@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{GyyL:function(e,t,a){"use strict";a.r(t);var n=a("OkUi"),i=a.n(n),p=a("UOBA"),r=a("p64v");t.default=function(){Object(p.b)().t;return i.a.createElement(i.a.Fragment,null,i.a.createElement(r.a,{title:"蚂蚁数据可视化",lang:"zh"}),i.a.createElement("div",{style:{margin:"0 auto",padding:"0 60px"}},"grahpin studio app"))}}}]);
+//# sourceMappingURL=component---site-pages-graphin-zh-tsx-3fe90fd78985f3f6673e.js.map

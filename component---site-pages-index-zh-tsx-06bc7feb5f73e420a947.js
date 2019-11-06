@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{jAeI:function(e,a,n){"use strict";n.r(a);n("Y7Bv");var t=n("UQZQ"),r=n.n(t),l=n("OkUi"),i=n.n(l),c=n("UOBA"),p=n("p64v");a.default=function(){var e=Object(c.b)().t;return i.a.createElement(i.a.Fragment,null,i.a.createElement(p.a,{title:"蚂蚁数据可视化",lang:"zh"}),i.a.createElement("div",{style:{margin:"0 auto",padding:"0 60px"}},"Graphin",e("首页"),"和antv官方保持一致，不需要写",i.a.createElement(r.a,null)))}}}]);
+//# sourceMappingURL=component---site-pages-index-zh-tsx-06bc7feb5f73e420a947.js.map
