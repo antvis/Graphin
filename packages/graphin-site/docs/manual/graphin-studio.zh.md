@@ -1,6 +1,6 @@
 ---
 title: GraphinStudio 简介
-order: 1
+order: 10
 icon: none
 ---
 

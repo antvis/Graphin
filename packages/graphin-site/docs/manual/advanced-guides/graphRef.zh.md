@@ -10,3 +10,5 @@ graphinRef.current.apis
 ## 02.G6 Graph 实例
 
 graphinRef.current.graph
+
+### 01.生命周期

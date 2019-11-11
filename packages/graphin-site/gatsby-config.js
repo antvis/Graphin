@@ -25,10 +25,10 @@ module.exports = {
                 },
             },
             {
-                slug: 'graphin',
+                slug: 'GraphinStudio',
                 title: {
-                    zh: 'graphin-studio',
-                    en: 'graphin-studio',
+                    zh: 'GraphinStudio',
+                    en: 'GraphinStudio',
                 },
             },
         ],
