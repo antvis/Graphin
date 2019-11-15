@@ -1,0 +1,26 @@
+---
+name: FoldingPanel
+menu: Components
+---
+
+import { Playground,Props } from 'docz'
+import FoldingPanel from './FoldingPanel.tsx';
+
+
+# FoldingPanel
+
+## Properties
+
+<Props of={FoldingPanel} />
+
+## 基本使用
+
+<Playground>
+  <FoldingPanel
+    data={[
+      { title: "title1", children: <span>content1</span> },
+      { title: "title2", children: <span>content2</span> },
+      { title: "title3", children: <span>content3</span> }
+    ]}
+  />
+</Playground>

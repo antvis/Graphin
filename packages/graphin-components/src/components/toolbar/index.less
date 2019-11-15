@@ -1,0 +1,54 @@
+
+.zoom-toolbar.vertical{
+  position: absolute;
+  left: 20px;
+  // bottom: 10px;
+  bottom: 66px;
+  background: #FFF;
+  box-shadow: 0 0 11px 0 rgba(0,0,0,0.10);
+  width: 32px;
+  border-radius: 4px;
+  z-index: 10;
+
+  .ant-btn {
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    border: none;
+    margin: 10px auto;
+    display: block;
+    // .anticon {
+    //   font-size: 22px;
+    // }
+
+    &[disabled] {
+      background-color: #FFF;
+    }
+  }
+}
+
+.zoom-toolbar.horizontal{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 36px;
+  line-height: 36px;
+  background: #FFF;
+  box-shadow: 0 0 11px 0 rgba(0,0,0,0.10);
+  border-radius: 4px;
+  z-index: 10;
+
+  .ant-btn {
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    border: none;
+    margin-left: 10px;
+    display: inline-block;
+
+    &[disabled] {
+      background-color: #FFF;
+    }
+  }
+}

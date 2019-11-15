@@ -1,0 +1,57 @@
+@height: 48px;
+.ant-drawer .ant-drawer-content-wrapper {
+    // margin-top: @height;
+    // height: calc(100% - @height);
+    height: 100%;
+    overflow: hidden;
+    // top: @height;
+}
+
+.ant-drawer-content {
+    .ant-drawer-header {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        height: @height;
+        line-height: @height;
+        display: block;
+        .ant-drawer-close {
+            height: @height;
+            line-height: @height;
+        }
+    }
+
+    .ant-drawer-body {
+        padding: 0;
+        position: absolute;
+        overflow: scroll;
+        top: @height;
+        bottom: 36px;
+        right: 0px;
+        left: 0px;
+        height: auto;
+    }
+}
+
+.ilink-graph-embeded {
+    // iframe嵌入模式下，没有顶部header
+    .ant-drawer .ant-drawer-content-wrapper {
+        height: 100%;
+        top: 0;
+    }
+}
+
+.ant-drawer-body {
+    padding: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+.ant-drawer-header {
+    padding: 12px 24px;
+}
+
+.ant-drawer-title {
+    line-height: 24px;
+}

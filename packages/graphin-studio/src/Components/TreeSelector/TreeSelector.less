@@ -1,0 +1,35 @@
+.tree_selector_wrapper {
+    width: inherit;
+    min-height: 150px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    display: flex;
+
+    .tree_wrapper {
+        width: 150px;
+        margin: 5px 0;
+
+        :global {
+            .ant-tree {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .ant-tree li span.ant-tree-switcher {
+                width: 3px;
+            }
+        }
+    }
+
+    .line {
+        width: 1px;
+        height: inherit;
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .checkbox_wrapper {
+        flex: 1;
+        margin: 15px 24px;
+    }
+}
