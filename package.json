@@ -1,7 +1,9 @@
 {
     "name": "graphin",
     "scripts": {
-        "start": "lerna run start --parallel --ignore graphin-site --npm-client=tnpm",
+        "start": "lerna run start --parallel  --ignore @antv/graphin-studio --ignore graphin-site --npm-client=npm",
+        "site": "cd ./packages/graphin-site && npm run start",
+        "studio": "cd ./packages/graphin-studio && npm run start",
         "bootstrap": "lerna bootstrap",
         "build": "lerna run build",
         "contributor": "git-contributor",
