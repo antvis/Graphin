@@ -27,37 +27,37 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-a424c26d7c0bceeee59d.js"
+    "url": "webpack-runtime-5c3ef98fed940839b193.js"
   },
   {
-    "url": "styles.c12ec1ec089936282ce4.css"
+    "url": "styles.728e33972aa859dd58a3.css"
   },
   {
-    "url": "styles-1205eafc724ef8f7b3e4.js"
+    "url": "styles-35fedc50c2d07d331f87.js"
   },
   {
-    "url": "app-3ce03f50a1ebfdff9293.js"
+    "url": "app-85eb254f9a65d9ca15e8.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "e91c7217bc4a9c3730d6ea21e78cab2d"
+    "revision": "197595a0122f34a141750ac344db34ae"
   },
   {
-    "url": "component---node-modules-gatsby-plugin-offline-3-0-18-gatsby-plugin-offline-app-shell-js-6412167758a4e56bdf6f.js"
+    "url": "component---node-modules-gatsby-plugin-offline-3-0-21-gatsby-plugin-offline-app-shell-js-3ebdf0604ecc5631fd6e.js"
   },
   {
     "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
-    "revision": "781966c4bd88a21fa139d04b33374a42"
+    "revision": "4436d7a89c01540831fbc6b3a5adf1a2"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "4bb6eaac34fda3aa6ad1ced48ab23662"
+    "revision": "123daa3226c4e9bd715f027dfb4e03ab"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerRoute(/(\.js$|\.css$|static\/)/, new workbox.strategies.CacheFirst(), 'GET');
-workbox.routing.registerRoute(/^https?:.*\page-data\/.*\/page-data\.json/, new workbox.strategies.NetworkFirst(), 'GET');
+workbox.routing.registerRoute(/^https?:.*\page-data\/.*\/page-data\.json/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
 workbox.routing.registerRoute(/^https?:.*\.(png|jpg|jpeg|webp|svg|gif|tiff|js|woff|woff2|json|css)$/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
 workbox.routing.registerRoute(/^https?:\/\/fonts\.googleapis\.com\/css/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
 
@@ -144,7 +144,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/graphin/app-3ce03f50a1ebfdff9293.js`))) {
+  if (!resources || !(await caches.match(`/graphin/app-85eb254f9a65d9ca15e8.js`))) {
     return await fetch(event.request)
   }
 
