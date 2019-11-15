@@ -1,0 +1,40 @@
+@padding: 8px;
+.panel {
+    :global {
+        .ant-collapse-item {
+            border-bottom: 4px solid #f0f2f5;
+
+            .ant-collapse-header {
+                padding: 21px @padding;
+
+                .anticon {
+                    right: 22px;
+                    left: initial;
+                }
+            }
+
+            .ant-collapse-content-box {
+                padding: 0 @padding;
+            }
+        }
+
+        .ant-collapse-item:last-child {
+            border: 0;
+        }
+    }
+    .name {
+        display: flex;
+        align-items: center;
+        font-family: PingFangSC-Medium;
+        color: rgba(0, 0, 0, 0.85);
+        line-height: 22px;
+
+        .mark {
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background: #1890ff;
+            margin-right: 8px;
+        }
+    }
+}

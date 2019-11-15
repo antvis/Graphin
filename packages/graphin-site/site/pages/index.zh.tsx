@@ -5,12 +5,12 @@ import Banner from '@antv/gatsby-theme-antv/site/components/Banner';
 import Companies from '@antv/gatsby-theme-antv/site/components/Companies';
 import Features from '@antv/gatsby-theme-antv/site/components/Features';
 import Cases from '@antv/gatsby-theme-antv/site/components/Cases';
-import BannerSVG from '@antv/gatsby-theme-antv/site/components/BannerSVG';
+// import BannerSVG from '@antv/gatsby-theme-antv/site/components/BannerSVG';
 
 const IndexPage = () => {
     const { t, i18n } = useTranslation();
 
-    const coverImage = BannerSVG();
+    // const coverImage = BannerSVG();
 
     const features = [
         {
@@ -96,7 +96,7 @@ const IndexPage = () => {
         <>
             <SEO title={t('蚂蚁数据可视化')} lang={i18n.language} />
             <Banner
-                coverImage={coverImage}
+                // coverImage={coverImage}
                 title={t('Graphin 图的分析洞察')}
                 description={t(
                     'Graphin 取名意为 Graph Insight（图的分析洞察），是一个基于 G6 封装的 React 组件库，简单，高效，开箱即用。',

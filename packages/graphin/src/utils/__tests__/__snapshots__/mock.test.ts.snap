@@ -1,0 +1,1767 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mock Util Should return result that match snapshot 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-8",
+    },
+  ],
+  "nodes": Array [
+    Object {
+      "id": "node-0",
+      "label": "node-0",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-1",
+      "label": "node-1",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-2",
+      "label": "node-2",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-3",
+      "label": "node-3",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-4",
+      "label": "node-4",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-5",
+      "label": "node-5",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-6",
+      "label": "node-6",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-7",
+      "label": "node-7",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-8",
+      "label": "node-8",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-9",
+      "label": "node-9",
+      "properties": Array [],
+      "type": "company",
+    },
+  ],
+}
+`;
+
+exports[`Mock Util Should return result that match snapshot 2`] = `
+Object {
+  "edges": Array [
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-1",
+    },
+  ],
+  "nodes": Array [
+    Object {
+      "id": "node-0",
+      "label": "node-0",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-1",
+      "label": "node-1",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-2",
+      "label": "node-2",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-3",
+      "label": "node-3",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-4",
+      "label": "node-4",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-5",
+      "label": "node-5",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-6",
+      "label": "node-6",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-7",
+      "label": "node-7",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-8",
+      "label": "node-8",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-9",
+      "label": "node-9",
+      "properties": Array [],
+      "type": "company",
+    },
+  ],
+}
+`;
+
+exports[`Mock Util Should return result that match snapshot 3`] = `
+Object {
+  "edges": Array [
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-1",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-2",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-3",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-4",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-5",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-6",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-7",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-0",
+      "target": "node-8",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-1",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-2",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-3",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-4",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-5",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-6",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-7",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-8",
+      "target": "node-0",
+    },
+    Object {
+      "properties": Array [],
+      "source": "node-9",
+      "target": "node-0",
+    },
+  ],
+  "nodes": Array [
+    Object {
+      "id": "node-0",
+      "label": "node-0",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-1",
+      "label": "node-1",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-2",
+      "label": "node-2",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-3",
+      "label": "node-3",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-4",
+      "label": "node-4",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-5",
+      "label": "node-5",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-6",
+      "label": "node-6",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-7",
+      "label": "node-7",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-8",
+      "label": "node-8",
+      "properties": Array [],
+      "type": "company",
+    },
+    Object {
+      "id": "node-9",
+      "label": "node-9",
+      "properties": Array [],
+      "type": "company",
+    },
+  ],
+}
+`;
+
+exports[`Mock Util Should return result that match snapshot 4`] = `
+Object {
+  "edges": Array [
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-0",
+        "target": "node-0",
+      },
+      "source": "node-0",
+      "target": "node-0",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-0",
+        "target": "node-1",
+      },
+      "source": "node-0",
+      "target": "node-1",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-0",
+        "target": "node-2",
+      },
+      "source": "node-0",
+      "target": "node-2",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-0",
+        "target": "node-3",
+      },
+      "source": "node-0",
+      "target": "node-3",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-0",
+        "target": "node-4",
+      },
+      "source": "node-0",
+      "target": "node-4",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-0",
+        "target": "node-5",
+      },
+      "source": "node-0",
+      "target": "node-5",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-0",
+        "target": "node-6",
+      },
+      "source": "node-0",
+      "target": "node-6",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-0",
+        "target": "node-7",
+      },
+      "source": "node-0",
+      "target": "node-7",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-0",
+        "target": "node-8",
+      },
+      "source": "node-0",
+      "target": "node-8",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-1",
+        "target": "node-0",
+      },
+      "source": "node-1",
+      "target": "node-0",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-1",
+        "target": "node-1",
+      },
+      "source": "node-1",
+      "target": "node-1",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-1",
+        "target": "node-2",
+      },
+      "source": "node-1",
+      "target": "node-2",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-1",
+        "target": "node-3",
+      },
+      "source": "node-1",
+      "target": "node-3",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-1",
+        "target": "node-4",
+      },
+      "source": "node-1",
+      "target": "node-4",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-1",
+        "target": "node-5",
+      },
+      "source": "node-1",
+      "target": "node-5",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-1",
+        "target": "node-6",
+      },
+      "source": "node-1",
+      "target": "node-6",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-1",
+        "target": "node-7",
+      },
+      "source": "node-1",
+      "target": "node-7",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-1",
+        "target": "node-8",
+      },
+      "source": "node-1",
+      "target": "node-8",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-2",
+        "target": "node-0",
+      },
+      "source": "node-2",
+      "target": "node-0",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-2",
+        "target": "node-1",
+      },
+      "source": "node-2",
+      "target": "node-1",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-2",
+        "target": "node-2",
+      },
+      "source": "node-2",
+      "target": "node-2",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-2",
+        "target": "node-3",
+      },
+      "source": "node-2",
+      "target": "node-3",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-2",
+        "target": "node-4",
+      },
+      "source": "node-2",
+      "target": "node-4",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-2",
+        "target": "node-5",
+      },
+      "source": "node-2",
+      "target": "node-5",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-2",
+        "target": "node-6",
+      },
+      "source": "node-2",
+      "target": "node-6",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-2",
+        "target": "node-7",
+      },
+      "source": "node-2",
+      "target": "node-7",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-2",
+        "target": "node-8",
+      },
+      "source": "node-2",
+      "target": "node-8",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-3",
+        "target": "node-0",
+      },
+      "source": "node-3",
+      "target": "node-0",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-3",
+        "target": "node-1",
+      },
+      "source": "node-3",
+      "target": "node-1",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-3",
+        "target": "node-2",
+      },
+      "source": "node-3",
+      "target": "node-2",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-3",
+        "target": "node-3",
+      },
+      "source": "node-3",
+      "target": "node-3",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-3",
+        "target": "node-4",
+      },
+      "source": "node-3",
+      "target": "node-4",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-3",
+        "target": "node-5",
+      },
+      "source": "node-3",
+      "target": "node-5",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-3",
+        "target": "node-6",
+      },
+      "source": "node-3",
+      "target": "node-6",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-3",
+        "target": "node-7",
+      },
+      "source": "node-3",
+      "target": "node-7",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-3",
+        "target": "node-8",
+      },
+      "source": "node-3",
+      "target": "node-8",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-4",
+        "target": "node-0",
+      },
+      "source": "node-4",
+      "target": "node-0",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-4",
+        "target": "node-1",
+      },
+      "source": "node-4",
+      "target": "node-1",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-4",
+        "target": "node-2",
+      },
+      "source": "node-4",
+      "target": "node-2",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-4",
+        "target": "node-3",
+      },
+      "source": "node-4",
+      "target": "node-3",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-4",
+        "target": "node-4",
+      },
+      "source": "node-4",
+      "target": "node-4",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-4",
+        "target": "node-5",
+      },
+      "source": "node-4",
+      "target": "node-5",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-4",
+        "target": "node-6",
+      },
+      "source": "node-4",
+      "target": "node-6",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-4",
+        "target": "node-7",
+      },
+      "source": "node-4",
+      "target": "node-7",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-4",
+        "target": "node-8",
+      },
+      "source": "node-4",
+      "target": "node-8",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-5",
+        "target": "node-0",
+      },
+      "source": "node-5",
+      "target": "node-0",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-5",
+        "target": "node-1",
+      },
+      "source": "node-5",
+      "target": "node-1",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-5",
+        "target": "node-2",
+      },
+      "source": "node-5",
+      "target": "node-2",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-5",
+        "target": "node-3",
+      },
+      "source": "node-5",
+      "target": "node-3",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-5",
+        "target": "node-4",
+      },
+      "source": "node-5",
+      "target": "node-4",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-5",
+        "target": "node-5",
+      },
+      "source": "node-5",
+      "target": "node-5",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-5",
+        "target": "node-6",
+      },
+      "source": "node-5",
+      "target": "node-6",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-5",
+        "target": "node-7",
+      },
+      "source": "node-5",
+      "target": "node-7",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-5",
+        "target": "node-8",
+      },
+      "source": "node-5",
+      "target": "node-8",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-6",
+        "target": "node-0",
+      },
+      "source": "node-6",
+      "target": "node-0",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-6",
+        "target": "node-1",
+      },
+      "source": "node-6",
+      "target": "node-1",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-6",
+        "target": "node-2",
+      },
+      "source": "node-6",
+      "target": "node-2",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-6",
+        "target": "node-3",
+      },
+      "source": "node-6",
+      "target": "node-3",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-6",
+        "target": "node-4",
+      },
+      "source": "node-6",
+      "target": "node-4",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-6",
+        "target": "node-5",
+      },
+      "source": "node-6",
+      "target": "node-5",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-6",
+        "target": "node-6",
+      },
+      "source": "node-6",
+      "target": "node-6",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-6",
+        "target": "node-7",
+      },
+      "source": "node-6",
+      "target": "node-7",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-6",
+        "target": "node-8",
+      },
+      "source": "node-6",
+      "target": "node-8",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-7",
+        "target": "node-0",
+      },
+      "source": "node-7",
+      "target": "node-0",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-7",
+        "target": "node-1",
+      },
+      "source": "node-7",
+      "target": "node-1",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-7",
+        "target": "node-2",
+      },
+      "source": "node-7",
+      "target": "node-2",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-7",
+        "target": "node-3",
+      },
+      "source": "node-7",
+      "target": "node-3",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-7",
+        "target": "node-4",
+      },
+      "source": "node-7",
+      "target": "node-4",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-7",
+        "target": "node-5",
+      },
+      "source": "node-7",
+      "target": "node-5",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-7",
+        "target": "node-6",
+      },
+      "source": "node-7",
+      "target": "node-6",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-7",
+        "target": "node-7",
+      },
+      "source": "node-7",
+      "target": "node-7",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-7",
+        "target": "node-8",
+      },
+      "source": "node-7",
+      "target": "node-8",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-8",
+        "target": "node-0",
+      },
+      "source": "node-8",
+      "target": "node-0",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-8",
+        "target": "node-1",
+      },
+      "source": "node-8",
+      "target": "node-1",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-8",
+        "target": "node-2",
+      },
+      "source": "node-8",
+      "target": "node-2",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-8",
+        "target": "node-3",
+      },
+      "source": "node-8",
+      "target": "node-3",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-8",
+        "target": "node-4",
+      },
+      "source": "node-8",
+      "target": "node-4",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-8",
+        "target": "node-5",
+      },
+      "source": "node-8",
+      "target": "node-5",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-8",
+        "target": "node-6",
+      },
+      "source": "node-8",
+      "target": "node-6",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-8",
+        "target": "node-7",
+      },
+      "source": "node-8",
+      "target": "node-7",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-8",
+        "target": "node-8",
+      },
+      "source": "node-8",
+      "target": "node-8",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-9",
+        "target": "node-0",
+      },
+      "source": "node-9",
+      "target": "node-0",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-9",
+        "target": "node-1",
+      },
+      "source": "node-9",
+      "target": "node-1",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-9",
+        "target": "node-2",
+      },
+      "source": "node-9",
+      "target": "node-2",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-9",
+        "target": "node-3",
+      },
+      "source": "node-9",
+      "target": "node-3",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-9",
+        "target": "node-4",
+      },
+      "source": "node-9",
+      "target": "node-4",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-9",
+        "target": "node-5",
+      },
+      "source": "node-9",
+      "target": "node-5",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-9",
+        "target": "node-6",
+      },
+      "source": "node-9",
+      "target": "node-6",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-9",
+        "target": "node-7",
+      },
+      "source": "node-9",
+      "target": "node-7",
+    },
+    Object {
+      "data": Object {
+        "properties": Array [],
+        "source": "node-9",
+        "target": "node-8",
+      },
+      "source": "node-9",
+      "target": "node-8",
+    },
+  ],
+  "nodes": Array [
+    Object {
+      "data": Object {
+        "id": "node-0",
+        "label": "node-0",
+        "properties": Array [],
+        "type": "company",
+      },
+      "id": "node-0",
+      "shape": "CircleNode",
+      "style": Object {},
+    },
+    Object {
+      "data": Object {
+        "id": "node-1",
+        "label": "node-1",
+        "properties": Array [],
+        "type": "company",
+      },
+      "id": "node-1",
+      "shape": "CircleNode",
+      "style": Object {},
+    },
+    Object {
+      "data": Object {
+        "id": "node-2",
+        "label": "node-2",
+        "properties": Array [],
+        "type": "company",
+      },
+      "id": "node-2",
+      "shape": "CircleNode",
+      "style": Object {},
+    },
+    Object {
+      "data": Object {
+        "id": "node-3",
+        "label": "node-3",
+        "properties": Array [],
+        "type": "company",
+      },
+      "id": "node-3",
+      "shape": "CircleNode",
+      "style": Object {},
+    },
+    Object {
+      "data": Object {
+        "id": "node-4",
+        "label": "node-4",
+        "properties": Array [],
+        "type": "company",
+      },
+      "id": "node-4",
+      "shape": "CircleNode",
+      "style": Object {},
+    },
+    Object {
+      "data": Object {
+        "id": "node-5",
+        "label": "node-5",
+        "properties": Array [],
+        "type": "company",
+      },
+      "id": "node-5",
+      "shape": "CircleNode",
+      "style": Object {},
+    },
+    Object {
+      "data": Object {
+        "id": "node-6",
+        "label": "node-6",
+        "properties": Array [],
+        "type": "company",
+      },
+      "id": "node-6",
+      "shape": "CircleNode",
+      "style": Object {},
+    },
+    Object {
+      "data": Object {
+        "id": "node-7",
+        "label": "node-7",
+        "properties": Array [],
+        "type": "company",
+      },
+      "id": "node-7",
+      "shape": "CircleNode",
+      "style": Object {},
+    },
+    Object {
+      "data": Object {
+        "id": "node-8",
+        "label": "node-8",
+        "properties": Array [],
+        "type": "company",
+      },
+      "id": "node-8",
+      "shape": "CircleNode",
+      "style": Object {},
+    },
+    Object {
+      "data": Object {
+        "id": "node-9",
+        "label": "node-9",
+        "properties": Array [],
+        "type": "company",
+      },
+      "id": "node-9",
+      "shape": "CircleNode",
+      "style": Object {},
+    },
+  ],
+}
+`;

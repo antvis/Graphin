@@ -1,0 +1,79 @@
+---
+name: ToolBar
+menu: Components
+---
+
+import { Playground,Props } from 'docz'
+import ToolBar from './ToolBar.tsx';
+
+
+# Item
+
+## Properties
+
+<Props of={ToolBar} />
+
+## 基本使用
+
+<Playground>
+    {()=>{
+const menus = [
+ 
+  {
+    name: "添加实体",
+    icon: "file-add",
+    id: "addNode"
+  },
+  {
+    name: "搜索",
+    icon: "search",
+    id: "search"
+  },
+  {
+    id: "filter",
+    name: "图筛选",
+    icon: "filter"
+  },
+  {
+    id: "dragSelect",
+    name: "圈选",
+    icon: "highlight"
+  },
+   {
+    isDivider: true
+  },
+  {
+    name: "关系发现",
+    icon: "eye"
+  },
+  {
+    name: "社群分析",
+    icon: "gateway"
+  },
+   {
+    isDivider: true
+  },
+  
+  {
+    id: "save",
+    name: "保存",
+    icon: "save"
+  },
+  {
+    id: "clear",
+    name: "清空",
+    icon: "delete"
+  },
+  {
+    id: "setting",
+    name: "设置",
+    icon: "setting"
+  },
+  
+];
+
+        return   <ToolBar data={menus} /> 
+
+    }}
+
+</Playground>
