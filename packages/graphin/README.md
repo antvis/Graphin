@@ -1,5 +1,3 @@
-![](https://user-images.githubusercontent.com/6628666/44565549-4ab5d480-a79b-11e8-8d75-11420845efc0.png)
-
 [![](https://img.shields.io/travis/antvis/graphin.svg)](https://travis-ci.org/antvis/graphin)
 ![](https://img.shields.io/badge/language-typescript-red.svg)
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
