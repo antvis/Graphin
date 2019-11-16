@@ -78,7 +78,7 @@ module.exports = {
 ### 02.install dependence
 
 ```bash
-tnpm i webpack webpack-cli html-webpack-plugin babel-loader ts-loader style-loader css-loader less-loader webpack-dev-server  --save-dev
+npm i webpack webpack-cli html-webpack-plugin babel-loader ts-loader style-loader css-loader less-loader webpack-dev-server  --save-dev
 
 ```
 
@@ -88,7 +88,7 @@ tnpm i webpack webpack-cli html-webpack-plugin babel-loader ts-loader style-load
 
 ```bash
 
-tnpm i @babel/cli @babel/core  @babel/plugin-proposal-class-properties @babel/preset-env @babel/preset-react --save-dev
+npm i @babel/cli @babel/core  @babel/plugin-proposal-class-properties @babel/preset-env @babel/preset-react --save-dev
 
 ```
 
@@ -141,7 +141,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ### 07. install react/react-dom
 
 ```bash
-tnpm i react react-dom --save
+npm i react react-dom --save
 ```
 
 ### 06.write your run-scripts in package.json
@@ -266,14 +266,14 @@ https://github.com/antvis/g6.git
 -   安装依赖，产生 g6 的编译后文件
 
 ```bash
-tnpm i
+npm i
 npm run build
 ```
 
 -   使用 npm link 产生 global links
 
 ```bash
-sudo tnpm link
+sudo npm link
 ```
 
 -   在我们的项目里使用 global link
@@ -281,7 +281,7 @@ sudo tnpm link
 ```bash
 cd g6-pro/packages/analyzer-react
 
-tnpm link @antv/g6
+npm link @antv/g6
 ```
 
 -   然后我们项目咯里的 node_modules/@antv/g6 就会被软连接到 global link，global link 就会连接到 g6 的源码处

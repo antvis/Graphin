@@ -9,7 +9,7 @@ extend 顾名思义是扩展的意思。Graphin 支持 3 种扩展类型：扩�
 
 Graphin 内置了布局，节点 与图标。除此之外，Graphin 给用户提供了扩展机制，用户可以方便的通过 extend 配置自定义布局，节点与图表。
 
-拓展是通过 `props.extend` 实现的：
+扩展是通过 `props.extend` 实现的：
 
 ```tsx
 <Graphin
@@ -24,7 +24,7 @@ Graphin 内置了布局，节点 与图标。除此之外，Graphin 给用户提
 
 下面让我们来看如何具体自定义布局，节点和图标。
 
-## 拓展布局
+## 扩展布局
 
 让我们来实现一个简单的随机布局作为例子。
 
@@ -79,14 +79,14 @@ import layout from "./layout"
 />
 ```
 
-`extend.layout` 函数的 API 参见 API 文档。
+`extend.layout` 函数的 API 参见[文档](/zh/docs/api/layout)。
 
 
-## 拓展节点
+## 扩展节点
 
-拓展节点指的是拓展 NodeShape，也就是 G6 中节点的渲染形状和样式。
+扩展节点指的是扩展 NodeShape，也就是 G6 中节点的渲染形状和样式。
 
-在 Graphin 中，我们支持通过 JSON 配置的形式来配置 NodeShape。让开发者不用使用 G6 的 API，声明式的对 NodeShape 进行拓展。
+在 Graphin 中，我们支持通过 JSON 配置的形式来配置 NodeShape。让开发者不用使用 G6 的 API，声明式的对 NodeShape 进行扩展。
 
 比如我们要注册一个新的 RectNode 类型的 NodeShape。首先我们要定义一个 NodeShape 函数：
 
@@ -125,10 +125,10 @@ const renderRectNode = (node: Node) => {
 
 JSON 配置文档 -> 
 
-## 拓展图标
+## 扩展图标
 
 
-如果想在 Graphin 节点上展示自定义的 icon，就需要通过 `extend.marker` 进行拓展：
+如果想在 Graphin 节点上展示自定义的 icon，就需要通过 `extend.marker` 进行扩展：
 
 
 ```tsx
@@ -150,47 +150,3 @@ import layout from "./layout"
 ```
 
 `extend.marker` 的 API 很简单，就是一个返回图标配置数组的函数。返回的图标配置中，name 代表 icon 的标识，也就是 G6 NodeShape 中 Marker 的 symbol 属性的值。path 就是 SVG 图标的 XML 代码。
-
-
-## API 接口
-
-```tsx
-<Graphin
-    data={data}
-    extend={{
-        nodeShape: extendNodeShapeFunction,
-        marker: extendMakerFunction,
-        layout: extendLayoutFunction,
-    }}
-/>
-```
-
-|   属性    | 类型                                                           | 是否必选 | 含义       |
-| --------- | -------------------------------------------------------------- | -------- | ---------- |
-| layout    | `function` [extendLayoutFunction](#extendlayoutfunction)       | 否       | 自定义布局 |
-| nodeShape | `function` [extendNodeShapeFunction](#extendnodeShapefunction) | 否       | 自定义节点 |
-| marker    | `function` [extendMakerFunction](#extendmakerfunction)         | 否       | 自定义图标 |
-
-### extendLayoutFunction
-
-```tsx
-export interface ExendLayout {
-    /** 布局名称，唯一标示 */
-    name: string;
-    /** 布局展示名称 */
-    desc: string;
-    /** antd icon */
-    icon: string;
-    /** layout 布局执行函数 */
-    layout: (
-        data: Data,
-        options: LayoutOption,
-    ) => {
-        data: Data;
-        forceSimulation?: ForceSimulation;
-    };
-}
-interface ExtendLayoutFunction {
-    (graphin: Graphin, prevProps: GraphinProps): ExendLayout[];
-}
-```

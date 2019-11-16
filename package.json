@@ -1,7 +1,7 @@
 {
     "name": "graphin",
     "scripts": {
-        "start": "lerna run start --parallel  --ignore @antv/graphin-studio --ignore graphin-site --npm-client=npm",
+        "start": "lerna run start --parallel  --ignore @antv/graphin-studio --ignore graphin-site",
         "site": "cd ./packages/graphin-site && npm run start",
         "studio": "cd ./packages/graphin-studio && npm run start",
         "bootstrap": "lerna bootstrap",

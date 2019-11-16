@@ -3,7 +3,7 @@ title: Register 注册接口
 order: 1
 ---
 
-Graphin 提供了声明式的 NodeShape 拓展方式。除此之外，Graphin 也支持直接传入 G6 的配置。主要支持自定义交互（behavior），自定义边（edge）。这让用户对 G6 的交互和边有了拓展能力。
+Graphin 提供了声明式的 NodeShape 扩展方式。除此之外，Graphin 也支持直接传入 G6 的配置。主要支持自定义交互（behavior），自定义边，自定义边。这让用户对 G6 的交互和边有了扩展能力。
 
 register 是通过 props 传入组件的：
 

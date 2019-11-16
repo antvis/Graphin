@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
