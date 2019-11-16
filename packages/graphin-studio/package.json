@@ -6,7 +6,7 @@
   "scripts": {
     "start": " node --max_old_space_size=8192 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --env.NODE_ENV=development",
     "build": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --env.NODE_ENV=production  -c ./webpack.config.js ",
-    "lib": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js --env.type=lib --env.NODE_ENV=production  -c ./webpack.config.js"
+    "deploy": "npm run build && gh-pages -d ./dist -r https://github.com/antvis/graphin-studio-site.git"
   },
   "dependencies": {
     "@antv/graphin": "^1.0.0",
@@ -36,6 +36,7 @@
     "css-loader": "^3.2.0",
     "deepmerge": "^4.1.1",
     "file-loader": "^4.2.0",
+    "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
