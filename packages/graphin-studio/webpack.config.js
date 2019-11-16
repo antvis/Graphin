@@ -5,29 +5,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = env => {
-    const isLib = env.type === 'lib';
-    const externals = isLib
-        ? {
-              react: {
-                  commonjs: 'react',
-                  commonjs2: 'react',
-                  amd: 'react',
-                  root: 'React',
-              },
-              'react-dom': {
-                  commonjs: 'react-dom',
-                  commonjs2: 'react-dom',
-                  amd: 'react-dom',
-                  root: 'ReactDOM',
-              },
-          }
-        : {};
+    const isPrd = env.NODE_ENV === 'production';
+    const alias = isPrd
+        ? {}
+        : {
+              react: require.resolve('react'),
+          };
     return {
         entry: {
             bundle: './src/index.tsx',
             app: './src/GraphinStudio.tsx',
         },
-        mode: process.env.NODE_ENV,
+        mode: env.NODE_ENV,
         module: {
             rules: [
                 {
@@ -95,11 +84,11 @@ module.exports = env => {
         resolve: {
             extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
             alias: {
-                react: require.resolve('react'),
                 '@types': path.resolve('./', 'src', 'types.ts'),
                 '@service': path.resolve('./', 'src', 'Service'),
                 '@utils': path.resolve('./', 'src', 'Utils/'),
                 '@com': path.resolve('./', 'src', 'Components/'),
+                ...alias,
             },
         },
         devtool: 'cheap-module-eval-source-map',
@@ -126,6 +115,19 @@ module.exports = env => {
                 chunks: ['bundle'],
             }),
         ],
-        externals,
+        externals: {
+            react: {
+                commonjs: 'react',
+                commonjs2: 'react',
+                amd: 'react',
+                root: 'React',
+            },
+            'react-dom': {
+                commonjs: 'react-dom',
+                commonjs2: 'react-dom',
+                amd: 'react-dom',
+                root: 'ReactDOM',
+            },
+        },
     };
 };
