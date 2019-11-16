@@ -3,7 +3,7 @@ title: Register 注册接口
 order: 1
 ---
 
-Graphin 提供了声明式的 NodeShape 拓展方式。除此之外，Graphin 也支持直接传入 G6 的配置。主要支持自定义交互（behavior），自定义边，自定义边。这让用户对 G6 的交互和边有了拓展能力。
+Graphin 提供了声明式的 NodeShape 拓展方式。除此之外，Graphin 也支持直接传入 G6 的配置。主要支持自定义交互（behavior），自定义边（edge）。这让用户对 G6 的交互和边有了拓展能力。
 
 register 是通过 props 传入组件的：
 
@@ -28,7 +28,7 @@ register?: {
 };
 ```
 
-```
+```ts
 interface Register {
     /** 节点名称 */
     name: string;
@@ -37,7 +37,7 @@ interface Register {
 }
 ```
 
-```
+```ts
 interface BehaviorRegister extends Register {
     options: any;
     mode: string;
@@ -48,7 +48,7 @@ interface BehaviorRegister extends Register {
 
 注册返回的 Register 类型中，register 函数就是真正进行注册的地方：
 
-```
+```ts
 register: {
     nodeShape: (G6) => [{
         name: "custom",
@@ -63,7 +63,7 @@ register: {
         }
     }],
     behavior: (G6) => [{
-        mode: "default",
+        mode: "default",  // 详见 G6 的 mode 文档
         options: {}
         name: "custom",
         register: () => {
@@ -73,11 +73,8 @@ register: {
 }
 ```
 
-
 **G6 相关文档**
 
-+ [自定义节点](https://www.yuque.com/antv/g6/self-node)
-+ [自定义边](https://www.yuque.com/antv/g6/self-edge)
-+ [自定义行为](https://www.yuque.com/antv/g6/self-behavior)
-
-
+-   [自定义节点](https://www.yuque.com/antv/g6/self-node)
+-   [自定义边](https://www.yuque.com/antv/g6/self-edge)
+-   [自定义行为](https://www.yuque.com/antv/g6/self-behavior)
