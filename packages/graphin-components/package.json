@@ -15,7 +15,7 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "antd": "^3.23.5",
-    "@antv/graphin": "^1.0.0"
+    "@antv/graphin": "^1.0.0-beta.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.0",
