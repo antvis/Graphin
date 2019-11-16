@@ -1,0 +1,59 @@
+---
+title: Components
+order: 2
+---
+
+The analysis process is a dynamic interaction process, and there is no exception of the graph analysis. So we need some analysis components to help us. There are two built-in components in Graphin: Toobar and ContextMenu.
+
+> MiniMap and ProptertiesFilter Component are in the planning.
+
+## 01.Toolbar
+
+Toolbar 内置了 4 大功能
+
+#### 功能介绍
+
+-   todo/redo
+
+我们提供了撤销重做的功能，能够让整个分析过程变得可靠，因为用户不必再担心因为误操作而毁坏了之前的分析过程。对于工具型产品，这是基础功能，也是特色功能
+
+-   zoomIn/out 缩小放大功能
+
+在分析过程中，当节点数量的变化，布局的变化，引起一些节点可能不在当前视窗内，这个时候我们就需要缩放功能帮助我们调整视窗的范围，配合画布的拖拽，能让我们不丢失全局（zoomOut），也不损失细节（zoomIn）
+
+-   fullscreen 全屏功能
+
+触发后，整个画布占满浏览器窗口，当你的画布页在业务中占比很小的时候，这将非常有用。
+
+-   foucs 节点聚焦功能
+
+输入节点 ID，将自动对焦到该节点，将和 Search 功能配套起来，支持模糊搜索，快速定位，这将大大提高你的分析效率
+
+-   Snapshot 快照下载
+    当你希望保存当前的画布给别人分享，下载快照将会是一个非常有用的功能。
+
+## 02.ContextMenu 右键菜单
+
+#### 功能介绍
+
+在画布上，我们在节点上右键菜单，将会出现更多的操作选项，如果说 Toolbar 是针对整个画布的操作，那么 ContextMenu 则是针对单独的节点做操作，对于单个节点，我们通用的分析操作有如下：
+
+-   复制
+
+复制节点 ID，以便于你的后续操作
+
+-   反选
+
+反选节点，这种排除法，是选择其他节点的一种快捷方式
+
+-   删除
+
+删除该节点，删除后，剩余的节点将重新布局，渲染，这在我们做案件排查的时候，删除已经确定的关键节点，重新布局分析能够减少我们的分析干扰。
+
+-   新增画布分析
+
+当我们在前一次分析中筛选出的关键节点，可以通过右键菜单，新建画布分析的方式，在一个新的画布中做二次分析，减少无用信息的干扰
+
+-   业务相关
+
+业务特有的一些针对节点的操作，比如给该节点打标，进行关系扩散，或者发起数据请求什么的
