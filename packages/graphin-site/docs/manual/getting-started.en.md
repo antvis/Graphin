@@ -3,7 +3,7 @@ title: Getting Started
 order: 2
 ---
 
-## Installation
+## Install
 
 ```bash
 $ npm install @antv/graphin --save
@@ -11,7 +11,7 @@ $ npm install @antv/graphin --save
 
 ## First Example
 
-Here is a simple example to show usage of Graphin. Visit http://u.ant.design/codesandbox-repro to create a codesandbox. Don't forget to press the save button.
+Here is a simple example to show the usage of Graphin. Visit http://u.ant.design/codesandbox-repro to create a codesandbox. Don't forget to press the save button.
 
 <iframe
      src="https://codesandbox.io/embed/data-driven-3o71b?fontsize=14"
@@ -21,12 +21,10 @@ Here is a simple example to show usage of Graphin. Visit http://u.ant.design/cod
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 ></iframe>
 
-### 01. 渲染数据
+### 01. Rendering data 
 
-Graphin 使用起来就像普通的组件一样，它只有一个必选属性 `data`，内部会对其进行数据校验，data 的数据结构有一定的要求，详情参考：[核心概念/Data 数据驱动](main-concepts/data)
-There is no difference between Graphin and typical React components. It has a required props `data` which will be checked internally. There are some requirements of data. For details, see: Core Concept/Data Data Driven.
+There is no difference between Graphin and typical React components. It has a required props `data` which will be checked internally. There are some requirements of data. For details, see: [Main Concepts/Data].
 
-Graphin 提供一个 Mock 函数，帮助我们快速生成一些图数据，让我们试试看吧：
 Graphin provides a Mock function to help us generate some graph data quickly, let us have a try:
 
 ```jsx
@@ -48,9 +46,8 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
-### 02. 使用布局
+### 02. Using layout
 
-Graphin 组件内置了 6 种布局，默认提供布局为 force（力导布局）。我们可以根据自己业务的不同来调整布局。比如，我们希望节点按照同心圆（concentric）排列。让我们来调整上述的代码：
 There are six built-in layouts in Grapnin, and the default is force (force layout). We can switch the layout according to our needs.
 
 For example, we want nodes to be arranged in a concentric order:
@@ -62,21 +59,18 @@ For example, we want nodes to be arranged in a concentric order:
 
 ```
 
-### 03. 使用组件
+### 03. Using components
 
-Graphin 目前仅提供两个官方组件，Toolbar 和 ContextMenu。关于它们，你们可以在[核心概念/Components 分析组件](main-concepts/components)中得到更详细的介绍，我们以添加组件 `Toolbar` 为例：
-Graphin provides two official components, Toolbar and ContextMenu. you can get more detail about them in the core concept / Components analysis component.
+Graphin provides two official components, Toolbar and ContextMenu. you can get more detail about them in the [Main-concepts/Components].
 
 we take Toolbar as an example:
 
--   安装组件，graphin 分析组件发布在单独的 NPM 包 graphin-components 中：
 -   Install component. Analysis components of graphin are published as package graphin-components.
 
 ```bash
 $ npm install @antv/graphin-components --save
 ```
 
--   将组件放在 Graphin 组件内部，这样 `Graphin` 组件可以将 `graph`，`apis` 等属性传递给分析组件：
 -   Place Toolbar component inside Graphin component so that Graphin can pass properties such as graph, apis, etc. to the Toolbar:
 
 ```jsx
@@ -101,22 +95,18 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
-这个时候我们再到 CodeSandbox 中去体验下 Toolbar：
 we can experience Toolbar component in codesandbox:
 
 -   todo/redo
 -   zoomIn/out
 -   fullscreen
 
-### 04. 事件监听
+### 04. Monitoring event 
 
-图分析有着非常丰富的事件，如果我们想监听事件，该如何做呢？
 There are a lot of events in Graph analysis. If we want to monitor events, what should we do?
 
--   1. 得到 Graphin 的 Ref 实例
--   2. 使用 G6 的 graph 进行事件监听
 -   1. get Ref of Graphin
--   2. 使用 G6 的 graph 进行事件监听
+-   2. Use graph instance of G6 to monitor events
 
 ```jsx
 const App = () => {
@@ -138,46 +128,47 @@ const App = () => {
 };
 ```
 
-### 05. 总结与引导
+### 05. Summary and guidance
 
 Through the above 4 steps, we have a knowledge of all four core concepts of Graphin: data, layout, components, and events.
 
-关于它们的用法，肯定还有很多同学有疑问，我们试着把这些问题整理归纳，形成一个指引。如果有其他问题，还请大家在 issue 中提出。
+As for their usage, there are certainly many students who have doubts. We try to sort out these issues and form a guide. If you have other questions, please ask in the issue.
 
 -   Data
 
-    -   1. 产生 Data 的 Mock 函数究竟是什么？ --- [核心概念/data 数据驱动](main-concepts/data)
-    -   2. 如何根据对设置 Node 的样式
-    -   3. 如何自定义 NodeShape？
+    -   1. what is the mock function？ --- [Main concepts/data Data](main-concepts/data)
+    -   2. How to set the style of Node?
+    -   3. How to customize NodeShape?
 
 -   Layout
 
-    -   1. 布局参数 API 在哪里？
-    -   2. 布局切换 如何实现？
-    -   3. 如何实现一个自定义布局？
+    -   1. How to get layout parameters？
+    -   2. How to switch Layout?
+    -   3. How to implement a custom layout?
 
 -   Components
 
-    -   1. Toolbar/ContextMenu 可以自定义吗？
-    -   2. Graphin 未来还会新增哪些组件？都有什么功能？
+    -   1. Can Toolbar/ContextMenu be customized?
+    -   2. What components will Graphin add in the future? What are the features?
 
 -   Events
-    -   1. 为什么不提供 handleEvents 的回调函数，而要让用户通过 Ref 手动去监听事件？
-    -   2. 一共支持哪些事件呢？
+    -   1. Why not provide a callback function for handleEvents, but let the user manually monitor events via Ref?
+    -   2. What events do Graphin support in total?
 
-当然，还有很多问题，可能属于高级指引范畴，这里就不一一列举，让我们快进入第二个阶段，开发点有趣的功能。
+Of course, there are still many problems, which may belong to the high-level guidelines. I will not list them here. Let us enter the second stage and develop some interesting features.
 
-## 开发点有趣的功能
+## more features
 
-通过上文，聪明的小伙伴已经发现了，Graphin 的设计完全遵照了 React 的编程模型，声明式的完成了从数据到视图的映射。现在让我们一起来开发两个有趣的功能，**_布局切换_** 与 **_节点扩散_**。
+Through the above, we can know that design of Graphin fully complies with React's programming model and completes the mapping from data to view declaratively. Now let's develop two interesting features together, **_layout switch_** and **_node spread_**.
 
-### 01. 布局切换
+### 01. Switching layout
 
-> 同一组数据，改变布局算法会产生不一样的布局效果，从而满足人们的分析需求。
+> The change of layout will lead to different layout effects to meet people's analytical needs with the same data.
 
-因为 Graphin 是 React 组件，改变 `props.layout` 就能改变视图的布局效果，因此我们只要把多种布局 layouts 组合起来，每次切换改变 `props.layout` 即可。
 
--   1. 设计布局切换 `LayoutSelector`组件的接口
+Graphin is a React component, the change of  `props.layout` will lead to diffrent layout effect, so we need to combine layouts and change `props.layout` every time.
+
+-   1. Interface of `LayoutSelector` component
 
 ```tsx
 interface Layout {
@@ -187,26 +178,26 @@ interface Layout {
     };
 }
 interface LayoutSelectorProps {
-    /** 所有的内置布局**/
+    /** all built-in layouts**/
     layouts: Layout[];
-    /** 当前的布局 **/
+    /** current layout **/
     value: Layout;
-    /** 切换布局的事件 **/
+    /** events of switching layout **/
     onChange: (vale: Layout) => void;
 }
 
 <LayoutSelector layouts={layouts} value={currentLayout} onChange={handleChange} />;
 ```
 
--   2.  内置布局信息 `layouts` 如何获取？
+-   2. How to get Built-in layout information
 
-Graphin 提供了很多 API，用于将内部的一些状态或者函数封装给用户使用。内置的布局信息也可通过`apis.getInfo().layouts`获得
+Graphin provides a number of APIs to the user which are some internal states or functions. Built-in layout information is also available via `apis.getInfo().layouts`.
 
--   3.  API 如何获得？
+-   3.  How to get API?
 
-Graphin 提供两种方式获得 apis 接口，第一种是通过组件的 props 传递，即所有包裹在 Graphin 组件内部的组件，都会获得 apis 这个属性。第二种方式是通过 ref 实例，详见[进阶指导/GraphRef](advanced-guides/graphRef)。第一种适用于用户自定义组件，非常方便拿到需要的接口。第二种方式更加灵活，可以在 Graphin 外层使用 Graphin 所提供的信息，常用于复杂场景或者多画布实例的情况下。
+Graphin provides two ways to get the apis interface. The first is to pass the component's props, that is, all the components wrapped inside the Graphin component will get the apis property. The second way is through the ref instance, see [Advanced Guide/GraphRef] (advanced-guides/graphRef). The first one is suitable for user-defined components, so it is very convenient to get the required interface. The second way is more flexible, and you can use the information provided by Graphin in the outer layer of Graphin, which is often used in complex scenes.
 
--   4. 完整代码如下：
+-   4. The complete code is as follows:
 
 <iframe
      src="https://codesandbox.io/embed/layout-selector-k16mh?fontsize=14&hidenavigation=1&theme=dark"
@@ -215,14 +206,15 @@ Graphin 提供两种方式获得 apis 接口，第一种是通过组件的 props
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
    ></iframe>
-### 02.节点扩散
 
-> 将一个节点扩散出它的一度，二度，多度关系，这是非常常用的一种分析手法。
+### 02.Node Diffusion
 
-「节点扩散」在图分析中是一个比较典型的功能。常规情况下，在画布中进行节点操作，比如添加节点，删除节点，我们都会考虑很多问题，比如从 1 个节点变为 10 个节点，画布如何变化呢？新增的 9 个节点会放在什么位置呢？使用 Graphin 时，我们就不需要考虑这么多，只需要记住它是数据驱动的，我们不需要关心内部的实现，只需要告诉 Graphin 你需要渲染的数据是什么就可以。增加节点不用使用 `graph.add(node)`，删除节点也不用调用 `graph.remove(node)`，一切都是改变数据 `props.data` 即可。
+> Spreading a node out of its one-degree, second-degree, and multi-degree relationship is a very common analytical technique.
 
--   1. 对选中的节点进行数据 Mock。
--   2. Click 事件触发改变 `state.data` 即可。
+Node Diffusion" is a typical function in graph analysis. Under normal circumstances, node operations in the canvas, such as adding nodes, deleting nodes, we will consider many problems, such as changing from 1 node to 10 nodes, how does the canvas change? Where will the new 9 nodes be placed? When using Graphin, we don't need to think about it. Just remember that it is data-driven. We don't need to care about the internal implementation. Just tell Graphin what data you need to render. Adding nodes does not use `graph.add(node)`, deleting nodes does not need to call `graph.remove(node)`, everything is changed data `props.data`.
+
+- 1. Perform a data mock on the selected node.
+- 2. The Click event triggers a change to `state.data`.
 
 ```tsx
 import React from 'react';
@@ -278,7 +270,7 @@ const App = () => {
 };
 ```
 
--   4. 完整代码如下：
+-   4. The complete code is as follows:
 
 <iframe
      src="https://codesandbox.io/embed/icy-snow-grltv?fontsize=14&hidenavigation=1&theme=dark"
@@ -288,6 +280,6 @@ const App = () => {
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
    ></iframe>
 
-### 03. 总结与引导
+### 03. Summary and guidance
 
-以上就是 Graphin 的快速入门指南，相信大家已经看到了 Graphin 的简单易用之处。其实关于 Graphin 的使用，还有可以有很多开脑洞的想法。比如布局和数据一起改变会发生什么？大家不妨自己试试。想要深入地了解 Graphin，可以继续阅读 [核心概念]() 和 [进阶指导]() 两部分的内容
+These are the quick start guides for Graphin. I believe you have seen the ease of use of Graphin. In fact, there are a lot of ideas about the use of Graphin. For example, what happens when the layout and data change together? You can have a try. if you want to get a deeper understanding of Graphin, you can continue to read the contents of [main-concepts]() and [advanced guides]().

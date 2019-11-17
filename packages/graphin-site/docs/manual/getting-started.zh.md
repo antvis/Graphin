@@ -133,7 +133,7 @@ const App = () => {
 -   Data
 
     -   1. 产生 Data 的 Mock 函数究竟是什么？ --- [核心概念/data 数据驱动](main-concepts/data)
-    -   2. 如何根据对设置 Node 的样式
+    -   2. 如何设置 Node 的样式
     -   3. 如何自定义 NodeShape？
 
 -   Layout

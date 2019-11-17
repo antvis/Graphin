@@ -59,7 +59,7 @@ As for the default `CircleNode` node, we only need to change the style of each n
 | primaryColor | '#9900EF' | primary color of node |
 | fontSize     | 12        | fontSize of text |
 | fontColor    | '#3b3b3b' | fontColor of text |
-| dark         | '#eee'    | dark 置灰      |
+| dark         | '#eee'    | color of the node when it is darkened      |
 
 -   Custom transform function
 

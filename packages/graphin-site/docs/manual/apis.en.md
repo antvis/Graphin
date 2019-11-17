@@ -56,9 +56,9 @@ order: 3
 | ------------ | --------- | -------------- |
 | nodeSize     | 20        | size of node     |
 | primaryColor | '#9900EF' | the main color of node |
-| fontSize     | 12        | font Size of text |
-| fontColor    | '#3b3b3b' | font Color of text |
-| dark         | '#eee'    | dark 置灰      |
+| fontSize     | 12        | font size of text |
+| fontColor    | '#3b3b3b' | font color of text |
+| dark         | '#eee'    | color of the node when it is darkened      |
 
 ### Edge
 
