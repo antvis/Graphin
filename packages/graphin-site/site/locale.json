@@ -13,5 +13,6 @@
     "自动布局": "Automatic layout",
     "内置丰富的布局，支持布局切换，满足不同场景下的布局需求": "Built-in rich layout, support layout switching, to meet the layout needs of different scenarios",
     "分析探索": "Analytical exploration",
-    "沉淀分析方法，内置分析组件，专注关系可视分析领域": "Precipitation analysis method, built-in analysis component, focus on relational visual analysis"
+    "沉淀分析方法，内置分析组件，专注关系可视分析领域": "Precipitation analysis method, built-in analysis component, focus on relational visual analysis",
+    "GraphinStudio 是基于 Graphin 开发的通用关系分析平台，具有关系扩散，关系发现，布局切换等功能": "GraphinStudio is a universal relational analysis platform developed by Graphin with features such as relationship diffusion, relationship discovery, layout switching, etc."
 }

@@ -52,9 +52,11 @@ const IndexPage = () => {
     const cases = [
         {
             logo: 'https://gw.alipayobjects.com/zos/basement_prod/f90e2f08-630b-4b02-8886-5c7c174a3fca.svg',
-            title: 'Graphin Stduio',
-            description: 'GraphinStudio是基于Graphin开发的通用关系分析平台，具有自动布局，关系扩散等功能',
-            link: 'zh/GraphinStudio',
+            title: t('Graphin Stduio'),
+            description: t(
+                'GraphinStudio 是基于 Graphin 开发的通用关系分析平台，具有关系扩散，关系发现，布局切换等功能',
+            ),
+            link: `/${i18n.language}/GraphinStudio`,
             image: 'https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*Y9y9QqfXYdkAAAAAAAAAAABkARQnAQ',
         },
     ];
