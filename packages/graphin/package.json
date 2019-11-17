@@ -1,6 +1,6 @@
 {
     "name": "@antv/graphin",
-    "version": "1.0.0-beta.4",
+    "version": "1.0.0-beta.6",
     "description": "the react toolkit for graph analysis based on g6",
     "main": "./dist/index.esm",
     "types": "./dist/index.d",
@@ -35,7 +35,7 @@
     "license": "MIT",
     "dependencies": {
         "svg2marker": "^0.1.3",
-        "@antv/g6": "^3.1.5",
+        "@antv/g6": "^3.1.9",
         "deepmerge": "^4.0.0",
         "lodash": "^4.17.15",
         "react": "^16.8.6"
