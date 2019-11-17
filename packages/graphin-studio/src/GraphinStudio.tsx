@@ -55,7 +55,6 @@ const Graphene = () => {
             <Side>
                 <OnlyGraphinReady graphRef={graphRef}>
                     <OperatorBar dispatch={dispatch} state={state} graphRef={graphRef} />
-                    {/* <SearchBar dispatch={dispatch} state={state} /> */}
                 </OnlyGraphinReady>
             </Side>
             <Main>
@@ -63,6 +62,7 @@ const Graphene = () => {
                 <OnlyGraphinReady graphRef={graphRef}>
                     <GraphDrawer dispatch={dispatch} state={state} />
                     <GraphModal dispatch={dispatch} state={state} />
+                    <SearchBar dispatch={dispatch} state={state} />
                 </OnlyGraphinReady>
             </Main>
             <Footer>This is Footer</Footer>

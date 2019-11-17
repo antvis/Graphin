@@ -1,7 +1,11 @@
 .searchBar-container {
     position: absolute;
-    top: 0;
+    top: 48px;
     width: 100%;
+    z-index: 2;
+    &.search-below-toolbar {
+        top: 36px;
+      }
     .content {
         font-weight: 700;
         color: #b8b8b8;

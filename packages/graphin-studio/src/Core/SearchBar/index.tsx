@@ -1,13 +1,19 @@
 import React from 'react';
+import classes from 'classnames';
 import { SearchBar } from '@com';
 import { SearchValue, ContentProps, SearchBarContainerBarProps } from './interface';
 import transformSearchValue from './transformSearchValue';
 import './index.less';
 
 const SearchBarContainer: React.FC<SearchBarContainerBarProps> = props => {
-    const { apis, graphVars = {}, state } = props;
-    const { visible } = state.searchBar;
-    const { nodes } = graphVars.data;
+    const { state } = props;
+    const {
+        searchBar: { visible },
+        data: { nodes },
+        graphRef,
+        toolbar: { direction },
+    } = state;
+    const apis = graphRef.current.getApis();
 
     const onSearch = (value: string) => {
         return new Promise<SearchValue[]>(resolve => {
@@ -44,8 +50,10 @@ const SearchBarContainer: React.FC<SearchBarContainerBarProps> = props => {
         // TODO:清空当前画布的搜索历史记录
     };
 
+    const rootClass = classes('searchBar-container', direction === 'horizontal' ? 'search-below-toolbar' : '');
+
     return (
-        <div className="searchBar-container">
+        <div className={rootClass}>
             <SearchBar
                 visible={visible}
                 isFocus
