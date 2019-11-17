@@ -1,7 +1,7 @@
 {
   "name": "@antv/graphin-components",
   "version": "0.1.0",
-  "description": "Components for graphin.",
+  "description": "Components for graphin",
   "main": "./dist/index.esm",
   "types": "./dist/src/index.d",
   "scripts": {
@@ -15,7 +15,7 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "antd": "^3.23.5",
-    "@antv/graphin": "^1.0.0-beta.3"
+    "@antv/graphin": "^1.0.0-beta.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.0",
@@ -29,5 +29,8 @@
   },
   "dependencies": {
     "@antv/g6": "^3.1.5"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
