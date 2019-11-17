@@ -145,7 +145,7 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
                     data,
                     /** 前置布局，默认为random */
                     preset: {
-                        name: 'random',
+                        name: (prevProps.layout && prevProps.layout.name) || 'concentric',
                         options: {},
                     },
                     /** spring stiffness 弹簧劲度系数 * */
@@ -167,6 +167,7 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
                 };
 
                 const layouOpts = { ...defaultOptions, ...options };
+
                 /** 只要不是初始化空数据布局，前一次的布局为力导布局，那么设置它的前置布局为force，内部采用tweak布局 */
                 if (prevProps && prevProps.layout!.name === 'force') {
                     if (prevProps.data.nodes.length === 0) {
