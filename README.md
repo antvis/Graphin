@@ -1,6 +1,6 @@
 ## Graphin
 
-## 总览
+[English README](./README.en-US.md)
 
 Graphin 采用 lerna 包管理机制，packages 中包含以下 4 个 package
 
@@ -20,10 +20,6 @@ Graphin 采用 lerna 包管理机制，packages 中包含以下 4 个 package
 | @antv/graphin-components | Graphin 中的图分析组件                                 |
 | @antv/graphin-site       | Graphin 文档官网                                       |
 | graphin-studio           | Graphin 演示 DEMO：基于 Graphin 实现的通用关系分析平台 |
-
-关于 Graphin 与 G6 的定位问题：Graphin 专注在关系可视分析领域，它是一个关系分析工具。上层服务关系网络，知识图谱，金融反欺诈等业务。基于 G6 的图可视化能力，结合 React 框架的优势，为用户提供工程方案，产品能力，简单易用的开发体验
-
-![graphin and g6](https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*zAbfSp28qFoAAAAAAAAAAABkARQnAQ)
 
 ### 快速开始
 
@@ -71,3 +67,10 @@ npm run studio
 ```bash
 npm run site
 ```
+
+### 使用文档
+
+-   [Graphin 简介](https://antvis.github.io/graphin/zh/docs/manual/introduction)
+-   [快速上手](https://antvis.github.io/graphin/zh/docs/manual/getting-started)
+-   [API 文档](https://antvis.github.io/graphin/zh/docs/api/graphin)
+-   [GraphinStudio](https://antvis.github.io/graphin/zh/GraphinStudio)

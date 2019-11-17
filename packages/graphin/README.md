@@ -1,4 +1,3 @@
-[![](https://img.shields.io/travis/antvis/graphin.svg)](https://travis-ci.org/antvis/graphin)
 ![](https://img.shields.io/badge/language-typescript-red.svg)
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 [![npm package](https://img.shields.io/npm/v/@antv/graphin.svg)](https://www.npmjs.com/package/@antv/graphin)
