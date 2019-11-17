@@ -46,7 +46,6 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
-
 ### 02. 使用布局
 
 Graphin 组件内置了 6 种布局，默认提供布局为 force（力导布局）。我们可以根据自己业务的不同来调整布局。比如，我们希望节点按照同心圆（concentric）排列。让我们来调整上述的代码：
@@ -138,11 +137,13 @@ const App = () => {
     -   3. 如何自定义 NodeShape？
 
 -   Layout
+
     -   1. 布局参数 API 在哪里？
     -   2. 布局切换 如何实现？
     -   3. 如何实现一个自定义布局？
 
 -   Components
+
     -   1. Toolbar/ContextMenu 可以自定义吗？
     -   2. Graphin 未来还会新增哪些组件？都有什么功能？
 
@@ -194,12 +195,12 @@ Graphin 提供两种方式获得 apis 接口，第一种是通过组件的 props
 -   4. 完整代码如下：
 
 <iframe
-     src="https://codesandbox.io/embed/data-driven-3o71b?fontsize=14"
+     src="https://codesandbox.io/embed/layout-selector-k16mh?fontsize=14&hidenavigation=1&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="data-driven"
+     title="layout-selector"
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-></iframe>
+   ></iframe>
 
 ### 02.节点扩散
 
@@ -248,8 +249,8 @@ const App = () => {
             ...state,
             data: {
                 // 还需要对Node和Edge去重，这里暂不考虑
-                nodes: [...state.nodes, expandData.nodes],
-                edges: [...state.edges, expandData.edges],
+                nodes: [...state.nodes, ...expandData.nodes],
+                edges: [...state.edges, ...expandData.edges],
             },
         });
     };
@@ -267,13 +268,12 @@ const App = () => {
 -   4. 完整代码如下：
 
 <iframe
-     src="https://codesandbox.io/embed/data-driven-3o71b?fontsize=14"
+     src="https://codesandbox.io/embed/icy-snow-grltv?fontsize=14&hidenavigation=1&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="data-driven"
+     title="nodeExpand"
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-></iframe>
-
+   ></iframe>
 ### 03. 总结与引导
 
 以上就是 Graphin 的快速入门指南，相信大家已经看到了 Graphin 的简单易用之处。其实关于 Graphin 的使用，还有可以有很多开脑洞的想法。比如布局和数据一起改变会发生什么？大家不妨自己试试。想要深入地了解 Graphin，可以继续阅读 [核心概念]() 和 [进阶指导]() 两部分的内容

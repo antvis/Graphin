@@ -24,6 +24,7 @@ const compiler = (extendNodeShape: ExendNodeShape) => {
         /** 自定义Shape */
         draw(inputCfg: any, group: any) {
             /** 得到用户返回的shapeComponents，然后拼装 */
+
             const { shapeComponents, state: RenderState, update } = renderNodeShape(inputCfg);
             /** 每次draw后的shape就是初始化shape，这个在节点update后，用于setstate的reset */
             initShapeComponentMap[inputCfg.data.id] = shapeComponents;
@@ -39,17 +40,6 @@ const compiler = (extendNodeShape: ExendNodeShape) => {
                 });
             });
             return g6Shapes[keyshapeIndex];
-        },
-        /**
-         * TODO UNSATE！compiler.update method
-         * 用户调用graph.updateItem的时候会触发update方法，对于数据驱动的graphin,不建议使用，未来会移除这个方法
-         */
-        update(cfg: any, node: any) {
-            const { id } = node.get('model').data;
-            const initUpdate = initUpdateMap[id];
-            if (initUpdate) {
-                initUpdate(cfg, node);
-            }
         },
         /** 设置各种交互状态 */
         setState(name: any, value: any, node: any) {

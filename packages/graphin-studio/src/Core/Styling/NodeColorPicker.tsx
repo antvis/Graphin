@@ -51,19 +51,34 @@ const NodeColorPicker: React.FC<StylingProps> = props => {
         storage.set('bizTypes', newBizTypes);
         const matchBizType = newBizTypes.find(item => item.type === type);
 
-        /** 调用G6的API实现刷新 */
-        const { graph } = props;
-        const graphNodes = graph.get('nodes') as GraphNode[];
-
-        graphNodes.forEach(node => {
-            const nodeType = node.get('model').data.type;
-            if (type === nodeType) {
-                /**  只更新需要更新的节点类型 */
-                graph.update(node, {
-                    style: matchBizType.style,
-                });
-            }
+        const { graph, dispatch } = props;
+        const preData = graph.save();
+        const newNodes = preData.nodes.map(node => {
+            return {
+                ...node,
+                style: node.data.type === type ? matchBizType.style : node.style,
+            };
         });
+        const newData = {
+            nodes: newNodes,
+            edges: preData.edges,
+        };
+        dispatch({
+            type: 'graph/changeData',
+            payload: newData,
+        });
+
+        /** 调用G6的API实现刷新 */
+        // const graphNodes = graph.get('nodes') as GraphNode[];
+        // graphNodes.forEach(node => {
+        //     const nodeType = node.get('model').data.type;
+        //     if (type === nodeType) {
+        //         /**  只更新需要更新的节点类型 */
+        //         graph.update(node, {
+        //             style: matchBizType.style,
+        //         });
+        //     }
+        // });
         /** end */
     };
 

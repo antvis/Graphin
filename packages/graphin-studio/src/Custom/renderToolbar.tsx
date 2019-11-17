@@ -11,9 +11,7 @@ const renderToolbar = (renderProps: RenderProps, state: GrapheneState, dispatch:
     const RadioLayouts = layouts.map(items => {
         return {
             ...items,
-            options: {
-                preset: { name: 'random' },
-            },
+            options: {},
         };
     });
 

@@ -48,11 +48,10 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
-
 ### 02. 使用布局
 
 Graphin 组件内置了 6 种布局，默认提供布局为 force（力导布局）。我们可以根据自己业务的不同来调整布局。比如，我们希望节点按照同心圆（concentric）排列。让我们来调整上述的代码：
-There are six built-in layouts in Grapnin, and the default is force (force layout). We can switch the layout according to our needs. 
+There are six built-in layouts in Grapnin, and the default is force (force layout). We can switch the layout according to our needs.
 
 For example, we want nodes to be arranged in a concentric order:
 
@@ -66,7 +65,7 @@ For example, we want nodes to be arranged in a concentric order:
 ### 03. 使用组件
 
 Graphin 目前仅提供两个官方组件，Toolbar 和 ContextMenu。关于它们，你们可以在[核心概念/Components 分析组件](main-concepts/components)中得到更详细的介绍，我们以添加组件 `Toolbar` 为例：
-Graphin provides two official components, Toolbar and ContextMenu. you can get more detail about them  in the core concept / Components analysis component.
+Graphin provides two official components, Toolbar and ContextMenu. you can get more detail about them in the core concept / Components analysis component.
 
 we take Toolbar as an example:
 
@@ -79,7 +78,6 @@ $ npm install @antv/graphin-components --save
 
 -   将组件放在 Graphin 组件内部，这样 `Graphin` 组件可以将 `graph`，`apis` 等属性传递给分析组件：
 -   Place Toolbar component inside Graphin component so that Graphin can pass properties such as graph, apis, etc. to the Toolbar:
-
 
 ```jsx
 import React from 'react';
@@ -106,9 +104,9 @@ ReactDOM.render(<App />, rootElement);
 这个时候我们再到 CodeSandbox 中去体验下 Toolbar：
 we can experience Toolbar component in codesandbox:
 
--   todo/redo 
--   zoomIn/out 
--   fullscreen 
+-   todo/redo
+-   zoomIn/out
+-   fullscreen
 
 ### 04. 事件监听
 
@@ -142,7 +140,7 @@ const App = () => {
 
 ### 05. 总结与引导
 
-Through the above 4 steps, we have a knowledge of all four core concepts of Graphin:  data, layout, components, and events.
+Through the above 4 steps, we have a knowledge of all four core concepts of Graphin: data, layout, components, and events.
 
 关于它们的用法，肯定还有很多同学有疑问，我们试着把这些问题整理归纳，形成一个指引。如果有其他问题，还请大家在 issue 中提出。
 
@@ -153,11 +151,13 @@ Through the above 4 steps, we have a knowledge of all four core concepts of Grap
     -   3. 如何自定义 NodeShape？
 
 -   Layout
+
     -   1. 布局参数 API 在哪里？
     -   2. 布局切换 如何实现？
     -   3. 如何实现一个自定义布局？
 
 -   Components
+
     -   1. Toolbar/ContextMenu 可以自定义吗？
     -   2. Graphin 未来还会新增哪些组件？都有什么功能？
 
@@ -209,13 +209,12 @@ Graphin 提供两种方式获得 apis 接口，第一种是通过组件的 props
 -   4. 完整代码如下：
 
 <iframe
-     src="https://codesandbox.io/embed/data-driven-3o71b?fontsize=14"
+     src="https://codesandbox.io/embed/layout-selector-k16mh?fontsize=14&hidenavigation=1&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="data-driven"
+     title="layout-selector"
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-></iframe>
-
+   ></iframe>
 ### 02.节点扩散
 
 > 将一个节点扩散出它的一度，二度，多度关系，这是非常常用的一种分析手法。
@@ -282,12 +281,12 @@ const App = () => {
 -   4. 完整代码如下：
 
 <iframe
-     src="https://codesandbox.io/embed/data-driven-3o71b?fontsize=14"
+     src="https://codesandbox.io/embed/icy-snow-grltv?fontsize=14&hidenavigation=1&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="data-driven"
+     title="nodeExpand"
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-></iframe>
+   ></iframe>
 
 ### 03. 总结与引导
 

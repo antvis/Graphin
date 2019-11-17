@@ -173,7 +173,7 @@ class ForceLayout {
             return force.mass;
         }
         /** 默认质量都是通过节点的度数自动计算的 */
-        return degree < 10 ? 1 : degree * 10;
+        return degree < 5 ? 1 : degree * 10;
     };
 
     init() {

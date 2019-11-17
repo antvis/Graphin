@@ -31,15 +31,15 @@ const ToolBar: React.FC<ToolBarProps> = props => {
     return (
         <ul className={`${'graphin-studio-toolbar'}${className ? ` ${className}` : ''}`} style={style}>
             {data.map(c => {
-                const { isDivider, onClick, tooltip, name, disabled, icon, reason = '暂不支持该操作', id } = c;
+                const { isDivider, onClick, tooltip, name, disabled, icon, id } = c;
                 if (isDivider) {
                     return <Divider key={id} />;
                 }
                 return (
-                    <Tooltip key={id} placement="right" title={disabled ? reason : tooltip || name}>
+                    <Tooltip key={id} placement="right" title={tooltip || name}>
                         <Button
-                            icon={icon}
                             disabled={disabled}
+                            icon={icon}
                             onClick={(): void => {
                                 if (onClick) {
                                     onClick(c);
