@@ -44,11 +44,12 @@ const OperatorBar: React.FC<OperatorBarProps> = props => {
                 });
             },
         },
-        {
-            id: 'filter',
-            name: '图筛选',
-            icon: 'filter',
-        },
+        // {
+        //     id: 'filter',
+        //     name: '图筛选',
+        //     icon: 'filter',
+        //     disabled: true,
+        // },
 
         {
             id: 'divider1',
@@ -62,16 +63,18 @@ const OperatorBar: React.FC<OperatorBarProps> = props => {
                 diffuseOperator(props);
             },
         },
-        {
-            id: 'discover',
-            name: '关系发现',
-            icon: 'eye',
-        },
-        {
-            id: 'analyse',
-            name: '社群分析',
-            icon: 'gateway',
-        },
+        // {
+        //     id: 'discover',
+        //     name: '关系发现',
+        //     disabled: true,
+        //     icon: 'eye',
+        // },
+        // {
+        //     id: 'analyse',
+        //     name: '社群分析',
+        //     disabled: true,
+        //     icon: 'gateway',
+        // },
         {
             id: 'divider2',
             isDivider: true,
