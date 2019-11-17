@@ -11,37 +11,37 @@ order: 0
 
 ```tsx
 export interface Data {
-    /** 节点 */
+    /** node */
     nodes: Node[];
-    /** 边 */
+    /** edge */
     edges: Edge[];
 }
 ```
 
 -   2. important concepts of Node
 
-|   属性 | 说明                                                                                           |
+|   Property | Description                                                                                           |
 | ------ | ---------------------------------------------------------------------------------------------- |
 | id     | id is the unique identifier of a node. If id does not exist, Graphin will ignore the node.           |
 | shape  | shape tells Graphin what kind of node to render, and the default shape is the built-in `CircleNode`. the concept of shape is the same with the shape in G6 |
-| data   | data 保存了后端返回的节点数据。单独用 data 字段来存储是为了避免和 Graphin 的节点数据混在一起          |
+| data   | Data refers to the specific data of the node        |
 
 -   3. important concepts of Edge
 
-|   属性 | 说明                                                                                |
+|   Attributr | Description                                                                                |
 | ------ | ----------------------------------------------------------------------------------- |
-| source | source is the id of the source node                     |
-| target | target is the id of the target node   |
-| data   | data 保存了后端返回的边数据，单独用 data 字段来存储是为了避免和 Graphin 的节点数据混在一起 |
+| source | the value of source is the id of the source node                     |
+| target | the value of target is the id of the target node   |
+| data   | data refers to the specific data of the edge |
 
-> 完整的 API，请查看[API 手册](../apis/#data)
+> For a complete API, please see [API Manual] (../apis/#data)
 
-## 02. 从数据到视图
+## 02. From data to view
 
-Graphin 数据全量渲染和增量添加：
+Graphin Full data rendering and incremental addition:
 
--   增量数据添加：Graphin 会根据前置布局，动态完成增量数据添加，达到节点扩散，关系发现等效果。
--   全量数据渲染：Graphin 支持全量数据渲染，满足保存，导入，导出等需求。
+-   Incremental data addition: Graphin adds data dynamically according to the pre-layout to achieve node diffusion, relationship discovery and other effects.
+-   Full data rendering: Graphin supports full data rendering to Meet the requirements of saving, importing, exporting, etc.
 
 when we use Graphin, we need to pass in the data to be rendered.
 
@@ -53,7 +53,7 @@ Sometimes we need to adjust the color, size, etc. of the nodes dynamically accor
 
 As for the default `CircleNode` node, we only need to change the style of each node.
 
-|   属性       | 默认值    | 说明           |
+|   Property     | Default    | Description           |
 | ------------ | --------- | -------------- |
 | nodeSize     | 20        | size of node     |
 | primaryColor | '#9900EF' | primary color of node |
@@ -91,7 +91,7 @@ const transform = {
 };
 ```
 
-## 03. 特殊情况
+## 03. Special cases
 
 Through the definition of the data, we know that the data of Graphin is a mandatory option. We have listed several special cases below.
 

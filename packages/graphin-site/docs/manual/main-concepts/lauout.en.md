@@ -3,15 +3,14 @@ title: Layout
 order: 1
 ---
 
-在图分析过程中，针对不同的分析场景，我们需要不同的布局方案。
 In the process of graph analysis, we need different layouts for different analysis scenes.
 
-## 01. 布局的定义
+## 01. Definition of layout
 
 -   Layout, as the name suggests, is how to place nodes. It is determined by x and y of nodes.
 -   The layout algorithm is a function that adds x and y to a node.
 
-布局的指定是通过 Graphin 的 `layout` 实现的：
+The layout is specified by Graphin's `props.layout`:
 
 ```tsx
 <Graphin data={data} layout={{ name: 'force', options: {} }} />
@@ -27,7 +26,7 @@ In the process of graph analysis, we need different layouts for different analys
 
 -   scene: When we find the key node in a group of nodes, it has the most related nodes. so with the circle layout, we can easily find this key node in the center.
 
-|   属性 | 类型     | 默认值                   | 说明        |
+|   Property | Type     | Default                   | Description        |
 | ------ | -------- | ------------------------ | ----------- |
 | x      | `number` | CanvasWidth / 2        |  x of the center node |
 | y      | `number` | CanvasHeight / 2       | y of the center node |
@@ -43,13 +42,13 @@ In the process of graph analysis, we need different layouts for different analys
 
 -   scene: When we find the key node in a group of nodes, it has the most related nodes. so with the circle layout, we can easily find this key node in the center.
 
-|   属性         | 类型       | 默认值                                   | 说明                                       |
+|   Property         | Type       | Default                                   | Description                                       |
 | -------------- | ---------- | ---------------------------------------- | ------------------------------------------ |
 | boundingBox    | `object`   | { x:0, y:0, w:CanvasWidth, h:CanvasHeight } | Range of the layout  |
 | minNodeSpacing | `number`   | 60                                       | Distance between nodes                   |
 | levelWidth     | `function` | (nodes: Data['nodes'], maxDegree: number) => number | 每层的节点度数范围                         |
 
-levelWidth 的示例：
+example of levelWidth:
 
 ```tsx
 const LevelWidthFunction = (nodes: Data['nodes'], maxDegree: number) => {
@@ -68,7 +67,7 @@ const LevelWidthFunction = (nodes: Data['nodes'], maxDegree: number) => {
 - scene: The position of the node is expanded according to the user-defined sorting. It is generally used for pre-analysis of other layouts.
 
 
-|   属性   | 类型     | 默认值         | 说明                             |
+|   Property   | Type     | Default         | Description                             |
 | -------- | -------- | -------------- | -------------------------------- |
 | width    | `number` | CanvasWidth  | Width of the layout                  |
 | height   | `number` | CanvasHeight | Height of the layout                  |
@@ -81,12 +80,12 @@ const LevelWidthFunction = (nodes: Data['nodes'], maxDegree: number) => {
 -   character: Nodes spread out like radar, which is the main layout algorithm for solving crossover problems in static layouts.
 -   scene:
 
-|   属性         | 类型              | 默认值                           | 说明       |
+|   Property   | Type     | Default         | Description                             |
 | -------------- | ----------------- | -------------------------------- | ---------- |
-| center         | `[number,number]` | [CanvasWidth/2,CanvasHeight/2] | Coordinate of center node|
-| preventOverlap | `bolean`          | CanvasHeight                | Prevent coverage   |
-| nodeSize       | `number`          | 100                              | Size of a node   |
-| unitRadius     | `number`          | 150                              | Radius of each layer |
+| center         | `[number,number]` | [CanvasWidth/2,CanvasHeight/2] | coordinate of the center node|
+| preventOverlap | `bolean`          | CanvasHeight                | prevent coverage   |
+| nodeSize       | `number`          | 100                              | size of a node   |
+| unitRadius     | `number`          | 150                              | radius of each layer |
 
 ### 05. `dagre`
 
@@ -94,12 +93,13 @@ const LevelWidthFunction = (nodes: Data['nodes'], maxDegree: number) => {
 -   character: Tree arrangement according to the direction of the edge and the level of the node
 -   scene: When we need to know the hierarchy, the upstream and downstream relationship of the data, dagre is a good way.
 
-|   属性   | 类型              | 默认值                    | 说明               |
+
+|   Property   | Type     | Default         | Description                             |
 | -------- | ----------------- | ------------------------- | ------------------ |
-| center   | `[number,number]` | [width / 2, height / 2] | Coordinate of center node        |
-| nodeSize | `number`          | CanvasHeight            | Size of a node         |
-| nodesep  | `number`          | 12                        | Horizontal distance between nodes   |
-| ranksep  | `number`          | 50                        | Vertical distance between nodes |
+| center   | `[number,number]` | [width / 2, height / 2] | coordinate of the center node        |
+| nodeSize | `number`          | CanvasHeight            | size of a node         |
+| nodesep  | `number`          | 12                        | horizontal distance between nodes   |
+| ranksep  | `number`          | 50                        | vertical distance between nodes |
 | align    | `string`          | `UL`                      | 放置位置           |
 
 ### 06. `force`
@@ -108,7 +108,7 @@ const LevelWidthFunction = (nodes: Data['nodes'], maxDegree: number) => {
 -   character: The nodes are distributed according to the natural force. The simulated charge repulsion between the nodes remains disjoint, and the spring tension is not dissociated. Finally, a force balance is achieved in multiple dynamic iterations.
 -   scene: When you want to solve the problem of intersecting nodes, it is very suitable to use the force layout. Generally used as a pre-layout for other layouts
 
-|   属性             | 类型     | 默认值                         | 说明                                                                       |
+|   Property   | Type     | Default         | Description                             |
 | ------------------ | -------- | ------------------------------ | -------------------------------------------------------------------------- |
 | preset             | `object` | { name: 'random',options:{}} | 前置布局，主要用于布局切换。当前置布局为 force 时，内部启动 tweak 布局算法 |
 | stiffness          | `number` | 200                            | 弹簧劲度系数                                                               |

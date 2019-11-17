@@ -1,59 +1,61 @@
 ---
-title: Components
+title: Components 
 order: 2
 ---
 
-The analysis process is a dynamic interaction process, and there is no exception of the graph analysis. So we need some analysis components to help us. There are two built-in components in Graphin: Toobar and ContextMenu.
+The analysis process is a dynamic interaction process. There is no exception of the graph analysis So we need some analysis components to help us. There are two built-in components in Graphin: Toobar and ContextMenu.
 
 > MiniMap and ProptertiesFilter Component are in the planning.
 
 ## 01.Toolbar
 
-Toolbar 内置了 4 大功能
+Toolbar includes 4 built-in features
 
-#### 功能介绍
+#### Features
 
 -   todo/redo
 
-我们提供了撤销重做的功能，能够让整个分析过程变得可靠，因为用户不必再担心因为误操作而毁坏了之前的分析过程。对于工具型产品，这是基础功能，也是特色功能
+We provide the ability to undo and redo, which makes the entire analysis process reliable, because users no longer have to worry about ruining the previous analysis process because of misuse. For tool-based products, this is the basic function and the feature.
 
--   zoomIn/out 缩小放大功能
+-   zoomIn/out 
 
-在分析过程中，当节点数量的变化，布局的变化，引起一些节点可能不在当前视窗内，这个时候我们就需要缩放功能帮助我们调整视窗的范围，配合画布的拖拽，能让我们不丢失全局（zoomOut），也不损失细节（zoomIn）
+During the analysis process, when the number of nodes or the layout changes, some nodes may not be in the current window. At this time, we need the zoom function to help us adjust the scope of the window. With the drag and drop of the canvas, we will not lose the global (zoomOut) and detail (zoomIn).
 
--   fullscreen 全屏功能
 
-触发后，整个画布占满浏览器窗口，当你的画布页在业务中占比很小的时候，这将非常有用。
+-   fullscreen
 
--   foucs 节点聚焦功能
+After the trigger, the entire canvas fills the browser window, which is very useful when your canvas page is small in the entire screen.
 
-输入节点 ID，将自动对焦到该节点，将和 Search 功能配套起来，支持模糊搜索，快速定位，这将大大提高你的分析效率
+-   foucs
 
--   Snapshot 快照下载
-    当你希望保存当前的画布给别人分享，下载快照将会是一个非常有用的功能。
+After entering the node ID, the graph will automatically focus on the node. This function can be used with the Search function to support fuzzy search and fast positioning, which will greatly improve your analysis efficiency.
 
-## 02.ContextMenu 右键菜单
+-   Snapshot  snapshot download
+    Downloading a snapshot will be a very useful feature when you want to save the current canvas for sharing.
 
-#### 功能介绍
+## 02.ContextMenu 
 
-在画布上，我们在节点上右键菜单，将会出现更多的操作选项，如果说 Toolbar 是针对整个画布的操作，那么 ContextMenu 则是针对单独的节点做操作，对于单个节点，我们通用的分析操作有如下：
+#### Features
 
--   复制
+On the canvas, we right click on the node and a menu will appear. We can customize the operation options of the ContextMenu. If the Toolbar is for the entire canvas operation, then the ContextMenu will operate on a single node. For a single node, our general analysis operation has as follows:
 
-复制节点 ID，以便于你的后续操作
+-   Copy
 
--   反选
+Copy the node ID for some operations.
 
-反选节点，这种排除法，是选择其他节点的一种快捷方式
+-   Inverse selection
 
--   删除
+Inverse selection is a shortcut to select other nodes.
 
-删除该节点，删除后，剩余的节点将重新布局，渲染，这在我们做案件排查的时候，删除已经确定的关键节点，重新布局分析能够减少我们的分析干扰。
+-   Delete
 
--   新增画布分析
+After tdeleting the node, the remaining nodes will be re-layout and rendered. when we do the case investigation, The re-layout analysis can reduce our analysis interference after deleting the identified key nodes.
 
-当我们在前一次分析中筛选出的关键节点，可以通过右键菜单，新建画布分析的方式，在一个新的画布中做二次分析，减少无用信息的干扰
+-   Add canvas
 
--   业务相关
+When we select the key nodes in the previous analysis, we can do a second analysis in a new canvas by right-click menu which will reduce the interference of useless information.
 
-业务特有的一些针对节点的操作，比如给该节点打标，进行关系扩散，或者发起数据请求什么的
+
+-   Business related
+
+Some operations specific to a node, such as marking the node, spreading the relationship, or initiating a data request.

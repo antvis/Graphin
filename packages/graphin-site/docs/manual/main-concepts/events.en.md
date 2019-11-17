@@ -7,7 +7,7 @@ order: 3
 
 Our interaction on the graph will actually trigger the event. For example, when the window is zoomed out, Graphin will automatically update the width and height of the canvas. when the canvas is zoomed out, only KeyShape is reserved by default.
 
-我们可以通过 G6 的 API 来对事件进行监听。
+We can monitor events through the G6 API.
 
 ## Supported events
 
@@ -15,15 +15,15 @@ The combined event name is a combination of `element` and `event`. For example, 
 
 |   element               | event                         | combined event name                                               |
 | -------------------- | ---------------------------- | ---------------------------------------------------------- |
-| node / edge / canvas | click （点击事件）           | `node:click`, `edge:click`, `canvas:click`                 |
-| node / edge / canvas | dblclick （双击事件）        | `node:dblclick`,`edge:dblclick`,`canvas:dblclick`          |
-| node / edge / canvas | contextmenu （右键菜单事件） | `node:contextmenu`,`edge:contextmenu`,`canvas:contextmenu` |
+| node / edge / canvas | click （click event）           | `node:click`, `edge:click`, `canvas:click`                 |
+| node / edge / canvas | dblclick （double click event）        | `node:dblclick`,`edge:dblclick`,`canvas:dblclick`          |
+| node / edge / canvas | contextmenu （right-click event） | `node:contextmenu`,`edge:contextmenu`,`canvas:contextmenu` |
 
-更多事件，请参考 G6 的 [Events API](https://www.yuque.com/antv/g6/event-api)
+For more events, please refer to G6's [Events API] (https://www.yuque.com/antv/g6/event-api)
 
-## 事件的用法
+## Usage of event 
 
-我们使用 graphRef 获得 G6 的 Graph 实例，在 Graph 上监听事件。比如下列代码，我们希望将点击的节点存储起来：
+We use graphRef to get a Graph instance of G6 and monitor events on the Graph. For example, the following code, we want to store the clicked nodes:
 
 ```tsx
 import React from 'react';
