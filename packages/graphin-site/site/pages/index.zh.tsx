@@ -64,7 +64,7 @@ const IndexPage = () => {
     const bannerButtons = [
         {
             text: t('继续了解'),
-            link: `/${i18n.language}/examples/tree/compactBox`,
+            link: `/${i18n.language}/docs/manual/introduction`,
             type: 'primary',
         },
         {

@@ -27,7 +27,6 @@ const Graphene = (props: GraphProps) => {
         // 将graph实例传给全局
     }, []);
     // eslint-disable-next-line no-console
-    console.log('graphin-studio..render...', props);
 
     return (
         <Graphin data={data} layout={layout} ref={graphRef} extend={extend}>
