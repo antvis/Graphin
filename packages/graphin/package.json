@@ -32,7 +32,7 @@
         "eventemitter3": "^4.0.0"
     },
     "sideEffects": false,
-    "author": "AntFinancial",
+    "author": "Ant Financial",
     "license": "MIT",
     "dependencies": {
         "svg2marker": "^0.1.3",
