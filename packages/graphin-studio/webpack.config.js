@@ -1,21 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-// const webpack = require('webpack');
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = env => {
-    const isPrd = env.NODE_ENV === 'production';
-    const alias = isPrd
-        ? {}
-        : {
-              react: require.resolve('react'),
-          };
     return {
         entry: {
             bundle: './src/index.tsx',
-            app: './src/GraphinStudio.tsx',
         },
+
         mode: env.NODE_ENV,
         module: {
             rules: [
@@ -32,14 +27,6 @@ module.exports = env => {
                         presets: ['@babel/env', '@babel/preset-react'],
                         plugins: [
                             ['@babel/plugin-proposal-class-properties', { loose: true }],
-                            [
-                                'import',
-                                {
-                                    libraryName: 'antd',
-                                    libraryDirectory: 'es',
-                                    style: 'css', // `style: true` 会加载 less 文件
-                                },
-                            ],
                             ['react-hot-loader/babel'],
                         ],
                     },
@@ -51,7 +38,12 @@ module.exports = env => {
                 },
                 {
                     test: /\.css$/,
-                    use: ['style-loader', 'css-loader'],
+                    use: [
+                        {
+                            loader: MiniCssExtractPlugin.loader,
+                        },
+                        'css-loader',
+                    ],
                 },
                 {
                     test: /\.(png|jpe?g|gif|svg)$/i,
@@ -65,7 +57,7 @@ module.exports = env => {
                     test: /\.less$/,
                     use: [
                         {
-                            loader: 'style-loader', // creates style nodes from JS strings
+                            loader: MiniCssExtractPlugin.loader,
                         },
                         {
                             loader: 'css-loader', // translates CSS into CommonJS
@@ -88,17 +80,13 @@ module.exports = env => {
                 '@service': path.resolve('./', 'src', 'Service'),
                 '@utils': path.resolve('./', 'src', 'Utils/'),
                 '@com': path.resolve('./', 'src', 'Components/'),
-                ...alias,
             },
         },
         devtool: 'cheap-module-eval-source-map',
         output: {
             path: path.resolve(__dirname, 'dist/'),
             publicPath: './',
-            // filename: 'bundle.js',
-            filename: '[name].js',
-            library: 'graphin-studio',
-            libraryTarget: 'umd',
+            filename: '[name].[hash].js',
         },
         devServer: {
             contentBase: path.join(__dirname, 'public/'),
@@ -107,8 +95,13 @@ module.exports = env => {
             hotOnly: true,
         },
         plugins: [
+            new MiniCssExtractPlugin({
+                // Options similar to the same options in webpackOptions.output
+                // both options are optional
+                filename: '[name].css',
+                chunkFilename: '[id].css',
+            }),
             // new BundleAnalyzerPlugin(),
-            // new webpack.HotModuleReplacementPlugin(),
             new HtmlWebpackPlugin({
                 title: 'example',
                 template: './public/index.html',
@@ -116,18 +109,12 @@ module.exports = env => {
             }),
         ],
         externals: {
-            react: {
-                commonjs: 'react',
-                commonjs2: 'react',
-                amd: 'react',
-                root: 'React',
-            },
-            'react-dom': {
-                commonjs: 'react-dom',
-                commonjs2: 'react-dom',
-                amd: 'react-dom',
-                root: 'ReactDOM',
-            },
+            antd: 'window.antd',
+            'chinese-random-name': 'chineseRandomName',
+            lodash: '_',
+            react: 'window.React',
+            'react-dom': 'window.ReactDOM',
+            '@antv/g6': 'G6',
         },
     };
 };

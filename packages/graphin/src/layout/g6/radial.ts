@@ -1,5 +1,5 @@
 import G6 from '@antv/g6';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash';
 import { LayoutOptionBase, Data } from '../../types';
 
 export interface RadialLayoutOption extends LayoutOptionBase {

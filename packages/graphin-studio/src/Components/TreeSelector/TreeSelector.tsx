@@ -1,7 +1,6 @@
 import React from 'react';
 import { Tree } from 'antd';
-import isEqual from 'lodash/isEqual';
-import difference from 'lodash/difference';
+import { isEqual, difference } from 'lodash';
 import { AntTreeNodeCheckedEvent } from 'antd/es/Tree';
 import EnhancedCheckbox from '../EnhancedCheckbox';
 import { CheckboxValueType, CheckboxDataProps, TreeDataProps } from './interface';

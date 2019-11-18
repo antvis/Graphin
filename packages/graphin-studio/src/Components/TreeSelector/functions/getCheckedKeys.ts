@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { chain } from 'lodash';
 import { CheckboxDataProps, CheckboxValueType } from '../interface';
 
 interface GroupedItemsProps {
@@ -10,7 +10,7 @@ interface GroupedItemsProps {
 const getCheckedKeys = (data: Array<CheckboxDataProps>, checkedList: Array<CheckboxValueType>) => {
     const checked: Array<string> = [];
     const halfChecked: Array<string> = [];
-    const groupedItems = _(data)
+    const groupedItems = chain(data)
         .groupBy((item: CheckboxDataProps) => item.key)
         .map((groups: Array<CheckboxDataProps>, key: string) => {
             return {

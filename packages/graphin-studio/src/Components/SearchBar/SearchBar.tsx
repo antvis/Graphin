@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import _ from 'lodash';
+import { debounce } from 'lodash';
 import { Input, Icon } from 'antd';
 import SearchPanel from './Panel';
 import { SearchValue, ContentProps } from './interface';
@@ -162,7 +162,7 @@ const SearchBar: React.SFC<SearchBarProps> = props => {
 
     // 直接在useEffect内执行debounce无效，可以使用useRef把函数存起来
     // 注意：useRef保存的state是之前的，必须将当前的state作为参数传进来，否则后面setState会有问题
-    const debounce = useRef(_.debounce((newState: InitialState) => onSearch(newState), DEBOUNCE_TIME));
+    const refDebounce = useRef(debounce((newState: InitialState) => onSearch(newState), DEBOUNCE_TIME));
 
     useEffect(() => {
         document.addEventListener('click', hideSearchPanel);
@@ -179,7 +179,7 @@ const SearchBar: React.SFC<SearchBarProps> = props => {
 
     useEffect(() => {
         if (visible) {
-            debounce.current(state);
+            refDebounce.current(state);
         }
     }, [searchWords]);
 

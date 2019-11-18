@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { ErrorInfo } from 'react';
 
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash';
 /** controller */
 import initController from './controller/init';
 import registerController from './controller/register';
@@ -300,6 +300,12 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
                 <div
                     data-testid="custom-element"
                     className="graphin-core"
+                    style={{
+                        height: '100%',
+                        width: '100%',
+                        minHeight: '500px',
+                        background: '#fff',
+                    }}
                     ref={node => {
                         this.graphDOM = node;
                     }}
