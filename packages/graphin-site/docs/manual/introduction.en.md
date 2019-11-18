@@ -18,7 +18,7 @@ Graphin means Graph Insight (analysis of graphs). It is a library of React compo
 
 ## Product Positioning
 
-Graph visualization can be layered into "graph analysis" and "graph editing" in the application field. The background introduction(#Background) above is actually about the graph analysis.
+Graph visualization can be layered into "graph analysis" and "graph editing" in the application field. The [background](#Background) above is actually about the graph analysis.
 
 -   graph analysis: layout analysis and visual exploration of the graph. Typical product: [cambridge-intelligence](https://cambridge-intelligence.com/)，[TigerGraph](https://testdrive.tigergraph.com)，[Linkurio](https://crunchbase.linkurio.us/demo/)，[Gephi](https://gephi.org/) ，[Palantir](https://www.palantir.com/)，[Neo4j](https://neo4j.com/product/)。
 -   graph editing: Editing, wiring, process management of the graph. Typical product: [draw.io](https://www.draw.io/)，[mxGraph](https://github.com/jgraph/mxgraph)，[ggEditor](http://ggeditor.com/)。
@@ -43,7 +43,6 @@ Take advantage of the React framework features to map from data to canvas render
 
 -   Incremental data addition: Graphin adds data dynamically according to the pre-layout to achieve node diffusion, relationship discovery and other effects.
 -   Full data rendering: Graphin supports full data rendering to Meet the requirements of saving, importing, exporting, etc.
-
 
 <img style='width:100%;box-shadow: 0 2px 8px #f0f1f2;padding:40px;'  src = 'https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*PM7yTr_-O0gAAAAAAAAAAABkARQnAQ'/>
 

@@ -7,7 +7,15 @@ const IndexPage = () => {
     return (
         <>
             <SEO title={t('蚂蚁数据可视化')} lang={i18n.language} />
-            <div style={{ margin: '0 auto', padding: '0', height: 'calc(100vh - 64px)' }}>
+            <div
+                style={{
+                    margin: '0 auto',
+                    padding: '0',
+                    height: 'calc(100vh - 64px)',
+                    background:
+                        'url(https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*ZW9RSYTyEDcAAAAAAAAAAABkARQnAQ) center center no-repeat',
+                }}
+            >
                 <iframe
                     src="https://antvis.github.io/graphin-studio-site/#/graphin-studio"
                     title="graphin-studio"
