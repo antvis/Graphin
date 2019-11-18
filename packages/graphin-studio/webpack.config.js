@@ -10,7 +10,11 @@ module.exports = env => {
         entry: {
             bundle: './src/index.tsx',
         },
-
+        optimization: {
+            splitChunks: {
+                chunks: 'all',
+            },
+        },
         mode: env.NODE_ENV,
         module: {
             rules: [
@@ -105,16 +109,41 @@ module.exports = env => {
             new HtmlWebpackPlugin({
                 title: 'example',
                 template: './public/index.html',
-                chunks: ['bundle'],
+                chunks: ['vendors~bundle', 'bundle'],
             }),
         ],
-        externals: {
-            antd: 'window.antd',
-            'chinese-random-name': 'chineseRandomName',
-            lodash: '_',
-            react: 'window.React',
-            'react-dom': 'window.ReactDOM',
-            '@antv/g6': 'G6',
-        },
+        externals: [
+            {
+                antd: 'window.antd',
+                'chinese-random-name': 'chineseRandomName',
+                lodash: '_',
+                react: 'window.React',
+                'react-dom': 'window.ReactDOM',
+                '@antv/g6': 'G6',
+            },
+            // eslint-disable-next-line
+            (context, request, callback) => {
+                if (request === 'lodash') {
+                    return callback(null, '_');
+                }
+                if (/lodash\//.test(request)) {
+                    // lodash/isArray
+                    const paths = request.split('/');
+                    // lodash or lodash-es
+                    paths[0] = '_';
+                    // _.isArray
+                    return callback(null, paths.join('.'));
+                }
+                if (/lodash\./.test(request)) {
+                    // lodash.debounce
+                    const paths = request.split('.');
+                    // lodash or lodash-es
+                    paths[0] = '_';
+                    // _.debounce
+                    return callback(null, paths.join('.'));
+                }
+                callback();
+            },
+        ],
     };
 };

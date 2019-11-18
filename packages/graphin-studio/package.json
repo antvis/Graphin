@@ -1,7 +1,7 @@
 {
   "name": "@antv/graphin-studio",
   "version": "1.0.0",
-  "description": "an example for graphin",
+  "description": "An Example for Graphin",
   "main": "dist/app.js",
   "scripts": {
     "start": " node --max_old_space_size=8192 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --env.NODE_ENV=development",
@@ -55,6 +55,6 @@
     "example",
     "graphene"
   ],
-  "author": "",
-  "license": "ISC"
+  "author": "Ant Financial",
+  "license": "MIT"
 }
