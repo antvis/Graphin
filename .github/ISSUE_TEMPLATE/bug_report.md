@@ -12,7 +12,7 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 
-// Add Code Sandbox Reproduce Link
+// Add Code Sanbox reproduce link using this template: https://codesandbox.io/s/data-driven-3o71b
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
