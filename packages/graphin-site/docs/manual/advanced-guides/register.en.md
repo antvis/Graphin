@@ -20,20 +20,19 @@ The specific API of register is as follows:
 
 ```ts
 register?: {
-    /** 通过G6原生方法，注册节点 */
+    /** register node by using API of G6 */
     nodeShape?: (G6: G6Type) => Register[];
-    /** 通过G6原生方法，注册边 */
+    /** register edge by using API of G6*/
     edgeShape?: (G6: G6Type) => Register[];
-    /** 通过G6原生方法，注册事件 */
+    /** register behavior by using API of G6*/
     behavior?: (G6: G6Type) => BehaviorRegister[];
 };
 ```
 
 ```ts
 interface Register {
-    /** 节点名称 */
+    /** name */
     name: string;
-    /** register执行函数,参数为G6对象 */
     register: (G6: G6Type) => void;
 }
 ```
@@ -53,21 +52,21 @@ register: {
     nodeShape: (G6) => [{
         name: "custom",
         register: () => {
-            G6.registerNode("custom", () => {})  // 详见 G6 registerNode 文档
+            G6.registerNode("custom", () => {})  // see document of G6 registerNode for details
         }
     }],
     edgeShape: (G6) => [{
         name: "custom",
         register: () => {
-            G6.registerEdge("custom", () => {})  // 详见 G6 registerEdge 文档
+            G6.registerEdge("custom", () => {})  // see document of G6 registerEdge for details
         }
     }],
     behavior: (G6) => [{
-        mode: "default",  // 详见 G6 的 mode 文档
+        mode: "default",  // see document of G6 mode for details
         options: {}
         name: "custom",
         register: () => {
-            G6.registerBehavior("custom", () => {})  // 详见 G6 registerBehavior 文档
+            G6.registerBehavior("custom", () => {})  // see document of  G6 registerBehavior for details
         }
     }],
 }

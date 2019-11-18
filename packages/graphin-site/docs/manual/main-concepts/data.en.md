@@ -70,9 +70,7 @@ const transform = {
             return {
                 id: node.id,
                 data: node,
-                // 根据type来指定渲染的shape
                 shape: node.type === 'phone' ? 'MyCustomNode' : 'CircleNode',
-                // 根据数据的渲染样式
                 style: {
                     nodeSize: node.weight > 20 ? 50 : 20,
                 },
@@ -110,6 +108,6 @@ There are two key points about rendering
 
 |   x、y  | Layout    | How to Render                                                    | scenes     |
 | ---------- | ------------- | ----------------------------------------------------------- | ------------ |
-| exist       | not exist        |  rendering based on x and y of each node                    | 图保存再复现 |
+| exist       | not exist        |  rendering based on x and y of each node                    | render data after saving |
 | exist       | exist          | ignore x and y of each node and rendering according to layout.name  | switch layout     |
 | not exist     | not exist / exist | rendering according to layout.name                              | render by layout     |

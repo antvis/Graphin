@@ -33,7 +33,7 @@ order: 3
 
 |   属性         | 类型       | 默认值                                   | 说明                                       |
 | -------------- | ---------- | ---------------------------------------- | ------------------------------------------ |
-| boundingBox    | { x: number; y:number; w:number; y:number; }   | {x:0,y:0,w:画布宽度,y:画布高度} | 同心圆的布局范围，默认为当前画布的宽高范围 |
+| boundingBox    | { x: number; y:number; w:number; y:number; }   | {x:0,y:0,w:画布宽度,h:画布高度} | 同心圆的布局范围，默认为当前画布的宽高范围 |
 | minNodeSpacing | number   | 60                                       | 节点间的距离                    |
 | levelWidth     | (nodes: Data['nodes'], maxDegree: number) => number |       见下方              | 每层的节点度数范围                         |
 

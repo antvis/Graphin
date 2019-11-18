@@ -37,7 +37,7 @@ const layout = (graphin: Graphin, props: GraphinProps) => {
     return [
         {
             name: 'custom',
-            desc: '自定义随机布局',
+            desc: 'random layout',
             icon: 'home',
             layout: (data: Data, options: LayoutOption): { data: Data } => {
                 const nodes = data.nodes.map(node => {

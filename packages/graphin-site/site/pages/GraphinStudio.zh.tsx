@@ -1,13 +1,12 @@
 import React from 'react';
-import { Skeleton } from 'antd';
 import { useTranslation } from 'react-i18next';
 import SEO from '@antv/gatsby-theme-antv/site/components/Seo';
 
 const IndexPage = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     return (
         <>
-            <SEO title="蚂蚁数据可视化" lang="zh" />
+            <SEO title={t('蚂蚁数据可视化')} lang={i18n.language} />
             <div style={{ margin: '0 auto', padding: '0', height: 'calc(100vh - 64px)' }}>
                 <iframe
                     src="https://antvis.github.io/graphin-studio-site/#/graphin-studio"

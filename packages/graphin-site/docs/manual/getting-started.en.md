@@ -253,7 +253,6 @@ const App = () => {
         setState({
             ...state,
             data: {
-                // 还需要对Node和Edge去重，这里暂不考虑
                 nodes: [...state.nodes, expandData.nodes],
                 edges: [...state.edges, expandData.edges],
             },

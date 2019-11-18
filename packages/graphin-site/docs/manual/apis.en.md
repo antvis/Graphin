@@ -45,17 +45,17 @@ order: 3
 
 |   Property         | Type     | Required | Description                    |
 | -------------- | -------- | -------- | ----------------------- |
-| id             | `string` | **_yes_** | unique identifier for the node |
-| label          | `string` | no       | text information for node          |
+| id             | `string` | **_yes_** | unique identifier of a node |
+| label          | `string` | no       | text information of node          |
 | properties     | `any`    | no       | node properties              |
-| `[key:string]` | `any`    | no       | Other Propertys               |
+| `[key:string]` | `any`    | no       | Other Properties               |
 
 ### NodeDefaultStyle
 
 |   Property       | Default    | Description           |
 | ------------ | --------- | -------------- |
 | nodeSize     | 20        | size of node     |
-| primaryColor | '#9900EF' | the main color of node |
+| primaryColor | '#9900EF' | main color of node |
 | fontSize     | 12        | font size of text |
 | fontColor    | '#3b3b3b' | font color of text |
 | dark         | '#eee'    | color of the node when it is darkened      |
@@ -71,7 +71,7 @@ order: 3
 | label          | `string` | no       | text information of edge                      |
 | style          | `any`    | no       | style                    |
 | spring         | `numbe`  | no       | spring length of the edge which is used when the layout is force layout     |
-| `[key:string]` | `any`    | no       | custom property   |
+| `[key:string]` | `any`    | no       | custom properties   |
 
 ## Layout
 
@@ -139,27 +139,27 @@ const LevelWidthFunction = (nodes: Data['nodes'], maxDegree: number) => {
 | nodeSize | `number`          | `CanvasHeight`            | size of a node            |
 | nodesep  | `number`          | 12                        | horizontal distance between nodes   |
 | ranksep  | `number`          | 50                        | vertical distance between nodes |
-| align    | `string`          | `UL`                      | 放置位置           |
+| align    | `string`          | `UL`                      | position           |
 
 ### ForceOptions
 
 |   Property             | Type     | Default                         | Description                                                                       |
 | ------------------ | -------- | ------------------------------ | -------------------------------------------------------------------------- |
-| preset             | `object` | `{ name: 'random',options:{}}` | 前置布局，主要用于布局切换。当前置布局为 force 时，内部启动 tweak 布局算法 |
-| stiffness          | `number` | 200                            | 弹簧劲度系数                                                               |
-| defSpringLen       | `number` | 200                            | default spring length                                                            |
-| repulsion          | `number` | 200.0 \* 5                     | 斥力，这里指代 库伦常量 Ke                                                 |
-| damping            | `number` | 0.9                            | 速度的减震因子，其实就是阻尼系数                                           |
-| minEnergyThreshold | `number` | 0.1                            | 最小能量阈值，粒子运动，有阻尼系数的存在，最终能量会消耗殆尽               |
-| maxSpeed           | `number` | 1000                           | 最大的速度 [0,1000]                                                        |
-| MaxIterations      | `number` | 1000000                        | 1000000 次/(1000/60) = 60000s = 1min                                       |
-| animation          | `bolean` | true                           | 是否开启动画                                                               |
+| preset             | `object` | `{ name: 'random',options:{}}` | Front layout that is used for switching layout mainly. tweak layout algorithm will be used when the current layout is force |
+| stiffness          | `number` | 200                            | Spring stiffness factor                                                              |
+| defSpringLen       | `number` | 200                            | Default spring length                                                            |
+| repulsion          | `number` | 200.0 \* 5                     | Repulsive force, here refers to the Coulomb constant Ke                                                 |
+| damping            | `number` | 0.9                            | Damping coefficient                                           |
+| minEnergyThreshold | `number` | 0.1                            | Minimum energy threshold               |
+| maxSpeed           | `number` | 1000                           | Maximum speed, range interval [0,1000]                                                        |
+| MaxIterations      | `number` | 1000000                        | 1000000 times/(1000/60) = 60000 s = 1 min                                       |
+| animation          | `bolean` | true                           | Whether to turn on animation                                                               |
 
 ```tsx
-// 力导里的小细节
+// details of the force layout:
 
-- edge.data.spring 可以指定设置边的弹簧长度
-- node.layout.force.mass 可以设置力导节点的质量
+- edge.data.spring can be used to set the spring length of edge
+- node.layout.force.mass can be used to set the quality of the node
 ```
 
 ## Options

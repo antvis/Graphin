@@ -6,9 +6,9 @@ icon: none
 
 ## Background
 
-With the advent of the era of big data, data analysis is becoming more and more important for enterprises. Traditional OLAP chart analysis has already emerged in the business world to help companies make business decisions. This is known as "BI" (Business Intelligence). In recent years, 5G + IoT technology has been  applied gradually, which will produce a new kind of data - associated data. Imagine, in your home, WiFi and 5G are connected to your refrigerator, air conditioner, washing machine, and your mobile phone, computer, and your social account is also connected to your mobile phone or computer. The future world must be a connected world, and we all live in a huge topology.
+With the advent of the era of big data, data analysis is becoming more and more important for enterprises. Traditional OLAP chart analysis has already emerged in the business world to help companies make business decisions. This is known as "BI" (Business Intelligence). In recent years, 5G + IoT technology has been applied gradually, which will produce a new kind of data - associated data. Imagine, in your home, WiFi and 5G are connected to your refrigerator, air conditioner, washing machine, mobile phone and computer, and your social account is also connected to your mobile phone or computer. The future world must be a connected world, and we all live in a huge topology.
 
-Therefore, how to process these relational data and analyze the data topology network, becomes a challenge. The process of this analysis is also called Graph Analysis.
+Therefore, how to process these relational data and analyze the data topology network becomes a challenge. The process of this analysis is also called Graph Analysis.
 
 At present, graph analysis has been widely used in the fields of financial anti-fraud, public safety, infrastructure monitoring, and smart medical care. In this process, we need a powerful graph calculation engine to solve the problem of data compliance and collection. The corresponding graph algorithm is also needed to solve the graph construction and analysis. Finally, at the front end, we need a graph visualization engine that provides us with visual analysis capabilities to discover potential value. Graphin was born in this context, its purpose is to visualize these relational data and analyze it.
 

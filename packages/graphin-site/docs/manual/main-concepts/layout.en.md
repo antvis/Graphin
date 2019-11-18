@@ -30,7 +30,7 @@ The layout is specified by Graphin's `props.layout`:
 | ------ | -------- | ------------------------ | ----------- |
 | x      | `number` | CanvasWidth / 2        |  x of the center node |
 | y      | `number` | CanvasHeight / 2       | y of the center node |
-| r      | `number` | data.nodes.length * 10 | Radius of the circle    |
+| r      | `number` | Number of nodes * 10 | Radius of the circle    |
 | scale  | `number` | 0.8                      | Scaling ratio    |
 
 
@@ -46,13 +46,13 @@ The layout is specified by Graphin's `props.layout`:
 | -------------- | ---------- | ---------------------------------------- | ------------------------------------------ |
 | boundingBox    | `object`   | { x:0, y:0, w:CanvasWidth, h:CanvasHeight } | Range of the layout  |
 | minNodeSpacing | `number`   | 60                                       | Distance between nodes                   |
-| levelWidth     | `function` | (nodes: Data['nodes'], maxDegree: number) => number | 每层的节点度数范围                         |
+| levelWidth     | `function` | (nodes: Data['nodes'], maxDegree: number) => number | range of degree in each layer                         |
 
 example of levelWidth:
 
 ```tsx
 const LevelWidthFunction = (nodes: Data['nodes'], maxDegree: number) => {
-    /** 同心圆层数 */
+    /** Number of layers */
     const levelNum = 8;
     return maxDegree / levelNum;
 };
@@ -100,7 +100,7 @@ const LevelWidthFunction = (nodes: Data['nodes'], maxDegree: number) => {
 | nodeSize | `number`          | CanvasHeight            | size of a node         |
 | nodesep  | `number`          | 12                        | horizontal distance between nodes   |
 | ranksep  | `number`          | 50                        | vertical distance between nodes |
-| align    | `string`          | `UL`                      | 放置位置           |
+| align    | `string`          | `UL`                      | position           |
 
 ### 06. `force`
 
@@ -110,19 +110,19 @@ const LevelWidthFunction = (nodes: Data['nodes'], maxDegree: number) => {
 
 |   Property   | Type     | Default         | Description                             |
 | ------------------ | -------- | ------------------------------ | -------------------------------------------------------------------------- |
-| preset             | `object` | { name: 'random',options:{}} | 前置布局，主要用于布局切换。当前置布局为 force 时，内部启动 tweak 布局算法 |
-| stiffness          | `number` | 200                            | 弹簧劲度系数                                                               |
-| defSpringLen       | `number` | 200                            | 默认的弹簧长度                                                             |
-| repulsion          | `number` | 200.0 \* 5                     | 斥力，这里指代 库伦常量 Ke                                                 |
-| damping            | `number` | 0.9                            | 速度的减震因子，其实就是阻尼系数                                           |
-| minEnergyThreshold | `number` | 0.1                            | 最小能量阈值，粒子运动，有阻尼系数的存在，最终能量会消耗殆尽               |
-| maxSpeed           | `number` | 1000                           | 最大的速度 [0,1000]                                                        |
-| MaxIterations      | `number` | 1000000                        | 1000000 次/(1000/60) = 60000s = 1min                                       |
-| animation          | `bolean` | true                           | 是否开启动画                                                               |
+| preset             | `object` | { name: 'random',options:{}} | Front layout that is used for switching layout mainly. tweak layout algorithm will be used when the current layout is force |
+| stiffness          | `number` | 200                            | Spring stiffness factor                                                               |
+| defSpringLen       | `number` | 200                            | Default spring length                                                               |
+| repulsion          | `number` | 200.0 \* 5                     | Repulsive force, here refers to the Coulomb constant Ke                                                |
+| damping            | `number` | 0.9                            | Damping coefficient                                          |
+| minEnergyThreshold | `number` | 0.1                            | Minimum energy threshold               |
+| maxSpeed           | `number` | 1000                           | Maximum speed, range interval [0,1000]                                                        |
+| MaxIterations      | `number` | 1000000                        | 1000000 times/(1000/60) = 60000 s = 1 min                                        |
+| animation          | `bolean` | true                           | Whether to turn on animation                                                               |
 
 ```tsx
-// 力导里的小细节
+// details of the force layout:
 
-- edge.data.spring 可以指定设置边的弹簧长度
-- node.layout.force.mass 可以设置力导节点的质量
+- edge.data.spring can be used to set the spring length of edge
+- node.layout.force.mass can be used to set the quality of the node
 ```

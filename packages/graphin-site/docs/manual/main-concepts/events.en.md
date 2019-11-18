@@ -49,7 +49,6 @@ const App = () => {
         };
         graph.on('node:click', handleNodeClick);
         return () => {
-            // 如果是每次渲染，那就需要解绑事件
             graph.off('node:click', handleNodeClick);
         };
     }, [state]);
