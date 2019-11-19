@@ -10,9 +10,7 @@ icon: none
 
 ## 行为准则
 
-// TODO 行为准则 链接
-
-我们有一份 行为准则，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。
+我们有一份[行为准则](https://github.com/antvis/graphin/blob/develop/CODE_OF_CONDUCT.md)，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。
 
 ## 透明的开发
 
@@ -24,27 +22,21 @@ icon: none
 
 ## Bugs
 
-// issue 模板 和 重现 SandBox 链接
-
-我们使用 GitHub Issues 来做 bug 追踪。 如果你想要你发现的 bug 被快速解决，最好的办法就是通过我们提供的 issue 模板 来提 issue。并且能使用这个 模板 来提供重现。
+我们使用 GitHub Issues 来做 bug 追踪。 如果你想要你发现的 bug 被快速解决，最好的办法就是通过我们提供的 [issue 模板](https://github.com/antvis/graphin/issues/new?assignees=&labels=&template=bug_report.md&title=) 来提 issue。并且能使用这个 Code Sandbox [模板](https://codesandbox.io/s/data-driven-3o71b) 来提供重现。
 
 在你报告一个 bug 之前，请先确保已经搜索过已有的 issue 和阅读了我们的 常见问题。
 
 ## 新增功能
 
-// issue 模板链接
-
-如果你有改进我们的 API 或者新增功能的想法，我们同样推荐你使用我们提供的 issue 模板 来新建一个添加新功能的 issue。
+如果你有改进我们的 API 或者新增功能的想法，我们同样推荐你使用我们提供的 [issue 模板](https://github.com/antvis/graphin/issues/new?assignees=&labels=&template=feature_request.md&title=) 来新建一个添加新功能的 issue。
 
 ## 第一次贡献
-
-// good first issues 链接
 
 如果你还不清楚怎么在 GitHub 上提 Pull Request ，可以阅读下面这篇文章来学习：
 
 [如何优雅地在 GitHub 上贡献代码](https://segmentfault.com/a/1190000000736629)
 
-为了能帮助你开始你的第一次尝试，我们用 good first issues 标记了一些比较比较容易修复的 bug 和小功能。这些 issue 可以很好地做为你的首次尝试。
+为了能帮助你开始你的第一次尝试，我们用 [good first issues](https://github.com/antvis/graphin/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) 标记了一些比较比较容易修复的 bug 和小功能。这些 issue 可以很好地做为你的首次尝试。
 
 如果你打算开始处理一个 issue，请先检查一下 issue 下面的留言以确保没有别人正在处理这个 issue。如果当前没有人在处理的话你可以留言告知其他人你将会处理这个 issue，以免别人重复劳动。
 

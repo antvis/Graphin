@@ -33,7 +33,7 @@ configuration of concentric layout
 
 |   Property         | Type       | Default                                   | Description                                       |
 | -------------- | ---------- | ---------------------------------------- | ------------------------------------------ |
-| boundingBox    | { x: number; y:number; w:number; y:number; }   | {x:0,y:0,w:CanvasWidth,h:CanvasHeight} | Range of the layout |
+| boundingBox    | { x1: number; y1:number; w:number; y:number; }   | {x:0,y:0,w:CanvasWidth,h:CanvasHeight} | Range of the layout |
 | minNodeSpacing | number   | 60                                       | Distance between nodes                   |
 | levelWidth     | (nodes: Data['nodes'], maxDegree: number) => number |       below              |  range of degree in each layer                        |
 
@@ -65,7 +65,7 @@ configuration of radial layout
 |   Property         | Type              | Default                           | Description       |
 | -------------- | ----------------- | -------------------------------- | ---------- |
 | center         | [number,number] | [CanvasWidth/2,CanvasHeight/2] | Coordinate of the center node |
-| preventOverlap | boolean         | CanvasHeight                   | prevent coverage   |
+| preventOverlap | boolean         | true                   | prevent coverage   |
 | nodeSize       | number          | 100                              | Size of a node   |
 | unitRadius     | number          | 150                              | Radius of each layer |
 
