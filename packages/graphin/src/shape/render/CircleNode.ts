@@ -1,3 +1,4 @@
+import iconFont from '../../icons/iconFont';
 /** 默认节点样式 */
 const defaultStyle = {
     /** 节点的大小 */
@@ -18,8 +19,9 @@ const renderNodeShape = (node: any) => {
         ...node.style,
     } as Style;
 
-    const iconSize = nodeSize / 2;
+    const iconSize = nodeSize;
     const fontPosition = nodeSize * 1.4;
+
     return {
         shape: 'CircleNode',
         shapeComponents: [
@@ -36,17 +38,34 @@ const renderNodeShape = (node: any) => {
                     lineWidth: 2,
                 },
             },
+            // {
+            //     shape: 'Marker',
+            //     attrs: {
+            //         id: 'node-icon',
+            //         symbol: node.data.type,
+            //         x: 0,
+            //         y: 0,
+            //         r: iconSize,
+            //         fill: primaryColor,
+            //     },
+            // },
+
+            /* icon font */
             {
-                shape: 'Marker',
+                shape: 'text',
                 attrs: {
                     id: 'node-icon',
-                    symbol: node.data.type,
                     x: 0,
                     y: 0,
-                    r: iconSize,
+                    fontSize: iconSize,
                     fill: primaryColor,
+                    text: iconFont(node.data.type),
+                    fontFamily: 'iconfont', // 对应css里面的font-family: "iconfont";
+                    textAlign: 'center',
+                    textBaseline: 'middle',
                 },
             },
+
             {
                 shape: 'text',
                 attrs: {

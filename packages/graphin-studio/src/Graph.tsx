@@ -14,6 +14,8 @@ import useGraphEvents from './Events/useGraphEvents';
 /** components */
 import NodeEdgeCount from './Core/NodeEdgeCount';
 
+import './fonts/iconfont.css';
+
 const Graphene = (props: GraphProps) => {
     const graphRef = useRef(null) as any; // eslint-disable-line
     const { dispatch, data, layout, toolbar, store } = props;

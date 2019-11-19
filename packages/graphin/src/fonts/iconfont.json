@@ -1,0 +1,44 @@
+{
+  "id": "1518551",
+  "name": "graphin",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "graphin icon font",
+  "glyphs": [
+    {
+      "icon_id": "88072",
+      "name": "phone",
+      "font_class": "phone",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "845805",
+      "name": "银联",
+      "font_class": "yinlian1193427easyiconnet",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
+      "icon_id": "1933028",
+      "name": "企业",
+      "font_class": "web-icon-",
+      "unicode": "e6cd",
+      "unicode_decimal": 59085
+    },
+    {
+      "icon_id": "11273003",
+      "name": "logo",
+      "font_class": "logo-copy",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "11480984",
+      "name": "Daytime mode",
+      "font_class": "Daytimemode",
+      "unicode": "e711",
+      "unicode_decimal": 59153
+    }
+  ]
+}

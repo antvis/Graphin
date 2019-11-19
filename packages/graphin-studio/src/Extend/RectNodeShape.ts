@@ -82,6 +82,21 @@ const renderRectNode = (node: Node) => {
                     fill: style.iconFill,
                 },
             },
+            // // iconFont
+            // {
+            //     shape: 'text',
+            //     attrs: {
+            //         id: 'node-icon',
+            //         x: style.containerWidth / 2,
+            //         y: style.containerWidth / 2,
+            //         fontSize: style.iconSize,
+            //         fill: style.iconFill,
+            //         text: '',
+            //         fontFamily: 'iconfont', // 对应css里面的font-family: "iconfont";
+            //         textAlign: 'center',
+            //         textBaseline: 'middle',
+            //     },
+            // },
             {
                 shape: 'text',
                 attrs: {

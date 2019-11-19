@@ -18,6 +18,8 @@ import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimul
 import debug from './utils/debug';
 
 import './index.less';
+/** font */
+// import './fonts/iconfont.css';
 
 class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     graphDOM: HTMLDivElement | null = null;
