@@ -21,7 +21,7 @@ Configuration of custom layout
 | name    | string       | **yes** | name of the layout      |
 | desc  | string     | **yes**       | name  of the layout     |
 | icon  | string   | **yes**     | antd icon type     |
-| layout      | (data: [Data](/zh/docs/api/graphin#data), options: [LayoutOption]()) => { data: [Data](/zh/docs/api/graphin#data); forceSimulation?: [ForceSimulation]();} | **yes**       | a function for calculating the layout which accept nodes as arguments and return nodes with location     |
+| layout      | (data: [Data](/zh/docs/api/graphin#data), options: [LayoutOption](/en/docs/api/layout#layoutoptions)) => { data: [Data](/zh/docs/api/graphin#data); forceSimulation?: [ForceSimulation]();} | **yes**       | a function for calculating the layout which accept nodes as arguments and return nodes with location     |
 
 ### ExendNodeShape
 

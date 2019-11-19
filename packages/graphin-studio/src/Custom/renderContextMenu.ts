@@ -5,7 +5,7 @@ import { GrapheneState, Dispatch } from '../types';
 interface ContextMenu extends GrapheneState {
     dispatch: Dispatch;
 }
-const renderContextMenu = (option: ContextMenu) =>  {
+const renderContextMenu = (option: ContextMenu) => {
     const { selectedNodes, dispatch } = option;
 
     const openNotification = (type: string, message: string, description: string) => {
@@ -58,7 +58,7 @@ const renderContextMenu = (option: ContextMenu) =>  {
         {
             key: 'copyId',
             title: '复制ID',
-            iconType: 'iconfuzhiID',
+            iconType: 'copy',
             visible: true,
             onClick: copyId,
         },
@@ -70,14 +70,14 @@ const renderContextMenu = (option: ContextMenu) =>  {
         {
             key: 'deleteNode',
             title: '删除实体',
-            iconType: 'iconfuzhiID',
+            iconType: 'delete',
             visible: true,
             onClick: deleteNodes,
         },
         {
             key: 'invertSelect',
             title: '反选实体',
-            iconType: 'iconfuzhiID',
+            iconType: 'select',
             visible: false,
             onClick: () => {},
         },

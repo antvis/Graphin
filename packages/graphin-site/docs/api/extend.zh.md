@@ -21,7 +21,7 @@ order: 3
 | name    | string       | **是** | 布局名称，唯一标识符      |
 | desc  | string     | **是**       | 布局展示名称      |
 | icon  | string   | **是**     | antd icon 类型     |
-| layout      | (data: [Data](/zh/docs/api/graphin#data), options: [LayoutOption]()) => { data: [Data](/zh/docs/api/graphin#data); forceSimulation?: [ForceSimulation]();} | **是**       | 布局函数，用于计算布局。接受节点，返回带有位置的节点      |
+| layout      | (data: [Data](/zh/docs/api/graphin#data), options: [LayoutOption](/zh/docs/api/layout#layoutoptions)) => { data: [Data](/zh/docs/api/graphin#data); forceSimulation?: [ForceSimulation]();} | **是**       | 布局函数，用于计算布局。接受节点，返回带有位置的节点      |
 
 ### ExendNodeShape
 

@@ -33,5 +33,6 @@ module.exports = {
         'no-restricted-properties': 'off', // Math.pow(10, 2) === 10**2
         'import/order': 0,
         '@typescript-eslint/explicit-member-accessibility': 0,
+        '@typescript-eslint/no-non-null-assertion': 0,
     },
 };

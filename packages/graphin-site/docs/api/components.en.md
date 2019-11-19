@@ -3,7 +3,7 @@ title: Analysis component
 order: 5
 ---
 
-## \<Toolbar /> 
+## \<ContextMenu /> 
 
 Props：
 
@@ -19,7 +19,7 @@ Props：
 
 ### RenderProps
 
-Argument of render function which extends Props of Toolbar:
+Argument of render function which extends Props of ContextMenu:
 
 |   Property  | Type         | Required | Description                 |
 | ------- | ------------ | -------- | -------------------- |
@@ -38,7 +38,6 @@ configuration of MenuItem
 | width         | number                                                      | no       | width of item            |
 | height        | number                                                      | no       | height of item            |
 | onClick       | (props: [ContainerProps](#containerprops)) => void;         | no       | Called when clicking item            |
-| useCustomIcon | boolean                                                     | no       | Whether to use custom icon |
 | render        | (props: [ContainerProps](#containerprops)) => ReactElement; | no       | custom rendering function      |
 
 ### ContainerProps
@@ -51,7 +50,7 @@ arguments of Clicking and rendering MenuItem
 | menu    | [MenuItemType](#menuitemtype)[ ] | no       | configuration of menu           |
 | onClose | ( ) => void;                     | no       | Called when closing menu |
 
-## \<ContextMenu /> component
+## \<Toolbar /> component
 
 Props：
 

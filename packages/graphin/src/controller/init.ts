@@ -38,13 +38,14 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
         plugins: [],
     };
 
-    const options = {
+    const options: Partial<ExtendedGraphOptions> = {
         ...defaultOptions,
         ...(props.options || {}),
-    } as GraphOptions;
+    };
 
     const {
         pan,
+        zoom,
         width,
         height,
         // interaction options:
@@ -98,7 +99,8 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     // 平移
     if (pan) instance.moveTo(pan.x, pan.y);
 
-    // TODO  缩放
+    // 缩放
+    if (zoom) instance.zoomTo(zoom, pan!);
 
     return {
         options: props.options || defaultOptions,

@@ -11,7 +11,7 @@ order: 1
 | -------- | --------------------- | -------- | ------------- |
 | data     | [Data](#data)         | **是** | 图的节点和边数据      |
 | layout   | [Layout](#layout)     | 否       | 布局配置      |
-| options  | [Options](#option)    | 否       | G6 配置      |
+| options  | [Options](#options)    | 否       | G6 配置      |
 | ref      | [Ref](#ref)           | 否       | Graphin 组件 Ref      |
 | extend   | [Extend](#extend)     | 否       | 扩展配置   |
 | register | [Register](#register) | 否       | G6 自定义节点/边/行为注册配置 |
@@ -97,7 +97,25 @@ G6 自定义节点/边/行为注册配置，详见[Register](/zh/docs/api/regist
 
 ## Options
 
-详见 [G6 Options](https://www.yuque.com/antv/g6/graph#VjayE)
+通过 `props.options` 传入 Graphin 的配置项。用于对 Graphin 的展示和行为进行一些高级配置。
+
+
+|   属性         | 类型     | 是否必选 | 说明                         |
+| -------------- | -------- | -------- | ---------------------------- |
+| zoom           | number     | 否 | 默认缩放比例               |
+| pixelRatio     | number | 否 | 像素比率，默认值 1.0         |
+| pan         | { x: number; y: number } | 否 | 默认画布平移位置       |
+| disablePan      | boolean | 否       |  是否禁止画布平移 |
+| disableZoom     | boolean | 否       | 是否禁止画布缩放                     |
+| disableDrag          | boolean    | 否       | 是否禁止节点拖动                   |
+| disableHighlight         | boolean  | 否       | 是否禁止节点选中高亮     |
+| wheelSensitivity | number   | 否       | 滚动敏感度   |
+| isZoomOptimize | (graph?: Graph, e?: G6Event) => boolean;   | 否       | 是否开启缩放时只显示 KeyShape 的优化   |
+| keyShapeZoom | number   | 否       | 在开启缩放 KeyShape 优化时，缩放比例小于 keyShapeZoom 的节点一直开启 KeyShape 优化，不显示内部细节。目的是为了在缩放到小比例时，隐藏细节，提升性能    |
+| autoFollowWithForce | boolean   | 否       | 力导时是否允许拖拽后其他节点重新进入力导流程   |
+| autoPinWithForce | boolean   | 否       | 力导时节点被拖拽后，如果重新进入力导流程，被拖拽的节点是否被钉在原地   |
+
+另外，这个 `props.options` 也支持传入 G6 的 Options。详见 [G6 Options](https://www.yuque.com/antv/g6/graph#VjayE)。
 
 
 ## Ref
