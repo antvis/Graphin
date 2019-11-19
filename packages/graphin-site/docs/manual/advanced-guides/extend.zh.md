@@ -79,7 +79,7 @@ import layout from "./layout"
 />
 ```
 
-`extend.layout` 函数的 API 参见[文档](/zh/docs/api/layout)。
+`extend.layout` 函数的 API 参见[文档](/zh/docs/api/extend#exendlayout)。
 
 ## 扩展节点
 
@@ -122,7 +122,7 @@ const renderRectNode = (node: Node) => {
 };
 ```
 
-JSON 配置文档 ->
+`extend.nodeShape` 函数的 API 参见[文档](/zh/docs/api/extend#exendnodeshape)。
 
 ## 扩展图标
 
@@ -148,3 +148,5 @@ import layout from './layout';
 ```
 
 `extend.marker` 的 API 很简单，就是一个返回图标配置数组的函数。返回的图标配置中，name 代表 icon 的标识，也就是 G6 NodeShape 中 Marker 的 symbol 属性的值。path 就是 SVG 图标的 XML 代码。
+
+`extend.marker` 函数的 API 参见[文档](/zh/docs/api/extend#exendmarker)。

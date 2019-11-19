@@ -17,15 +17,9 @@ const Graphene = (props: GraphProps) => {
 
 通过 `graphinRef.current.apis` 可以访问到 Graphin 内部的一组 API。这组 API 同样可以在 Graphin 组件中获取到。
 
-APIs 的具体接口：
+APIs 的具体接口请参考 [API 文档](/zh/docs/api/graphin#apis)。
 
-|   属性    | 类型                                                                                                                                              | 说明                                                 |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| search    | (words: string) => Node[]                                                                                                                         | 搜索节点，关键词可以为 id，label，或者 property 的值 |
-| highlight | (nodeIds: string[]) => void                                                                                                                       | 高亮节点                                             |
-| clear     | () => void                                                                                                                                        | 重置 Graphin                                         |
-| getInfo   | { layouts: { desc:string;icon:string;name:string}[], count: { nodes: number;edges:number; } }                                                     | 渲染数据                                             |
-| history   | { redo: () => void;undo: () => void;save: () => void;getInfo: () => { currentStep:number;allStep:number;disableRedo:number;disableUndo:number;};} | 操作历史                                             |
+// TODO 添加 SandBox 实例
 
 ## 02. G6 Graph 实例
 

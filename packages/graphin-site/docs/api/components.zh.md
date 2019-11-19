@@ -3,7 +3,7 @@ title: 分析组件
 order: 5
 ---
 
-## \<Toolbar /> 组件
+## \<ContextMenu /> 组件
 
 Props：
 
@@ -19,9 +19,9 @@ Props：
 
 ### RenderProps
 
-Toolbar render 函数的参数。
+ContextMenu render 函数的参数。
 
-RenderProps extend 了 Toolbar 的 Props：
+RenderProps extend 了 ContextMenu 的 Props：
 
 |   属性  | 类型         | 是否必选 | 说明                 |
 | ------- | ------------ | -------- | -------------------- |
@@ -40,7 +40,6 @@ MenuItem 的配置项
 | width         | number                                                      | 否       | 菜单宽度            |
 | height        | number                                                      | 否       | 菜单高度            |
 | onClick       | (props: [ContainerProps](#containerprops)) => void;         | 否       | 点击回调            |
-| useCustomIcon | boolean                                                     | 否       | 是否使用自定义 icon |
 | render        | (props: [ContainerProps](#containerprops)) => ReactElement; | 否       | 自定义渲染函数      |
 
 ### ContainerProps
@@ -53,7 +52,7 @@ MenuItem 点击和渲染函数的参数
 | menu    | [MenuItemType](#menuitemtype)[ ] | 否       | 菜单项配置           |
 | onClose | ( ) => void;                     | 否       | 隐藏右键菜单事件回调 |
 
-## \<ContextMenu /> 组件
+## \<Toolbar /> 组件
 
 Props：
 

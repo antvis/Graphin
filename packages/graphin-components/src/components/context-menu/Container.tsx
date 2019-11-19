@@ -4,10 +4,6 @@ import { Graph } from '@antv/g6';
 
 const MenuItem = Menu.Item;
 
-const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1187963_50nfpuasd7b.js',
-});
-
 export interface MenuItemType {
     key: string;
     visible?: boolean;
@@ -17,10 +13,8 @@ export interface MenuItemType {
     width?: number;
     height?: number;
     onClick?: (props: ContainerProps) => void;
-    /** antd icon type */
-    useCustomIcon?: boolean;
     /** user defined render function */
-    render?: (props: ContainerProps) => ReactElement;
+    render?: (props: ContainerProps, index: number) => ReactElement;
 }
 
 interface ContainerProps {
@@ -40,21 +34,21 @@ const Container: React.FC<ContainerProps> = props => {
 
     const menuItems = menu
         .filter(item => !(item.visible === false)) // item.visible 不传时默认可见
-        .map(item => {
+        .map((item, index) => {
             // render icon
             const iconProps = {
                 type: item.iconType,
                 style: { fontSize: '12px' },
             };
-            const icon = item.useCustomIcon === false ? <Icon {...iconProps} /> : <IconFont {...iconProps} />;
+            const icon = <Icon {...iconProps} />;
 
             return (
                 <MenuItem key={item.key} className={item.key} onClick={() => onClickMenuItem(item)}>
                     {item.render ? (
-                        item.render(props)
+                        item.render(props, index)
                     ) : (
                         <>
-                            {icon}
+                            {item.iconType && icon}
                             {item.title}
                         </>
                     )}
