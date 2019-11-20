@@ -156,8 +156,8 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
                     repulsion: 200.0 * 5,
                     /** 向心力 */
                     centripetalOptions: {
-                        leaf: 2,
-                        single: 2,
+                        leaf: 1.6,
+                        single: 1.6,
                     },
                     /** 速度的减震因子，其实就是阻尼系数 */
                     damping: 0.9,

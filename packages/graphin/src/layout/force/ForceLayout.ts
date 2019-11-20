@@ -422,7 +422,7 @@ class ForceLayout {
             const defaultRadio = {
                 left: 2,
                 single: 2,
-                others: 1 / getBaseLog(2, degree),
+                others: 1, //  1 / getBaseLog(2, degree),
                 center: () => {
                     return {
                         x: this.props.width / 2,
