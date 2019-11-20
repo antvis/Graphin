@@ -13,7 +13,7 @@ const defaultOptions = {
     unitRadius: 150,
 };
 
-const data: Data = json;
+const data: Data = json as any;
 
 describe('Radial Layout', () => {
     it('Should return result that matches snapshot', () => {

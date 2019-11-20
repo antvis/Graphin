@@ -15,7 +15,7 @@ const defaultOptions = {
     align: 'UL',
 };
 
-const data: Data = json;
+const data: Data = json as any;
 
 describe('Dagre Layout', () => {
     it('Should return result that matches snapshot', () => {

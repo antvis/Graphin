@@ -45,7 +45,7 @@ const concentricOptions2 = {
     sweep: 0.1,
 };
 
-const data: Data = json;
+const data: Data = json as any;
 
 describe('Concentric Layout', () => {
     it('Should return result that matches snapshot', () => {

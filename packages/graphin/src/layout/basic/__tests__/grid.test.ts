@@ -13,7 +13,7 @@ const gridLayoutOption = {
     nodeSize: 50,
 };
 
-const data: Data = json;
+const data: Data = json as any;
 
 describe('Grid Layout', () => {
     it('Should return result that matches snapshot', () => {

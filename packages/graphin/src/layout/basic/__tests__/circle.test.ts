@@ -23,7 +23,7 @@ const node = {
     },
 };
 
-const data: Data = json;
+const data: Data = json as any;
 
 describe('Cricle Layout', () => {
     it('Should return result that matches snapshot', () => {
