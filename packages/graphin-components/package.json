@@ -1,37 +1,37 @@
 {
-  "name": "@antv/graphin-components",
-  "version": "1.0.0-beta7",
-  "description": "Components for graphin",
-  "main": "./dist/index",
-  "types": "./dist/src/index.d",
-  "scripts": {
-    "start": "father build --watch",
-    "build": "father build",
-    "test": "jest"
-  },
-  "author": "",
-  "license": "MIT",
-  "sideEffects": false,
-  "peerDependencies": {
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "antd": "^3.23.5",
-    "@antv/graphin": "^1.0.0-beta.6"
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^4.2.0",
-    "@testing-library/react": "^9.3.0",
-    "father": "^2.23.1",
-    "jest": "^24.9.0",
-    "ts-jest": "^24.1.0",
-    "jest-canvas-mock": "^2.1.2",
-    "typescript": "^3.6.4",
-    "eventemitter3": "^4.0.0"
-  },
-  "dependencies": {
-    "@antv/g6": "^3.1.9"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+    "name": "@antv/graphin-components",
+    "version": "1.0.0-beta7",
+    "description": "Components for graphin",
+    "main": "./dist/index",
+    "types": "./dist/src/index.d",
+    "scripts": {
+        "start": "father build --watch",
+        "build": "father build",
+        "test": "jest"
+    },
+    "author": "",
+    "license": "MIT",
+    "sideEffects": false,
+    "peerDependencies": {
+        "react": "^16.11.0",
+        "react-dom": "^16.11.0",
+        "antd": "^3.23.5"
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^4.2.0",
+        "@testing-library/react": "^9.3.0",
+        "father": "^2.23.1",
+        "jest": "^24.9.0",
+        "ts-jest": "^24.1.0",
+        "jest-canvas-mock": "^2.1.2",
+        "typescript": "^3.6.4",
+        "eventemitter3": "^4.0.0"
+    },
+    "dependencies": {
+        "@antv/g6": "^3.1.9",
+        "@antv/graphin": "^1.0.0-beta.6"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
 }
