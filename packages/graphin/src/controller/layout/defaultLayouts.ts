@@ -154,6 +154,11 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
                     defSpringLen: 200,
                     /** repulsion 斥力，这里指代 库伦常量Ke */
                     repulsion: 200.0 * 5,
+                    /** 向心力 */
+                    centripetalOptions: {
+                        leaf: 2,
+                        single: 2,
+                    },
                     /** 速度的减震因子，其实就是阻尼系数 */
                     damping: 0.9,
                     /** 最小能量阈值，当粒子运动，有阻尼系数的存在，最终会将初始的能量消耗殆尽 */
