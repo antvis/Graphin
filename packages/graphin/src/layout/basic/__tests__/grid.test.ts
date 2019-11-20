@@ -13,8 +13,10 @@ const gridLayoutOption = {
     nodeSize: 50,
 };
 
+const data: Data = json;
+
 describe('Grid Layout', () => {
     it('Should return result that matches snapshot', () => {
-        expect(GridLayout(json as Data, gridLayoutOption as GridLayoutOptions)).toMatchSnapshot();
+        expect(GridLayout(data, gridLayoutOption as GridLayoutOptions)).toMatchSnapshot();
     });
 });

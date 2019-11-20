@@ -15,8 +15,10 @@ const defaultOptions = {
     align: 'UL',
 };
 
+const data: Data = json;
+
 describe('Dagre Layout', () => {
     it('Should return result that matches snapshot', () => {
-        expect(DagreLayout(json as Data, defaultOptions as DagreLayoutOption)).toMatchSnapshot();
+        expect(DagreLayout(data, defaultOptions as DagreLayoutOption)).toMatchSnapshot();
     });
 });

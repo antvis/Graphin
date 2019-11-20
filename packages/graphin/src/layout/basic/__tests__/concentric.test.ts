@@ -1,5 +1,6 @@
 import ConcentricLayout from '../concentric';
 import json from './__mock__/concentric.input.json';
+import { Data } from '../../../types';
 
 const concentricOptions = {
     /** 同心圆的布局范围，默认为当前画布的宽高范围 */
@@ -44,12 +45,14 @@ const concentricOptions2 = {
     sweep: 0.1,
 };
 
+const data: Data = json;
+
 describe('Concentric Layout', () => {
     it('Should return result that matches snapshot', () => {
         expect(
             new ConcentricLayout({
                 ...concentricOptions,
-                data: json,
+                data,
             }).run(),
         ).toMatchSnapshot();
     });
@@ -58,7 +61,7 @@ describe('Concentric Layout', () => {
         expect(
             new ConcentricLayout({
                 ...concentricOptions2,
-                data: json,
+                data,
             }).run(),
         ).toMatchSnapshot();
     });

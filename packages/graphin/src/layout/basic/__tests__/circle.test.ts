@@ -1,5 +1,6 @@
 import CircleLayout, { CircleLayoutOption } from '../circle';
 import json from './__mock__/concentric.input.json';
+import { Data } from '../../../types';
 
 const defaultOptions = {
     /** 圆心 x坐标 */
@@ -22,9 +23,11 @@ const node = {
     },
 };
 
+const data: Data = json;
+
 describe('Cricle Layout', () => {
     it('Should return result that matches snapshot', () => {
-        expect(CircleLayout(json, defaultOptions as CircleLayoutOption)).toMatchSnapshot();
+        expect(CircleLayout(data, defaultOptions as CircleLayoutOption)).toMatchSnapshot();
     });
 
     it('Should return correct result for empty input', () => {
