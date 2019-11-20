@@ -5,6 +5,7 @@
         "site": "cd ./packages/graphin-site && npm run start",
         "studio": "cd ./packages/graphin-studio && npm run start",
         "bootstrap": "lerna bootstrap",
+        "bootstrap:ci": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site",
         "build": "lerna run build",
         "contributor": "git-contributor",
         "clean": "sudo lerna clean && npm run rm-package-lock",
