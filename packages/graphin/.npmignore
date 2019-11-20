@@ -48,3 +48,8 @@ yarn.lock
 # ignore dist files
 .vscode/
 src
+jest.config.js
+.fatherrc.js
+__mock__
+public
+tsconfig.json

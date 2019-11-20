@@ -35,7 +35,7 @@ export interface RenderProps {
 
 export type Tdirection = 'horizontal' | 'vertical';
 export interface ToolbarProps {
-    graphDOM: HTMLElement;
+    graphDOM?: HTMLElement;
     graph?: Graph;
     apis?: any; // eslint-disable-line
     className?: string;
@@ -107,7 +107,6 @@ const Toolbar: React.FC<ToolbarProps> = props => {
             icon: 'undo',
             disabled: false,
             action: () => {
-                props.apis.search('dd');
                 history.undo();
             },
             style: {},
@@ -153,7 +152,7 @@ const Toolbar: React.FC<ToolbarProps> = props => {
     }
 
     const placement = direction === 'vertical' ? 'right' : 'bottom';
-    const style = getToolbarPosition(graphDOM, direction);
+    const style = getToolbarPosition(graphDOM!, direction);
     return (
         <div>
             <div className={`zoom-toolbar ${direction} ${className}`} style={style}>

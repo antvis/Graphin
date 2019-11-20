@@ -46,7 +46,6 @@ describe('<ContextMenu />', () => {
                         key: 'delete',
                         title: 'Delete',
                         visible: true,
-                        useCustomIcon: true,
                         render: () => <div>Delete</div>,
                     },
                 ]}

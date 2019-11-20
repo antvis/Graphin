@@ -1,6 +1,10 @@
 import { Graph } from '@antv/g6';
 import { NodeData, Node, Data } from '../types';
 
+interface Property {
+    value?: string;
+}
+
 const search = (graph: Graph) => (words = '') => {
     // 搜索分词，默认空格隔开
     const wordsArray = words.trim().split(' ');
@@ -22,12 +26,12 @@ const search = (graph: Graph) => (words = '') => {
             return { isMatch: true, searchType: 'label' };
         }
 
-        let matchProperty = [];
+        let matchProperty: Property[] = [];
 
         // 按 property 匹配
         if (properties) {
             // eslint-disable-next-line
-            matchProperty = properties.filter((property: any) => {
+            matchProperty = properties.filter((property: Property) => {
                 return property.value && property.value === word;
             });
         }
