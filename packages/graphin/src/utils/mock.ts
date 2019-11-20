@@ -78,7 +78,7 @@ export class Mock {
     };
 
     type = (nodeType: string) => {
-        this.nodes.map(node => {
+        this.nodes = this.nodes.map(node => {
             return {
                 ...node,
                 type: nodeType,

@@ -11,6 +11,10 @@ type ForceNodeType = Node;
 
 type ForceEdgeType = Edge;
 
+const getBaseLog = (x: number, y: number) => {
+    return Math.log(y) / Math.log(x);
+};
+
 interface Map<K, V> {
     clear(): void;
     delete(key: K): boolean;
@@ -32,6 +36,23 @@ class ForceLayout {
         defSpringLen: 200;
         /** repulsion 斥力，这里指代 库伦常量Ke */
         repulsion: number;
+        /** 向心力 */
+        centripetalOptions: {
+            /** 叶子节点的施加力的因子 */
+            leaf?: number;
+            /** 孤立节点的施加力的因子 */
+            single?: number;
+            /** 其他节点的施加力的因子 */
+            others?: number;
+            /** 向心力的中心点，默认为画布的中心 */
+            center?: (
+                node: NodeType,
+            ) => {
+                x: number;
+                y: number;
+            };
+        };
+
         /** https://www.khanacademy.org/science/ap-physics-1/ap-electric-charge-electric-force-and-voltage/coulombs-law-and-electric-force-ap/a/coulombs-law-and-electric-force-ap-physics-1 */
         /** volocity damping factor 速度的减震因子，其实就是阻尼系数 */
         damping: number;
@@ -97,6 +118,10 @@ class ForceLayout {
             stiffness: 200.0,
             defSpringLen: 200,
             repulsion: 200.0 * SPEED,
+            centripetalOptions: {
+                leaf: 2,
+                single: 2,
+            },
             damping: 0.9,
             minEnergyThreshold: 0.1,
             maxSpeed: 1000,
@@ -382,29 +407,50 @@ class ForceLayout {
     }
 
     attractToCentre() {
-        const implementForce = (node: Node, center: Vector, radio = 100) => {
+        const implementForce = (node: Node, center: Vector, radio = 2) => {
             const point = this.nodePoints.get(node.id);
             const direction = point.p.subtract(center);
-            point.updateAcc(direction.scalarMultip(-this.props.repulsion / radio));
-        };
-        const getBaseLog = (x: number, y: number) => {
-            return Math.log(y) / Math.log(x);
-        };
 
+            point.updateAcc(direction.scalarMultip(-radio));
+        };
         this.nodes.forEach(node => {
             // 默认的向心力指向画布中心
             const degree = (node.data && node.data.layout && node.data.layout.degree) as number;
             const leafNode = degree === 1;
             const singleNode = degree === 0;
-            const MaxRadio = 600;
-            if (singleNode || leafNode) {
-                const center = new Vector(this.props.width / 2, this.props.height / 2);
-                implementForce(node, center, MaxRadio);
-            } else {
-                const radio = MaxRadio / 2 / getBaseLog(2, degree);
-                const center = new Vector(this.props.width / 2, this.props.height / 2);
-                implementForce(node, center, radio);
+            /** 默认的向心力配置 */
+            const defaultRadio = {
+                left: 2,
+                single: 2,
+                others: 1 / getBaseLog(2, degree),
+                center: () => {
+                    return {
+                        x: this.props.width / 2,
+                        y: this.props.height / 2,
+                    };
+                },
+            };
+
+            const { leaf, single, others, center } = { ...defaultRadio, ...this.props.centripetalOptions };
+            const { x, y } = center(node);
+            const centerVector = new Vector(x, y);
+
+            /** 如果radio为0，则认为忽略向心力 */
+            if (leaf === 0 || single === 0 || others === 0) {
+                return;
             }
+
+            if (singleNode) {
+                implementForce(node, centerVector, single);
+                return;
+            }
+
+            if (leafNode) {
+                implementForce(node, centerVector, leaf);
+                return;
+            }
+            /** others */
+            implementForce(node, centerVector, others);
         });
     }
 
