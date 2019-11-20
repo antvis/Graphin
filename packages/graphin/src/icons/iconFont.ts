@@ -1,15 +1,20 @@
 import fonts from '../fonts/iconfont.json';
 
-const icons = fonts.glyphs.map(icon => {
+interface Icon {
+    font_class: string;
+    unicode_decimal: number;
+}
+
+const icons = fonts.glyphs.map((icon: Icon) => {
     return {
-        name: icon.name,
-        unicode: String.fromCodePoint(icon.unicode_decimal), // `\u${icon.unicode}`,
+        name: icon.font_class,
+        unicode: String.fromCodePoint(icon.unicode_decimal),
     };
 });
 
-export default (type: string) => {
+export default (type: string, fontFamily: string) => {
     const matchIcon = icons.find(icon => {
         return icon.name === type;
-    }) || { unicode: String.fromCodePoint(58882), name: 'graphin' };
+    }) || { unicode: String.fromCodePoint(59302), name: 'thumbs-up' };
     return matchIcon.unicode;
 };

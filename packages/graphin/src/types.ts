@@ -83,6 +83,25 @@ export interface ExtendedGraph extends Graph {
     autoPaint(): void;
 }
 
+/** 默认节点样式 */
+export interface NodeStyle {
+    /** 节点的大小 */
+    nodeSize: number;
+    /** 节点的主要颜色 */
+    primaryColor: string;
+    /** 文本的字体大小 */
+    fontSize: number;
+    /** 文本的字体颜色 */
+    fontColor: string;
+    /** dark 置灰 */
+    dark: string;
+    /** iconfont 的 font-family */
+    fontFamily: string;
+    /** icon 的类型 */
+    icon: string;
+    [key: string]: string | number;
+}
+
 export interface Node {
     /** 节点源数据 */
     data: {
@@ -100,7 +119,7 @@ export interface Node {
     /** 节点类型 */
     shape?: string;
     /** 节点样式 */
-    style?: object;
+    style?: Partial<NodeStyle>;
     /** 节点位置信息 */
     x?: number;
     y?: number;

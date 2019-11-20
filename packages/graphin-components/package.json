@@ -1,8 +1,8 @@
 {
   "name": "@antv/graphin-components",
-  "version": "0.1.1",
+  "version": "1.0.0-beta7",
   "description": "Components for graphin",
-  "main": "./dist/index.esm",
+  "main": "./dist/index",
   "types": "./dist/src/index.d",
   "scripts": {
     "start": "father build --watch",

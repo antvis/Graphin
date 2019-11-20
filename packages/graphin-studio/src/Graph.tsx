@@ -2,6 +2,10 @@ import React, { useRef } from 'react';
 import Graphin from '@antv/graphin';
 import { Toolbar, ContextMenu } from '@antv/graphin-components';
 import { GraphProps } from './types';
+
+import '@antv/graphin/dist/index.css';
+import '@antv/graphin-components/dist/index.css';
+
 /** custom */
 import renderToolbar from './Custom/renderToolbar';
 import renderContextMenu from './Custom/renderContextMenu';
@@ -13,8 +17,6 @@ import useGraphEvents from './Events/useGraphEvents';
 
 /** components */
 import NodeEdgeCount from './Core/NodeEdgeCount';
-
-import './fonts/iconfont.css';
 
 const Graphene = (props: GraphProps) => {
     const graphRef = useRef(null) as any; // eslint-disable-line

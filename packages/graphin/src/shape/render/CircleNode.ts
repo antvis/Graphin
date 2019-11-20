@@ -1,23 +1,23 @@
+import { Node, NodeStyle } from '../../types';
 import iconFont from '../../icons/iconFont';
-/** 默认节点样式 */
-const defaultStyle = {
-    /** 节点的大小 */
+
+const defaultStyle: NodeStyle = {
     nodeSize: 20,
-    /** 节点的主要颜色 */
     primaryColor: '#9900EF',
-    /** 文本的字体大小 */
     fontSize: 12,
-    /** 文本的字体颜色 */
     fontColor: '#3b3b3b',
-    /** dark 置灰 */
     dark: '#eee',
+    fontFamily: 'graphin',
+    icon: 'logo',
 };
-type Style = typeof defaultStyle;
-const renderNodeShape = (node: any) => {
-    const { primaryColor, nodeSize, fontColor, fontSize, dark } = {
+
+const renderNodeShape = (node: Node) => {
+    const mergedStyle: Partial<NodeStyle> = {
         ...defaultStyle,
         ...node.style,
-    } as Style;
+    };
+
+    const { primaryColor, nodeSize, fontColor, fontSize, dark, fontFamily, icon } = mergedStyle as NodeStyle;
 
     const iconSize = nodeSize;
     const fontPosition = nodeSize * 1.4;
@@ -38,19 +38,7 @@ const renderNodeShape = (node: any) => {
                     lineWidth: 2,
                 },
             },
-            // {
-            //     shape: 'Marker',
-            //     attrs: {
-            //         id: 'node-icon',
-            //         symbol: node.data.type,
-            //         x: 0,
-            //         y: 0,
-            //         r: iconSize,
-            //         fill: primaryColor,
-            //     },
-            // },
-
-            /* icon font */
+            // G6 iconfont 方案。https://www.yuque.com/antv/g6/acaihu
             {
                 shape: 'text',
                 attrs: {
@@ -59,13 +47,12 @@ const renderNodeShape = (node: any) => {
                     y: 0,
                     fontSize: iconSize,
                     fill: primaryColor,
-                    text: iconFont(node.data.type),
-                    fontFamily: 'iconfont', // 对应css里面的font-family: "iconfont";
+                    text: iconFont(node.data.type || icon, fontFamily),
+                    fontFamily,
                     textAlign: 'center',
                     textBaseline: 'middle',
                 },
             },
-
             {
                 shape: 'text',
                 attrs: {

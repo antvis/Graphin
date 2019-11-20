@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@antv/graphin": "^1.0.0-beta.6",
-    "@antv/graphin-components": "^0.1.1",
+    "@antv/graphin-components": "^1.0.0-beta.6",
     "@types/classnames": "^2.2.9",
     "antd": "^3.23.5",
     "chinese-random-name": "^1.0.0",

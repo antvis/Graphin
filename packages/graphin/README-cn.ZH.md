@@ -5,14 +5,14 @@
 
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/antvis/graphin.svg)](http://isitmaintained.com/project/antvis/graphin 'Percentage of issues still open')
 
-[中文](./README.cn-ZH.md)
+[English](./README.en-US.md)
 
 ## @antv/graphin
 
-This package is the core React component of Graphin, the graph analysis toolkit based on [G6](https://github.com/antvis/g6).
+这是 Graphin 的核心 React 组件。Graphin 是基于 [G6](https://github.com/antvis/g6) 的图分析解决方案。
 
 
-## Install
+## 安装
 
 ```bash
 
@@ -20,7 +20,7 @@ npm install @antv/graphin --save
 
 ```
 
-## Usage
+## 使用
 
 ```tsx
 import React from 'react';
@@ -41,11 +41,11 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
-## Docs
+## 文档
 
-Please refer to [Graphin doc site](https://antvis.github.io/graphin/zh/)
+请参考 [Graphin 文档](https://antvis.github.io/graphin/zh/)
 
 
 ## APIs
 
-Please refer to [Graphin doc site for API](https://antvis.github.io/graphin/zh/docs/api/graphin)
+请参考[Graphin API 文档](https://antvis.github.io/graphin/zh/docs/api/graphin)

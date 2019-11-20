@@ -141,43 +141,15 @@ describe('<Graphin />', () => {
             // Draw Canvas need some time
             await wait();
 
-            expect(getCanvasPathCount(getByTestId)).toEqual(1);
+            const prevEventsCount = getCanvasEventCount(getByTestId);
 
-            data = {
-                nodes: [
-                    {
-                        id: 'foo',
-                        data: {
-                            id: 'foo',
-                        },
-                    },
-                    {
-                        id: 'foo1',
-                        data: {
-                            id: 'foo1',
-                        },
-                    },
-                    {
-                        id: 'foo2',
-                        data: {
-                            id: 'foo2',
-                        },
-                    },
-                    {
-                        id: 'foo3',
-                        data: {
-                            id: 'foo3',
-                        },
-                    },
-                ],
-                edges: [],
-            };
+            data = Object.assign({}, SAMPLE_DATA_2);
             act(() => {
                 rerender(<Graphin data={data} layout={layout}></Graphin>);
             });
 
             await wait();
-            expect(getCanvasPathCount(getByTestId)).toEqual(5);
+            expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
         },
         TIMEOUT,
     );

@@ -18,8 +18,6 @@ import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimul
 import debug from './utils/debug';
 
 import './index.less';
-/** font */
-// import './fonts/iconfont.css';
 
 class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     graphDOM: HTMLDivElement | null = null;
@@ -302,12 +300,6 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
                 <div
                     data-testid="custom-element"
                     className="graphin-core"
-                    style={{
-                        height: '100%',
-                        width: '100%',
-                        minHeight: '500px',
-                        background: '#fff',
-                    }}
                     ref={node => {
                         this.graphDOM = node;
                     }}

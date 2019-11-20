@@ -1,7 +1,8 @@
 export default {
     esm: {
         type: 'rollup',
+        file: 'index',
     },
     lessInRollupMode: {},
-    injectCSS: true,
+    extractCSS: true,
 };
