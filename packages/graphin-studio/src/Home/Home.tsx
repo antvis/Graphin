@@ -16,8 +16,8 @@ const Home = () => {
                 <Link to="/graphin-studio" className="card-item">
                     <div className="card-text">
                         {`
-                            演示demo：Graphin Studio
-                                --- 通用图分析工作台
+                            演示 Demo: Graphin Studio
+                                —— 通用图分析工作台
                             `}
                     </div>
                 </Link>

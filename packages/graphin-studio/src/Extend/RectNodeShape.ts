@@ -1,3 +1,4 @@
+import { NodeShapeFunction } from '@antv/graphin';
 import { Node } from '../types';
 
 const defaultStyles = {
@@ -20,7 +21,7 @@ const defaultStyles = {
 };
 type Style = typeof defaultStyles;
 // eslint-disable-next-line
-const renderRectNode = (node: Node) => {
+const renderRectNode: NodeShapeFunction = (node: Node) => {
     const style: Style = {
         ...defaultStyles,
         ...node.style,
@@ -72,7 +73,7 @@ const renderRectNode = (node: Node) => {
                 },
             },
             {
-                shape: 'Marker',
+                shape: 'marker',
                 attrs: {
                     id: 'node-icon',
                     symbol: node.data.type,

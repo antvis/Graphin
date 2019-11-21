@@ -51,7 +51,7 @@ const Graphene = () => {
 
     return (
         <Layout>
-            <Header>This is Header</Header>
+            <Header>Header</Header>
             <Side>
                 <OnlyGraphinReady graphRef={graphRef}>
                     <OperatorBar dispatch={dispatch} state={state} graphRef={graphRef} />
@@ -65,7 +65,7 @@ const Graphene = () => {
                     <SearchBar dispatch={dispatch} state={state} />
                 </OnlyGraphinReady>
             </Main>
-            <Footer>This is Footer</Footer>
+            <Footer>Footer</Footer>
         </Layout>
     );
 };

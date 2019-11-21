@@ -70,6 +70,8 @@ describe('<Graphin />', () => {
             name: 'grid',
         };
 
+        console.log('fff', typeof Worker === 'undefined', typeof Worker);
+
         const { queryByText } = render(
             <Graphin data={data} layout={layout}>
                 <MockComponent />
@@ -122,7 +124,7 @@ describe('<Graphin />', () => {
             };
 
             const layout = {
-                name: 'grid',
+                name: 'circle',
             };
 
             const { getByTestId, rerender } = render(
@@ -142,11 +144,22 @@ describe('<Graphin />', () => {
             await wait();
 
             const prevEventsCount = getCanvasEventCount(getByTestId);
+            console.log(getCanvasPathCount(getByTestId));
 
-            data = Object.assign({}, SAMPLE_DATA_2);
-            act(() => {
-                rerender(<Graphin data={data} layout={layout}></Graphin>);
-            });
+            rerender(
+                <Graphin
+                    data={mock(10)
+                        .circle()
+                        .graphin()}
+                    layout={layout}
+                    options={{
+                        animate: false,
+                        animateCfg: {
+                            duration: 0,
+                        },
+                    }}
+                ></Graphin>,
+            );
 
             await wait();
             expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
