@@ -4,7 +4,7 @@
 
 Graphin means Graph Insight (analysis of graphs). It is a library based on [G6](https://github.com/antvis/g6) and React and offers graph analysis ability out of the box. Graphin's logo is graphene, which means the potential of the future.
 
-For more infomation, please check the [Graphin Website](https://graphin.antv.vision).
+For more infomation, please check the [Graphin Website](https://graphin.antv.vision/zh).
 
 Graphin use lerna to manage this repo. This repo contains the  following packages:
 
