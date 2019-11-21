@@ -18,7 +18,6 @@ export type LayoutOption =
     | DagreLayoutOption
     | GridLayoutOptions;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
     const { graph } = graphin;
     const width = graph!.get('width');

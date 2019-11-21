@@ -102,7 +102,7 @@ npm run site
 
 ### 更多信息
 
--   [Graphin 简介](https://antvis.github.io/graphin/zh/docs/manual/introduction)
--   [快速上手](https://antvis.github.io/graphin/zh/docs/manual/getting-started)
--   [API 文档](https://antvis.github.io/graphin/zh/docs/api/graphin)
--   [GraphinStudio](https://antvis.github.io/graphin/zh/GraphinStudio)
+-   [Graphin 简介](https://graphin.antv.vision/zh/docs/manual/introduction)
+-   [快速上手](https://graphin.antv.vision/zh/docs/manual/getting-started)
+-   [API 文档](https://graphin.antv.vision/zh/docs/api/graphin)
+-   [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)
