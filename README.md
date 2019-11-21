@@ -1,76 +1,110 @@
-## Graphin
+![](https://camo.githubusercontent.com/2b77a87432d47fb4f20f5b0bfbdcb2db15775dab/68747470733a2f2f67772e616c697061796f626a656374732e636f6d2f6d646e2f726d735f3030656463622f616674732f696d672f412a456b4a6d52726d754a41674141414141414141414141426b4152516e4151)
 
-[English README](./README.en-US.md)
+[中文](./README.cn-ZH.md)
 
-Graphin 采用 lerna 包管理机制，packages 中包含以下 4 个 package
+Graphin means Graph Insight (analysis of graphs). It is a library based on [G6](https://github.com/antvis/g6) and React and offers graph analysis ability out of the box. Graphin's logo is graphene, which means the potential of the future.
+
+For more infomation, please check the [Graphin Website](https://graphin.antv.vision).
+
+Graphin use lerna to manage this repo. This repo contains the  following packages:
 
 ```bash
 /packages
-    graphin
-    graphin-components
-    graphin-studio
-    graphin-site
+    graphin
+    graphin-components
+    graphin-studio
+    graphin-site
 ```
 
-他们依次对应的包名与解释如下
+Please checkout the specific package：
 
-|   包名                   | 说明                                                   |
-| ------------------------ | ------------------------------------------------------ |
-| @antv/graphin            | Graphin 中的图分析内核，基于 G6 封装 的 React 组件     |
-| @antv/graphin-components | Graphin 中的图分析组件                                 |
-| @antv/graphin-site       | Graphin 文档官网                                       |
-| graphin-studio           | Graphin 演示 DEMO：基于 Graphin 实现的通用关系分析平台 |
+| Package Name             | Description                                                            |
+| ------------------------ | ---------------------------------------------------------------------- |
+| [@antv/graphin](https://github.com/antvis/graphin/tree/master/packages/graphin)  |    Core React component of Graphin                    |
+| [@antv/graphin-components](https://github.com/antvis/graphin/tree/master/packages/graphin-components) | Graphin components                                            |
+| [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)       | Graphin documentation website                                               |
+| [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)           | A Graphin demo: generic graph analysis workbench based on Graphin |
 
-### 快速开始
+### Graphin Quick Start
 
--   设置 npmClient
+#### Install
 
-在 lerna.json 中设置你的 npmClient，中国地区的朋友可以设置 [cnpm](https://www.npmjs.com/package/cnpm)
+```bash
+npm run --save @antv/graphin
+```
+
+#### Usage
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Graphin, { Utils } from '@antv/graphin';
+
+import "@antv/graphin/dist/index.css"; // Don't forget to import css
+import './styles.css';
+
+const App = () => {
+    const data = Utils.mock(10).graphin();
+    return (
+        <div className="App">
+            <Graphin data={data} />
+        </div>
+    );
+};
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App />, rootElement);
+```
+
+
+### Develop Graphin 
+
+-   Set npmClient
+
+Set your npmClient in lerna.json, developers in China can set npmClient to [cnpm](https://www.npmjs.com/package/cnpm)
 
 ```json
 // ./lerna.json
 {
     "packages": ["packages/*"],
-    "npmClient": "cnpm",
+    "npmClient": "yarn",
     "version": "0.0.0"
 }
 ```
 
--   安装依赖
+-   Install dependencies
 
 ```bash
-cnpm i
+npm i
 ```
 
--   安装各 packages 的依赖
+-   Install dependencies for each package
 
 ```bash
 npm run bootstrap
 ```
 
--   启动 graphin 与 graphin-components 的 start 本地编译
+-   Start the local compilation of graphin and graphin-components
 
 ```bash
 npm run start
 ```
 
-> 在`npm run start`后
-
--   查看 graphin-studio 的 demo 示例
+-   Start the Graphin studio demo after `npm run start`
 
 ```bash
 npm run studio
 ```
 
--   查看 graphin-sire 的 gatsby 官方
+-   Start the Graphin Doc site
 
 ```bash
 npm run site
 ```
 
-### 使用文档
+### More Info
 
--   [Graphin 简介](https://antvis.github.io/graphin/zh/docs/manual/introduction)
--   [快速上手](https://antvis.github.io/graphin/zh/docs/manual/getting-started)
--   [API 文档](https://antvis.github.io/graphin/zh/docs/api/graphin)
--   [GraphinStudio](https://antvis.github.io/graphin/zh/GraphinStudio)
+- [Introduction to Graphin](https://graphin.antv.vision/zh/docs/manual/introduction)
+- [Getting started](https://graphin.antv.vision/zh/docs/manual/getting-started)
+- [API documentation](https://graphin.antv.vision/zh/docs/api/graphin)
+- [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)

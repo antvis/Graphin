@@ -70,8 +70,6 @@ describe('<Graphin />', () => {
             name: 'grid',
         };
 
-        console.log('fff', typeof Worker === 'undefined', typeof Worker);
-
         const { queryByText } = render(
             <Graphin data={data} layout={layout}>
                 <MockComponent />
@@ -144,7 +142,6 @@ describe('<Graphin />', () => {
             await wait();
 
             const prevEventsCount = getCanvasEventCount(getByTestId);
-            console.log(getCanvasPathCount(getByTestId));
 
             rerender(
                 <Graphin
@@ -386,7 +383,6 @@ describe('<Graphin />', () => {
                         <div
                             onClick={() => {
                                 console.log('undo called');
-                                console.log(props.apis.history.getInfo());
                                 props.apis.history.undo();
                             }}
                         >

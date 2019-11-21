@@ -66,7 +66,7 @@ const layoutController = (
         if (hasPosition) {
             return { data };
         }
-        layout = { name: 'force' };
+        layout = { name: 'concentric' };
     }
 
     // 重置forceSimulation
