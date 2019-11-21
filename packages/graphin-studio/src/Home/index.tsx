@@ -2,8 +2,11 @@ import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import Home from './Home';
-import './index.css';
 import GraphinStudio from '../GraphinStudio';
+
+import './index.css';
+import '@antv/graphin/dist/index.css';
+import '@antv/graphin-components/dist/index.css';
 
 const propTypes = {};
 

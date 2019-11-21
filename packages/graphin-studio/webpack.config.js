@@ -42,12 +42,8 @@ module.exports = env => {
                 },
                 {
                     test: /\.css$/,
-                    use: [
-                        {
-                            loader: MiniCssExtractPlugin.loader,
-                        },
-                        'css-loader',
-                    ],
+                    use: ['style-loader', 'css-loader'],
+                    sideEffects: true,
                 },
                 {
                     test: /\.(png|jpe?g|gif|svg)$/i,
@@ -61,7 +57,7 @@ module.exports = env => {
                     test: /\.less$/,
                     use: [
                         {
-                            loader: MiniCssExtractPlugin.loader,
+                            loader: 'style-loader',
                         },
                         {
                             loader: 'css-loader', // translates CSS into CommonJS
@@ -73,6 +69,7 @@ module.exports = env => {
                             },
                         },
                     ],
+                    sideEffects: true,
                 },
                 {
                     test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -103,12 +100,6 @@ module.exports = env => {
             hotOnly: true,
         },
         plugins: [
-            new MiniCssExtractPlugin({
-                // Options similar to the same options in webpackOptions.output
-                // both options are optional
-                filename: '[name].css',
-                chunkFilename: '[id].css',
-            }),
             // new BundleAnalyzerPlugin(),
             new HtmlWebpackPlugin({
                 title: 'example',

@@ -3,9 +3,6 @@ import Graphin from '@antv/graphin';
 import { Toolbar, ContextMenu } from '@antv/graphin-components';
 import { GraphProps } from './types';
 
-import '@antv/graphin/dist/index.css';
-import '@antv/graphin-components/dist/index.css';
-
 /** custom */
 import renderToolbar from './Custom/renderToolbar';
 import renderContextMenu from './Custom/renderContextMenu';

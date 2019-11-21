@@ -20,7 +20,6 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
     /** 设置初始化shapeComponent，按照节点ID进行分类 */
     const initShapeComponentMap: { [key: string]: ShapeComponent[] } = {};
     const initStateMap: { [key: string]: any } = {}; // eslint-disable-line
-    const initUpdateMap: { [key: string]: any } = {}; // eslint-disable-line
     G6.registerNode(registerName, {
         // 自定义Shape
         // eslint-disable-next-line

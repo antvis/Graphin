@@ -20,18 +20,18 @@ export interface Data {
 
 -   2. Node 最重要的三个概念
 
-|   属性 | 说明                                                                                           |
-| ------ | ---------------------------------------------------------------------------------------------- |
-| id     | id 是节点的唯一标识，如果 id 不存在，Graphin 会忽略这个节点                                    |
+|   属性 | 说明                                                                                                             |
+| ------ | ---------------------------------------------------------------------------------------------------------------- |
+| id     | id 是节点的唯一标识，如果 id 不存在，Graphin 会忽略这个节点                                                      |
 | shape  | shape 是告诉 Graphin，渲染什么样的节点，默认设置为内置的 `CircleNode` 类型 。shape 和 G6 中的 shape 是同一个概念 |
-| data   | data 保存了后端返回的节点数据。单独用 data 字段来存储是为了避免和 Graphin 的节点数据混在一起          |
+| data   | data 保存了后端返回的节点数据。单独用 data 字段来存储是为了避免和 Graphin 的节点数据混在一起                     |
 
 -   3. Edge 最重要的三个概念
 
-|   属性 | 说明                                                                                |
-| ------ | ----------------------------------------------------------------------------------- |
-| source | source 是边连接的源节点的 id ，是 string 类型                                       |
-| target | target 是边连接的目标节点的 id ，是 string 类型                                     |
+|   属性 | 说明                                                                                       |
+| ------ | ------------------------------------------------------------------------------------------ |
+| source | source 是边连接的源节点的 id ，是 string 类型                                              |
+| target | target 是边连接的目标节点的 id ，是 string 类型                                            |
 | data   | data 保存了后端返回的边数据，单独用 data 字段来存储是为了避免和 Graphin 的节点数据混在一起 |
 
 > 完整的 API，请查看[API 手册](../apis/#data)
@@ -53,23 +53,25 @@ Graphin 数据全量渲染和增量添加：
 
 对于默认的 `CircleNode` 节点，我们只需要改变每个节点 style 即可：
 
-|   属性       | 默认值    | 说明           |
-| ------------ | --------- | -------------- |
-| nodeSize     | 20        | 节点的大小     |
-| primaryColor | '#9900EF' | 节点的主要颜色 |
-| fontSize     | 12        | 文本的字体大小 |
-| fontColor    | '#3b3b3b' | 文本的字体颜色 |
-| dark         | '#eee'    | dark 置灰      |
-| icon         |  无    | iconfont 的 class      |
-| fontFamily        | 'graphin'    | iconfont 的 fontFamily，默认为 Graphin 内置 icon    |
+|   属性       | 默认值    | 说明                                             |
+| ------------ | --------- | ------------------------------------------------ |
+| nodeSize     | 20        | 节点的大小                                       |
+| primaryColor | '#9900EF' | 节点的主要颜色                                   |
+| fontSize     | 12        | 文本的字体大小                                   |
+| fontColor    | '#3b3b3b' | 文本的字体颜色                                   |
+| dark         | '#eee'    | dark 置灰                                        |
+| icon         | 无        | iconfont 的 name                                 |
+| fontFamily   | 'graphin' | iconfont 的 fontFamily，默认为 Graphin 内置 icon |
+
+Graphin 的内置 icon 请查阅[内置图标](/zh/docs/manual/icons)
 
 > 这里的 style 属性规范只针对 Graphin 的内置 Shape。如果是自定义 Shape，从 style 到 G6 节点 attr 的映射可以在 Shape 定义时自行配置
 
--   自定义 transform 函数
+综上，我们可以编写 transform 函数来对 Data 进行转换：
 
 ```tsx
-const transform = {
-    nodes: (nodes: NodeData[]) => {
+const trasform = (data: { nodes: NodeData[]; edges: EdgeData[] }) => {
+    const nodes = (nodes: NodeData[]) => {
         return nodes.map(node => {
             return {
                 id: node.id,
@@ -82,17 +84,17 @@ const transform = {
                 },
             };
         });
-    },
-    edges: (edges: EdgeData[]) => {
+    };
+    const edges = (edges: EdgeData[]) => {
         return edges;
-    },
-    data: (data: { nodes: NodeData[]; edges: EdgeData[] }) => {
-        return {
-            nodes: transform.nodes(data.nodes),
-            edges: transform.edges(data.edges),
-        };
-    },
+    };
+    return {
+        nodes: transform.nodes(data.nodes),
+        edges: transform.edges(data.edges),
+    };
 };
+
+<Graphin data={transform.(data)} />;
 ```
 
 ## 03. 特殊情况
@@ -113,7 +115,7 @@ const transform = {
 -   2. 节点的位置：它由 Node 的 x 和 y 值决定的
 
 |   x、y 坐标 | Layout 布局   | 渲染结果                                                    | 使用场景     |
-| ---------- | ------------- | ----------------------------------------------------------- | ------------ |
-| 存在       | 不存在        | 根据 data.nodes 中的 x，y 进行布局渲染                      | 图保存再复现 |
-| 存在       | 存在          | 忽略 data.nodes 中的布局信息，根据 layout.name 进行布局渲染 | 布局切换     |
-| 不存在     | 不存在 / 存在 | 根据 layout.name 进行布局渲染                               | 布局渲染     |
+| ----------- | ------------- | ----------------------------------------------------------- | ------------ |
+| 存在        | 不存在        | 根据 data.nodes 中的 x，y 进行布局渲染                      | 图保存再复现 |
+| 存在        | 存在          | 忽略 data.nodes 中的布局信息，根据 layout.name 进行布局渲染 | 布局切换     |
+| 不存在      | 不存在 / 存在 | 根据 layout.name 进行布局渲染                               | 布局渲染     |
