@@ -7,7 +7,6 @@ module.exports = {
             resolve: '@antv/gatsby-theme-antv',
             options: {
                 GATrackingId: `UA-148148901-8`,
-                pathPrefix: '/graphin',
             },
         },
     ],
@@ -15,6 +14,7 @@ module.exports = {
     siteMetadata: {
         title: 'Graphin',
         description: 'the react toolkit for graph analysis based on g6',
+        siteUrl: 'https://graphin.antv.vision',
         githubUrl: repository.url,
         navs: [
             {

@@ -17,7 +17,7 @@ const IndexPage = () => {
                 }}
             >
                 <iframe
-                    src="https://antvis.github.io/graphin-studio-site/#/graphin-studio"
+                    src="https://graphin.antv.vision-studio-site/#/graphin-studio"
                     title="graphin-studio"
                     style={{ width: '100%', height: '100%', border: 0, borderRadius: '4px', overflow: 'hidden' }}
                     allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
