@@ -22,8 +22,8 @@ order: 1
 
 |   属性 | 类型                   | 是否必选 | 说明       |
 | ------ | ---------------------- | -------- | ---------- |
-| nodes  | [Node[]](#node) | 是       | 节点的集合 |
-| edges  | [Edge[]](#edge) | 是       | 边的集合   |
+| nodes  | [Node[ ]](#node) | 是       | 节点的集合 |
+| edges  | [Edge[ ]](#edge) | 是       | 边的集合   |
 
 ### Node
 
@@ -34,10 +34,10 @@ order: 1
 | id             | string                              | **是** | 唯一标示 id                              |
 | data           | [NodeData](#nodedata)                 | **是** | 节点附带的 key-value 数据 |
 | shape          | string                              | 否       | 节点的图形类型（NodeShape）。默认值为内置的 `CircleNode`。可以通过 extend 对 NodeShape 进行扩展  |
-| style          | [NodeDefaultStyle](#nodedefaultstyle) | 否       | 和 NodeShape 相对应的样式信息                     |
+| style          | [NodeStyle](#nodestyle) | 否       | 和 NodeShape 相对应的样式信息                     |
 | x              | number                              | 否       | 节点的位置信息：X 坐标（在保存下来的图数据中会有位置信息）                            |
 | y              | number                              | 否       | 节点的位置信息：Y 坐标（在保存下来的图数据中会有位置信息）                           |
-| layout         | NodeLayoutType                    | 否       | 内置的某些布局在节点上附加的属性                                 |
+| layout         | [NodeLayoutType](#nodelayouttype)                    | 否       | 内置的某些布局在节点上附加的属性                                 |
 | `[key:string]` | any                                 | 否       | 其余用户自定义的属性，也是支持挂载的              |
 |                |
 
@@ -52,9 +52,11 @@ order: 1
 | properties     | any[]    | 否       | 节点的属性，任意的 key-value              |
 | `[key:string]` | any    | 否       | 其余任意属性                |
 
-### NodeDefaultStyle
+### NodeStyle
 
-和 NodeShape 相对应的样式信息
+和 NodeShape 相对应的样式信息。任意的 key-value 都可以。
+
+这是 Graphin 内置 NodeShape 支持的 NodeStyle 类型：
 
 |   属性       | 默认值    | 说明           |
 | ------------ | --------- | -------------- |
@@ -63,6 +65,22 @@ order: 1
 | fontSize     | 12        | 文本的字体大小 |
 | fontColor    | #3b3b3b | 文本的字体颜色 |
 | dark         | #eee    | 置灰状态下颜色      |
+| icon         | company    | iconfont 的 class name      |
+| fontFamily         | 'graphin'    | iconfont 的  fontFamily     |
+
+### NodeLayoutType
+
+内置的某些布局在节点上附加的属性
+
+
+
+|   属性         | 类型     | 是否必选 | 说明                         |
+| -------------- | -------- | -------- | ---------------------------- |
+| degree           | number    | 否 | 节点度数               |
+| force         | { mass?: number }| 否 | 力导布局相关的节点附加参数         |
+| concentric         | { outerR?:number; center: { x: number; y:number;} theta: number; } | 否 | 同心圆布局相关的节点附加参数       |
+
+
 
 ### Edge
 

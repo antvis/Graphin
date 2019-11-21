@@ -23,11 +23,6 @@ const noopLayout = () => {
     return [];
 };
 
-/**
- *
- * @param graphin Graphin组件对象
- * @param params
- */
 const layoutController = (
     graphin: Graphin,
     params: LayoutParams,
@@ -66,20 +61,20 @@ const layoutController = (
         return node.x && node.y;
     });
 
-    /** layout不存在，且有位置信息，则认为是save-render操作 */
     if (!(layout && layout.name)) {
+        // layout不存在，且有位置信息，则认为是 save-render 操作
         if (hasPosition) {
             return { data };
         }
-        layout = { name: 'concentric' };
+        layout = { name: 'force' };
     }
 
-    /** 重置forceSimulation  */
+    // 重置forceSimulation
     if (forceSimulation) {
         forceSimulation.stop();
     }
 
-    /** 设置布局的 options参数 */
+    // 设置布局的 options参数
     const { name } = layout;
     const options = {
         graph,
@@ -89,7 +84,7 @@ const layoutController = (
         ...layout.options,
     };
 
-    /** 得到当前匹配的布局函数 */
+    // 得到当前匹配的布局函数
     const matchLayout = layouts.find(item => item.name === name) || {
         name: '',
         icon: '',

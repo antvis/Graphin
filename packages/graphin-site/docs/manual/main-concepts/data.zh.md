@@ -30,8 +30,8 @@ export interface Data {
 
 |   属性 | 说明                                                                                |
 | ------ | ----------------------------------------------------------------------------------- |
-| source | source 是边连接的源节点的 id ，是 `string` 类型                                       |
-| target | target 是边连接的目标节点的 id ，是 `string` 类型                                     |
+| source | source 是边连接的源节点的 id ，是 string 类型                                       |
+| target | target 是边连接的目标节点的 id ，是 string 类型                                     |
 | data   | data 保存了后端返回的边数据，单独用 data 字段来存储是为了避免和 Graphin 的节点数据混在一起 |
 
 > 完整的 API，请查看[API 手册](../apis/#data)
@@ -60,6 +60,10 @@ Graphin 数据全量渲染和增量添加：
 | fontSize     | 12        | 文本的字体大小 |
 | fontColor    | '#3b3b3b' | 文本的字体颜色 |
 | dark         | '#eee'    | dark 置灰      |
+| icon         |  无    | iconfont 的 class      |
+| fontFamily        | 'graphin'    | iconfont 的 fontFamily，默认为 Graphin 内置 icon    |
+
+> 这里的 style 属性规范只针对 Graphin 的内置 Shape。如果是自定义 Shape，从 style 到 G6 节点 attr 的映射可以在 Shape 定义时自行配置
 
 -   自定义 transform 函数
 

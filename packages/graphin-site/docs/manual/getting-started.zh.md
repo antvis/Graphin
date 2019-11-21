@@ -14,16 +14,16 @@ $ npm install @antv/graphin --save
 这是一个最简单的 Graphin 组件的在线演示。访问 https://codesandbox.io/s/data-driven-3o71b 创建一个 CodeSandbox 的在线示例，别忘了保存以创建一个新的实例。通过 CodeSandbox，我们可以不用去配那些琐碎的 React 脚手架，快速尝鲜。
 
 <iframe
-     src="https://codesandbox.io/embed/data-driven-3o71b?fontsize=14"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     src="https://codesandbox.io/embed/data-driven-v6v72?fontsize=14&theme=dark"
+     style="width:100%; height:600px; border:0; border-radius: 4px; overflow:hidden;"
      title="data-driven"
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-></iframe>
+   ></iframe>
 
 ### 01. 渲染数据
 
-Graphin 使用起来就像普通的组件一样，它只有一个必选属性 `data`，内部会对其进行数据校验，data 的数据结构有一定的要求，详情参考：[核心概念/Data 数据驱动](main-concepts/data)
+Graphin 使用起来就像普通的组件一样，它只有一个必选属性 `data`，内部会对其进行数据校验，data 的数据结构有一定的要求，详情参考：[核心概念/Data 数据驱动](main-concepts/data)。
 
 Graphin 提供一个 Mock 函数，帮助我们快速生成一些图数据，让我们试试看吧：
 
@@ -31,6 +31,8 @@ Graphin 提供一个 Mock 函数，帮助我们快速生成一些图数据，让
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
+
+import "@antv/graphin/dist/index.css"; // 引入Graphin CSS
 import './styles.css';
 
 const App = () => {
@@ -46,6 +48,8 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
+这个例子的效果可以看上一节中的 Sandbox 例子。
+
 ### 02. 使用布局
 
 Graphin 组件内置了 6 种布局，默认提供布局为 force（力导布局）。我们可以根据自己业务的不同来调整布局。比如，我们希望节点按照同心圆（concentric）排列。让我们来调整上述的代码：
@@ -57,6 +61,16 @@ Graphin 组件内置了 6 种布局，默认提供布局为 force（力导布局
 
 ```
 
+效果如下：
+
+<iframe
+     src="https://codesandbox.io/embed/data-driven-lbk7e?fontsize=14&theme=dark"
+     style="width:100%; height:600px; border:0; border-radius: 4px; overflow:hidden;"
+     title="quick-starter-layout-change"
+     allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+   ></iframe>
+
 ### 03. 使用组件
 
 Graphin 目前仅提供两个官方组件，Toolbar 和 ContextMenu。关于它们，你们可以在[核心概念/Components 分析组件](main-concepts/components)中得到更详细的介绍，我们以添加组件 `Toolbar` 为例：
@@ -66,6 +80,7 @@ Graphin 目前仅提供两个官方组件，Toolbar 和 ContextMenu。关于它�
 ```bash
 $ npm install @antv/graphin-components --save
 ```
+> Graphin-components 基于 antd 组件，因此如果是非 antd 项目，需要手动引入 antd 的 css
 
 -   将组件放在 Graphin 组件内部，这样 `Graphin` 组件可以将 `graph`，`apis` 等属性传递给分析组件：
 
@@ -74,10 +89,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar } from '@antv/graphin-components';
+
+import "@antv/graphin/dist/index.css"; // Graphin CSS
+import "@antv/graphin-components/dist/index.css"; // Graphin 组件 CSS
 import './styles.css';
 
 const App = () => {
-    const data = Utils.mock(10).graphin();
+    const data = Utils.mock(10).circle().graphin();
     return (
         <div className="App">
             <Graphin data={data} layout={{ name: 'concentric' }}>
@@ -91,11 +109,22 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
-这个时候我们再到 CodeSandbox 中去体验下 Toolbar：
+效果如下：
+
+<iframe
+     src="https://codesandbox.io/embed/graphin-components-toolbar-vged5?fontsize=14&theme=dark"
+     style="width:100%; height:600px; border:0; border-radius: 4px; overflow:hidden;"
+     title="quick-starter-toolbar"
+     allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+   ></iframe>
+
+关于 Graphin 组件，我们可以到 [Grapin Studio](/zh/GraphinStudio) 中去体验一下功能：
 
 -   todo/redo 撤销重做功能
 -   zoomIn/out 缩小放大功能
 -   fullscreen 全屏功能
+-   contextmenu 右键菜单
 
 ### 04. 事件监听
 
@@ -103,6 +132,8 @@ ReactDOM.render(<App />, rootElement);
 
 -   1. 得到 Graphin 的 Ref 实例
 -   2. 使用 G6 的 graph 进行事件监听
+
+代码如下：
 
 ```jsx
 const App = () => {
@@ -195,8 +226,8 @@ Graphin 提供两种方式获得 apis 接口，第一种是通过组件的 props
 -   4. 完整代码如下：
 
 <iframe
-     src="https://codesandbox.io/embed/layout-selector-k16mh?fontsize=14&hidenavigation=1&theme=dark"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     src="https://codesandbox.io/embed/layout-selector-oplx5?fontsize=14&theme=dark"
+     style="width:100%; height:600px; border:0; border-radius: 4px; overflow:hidden;"
      title="layout-selector"
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
@@ -268,12 +299,13 @@ const App = () => {
 -   4. 完整代码如下：
 
 <iframe
-     src="https://codesandbox.io/embed/icy-snow-grltv?fontsize=14&hidenavigation=1&theme=dark"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     src="https://codesandbox.io/embed/nodeexpand-3io3m?fontsize=14&theme=dark"
+     style="width:100%; height:600px; border:0; border-radius: 4px; overflow:hidden;"
      title="nodeExpand"
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
    ></iframe>
+
 ### 03. 总结与引导
 
 以上就是 Graphin 的快速入门指南，相信大家已经看到了 Graphin 的简单易用之处。其实关于 Graphin 的使用，还有可以有很多开脑洞的想法。比如布局和数据一起改变会发生什么？大家不妨自己试试。想要深入地了解 Graphin，可以继续阅读 [核心概念](main-concepts/data) 和 [进阶指导](advanced-guides/extend) 两部分的内容

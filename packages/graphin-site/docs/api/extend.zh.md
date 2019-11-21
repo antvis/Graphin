@@ -10,7 +10,7 @@ order: 3
 | layout    | (graphin: [Graphin](), prevProps: [GraphinProps](/zh/docs/api/graphin#props)) => [ExendLayout](#extendlayout)[ ]  | 否       | 自定义布局 |
 | nodeShape | (node: [Node](/zh/docs/api/graphin#node)) => [ExtendNodeShape](#extendnodeshape)[ ] | 否       | 自定义节点 |
 | marker    | ( ) => [ExtendMarker](#extendmarker)[ ]         | 否       | 自定义图标 |
-
+| icon   | ( ) => [ExtendIcon](#extendicon)[ ]         | 否       | 自定义图标（iconfont 形式） |
 
 ### ExendLayout
 
@@ -48,3 +48,15 @@ order: 3
 | -------- | --------------------- | -------- | ------------- |
 | name    | string       | **是** | icon 类型      |
 | path | string     | **是**       | svg 路径数据      |
+
+
+### ExtendIcon
+
+自定义 Icon 配置
+
+|   属性   | 类型                  | 是否必选 | 说明          |
+| -------- | --------------------- | -------- | ------------- |
+| fontFamily    | string       | **是** | 字体名称      |
+| map | { font\_class: string; unicode\_decimal: number; }[ ]     | **是**       | iconfont 的 class name 和 unicode decimal 的映射集合      |
+
+
