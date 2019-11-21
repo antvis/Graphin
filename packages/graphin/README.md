@@ -43,9 +43,9 @@ ReactDOM.render(<App />, rootElement);
 
 ## Docs
 
-Please refer to [Graphin doc site](https://antvis.github.io/graphin/zh/)
+Please refer to [Graphin doc site](https://graphin.antv.vision/zh/)
 
 
 ## APIs
 
-Please refer to [Graphin doc site for API](https://antvis.github.io/graphin/zh/docs/api/graphin)
+Please refer to [Graphin doc site for API](https://graphin.antv.vision/zh/docs/api/graphin)

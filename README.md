@@ -104,7 +104,7 @@ npm run site
 
 ### More Info
 
--   [Introduction to Graphin](https://antv.vision/graphin/en/docs/manual/introduction)
--   [Getting started](https://antv.vision/graphin/en/docs/manual/getting-started)
--   [API documentation](https://antv.vision/graphin/en/docs/api/graphin)
--   [GraphinStudio](https://antv.vision/graphin/en/GraphinStudio)
+- [Introduction to Graphin](https://graphin.antv.vision/zh/docs/manual/introduction)
+- [Getting started](https://graphin.antv.vision/zh/docs/manual/getting-started)
+- [API documentation](https://graphin.antv.vision/zh/docs/api/graphin)
+- [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)

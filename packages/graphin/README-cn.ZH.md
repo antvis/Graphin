@@ -43,9 +43,9 @@ ReactDOM.render(<App />, rootElement);
 
 ## 文档
 
-请参考 [Graphin 文档](https://antvis.github.io/graphin/zh/)
+请参考 [Graphin 文档](https://graphin.antv.vision/zh/)
 
 
 ## APIs
 
-请参考[Graphin API 文档](https://antvis.github.io/graphin/zh/docs/api/graphin)
+请参考[Graphin API 文档](https://graphin.antv.vision/zh/docs/api/graphin)
