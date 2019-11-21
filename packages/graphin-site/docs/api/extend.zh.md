@@ -30,7 +30,9 @@ order: 3
 |   属性   | 类型                  | 是否必选 | 说明          |
 | -------- | --------------------- | -------- | ------------- |
 | shape    | string       | **是** | 自定义的 NodeShape 名称，唯一标识符      |
-| shapeComponents  | [ShapeComponent](#shapecomponent)[ ]     | **是**       | 构成 Shape 的组件数组      |
+| shapeComponents  | [ShapeComponent](#shapecomponent)[ ]     | **是**       | 构成 Shape 的组件列表      |
+| state  |  [StateMap](#StateMap) | 否 |   不同 behavior 状态和 ShapeComponent 的属性构成的映射  |
+
 
 #### ShapeComponent
 
@@ -40,14 +42,25 @@ order: 3
 | attrs  | [Attrs](https://www.yuque.com/antv/g6/ffzwfp)     | **是**       | G6 Shape 属性      |
 
 
-### ExendMarker
+#### StateMap
+
+不同 behavior 状态和 ShapeComponent 的属性构成的映射
+
+|   属性   | 类型                  | 是否必选 | 说明          |
+| -------- | --------------------- | -------- | ------------- |
+| selected    | { [id: string]: { [attr: string]: any; }; };       | 否 | 选中状态下的 Shape 属性      |
+| highlight.dark  | { [id: string]: { [attr: string]: any; }; };     | 否      | 高亮状态下的 Shape 属性   |
+| [key:string]  |  { [id: string]: { [attr: string]: any; }; };| 否 |  自定义 behavior 状态下的 Shape 属性 |
+
+
+<!-- ### ExendMarker
 
 自定义 Marker 配置
 
 |   属性   | 类型                  | 是否必选 | 说明          |
 | -------- | --------------------- | -------- | ------------- |
 | name    | string       | **是** | icon 类型      |
-| path | string     | **是**       | svg 路径数据      |
+| path | string     | **是**       | svg 路径数据      | -->
 
 
 ### ExtendIcon
@@ -57,6 +70,6 @@ order: 3
 |   属性   | 类型                  | 是否必选 | 说明          |
 | -------- | --------------------- | -------- | ------------- |
 | fontFamily    | string       | **是** | 字体名称      |
-| map | { font\_class: string; unicode\_decimal: number; }[ ]     | **是**       | iconfont 的 class name 和 unicode decimal 的映射集合      |
+| map | { name: string; unicode\_decimal: number; }[ ]     | **是**       | iconfont 上 icon 的 name 和 unicode decimal 的映射集合      |
 
 

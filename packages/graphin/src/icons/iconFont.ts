@@ -15,7 +15,7 @@ export const registerFontFamily = (extendIcons: ExtendIcon[]): void => {
 export default (type: string, fontFamily: string) => {
     const icons = ICON_FONT_FAMILY_MAP[fontFamily].map((icon: IconFontMapItem) => {
         return {
-            name: icon.font_class,
+            name: icon.name,
             unicode: String.fromCodePoint(icon.unicode_decimal),
         };
     });

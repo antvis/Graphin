@@ -223,7 +223,6 @@ export interface NodeShapeFunction {
                 };
             };
         };
-        update?: any; // eslint-disable-line
     };
 }
 
@@ -255,7 +254,7 @@ export interface ExtendMarker {
 }
 
 export interface IconFontMapItem {
-    font_class: string;
+    name: string;
     unicode_decimal: number;
 }
 

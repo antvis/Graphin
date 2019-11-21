@@ -16,7 +16,7 @@ Graphin 内置了布局，节点 与图标。除此之外，Graphin 给用户提
     data={data}
     extend={{
         nodeShape: extendNodeShapeFunction,
-        marker: extendMakerFunction,
+        icon: extendIconFunction,
         layout: extendLayoutFunction,
     }}
 />
@@ -26,7 +26,9 @@ Graphin 内置了布局，节点 与图标。除此之外，Graphin 给用户提
 
 ## 扩展布局
 
-让我们来实现一个简单的随机布局作为例子。 [![Edit extendLayout](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/extendlayout-vxfds?fontsize=14&hidenavigation=1&theme=dark)
+让我们来实现一个简单的随机布局作为例子。
+
+本节的最终效果可以查看：[![Edit extendLayout](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/extendlayout-vxfds?fontsize=14&hidenavigation=1&theme=dark)
 
 首先我们要定义一个 layout 函数：
 
@@ -83,7 +85,9 @@ import layout from "./layout"
 
 ## 扩展节点
 
-扩展节点指的是扩展 NodeShape，也就是 G6 中节点的渲染形状和样式。 [![Edit extendNodeShape](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/extendnodeshape-nilen?fontsize=14&hidenavigation=1&theme=dark)
+扩展节点指的是扩展 NodeShape，也就是 G6 中节点的渲染形状和样式。
+
+本节的最终效果可以查看：[![Edit extendNodeShape](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/extendnodeshape-nilen?fontsize=14&hidenavigation=1&theme=dark)
 
 在 Graphin 中，我们支持通过 JSON 配置的形式来配置 NodeShape。让开发者不用使用 G6 的 API，声明式的对 NodeShape 进行扩展。
 
@@ -116,16 +120,78 @@ const renderRectNode = (node: Node) => {
                     lineWidth: 2,
                     radius: 2,
                 },
+                selected: {
+                    'rect-container': {
+                        fill: style.highlightFill,
+                    },
+                },
             },
         ],
     };
 };
 ```
 
-`extend.nodeShape` 函数的 API 参见[文档](/zh/docs/api/extend#exendnodeshape)。
+这个函数返回的是一个 JSON schema，是对 Shape 的描述。主要包括 shapeComponents 和 state。
+
+shapeComponents 是一个数组，每一项是一个 Shape 的样式描述。其中 shape 的值是 G6 中的内置 shape。shape 类型和 attrs 的详情见 [G6 文档](https://www.yuque.com/antv/g6/ffzwfp)。
+
+state 则是对 G6 中 behavior 中 state 的抽象。state 的 key 是 G6 的 behavior 中 `setItemState` 的状态。value 也一个 map，key 是 shapeComponents 中 shape 的 id。value 是 attrs 对象。因此 state 对象是对不同状态下 shapeComponents 的属性的描述。通过这个 API，我们可以声明式的对 NodeShape 的样式和组成进行编写，更符合 React 的编程范式。
+
+`extend.nodeShape` 函数的具体 API 请参考[文档](/zh/docs/api/extend#exendnodeshape)。
 
 ## 扩展图标
 
+Graphind 的 icon 机制使用 iconfont 实现。并且 Graphin 内置了 graphin 这个 fontFamily（Graphin 的内置图标）。如果想使用自定义的 图标，可以使用 `extend.icon` API 进行扩展。
+
+Graphin 使用的 G6 的 iconfont 方案。使用 unicode 方式。具体可以参考 [G6 文档](https://www.yuque.com/antv/g6/acaihu)。
+
+首先我们要把自定义的图标导入到一个 iconfont 项目中。
+
+> 以下假设开发者使用的 iconfont.cn 这个字体图标平台。使用其他 iconfont 平台也是可以的。
+
+之后引入 CSS。打开 iconfont 下自己的字体项目，将 unicode tab 下的 font-face 这段 CSS 复制到项目的 CSS 中：
+
+<img style="width:80%;" src="https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*hzfWSbtVNBMAAAAAAAAAAABkARQnAQ" />
+
+使用 icon 时，unicode 的方式可读性很差，不太友好。因此我们可以给 Graphin 提供一个 icon 的 name 和 unicode 的映射。
+
+iconfont.cn 刚好提供了这样的映射，我们可以点击上图中的下载到本地，找到一个 `.json` 后缀的文件。
+
+最后我们通过 `props.extend.icon` 传入新的 fontFamily 和 name-unicode 映射，对 Graphin 的图标进行扩展。同时在 data 的 `node.style` 中传入对应的 icon 和 fontFamily。icon 的值是 iconfont 中的 icon 的 name。
+
+```tsx
+import json from './font.json'; // iconfont 网站上下载的 name-unicode 映射文件。
+
+const data = {
+    nodes: [
+        {
+            id: 'foo',
+            style: {
+                icon: "phone",
+                fontFamily: "iconfont"
+            }
+        }
+    ]
+}
+
+<Graphin
+    data={data}
+    extend={{
+        icon: () => {
+            return [
+                {
+                    fontFamily: 'iconfont', // 注意这边的 fontFamily 需要和上面 CSS 的 fontFamily 对应
+                    map: fonts.glyphs,
+                },
+            ];
+        },
+    }}
+/>;
+```
+
+> 如果使用的 iconfont 平台没有 name-unicode 映射文件，可以自己构造一个，数据结构是 `{ name: string; unicode_decimal: number; }[ ]`
+
+<!--
 如果想在 Graphin 节点上展示自定义的 icon，就需要通过 `extend.marker` 进行扩展：
 
 ```tsx
@@ -149,4 +215,4 @@ import layout from './layout';
 
 `extend.marker` 的 API 很简单，就是一个返回图标配置数组的函数。返回的图标配置中，name 代表 icon 的标识，也就是 G6 NodeShape 中 Marker 的 symbol 属性的值。path 就是 SVG 图标的 XML 代码。
 
-`extend.marker` 函数的 API 参见[文档](/zh/docs/api/extend#exendmarker)。
+`extend.marker` 函数的 API 参见[文档](/zh/docs/api/extend#exendmarker)。 -->
