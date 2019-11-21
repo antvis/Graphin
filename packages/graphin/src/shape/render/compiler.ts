@@ -27,11 +27,11 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
         draw(inputCfg: any, group: G.Group) {
             /** 得到用户返回的shapeComponents，然后拼装 */
 
-            const { shapeComponents, state: RenderState, update } = renderNodeShape(inputCfg);
+            const { shapeComponents, state: RenderState } = renderNodeShape(inputCfg);
             /** 每次draw后的shape就是初始化shape，这个在节点update后，用于setstate的reset */
             initShapeComponentMap[inputCfg.data.id] = shapeComponents;
             initStateMap[inputCfg.data.id] = RenderState;
-            initUpdateMap[inputCfg.data.id] = update;
+
             let keyshapeIndex = 0;
             const g6Shapes = shapeComponents.map((component, index: number) => {
                 if (component.isKeyShape) keyshapeIndex = index;
