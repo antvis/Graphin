@@ -11,10 +11,11 @@
         "clean": "sudo lerna clean && npm run rm-package-lock",
         "rm-package-lock": "rm -rf ./packages/*/package-lock.json",
         "list": "lerna list",
-        "link": "lerna link ",
+        "link": "lerna link",
         "prettier": "prettier --write './packages/*/src/**/*.??'",
-        "lint": "eslint --ext .js,.jsx,.ts,.tsx ./packages/*/src",
-        "test": "lerna run --stream test"
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx ./packages/graphin/src ./packages/graphin-components/src",
+        "test": "lerna run --stream test",
+        "ci": "npm run lint && npm run test"
     },
     "devDependencies": {
         "@types/jest": "^24.0.21",

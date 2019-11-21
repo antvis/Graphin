@@ -1,18 +1,25 @@
 import fonts from '../fonts/iconfont.json';
+import { IconFontMapItem, ExtendIcon } from '../types';
 
-interface Icon {
-    font_class: string;
-    unicode_decimal: number;
-}
+const ICON_FONT_FAMILY_MAP: {
+    [key: string]: IconFontMapItem[];
+} = {};
 
-const icons = fonts.glyphs.map((icon: Icon) => {
-    return {
-        name: icon.font_class,
-        unicode: String.fromCodePoint(icon.unicode_decimal),
-    };
-});
+export const registerFontFamily = (extendIcons: ExtendIcon[]): void => {
+    ICON_FONT_FAMILY_MAP.graphin = fonts.glyphs as IconFontMapItem[];
+    extendIcons.forEach(item => {
+        ICON_FONT_FAMILY_MAP[item.fontFamily] = item.map;
+    });
+};
 
 export default (type: string, fontFamily: string) => {
+    const icons = ICON_FONT_FAMILY_MAP[fontFamily].map((icon: IconFontMapItem) => {
+        return {
+            name: icon.font_class,
+            unicode: String.fromCodePoint(icon.unicode_decimal),
+        };
+    });
+
     const matchIcon = icons.find(icon => {
         return icon.name === type;
     }) || { unicode: String.fromCodePoint(59302), name: 'thumbs-up' };

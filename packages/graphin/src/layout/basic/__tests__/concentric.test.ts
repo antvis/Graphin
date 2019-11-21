@@ -45,7 +45,7 @@ const concentricOptions2 = {
     sweep: 0.1,
 };
 
-const data: Data = json as any;
+const data: Data = json as any; // eslint-disable-line
 
 describe('Concentric Layout', () => {
     it('Should return result that matches snapshot', () => {

@@ -1,15 +1,16 @@
+import G6 from '@antv/g6';
+
 import registerInnerMarker from '../icons/marker';
 import { GraphinProps } from '../types';
 import compiler from '../shape/render/compiler';
 import CircleNode from '../shape/render/CircleNode';
-/** register */
+
 import RegisterLineEdge from '../shape/g6/LineEdge';
 import graphinHighlight from '../behaviors/graphin-highlight';
-// import graphinBrushSelect from '../behaviors/custom-brush-select';
+import { registerFontFamily } from '../icons/iconFont';
+import { BehaviorModeItem } from './init';
 
-import G6 from '@antv/g6';
-
-const innerRegister = {
+const defaultRegister = {
     nodeShape: () => {
         return [];
     },
@@ -37,14 +38,7 @@ const innerRegister = {
     },
 };
 
-const dumpRegister = () => {
-    return [];
-};
-const dumpExtend = () => {
-    return [];
-};
-
-const innerExtend = {
+const defaultExtend: GraphinProps['extend'] = {
     nodeShape: () => {
         return [
             {
@@ -56,71 +50,95 @@ const innerExtend = {
     marker: () => {
         return [];
     },
+    icon: () => {
+        return [];
+    },
+};
+
+const dummyRegister = () => {
+    return [];
+};
+const dummyExtend = () => {
+    return [];
+};
+const dummyIcon = () => {
+    return [];
 };
 
 const toUpperCaseWithFirst = (str: string): string => {
     return `${str[0].toUpperCase()}${str.slice(1)}`;
 };
+
+interface Mode {
+    mode: string;
+    type: string;
+    [key: string]: string | number | boolean | undefined;
+}
+
+interface BehaviorMode {
+    default: BehaviorModeItem[];
+    [key: string]: BehaviorModeItem[];
+}
+
 const graphinRegister = (props: GraphinProps) => {
     const { extend = {}, register = {}, options = {} } = props;
 
-    const innerBehaviors = innerRegister.behavior().filter(behavior => {
+    const defaultBehaviors = defaultRegister.behavior().filter(behavior => {
         const behaviorName = behavior.name.split('-')[1];
         const disableName = `disable${toUpperCaseWithFirst(behaviorName)}`;
         return !options[disableName];
     });
 
-    /** 使用G6原生方法得到的 */
-    const { nodeShape = dumpRegister, edgeShape = dumpRegister, behavior = dumpRegister } = register;
-    const registerNodes = [...innerRegister.nodeShape(), ...nodeShape(G6)];
-    const registerEdges = [...innerRegister.edgeShape(), ...edgeShape(G6)];
-    const registerBehaviors = [...innerBehaviors, ...behavior(G6)];
+    // props.register 处理
+    const { nodeShape = dummyRegister, edgeShape = dummyRegister, behavior = dummyRegister } = register;
+    const registerNodes = [...defaultRegister.nodeShape(), ...nodeShape(G6)];
+    const registerEdges = [...defaultRegister.edgeShape(), ...edgeShape(G6)];
+    const registerBehaviors = [...defaultBehaviors, ...behavior(G6)];
+
     registerNodes.forEach(item => {
         item.register(G6);
     });
     registerEdges.forEach(item => {
         item.register(G6);
     });
-    const modes: any[] = [];
+    const modes: Mode[] = [];
 
     registerBehaviors.forEach(item => {
         item.register(G6);
         const { name, mode } = item;
-        try {
-            modes.push({
-                mode,
-                type: name,
-                ...item.options,
-            });
-            // eslint-disable-next-line no-empty
-        } catch (error) {}
+
+        modes.push({
+            mode,
+            type: name,
+            ...item.options,
+        });
     });
 
-    const behaviorMode = modes.reduce(
-        (acc, curr) => {
-            const { mode, ...others } = curr;
-            if (!acc[mode]) {
-                acc[mode] = [];
-            }
-            acc[mode].push(others);
-            return { ...acc };
-        },
-        {
-            default: [],
-        },
-    );
+    const initialValue: BehaviorMode = {
+        default: [],
+    };
 
-    /** 扩展得到的 */
-    const { nodeShape: ExNodeShape = dumpExtend, marker: ExMarker = dumpExtend } = extend;
+    const behaviorMode = modes.reduce((acc, curr) => {
+        const { mode, ...others } = curr;
+        if (!acc[mode]) {
+            acc[mode] = [];
+        }
+        acc[mode].push(others);
+        return { ...acc };
+    }, initialValue);
 
-    const extendNodes = [...innerExtend.nodeShape(), ...ExNodeShape()];
-    const extendMarker = [...innerExtend.marker(), ...ExMarker()];
+    // props.extend 处理
+    const { icon = dummyIcon, nodeShape: ExNodeShape = dummyExtend, marker: ExMarker = dummyExtend } = extend;
+
+    const extendNodes = [...defaultExtend.nodeShape!(), ...ExNodeShape()];
+    const extendMarker = [...defaultExtend.marker!(), ...ExMarker()];
 
     extendNodes.forEach(item => {
         compiler(item);
     });
 
     registerInnerMarker(extendMarker);
+    registerFontFamily(icon());
 
     return behaviorMode;
 };

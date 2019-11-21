@@ -7,14 +7,14 @@ const dragWithForce = (graphin: Graphin) => {
     const { autoFollowWithForce = true, autoPinWithForce = true } = g6Options!;
 
     /** 拖拽Force节点：start */
-    graph.on('node:dragstart', () => {
+    graph!.on('node:dragstart', () => {
         if (graphin.state.forceSimulation) {
             graphin.state.forceSimulation.stop();
         }
     });
 
     /** 拖拽结束 */
-    graph.on('node:dragend', (e: G6Event) => {
+    graph!.on('node:dragend', (e: G6Event) => {
         if (graphin.state.forceSimulation && autoFollowWithForce) {
             const nodeModel = e.item.get('model');
             nodeModel.x = e.x;
@@ -29,8 +29,8 @@ const dragWithForce = (graphin: Graphin) => {
             // TODO :未来多选可以拖拽。
             const drageNodes = [nodeModel];
 
-            graphin.state.forceSimulation.restart(drageNodes, graph);
-            graph.refreshPositions();
+            graphin.state.forceSimulation.restart(drageNodes, graph!);
+            graph!.refreshPositions();
         }
     });
 };

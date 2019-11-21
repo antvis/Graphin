@@ -1,8 +1,9 @@
-import G6 from '@antv/g6';
-import { ExendNodeShape } from '../../types';
+import G6, { Node } from '@antv/g6';
+import { G } from '@antv/g6/types/g';
+import { ExtendNodeShape, ShapeComponent } from '../../types';
 
-const reset = (shapes: any, shapeComponents: any) => {
-    shapes.forEach((shape: any, index: any) => {
+const reset = (shapes: G.Shape[], shapeComponents: ShapeComponent[]) => {
+    shapes.forEach((shape, index: number) => {
         if (!shapeComponents[index].noReset)
             shape.attr({
                 ...shapeComponents[index].attrs,
@@ -10,19 +11,20 @@ const reset = (shapes: any, shapeComponents: any) => {
     });
 };
 
-const compiler = (extendNodeShape: ExendNodeShape) => {
+const compiler = (extendNodeShape: ExtendNodeShape) => {
     const { name: registerName, render: renderNodeShape } = extendNodeShape;
     if (!renderNodeShape) {
         return;
     }
 
     /** 设置初始化shapeComponent，按照节点ID进行分类 */
-    const initShapeComponentMap: { [key: string]: any } = {};
-    const initStateMap: { [key: string]: any } = {};
-    const initUpdateMap: { [key: string]: any } = {};
+    const initShapeComponentMap: { [key: string]: ShapeComponent[] } = {};
+    const initStateMap: { [key: string]: any } = {}; // eslint-disable-line
+    const initUpdateMap: { [key: string]: any } = {}; // eslint-disable-line
     G6.registerNode(registerName, {
-        /** 自定义Shape */
-        draw(inputCfg: any, group: any) {
+        // 自定义Shape
+        // eslint-disable-next-line
+        draw(inputCfg: any, group: G.Group) {
             /** 得到用户返回的shapeComponents，然后拼装 */
 
             const { shapeComponents, state: RenderState, update } = renderNodeShape(inputCfg);
@@ -31,7 +33,7 @@ const compiler = (extendNodeShape: ExendNodeShape) => {
             initStateMap[inputCfg.data.id] = RenderState;
             initUpdateMap[inputCfg.data.id] = update;
             let keyshapeIndex = 0;
-            const g6Shapes = shapeComponents.map((component: any, index: number) => {
+            const g6Shapes = shapeComponents.map((component, index: number) => {
                 if (component.isKeyShape) keyshapeIndex = index;
                 return group.addShape(component.shape, {
                     attrs: {
@@ -41,33 +43,33 @@ const compiler = (extendNodeShape: ExendNodeShape) => {
             });
             return g6Shapes[keyshapeIndex];
         },
-        /** 设置各种交互状态 */
-        setState(name: any, value: any, node: any) {
+
+        // 设置各种交互状态
+        setState(name: string, value: string, node: Node) {
             const { id } = node.get('model').data;
             const initShapeComponent = initShapeComponentMap[id];
             const initState = initStateMap[id];
 
             const shapes = node.getContainer().get('children'); // 顺序根据 draw 时确定
-            /** 如果为false，则重置到初始状态 */
+            // 如果为false，则重置到初始状态
             if (!value || !name) {
                 reset(shapes, initShapeComponent);
                 return;
             }
 
-            /** 如果为为selected状态，则不作高亮 */
+            // 如果为为selected状态，则不作高亮
             // if (node.hasState('selected') && name === 'highlight.light' && value) return;
 
             Object.keys(initState).forEach(key => {
-                /** state的key和behavior里触发的name匹配 */
+                // state 的 key 和 behavior 里触发的 name 匹配
                 if (name === key) {
-                    shapes.forEach((g6Shape: any) => {
+                    shapes.forEach((g6Shape: G.Shape) => {
                         const originAttrs = g6Shape.attr();
                         const customAttrs = initState[key][originAttrs.id];
                         if (customAttrs) {
                             const { animate, ...otherAttrs } = customAttrs;
                             g6Shape.attr(otherAttrs);
                             if (animate) {
-                                /** 如果有动画 */
                                 const { attrs, duration, easing, callback, delay } = animate;
                                 g6Shape.animate(attrs, duration, easing, callback, delay);
                             }

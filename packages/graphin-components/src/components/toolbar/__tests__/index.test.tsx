@@ -20,6 +20,5 @@ describe('<Toolbar />', () => {
                 <Toolbar />
             </Graphin>,
         );
-        console.log(asFragment());
     });
 });

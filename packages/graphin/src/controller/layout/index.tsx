@@ -1,7 +1,7 @@
 import dataChecking from './dataChecking';
 import { GraphinProps, Data, ForceSimulation, ExendLayout } from '../../types';
 import Graphin from '../../Graphin';
-import defaultLayouts from './defaultLayouts';
+import defaultLayouts, { LayoutOption } from './defaultLayouts';
 
 interface LayoutParams {
     data: Data;
@@ -36,16 +36,16 @@ const layoutController = (
     forceSimulation?: ForceSimulation;
 } => {
     const { props, forceSimulation, graph } = graphin;
-    const width = graph.get('width');
-    const height = graph.get('height');
+    const width = graph!.get('width');
+    const height = graph!.get('height');
 
     const { data: PropsData, prevProps = props } = params;
     let { layout } = props;
 
-    /** 数据的校验  */
+    // 数据的校验
     const data = dataChecking(PropsData);
 
-    /** 注册 */
+    // 注册 Layout
     const { extend = {} } = props;
     const extendLayout = extend.layout || noopLayout;
     const layouts = [...defaultLayouts(graphin, prevProps), ...extendLayout(graphin, prevProps)];
@@ -55,7 +55,7 @@ const layoutController = (
         return layoutInfo(layouts);
     };
 
-    /** 当没有节点，则不参加布局 */
+    // 当没有节点，则不参加布局
     if (data.nodes && data.nodes.length === 0) {
         return {
             data,
@@ -100,7 +100,7 @@ const layoutController = (
         },
     };
 
-    return matchLayout.layout(data, options);
+    return matchLayout.layout(data, options as LayoutOption);
 };
 
 export default layoutController;

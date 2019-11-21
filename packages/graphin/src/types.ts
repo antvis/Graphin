@@ -1,10 +1,12 @@
 import G6, { GraphOptions } from '@antv/g6';
 import { ReactElement, ReactNode } from 'react';
+import ForceLayout from './layout/force/ForceLayout';
 import Graphin from './Graphin';
 import { LayoutOption } from './controller/layout/defaultLayouts';
+import { G } from '@antv/g6/types/g';
 
 /** export types  */
-export type G6Type = any;
+export type G6Type = any; // eslint-disable-line
 export type Graph = G6.Graph;
 
 export type GraphNode = G6.Node;
@@ -20,7 +22,7 @@ export interface GraphType extends G6.Graph {
 
     autoPaint(): void;
 
-    emit: (eventName: string) => any;
+    emit: (eventName: string) => any; // eslint-disable-line
 }
 
 /** G6 没有暴露这个类型 */
@@ -58,7 +60,7 @@ export interface ExtendedGraphOptions extends GraphOptions {
     keyShapeZoom?: number;
     autoFollowWithForce?: boolean;
     autoPinWithForce?: boolean;
-    [key: string]: any;
+    [key: string]: any; // eslint-disable-line
 }
 
 type CanvasKey = keyof Canvas;
@@ -112,7 +114,7 @@ export interface Node {
         /** 节点文本 */
         label?: string;
         /** 节点属性 */
-        properties?: any[];
+        properties?: any[]; // eslint-disable-line
     };
     /** 唯一标示ID，必选 */
     id: string;
@@ -190,48 +192,42 @@ export interface Layout {
 /** 用户自定义shape的样式 */
 export interface NodeShape {
     name: string;
-    shapeComponent?: object;
+    shapeComponent?: ShapeComponent;
 }
 export interface EdgeShape {
     name: string;
     style?: object;
 }
 
-// export interface HandleEventProps {
-//     graph: GraphType;
-//     /** G6的event对象 */
-//     e: G6Event;
-//     /** 事件类型,eg:"node:click" */
-//     type: string;
-// }
+export interface ShapeComponent {
+    shape: G.ShapeType;
+    attrs: {
+        /** 这个shape图形的ID，用户自定义，保证不重复即可 */
+        id: string;
+        // eslint-disable-next-line
+        [key: string]: any;
+    };
+    isKeyShape?: boolean;
+    noReset?: boolean;
+}
 
-type renderFunc = (props: GraphinProps) => ReactElement;
 export interface NodeShapeFunction {
     (node: Node): {
         /** 自定义Shape的名称，之后数据指定即可调用这个Shape定义 */
         shape: string;
-        shapeComponents: {
-            /**  'rect' | 'circle' | 'Marker' | 'text'; */
-            shape: string;
-            attrs: {
-                /** 这个shape图形的ID，用户自定义，保证不重复即可 */
-                id: string;
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                [key: string]: any;
-            };
-        }[];
+        shapeComponents: ShapeComponent[];
         state: {
             [stateName: string]: {
                 [id: string]: {
-                    [attr: string]: any;
+                    [attr: string]: any; // eslint-disable-line
                 };
             };
         };
-        update?: any;
+        update?: any; // eslint-disable-line
     };
 }
 
-export interface ExendNodeShape {
+export interface ExtendNodeShape {
     name: string;
     render: NodeShapeFunction;
 }
@@ -258,6 +254,18 @@ export interface ExtendMarker {
     path: string;
 }
 
+export interface IconFontMapItem {
+    font_class: string;
+    unicode_decimal: number;
+}
+
+export interface ExtendIcon {
+    /** 字体名称 */
+    fontFamily: string;
+    /** iconfont 的 class name 和 unicode decimal 的映射 */
+    map: IconFontMapItem[];
+}
+
 export interface Register {
     /** 节点名称 */
     name: string;
@@ -266,11 +274,10 @@ export interface Register {
 }
 
 export interface BehaviorRegister extends Register {
-    options: any;
+    options: any; // eslint-disable-line
     mode: string;
 }
 
-type GraphTypeKey = keyof GraphinProps;
 export interface GraphinProps {
     /** render */
     data: Data;
@@ -281,8 +288,9 @@ export interface GraphinProps {
 
     extend?: {
         layout?: (graphin: Graphin, prevProps: GraphinProps) => ExendLayout[];
-        nodeShape?: () => ExendNodeShape[];
+        nodeShape?: () => ExtendNodeShape[];
         marker?: () => ExtendMarker[];
+        icon?: () => ExtendIcon[];
     };
     register?: {
         /** 通过G6原生方法，注册节点 */
@@ -296,20 +304,12 @@ export interface GraphinProps {
     children?: ReactNode;
 
     [key: string]: GraphinProps[keyof GraphinProps];
-    // /** children */
-    // children?: ReactChild | ReactFragment | ReactPortal | boolean | null | undefined | renderFunc;
 }
 
-export interface ForceSimulation {
-    stop: () => void;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    restart: (selectedNodes: Node[], graph: GraphType) => any;
-    done: boolean;
-}
+export type ForceSimulation = ForceLayout;
 
 export interface GraphinHistory extends GraphinState {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    graphSave: any;
+    graphSave: any; // eslint-disable-line
 }
 
 export interface GraphinState {
@@ -331,22 +331,6 @@ export interface NodeModel {
     x?: number;
     y?: number;
 }
-
-// export interface G6Graph {
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//     _cfg: any;
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//     [key: string]: any;
-// }
-
-// export interface GraphinComponent {
-//     graph: G6Graph;
-//     graphDOM: HTMLElement;
-//     props: GraphinProps;
-//     state: GraphinState;
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//     [key: string]: any;
-// }
 
 export interface LayoutOptionBase {
     graph: GraphType;

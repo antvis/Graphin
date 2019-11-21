@@ -21,7 +21,7 @@ const changeZoom = (graphin: Graphin) => {
 
     /** 缩放的时候隐藏IMAGE/TEXT */
     let timer: NodeJS.Timeout | null = null;
-    graph.on('viewportchange', (evt: ExtendedG6Event) => {
+    graph!.on('viewportchange', (evt: ExtendedG6Event) => {
         if (evt.action === 'zoom' && isZoomOptimize(graph, evt)) {
             if (timer) window.clearTimeout(timer);
             timer = setTimeout(() => {
@@ -31,7 +31,7 @@ const changeZoom = (graphin: Graphin) => {
                         if (graphin.state.forceSimulation.done) optimizeDrawing(extendedGraph, false);
                     }
                     /** 只有缩放比率大于keyShapeZoom，才展示所有的，否则只展示keyshape */
-                    if (graph.getZoom() > keyShapeZoom) {
+                    if (graph!.getZoom() > keyShapeZoom) {
                         optimizeDrawing(extendedGraph, false);
                     }
                 } catch (error) {

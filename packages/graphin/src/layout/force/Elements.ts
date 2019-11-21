@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { Node as NodeType, Edge as EdgeType } from '../../types';
 
 export class Node {
@@ -5,9 +6,15 @@ export class Node {
 
     data: NodeType;
 
-    constructor(data: any) {
+    x: number;
+
+    y: number;
+
+    constructor(data: NodeType) {
         this.id = data.id;
         this.data = data || {};
+        this.x = data.x || 0;
+        this.y = data.y || 0;
     }
 }
 
@@ -20,7 +27,7 @@ export class Edge {
 
     data: EdgeType;
 
-    constructor(id: any, source: any, target: any, data: any) {
+    constructor(id: string, source: NodeType, target: NodeType, data: EdgeType) {
         this.id = id;
         this.source = source;
         this.target = target;

@@ -13,7 +13,7 @@ const gridLayoutOption = {
     nodeSize: 50,
 };
 
-const data: Data = json as any;
+const data: Data = json as any; // eslint-disable-line
 
 describe('Grid Layout', () => {
     it('Should return result that matches snapshot', () => {

@@ -1,14 +1,13 @@
-import G6, { GraphOptions, Graph as GraphType } from '@antv/g6';
+import G6, { Graph as GraphType } from '@antv/g6';
 import { GraphinProps, ExtendedGraphOptions } from '../types';
 
-interface GraphMode {
+export interface BehaviorModeItem {
     type: string;
-    // eslint-disable-next-line
-    [key: string]: any;
+    [key: string]: string | number | boolean | undefined;
 }
 
 interface BehaviorsMode {
-    [mode: string]: (GraphMode | string)[];
+    [mode: string]: (BehaviorModeItem | string)[];
 }
 
 const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode: BehaviorsMode) => {
@@ -62,7 +61,7 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
         plugins,
     } = options as ExtendedGraphOptions;
 
-    const defaultModes: (string | GraphMode)[] = ['click-select'];
+    const defaultModes: (string | BehaviorModeItem)[] = ['click-select'];
 
     if (!disablePan) {
         defaultModes.push('drag-canvas');

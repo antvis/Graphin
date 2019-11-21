@@ -8,8 +8,9 @@ import { ExtendedGraph } from '../types';
  */
 const optimizeDrawingByNode = (isOptimize: boolean, node: Node) => {
     const shapes = node.getContainer().get('children');
-    const keyShape = shapes.find((item: any) => item.isKeyShape);
+    const keyShape = shapes.find((item: any) => item.isKeyShape); //eslint-disable-line
     keyShape.show();
+    // eslint-disable-next-line
     shapes.forEach((shape: any) => {
         if (isOptimize && shape !== keyShape) {
             shape.hide();

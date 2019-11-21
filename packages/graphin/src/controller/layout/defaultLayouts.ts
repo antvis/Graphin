@@ -21,8 +21,8 @@ export type LayoutOption =
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
     const { graph } = graphin;
-    const width = graph.get('width');
-    const height = graph.get('height');
+    const width = graph!.get('width');
+    const height = graph!.get('height');
 
     return [
         {
@@ -195,10 +195,6 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
                 };
             },
         },
-
-        //     random: (data, options: RandomLayoutOptions) => ({
-        //         data: randomLayout(data, options),
-        //     }),
     ];
 };
 

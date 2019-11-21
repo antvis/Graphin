@@ -1,4 +1,6 @@
-import { Data } from '../../types';
+import { Data, Node, Edge } from '../../types';
+import { ForceLayoutOptions } from './force';
+
 /* eslint-disable no-param-reassign */
 const getRandomPosition = () => {
     return Math.round((Math.random() - 0.5) * 80);
@@ -9,7 +11,7 @@ const getRandomPosition = () => {
  * @param options
  */
 
-const tweak = (data: Data, options: any) => {
+const tweak = (data: Data, options: ForceLayoutOptions) => {
     const { graph, width, height } = options;
 
     const { nodes: currNodes, edges: currEdges } = data;
@@ -17,7 +19,7 @@ const tweak = (data: Data, options: any) => {
 
     /** 将图上之前节点的位置信息存储在positionMap中 */
     const positionMap = new Map();
-    preNodes.forEach((item: any) => {
+    preNodes.forEach((item: Node) => {
         const { id, x, y } = item;
         positionMap.set(id, {
             x,
@@ -26,7 +28,7 @@ const tweak = (data: Data, options: any) => {
     });
 
     const incrementNodesMap = new Map();
-    currNodes.forEach((node: any) => {
+    currNodes.forEach((node: Node) => {
         const { id } = node;
         const position = positionMap.get(id);
         if (position) {
@@ -38,7 +40,7 @@ const tweak = (data: Data, options: any) => {
     });
 
     const incrementPositonMap = new Map();
-    currEdges.forEach((edge: any) => {
+    currEdges.forEach((edge: Edge) => {
         const { source, target } = edge;
 
         const nodeInSource = incrementNodesMap.get(source);
@@ -62,7 +64,7 @@ const tweak = (data: Data, options: any) => {
         }
     });
 
-    currNodes.forEach((node: any) => {
+    currNodes.forEach((node: Node) => {
         const { id } = node;
         const position = positionMap.get(id) || incrementPositonMap.get(id);
 

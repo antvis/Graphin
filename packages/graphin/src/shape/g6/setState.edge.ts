@@ -1,20 +1,25 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 import hexToRgba from '../../utils/hexToRgba';
+import { Item } from '@antv/g6';
+import { G } from '@antv/g6/types/g';
 
-const reset = (shape: any, initStyle: any) => {
+const reset = (shape: G.Shape, initStyle: G.Attrs) => {
     const { lineWidth, stroke } = initStyle;
     shape.stopAnimate();
     shape.attr('lineWidth', lineWidth);
     shape.attr('stroke', stroke);
 };
+
+// eslint-disable-next-line
 const cache = (model: any) => {
     if (!model.initStyle) {
         model.initStyle = model.style;
     }
     return model.initStyle;
 };
-export default (name: any, value: any, item: any) => {
+
+export default (name: string, value: string, item: Item) => {
     const group = item.getContainer();
     const shape = group.get('children')[0]; // 顺序根据 draw 时确定
     const textShape = group.get('children')[1];

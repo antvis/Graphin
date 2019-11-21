@@ -27,6 +27,7 @@ const debug = (name: string) => {
     }
     const color = colorMap[name];
 
+    // eslint-disable-next-line
     return (...message: any[]) => {
         // eslint-disable-line
         if (isDebugMode && process.env.NODE_ENV === 'development') {

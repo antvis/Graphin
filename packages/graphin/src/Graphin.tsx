@@ -12,7 +12,7 @@ import apisController from './apis';
 import eventController from './events/index';
 
 /** types  */
-import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimulation } from './types';
+import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimulation, Data } from './types';
 
 /** utils */
 import debug from './utils/debug';
@@ -22,7 +22,7 @@ import './index.less';
 class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     graphDOM: HTMLDivElement | null = null;
 
-    graph: GraphType;
+    graph?: GraphType;
 
     history: HistoryController;
 
@@ -47,7 +47,6 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         };
         this.history = new HistoryController();
         this.forceSimulation = null;
-        this.graph = {} as GraphType;
         this.getLayoutInfo = () => {};
     }
 
@@ -129,7 +128,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     };
 
     clear = () => {
-        this.graph.clear();
+        this.graph!.clear();
         this.history.reset();
         this.clearEvents!();
 
@@ -168,8 +167,8 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
     renderGraphWithLifeCycle = () => {
         const { data } = this.state;
-        this.graph.changeData(cloneDeep(data));
-        this.graph.emit('afterchangedata');
+        this.graph!.changeData(cloneDeep(data));
+        this.graph!.emit('afterchangedata');
         this.handleSaveHistory();
     };
 
@@ -184,7 +183,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     handleSaveHistory = () => {
         const currentState = {
             ...this.state,
-            graphSave: cloneDeep(this.graph.save()), // 避免数据引用
+            graphSave: cloneDeep(this.graph!.save()), // 避免数据引用
         };
         this.history.save(currentState);
     };
@@ -221,13 +220,13 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         }
     };
 
-    renderGraph = (data: any) => {
-        this.graph.changeData(cloneDeep(data));
+    renderGraph = (data: Data) => {
+        this.graph!.changeData(cloneDeep(data));
         /**
          * TODO 移除 `afterchangedata` Event
          * 此方法应该放到G6的changeData方法中去emit
          */
-        this.graph.emit('afterchangedata');
+        this.graph!.emit('afterchangedata');
     };
 
     /**
@@ -237,7 +236,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         /** 如果历史上有模拟器，需要重新启动 */
         const { forceSimulation, graphSave } = this.state;
         if (forceSimulation) {
-            forceSimulation.restart(graphSave.nodes || [], this.graph);
+            forceSimulation.restart(graphSave.nodes || [], this.graph!);
         }
         this.renderGraph(graphSave);
     };

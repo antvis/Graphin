@@ -7,6 +7,7 @@
 
 import { getDegree } from '../utils/graph';
 import { LayoutOptionBase, Node } from '../../types';
+import { Edge } from '../../layout/force/Elements';
 
 export interface BBox {
     x1: number;
@@ -36,7 +37,7 @@ interface ConcentricConfig extends LayoutOptionBase {
     levelWidth: (nodes: Node[], maxDegree: number) => number;
     counterclockwise: boolean;
     clockwise: boolean;
-    concentric: (Node: any) => number;
+    concentric: (node: Node) => number;
     avoidOverlap: boolean;
     sweep?: number;
     equidistant: boolean;
@@ -85,41 +86,38 @@ const defaults = {
     height: undefined, // height of layout area (overrides container height)
     width: undefined, // width of layout area (overrides container width)
     spacingFactor: undefined, // Applies a multiplicative factor (>0) to expand or compress the overall area that the nodes take up
-    // concentric(node: any) {
-    //     // returns numeric value for each node, placing higher nodes in levels towards the centre
-    //     return node.degree();
-    // },
-    // levelWidth(nodes: any) {
-    //     // the letiation of concentric values in each level
-    //     return nodes.maxDegree() / 4;
-    // },
+    // eslint-disable-next-line
+    concentric(node: any) {
+        // returns numeric value for each node, placing higher nodes in levels towards the centre
+        return node.degree();
+    },
+    // eslint-disable-next-line
+    levelWidth(nodes: any) {
+        // the letiation of concentric values in each level
+        return nodes.maxDegree() / 4;
+    },
     animate: false, // whether to transition the node positions
     animationDuration: 500, // duration of animation in ms if enabled
     animationEasing: undefined, // easing of animation if enabled
-    // animateFilter() {
-    //     return true;
-    // }, // a function that determines whether the node should be animated.  All nodes animated by default on animate enabled.  Non-animated nodes are positioned immediately when the layout starts
     ready: undefined, // callback on layoutready
     stop: undefined, // callback on layoutstop
-    // transform(node: Node, position: { x: string; y: string }) {
-    //     return position;
-    // }, // transform a given node position. Useful for changing flow direction in discrete layouts
 };
 
 class ConcentricLayout {
-    options: ConcentricConfig;
+    options: ConcentricOption;
 
-    constructor(options: any) {
-        const { edges } = options.data;
+    constructor(options: Partial<ConcentricOption>) {
+        const { edges } = options.data!;
         this.options = {
             ...defaults,
             ...{
-                concentric(node: any) {
-                    return getDegree(node, edges);
+                concentric(node: Node) {
+                    // eslint-disable-next-line
+                    return getDegree(node, edges as any);
                 },
             },
             ...options,
-        };
+        } as ConcentricOption;
     }
 
     run() {
@@ -148,7 +146,7 @@ class ConcentricLayout {
         const nodeValues: NodeValue[] = nodes
             .map(node => {
                 return {
-                    value: options.concentric(node),
+                    value: options.concentric!(node),
                     node,
                 };
             })
@@ -159,7 +157,7 @@ class ConcentricLayout {
         // maxNodeSize = Math.max(maxNodeSize, nbb.w, nbb.h);
         maxNodeSize = 50;
         const maxDegree = nodeValues[0].value;
-        const levelWidth = options.levelWidth(nodes, maxDegree);
+        const levelWidth = options.levelWidth!(nodes, maxDegree);
         // put the values into levels
         const levels: Level[] = [[]];
         let currentLevel: Level = levels[0];
@@ -177,7 +175,7 @@ class ConcentricLayout {
 
         // create positions from levels
 
-        let minDist = maxNodeSize + options.minNodeSpacing; // min dist between nodes
+        let minDist = maxNodeSize + options.minNodeSpacing!; // min dist between nodes
 
         if (!options.avoidOverlap) {
             // then strictly constrain to bb
@@ -233,7 +231,7 @@ class ConcentricLayout {
         }
 
         // calculate the node positions
-        const pos: { [key: string]: any } = {}; // id => position
+        const pos: { [key: string]: { x: number; y: number } } = {}; // id => position
         const outerR = [...levels].pop()!.r;
         const result: Node[] = [];
         for (let i = 0; i < levels.length; i++) {
@@ -243,7 +241,7 @@ class ConcentricLayout {
 
             for (let j = 0; j < level.length; j++) {
                 const val = level[j];
-                const theta = options.startAngle + (clockwise ? 1 : -1) * dTheta! * j;
+                const theta = options.startAngle! + (clockwise ? 1 : -1) * dTheta! * j;
                 const p = {
                     x: center.x + radius! * Math.cos(theta),
                     y: center.y + radius! * Math.sin(theta),

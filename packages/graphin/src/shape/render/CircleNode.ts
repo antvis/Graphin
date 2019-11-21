@@ -1,4 +1,4 @@
-import { Node, NodeStyle } from '../../types';
+import { Node, NodeStyle, NodeShapeFunction } from '../../types';
 import iconFont from '../../icons/iconFont';
 
 const defaultStyle: NodeStyle = {
@@ -11,7 +11,7 @@ const defaultStyle: NodeStyle = {
     icon: 'logo',
 };
 
-const renderNodeShape = (node: Node) => {
+const renderNodeShape: NodeShapeFunction = (node: Node) => {
     const mergedStyle: Partial<NodeStyle> = {
         ...defaultStyle,
         ...node.style,

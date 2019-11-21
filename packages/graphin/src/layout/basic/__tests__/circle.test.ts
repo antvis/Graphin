@@ -23,7 +23,7 @@ const node = {
     },
 };
 
-const data: Data = json as any;
+const data: Data = json as any; // eslint-disable-line
 
 describe('Cricle Layout', () => {
     it('Should return result that matches snapshot', () => {
@@ -31,6 +31,7 @@ describe('Cricle Layout', () => {
     });
 
     it('Should return correct result for empty input', () => {
+        // eslint-disable-next-line
         expect(CircleLayout({ nodes: [node] } as any, { x: 100, y: 100 } as CircleLayoutOption)).toMatchSnapshot();
     });
 });

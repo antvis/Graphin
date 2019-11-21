@@ -4,4 +4,4 @@ node_js:
 before_script:
     - npm install
     - npm run bootstrap:ci
-script: npm run test
+script: npm run ci

@@ -7,15 +7,15 @@ const apis = (context: GraphCtor) => {
     const { graph, clear, handleRedo, handleUndo, handleSaveHistory, getHistoryInfo, getLayoutInfo } = context;
     return {
         highlight: (nodeIds: string[]) => {
-            return highlight(graph)(nodeIds);
+            return highlight(graph!)(nodeIds);
         },
         getInfo: () => {
             return {
-                ...getInfo(graph)(),
+                ...getInfo(graph!)(),
                 layouts: getLayoutInfo(),
             };
         },
-        search: (words: string) => search(graph)(words),
+        search: (words: string) => search(graph!)(words),
         history: {
             redo: handleRedo,
             undo: handleUndo,

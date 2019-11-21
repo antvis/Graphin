@@ -1,5 +1,5 @@
 import Vector from './Vector';
-import { Data } from '../../types';
+import { Node } from '../../types';
 
 class Point {
     /** 点的位置，用[x,y]向量来表示 */
@@ -15,9 +15,9 @@ class Point {
 
     id: string;
 
-    data: Data;
+    data: Node;
 
-    constructor(position:any, id:any, data:any, mass = 1.0) {
+    constructor(position: Vector, id: string, data: Node, mass = 1.0) {
         this.p = position; // 点的位置，用[x,y]向量来表示
         this.m = mass; // 点的质量，默认为1.0
         this.v = new Vector(0, 0); // 速度，初始值为向量零 [0,0] velocity, init with x=0, y=0
@@ -26,7 +26,7 @@ class Point {
         this.data = data;
     }
 
-    updateAcc(force:any) {
+    updateAcc(force: Vector) {
         /**
          * 加速度也是一个向量，根据力的平行四边形法则进行力的合成，用向量运算就是加运算
          */

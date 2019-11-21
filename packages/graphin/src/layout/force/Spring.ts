@@ -10,7 +10,7 @@ class Spring {
     /** 弹簧的长度 */
     length: number;
 
-    constructor(source:any, target:any, length:any) {
+    constructor(source: Point, target: Point, length: number) {
         this.source = source;
         this.target = target;
         this.length = length;
