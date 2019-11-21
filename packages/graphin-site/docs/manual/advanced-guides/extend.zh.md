@@ -87,8 +87,6 @@ import layout from "./layout"
 
 扩展节点指的是扩展 NodeShape，也就是 G6 中节点的渲染形状和样式。
 
-本节的最终效果可以查看：[![Edit extendNodeShape](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/extendnodeshape-nilen?fontsize=14&hidenavigation=1&theme=dark)
-
 在 Graphin 中，我们支持通过 JSON 配置的形式来配置 NodeShape。让开发者不用使用 G6 的 API，声明式的对 NodeShape 进行扩展。
 
 比如我们要注册一个新的 RectNode 类型的 NodeShape。首先我们要定义一个 NodeShape 函数：
@@ -136,6 +134,8 @@ const renderRectNode = (node: Node) => {
 shapeComponents 是一个数组，每一项是一个 Shape 的样式描述。其中 shape 的值是 G6 中的内置 shape。shape 类型和 attrs 的详情见 [G6 文档](https://www.yuque.com/antv/g6/ffzwfp)。
 
 state 则是对 G6 中 behavior 中 state 的抽象。state 的 key 是 G6 的 behavior 中 `setItemState` 的状态。value 也一个 map，key 是 shapeComponents 中 shape 的 id。value 是 attrs 对象。因此 state 对象是对不同状态下 shapeComponents 的属性的描述。通过这个 API，我们可以声明式的对 NodeShape 的样式和组成进行编写，更符合 React 的编程范式。
+
+NodeShape 拓展的 Demo 可以查看：[![Edit extendNodeShape](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/extendnodeshape-nilen?fontsize=14&hidenavigation=1&theme=dark)
 
 `extend.nodeShape` 函数的具体 API 请参考[文档](/zh/docs/api/extend#exendnodeshape)。
 
