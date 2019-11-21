@@ -1,11 +1,110 @@
-## Graphin
+![](https://camo.githubusercontent.com/2b77a87432d47fb4f20f5b0bfbdcb2db15775dab/68747470733a2f2f67772e616c697061796f626a656374732e636f6d2f6d646e2f726d735f3030656463622f616674732f696d672f412a456b4a6d52726d754a41674141414141414141414141426b4152516e4151)
 
-![Graphin](https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*EkJmRrmuJAgAAAAAAAAAAABkARQnAQ)
+[中文](./README.cn-ZH.md)
 
-> 名称由来：Graphin 取名意为 Graph Insight（图的分析洞察），是一个基于 G6 封装的 React 组件库，简单，高效，开箱即用。
+Graphin means Graph Insight (analysis of graphs). It is a library based on [G6](https://github.com/antvis/g6) and React and offers graph analysis ability out of the box. Graphin's logo is graphene, which means the potential of the future.
 
-虽然 Graphin 是基于 G6 封装的 React 组件库，这只是它的技术实现，并不是它的产品定位。Graphin 专注在图分析领域，准确来讲，它是对 G6 网图的一种扩展与应用，因此它并不能全部 覆盖 G6 的现有能力，比如绘制流程图，绘制桑基图，以及绘制各种 产品经理 开脑洞的图。
-但是它也有它的可爱之处，因为聚焦，所以更加强大，集成业界优秀图分析产品的功能特性，在关系分析，知识图谱，金融反欺诈，物流安全等领域有着广泛的应用。
-Graphin 的有一颗想做产品的心，开源后，我们将对标商业图分析工具 ReGraph 去打造，因为，这次发布的主题是“抛砖引玉”，希望更多的人加入我们，在图分析这个领域探索
+For more infomation, please check the [Graphin Website](https://graphin.antv.vision/zh).
 
-11 月 22 日开源，coming soon ...
+Graphin use lerna to manage this repo. This repo contains the  following packages:
+
+```bash
+/packages
+    graphin
+    graphin-components
+    graphin-studio
+    graphin-site
+```
+
+Please checkout the specific package：
+
+| Package Name             | Description                                                            |
+| ------------------------ | ---------------------------------------------------------------------- |
+| [@antv/graphin](https://github.com/antvis/graphin/tree/master/packages/graphin)  |    Core React component of Graphin                    |
+| [@antv/graphin-components](https://github.com/antvis/graphin/tree/master/packages/graphin-components) | Graphin components                                            |
+| [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)       | Graphin documentation website                                               |
+| [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)           | A Graphin demo: generic graph analysis workbench based on Graphin |
+
+### Graphin Quick Start
+
+#### Install
+
+```bash
+npm run --save @antv/graphin
+```
+
+#### Usage
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Graphin, { Utils } from '@antv/graphin';
+
+import "@antv/graphin/dist/index.css"; // Don't forget to import css
+import './styles.css';
+
+const App = () => {
+    const data = Utils.mock(10).graphin();
+    return (
+        <div className="App">
+            <Graphin data={data} />
+        </div>
+    );
+};
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App />, rootElement);
+```
+
+
+### Develop Graphin 
+
+-   Set npmClient
+
+Set your npmClient in lerna.json, developers in China can set npmClient to [cnpm](https://www.npmjs.com/package/cnpm)
+
+```json
+// ./lerna.json
+{
+    "packages": ["packages/*"],
+    "npmClient": "yarn",
+    "version": "0.0.0"
+}
+```
+
+-   Install dependencies
+
+```bash
+npm i
+```
+
+-   Install dependencies for each package
+
+```bash
+npm run bootstrap
+```
+
+-   Start the local compilation of graphin and graphin-components
+
+```bash
+npm run start
+```
+
+-   Start the Graphin studio demo after `npm run start`
+
+```bash
+npm run studio
+```
+
+-   Start the Graphin Doc site
+
+```bash
+npm run site
+```
+
+### More Info
+
+- [Introduction to Graphin](https://graphin.antv.vision/zh/docs/manual/introduction)
+- [Getting started](https://graphin.antv.vision/zh/docs/manual/getting-started)
+- [API documentation](https://graphin.antv.vision/zh/docs/api/graphin)
+- [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)

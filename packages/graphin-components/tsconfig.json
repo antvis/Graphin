@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "target": "esnext",
+        "moduleResolution": "node",
+        "jsx": "react",
+        "resolveJsonModule": true,
+        "strict": true,
+        "noImplicitAny": false,
+        "lib": ["dom", "esnext"],
+        "module": "esnext",
+        "esModuleInterop": true
+    },
+    "include": ["src", "../graphin/src"]
+}

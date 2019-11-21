@@ -6,8 +6,7 @@ module.exports = {
         {
             resolve: '@antv/gatsby-theme-antv',
             options: {
-                GATrackingId: `UA-148148901-2`,
-                pathPrefix: '/graphin',
+                GATrackingId: `UA-148148901-8`,
             },
         },
     ],
@@ -15,13 +14,21 @@ module.exports = {
     siteMetadata: {
         title: 'Graphin',
         description: 'the react toolkit for graph analysis based on g6',
+        siteUrl: 'https://graphin.antv.vision',
         githubUrl: repository.url,
         navs: [
             {
                 slug: 'docs/manual/introduction',
                 title: {
                     zh: '使用文档',
-                    en: 'docs',
+                    en: 'Documentation',
+                },
+            },
+            {
+                slug: 'docs/api/graphin',
+                title: {
+                    zh: 'API 文档',
+                    en: 'API docs',
                 },
             },
             {

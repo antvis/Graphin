@@ -20,7 +20,7 @@ module.exports = {
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'react/prop-types': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
-        '@typescript-eslint/no-explicit-any': 0,
+        '@typescript-eslint/no-explicit-any': 'error',
         'react/display-name': 'off',
         'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx'] }],
         'react/jsx-props-no-spreading': 0,
@@ -32,5 +32,9 @@ module.exports = {
         radix: 'off', // parseInt Missing radix parameter
         'no-restricted-properties': 'off', // Math.pow(10, 2) === 10**2
         'import/order': 0,
+        '@typescript-eslint/explicit-member-accessibility': 0,
+        '@typescript-eslint/no-non-null-assertion': 0,
+        'no-param-reassign': 0,
+        '@typescript-eslint/no-object-literal-type-assertion': 0,
     },
 };

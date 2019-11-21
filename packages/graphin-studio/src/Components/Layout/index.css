@@ -1,0 +1,57 @@
+.graphin-studio {
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+}
+.graphin-studio-header {
+    height: 48px;
+    line-height: 48px;
+    padding-left: 68px;
+    position: relative;
+    background: #ddd;
+
+    z-index: 2;
+    background: #fff;
+    box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.1);
+}
+
+.graphin-studio-side {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 48px;
+    transition: left 0.3s;
+    background: #fff;
+    box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+.graphin-studio-main {
+    position: absolute;
+    left: 48px;
+    top: 48px;
+    right: 0px;
+    bottom: 36px;
+    background: #fafafa;
+    transition: left 0.3s;
+}
+
+.graphin-studio-footer {
+    position: absolute;
+
+    bottom: 0px;
+    left: 48px;
+
+    right: 0px;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 48px;
+
+    transition: left 0.3s;
+    background: #ffffff;
+    border: 1px solid #fafafa;
+    box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.1);
+}
