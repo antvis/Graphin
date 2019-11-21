@@ -1,10 +1,10 @@
 ---
-title:  Contributing
-order: 7
+title: Contributing
+order: 8
 icon: none
 ---
 
->  This guide is referenced from[Ant Design](https://ant.design/docs/react/contributing-cn)
+> This guide is referenced from[Ant Design](https://ant.design/docs/react/contributing-cn)
 
 The following is a set of guidelines for contributing to Graphin. Please spend several minutes reading these guidelines before you create an issue or pull request.
 
@@ -22,13 +22,11 @@ According to our release schedule, we maintain two branches, master and feature.
 
 ## Bugs
 
-
 We are using GitHub Issues for bug tracking. The best way to get your bug fixed is using our [issue helper](https://github.com/antvis/graphin/issues/new?assignees=&labels=&template=bug_report.md&title=) and provide reproduction steps with this Code Sanbox [template](https://codesandbox.io/s/data-driven-3o71b).
 
 Before you report a bug, please make sure you've searched exists issues, and read our FAQ.
 
 ## Proposing a Change
-
 
 If you intend to change the public API or introduce new feature, we also recommend you use our [issue template](https://github.com/antvis/graphin/issues/new?assignees=&labels=&template=feature_request.md&title=) to create a feature request issue.
 
@@ -68,7 +66,7 @@ Sending a Pull Request to Graphin:
 
 After cloning Graphin, run npm install and npm run bootstrap to fetch its dependencies. Then, you can run several commands:
 
-npm run start runs Graphin and  Graphin Components.
+npm run start runs Graphin and Graphin Components.
 
 npm run dev runs Graphin Studio locally.
 
@@ -77,4 +75,3 @@ npm run lint checks the code style.
 npm test runs the complete test suite.
 
 npm run build compiles Graphin and Graphin Components code to the dist directory.
-

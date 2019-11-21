@@ -1,6 +1,6 @@
 ---
 title: 贡献指南
-order: 7
+order: 8
 icon: none
 ---
 
