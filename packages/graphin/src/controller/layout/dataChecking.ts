@@ -1,19 +1,14 @@
 import { Data } from '../../types';
 
-/**
- *
- * @param Data 用户的数据
- *
- * @returns Data
- */
+// Checking data, filter out invalid data and fill in optional field with default value
 const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
     const { edges = [], nodes = [] } = data;
-    /** nodes */
+    // nodes
     const nodeIds: string[] = [];
     const graphinNodes = nodes
         .filter(node => {
             const { id } = node;
-            /** 如果节点不存在，则忽略该节点 */
+            // 如果节点不存在，则忽略该节点
             if (!id) {
                 console.warn(`node requires an id，this '${JSON.stringify(node)}' node will be automatically filtered`);
                 return false;
@@ -24,7 +19,7 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
                 );
                 return false;
             }
-            /** 如果节点ID存在重复，则忽略后加入的节点 */
+            // 如果节点ID存在重复，则忽略后加入的节点
             if (nodeIds.indexOf(id) !== -1) {
                 return false;
             }
@@ -39,8 +34,7 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
             };
         });
 
-    /** edges */
-
+    // edges
     const graphinEdges = edges
         .filter(edge => {
             const { source, target } = edge;
