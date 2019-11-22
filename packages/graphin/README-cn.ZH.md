@@ -2,14 +2,15 @@
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 [![npm package](https://img.shields.io/npm/v/@antv/graphin.svg)](https://www.npmjs.com/package/@antv/graphin)
 [![NPM downloads](http://img.shields.io/npm/dm/@antv/graphin.svg)](https://npmjs.org/package/@antv/graphin)
+[![Build Status](https://travis-ci.org/antvis/graphin.svg?branch=master)](https://travis-ci.org/antvis/graphin)
 
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/antvis/graphin.svg)](http://isitmaintained.com/project/antvis/graphin 'Percentage of issues still open')
 
-[English](./README.en-US.md)
+[English](./README.md)
 
 ## @antv/graphin
 
-这是 Graphin 的核心 React 组件。Graphin 是基于 [G6](https://github.com/antvis/g6) 的图分析解决方案。
+这是 Graphin 的核心 React 组件。Graphin 是基于 [G6 3.x](https://github.com/antvis/g6) 的图分析解决方案。
 
 
 ## 安装
