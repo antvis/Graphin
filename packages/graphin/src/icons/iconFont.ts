@@ -22,7 +22,7 @@ export default (type: string, fontFamily: string) => {
 
     const matchIcon = icons.find(icon => {
         return icon.name === type;
-    }) || { unicode: String.fromCodePoint(58915), name: 'company' };
+    }) || { unicode: '', name: '' };
 
     return matchIcon.unicode;
 };

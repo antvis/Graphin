@@ -34,7 +34,7 @@ export interface Data {
 | target | target 是边连接的目标节点的 id ，是 string 类型                                            |
 | data   | data 保存了后端返回的边数据，单独用 data 字段来存储是为了避免和 Graphin 的节点数据混在一起 |
 
-> 完整的 API，请查看[API 手册](../apis/#data)
+> 完整的 API，请查看[API 手册](/zh/docs/api/graphin#data)
 
 ## 02. 从数据到视图
 

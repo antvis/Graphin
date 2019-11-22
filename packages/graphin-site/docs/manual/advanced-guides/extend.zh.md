@@ -167,7 +167,7 @@ const data = {
         {
             id: 'foo',
             style: {
-                icon: "phone",
+                icon: "phonecall",
                 fontFamily: "iconfont"
             }
         }
@@ -190,6 +190,11 @@ const data = {
 ```
 
 > 如果使用的 iconfont 平台没有 name-unicode 映射文件，可以自己构造一个，数据结构是 `{ name: string; unicode_decimal: number; }[ ]`
+
+完整的例子请查看：
+
+[![Edit extend-font](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/extend-font-misrs?fontsize=14&hidenavigation=1&theme=dark)
+
 
 <!--
 如果想在 Graphin 节点上展示自定义的 icon，就需要通过 `extend.marker` 进行扩展：
