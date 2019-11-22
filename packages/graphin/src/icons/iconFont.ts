@@ -13,7 +13,13 @@ export const registerFontFamily = (extendIcons: ExtendIcon[]): void => {
 };
 
 export default (type: string, fontFamily: string) => {
-    const icons = ICON_FONT_FAMILY_MAP[fontFamily].map((icon: IconFontMapItem) => {
+    const selectedIconFont = ICON_FONT_FAMILY_MAP[fontFamily];
+    // fontFamily not found
+    if (!selectedIconFont) {
+        console.warn(`fontFamily ${fontFamily} not found`);
+        return '';
+    }
+    const icons = selectedIconFont.map((icon: IconFontMapItem) => {
         return {
             name: icon.name,
             unicode: String.fromCodePoint(icon.unicode_decimal),
