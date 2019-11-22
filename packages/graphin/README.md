@@ -2,14 +2,16 @@
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 [![npm package](https://img.shields.io/npm/v/@antv/graphin.svg)](https://www.npmjs.com/package/@antv/graphin)
 [![NPM downloads](http://img.shields.io/npm/dm/@antv/graphin.svg)](https://npmjs.org/package/@antv/graphin)
+[![Build Status](https://travis-ci.org/antvis/graphin.svg?branch=master)](https://travis-ci.org/antvis/graphin)
 
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/antvis/graphin.svg)](http://isitmaintained.com/project/antvis/graphin 'Percentage of issues still open')
 
-[中文](./README.cn-ZH.md)
+[中文](./README-cn.ZH.md)
+
 
 ## @antv/graphin
 
-This package is the core React component of Graphin, the graph analysis toolkit based on [G6](https://github.com/antvis/g6).
+This package is the core React component of Graphin, the graph analysis toolkit based on [G6 3.x](https://github.com/antvis/g6).
 
 
 ## Install

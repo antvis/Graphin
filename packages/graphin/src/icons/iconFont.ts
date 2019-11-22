@@ -22,6 +22,7 @@ export default (type: string, fontFamily: string) => {
 
     const matchIcon = icons.find(icon => {
         return icon.name === type;
-    }) || { unicode: String.fromCodePoint(59302), name: 'thumbs-up' };
+    }) || { unicode: String.fromCodePoint(58915), name: 'company' };
+
     return matchIcon.unicode;
 };
