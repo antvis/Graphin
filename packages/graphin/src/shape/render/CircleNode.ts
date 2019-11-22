@@ -47,7 +47,7 @@ const renderNodeShape: NodeShapeFunction = (node: Node) => {
                     y: 0,
                     fontSize: iconSize,
                     fill: primaryColor,
-                    text: iconFont(node.data.type || icon, fontFamily),
+                    text: iconFont(icon || node.data.type || '', fontFamily),
                     fontFamily,
                     textAlign: 'center',
                     textBaseline: 'middle',
