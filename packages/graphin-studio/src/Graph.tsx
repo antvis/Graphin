@@ -28,7 +28,6 @@ const Graphene = (props: GraphProps) => {
         // 将graph实例传给全局
     }, []);
     // eslint-disable-next-line no-console
-
     return (
         <Graphin data={data} layout={layout} ref={graphRef} extend={extend}>
             {/** 官方组件 */}

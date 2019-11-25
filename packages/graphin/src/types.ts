@@ -88,20 +88,20 @@ export interface ExtendedGraph extends Graph {
 /** 默认节点样式 */
 export interface NodeStyle {
     /** 节点的大小 */
-    nodeSize: number;
+    nodeSize?: number;
     /** 节点的主要颜色 */
-    primaryColor: string;
+    primaryColor?: string;
     /** 文本的字体大小 */
-    fontSize: number;
+    fontSize?: number;
     /** 文本的字体颜色 */
-    fontColor: string;
+    fontColor?: string;
     /** dark 置灰 */
-    dark: string;
+    dark?: string;
     /** iconfont 的 font-family */
-    fontFamily: string;
+    fontFamily?: string;
     /** icon 的类型 */
-    icon: string;
-    [key: string]: string | number;
+    icon?: string;
+    [key: string]: string | number | undefined;
 }
 
 export interface Node {

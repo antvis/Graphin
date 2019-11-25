@@ -8,7 +8,6 @@ const defaultStyle: NodeStyle = {
     fontColor: '#3b3b3b',
     dark: '#eee',
     fontFamily: 'graphin',
-    icon: 'logo',
 };
 
 const renderNodeShape: NodeShapeFunction = (node: Node) => {
@@ -20,7 +19,7 @@ const renderNodeShape: NodeShapeFunction = (node: Node) => {
     const { primaryColor, nodeSize, fontColor, fontSize, dark, fontFamily, icon } = mergedStyle as NodeStyle;
 
     const iconSize = nodeSize;
-    const fontPosition = nodeSize * 1.4;
+    const fontPosition = nodeSize! * 1.4;
 
     return {
         shape: 'CircleNode',
@@ -47,7 +46,7 @@ const renderNodeShape: NodeShapeFunction = (node: Node) => {
                     y: 0,
                     fontSize: iconSize,
                     fill: primaryColor,
-                    text: iconFont(icon || node.data.type || '', fontFamily),
+                    text: iconFont(icon || node.data.type || '', fontFamily!),
                     fontFamily,
                     textAlign: 'center',
                     textBaseline: 'middle',
