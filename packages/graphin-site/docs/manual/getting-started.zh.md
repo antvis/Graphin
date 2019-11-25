@@ -11,7 +11,7 @@ $ npm install @antv/graphin --save
 
 ## 第一个例子
 
-这是一个最简单的 Graphin 组件的在线演示。访问 https://codesandbox.io/s/data-driven-3o71b 创建一个 CodeSandbox 的在线示例，别忘了保存以创建一个新的实例。通过 CodeSandbox，我们可以不用去配那些琐碎的 React 脚手架，快速尝鲜。
+这是一个最简单的 Graphin 组件的在线演示。访问 https://codesandbox.io/s/data-driven-fkue0 创建一个 CodeSandbox 的在线示例，别忘了保存以创建一个新的实例。通过 CodeSandbox，我们可以不用去配那些琐碎的 React 脚手架，快速尝鲜。
 
 <iframe
      src="https://codesandbox.io/embed/data-driven-v6v72?fontsize=14&hidenavigation=1&theme=dark"
