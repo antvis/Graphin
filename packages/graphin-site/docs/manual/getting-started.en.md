@@ -11,26 +11,28 @@ $ npm install @antv/graphin --save
 
 ## First Example
 
-Here is a simple example to show the usage of Graphin. Visit http://u.ant.design/codesandbox-repro to create a codesandbox. Don't forget to press the save button.
+Here is a simple example to show the usage of Graphin. You can use https://codesandbox.io/s/data-driven-fkue0 as a starter and fork a new Code Sandbox to play around.
 
 <iframe
-     src="https://codesandbox.io/embed/data-driven-3o71b?fontsize=14"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     src="https://codesandbox.io/embed/data-driven-v6v72?fontsize=14&hidenavigation=1&theme=dark"
+     style="width:100%; height:600px; border:0; border-radius: 4px; overflow:hidden;"
      title="data-driven"
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-></iframe>
+   ></iframe>
 
 ### 01. Rendering data
 
-There is no difference between Graphin and typical React components. It has a required props `data` which will be checked internally. There are some requirements of data. For details, see: [Main Concepts/Data](main-concepts/data).
+There is no difference between Graphin and typical React component. It has a required props `data` which will be checked internally. There are some requirements for `props.data`. For details, see: [Main Concepts/Data](/en/docs/manual/main-concepts/data).
 
-Graphin provides a Mock function to help us generate some graph data quickly, let us have a try:
+Graphin provides a mock function to help us generate some graph data quickly, let us have a try:
 
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
+
+import "@antv/graphin/dist/index.css"; // import css fro graphin
 import './styles.css';
 
 const App = () => {
@@ -46,42 +48,60 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
+You can preview this in the Code Sanbox link above.
+
 ### 02. Using layout
 
-There are six built-in layouts in Grapnin, and the default is force (force layout). We can switch the layout according to our needs.
+There are 6 built-in layouts in Grapnin, and the default is concentric (concentric layout). We can switch the default layout according to our needs.
 
-For example, we want nodes to be arranged in a concentric order:
+For example, if we want nodes to be arranged in a force layout:
 
 ```diff
 
 -  <Graphin data={data} />
-+  <Graphin data={data} layout={{name:"concentric"}}/>
++  <Graphin data={data} layout={{name:"layout"}}/>
 
 ```
 
+Preview:
+
+
+<iframe
+     src="https://codesandbox.io/embed/data-driven-lbk7e?fontsize=14&theme=dark"
+     style="width:100%; height:600px; border:0; border-radius: 4px; overflow:hidden;"
+     title="quick-starter-layout-change"
+     allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+   ></iframe>
+
+
 ### 03. Using components
 
-Graphin provides two official components, Toolbar and ContextMenu. you can get more detail about them in the [Main-concepts/Components](main-concepts/components).
+Graphin provides two official components, Toolbar and ContextMenu. You can get more detail about them in the [Main-concepts/Components](/en/docs/manual/main-concepts/components).
 
-we take Toolbar as an example:
+We take Toolbar as an example:
 
--   Install component. Analysis components of graphin are published as package graphin-components.
+-   Install graphin components. Analysis components of graphin are published as package @antv/graphin-components.
 
 ```bash
 $ npm install @antv/graphin-components --save
 ```
 
--   Place Toolbar component inside Graphin component so that Graphin can pass properties such as graph, apis, etc. to the Toolbar:
+-   Place Toolbar component inside Graphin component so that Graphin can pass internal properties such as `graph`, `apis`, etc. to the Toolbar:
+
 
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar } from '@antv/graphin-components';
+
+import "@antv/graphin/dist/index.css"; // Graphin CSS
+import "@antv/graphin-components/dist/index.css"; // Graphin Component CSS
 import './styles.css';
 
 const App = () => {
-    const data = Utils.mock(10).graphin();
+    const data = Utils.mock(10).circle().graphin();
     return (
         <div className="App">
             <Graphin data={data} layout={{ name: 'concentric' }}>
@@ -95,18 +115,29 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
-we can experience Toolbar component in codesandbox:
+Preview:
 
--   todo/redo
+<iframe
+     src="https://codesandbox.io/embed/graphin-components-toolbar-vged5?fontsize=14&theme=dark"
+     style="width:100%; height:600px; border:0; border-radius: 4px; overflow:hidden;"
+     title="quick-starter-toolbar"
+     allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+   ></iframe>
+
+We can play around these features of graphin component in the [Grapin Studio](/en/GraphinStudio):
+
+-   undo/redo
 -   zoomIn/out
 -   fullscreen
+-   contextmenu
 
-### 04. Monitoring event
+### 04. Listening event
 
-There are a lot of events in Graph analysis. If we want to monitor events, what should we do?
+There are a lot of events in graph analysis. If we want to listen events, we should:
 
--   1. get Ref of Graphin
--   2. Use graph instance of G6 to monitor events
+-   1. Get ref of graphin instance
+-   2. Use the G6 instance on graphin instance to listen events
 
 ```jsx
 const App = () => {
@@ -127,6 +158,8 @@ const App = () => {
     );
 };
 ```
+
+<!-- review to here -->
 
 ### 05. Summary and guidance
 

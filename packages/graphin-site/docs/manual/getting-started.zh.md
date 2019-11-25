@@ -52,12 +52,12 @@ ReactDOM.render(<App />, rootElement);
 
 ### 02. 使用布局
 
-Graphin 组件内置了 6 种布局，默认提供布局为 force（力导布局）。我们可以根据自己业务的不同来调整布局。比如，我们希望节点按照同心圆（concentric）排列。让我们来调整上述的代码：
+Graphin 组件内置了 6 种布局，默认提供布局为 concentric（同心圆布局）。我们可以根据自己业务的不同来调整布局。比如，我们希望节点按照里力导（force）排列。让我们来调整上述的代码：
 
 ```diff
 
 -  <Graphin data={data} />
-+  <Graphin data={data} layout={{name:"concentric"}}/>
++  <Graphin data={data} layout={{name:"force"}}/>
 
 ```
 
