@@ -4,6 +4,8 @@
 
 Graphin 取名意为 Graph Insight（图的分析洞察），是一个基于 [G6](https://github.com/antvis/g6) 封装的 React 组件库。简单，高效，开箱即用。它的 Logo 是一个石墨烯（Graphene），意为蕴藏未来的潜力。
 
+![graphin](https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*N-5PT6UO9LAAAAAAAAAAAABkARQnAQ)
+
 Graphin 采用 lerna 管理仓库，packages 中包含以下 4 个 package：
 
 ```bash
@@ -87,8 +89,7 @@ npm run bootstrap
 npm run start
 ```
 
-
--  在`npm run start`后，启动 Graphin Demo：Graphin Studio
+-   在`npm run start`后，启动 Graphin Demo：Graphin Studio
 
 ```bash
 npm run studio
