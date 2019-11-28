@@ -1,31 +1,33 @@
 {
-	"name": "graphin-site",
-	"version": "1.0.0",
-	"description": "antv graphin site",
-	"directories": {
-		"doc": "docs"
-	},
-	"scripts": {
-		"start": "npm run site:develop",
-		"site:develop": "gatsby develop --open",
-		"site:build": "npm run site:clean && gatsby build --prefix-paths",
-		"site:clean": "gatsby clean",
-		"site:deploy": "npm run site:build && gh-pages -d public"
-	},
-	"author": "",
-	"license": "ISC",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/antvis/graphin"
-	},
-	"devDependencies": {
-		"@antv/gatsby-theme-antv": "^0.9.95",
-		"gatsby": "^2.17.7",
-		"gh-pages": "^2.1.1"
-	},
-	"dependencies": {
-		"antd": "^3.24.3",
-		"react": "^16.11.0",
-		"react-i18next": "^11.0.1"
-	}
+  "name": "graphin-site",
+  "version": "1.0.0",
+  "description": "antv graphin site",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "npm run site:develop",
+    "site:develop": "gatsby develop --open",
+    "site:build": "npm run site:clean && gatsby build --prefix-paths",
+    "site:clean": "gatsby clean",
+    "site:deploy": "npm run site:build && gh-pages -d public"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/graphin"
+  },
+  "devDependencies": {
+    "@antv/gatsby-theme-antv": "^0.9.95",
+    "gatsby": "^2.17.7",
+    "gh-pages": "^2.1.1"
+  },
+  "dependencies": {
+    "@antv/graphin": "^1.0.1",
+    "antd": "^3.24.3",
+    "react": "^16.11.0",
+    "react-dom": "^16.12.0",
+    "react-i18next": "^11.0.1"
+  }
 }
