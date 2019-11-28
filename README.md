@@ -109,3 +109,9 @@ npm run site
 -   [Getting started](https://graphin.antv.vision/zh/docs/manual/getting-started)
 -   [API documentation](https://graphin.antv.vision/zh/docs/api/graphin)
 -   [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)
+
+### DingTalk
+
+You can scan the QR code to join graphin's group chat
+
+<img src='https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*xlT5ToVNZdYAAAAAAAAAAABkARQnAQ' alt='DingTalk' width= '300px'/>

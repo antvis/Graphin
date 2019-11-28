@@ -107,3 +107,7 @@ npm run site
 -   [快速上手](https://graphin.antv.vision/zh/docs/manual/getting-started)
 -   [API 文档](https://graphin.antv.vision/zh/docs/api/graphin)
 -   [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)
+
+### 钉钉群
+
+<img src='https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*Z6OATqeN6GYAAAAAAAAAAABkARQnAQ' alt='钉钉群' width= '300px'/>
