@@ -1,4 +1,4 @@
-import { Graph, Item } from '@antv/g6';
+import { Graph, NodeConfig } from '@antv/g6';
 import Vector from './Vector';
 import Point from './Point';
 import { Node, Edge } from './Elements';
@@ -563,7 +563,7 @@ class ForceLayout {
     restart = (dragNode: ForceNodeType[], graph: Graph) => {
         /** 将位置更新到nodePoint中 */
         const { ignore } = this.props;
-        graph.getNodes().forEach((nodeItem: Item) => {
+        graph.getNodes().forEach((nodeItem: NodeConfig) => {
             const node = nodeItem.get('model');
 
             if (ignore && ignore(node)) {

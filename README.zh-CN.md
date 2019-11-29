@@ -56,6 +56,13 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
+### Graphin 与 G6 兼容版本对照表
+
+| Graphin 版本 | G6 版本 |
+| ------------ | ------- |
+| before 1.0.1 | 3.1.9   |
+| ^1.0.2       | ^3.2.0  |
+
 ### 开发 Graphin
 
 -   设置 npmClient

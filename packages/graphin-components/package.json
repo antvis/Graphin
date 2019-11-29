@@ -1,9 +1,9 @@
 {
     "name": "@antv/graphin-components",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "description": "Components for graphin",
     "main": "./dist/index",
-    "types": "./dist/src/index.d",
+    "types": "./dist/graphin-components/src/index.d",
     "scripts": {
         "start": "father build --watch",
         "build": "father build",
@@ -28,7 +28,7 @@
         "typescript": "^3.6.4"
     },
     "dependencies": {
-        "@antv/g6": "3.1.9",
+        "@antv/g6": "^3.2.0",
         "@antv/graphin": "^1.0.0-beta.6"
     },
     "publishConfig": {

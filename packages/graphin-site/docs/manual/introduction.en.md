@@ -1,5 +1,5 @@
 ---
-title: Graphin
+title: Introduction
 order: 0
 icon: none
 ---
