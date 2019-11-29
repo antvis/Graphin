@@ -1,5 +1,5 @@
 ---
-title: Contributing
+title: Contribution Guide
 order: 8
 icon: none
 ---

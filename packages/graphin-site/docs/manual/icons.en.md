@@ -1,5 +1,5 @@
 ---
-title: Inner Icons
+title: Default Icons
 order: 7
 ---
 
