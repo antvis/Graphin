@@ -4,7 +4,7 @@ order: 8
 icon: none
 ---
 
-> This guide is referenced from[Ant Design](https://ant.design/docs/react/contributing-cn)
+> This guide is referenced from [Ant Design](https://ant.design/docs/react/contributing-cn)
 
 The following is a set of guidelines for contributing to Graphin. Please spend several minutes reading these guidelines before you create an issue or pull request.
 
@@ -54,7 +54,7 @@ Run npm install in the repository root.
 
 If you've fixed a bug or added code that should be tested, add tests!
 
-Ensure the test suite passes (npm run test). Tip: npm test -- --watch TestName is helpful in development.
+Ensure the test suite passes (npm run test).
 
 Run npm test -- -u to update the jest snapshots and commit these changes as well (if there are any updates).
 
@@ -68,10 +68,10 @@ After cloning Graphin, run npm install and npm run bootstrap to fetch its depend
 
 npm run start runs Graphin and Graphin Components.
 
-npm run dev runs Graphin Studio locally.
+npm run studio runs Graphin Studio locally.
 
 npm run lint checks the code style.
 
-npm test runs the complete test suite.
+npm run test runs the complete test suite.
 
 npm run build compiles Graphin and Graphin Components code to the dist directory.

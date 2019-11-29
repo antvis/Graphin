@@ -165,7 +165,7 @@ const App = () => {
 
 Through the above 4 steps, we have a knowledge of all four core concepts of Graphin: data, layout, components, and events.
 
-As for their usage, there are certainly many students who have doubts. We try to sort out these issues and form a guide. If you have other questions, please ask in the issue.
+<!-- As for their usage, there are certainly many students who have doubts. We try to sort out these issues and form a guide. If you have other questions, please ask in the issue.
 
 -   Data
 
@@ -188,7 +188,7 @@ As for their usage, there are certainly many students who have doubts. We try to
     -   1. Why not provide a callback function for handleEvents, but let the user manually monitor events via Ref?
     -   2. What events do Graphin support in total?
 
-Of course, there are still many problems, which may belong to the high-level guidelines. I will not list them here. Let us enter the second stage and develop some interesting features.
+Of course, there are still many problems, which may belong to the high-level guidelines. I will not list them here. Let us enter the second stage and develop some interesting features. -->
 
 ## more features
 
