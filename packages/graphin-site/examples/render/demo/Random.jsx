@@ -1,13 +1,9 @@
-/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable no-undef */
 
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import Graphin from '@antv/graphin';
-// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
-
-const Graphin = window.Graphin.default;
-const { Utils } = window.Graphin;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Graphin, { Utils } from '@antv/graphin';
+import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 
 const data = Utils.mock(10)
     .random()
