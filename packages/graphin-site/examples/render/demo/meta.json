@@ -5,13 +5,23 @@
     },
     "demos": [
         {
-            "filename": "Random.jsx",
-            "title": "随机数据渲染",
+            "filename": "renderRandomData.jsx",
+            "title": "渲染节点：无布局信息",
             "screenshot": "https://gw.alipayobjects.com/mdn/rms_d314dd/afts/img/A*nBhpT5HbGOAAAAAAAAAAAABkARQnAQ"
         },
         {
-            "filename": "Circle.jsx",
-            "title": "圆形数据渲染",
+            "filename": "renderSavedGraph.jsx",
+            "title": "渲染节点：有布局信息",
+            "screenshot": "https://gw.alipayobjects.com/mdn/rms_d314dd/afts/img/A*nBhpT5HbGOAAAAAAAAAAAABkARQnAQ"
+        },
+        {
+            "filename": "AddNode.jsx",
+            "title": "添加节点",
+            "screenshot": "https://gw.alipayobjects.com/mdn/rms_d314dd/afts/img/A*nBhpT5HbGOAAAAAAAAAAAABkARQnAQ"
+        },
+        {
+            "filename": "NodeExpand.jsx",
+            "title": "关系分析：节点扩散",
             "screenshot": "https://gw.alipayobjects.com/mdn/rms_d314dd/afts/img/A*nBhpT5HbGOAAAAAAAAAAAABkARQnAQ"
         }
     ]
