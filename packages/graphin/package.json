@@ -36,7 +36,7 @@
   "author": "Ant Financial",
   "license": "MIT",
   "dependencies": {
-    "@antv/g6": "^3.2.0",
+    "@antv/g6": "^3.2.3",
     "deepmerge": "^4.0.0",
     "lodash": "^4.17.15",
     "react": "^16.8.6",

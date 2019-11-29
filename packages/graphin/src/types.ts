@@ -120,6 +120,8 @@ export interface Node {
     id: string;
     /** 节点类型 */
     shape?: string;
+    /** 节点文本 */
+    label?: string;
     /** 节点样式 */
     style?: Partial<NodeStyle>;
     /** 节点位置信息 */
