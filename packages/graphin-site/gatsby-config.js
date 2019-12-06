@@ -25,6 +25,13 @@ module.exports = {
                 },
             },
             {
+                slug: 'examples',
+                title: {
+                    zh: '组件演示',
+                    en: 'Examples',
+                },
+            },
+            {
                 slug: 'docs/api/graphin',
                 title: {
                     zh: 'API 文档',
@@ -36,13 +43,6 @@ module.exports = {
                 title: {
                     zh: 'GraphinStudio',
                     en: 'GraphinStudio',
-                },
-            },
-            {
-                slug: 'examples',
-                title: {
-                    zh: '组件演示',
-                    en: 'Examples',
                 },
             },
         ],
@@ -85,10 +85,31 @@ module.exports = {
         examples: [
             {
                 slug: 'render',
-                icon: 'render', // 图标名可以去 https://antv.alipay.com/zh-cn/g2/3.x/demo/index.html 打开控制台查看图标类名
                 title: {
-                    zh: '渲染',
-                    en: 'render data',
+                    zh: '数据渲染',
+                    en: 'render',
+                },
+            },
+            {
+                slug: 'layout',
+                title: {
+                    zh: '内置布局',
+                    en: 'layout',
+                },
+            },
+            {
+                slug: 'shape',
+                // icon: 'layout', // 图标名可以去 https://antv.alipay.com/zh-cn/g2/3.x/demo/index.html 打开控制台查看图标类名
+                title: {
+                    zh: '节点与边',
+                    en: 'shape',
+                },
+            },
+            {
+                slug: 'case',
+                title: {
+                    zh: '应用场景',
+                    en: 'Case',
                 },
             },
         ],

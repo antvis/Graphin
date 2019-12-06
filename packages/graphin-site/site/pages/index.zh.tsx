@@ -11,7 +11,7 @@ const IndexPage = () => {
     const coverImage = (
         <img
             alt="graphin"
-            style={{ width: '100%', height: '100%', marginTop: '20%' }}
+            style={{ width: '100%', marginTop: '20%' }}
             src="https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*Gix7Rry3-5wAAAAAAAAAAABkARQnAQ"
         />
     );
