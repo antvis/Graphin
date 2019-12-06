@@ -12,25 +12,26 @@ const App = () => {
     });
 
     React.useEffect(() => {
-        fetch('data/honglou.json')
+        fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/xiaomi.json')
             .then(res => {
                 return res.json();
             })
             .then(res => {
-                const { nodes: sourceNodes, edges: sourceEdges } = res.data;
+                const { nodes: sourceNodes, edges: sourceEdges } = res;
                 const nodes = sourceNodes.map(node => {
                     return {
-                        id: String(node.id),
+                        id: node.id,
                         shape: 'CircleNode',
+                        // label: node.name,
                         data: node,
                     };
                 });
                 const edges = sourceEdges.map(edge => {
                     return {
-                        source: String(edge.from),
-                        target: String(edge.to),
+                        source: edge.source,
+                        target: edge.target,
                         data: edge,
-                        label: edge.label,
+                        // label: edge.properties.role,
                     };
                 });
                 setData({
@@ -40,7 +41,7 @@ const App = () => {
             });
     }, []);
 
-    console.log(data.edges.length);
+    console.log(data);
 
     return (
         data.nodes.length > 0 && (
@@ -52,8 +53,10 @@ const App = () => {
                         preset: {
                             name: 'concentric',
                         },
-                        repulsion: data.edges.length * 5,
-                        defSpringLen: data.edges.length,
+                        repulsion: data.edges.length * 15,
+                        defSpringLen: 200,
+                        maxSpeed: 1000,
+                        MaxIterations: 240,
                     },
                 }}
             />
