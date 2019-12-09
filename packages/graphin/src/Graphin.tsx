@@ -12,12 +12,15 @@ import apisController from './apis';
 import eventController from './events/index';
 
 /** types  */
-import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimulation, Data } from './types';
+import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimulation, Data, Layout } from './types';
 
 /** utils */
 import debug from './utils/debug';
+import shallowEqual from './utils/shallowEqual';
 
 import './index.less';
+
+type DiffValue = Data | Layout | undefined;
 
 class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     graphDOM: HTMLDivElement | null = null;
@@ -84,6 +87,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     componentDidUpdate(prevProps: GraphinProps) {
         const isDataChange = this.shouldUpdateWithDeps(prevProps, ['data']);
         const isLayoutChange = this.shouldUpdateWithDeps(prevProps, ['layout']);
+
         // only rerender when data or layout change
         if (isDataChange || isLayoutChange) {
             let { data: currentData } = this.state;
@@ -145,13 +149,19 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
     shouldUpdateWithDeps(prevProps: GraphinProps, deps: string[]) {
         const { props } = this;
-        let isUpdate = false;
+        let shouldUpdate = false;
         deps.forEach(key => {
-            if (prevProps[key] !== props[key]) {
-                isUpdate = true;
+            const prevVal = prevProps[key] as DiffValue;
+            const currentVal = props[key] as DiffValue;
+            if (prevVal !== currentVal) {
+                if (!prevVal || !currentVal) {
+                    shouldUpdate = true;
+                } else if (!shallowEqual(prevVal, currentVal)) {
+                    shouldUpdate = true;
+                }
             }
         });
-        return isUpdate;
+        return shouldUpdate;
     }
 
     handleEvents() {
