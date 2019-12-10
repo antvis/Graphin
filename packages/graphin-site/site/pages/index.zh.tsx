@@ -56,7 +56,7 @@ const IndexPage = () => {
             description: t(
                 'GraphinStudio 是基于 Graphin 开发的通用关系分析平台，具有关系扩散，关系发现，布局切换等功能',
             ),
-            link: `${i18n.language}/GraphinStudio`,
+            link: `/${i18n.language}/GraphinStudio`,
             image: 'https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*Y9y9QqfXYdkAAAAAAAAAAABkARQnAQ',
         },
     ];
@@ -64,7 +64,7 @@ const IndexPage = () => {
     const bannerButtons = [
         {
             text: t('继续了解'),
-            link: `${i18n.language}/docs/manual/introduction`,
+            link: `/${i18n.language}/docs/manual/introduction`,
             type: 'primary',
         },
         {
