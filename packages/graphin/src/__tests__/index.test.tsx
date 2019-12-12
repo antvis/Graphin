@@ -277,6 +277,46 @@ describe('<Graphin />', () => {
     );
 
     it(
+        'should not rerender g6 when layout reference change without value change',
+        async () => {
+            const data: Data = Object.assign({}, SAMPLE_DATA_2);
+
+            const { getByTestId, rerender } = render(
+                <Graphin
+                    data={data}
+                    layout={{
+                        name: 'grid',
+                    }}
+                    options={{
+                        animate: false,
+                        animateCfg: {
+                            duration: 0,
+                        },
+                    }}
+                ></Graphin>,
+            );
+
+            await wait();
+            const prevEventsCount = getCanvasEventCount(getByTestId);
+
+            act(() => {
+                rerender(
+                    <Graphin
+                        data={data}
+                        layout={{
+                            name: 'grid',
+                        }}
+                    ></Graphin>,
+                );
+            });
+
+            await wait();
+            expect(getCanvasEventCount(getByTestId) === prevEventsCount).toBeTruthy();
+        },
+        TIMEOUT,
+    );
+
+    it(
         'should have default value for layout',
         async () => {
             const data: Data = Object.assign({}, SAMPLE_DATA_2);
