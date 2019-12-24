@@ -71,7 +71,25 @@ Graphin 组件内置了 6 种布局，默认提供布局为 concentric（同心�
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
    ></iframe>
 
-### 03. 使用组件
+### 03. 配置 Node 和 Edge 样式
+
+想要修改 Graphin 的节点和边的样式，我们可以直接修改 data 上的数据：
+
+
+<iframe
+     src="https://codesandbox.io/embed/data-driven-2gsn2?fontsize=14&hidenavigation=1&theme=dark"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="node_edge_style"
+     allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+   ></iframe>
+
+`data.node` 和 `data.edge` 上的各个属性，比如 `shape` 和 `style` 等等和 G6 节点和边数据上的是一样的。这里会透传给 G6。这里的配置可以参考 G6 的文档：[内置节点](https://g6.antv.vision/zh/docs/manual/middle/elements/nodes/defaultNode/#%E8%8A%82%E7%82%B9%E7%9A%84%E9%80%9A%E7%94%A8%E5%B1%9E%E6%80%A7) 和 [内置边](https://g6.antv.vision/zh/docs/manual/middle/elements/edges/defaultEdge#%E8%BE%B9%E7%9A%84%E9%80%9A%E7%94%A8%E5%B1%9E%E6%80%A7)。
+
+需要注意的是，如果传入的数据没有 shape，Graphin 给节点的默认 shape 是内置的自定义的 [CircleShape](/zh/docs/manual/main-concepts/data#02-%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%88%B0%E8%A7%86%E5%9B%BE)。默认的边是内置的自定义 LineEdge。
+
+
+### 04. 使用组件
 
 Graphin 目前仅提供两个官方组件，Toolbar 和 ContextMenu。关于它们，你们可以在[核心概念/Components 分析组件](main-concepts/components)中得到更详细的介绍，我们以添加组件 `Toolbar` 为例：
 
@@ -157,9 +175,9 @@ const App = () => {
 
 ### 05. 总结与引导
 
-通过上面的 4 步，我们基本了解了 Graphin 的全部 4 个核心概念 data、layout、components，events。
+通过上面的 4 步，我们基本了解了 Graphin 的全部 4 个核心概念 data（数据）、layout（布局）、components（分析组件），events（数据）。
 
-关于它们的用法，肯定还有很多同学有疑问，我们试着把这些问题整理归纳，形成一个指引。如果有其他问题，还请大家在 issue 中提出。
+<!-- 关于它们的用法，肯定还有很多同学有疑问，我们试着把这些问题整理归纳，形成一个指引。如果有其他问题，还请大家在 issue 中提出。
 
 -   Data
 
@@ -182,7 +200,7 @@ const App = () => {
     -   1. 为什么不提供 handleEvents 的回调函数，而要让用户通过 Ref 手动去监听事件？
     -   2. 一共支持哪些事件呢？
 
-当然，还有很多问题，可能属于高级指引范畴，这里就不一一列举，让我们快进入第二个阶段，开发点有趣的功能。
+当然，还有很多问题，可能属于高级指引范畴，这里就不一一列举，让我们快进入第二个阶段，开发点有趣的功能。 -->
 
 ## 开发点有趣的功能
 
@@ -194,7 +212,7 @@ const App = () => {
 
 因为 Graphin 是 React 组件，改变 `props.layout` 就能改变视图的布局效果，因此我们只要把多种布局 layouts 组合起来，每次切换改变 `props.layout` 即可。
 
--   1. 设计布局切换 `LayoutSelector`组件的接口
+-   1. 设计布局切换 `LayoutSelector`组件的接口。
 
 ```tsx
 interface Layout {
@@ -215,15 +233,14 @@ interface LayoutSelectorProps {
 <LayoutSelector layouts={layouts} value={currentLayout} onChange={handleChange} />;
 ```
 
--   2.  内置布局信息 `layouts` 如何获取？
+-   2.  获取 Graphin 支持的内置布局列表 `layouts`。
 
-Graphin 提供了很多 API，用于将内部的一些状态或者函数封装给用户使用。内置的布局信息也可通过`apis.getInfo().layouts`获得
+Graphin 提供了很多 API，用于将内部的一些状态或者函数封装给用户使用。内置的布局信息可通过注入到 Graphin 子组件 props 中的 `props.apis.getInfo().layouts`获得
 
--   3.  API 如何获得？
+> Graphin 提供两种方式获得 apis 接口，第一种是通过组件的 props 传递，即所有包裹在 Graphin 组件内部的组件，都会获得 `apis` 这个属性。第二种方式是通过 `ref` 实例，详见[进阶指导/GraphRef](advanced-guides/graphRef)。第一种适用于用户自定义组件，非常方便拿到需要的接口。第二种方式更加灵活，可以在 Graphin 外层使用 Graphin 所提供的信息，常用于复杂场景或者多画布实例的情况下。
 
-Graphin 提供两种方式获得 apis 接口，第一种是通过组件的 props 传递，即所有包裹在 Graphin 组件内部的组件，都会获得 apis 这个属性。第二种方式是通过 ref 实例，详见[进阶指导/GraphRef](advanced-guides/graphRef)。第一种适用于用户自定义组件，非常方便拿到需要的接口。第二种方式更加灵活，可以在 Graphin 外层使用 Graphin 所提供的信息，常用于复杂场景或者多画布实例的情况下。
 
--   4. 完整代码如下：
+-   3. 完整代码如下：
 
 <iframe
      src="https://codesandbox.io/embed/layout-selector-oplx5?fontsize=14&theme=dark"
@@ -233,13 +250,16 @@ Graphin 提供两种方式获得 apis 接口，第一种是通过组件的 props
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
    ></iframe>
 
-### 02.节点扩散
+
+### 02. 节点扩散
 
 > 将一个节点扩散出它的一度，二度，多度关系，这是非常常用的一种分析手法。
 
-「节点扩散」在图分析中是一个比较典型的功能。常规情况下，在画布中进行节点操作，比如添加节点，删除节点，我们都会考虑很多问题，比如从 1 个节点变为 10 个节点，画布如何变化呢？新增的 9 个节点会放在什么位置呢？使用 Graphin 时，我们就不需要考虑这么多，只需要记住它是数据驱动的，我们不需要关心内部的实现，只需要告诉 Graphin 你需要渲染的数据是什么就可以。增加节点不用使用 `graph.add(node)`，删除节点也不用调用 `graph.remove(node)`，一切都是改变数据 `props.data` 即可。
+「节点扩散」在图分析中是一个比较典型的功能。常规情况下，在画布中进行节点操作，比如添加节点，删除节点，我们都会考虑很多问题，比如从 1 个节点变为 10 个节点，画布如何变化呢？新增的 9 个节点会放在什么位置呢？使用 Graphin 时，我们就不需要考虑这么多，只需要记住它是数据驱动的，我们不需要关心具体的实现，只需要告诉 Graphin 你需要渲染的数据是什么就可以。增加节点不用使用 `graph.add(node)`，删除节点也不用调用 `graph.remove(node)`，一切都是改变数据 `props.data` 即可。
 
--   1. 对选中的节点进行数据 Mock。
+步骤：
+
+-   1. 对选中的节点进行数据 Mock，模拟出节点扩散的结果（实际应用中这可能是从服务端返回的数据）。
 -   2. Click 事件触发改变 `state.data` 即可。
 
 ```tsx
@@ -296,7 +316,7 @@ const App = () => {
 };
 ```
 
--   4. 完整代码如下：
+完整代码如下：
 
 <iframe
      src="https://codesandbox.io/embed/nodeexpand-3io3m?fontsize=14&theme=dark"

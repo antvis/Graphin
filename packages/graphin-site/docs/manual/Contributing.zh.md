@@ -68,7 +68,7 @@ Graphin 团队会关注所有的 pull request，我们会 review 以及合并你
 
 npm run start 在本地运行 Graphin 和 Graphin Components 的构建
 
-npm run dev 在本地运行 Graphin Studio 的网站。
+npm run studio 在本地运行 Graphin Studio 的网站。
 
 npm run lint 检查代码风格。
 
