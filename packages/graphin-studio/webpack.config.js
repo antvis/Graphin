@@ -43,6 +43,7 @@ module.exports = env => {
                 {
                     test: /\.css$/,
                     use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                    sideEffects: true,
                 },
                 {
                     test: /\.(png|jpe?g|gif|svg)$/i,
@@ -68,6 +69,7 @@ module.exports = env => {
                             },
                         },
                     ],
+                    sideEffects: true,
                 },
                 {
                     test: /\.(woff|woff2|eot|ttf|otf)$/,
