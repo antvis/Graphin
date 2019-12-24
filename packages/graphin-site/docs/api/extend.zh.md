@@ -7,12 +7,12 @@ order: 3
 
 |   属性    | 类型                                                           | 是否必选 | 说明       |
 | --------- | -------------------------------------------------------------- | -------- | ---------- |
-| layout    | (graphin: [Graphin](), prevProps: [GraphinProps](/zh/docs/api/graphin#props)) => [ExendLayout](#extendlayout)[ ]  | 否       | 自定义布局 |
+| layout    | (graphin: [Graphin](), prevProps: [GraphinProps](/zh/docs/api/graphin#props)) => [ExtendLayout](#extendlayout)[ ]  | 否       | 自定义布局 |
 | nodeShape | (node: [Node](/zh/docs/api/graphin#node)) => [ExtendNodeShape](#extendnodeshape)[ ] | 否       | 自定义节点 |
 | marker    | ( ) => [ExtendMarker](#extendmarker)[ ]         | 否       | 自定义图标 |
 | icon   | ( ) => [ExtendIcon](#extendicon)[ ]         | 否       | 自定义图标（iconfont 形式） |
 
-### ExendLayout
+### ExtendLayout
 
 自定义布局配置
 

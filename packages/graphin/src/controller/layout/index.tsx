@@ -1,5 +1,5 @@
 import dataChecking from './dataChecking';
-import { GraphinProps, Data, ForceSimulation, ExendLayout } from '../../types';
+import { GraphinProps, Data, ForceSimulation, ExtendLayout } from '../../types';
 import Graphin from '../../Graphin';
 import defaultLayouts, { LayoutOption } from './defaultLayouts';
 
@@ -8,7 +8,7 @@ interface LayoutParams {
     prevProps?: GraphinProps;
 }
 
-const layoutInfo = (layouts: ExendLayout[]) => {
+const layoutInfo = (layouts: ExtendLayout[]) => {
     return layouts.map(item => {
         const { desc, name, icon } = item;
         return {

@@ -12,7 +12,16 @@ import apisController from './apis';
 import eventController from './events/index';
 
 /** types  */
-import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimulation, Data, Layout } from './types';
+import {
+    GraphinProps,
+    GraphinState,
+    ExtendedGraphOptions,
+    GraphType,
+    ForceSimulation,
+    Data,
+    Layout,
+    ExtendLayout,
+} from './types';
 
 /** utils */
 import debug from './utils/debug';

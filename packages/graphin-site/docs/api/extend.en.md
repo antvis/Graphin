@@ -7,12 +7,12 @@ The property `extend` of  component `<Graphin/>` is used to extend layout, NodeS
 
 |   Property    | Type                                                           | Required | Description       |
 | --------- | -------------------------------------------------------------- | -------- | ---------- |
-| layout    | (graphin: [Graphin](), prevProps: [GraphinProps](/zh/docs/api/graphin#props)) => [ExendLayout](#extendlayout)[ ]  | no       | custom Layout |
+| layout    | (graphin: [Graphin](), prevProps: [GraphinProps](/zh/docs/api/graphin#props)) => [ExtendLayout](#extendlayout)[ ]  | no       | custom Layout |
 | nodeShape | (node: [Node](/zh/docs/api/graphin#node)) => [ExtendNodeShape](#extendnodeshape)[ ] | no       | custom Node |
 | marker    | ( ) => [ExtendMarker](#extendmarker)[ ]         | no       | custom Icon |
 
 
-### ExendLayout
+### ExtendLayout
 
 Configuration of custom layout
 
