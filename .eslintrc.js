@@ -36,5 +36,7 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 0,
         'no-param-reassign': 0,
         '@typescript-eslint/no-object-literal-type-assertion': 0,
+        'no-empty-function': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
     },
 };
