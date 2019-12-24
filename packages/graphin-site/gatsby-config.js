@@ -113,9 +113,9 @@ module.exports = {
                 },
             },
         ],
-    },
-    docsearchOptions: {
-        apiKey: '159c16127929bd9fe6a3087f9ddddcb9',
-        indexName: 'antv_graphin',
+        docsearchOptions: {
+            apiKey: '159c16127929bd9fe6a3087f9ddddcb9',
+            indexName: 'antv_graphin',
+        },
     },
 };
