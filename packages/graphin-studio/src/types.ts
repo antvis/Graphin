@@ -120,7 +120,7 @@ export interface SearchBarProps {
 }
 
 export interface ToolBarProps {
-    direction: string;
+    direction: 'horizontal' | 'vertical';
 }
 
 export interface GrapheneState {
@@ -180,7 +180,7 @@ export interface RenderToolbarProps {
                 edges: number;
             };
         };
-        [key: string]: any;
+        [key: string]: any; // eslint-disable-line
     };
     direction: string;
     graph: Graph;
