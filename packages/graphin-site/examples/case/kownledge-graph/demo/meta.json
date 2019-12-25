@@ -1,0 +1,13 @@
+{
+    "title": {
+        "zh": "中文分类",
+        "en": "Category"
+    },
+    "demos": [
+        {
+            "filename": "Movie.tsx",
+            "title": "电影关系",
+            "screenshot": "https://gw.alipayobjects.com/mdn/rms_975111/afts/img/A*Z2vsTZDRHxYAAAAAAAAAAABkARQnAQ"
+        }
+    ]
+}

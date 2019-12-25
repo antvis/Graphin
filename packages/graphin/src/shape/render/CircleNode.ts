@@ -56,7 +56,7 @@ const renderNodeShape: NodeShapeFunction = (node: Node) => {
                 shape: 'text',
                 attrs: {
                     id: 'text-desc',
-                    text: node.data.label,
+                    text: node.label || node.data.label,
                     x: 0,
                     y: fontPosition,
                     cursor: 'pointer',

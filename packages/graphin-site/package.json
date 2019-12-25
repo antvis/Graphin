@@ -24,8 +24,11 @@
 		"gh-pages": "^2.1.1"
 	},
 	"dependencies": {
+		"@antv/graphin": "^1.0.2",
+		"@antv/graphin-components": "^1.0.3",
 		"antd": "^3.24.3",
 		"react": "^16.11.0",
+		"react-dom": "^16.11.0",
 		"react-i18next": "^11.0.1"
 	}
 }
