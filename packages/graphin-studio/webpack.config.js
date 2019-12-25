@@ -42,7 +42,7 @@ module.exports = env => {
                 },
                 {
                     test: /\.css$/,
-                    use: ['style-loader', 'css-loader'],
+                    use: [MiniCssExtractPlugin.loader, 'css-loader'],
                     sideEffects: true,
                 },
                 {
@@ -57,7 +57,7 @@ module.exports = env => {
                     test: /\.less$/,
                     use: [
                         {
-                            loader: 'style-loader',
+                            loader: MiniCssExtractPlugin.loader,
                         },
                         {
                             loader: 'css-loader', // translates CSS into CommonJS
@@ -97,9 +97,9 @@ module.exports = env => {
             contentBase: path.join(__dirname, 'public/'),
             port: 3003,
             publicPath: 'http://localhost:3003/',
-            hotOnly: true,
         },
         plugins: [
+            new MiniCssExtractPlugin(),
             // new BundleAnalyzerPlugin(),
             new HtmlWebpackPlugin({
                 title: 'example',
