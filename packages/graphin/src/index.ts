@@ -1,9 +1,10 @@
 import G6 from '@antv/g6';
 import Graphin from './Graphin';
 import Utils from './utils';
+import Layout from './layout';
 
 export default Graphin;
-export { Utils };
+export { Utils, Layout };
 
 export * from './types';
 

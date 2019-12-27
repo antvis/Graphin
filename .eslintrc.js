@@ -22,7 +22,7 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-explicit-any': 'error',
         'react/display-name': 'off',
-        'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx'] }],
+        'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx', '.js', '.ts'] }],
         'react/jsx-props-no-spreading': 0,
         'operator-assignment': 0,
         'react/no-did-update-set-state': 0,
