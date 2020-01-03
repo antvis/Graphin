@@ -70,7 +70,7 @@ Graphin 的内置 icon 请查阅[内置图标](/zh/docs/manual/icons)
 综上，我们可以编写 transform 函数来对 Data 进行转换：
 
 ```tsx
-const trasform = (data: { nodes: NodeData[]; edges: EdgeData[] }) => {
+const transform = (data: { nodes: NodeData[]; edges: EdgeData[] }) => {
     const nodes = (nodes: NodeData[]) => {
         return nodes.map(node => {
             return {
