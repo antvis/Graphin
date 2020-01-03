@@ -5,31 +5,31 @@ import dragWithForce from './drag-with-force';
 import Graphin from '../Graphin';
 
 const handleGraphEvents = (graphin: Graphin) => {
-    /**
-     * 监听window事件
-     * resize :debounce处理
-     */
-    const handleResizeEvent = debounce(() => {
-        handleResize(graphin);
-    }, 100);
-    window.addEventListener('resize', handleResizeEvent, false);
+  /**
+   * 监听window事件
+   * resize :debounce处理
+   */
+  const handleResizeEvent = debounce(() => {
+    handleResize(graphin);
+  }, 100);
+  window.addEventListener('resize', handleResizeEvent, false);
 
-    /**
-     * 监听wheel/zoom事件
-     */
-    handleZoom(graphin);
-    /**
-     * 基于力导的节点拖拽
-     */
-    dragWithForce(graphin);
+  /**
+   * 监听wheel/zoom事件
+   */
+  handleZoom(graphin);
+  /**
+   * 基于力导的节点拖拽
+   */
+  dragWithForce(graphin);
 
-    /**
-     * 事件清除
-     */
-    return {
-        clear: () => {
-            window.removeEventListener('resize', handleResizeEvent, false);
-        },
-    };
+  /**
+   * 事件清除
+   */
+  return {
+    clear: () => {
+      window.removeEventListener('resize', handleResizeEvent, false);
+    },
+  };
 };
 export default handleGraphEvents;

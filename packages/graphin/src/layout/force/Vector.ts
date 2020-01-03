@@ -8,44 +8,44 @@
  */
 
 class Vector {
-    /** x点坐标 */
-    x: number;
+  /** x点坐标 */
+  x: number;
 
-    /** y点坐标 */
-    y: number;
+  /** y点坐标 */
+  y: number;
 
-    constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
-    }
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
 
-    getvec() {
-        return this;
-    }
+  getvec() {
+    return this;
+  }
 
-    add(v2: Vector) {
-        return new Vector(this.x + v2.x, this.y + v2.y);
-    }
+  add(v2: Vector) {
+    return new Vector(this.x + v2.x, this.y + v2.y);
+  }
 
-    subtract(v2: Vector) {
-        return new Vector(this.x - v2.x, this.y - v2.y);
-    }
+  subtract(v2: Vector) {
+    return new Vector(this.x - v2.x, this.y - v2.y);
+  }
 
-    magnitude() {
-        return Math.sqrt(this.x * this.x + this.y * this.y);
-    }
+  magnitude() {
+    return Math.sqrt(this.x * this.x + this.y * this.y);
+  }
 
-    normalise() {
-        return this.divide(this.magnitude());
-    }
+  normalise() {
+    return this.divide(this.magnitude());
+  }
 
-    divide(n: number) {
-        return new Vector(this.x / n || 0, this.y / n || 0);
-    }
+  divide(n: number) {
+    return new Vector(this.x / n || 0, this.y / n || 0);
+  }
 
-    scalarMultip(n: number) {
-        return new Vector(this.x * n, this.y * n);
-    }
+  scalarMultip(n: number) {
+    return new Vector(this.x * n, this.y * n);
+  }
 }
 
 export default Vector;

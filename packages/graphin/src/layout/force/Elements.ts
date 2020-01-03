@@ -2,35 +2,35 @@
 import { Node as NodeType, Edge as EdgeType } from '../../types';
 
 export class Node {
-    id: string;
+  id: string;
 
-    data: NodeType;
+  data: NodeType;
 
-    x: number;
+  x: number;
 
-    y: number;
+  y: number;
 
-    constructor(data: NodeType) {
-        this.id = data.id;
-        this.data = data || {};
-        this.x = data.x || 0;
-        this.y = data.y || 0;
-    }
+  constructor(data: NodeType) {
+    this.id = data.id;
+    this.data = data || {};
+    this.x = data.x || 0;
+    this.y = data.y || 0;
+  }
 }
 
 export class Edge {
-    id: string;
+  id: string;
 
-    source: NodeType;
+  source: NodeType;
 
-    target: NodeType;
+  target: NodeType;
 
-    data: EdgeType;
+  data: EdgeType;
 
-    constructor(id: string, source: NodeType, target: NodeType, data: EdgeType) {
-        this.id = id;
-        this.source = source;
-        this.target = target;
-        this.data = data || {};
-    }
+  constructor(id: string, source: NodeType, target: NodeType, data: EdgeType) {
+    this.id = id;
+    this.source = source;
+    this.target = target;
+    this.data = data || {};
+  }
 }

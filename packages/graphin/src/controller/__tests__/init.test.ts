@@ -1,3 +1,3 @@
 describe('Init controller', () => {
-    it('You shall pass', () => {});
+  it('You shall pass', () => {});
 });
