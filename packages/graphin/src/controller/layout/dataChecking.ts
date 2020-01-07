@@ -29,6 +29,10 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
       return {
         shape: node.shape || 'CircleNode',
         ...node,
+        data: {
+          ...node.data,
+          id: node.id,
+        },
       };
     });
 
@@ -67,6 +71,11 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
           dist: 20,
         },
         ...edge,
+        data: {
+          ...edge.data,
+          source: edge.source,
+          target: edge.target,
+        },
       };
     });
 
