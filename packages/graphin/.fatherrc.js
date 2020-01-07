@@ -1,5 +1,5 @@
 export default {
-    esm: { type: 'rollup', file: 'index', importLibToEs: true },
-    lessInRollupMode: {},
-    extractCSS: true,
+  esm: { type: 'rollup', file: 'index', importLibToEs: true },
+  lessInRollupMode: {},
+  extractCSS: true,
 };

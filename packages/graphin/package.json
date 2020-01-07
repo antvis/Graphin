@@ -6,7 +6,8 @@
   "types": "./dist/index.d",
   "scripts": {
     "start": "father build --watch",
-    "build": "father build",
+    "build": "father build && npm run build:umd",
+    "build:umd": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --env.NODE_ENV=production  -c ./webpack.config.js ",
     "test": "jest",
     "prettier": "prettier --write ./src/**/**/**/*.js"
   },
@@ -25,12 +26,16 @@
     "jsdom-worker": "^0.1.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.2",
     "style-loader": "^0.23.1",
     "svg-inline-loader": "^0.8.0",
     "svg-path-parser": "^1.1.0",
-    "ts-jest": "^24.1.0"
+    "ts-jest": "^24.1.0",
+    "webpack": "^4.41.5",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.10"
   },
   "sideEffects": false,
   "author": "Ant Financial",
