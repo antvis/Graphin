@@ -60,6 +60,7 @@ export interface ExtendedGraphOptions extends GraphOptions {
   keyShapeZoom?: number;
   autoFollowWithForce?: boolean;
   autoPinWithForce?: boolean;
+  restartForceOnDrag?: boolean;
   [key: string]: any; // eslint-disable-line
 }
 
