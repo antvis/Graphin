@@ -12,7 +12,7 @@ const changeZoom = (graphin: Graphin) => {
 
   const {
     isZoomOptimize = () => {
-      return true;
+      return false;
     },
     keyShapeZoom = 0.6,
   } = g6Options!;
