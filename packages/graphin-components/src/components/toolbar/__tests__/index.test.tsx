@@ -6,19 +6,19 @@ import Graphin from '@antv/graphin/src/Graphin';
 import Toolbar from '../index';
 
 describe('<Toolbar />', () => {
-    it('You shall pass', () => {
-        const data = {
-            nodes: [],
-            edges: [],
-        };
-        const layout = {
-            name: 'force',
-        };
+  it('You shall pass', () => {
+    const data = {
+      nodes: [],
+      edges: [],
+    };
+    const layout = {
+      name: 'force',
+    };
 
-        const { asFragment, queryAllByTestId } = render(
-            <Graphin data={data} layout={layout}>
-                <Toolbar />
-            </Graphin>,
-        );
-    });
+    const { asFragment, queryAllByTestId } = render(
+      <Graphin data={data} layout={layout}>
+        <Toolbar />
+      </Graphin>,
+    );
+  });
 });

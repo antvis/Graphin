@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'antd';
-import { Graph  }   from '@antv/graphin'
+import { Graph } from '@antv/graphin';
 import { GrapheneState, Dispatch } from 'src/types';
 import Clear from '../Clear';
 import Save from '../Save';
