@@ -24,6 +24,9 @@ npm install @antv/graphin-components --save
 
 ```
 
+UMD bundle is available in [releases](https://github.com/antvis/Graphin/releases). External dependencys: react, react-dom, antd.
+
+
 ## Usage
 
 ```tsx

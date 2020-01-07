@@ -22,6 +22,9 @@ npm install @antv/graphin --save
 
 ```
 
+UMD bundle is available in [releases](https://github.com/antvis/Graphin/releases). External dependencys: lodash, react, react-dom, @antv/g6.
+
+
 ## Usage
 
 ```tsx

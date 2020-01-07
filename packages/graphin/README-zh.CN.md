@@ -21,6 +21,9 @@ npm install @antv/graphin --save
 
 ```
 
+UMD 格式的文件可以在 [releases](https://github.com/antvis/Graphin/releases) 中下载。外部依赖：lodash，react，react-dom，@antv/g6。
+
+
 ## 使用
 
 ```tsx
