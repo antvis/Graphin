@@ -65,12 +65,12 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     const { data } = this.props;
     debug('effect')('did-mount');
     // register props.extend and props.register
-    const behavirosMode = registerController(this.props);
+    const behaviorsMode = registerController(this.props);
     // init G6 instance
     const { instance, width, height, options } = initController(
       this.props,
       this.graphDOM as HTMLDivElement,
-      behavirosMode,
+      behaviorsMode,
     );
     this.g6Options = options;
     this.graph = instance as GraphType;
