@@ -51,6 +51,10 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     width,
     height,
     // interaction options:
+    autoPaint,
+    fitView,
+    fitViewPadding,
+    pixelRatio,
     minZoom,
     maxZoom,
     disableZoom, // 禁用画布缩放
@@ -88,6 +92,10 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
 
     width,
     height,
+    fitView,
+    fitViewPadding,
+    autoPaint,
+    pixelRatio,
     animate,
     animateCfg,
     minZoom,
