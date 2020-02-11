@@ -98,6 +98,9 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     },
   });
 
+  // force paint to make sure zoomTo and moveTo working
+  instance.data([]);
+  instance.render();
   // 平移
   if (pan) instance.moveTo(pan.x, pan.y);
 
