@@ -24,7 +24,6 @@ import {
 } from './types';
 
 /** utils */
-import debug from './utils/debug';
 import shallowEqual from './utils/shallowEqual';
 
 import './index.less';
@@ -63,14 +62,13 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
   componentDidMount() {
     const { data } = this.props;
-    debug('effect')('did-mount');
     // register props.extend and props.register
-    const behavirosMode = registerController(this.props);
+    const behaviorsMode = registerController(this.props);
     // init G6 instance
     const { instance, width, height, options } = initController(
       this.props,
       this.graphDOM as HTMLDivElement,
-      behavirosMode,
+      behaviorsMode,
     );
     this.g6Options = options;
     this.graph = instance as GraphType;
@@ -121,7 +119,6 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
   componentWillUnmount() {
     this.clearEvents!();
-    debug('Unmount')('componentWillUnmount');
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {

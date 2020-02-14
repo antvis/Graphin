@@ -8,7 +8,7 @@
         "bootstrap:ci": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site",
         "build": "lerna run build",
         "contributor": "git-contributor",
-        "clean": "sudo lerna clean && npm run rm-package-lock",
+        "clean": "lerna clean && npm run rm-package-lock",
         "rm-package-lock": "rm -rf ./packages/*/package-lock.json",
         "list": "lerna list",
         "link": "lerna link",
