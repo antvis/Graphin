@@ -655,7 +655,7 @@ describe('<Graphin />', () => {
       );
 
       // Draw Canvas need some time
-      // await wait();
+      await wait();
       const prevEventsCount = getCanvasEventCount(getByTestId);
 
       act(() => {

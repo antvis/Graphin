@@ -3,7 +3,7 @@ import React, { ErrorInfo } from 'react';
 
 import { cloneDeep } from 'lodash';
 /** controller */
-import initController from './controller/init';
+import initController, { initGraphAfterRender } from './controller/init';
 import registerController from './controller/register';
 import HistoryController from './controller/history';
 
@@ -85,7 +85,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         forceSimulation,
       },
       () => {
-        this.renderGraphWithLifeCycle();
+        this.renderGraphWithLifeCycle(true);
       },
     );
     this.handleEvents();
@@ -178,11 +178,14 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     return this;
   };
 
-  renderGraphWithLifeCycle = () => {
+  renderGraphWithLifeCycle = (fristRender: boolean) => {
     const { data } = this.state;
     this.graph!.changeData(cloneDeep(data));
     this.graph!.emit('afterchangedata');
     this.handleSaveHistory();
+    if (fristRender) {
+      initGraphAfterRender(this.props, this.graphDOM, this.graph);
+    }
   };
 
   stopForceSimulation = () => {
