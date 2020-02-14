@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin-components",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Components for graphin",
   "main": "./dist/index",
   "types": "./dist/graphin-components/src/index.d",
