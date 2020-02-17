@@ -27,6 +27,9 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     // initial canvas
     width: clientWidth,
     height: clientHeight,
+    // initial viewport state:
+    zoom: 1,
+    pan: { x: clientWidth / 2, y: clientHeight / 2 },
     // interaction options:
     minZoom: 0.2,
     maxZoom: 10,
@@ -113,6 +116,12 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
       default: [...defaultModes, ...options.modes!.default!, ...behaviorsMode.default],
     },
   });
+
+  // 平移
+  if (pan) instance.moveTo(pan.x, pan.y);
+
+  // 缩放
+  if (zoom) instance.zoomTo(zoom, pan!);
 
   return {
     options: props.options || defaultOptions,
