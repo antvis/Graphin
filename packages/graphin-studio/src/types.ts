@@ -22,6 +22,7 @@ export interface Node {
     data: {
         /** 唯一标示ID，必选 */
         id: string;
+        groupId?: string;
         /** 节点数据类型 */
         type?: string;
         /** 节点文本 */
@@ -90,6 +91,7 @@ export interface EdgeModel {
 export interface GraphData {
     nodes: Node[];
     edges: Edge[];
+    groups: any[];
 }
 export interface Layout {
     name: string;

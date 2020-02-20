@@ -16,9 +16,10 @@ const initialState: GrapheneState = {
     data: {
         nodes: [],
         edges: [],
+        groups: []
     },
     layout: {
-        name: 'force',
+        name: 'grid',
         options: {
             preset: {
                 name: 'concentric',

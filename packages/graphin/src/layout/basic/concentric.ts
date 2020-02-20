@@ -265,12 +265,13 @@ class ConcentricLayout {
         });
       }
     }
-    const { edges } = options.data;
+    const { edges, groups } = options.data;
     return {
       outerR,
       levels,
       nodes: result,
       edges,
+      groups
     };
   }
 }

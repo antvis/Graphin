@@ -50,10 +50,14 @@ const circleLayout = (data: Data, cfg: CircleLayoutOption) => {
     return {
       nodes: newNodes,
       edges,
+      groups: data.groups
     };
   }
 
-  return newNodes;
+  return { 
+    nodes: newNodes,
+    groups: data.groups
+  };
 };
 
 export default circleLayout;

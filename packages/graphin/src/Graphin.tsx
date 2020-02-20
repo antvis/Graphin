@@ -62,6 +62,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
   componentDidMount() {
     const { data } = this.props;
+    
     // register props.extend and props.register
     const behaviorsMode = registerController(this.props);
     // init G6 instance
@@ -180,7 +181,9 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
   renderGraphWithLifeCycle = (fristRender: boolean) => {
     const { data } = this.state;
-    this.graph!.changeData(cloneDeep(data));
+    // this.graph!.changeData(cloneDeep(data));
+    this.graph!.data(cloneDeep(data))
+    this.graph!.render()
     this.graph!.emit('afterchangedata');
     this.handleSaveHistory();
     if (fristRender) {
@@ -236,6 +239,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
   };
 
   renderGraph = (data: Data) => {
+      debugger
     this.graph!.changeData(cloneDeep(data));
     /**
      * TODO 移除 `afterchangedata` Event
@@ -300,6 +304,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
   render() {
     const { isGraphReady } = this.state;
+    debugger
     return (
       <>
         <div

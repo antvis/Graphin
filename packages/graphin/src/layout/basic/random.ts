@@ -33,6 +33,7 @@ const randomLayout = (data: Data, cfg: RandomLayoutOptions) => {
   return {
     nodes: newNodes,
     edges,
+    groups: data.groups
   };
 };
 

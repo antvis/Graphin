@@ -43,6 +43,7 @@ const gridLayout = (data: Data, options: GridLayoutOptions) => {
   return {
     nodes: resultNodes,
     edges,
+    groups: data.groups
   };
 };
 export default gridLayout;
