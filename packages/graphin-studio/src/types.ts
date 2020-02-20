@@ -88,10 +88,14 @@ export interface EdgeModel {
     [key: string]: any; // eslint-disable-line
 }
 
+export interface GroupModel {
+    [key: string]: any; // eslint-disable-line
+}
+
 export interface GraphData {
     nodes: Node[];
     edges: Edge[];
-    groups: any[];
+    groups: GroupModel[];
 }
 export interface Layout {
     name: string;
