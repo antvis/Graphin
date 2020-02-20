@@ -239,7 +239,6 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
   };
 
   renderGraph = (data: Data) => {
-      debugger
     this.graph!.changeData(cloneDeep(data));
     /**
      * TODO 移除 `afterchangedata` Event
@@ -304,7 +303,6 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
   render() {
     const { isGraphReady } = this.state;
-    debugger
     return (
       <>
         <div
