@@ -77,11 +77,12 @@ const tweak = (data: Data, options: ForceLayoutOptions) => {
     }
   });
 
-  return {
-    data: {
-      nodes: currNodes,
-      edges: currEdges,
-    },
-  };
+    return {
+        data: {
+            nodes: currNodes,
+            edges: currEdges,
+            groups: data.groups
+        },
+    };
 };
 export default tweak;

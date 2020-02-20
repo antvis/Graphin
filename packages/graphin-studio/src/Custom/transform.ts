@@ -19,6 +19,7 @@ const transform = {
             const { type } = node;
 
             return {
+                ...node,
                 id: node.id,
                 shape: type === 'phone' ? 'RectNode' : 'CircleNode',
                 data: node,
@@ -30,6 +31,7 @@ const transform = {
         return edges.map(edge => {
             const { source, target } = edge;
             return {
+                ...edge,
                 source,
                 target,
                 data: edge,

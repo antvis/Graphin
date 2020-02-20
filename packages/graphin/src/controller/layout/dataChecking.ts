@@ -1,26 +1,29 @@
 import { Data } from '../../types';
 
 // Checking data, filter out invalid data and fill in optional field with default value
-const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
-  const { edges = [], nodes = [] } = data;
-  // nodes
-  const nodeIds: string[] = [];
-  const graphinNodes = nodes
-    .filter(node => {
-      const { id } = node;
-      // 如果节点不存在，则忽略该节点
-      if (!id) {
-        console.warn(`node requires an id，this '${JSON.stringify(node)}' node will be automatically filtered`);
-        return false;
-      }
-      if (!node.data) {
-        console.warn(`node requires an data field，this '${JSON.stringify(node)}' node will be automatically filtered`);
-        return false;
-      }
-      // 如果节点ID存在重复，则忽略后加入的节点
-      if (nodeIds.indexOf(id) !== -1) {
-        return false;
-      }
+const dataChecking = (data: Data = { nodes: [], edges: [], groups: [] }): Data => {
+    const { edges = [], nodes = [], groups = [] } = data;
+    
+    // nodes
+    const nodeIds: string[] = [];
+    const graphinNodes = nodes
+        .filter(node => {
+            const { id } = node;
+            // 如果节点不存在，则忽略该节点
+            if (!id) {
+                console.warn(`node requires an id，this '${JSON.stringify(node)}' node will be automatically filtered`);
+                return false;
+            }
+            if (!node.data) {
+                console.warn(
+                    `node requires an data field，this '${JSON.stringify(node)}' node will be automatically filtered`,
+                );
+                return false;
+            }
+            // 如果节点ID存在重复，则忽略后加入的节点
+            if (nodeIds.indexOf(id) !== -1) {
+                return false;
+            }
 
       nodeIds.push(id);
       return true;
@@ -79,10 +82,11 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
       };
     });
 
-  return {
-    nodes: graphinNodes,
-    edges: graphinEdges,
-  };
+    return {
+        nodes: graphinNodes,
+        edges: graphinEdges,
+        groups
+    };
 };
 
 export default dataChecking;

@@ -180,10 +180,12 @@ export type NodeData = Node['data'];
 export type EdgeData = Edge['data'];
 
 export interface Data {
-  /** 节点 */
-  nodes: Node[];
-  /** 边 */
-  edges: Edge[];
+    /** 节点 */
+    nodes: Node[];
+    /** 边 */
+    edges: Edge[];
+
+    groups?: any[];
 }
 export interface Layout {
   /** 布局名称，必选 */
