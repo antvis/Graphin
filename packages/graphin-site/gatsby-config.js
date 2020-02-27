@@ -105,6 +105,13 @@ module.exports = {
           en: 'shape',
         },
       },
+      {
+        slug: 'components',
+        title: {
+          zh: '分析组件',
+          en: 'components',
+        },
+      },
     ],
     docsearchOptions: {
       apiKey: '159c16127929bd9fe6a3087f9ddddcb9',
