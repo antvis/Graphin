@@ -142,26 +142,27 @@ const renderRectNode: NodeShapeFunction = (node: Node) => {
                     lineWidth: 6,
                 },
             },
+            'highlight.dark': {
+                'rect-container': {
+                    fill: style.dark,
+                    stroke: style.dark,
+                    lineWidth: 0,
+                },
+                'node-icon': {
+                    fill: style.dark,
+                },
+                'text-desc': {
+                    fill: '#eee',
+                },
+                badge: {
+                    fill: style.dark,
+                },
+                'badge-text': {
+                    fill: style.dark,
+                },
+            },
         },
-        'highlight.dark': {
-            'rect-container': {
-                fill: style.dark,
-                stroke: style.dark,
-                lineWidth: 0,
-            },
-            'node-icon': {
-                fill: style.dark,
-            },
-            'text-desc': {
-                fill: '#eee',
-            },
-            badge: {
-                fill: style.dark,
-            },
-            'badge-text': {
-                fill: style.dark,
-            },
-        },
+        
     };
 };
 export default renderRectNode;
