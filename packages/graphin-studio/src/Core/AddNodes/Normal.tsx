@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Select, Input, Button } from 'antd';
 import nodeTypes from '@service/Mock/nodeTypes';
+import { GraphData } from '@antv/g6/lib/types';
 import { Item } from '@com';
 import service from '@service';
 import { NormalProps, NormalState } from './interface';
@@ -29,7 +30,7 @@ const Normal: React.FC<NormalProps> = props => {
         const ids = params.split(',');
         const data = (await service.queryNodes(ids, type)) as NodeData[];
         const preData = graph.save();
-        const { nodes, edges } = preData;
+        const { nodes, edges } = preData as GraphData;
 
         dispatch({
             type: 'graph/addNodes',

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { GraphNode } from '@antv/graphin';
+import { GraphData, NodeConfig } from '@antv/g6/lib/types';
+import { Node } from '@antv/graphin/dist/types';
 import ColorPicker from './ColorPicker';
 import Storage from '../../Service/Storage/index';
 import { StylingProps } from './interface';
@@ -52,11 +53,11 @@ const NodeColorPicker: React.FC<StylingProps> = props => {
         const matchBizType = newBizTypes.find(item => item.type === type);
 
         const { graph, dispatch } = props;
-        const preData = graph.save();
+        const preData = graph.save() as GraphData;
         const newNodes = preData.nodes.map(node => {
             return {
                 ...node,
-                style: node.data.type === type ? matchBizType.style : node.style,
+                style: ((node as unknown) as Node).data.type === type ? matchBizType.style : node.style,
             };
         });
         const newData = {

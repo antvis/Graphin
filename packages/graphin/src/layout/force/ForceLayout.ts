@@ -77,7 +77,7 @@ interface Prop {
   /**  力导结束后的回调函数 */
   done?: () => void;
   /** 忽略节点，不参加力导计算 */
-  ignore?: (node: NodeType) => void;
+  ignore?: (node: NodeType) => boolean;
 }
 
 interface IndexableProp extends Prop {
