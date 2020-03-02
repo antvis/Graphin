@@ -7,7 +7,7 @@ interface ExtendedG6Event extends G6Event {
 }
 
 const changeZoom = (graphin: Graphin) => {
-  const { graph, state, g6Options } = graphin;
+  const { graph, g6Options } = graphin;
   // const { forceSimulation } = state;
 
   const {

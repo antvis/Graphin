@@ -24,7 +24,7 @@ describe('<ContextMenu />', () => {
     const mockCallback = jest.fn(() => {});
 
     // TODO icon 测试
-    const { asFragment, queryByText, rerender, getByText, unmount } = render(
+    const { asFragment, queryByText, rerender, getByText } = render(
       <ContextMenu
         graph={mockGraph}
         options={[
