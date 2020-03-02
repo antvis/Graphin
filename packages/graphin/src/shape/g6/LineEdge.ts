@@ -1,4 +1,4 @@
-import { Item } from '@antv/g6';
+import { Item } from '@antv/g6/lib/types';
 import setEdgeState from './setState.edge';
 
 // eslint-disable-next-line

@@ -7,7 +7,7 @@
 
 import { getDegree } from '../utils/graph';
 import { LayoutOptionBase, Node } from '../../types';
-import { Edge } from '../../layout/force/Elements';
+// import { Edge } from '../../layout/force/Elements';
 
 export interface BBox {
   x1: number;

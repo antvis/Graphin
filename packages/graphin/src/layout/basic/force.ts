@@ -4,7 +4,7 @@ import { optimizeDrawing, optimizeDrawingByNode } from '../../perf/optimizeDrawi
 import randomLayout, { RandomLayoutOptions } from './random';
 import ConcentricLayout from './concentric';
 import TweakLayout from './tweak';
-import { LayoutOptionBase, Data, Node, ForceSimulation, ExtendedGraph, Graph } from '../../types';
+import { LayoutOptionBase, Data, Node, ForceSimulation, Graph } from '../../types';
 
 export interface ForceLayoutOptions extends LayoutOptionBase {
   /** 前置布局 */
@@ -99,7 +99,7 @@ const forceLayout = (options: ForceLayoutOptions): Return => {
     animation: animation !== undefined ? animation : true,
     done: () => {
       if (isOptimization) {
-        optimizeDrawing(graph as ExtendedGraph, false);
+        optimizeDrawing(graph, false);
       }
       done(graph);
     },

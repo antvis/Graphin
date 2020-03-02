@@ -41,7 +41,7 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     // rendering options:
     animate: true,
     animateCfg: {
-      onFrame: null,
+      onFrame: undefined,
       duration: 500,
       easing: 'easeLinear',
     },
@@ -65,7 +65,6 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     autoPaint,
     fitView,
     fitViewPadding,
-    pixelRatio,
     minZoom,
     maxZoom,
     disableZoom, // 禁用画布缩放
@@ -99,14 +98,13 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
 
   const instance: GraphType = new G6.Graph({
     container: graphDOM,
-    renderer: 'canvas',
-
+    // TODO >=g6@3.3 does not support svg engine yet,
+    // renderer: 'canvas',
     width,
     height,
     fitView,
     fitViewPadding,
     autoPaint,
-    pixelRatio,
     animate,
     animateCfg,
     minZoom,

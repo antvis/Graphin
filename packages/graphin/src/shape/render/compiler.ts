@@ -1,8 +1,9 @@
-import G6, { Node } from '@antv/g6';
-import { G } from '@antv/g6/types/g';
+import G6 from '@antv/g6';
+import G, { Shape } from '@antv/g-canvas';
 import { ExtendNodeShape, ShapeComponent } from '../../types';
+import { Item } from '@antv/g6/lib/types';
 
-const reset = (shapes: G.Shape[], shapeComponents: ShapeComponent[]) => {
+const reset = (shapes: Shape.Base[], shapeComponents: ShapeComponent[]) => {
   shapes.forEach((shape, index: number) => {
     if (!shapeComponents[index].noReset)
       shape.attr({
@@ -44,7 +45,7 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
     },
 
     // 设置各种交互状态
-    setState(name: string, value: string, node: Node) {
+    setState(name: string, value: string, node: Item) {
       const { id } = node.get('model').data;
       const initShapeComponent = initShapeComponentMap[id];
       const initState = initStateMap[id];
@@ -62,7 +63,7 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
       Object.keys(initState).forEach(key => {
         // state 的 key 和 behavior 里触发的 name 匹配
         if (name === key) {
-          shapes.forEach((g6Shape: G.Shape) => {
+          shapes.forEach((g6Shape: Shape.Base) => {
             const originAttrs = g6Shape.attr();
             const customAttrs = initState[key][originAttrs.id];
             if (customAttrs) {

@@ -1,5 +1,6 @@
 import { Graph } from '@antv/g6';
 import { NodeData, Node, Data } from '../types';
+// import { GraphData } from '@antv/g6/lib/types';
 
 interface Property {
   value?: string;
@@ -10,7 +11,9 @@ const search = (graph: Graph) => (words = '') => {
   const wordsArray = words.trim().split(' ');
 
   // 目前先只支持node 的搜索
-  const { nodes } = graph.save() as Data;
+  // TODO: why graph export TreeData ?
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { nodes } = (graph.save() as any) as Data;
 
   // 匹配方法
   const matchWord = (node: NodeData, word: string) => {

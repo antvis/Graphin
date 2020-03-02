@@ -1,7 +1,9 @@
 import { Graph } from '@antv/g6';
 import search from '../search';
 
-const MockGraph = {
+// TODO: define mock graph type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const MockGraph: any = {
   save: () => {
     return {
       nodes: [

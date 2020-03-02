@@ -1,22 +1,22 @@
-import { Graph, NodeConfig } from '@antv/g6';
 import Vector from './Vector';
 import Point from './Point';
 import { Node, Edge } from './Elements';
 import Spring from './Spring';
 import { getDegree } from '../utils/graph';
-import { Data, Node as NodeType } from '../../types';
+import { Data, Node as NodeType, Graph } from '../../types';
+import { Item } from '@antv/g6/lib/types';
 
 type ForceNodeType = Node;
 
 type ForceEdgeType = Edge;
 
-const getBaseLog = (x: number, y: number) => {
-  return Math.log(y) / Math.log(x);
-};
-interface ForceData {
-  nodes: Node[];
-  edges: Edge[];
-}
+// const getBaseLog = (x: number, y: number) => {
+//   return Math.log(y) / Math.log(x);
+// };
+// interface ForceData {
+//   nodes: Node[];
+//   edges: Edge[];
+// }
 
 interface Map<K, V> {
   clear(): void;
@@ -561,7 +561,7 @@ class ForceLayout {
   restart = (dragNode: ForceNodeType[], graph: Graph) => {
     /** 将位置更新到nodePoint中 */
     const { ignore } = this.props;
-    graph.getNodes().forEach((nodeItem: NodeConfig) => {
+    graph.getNodes().forEach((nodeItem: Item) => {
       const node = nodeItem.get('model');
 
       if (ignore && ignore(node)) {

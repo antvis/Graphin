@@ -1,5 +1,4 @@
 import Graphin from '../Graphin';
-import { ExtendedGraph } from '../types';
 
 const getContainerSize = (el: HTMLDivElement) => {
   const { clientWidth, clientHeight } = el;
@@ -17,7 +16,7 @@ const handleResize = (graphin: Graphin) => {
   const canvas = graph!.get('canvas');
   if (canvas) {
     canvas.changeSize(width, height);
-    (graph as ExtendedGraph).autoPaint();
+    graph.autoPaint();
     graphin.setState({
       width,
       height,

@@ -1,6 +1,6 @@
 import svg2marker from 'svg2marker';
-import G6 from '@antv/g6';
 import DEFAULT_ICONS from './inner';
+import G from '@antv/g-canvas';
 
 export interface IconType {
   name: string;
@@ -24,6 +24,7 @@ export default (customIcons: IconType[]) => {
     }, {});
   const icons = { ...DEFAULT_ICONS, ...CUSTOM_ICONS };
   Object.keys(icons).forEach(key => {
-    G6.G.Marker.Symbols[key] = svg2marker(icons[key].path);
+    // TODO deprecated hack function
+    G.Shape.Marker.Symbols[key as 'circle'] = svg2marker(icons[key].path);
   });
 };

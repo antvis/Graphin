@@ -12,16 +12,7 @@ import apisController from './apis';
 import eventController from './events/index';
 
 /** types  */
-import {
-  GraphinProps,
-  GraphinState,
-  ExtendedGraphOptions,
-  GraphType,
-  ForceSimulation,
-  Data,
-  Layout,
-  ExtendLayout,
-} from './types';
+import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimulation, Data, Layout } from './types';
 
 /** utils */
 import shallowEqual from './utils/shallowEqual';
