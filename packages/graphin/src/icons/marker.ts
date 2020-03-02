@@ -1,6 +1,6 @@
 import svg2marker from 'svg2marker';
 import DEFAULT_ICONS from './inner';
-import G from '@antv/g-canvas';
+import * as G from '@antv/g-canvas';
 
 export interface IconType {
   name: string;
