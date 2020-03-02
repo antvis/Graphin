@@ -10,4 +10,3 @@ window.graphinComponents = require('@antv/graphin-components');
 
 require('@antv/graphin/dist/index.css');
 require('@antv/graphin-components/dist/index.css');
-require('antd/dist/antd.css');
