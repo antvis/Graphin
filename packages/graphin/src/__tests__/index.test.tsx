@@ -693,16 +693,16 @@ describe('<Graphin />', () => {
             <div
               onClick={() => {
                 props.graph.emit('node:click', {
-                  item: props.graph._cfg.nodes[0],
+                  item: props.graph.cfg.nodes[0],
                 });
                 props.graph.emit('edge:click', {
-                  item: props.graph._cfg.edges[0],
+                  item: props.graph.cfg.edges[0],
                 });
                 props.graph.emit('edge:click', {
-                  item: props.graph._cfg.edges[0],
+                  item: props.graph.cfg.edges[0],
                 });
                 props.graph.emit('canvas:click', {
-                  item: props.graph._cfg.edges[0],
+                  item: props.graph.cfg.edges[0],
                 });
               }}
             >
