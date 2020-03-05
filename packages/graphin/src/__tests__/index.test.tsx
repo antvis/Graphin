@@ -496,12 +496,14 @@ describe('<Graphin />', () => {
         fireEvent.click(getByText(/Undo/), {});
       });
 
+      await wait();
       expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
 
       act(() => {
         fireEvent.click(getByText(/Redo/), {});
       });
 
+      await wait();
       expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
     },
     TIMEOUT,
