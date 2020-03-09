@@ -113,6 +113,7 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     maxZoom,
     plugins,
     modes: {
+      ...behaviorsMode, // Add multiple G6 behavior modes
       default: [...defaultModes, ...options.modes!.default!, ...behaviorsMode.default],
     },
   });
