@@ -4,7 +4,7 @@ import { LayoutOptionBase, Data } from '../../types';
 
 export interface DagreLayoutOption extends LayoutOptionBase {
   /** 中心点坐标 */
-  center: [number, number];
+  // center: [number, number];
   /** 节点大小 */
   nodeSize: [number, number];
   /**  节点水平间距(px) */

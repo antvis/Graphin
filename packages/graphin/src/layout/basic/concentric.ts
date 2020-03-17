@@ -137,8 +137,8 @@ class ConcentricLayout {
     );
 
     const center = {
-      x: bb!.x1 + bb!.w / 2,
-      y: bb!.y1 + bb!.h / 2,
+      x: bb!.x1, // + bb!.w / 2,
+      y: bb!.y1, // + bb!.h / 2,
     };
 
     let maxNodeSize = 0;

@@ -31,9 +31,11 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
       layout: (data: Data, options: LayoutOption): { data: Data } => {
         const defaultOptions = {
           /** 圆心 x坐标 */
-          x: width / 2,
+          x: 0,
+          // x: width / 2,
           /** 圆心 y坐标 */
-          y: height / 2,
+          y: 0,
+          // y: height / 2,
           /** 半径，默认半径为节点数*10 */
           r: data.nodes.length * 10,
         };
@@ -49,7 +51,8 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
       layout: (data: Data, options: LayoutOption): { data: Data } => {
         const defaultOptions = {
           /** 中心点坐标 */
-          center: [width / 2, height / 2],
+          // WARNING: center is not working any more ?
+          // center: [0, 0],
           /** 节点大小 */
           nodeSize: [50, 50],
           /**  节点水平间距(px) */
@@ -71,7 +74,8 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
       layout: (data: Data, options: LayoutOption): { data: Data } => {
         const defaultOptions = {
           /** 中心点坐标 */
-          center: [width / 2, height / 2],
+          // center: [width / 2, height / 2],
+          center: [0, 0],
           /** 防止覆盖 */
           preventOverlap: true,
           /** 节点大小 */
