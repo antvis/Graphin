@@ -23,10 +23,10 @@ export default {
     // eslint-disable-next-line
     const { graph } = this as any;
     graph.getNodes().forEach((node: NodeData) => {
-      graph.clearItemStates(node);
+      graph.clearItemStates(node, ['highlight.source', 'highlight.target', 'highlight.dark', 'highlight.light']);
     });
     graph.getEdges().forEach((edge: EdgeData) => {
-      graph.clearItemStates(edge);
+      graph.clearItemStates(edge, ['selected']);
     });
   },
   onCanvasClick() {

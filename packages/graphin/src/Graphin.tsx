@@ -169,12 +169,12 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     return this;
   };
 
-  renderGraphWithLifeCycle = (fristRender: boolean) => {
+  renderGraphWithLifeCycle = (firstRender: boolean) => {
     const { data } = this.state;
     this.graph!.changeData(cloneDeep(data));
     this.graph!.emit('afterchangedata');
     this.handleSaveHistory();
-    if (fristRender) {
+    if (firstRender) {
       initGraphAfterRender(this.props, this.graphDOM, this.graph);
     }
   };
