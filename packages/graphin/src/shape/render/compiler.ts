@@ -35,7 +35,7 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
       let keyshapeIndex = 0;
       const g6Shapes = shapeComponents.map((component, index: number) => {
         if (component.isKeyShape) keyshapeIndex = index;
-        return group.addShape(component.shape, {
+        return group.addShape(component.type || component.shape, {
           attrs: {
             ...component.attrs,
           },

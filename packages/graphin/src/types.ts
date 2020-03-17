@@ -102,6 +102,8 @@ export interface Node {
   id: string;
   /** 节点类型 */
   shape?: string;
+  /** 节点类型 */
+  type?: string;
   /** 节点文本 */
   label?: string;
   /** 节点样式 */
@@ -148,6 +150,8 @@ export interface Edge {
   target: string;
   /** 边的类型 */
   shape?: string;
+  /** 边的类型 */
+  type?: string;
 
   /** 边的文本 */
   label?: string;
@@ -184,7 +188,8 @@ export interface EdgeShape {
 }
 
 export interface ShapeComponent {
-  shape: string;
+  shape?: string;
+  type?: string;
   attrs: {
     /** 这个shape图形的ID，用户自定义，保证不重复即可 */
     id: string;
@@ -198,7 +203,8 @@ export interface ShapeComponent {
 export interface NodeShapeFunction {
   (node: Node): {
     /** 自定义Shape的名称，之后数据指定即可调用这个Shape定义 */
-    shape: string;
+    shape?: string;
+    type?: string;
     shapeComponents: ShapeComponent[];
     state: {
       [stateName: string]: {

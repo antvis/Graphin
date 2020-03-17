@@ -1660,8 +1660,8 @@ Object {
         "type": "company",
       },
       "id": "node-0",
-      "shape": "CircleNode",
       "style": Object {},
+      "type": "CircleNode",
     },
     Object {
       "data": Object {
@@ -1671,8 +1671,8 @@ Object {
         "type": "company",
       },
       "id": "node-1",
-      "shape": "CircleNode",
       "style": Object {},
+      "type": "CircleNode",
     },
     Object {
       "data": Object {
@@ -1682,8 +1682,8 @@ Object {
         "type": "company",
       },
       "id": "node-2",
-      "shape": "CircleNode",
       "style": Object {},
+      "type": "CircleNode",
     },
     Object {
       "data": Object {
@@ -1693,8 +1693,8 @@ Object {
         "type": "company",
       },
       "id": "node-3",
-      "shape": "CircleNode",
       "style": Object {},
+      "type": "CircleNode",
     },
     Object {
       "data": Object {
@@ -1704,8 +1704,8 @@ Object {
         "type": "company",
       },
       "id": "node-4",
-      "shape": "CircleNode",
       "style": Object {},
+      "type": "CircleNode",
     },
     Object {
       "data": Object {
@@ -1715,8 +1715,8 @@ Object {
         "type": "company",
       },
       "id": "node-5",
-      "shape": "CircleNode",
       "style": Object {},
+      "type": "CircleNode",
     },
     Object {
       "data": Object {
@@ -1726,8 +1726,8 @@ Object {
         "type": "company",
       },
       "id": "node-6",
-      "shape": "CircleNode",
       "style": Object {},
+      "type": "CircleNode",
     },
     Object {
       "data": Object {
@@ -1737,8 +1737,8 @@ Object {
         "type": "company",
       },
       "id": "node-7",
-      "shape": "CircleNode",
       "style": Object {},
+      "type": "CircleNode",
     },
     Object {
       "data": Object {
@@ -1748,8 +1748,8 @@ Object {
         "type": "company",
       },
       "id": "node-8",
-      "shape": "CircleNode",
       "style": Object {},
+      "type": "CircleNode",
     },
     Object {
       "data": Object {
@@ -1759,8 +1759,8 @@ Object {
         "type": "company",
       },
       "id": "node-9",
-      "shape": "CircleNode",
       "style": Object {},
+      "type": "CircleNode",
     },
   ],
 }
