@@ -1,0 +1,33 @@
+{
+  "title": {
+    "zh": "中文分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "Grid.jsx",
+      "title": "矩阵布局",
+      "screenshot": ""
+    },
+    {
+      "filename": "Circle.jsx",
+      "title": "圆形布局",
+      "screenshot": ""
+    },
+    {
+      "filename": "Concentric.jsx",
+      "title": "同心圆布局",
+      "screenshot": ""
+    },
+    {
+      "filename": "Dagre.jsx",
+      "title": "有向分层布局",
+      "screenshot": ""
+    },
+    {
+      "filename": "Radial.jsx",
+      "title": "迳向布局",
+      "screenshot": ""
+    }
+  ]
+}

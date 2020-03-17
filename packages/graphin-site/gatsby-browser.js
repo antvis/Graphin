@@ -4,8 +4,9 @@
 window.react = require('react');
 // eslint-disable-next-line import/no-extraneous-dependencies
 window.reactDom = require('react-dom');
-window.graphin = require('@antv/graphin');
 window.antd = require('antd');
+window.graphin = require('@antv/graphin');
+window.graphinComponents = require('@antv/graphin-components');
 
 require('@antv/graphin/dist/index.css');
-require('antd/dist/antd.css');
+require('@antv/graphin-components/dist/index.css');
