@@ -50,6 +50,7 @@ const renderNodeShape: NodeShapeFunction = (node: Node) => {
           fontFamily,
           textAlign: 'center',
           textBaseline: 'middle',
+          cursor: 'pointer',
         },
       },
       {
