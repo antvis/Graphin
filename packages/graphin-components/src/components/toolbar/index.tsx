@@ -1,6 +1,6 @@
 import React, { ReactElement, CSSProperties } from 'react';
 import { Graph } from '@antv/g6';
-import { Tooltip, Button, Icon, Popover, Progress } from 'antd';
+import { Tooltip, Button, Icon, Popover, Progress } from '../ui'; // 'antd';
 
 import useFullscreen from './useFullscreen';
 import useZoom from './useZoom';
@@ -35,6 +35,7 @@ export interface RenderProps {
 
 export type Tdirection = 'horizontal' | 'vertical';
 export interface ToolbarProps {
+  style?: CSSProperties;
   graphDOM?: HTMLElement;
   graph?: Graph;
   apis?: any; // eslint-disable-line
@@ -47,23 +48,14 @@ export interface ToolbarProps {
   render?(props: RenderProps): MenuItem[];
 }
 
-const getToolbarPosition = (graphDOM: HTMLElement, direction: Tdirection): CSSProperties => {
-  const { top, left, bottom } = graphDOM.getBoundingClientRect();
-  if (direction === 'horizontal') {
-    return {
-      position: 'fixed',
-      left,
-      top,
-    };
-  }
-  return {
-    position: 'fixed',
-    left: left + 30,
-    bottom: window.innerHeight - bottom + 30,
-  };
+const defaultStyle: CSSProperties = {
+  position: 'absolute',
+  top: '48px',
+  left: '48px',
 };
+
 const Toolbar: React.FC<ToolbarProps> = props => {
-  const { graphDOM, graph, className = '', render, graphVars = {}, apis, direction = 'vertical' } = props;
+  const { graphDOM, graph, className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
   const { history } = apis;
   const { width = 0, height = 0 } = graphVars;
   const [fullscreen, toggleFullscreen] = useFullscreen(graphDOM);
@@ -152,10 +144,10 @@ const Toolbar: React.FC<ToolbarProps> = props => {
   }
 
   const placement = direction === 'vertical' ? 'right' : 'bottom';
-  const style = getToolbarPosition(graphDOM!, direction);
+
   return (
     <div>
-      <div className={`zoom-toolbar ${direction} ${className}`} style={style}>
+      <div className={`zoom-toolbar ${direction} ${className}`} style={style || defaultStyle}>
         {buttonCfg.map(item => {
           /** 需要自定义渲染 */
           if (item.renderTooltip) {
