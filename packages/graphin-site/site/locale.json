@@ -15,5 +15,6 @@
     "内置丰富的布局，支持布局切换，满足不同场景下的布局需求": "Rich built-in layouts, support layout switching to meet the layout needs for different scenarios",
     "分析探索": "Analytical exploration",
     "沉淀分析方法，内置分析组件，专注关系可视分析领域": "Precipitation analysis method, built-in analysis component, focus on relational visual analysis",
-    "Graph Studio 是基于 Graphin 开发的通用关系分析平台，具有关系扩散，关系发现，布局切换等功能": "Graph Studio is a universal relational analysis platform developed by Graphin with features such as relationship diffusion, relationship discovery, layout switching, etc."
+    "Graph Studio 是阿里云Dataworks团队围绕Graph Compute引擎打造的一站式图开发平台。其中基于Graphin开发的图分析平台提供了数据检索、关系扩散、布局切换、节点筛选、关联高亮、分享等常用图分析能力，能够帮助用户快速完成相关分析工作": 
+        "Graph Studio is a one-stop graph development platform built by the Alibaba Cloud Dataworks Team based on Graph Compute. The graph analysis which is based on Graphin in this platform provides common graph analysis capabilities such as data retrieval, relationship diffusion, layout switching, node selection, association highlighting, and sharing, which can help users quickly complete related analysis work."
 }
