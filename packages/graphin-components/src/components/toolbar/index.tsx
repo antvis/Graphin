@@ -55,10 +55,12 @@ const defaultStyle: CSSProperties = {
 };
 
 const Toolbar: React.FC<ToolbarProps> = props => {
-  const { graphDOM, graph, className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
+  const { graph, className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
   const { history } = apis;
   const { width = 0, height = 0 } = graphVars;
-  const [fullscreen, toggleFullscreen] = useFullscreen(graphDOM);
+  const graphinContainer = document.getElementById('graphin-container') as HTMLElement;
+
+  const [fullscreen, toggleFullscreen] = useFullscreen(graphinContainer);
   const [zoom, handleZoom] = useZoom(1);
   const handleGraphZoom = (isZoom: boolean) => {
     const center = {
