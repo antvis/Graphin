@@ -10,9 +10,6 @@ type ForceNodeType = Node;
 
 type ForceEdgeType = Edge;
 
-const getBaseLog = (x: number, y: number) => {
-  return Math.log(y) / Math.log(x);
-};
 interface ForceData {
   nodes: Node[];
   edges: Edge[];
@@ -29,7 +26,7 @@ interface Map<K, V> {
   readonly size: number;
 }
 
-interface Prop {
+export interface ForceProps {
   /** 向心力 */
   centripetalOptions: {
     /** 叶子节点的施加力的因子 */
@@ -49,7 +46,7 @@ interface Prop {
   /** spring stiffness 弹簧劲度系数 */
   stiffness: number;
   /** 默认的弹簧长度 */
-  defSpringLen: number;
+  defSpringLen: (edge: Edge, source: Point, target: Point) => number;
   /** repulsion 斥力，这里指代 库伦常量Ke */
   repulsion: number;
   /** https://www.khanacademy.org/science/ap-physics-1/ap-electric-charge-electric-force-and-voltage/coulombs-law-and-electric-force-ap/a/coulombs-law-and-electric-force-ap-physics-1 */
@@ -68,6 +65,10 @@ interface Prop {
   MaxIterations: number;
   /** 初始化时候是否需要动画 */
   animation: boolean;
+  /** 是否启动webworker */
+
+  enableWorker: boolean;
+
   /** 重启后是否需要动画 */
   restartAnimation: boolean;
   /** 力导区域的宽度 */
@@ -80,11 +81,10 @@ interface Prop {
   ignore?: (node: NodeType) => void;
 }
 
-interface IndexableProp extends Prop {
-  [key: string]: Prop[keyof Prop];
+interface IndexableProp extends ForceProps {
+  [key: string]: ForceProps[keyof ForceProps];
 }
 
-const SPEED = 5; // 根据节点的大小可以自动设置速度的大小
 class ForceLayout {
   props: IndexableProp; // eslint-disable-line
 
@@ -120,11 +120,14 @@ class ForceLayout {
   /** 向心力的中心点 */
   center: Vector;
 
-  constructor(options: Partial<Prop>) {
+  constructor(options: Partial<ForceProps>) {
     this.props = {
       stiffness: 200.0,
-      defSpringLen: 200,
-      repulsion: 200.0 * SPEED,
+      enableWorker: false,
+      defSpringLen: edge => {
+        return edge.data.spring || 200;
+      },
+      repulsion: 200.0 * 5,
       centripetalOptions: {
         leaf: 2,
         single: 2,
@@ -167,16 +170,16 @@ class ForceLayout {
    * Iterate options to update this.props
    * @param {*} options
    */
-  updateOptions(options: Partial<IndexableProp>) {
+  updateOptions = (options: Partial<IndexableProp>) => {
     if (!options) {
       return;
     }
     Object.keys(options).forEach(key => {
       this.props[key] = options[key];
     });
-  }
+  };
 
-  setData(data: Data) {
+  setData = (data: Data) => {
     // clean all data
     this.nodes = [];
     this.edges = [];
@@ -192,7 +195,7 @@ class ForceLayout {
       // eslint-disable-next-line
       this.addEdges(data.edges as any);
     }
-  }
+  };
 
   getMass = (node: NodeType) => {
     const {
@@ -209,7 +212,7 @@ class ForceLayout {
     return degree < 5 ? 1 : degree * 10;
   };
 
-  init() {
+  init = () => {
     /** 初始化点和边的信息 */
     const { width, height } = this.props;
 
@@ -232,16 +235,7 @@ class ForceLayout {
     this.edges.forEach(edge => {
       const source = this.nodePoints.get(edge.source.id) as Point;
       const target = this.nodePoints.get(edge.target.id) as Point;
-
-      let length = source.p.subtract(target.p).magnitude(); // 相邻两点的向量
-
-      if (this.props.defSpringLen) {
-        length = this.props.defSpringLen;
-      }
-
-      if (edge.data.spring) {
-        length = edge.data.spring;
-      }
+      const length = this.props.defSpringLen(edge, source, target);
 
       this.edgeSprings.set(edge.id, new Spring(source, target, length));
     });
@@ -250,40 +244,40 @@ class ForceLayout {
     const { size } = this.nodePoints;
     const vv = Math.pow(10, 2);
     this.props.minEnergyThreshold = (1 / 2) * Math.pow(1, 2) * 1 * size * vv;
-  }
+  };
 
-  start() {
+  start = () => {
     /** 初始化节点 */
     this.init();
     if (this.props.animation) this.animation();
     else this.slienceForce();
-  }
+  };
 
-  calTotalEnergy() {
+  calTotalEnergy = () => {
     let energy = 0.0;
 
     this.nodes.forEach(node => {
       const point = this.nodePoints.get(node.id) as Point;
       const speed = point.v.magnitude();
 
-      const m = 1; // point.m;
+      const m = point.m; // 1; //
       energy += m * Math.pow(speed, 2) * 0.5; // p = 1/2*(mv^2)
     });
 
     return energy;
-  }
+  };
 
-  slienceForce() {
+  slienceForce = () => {
+    const firstTickInterval = 0.22;
     for (let i = 0; i < this.props.MaxIterations; i++) {
-      this.tick(this.props.tickInterval);
+      const tickInterval = Math.max(0.02, firstTickInterval - i * 0.002);
+      this.tick(tickInterval);
       const energy = this.calTotalEnergy();
-
       /** 如果需要监控信息，则提供给用户 */
       const monitor = this.registers.get('monitor');
       if (monitor) {
         monitor(this.reportMointor(energy));
       }
-
       if (
         energy <= this.props.minEnergyThreshold ||
         i === this.props.MaxIterations - 1 // 1000000次/(1000/60) = 60000s = 1min
@@ -295,9 +289,28 @@ class ForceLayout {
         break;
       }
     }
-  }
+  };
+  /** polyfill: support webworker requestAnimationFrame */
+  requestAnimationFrame = (fn: any): any => {
+    const { enableWorker } = this.props;
+    if (enableWorker) {
+      return setInterval(() => {
+        fn();
+      }, 16);
+    } else {
+      return window.requestAnimationFrame(fn);
+    }
+  };
+  cancelAnimationFrame = (handleId: number) => {
+    const { enableWorker } = this.props;
+    if (enableWorker) {
+      clearInterval(handleId);
+    } else {
+      window.cancelAnimationFrame(handleId);
+    }
+  };
 
-  animation() {
+  animation = () => {
     const step = () => {
       const { done, tickInterval, minEnergyThreshold, MaxIterations } = this.props;
 
@@ -318,20 +331,20 @@ class ForceLayout {
         energy <= minEnergyThreshold ||
         this.iterations === MaxIterations // 1000000次/(1000/60) = 60000s = 1min
       ) {
-        window.cancelAnimationFrame(this.timer);
+        this.cancelAnimationFrame(this.timer);
         this.iterations = 0;
         this.done = true;
         if (done) {
           done();
         }
       } else {
-        this.timer = window.requestAnimationFrame(step);
+        this.timer = this.requestAnimationFrame(step);
       }
     };
-    this.timer = window.requestAnimationFrame(step);
-  }
+    this.timer = this.requestAnimationFrame(step);
+  };
 
-  render() {
+  render = () => {
     const render = this.registers.get('render');
     const nodes: NodeType[] = [];
     this.nodePoints.forEach(node => {
@@ -351,9 +364,9 @@ class ForceLayout {
       // eslint-disable-next-line no-console
       console.error('need a render function');
     }
-  }
+  };
 
-  reportMointor(energy: number) {
+  reportMointor = (energy: number) => {
     const params = {
       energy,
       iterations: this.iterations,
@@ -363,18 +376,18 @@ class ForceLayout {
     };
 
     return params;
-  }
+  };
 
-  tick(interval: number) {
+  tick = (interval: number) => {
     this.updateCoulombsLaw();
     this.updateHookesLaw();
     this.attractToCentre();
     this.updateVelocity(interval);
     this.updatePosition(interval);
-  }
+  };
 
   /** 布局算法 */
-  updateCoulombsLaw() {
+  updateCoulombsLaw = () => {
     const len = this.nodes.length;
 
     for (let i = 0; i < len; i++) {
@@ -398,9 +411,9 @@ class ForceLayout {
         this.nodePoints.get(jNode.id).updateAcc(direction.scalarMultip(repulsion * factor).divide(-Math.pow(dis, 2)));
       }
     }
-  }
+  };
 
-  updateHookesLaw() {
+  updateHookesLaw = () => {
     this.edges.forEach(edge => {
       const spring = this.edgeSprings.get(edge.id);
       const v = spring.target.p.subtract(spring.source.p);
@@ -410,9 +423,9 @@ class ForceLayout {
       spring.source.updateAcc(direction.scalarMultip(-this.props.stiffness * displacement));
       spring.target.updateAcc(direction.scalarMultip(this.props.stiffness * displacement));
     });
-  }
+  };
 
-  attractToCentre() {
+  attractToCentre = () => {
     const implementForce = (node: Node, center: Vector, radio = 2) => {
       const point = this.nodePoints.get(node.id);
       const direction = point.p.subtract(center);
@@ -426,10 +439,10 @@ class ForceLayout {
       const singleNode = degree === 0;
       /** 默认的向心力配置 */
       const defaultRadio = {
-        left: 2,
+        leaf: 2,
         single: 2,
-        others: 1, //  1 / getBaseLog(2, degree),
-        center: () => {
+        others: 1,
+        center: (_node: any) => {
           return {
             x: this.props.width / 2,
             y: this.props.height / 2,
@@ -458,9 +471,9 @@ class ForceLayout {
       /** others */
       implementForce(node, centerVector, others);
     });
-  }
+  };
 
-  updateVelocity(interval: number) {
+  updateVelocity = (interval: number) => {
     this.nodes.forEach(node => {
       const point = this.nodePoints.get(node.id);
       point.v = point.v
@@ -472,20 +485,20 @@ class ForceLayout {
       }
       point.a = new Vector(0, 0);
     });
-  }
+  };
 
-  updatePosition(interval: number) {
+  updatePosition = (interval: number) => {
     this.nodes.forEach(node => {
       const point = this.nodePoints.get(node.id);
       point.p = point.p.add(point.v.scalarMultip(interval)); // 路程公式 s = v * t
     });
-  }
+  };
 
   /**
    * add one Node
    * @param {[type]} node [description]
    */
-  addNode(node: ForceNodeType) {
+  addNode = (node: ForceNodeType) => {
     const { ignore } = this.props;
     if (ignore && ignore(node)) {
       return;
@@ -494,36 +507,36 @@ class ForceLayout {
       this.nodes.push(node);
     }
     this.nodeSet[node.id] = node;
-  }
+  };
 
   /**
    * add Nodes
    * @param {[type]} data [description]
    */
-  addNodes(data: NodeType[]) {
+  addNodes = (data: NodeType[]) => {
     data.forEach(node => {
       this.addNode(new Node(node));
     });
-  }
+  };
 
   /**
    * add one Edge
    * @param {[type]} edge [description]
    */
-  addEdge(edge: Edge) {
+  addEdge = (edge: Edge) => {
     if (!(edge.id in this.edgeSet)) {
       this.edges.push(edge);
     }
 
     this.edgeSet[edge.id] = edge;
     return edge;
-  }
+  };
 
   /**
    * add Edges
    * @param {[type]} data [description]
    */
-  addEdges(data: Edge[]) {
+  addEdges = (data: Edge[]) => {
     try {
       const len = data.length;
       for (let i = 0; i < len; i++) {
@@ -551,12 +564,12 @@ class ForceLayout {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register(type: string, options: any) {
+  register = (type: string, options: any) => {
     this.registers.set(type, options); // 将用户的自定义函数注册进来
-  }
+  };
 
   restart = (dragNode: ForceNodeType[], graph: Graph) => {
     /** 将位置更新到nodePoint中 */
@@ -598,10 +611,10 @@ class ForceLayout {
     else this.slienceForce();
   };
 
-  stop() {
+  stop = () => {
     window.cancelAnimationFrame(this.timer);
     this.done = true;
-  }
+  };
 }
 
 export default ForceLayout;
