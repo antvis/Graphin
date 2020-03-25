@@ -20,7 +20,7 @@ const renderContextMenu = (option: ContextMenu) => {
             openNotification('info', '复制ID', '复制ID需要至少选中一个节点');
             return;
         }
-        const nodeIds = selectedNodes.map(node => node.id).join(',');
+        const nodeIds = selectedNodes.map((node) => node.id).join(',');
         if (copy2Clipboard(nodeIds)) {
             openNotification('success', '复制ID', '复制ID成功');
         } else {
@@ -79,6 +79,7 @@ const renderContextMenu = (option: ContextMenu) => {
             title: '反选实体',
             iconType: 'select',
             visible: false,
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             onClick: () => {},
         },
     ];

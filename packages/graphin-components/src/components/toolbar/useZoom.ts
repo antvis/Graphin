@@ -20,7 +20,7 @@ interface FunUseZoom {
 
 const useZoom: FunUseZoom = (initZoom = 1) => {
   const [zoom, setZoom] = useState(initZoom);
-  const handleZoom: FunHandleZoom = isZoomIn => {
+  const handleZoom: FunHandleZoom = (isZoomIn) => {
     const newZoom = getNextZoom(zoom, isZoomIn, MIN_ZOOM, MAX_ZOOM);
     setZoom(newZoom);
     return newZoom;

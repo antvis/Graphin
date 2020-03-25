@@ -7,9 +7,9 @@ const deleteNodes = (state: GrapheneState, selectedNodes: NodeData[]) => {
     } = state;
 
     const selectedNodeIds = selectedNodes.map((node: NodeData) => node.id);
-    const newNodes = nodes.filter(node => !selectedNodeIds.includes(node.id));
+    const newNodes = nodes.filter((node) => !selectedNodeIds.includes(node.id));
     const newEdges = edges.filter(
-        edge => !selectedNodeIds.includes(edge.source) && !selectedNodeIds.includes(edge.target),
+        (edge) => !selectedNodeIds.includes(edge.source) && !selectedNodeIds.includes(edge.target),
     );
 
     return updateChain(state)

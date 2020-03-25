@@ -22,7 +22,7 @@ const randomLayout = (data: Data, cfg: RandomLayoutOptions) => {
 
   const { edges, nodes } = data;
 
-  const newNodes = nodes.map(node => {
+  const newNodes = nodes.map((node) => {
     return {
       ...node,
       x: x + Math.round(Math.random() * w),

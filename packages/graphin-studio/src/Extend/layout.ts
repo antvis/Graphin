@@ -7,7 +7,7 @@ const layout = (graphin: Graphin, props: GraphinProps) => {
             desc: '自定义随机布局',
             icon: 'home',
             layout: (): { data: Data } => {
-                const nodes = props.data.nodes.map(node => {
+                const nodes = props.data.nodes.map((node) => {
                     return {
                         ...node,
                         x: Math.round(Math.random() * 800),

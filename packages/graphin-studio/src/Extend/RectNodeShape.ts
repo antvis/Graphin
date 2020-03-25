@@ -162,7 +162,6 @@ const renderRectNode: NodeShapeFunction = (node: Node) => {
                 },
             },
         },
-        
     };
 };
 export default renderRectNode;

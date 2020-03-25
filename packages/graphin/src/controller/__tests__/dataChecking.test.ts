@@ -73,7 +73,10 @@ const edgeErrorInput: any = {
 // eslint-disable-next-line
 const edgeDupInput: any = {
   nodes: [],
-  edges: [{ source: '1', target: '2', data: {} }, { source: '1', target: '2', data: {} }],
+  edges: [
+    { source: '1', target: '2', data: {} },
+    { source: '1', target: '2', data: {} },
+  ],
 };
 
 // eslint-disable-next-line

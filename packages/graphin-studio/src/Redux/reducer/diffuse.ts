@@ -8,9 +8,7 @@ import { NodeData, EdgeData, GrapheneState } from '../../types';
 const diffuseReducer = (state: GrapheneState, startNodes: NodeData[]) => {
     const count = Math.round((Math.random() + 1) * 5);
 
-    const { nodes, edges } = Utils.mock(count)
-        .expand(startNodes)
-        .value();
+    const { nodes, edges } = Utils.mock(count).expand(startNodes).value();
 
     const data = transform.data({
         nodes: getNodeProperties(nodes),
