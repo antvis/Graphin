@@ -27,7 +27,8 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
   } = options;
 
   /** Webworker solution. Otherwise, browser UI rendering is blocked */
-  if (enableWorker) {
+  if (enableWorker && data.nodes.length > 100) {
+    // 100以下的节点不走webworker
     return forceWithWorker(data, options);
   }
 

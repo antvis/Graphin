@@ -85,26 +85,59 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
     nodes: data.nodes,
     edges: data.edges,
   });
+
+  let renderIndex = -1;
+  const allData: any[] = [];
+  let requestAnimationFrameId: number;
   globalWorker.onmessage = e => {
-    const forceData = e.data;
-    try {
-      forceData.nodes.forEach((item: NodeType) => {
-        const node = graph.findById(item.id);
-        if (node) {
-          // 因为有可能画布删除了节点
-          const model = node.get('model');
-          model.x = item.x;
-          model.y = item.y;
-          if (isOptimization) {
-            optimizeDrawingByNode(true, node);
-          }
-        }
+    const { forceData, done } = e.data;
+    renderIndex = renderIndex + 1;
+    allData.push(forceData);
+
+    if (requestAnimationFrameId) {
+      window.cancelAnimationFrame(requestAnimationFrameId);
+    }
+    if (done) {
+      return;
+    }
+
+    if (renderIndex === 0) {
+      // 从第二个渲染开始做补间动画
+      console.info('力导准备阶段...');
+      return;
+    } else {
+      const preData = allData[renderIndex - 1];
+      const currData = allData[renderIndex];
+      const nodeMap = new Map();
+      currData.nodes.forEach((node: any, index: number) => {
+        const preNode = preData.nodes[index];
+        nodeMap.set(node.id, {
+          x: node.x,
+          y: node.y,
+          // 计算出每个节点的 deltaX 与 deltaY
+          deltaX: (node.x - preNode.x) / 60,
+          deltaY: (node.y - preNode.y) / 60,
+        });
       });
-      graph.refreshPositions();
-      data = forceData;
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+
+      let stepIndex: number = 0;
+      /** 补间动画 */
+      const step = () => {
+        console.time('cost');
+        preData.nodes.forEach((item: NodeType) => {
+          const node = graph.findById(item.id);
+          const map = nodeMap.get(item.id);
+          const model = node.get('model');
+          model.x = (item.x as number) + map.deltaX * stepIndex;
+          model.y = (item.y as number) + map.deltaY * stepIndex;
+        });
+        graph.refreshPositions();
+        stepIndex++;
+        console.timeEnd('cost');
+        requestAnimationFrameId = window.requestAnimationFrame(step);
+      };
+      requestAnimationFrameId = window.requestAnimationFrame(step);
+      return;
     }
   };
 

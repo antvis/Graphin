@@ -119,6 +119,8 @@ class ForceLayout {
 
   /** 向心力的中心点 */
   center: Vector;
+  /** 距离的总和 */
+  averageDistance: number;
 
   constructor(options: Partial<ForceProps>) {
     this.props = {
@@ -158,6 +160,7 @@ class ForceLayout {
     this.edgeSprings = new Map();
     this.registers = new Map();
     this.done = false;
+    this.averageDistance = 0;
 
     /** 计数器 */
     this.iterations = 0;
@@ -188,6 +191,7 @@ class ForceLayout {
     this.nodePoints = new Map();
     this.edgeSprings = new Map();
     this.sourceData = data;
+    this.averageDistance = 0;
 
     // add nodes and edges
     if ('nodes' in data || 'edges' in data) {
@@ -311,6 +315,34 @@ class ForceLayout {
   };
 
   animation = () => {
+    if (this.props.enableWorker) {
+      let startTimer = new Date().valueOf();
+      const firstTickInterval = 0.22;
+      for (let i = 0; i < this.props.MaxIterations; i++) {
+        const tickInterval = Math.max(0.02, firstTickInterval - i * 0.002);
+        this.tick(tickInterval);
+        const diff = new Date().valueOf() - startTimer;
+        if (diff > 2000) {
+          this.render();
+          startTimer = new Date().valueOf();
+        }
+        const energy = this.calTotalEnergy();
+        /** 如果需要监控信息，则提供给用户 */
+        const monitor = this.registers.get('monitor');
+        if (monitor) {
+          monitor(this.reportMointor(energy));
+        }
+        console.log('average', this.averageDistance);
+        if (this.averageDistance < 0.5) {
+          this.render();
+          if (this.props.done) {
+            this.props.done();
+          }
+          return;
+        }
+      }
+      return;
+    }
     const step = () => {
       const { done, tickInterval, minEnergyThreshold, MaxIterations } = this.props;
 
@@ -327,10 +359,8 @@ class ForceLayout {
         monitor(this.reportMointor(energy));
       }
 
-      if (
-        energy <= minEnergyThreshold ||
-        this.iterations === MaxIterations // 1000000次/(1000/60) = 60000s = 1min
-      ) {
+      console.log('average', this.averageDistance);
+      if (this.averageDistance < 0.5) {
         this.cancelAnimationFrame(this.timer);
         this.iterations = 0;
         this.done = true;
@@ -488,10 +518,14 @@ class ForceLayout {
   };
 
   updatePosition = (interval: number) => {
+    let sum = 0;
     this.nodes.forEach(node => {
       const point = this.nodePoints.get(node.id);
+      const distance = point.v.scalarMultip(interval);
+      sum = sum + distance.magnitude();
       point.p = point.p.add(point.v.scalarMultip(interval)); // 路程公式 s = v * t
     });
+    this.averageDistance = sum / this.nodes.length;
   };
 
   /**

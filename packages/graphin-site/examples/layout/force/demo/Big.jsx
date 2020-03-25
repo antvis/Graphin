@@ -77,7 +77,7 @@ const App = () => {
             },
             repulsion: 200 * 6,
             stiffness: 200,
-            MaxIterations: 120,
+            MaxIterations: 1200,
             tickInterval: 0.02,
             maxSpeed: 1000,
             damping: 0.8,

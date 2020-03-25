@@ -15,12 +15,21 @@ export default () => {
       return value;
     });
 
-    const simulation = new ForceLayout(newForceOptions);
+    const simulation = new ForceLayout({
+      ...newForceOptions,
+      done: () => {
+        // @ts-ignore
+        postMessage({
+          done: true,
+        });
+        newForceOptions.done && newForceOptions.done();
+      },
+    });
     simulation.setData(data);
 
     simulation.register('render', (forceData: any) => {
       // @ts-ignore
-      postMessage(forceData);
+      postMessage({ forceData, done: false });
     });
 
     simulation.start();
