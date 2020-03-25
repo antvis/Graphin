@@ -58,14 +58,8 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
     .map((edge) => {
       const { source, target, shape, style } = edge;
       return {
-        shape: shape || source === target ? 'loop' : 'LineEdge',
-        style: style || {
-          endArrow: true,
-          stroke: '#ddd',
-          cursor: 'pointer',
-          lineWidth: 1.5,
-          lineAppendWidth: 10, // 添加hover上去的宽度,
-        },
+        shape: shape || source === target ? 'loop' : 'CanonicalLineEdge',
+        style,
         loopCfg: {
           position: 'top',
           dist: 20,
