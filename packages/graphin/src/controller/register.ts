@@ -9,6 +9,7 @@ import RegisterLineEdge from '../shape/g6/LineEdge';
 import RegisterCanonicalLineEdge from '../shape/graph-studio/LineEdge';
 import RegisterCanonicalCircleNode from '../shape/graph-studio/CircleNode';
 import RegisterCanonicalRectNode from '../shape/graph-studio/RectNode';
+import RegisterCanonicalHexagonNode from '../shape/graph-studio/HexagonNode';
 import graphinHighlight from '../behaviors/graphin-highlight';
 import { registerFontFamily } from '../icons/iconFont';
 import { BehaviorModeItem } from './init';
@@ -26,6 +27,12 @@ const defaultRegister = {
         name: 'CanonicalRectNode',
         register: () => {
           RegisterCanonicalRectNode(G6);
+        },
+      },
+      {
+        name: 'CanonicalHexagonNode',
+        register: () => {
+          RegisterCanonicalHexagonNode(G6);
         },
       },
     ];
