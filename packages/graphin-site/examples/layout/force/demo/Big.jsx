@@ -36,7 +36,7 @@ const colors = legend.map(c => c.color);
 const App = () => {
   const [data, setData] = React.useState({ nodes: [], edges: [] });
   React.useEffect(() => {
-    fetch('../../data/web.json')
+    fetch('../../examples/data/web.json')
       .then(res => res.json())
       .then(res => {
         const nodes = res.nodes.map((node, index) => {
