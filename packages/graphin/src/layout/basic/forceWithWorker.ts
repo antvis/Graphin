@@ -1,11 +1,9 @@
 import { LayoutOption } from '../../controller/layout/defaultLayouts';
-import ForceLayout from '../force/ForceLayout';
-import { optimizeDrawingByNode } from '../../perf/optimizeDrawing';
+import ForceLayout, { ForceProps } from '../force/ForceLayout';
 
-import { LayoutOptionBase, Data, Node as NodeType, ForceSimulation, ExtendedGraph, Graph } from '../../types';
+import { LayoutOptionBase, Data, ForceSimulation } from '../../types';
 
-import { ForceProps } from '../force/ForceLayout';
-/** web worker*/
+/** web worker */
 import Point from '../force/Point';
 import Vector from '../force/Vector';
 import Spring from '../force/Spring';
@@ -55,6 +53,7 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
   /** serialize an object with method */
   const optionString = JSON.stringify(
     others,
+    // eslint-disable-next-line
     (_key: string, value: any) => {
       if (typeof value === 'function') {
         return value.toString();
@@ -72,9 +71,9 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
     `;workerFunction()`,
   ];
 
-  /** Build a worker from an anonymous function body **/
+  /** Build a worker from an anonymous function body */
 
-  var blobURL = URL.createObjectURL(
+  const blobURL = URL.createObjectURL(
     new Blob(['(()=>{', ...(workerStringArray as [string]), '})()'], {
       type: 'application/javascript',
     }),
@@ -86,64 +85,71 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
     edges: data.edges,
   });
 
-  let renderIndex = -1;
-  const allData: any[] = [];
+  // let renderIndex = -1;
+  // replace array to swap to avoid memory leak
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const swap: { pre?: any; current?: any } = {};
   let requestAnimationFrameId: number;
-  globalWorker.onmessage = e => {
+
+  globalWorker.onmessage = (e) => {
     const { forceData, done } = e.data;
-    renderIndex = renderIndex + 1;
-    allData.push(forceData);
-
-    if (requestAnimationFrameId) {
-      window.cancelAnimationFrame(requestAnimationFrameId);
-    }
+    // renderIndex = renderIndex + 1;
+    // allData.push(forceData);
+    // swap.pre = swap.current;
+    if (requestAnimationFrameId) window.cancelAnimationFrame(requestAnimationFrameId);
     if (done) {
+      // force render
       return;
     }
 
-    if (renderIndex === 0) {
+    if (!swap.pre) {
       // 从第二个渲染开始做补间动画
-      console.info('力导准备阶段...');
-      return;
+      swap.pre = forceData;
     } else {
-      const preData = allData[renderIndex - 1];
-      const currData = allData[renderIndex];
-      const nodeMap = new Map();
-      currData.nodes.forEach((node: any, index: number) => {
-        const preNode = preData.nodes[index];
-        nodeMap.set(node.id, {
-          x: node.x,
-          y: node.y,
-          // 计算出每个节点的 deltaX 与 deltaY
-          deltaX: (node.x - preNode.x) / 60,
-          deltaY: (node.y - preNode.y) / 60,
-        });
+      swap.current = forceData;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      swap.current.nodes.forEach((node: any, index: number) => {
+        const preNode = swap.pre.nodes[index];
+        // 计算出每个节点的 deltaX 与 deltaY
+        // 补间动画可能需要重新设计采样频率才能保证顺滑
+        // 至少保证60像素的位移，避免补间动画卡顿问题
+        let deltaX = (node.x - preNode.x) / 60;
+        let deltaY = (node.y - preNode.y) / 60;
+        // 同方向至少移动1像素
+        // eslint-disable-next-line no-nested-ternary
+        deltaX = Math.abs(deltaX) > 1 ? deltaX : deltaX >= 0 ? 1 : -1;
+        // eslint-disable-next-line no-nested-ternary
+        deltaY = Math.abs(deltaY) > 1 ? deltaY : deltaY >= 0 ? 1 : -1;
+        preNode.deltaX = deltaX;
+        preNode.deltaY = deltaY;
       });
 
-      let stepIndex: number = 0;
+      let stepIndex = 0;
       /** 补间动画 */
       const step = () => {
-        console.time('cost');
-        preData.nodes.forEach((item: NodeType) => {
+        // console.time('cost');
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        swap.pre.nodes.forEach((item: any) => {
           const node = graph.findById(item.id);
-          const map = nodeMap.get(item.id);
           const model = node.get('model');
-          model.x = (item.x as number) + map.deltaX * stepIndex;
-          model.y = (item.y as number) + map.deltaY * stepIndex;
+          model.x = item.x;
+          model.y = item.y;
+          item.x = item.x + item.deltaX;
+          item.y = item.y + item.deltaY;
         });
         graph.refreshPositions();
         stepIndex++;
-        console.timeEnd('cost');
+        // console.timeEnd('cost');
         requestAnimationFrameId = window.requestAnimationFrame(step);
       };
       requestAnimationFrameId = window.requestAnimationFrame(step);
-      return;
     }
   };
 
   return {
-    data: data,
-    //@ts-ignore
+    data,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     simulation: null,
   };
 };

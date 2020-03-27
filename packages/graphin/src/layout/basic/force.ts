@@ -1,9 +1,8 @@
-import ForceLayout from '../force/ForceLayout';
+import ForceLayout, { ForceProps } from '../force/ForceLayout';
 import { optimizeDrawing, optimizeDrawingByNode } from '../../perf/optimizeDrawing';
 
-import { LayoutOptionBase, Data, Node as NodeType, ForceSimulation, ExtendedGraph, Graph } from '../../types';
+import { LayoutOptionBase, Data, Node as NodeType, ForceSimulation, ExtendedGraph } from '../../types';
 
-import { ForceProps } from '../force/ForceLayout';
 import forceWithWorker from './forceWithWorker';
 
 export interface ForceLayoutOptions extends ForceProps, LayoutOptionBase {
@@ -21,7 +20,8 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
     graph,
     enableWorker = false,
     animation,
-    done = (graph: any) => {},
+    // eslint-disable-next-line
+    done = (_graph: any) => {},
     isOptimization,
     ...others
   } = options;
