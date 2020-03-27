@@ -4,8 +4,8 @@ import ConcentricLayout, { ConcentricOption } from '../../layout/basic/concentri
 import forceLayout, { ForceLayoutOptions } from '../../layout/basic/force';
 import dagreLayout, { DagreLayoutOption } from '../../layout/g6/dagre';
 import gridLayout, { GridLayoutOptions } from '../../layout/basic/grid';
-import { RandomLayoutOptions } from '../../layout/basic/random';
-
+import randomLayout, { RandomLayoutOptions } from '../../layout/basic/random';
+import TweakLayout from '../../layout/basic/tweak';
 import Graphin from '../../Graphin';
 import { Data, ForceSimulation, GraphinProps } from '../../types';
 
@@ -24,6 +24,26 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
   const height = graph!.get('height');
 
   return [
+    {
+      name: 'random',
+      desc: '随机布局',
+      icon: 'random',
+      layout: (data: Data, options: LayoutOption): { data: Data } => {
+        const defaultOptions = {
+          /** 随机区域的bbox */
+          bbox: {
+            x: 0,
+            y: 0,
+            w: width,
+            h: height,
+          },
+        };
+        return {
+          data: randomLayout(data, { ...defaultOptions, ...options }) as Data,
+        };
+      },
+    },
+
     {
       name: 'circle',
       desc: '圆形布局',
@@ -142,15 +162,14 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
       layout: (data: Data, options: LayoutOption): { data: Data; forceSimulation: ForceSimulation } => {
         const defaultOptions = {
           data,
-          /** 前置布局，默认为random */
+          /** 前置布局，默认为 concentric */
           preset: {
             name: (prevProps.layout && prevProps.layout.name) || 'concentric',
             options: {},
           },
           /** spring stiffness 弹簧劲度系数 * */
           stiffness: 200.0,
-          /** 默认的弹簧长度 * */
-          defSpringLen: 200,
+
           /** repulsion 斥力，这里指代 库伦常量Ke */
           repulsion: 200.0 * 5,
           /** 向心力 */
@@ -171,23 +190,28 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
         };
 
         const layouOpts = { ...defaultOptions, ...options };
+        let { name: presetName, options: presetOptions = {} } = layouOpts.preset;
 
-        /** 只要不是初始化空数据布局，前一次的布局为力导布局，那么设置它的前置布局为force，内部采用tweak布局 */
-        if (prevProps && prevProps.layout!.name === 'force') {
-          if (prevProps.data.nodes.length === 0) {
-            layouOpts.preset = {
-              name: 'concentric',
-              options: {},
-            };
-          } else {
-            layouOpts.preset = {
-              name: 'force',
-              options: {},
-            };
-          }
+        /** 特殊情况处理：前置布局为force，但是前置的数据也为空，则证明是初始化force布局，否则为正常前置force布局 */
+        if (presetName === 'force' && prevProps.data.nodes.length === 0) {
+          presetName = 'concentric';
+          presetOptions = {};
+        }
+        let presetData = data;
+        // 处理 前置布局后的数据
+        if (presetName === 'force') {
+          presetData = TweakLayout(presetData, options as ForceLayoutOptions).data;
+        } else {
+          const layouts = defaultLayouts(graphin, prevProps);
+          const presetLayout =
+            layouts.find((item) => {
+              return item.name === presetName;
+            }) || layouts[5]; // concentric
+          presetData = presetLayout?.layout(data, presetOptions as ForceLayoutOptions).data as Data;
         }
 
-        const force = forceLayout(layouOpts as ForceLayoutOptions);
+        const force = forceLayout(presetData, layouOpts as ForceLayoutOptions);
+
         return {
           data: force.data,
           forceSimulation: force.simulation,
