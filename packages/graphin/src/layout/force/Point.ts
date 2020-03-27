@@ -26,11 +26,11 @@ class Point {
     this.data = data;
   }
 
-  updateAcc(force: Vector) {
+  updateAcc = (force: Vector) => {
     /**
      * 加速度也是一个向量，根据力的平行四边形法则进行力的合成，用向量运算就是加运算
      */
     this.a = this.a.add(force.divide(this.m)); // a = a + F/m
-  }
+  };
 }
 export default Point;

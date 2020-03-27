@@ -19,33 +19,33 @@ class Vector {
     this.y = y;
   }
 
-  getvec() {
+  getvec = () => {
     return this;
-  }
+  };
 
-  add(v2: Vector) {
+  add = (v2: Vector) => {
     return new Vector(this.x + v2.x, this.y + v2.y);
-  }
+  };
 
-  subtract(v2: Vector) {
+  subtract = (v2: Vector) => {
     return new Vector(this.x - v2.x, this.y - v2.y);
-  }
+  };
 
-  magnitude() {
+  magnitude = () => {
     return Math.sqrt(this.x * this.x + this.y * this.y);
-  }
+  };
 
-  normalise() {
+  normalise = () => {
     return this.divide(this.magnitude());
-  }
+  };
 
-  divide(n: number) {
+  divide = (n: number) => {
     return new Vector(this.x / n || 0, this.y / n || 0);
-  }
+  };
 
-  scalarMultip(n: number) {
+  scalarMultip = (n: number) => {
     return new Vector(this.x * n, this.y * n);
-  }
+  };
 }
 
 export default Vector;
