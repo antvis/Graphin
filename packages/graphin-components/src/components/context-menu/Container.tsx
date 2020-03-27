@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon } from '../ui'; // 'antd';
+
 import { Graph } from '@antv/g6';
 
 const MenuItem = Menu.Item;

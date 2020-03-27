@@ -301,7 +301,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
   render() {
     const { isGraphReady } = this.state;
     return (
-      <>
+      <div id="graphin-container">
         <div
           data-testid="custom-element"
           className="graphin-core"
@@ -310,7 +310,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
           }}
         />
         <div className="graphin-components">{isGraphReady && this.renderChildren()}</div>
-      </>
+      </div>
     );
   }
 }
