@@ -4,9 +4,8 @@ import ConcentricLayout, { ConcentricOption } from '../../layout/basic/concentri
 import forceLayout, { ForceLayoutOptions } from '../../layout/basic/force';
 import dagreLayout, { DagreLayoutOption } from '../../layout/g6/dagre';
 import gridLayout, { GridLayoutOptions } from '../../layout/basic/grid';
-import { RandomLayoutOptions } from '../../layout/basic/random';
+import randomLayout, { RandomLayoutOptions } from '../../layout/basic/random';
 import TweakLayout from '../../layout/basic/tweak';
-import randomLayout from '../../layout/basic/random';
 import Graphin from '../../Graphin';
 import { Data, ForceSimulation, GraphinProps } from '../../types';
 
@@ -193,7 +192,7 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
         const layouOpts = { ...defaultOptions, ...options };
         let { name: presetName, options: presetOptions = {} } = layouOpts.preset;
 
-        /** 特殊情况处理：前置布局为force，但是前置的数据也为空，则证明是初始化force布局，否则为正常前置force布局*/
+        /** 特殊情况处理：前置布局为force，但是前置的数据也为空，则证明是初始化force布局，否则为正常前置force布局 */
         if (presetName === 'force' && prevProps.data.nodes.length === 0) {
           presetName = 'concentric';
           presetOptions = {};
@@ -205,7 +204,7 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
         } else {
           const layouts = defaultLayouts(graphin, prevProps);
           const presetLayout =
-            layouts.find(item => {
+            layouts.find((item) => {
               return item.name === presetName;
             }) || layouts[5]; // concentric
           presetData = presetLayout?.layout(data, presetOptions as ForceLayoutOptions).data as Data;
