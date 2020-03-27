@@ -10,9 +10,9 @@ if (!storage.get('bizTypes')) {
 
 const transform = {
     nodes: (nodes: NodeData[]) => {
-        return nodes.map(node => {
+        return nodes.map((node) => {
             const BizTypes = storage.get('bizTypes') as BizType[];
-            const bizType = BizTypes.find(item => {
+            const bizType = BizTypes.find((item) => {
                 return item.type === node.type;
             }) || { style: {} };
 
@@ -27,7 +27,7 @@ const transform = {
         });
     },
     edges: (edges: EdgeData[]) => {
-        return edges.map(edge => {
+        return edges.map((edge) => {
             const { source, target } = edge;
             return {
                 source,

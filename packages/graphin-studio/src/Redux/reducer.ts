@@ -24,17 +24,11 @@ const reducer = (state: GrapheneState, action: { type: string; payload: { [key: 
                 .$set('modal.handleOk', payload.handleOk)
                 .value();
         case 'graph/searchBar':
-            return updateChain(state)
-                .$set('searchBar.visible', payload.visible)
-                .value();
+            return updateChain(state).$set('searchBar.visible', payload.visible).value();
         case 'graph/addNodes':
-            return updateChain(state)
-                .$set('data', payload)
-                .value();
+            return updateChain(state).$set('data', payload).value();
         case 'graph/changeData':
-            return updateChain(state)
-                .$set('data', payload)
-                .value();
+            return updateChain(state).$set('data', payload).value();
         case 'graph/changeLayout':
             return updateChain(state)
                 .$set('layout', {
@@ -69,9 +63,7 @@ const reducer = (state: GrapheneState, action: { type: string; payload: { [key: 
             return deleteNodes(state, payload.selectedNodes);
 
         case 'graph/graphRef':
-            return updateChain(state)
-                .$set('graphRef', payload)
-                .value();
+            return updateChain(state).$set('graphRef', payload).value();
 
         default:
             return state;

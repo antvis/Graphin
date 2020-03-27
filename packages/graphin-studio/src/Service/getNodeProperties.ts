@@ -43,14 +43,10 @@ const getPropertyValue = (property: SchemaProperty) => {
                 return Math.random() - 0.5;
             })[0];
         case 'phone':
-            return Math.random()
-                .toString()
-                .slice(2, 11);
+            return Math.random().toString().slice(2, 11);
 
         case 'USCC':
-            return Math.random()
-                .toString()
-                .slice(2, 20);
+            return Math.random().toString().slice(2, 20);
         default:
             return '...';
     }
@@ -61,7 +57,7 @@ const getPropertyValue = (property: SchemaProperty) => {
  * @param nodes
  */
 const getProperties = (nodes: NodeData[]): NodeData[] => {
-    return nodes.map(node => {
+    return nodes.map((node) => {
         const { type = '' } = node;
         if (!nodePropertiesSchemaMap[type]) {
             return node;

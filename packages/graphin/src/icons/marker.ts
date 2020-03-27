@@ -23,7 +23,7 @@ export default (customIcons: IconType[]) => {
       };
     }, {});
   const icons = { ...DEFAULT_ICONS, ...CUSTOM_ICONS };
-  Object.keys(icons).forEach(key => {
+  Object.keys(icons).forEach((key) => {
     G6.G.Marker.Symbols[key] = svg2marker(icons[key].path);
   });
 };

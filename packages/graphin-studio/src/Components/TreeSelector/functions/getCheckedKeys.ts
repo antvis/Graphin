@@ -22,7 +22,7 @@ const getCheckedKeys = (data: Array<CheckboxDataProps>, checkedList: Array<Check
 
     groupedItems.forEach((item: GroupedItemsProps) => {
         const { groups } = item;
-        const filterItems = groups.filter(e => checkedList.includes(e.value));
+        const filterItems = groups.filter((e) => checkedList.includes(e.value));
 
         if (groups.length === filterItems.length) {
             checked.push(item.key);

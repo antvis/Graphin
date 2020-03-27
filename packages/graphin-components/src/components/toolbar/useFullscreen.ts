@@ -4,7 +4,7 @@ interface FunUseFullscreen {
   (el?: HTMLElement): [boolean, () => void];
 }
 
-const useFullscreen: FunUseFullscreen = el => {
+const useFullscreen: FunUseFullscreen = (el) => {
   const [fullscreen, setFullscreen] = useState(false);
   const handleFullScreenChange = () => {
     // if exit fullscreen
@@ -18,7 +18,7 @@ const useFullscreen: FunUseFullscreen = el => {
         .then(() => {
           setFullscreen(true);
         })
-        .catch(err => {
+        .catch((err) => {
           console.error('requestFullscreen error: ', err);
         });
     }
@@ -30,7 +30,7 @@ const useFullscreen: FunUseFullscreen = el => {
         .then(() => {
           setFullscreen(false);
         })
-        .catch(err => {
+        .catch((err) => {
           console.error('exitFullscreen error: ', err);
         });
     }

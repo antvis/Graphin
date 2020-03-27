@@ -11,9 +11,7 @@ const changeToolbarReducer = (state: GrapheneState, direction: string) => {
         },
     });
 
-    return updateChain(state)
-        .$set('toolbar.direction', direction)
-        .value();
+    return updateChain(state).$set('toolbar.direction', direction).value();
 };
 
 export default changeToolbarReducer;

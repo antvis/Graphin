@@ -24,7 +24,7 @@ const useGraphEvents = (state: GrapheneState, graphRef: any, dispatch: React.Dis
         });
 
         return () => {
-            Object.keys(events).forEach(name => {
+            Object.keys(events).forEach((name) => {
                 graph.off(name, events[name]);
             });
         };

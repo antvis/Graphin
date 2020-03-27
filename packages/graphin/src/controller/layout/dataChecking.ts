@@ -6,7 +6,7 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
   // nodes
   const nodeIds: string[] = [];
   const graphinNodes = nodes
-    .filter(node => {
+    .filter((node) => {
       const { id } = node;
       // 如果节点不存在，则忽略该节点
       if (!id) {
@@ -25,7 +25,7 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
       nodeIds.push(id);
       return true;
     })
-    .map(node => {
+    .map((node) => {
       return {
         shape: node.shape || 'CircleNode',
         ...node,
@@ -38,7 +38,7 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
 
   // edges
   const graphinEdges = edges
-    .filter(edge => {
+    .filter((edge) => {
       const { source, target } = edge;
       if (!source || !target) {
         // eslint-disable-next-line no-console
@@ -55,7 +55,7 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
       /** 边是可以重复的，因为properties可能不一样 */
       return true;
     })
-    .map(edge => {
+    .map((edge) => {
       const { source, target, shape, style } = edge;
       return {
         shape: shape || source === target ? 'loop' : 'LineEdge',
