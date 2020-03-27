@@ -1,0 +1,13 @@
+{
+  "title": {
+    "zh": "中文分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "Simple.jsx",
+      "title": "简易 Timebar ",
+      "screenshot": "https://gw.alipayobjects.com/mdn/rms_d314dd/afts/img/A*nBhpT5HbGOAAAAAAAAAAAABkARQnAQ"
+    }
+  ]
+}

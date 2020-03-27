@@ -6,11 +6,11 @@
   "demos": [
     {
       "filename": "Simple.jsx",
-      "title": "demo-1: 内置的 Toolbar 功能体验"
+      "title": "demo-1: 通过 options 设置菜单"
     },
     {
       "filename": "Custom.jsx",
-      "title": "demo-2: 自定义 Toolbar "
+      "title": "demo-2: 通过 render 设置菜单"
     }
   ]
 }
