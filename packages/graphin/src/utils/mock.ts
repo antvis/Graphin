@@ -1,4 +1,5 @@
 import { NodeData, EdgeData, Data } from '../types';
+import Tree from './Tree';
 
 const defaultOptions = {
   /** 节点 */
@@ -112,6 +113,31 @@ export class Mock {
     });
 
     this.edges = this.edges.sort(() => Math.random() - 0.5).slice(0, length);
+
+    return this;
+  };
+
+  tree = () => {
+    this.edges = [];
+    const tree = new Tree();
+    const rootId = this.nodeIds[0];
+
+    this.nodeIds.forEach(id => {
+      tree.addNode({
+        id,
+      });
+    });
+
+    tree.bfs(node => {
+      if (node.id !== rootId) {
+        this.edges.push({
+          source: node.parent && node.parent.id,
+          target: node.id,
+          properties: [],
+        });
+      }
+      return false;
+    });
 
     return this;
   };
