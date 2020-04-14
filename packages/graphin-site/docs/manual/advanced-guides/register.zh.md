@@ -53,13 +53,13 @@ register: {
     nodeShape: (G6) => [{
         name: "custom",
         register: () => {
-            G6.registerNode("custom", () => {})  // 详见 G6 registerNode 文档
+            G6.registerNode("custom", {})  // 详见 G6 registerNode 文档
         }
     }],
     edgeShape: (G6) => [{
         name: "custom",
         register: () => {
-            G6.registerEdge("custom", () => {})  // 详见 G6 registerEdge 文档
+            G6.registerEdge("custom", {})  // 详见 G6 registerEdge 文档
         }
     }],
     behavior: (G6) => [{
@@ -67,7 +67,7 @@ register: {
         options: {}
         name: "custom",
         register: () => {
-            G6.registerBehavior("custom", () => {})  // 详见 G6 registerBehavior 文档
+            G6.registerBehavior("custom", {})  // 详见 G6 registerBehavior 文档
         }
     }],
 }
