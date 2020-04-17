@@ -163,14 +163,14 @@ export default (g6: any) => {
 
       const targetAttrs = {
         border: {
-          stroke: data.style?.dark ? '#1E202D' : color.normal,
+          stroke: color.normal,
           lineWidth: 2,
         },
         selected: {
           points: [] as number[][],
         },
         inner: {
-          fill: data.style?.dark ? '#1E202D' : color.dark,
+          fill: color.dark,
         },
         icon: {
           fill: data.style?.dark ? '#8D93B0' : '#FFFFFF',
@@ -179,7 +179,7 @@ export default (g6: any) => {
           fill: data.style?.dark ? '#8D93B0' : '#FFFFFF',
         },
         children: {
-          fill: data.style?.dark ? '#1E202D' : color.normal,
+          fill: color.normal,
         },
         childrenIcon: {
           fill: data.style?.dark ? '#8D93B0' : '#FFFFFF',
@@ -196,11 +196,11 @@ export default (g6: any) => {
       }
 
       if (name === EnumNodeAndEdgeStatus.DARK && value) {
-        targetAttrs.border.stroke = '#1E202D';
-        targetAttrs.inner.fill = '#1E202D';
+        targetAttrs.border.stroke = GREY.dark;
+        targetAttrs.inner.fill = GREY.dark;
         targetAttrs.icon.fill = '#8D93B0';
         targetAttrs.label.fill = '#8D93B0';
-        targetAttrs.children.fill = '#1E202D';
+        targetAttrs.children.fill = GREY.normal;
         targetAttrs.childrenIcon.fill = '#8D93B0';
       }
 

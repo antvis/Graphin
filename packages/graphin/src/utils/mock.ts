@@ -129,7 +129,7 @@ export class Mock {
         return {
           id: node.id,
           data: node,
-          shape: 'CanonicalStubNode',
+          shape: 'CanonicalHexagonNode',
           style: {},
         };
       }),

@@ -142,7 +142,7 @@ export default (g6: any) => {
       }
       if (name === EnumNodeAndEdgeStatus.DARK && value) {
         targetAttrs.main = {
-          stroke: '#2C2F40',
+          stroke: GREY.dark,
           lineWidth: 1,
           endArrow: {
             d: 2,

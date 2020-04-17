@@ -20,7 +20,7 @@ export default (g6: any) => {
           height: 4,
           width: 12,
           radius: [2],
-          fill: cfg.style?.dark ? '#1E202D' : color.dark,
+          fill: color.dark,
         },
       });
       group.addShape('rect', {
@@ -62,7 +62,7 @@ export default (g6: any) => {
 
       const targetAttrs = {
         floor: {
-          fill: data.style?.dark ? '#1E202D' : color.dark,
+          fill: color.dark,
         },
         selected: {
           r: 0,
@@ -78,7 +78,7 @@ export default (g6: any) => {
         };
       }
       if (name === EnumNodeAndEdgeStatus.DARK && value) {
-        targetAttrs.floor.fill = '#1E202D';
+        targetAttrs.floor.fill = GREY.dark;
         targetAttrs.text.fill = '#8D93B0';
       }
       floor.attr(targetAttrs.floor);

@@ -60,7 +60,7 @@ export default (g6: any) => {
 
       const targetAttrs = {
         floor: {
-          stroke: data.style?.dark ? '#1E202D' : color.dark,
+          stroke: color.dark,
         },
         selected: {
           r: 0,
@@ -76,7 +76,7 @@ export default (g6: any) => {
         };
       }
       if (name === EnumNodeAndEdgeStatus.DARK && value) {
-        targetAttrs.floor.stroke = '#1E202D';
+        targetAttrs.floor.stroke = GREY.dark;
         targetAttrs.text.fill = '#8D93B0';
       }
       floor.attr(targetAttrs.floor);

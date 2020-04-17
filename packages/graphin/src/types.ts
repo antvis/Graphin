@@ -243,6 +243,8 @@ export interface Edge {
 export type G6Edge = Edge & {
   startPoint: G6Node;
   endPoint: G6Node;
+  sourceNode: G6.Node;
+  targetNode: G6.Node;
 };
 
 export type NodeData = Node['data'];

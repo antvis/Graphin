@@ -7,6 +7,7 @@ import CircleNode from '../shape/render/CircleNode';
 
 import RegisterLineEdge from '../shape/g6/LineEdge';
 import RegisterCanonicalLineEdge from '../shape/graph-studio/LineEdge';
+import RegisterCanonicalLoopEdge from '../shape/graph-studio/LoopEdge';
 import RegisterCanonicalCircleNode from '../shape/graph-studio/CircleNode';
 import RegisterCanonicalRectNode from '../shape/graph-studio/RectNode';
 import RegisterCanonicalHexagonNode from '../shape/graph-studio/HexagonNode';
@@ -63,6 +64,12 @@ const defaultRegister = {
         name: 'CanonicalLineEdge',
         register: () => {
           RegisterCanonicalLineEdge(G6);
+        },
+      },
+      {
+        name: 'CanonicalLoopEdge',
+        register: () => {
+          RegisterCanonicalLoopEdge(G6);
         },
       },
     ];
