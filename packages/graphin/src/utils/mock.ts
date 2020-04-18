@@ -128,8 +128,9 @@ export class Mock {
       nodes: this.nodes.map((node) => {
         return {
           id: node.id,
+          label: `node-${node.id}`,
           data: node,
-          shape: 'CanonicalHexagonNode',
+          shape: 'CanonicalCircleNode',
           style: {},
         };
       }),

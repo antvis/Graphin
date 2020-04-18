@@ -126,7 +126,7 @@ export default (g6: any) => {
           fontSize: 10,
           textAlign: 'center',
           textBaseline: 'middle',
-          fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
+          fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
         },
       });
       children.translate(outerSize / 2 - 16 / 2, 0);
@@ -176,7 +176,7 @@ export default (g6: any) => {
           fill: data.style?.dark ? '#8D93B0' : '#FFFFFF',
         },
         label: {
-          fill: data.style?.dark ? '#8D93B0' : '#FFFFFF',
+          fill: data.style?.dark ? '#8D93B0' : '#3B3B3B',
         },
         children: {
           fill: color.normal,

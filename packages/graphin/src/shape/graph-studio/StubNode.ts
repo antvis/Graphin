@@ -44,7 +44,7 @@ export default (g6: any) => {
             fontSize: 12,
             text: cfg.label,
             textAlign: 'left',
-            fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
+            fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
           },
         });
       }
@@ -68,7 +68,7 @@ export default (g6: any) => {
           r: 0,
         },
         text: {
-          fill: data.style?.dark ? '#8D93B0' : '#FFFFFF',
+          fill: data.style?.dark ? '#8D93B0' : '#3B3B3B',
         },
       };
       if ((name === EnumNodeAndEdgeStatus.SELECTED && value) || (name === EnumNodeAndEdgeStatus.LIGHT && value)) {

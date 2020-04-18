@@ -80,11 +80,11 @@ export default (g6: any) => {
           attrs: {
             id: 'circle-label',
             x: 0,
-            y: outerSize / 2 + 8,
+            y: outerSize / 2 + 14,
             fontSize: 12,
             text: cfg.label,
             textAlign: 'center',
-            fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
+            fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
           },
         });
       }
@@ -166,7 +166,7 @@ export default (g6: any) => {
           fill: data.style?.dark ? '#8D93B0' : '#FFFFFF',
         },
         label: {
-          fill: data.style?.dark ? '#8D93B0' : '#FFFFFF',
+          fill: data.style?.dark ? '#8D93B0' : '#3B3B3B',
         },
         children: {
           fill: color.normal,
