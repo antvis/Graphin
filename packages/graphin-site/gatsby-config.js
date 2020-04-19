@@ -112,6 +112,13 @@ module.exports = {
           en: 'components',
         },
       },
+      {
+        slug: 'case',
+        title: {
+          zh: '分析案例',
+          en: 'case',
+        },
+      },
     ],
     docsearchOptions: {
       apiKey: '159c16127929bd9fe6a3087f9ddddcb9',
