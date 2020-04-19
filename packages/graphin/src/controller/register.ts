@@ -6,13 +6,51 @@ import compiler from '../shape/render/compiler';
 import CircleNode from '../shape/render/CircleNode';
 
 import RegisterLineEdge from '../shape/g6/LineEdge';
+import RegisterCanonicalLineEdge from '../shape/graph-studio/LineEdge';
+import RegisterCanonicalLoopEdge from '../shape/graph-studio/LoopEdge';
+import RegisterCanonicalCircleNode from '../shape/graph-studio/CircleNode';
+import RegisterCanonicalRectNode from '../shape/graph-studio/RectNode';
+import RegisterCanonicalHexagonNode from '../shape/graph-studio/HexagonNode';
+import RegisterCanonicalPointNode from '../shape/graph-studio/PointNode';
+import RegisterCanonicalStubNode from '../shape/graph-studio/StubNode';
 import graphinHighlight from '../behaviors/graphin-highlight';
 import { registerFontFamily } from '../icons/iconFont';
 import { BehaviorModeItem } from './init';
 
 const defaultRegister = {
   nodeShape: () => {
-    return [];
+    return [
+      {
+        name: 'CanonicalCircleNode',
+        register: () => {
+          RegisterCanonicalCircleNode(G6);
+        },
+      },
+      {
+        name: 'CanonicalRectNode',
+        register: () => {
+          RegisterCanonicalRectNode(G6);
+        },
+      },
+      {
+        name: 'CanonicalHexagonNode',
+        register: () => {
+          RegisterCanonicalHexagonNode(G6);
+        },
+      },
+      {
+        name: 'RegisterCanonicalPointNode',
+        register: () => {
+          RegisterCanonicalStubNode(G6);
+        },
+      },
+      {
+        name: 'CanonicalStubNode',
+        register: () => {
+          RegisterCanonicalPointNode(G6);
+        },
+      },
+    ];
   },
   edgeShape: () => {
     return [
@@ -20,6 +58,18 @@ const defaultRegister = {
         name: 'LineEdge',
         register: () => {
           RegisterLineEdge(G6);
+        },
+      },
+      {
+        name: 'CanonicalLineEdge',
+        register: () => {
+          RegisterCanonicalLineEdge(G6);
+        },
+      },
+      {
+        name: 'CanonicalLoopEdge',
+        register: () => {
+          RegisterCanonicalLoopEdge(G6);
         },
       },
     ];

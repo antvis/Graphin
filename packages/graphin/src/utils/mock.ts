@@ -50,6 +50,7 @@ export class Mock {
         this.edges.push({
           source: `node-${i}`,
           target: `node-${j}`,
+          label: `edge-${i}_${j}`,
           properties: [],
         });
       }
@@ -71,6 +72,7 @@ export class Mock {
         this.edges.push({
           source: `${node.id}-${i}`,
           target: node.id,
+          label: `edge-${i}_${node.id}`,
           properties: [],
         });
       }
@@ -154,8 +156,9 @@ export class Mock {
       nodes: this.nodes.map((node) => {
         return {
           id: node.id,
+          label: `node-${node.id}`,
           data: node,
-          shape: 'CircleNode',
+          shape: 'CanonicalCircleNode',
           style: {},
         };
       }),
@@ -163,6 +166,7 @@ export class Mock {
         return {
           source: edge.source,
           target: edge.target,
+          label: edge.label,
           data: edge,
         };
       }),

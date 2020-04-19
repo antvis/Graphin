@@ -1,5 +1,5 @@
 import G6, { GraphOptions } from '@antv/g6';
-import { ReactElement, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import ForceLayout from './layout/force/ForceLayout';
 import Graphin from './Graphin';
 import { LayoutOption } from './controller/layout/defaultLayouts';
@@ -91,19 +91,48 @@ export interface NodeStyle {
   /** 节点的大小 */
   nodeSize?: number;
   /** 节点的主要颜色 */
-  primaryColor?: string;
+  primaryColor?: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B] | string;
   /** 文本的字体大小 */
   fontSize?: number;
   /** 文本的字体颜色 */
-  fontColor?: string;
+  fontColor?: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B] | string;
   /** dark 置灰 */
   dark?: string;
   /** iconfont 的 font-family */
   fontFamily?: string;
   /** icon 的类型 */
   icon?: string;
-  [key: string]: string | number | undefined;
+  /** icon大小 */
+  iconSize?: number;
+  /** icon颜色 */
+  iconColor?: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B] | string;
+  /** 标记 */
+  tag?: {
+    outDegree: boolean;
+  };
+  [key: string]: string | number | undefined | object;
 }
+
+// TODO: 考虑一下重新调整style的内容组织方式
+// export interface InnerNodeStyle {
+//   size: number;
+//   tag: {
+//     outDegree: boolean;
+//   },
+//   icon: {
+//     size: number;
+//     fontFamily?: string;
+//     color: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B];
+//   };
+//   label: {
+//     size: number;
+//     position: 'inner' | 'bottom';
+//     color: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B];
+//   }
+//   border: {
+//     color: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B];
+//   }
+// }
 
 export interface Node {
   /** 节点源数据 */
@@ -125,6 +154,8 @@ export interface Node {
   label?: string;
   /** 节点样式 */
   style?: Partial<NodeStyle>;
+  /** 内置节点属性 */
+  // innerNodeStyle?: Partial<InnerNodeStyle>;
   /** 节点位置信息 */
   x?: number;
   y?: number;
@@ -134,6 +165,11 @@ export interface Node {
   degree?: number;
   searchTypes?: string[];
 }
+
+export type G6Node = Node & {
+  x: number;
+  y: number;
+};
 
 export interface NodeLayoutType {
   /** 节点度数 */
@@ -152,6 +188,32 @@ export interface NodeLayoutType {
     theta: number;
   };
 }
+
+type COLOR_RGB_R = number;
+type COLOR_RGB_G = number;
+type COLOR_RGB_B = number;
+
+/**
+ * 默认节点样式
+ * TODO: 与Style设计合并
+ * */
+export interface InnerEdgeStyle {
+  /** Line 样式 */
+  line: {
+    width: number;
+    color: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B];
+    dash?: [number, number];
+  };
+  /** Label样式 */
+  label?: {
+    size: number;
+    color: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B];
+    family: string;
+  };
+  dark?: string;
+  [key: string]: string | number | undefined | object;
+}
+
 export interface Edge {
   /** 边的数据，必选 */
   data: {
@@ -171,11 +233,20 @@ export interface Edge {
   /** 边的文本 */
   label?: string;
   /** 边的样式 */
-  style?: object;
+  style?: InnerEdgeStyle;
+
   id?: string;
   /** 边的弹簧长度，力导时使用 */
   spring?: number;
 }
+
+export type G6Edge = Edge & {
+  startPoint: G6Node;
+  endPoint: G6Node;
+  sourceNode: G6.Node;
+  targetNode: G6.Node;
+};
+
 export type NodeData = Node['data'];
 export type EdgeData = Edge['data'];
 
