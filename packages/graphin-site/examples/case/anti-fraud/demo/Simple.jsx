@@ -80,7 +80,7 @@ const edges = source.edges.map(edge => {
     label: edge.relative,
     style: {
       line: {
-        dash: edge.lineType === 'dash' ? 5 : 0,
+        dash: edge.lineType === 'dash' ? [2, 2] : 0,
       },
     },
   };
