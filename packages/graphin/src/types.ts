@@ -133,6 +133,9 @@ export interface Node {
   /** 节点度数 */
   degree?: number;
   searchTypes?: string[];
+
+  /** User Defined Propery */
+  [key: string]: any;
 }
 
 export interface NodeLayoutType {
@@ -175,6 +178,9 @@ export interface Edge {
   id?: string;
   /** 边的弹簧长度，力导时使用 */
   spring?: number;
+
+  /** User Defined Property */
+  [key: string]: any;
 }
 export type NodeData = Node['data'];
 export type EdgeData = Edge['data'];
