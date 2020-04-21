@@ -26,9 +26,7 @@ const source = {
       name: 'elemeID',
     },
     // friends
-    {
-      name: '小明',
-    },
+
     {
       name: '小王',
     },
@@ -94,11 +92,6 @@ const source = {
       target: '小红',
       relative: '朋友',
     },
-    {
-      source: '陆某',
-      target: '小明',
-      relative: '朋友',
-    },
   ],
 };
 
@@ -135,7 +128,7 @@ const App = () => (
     layout={{
       name: 'force',
       options: {
-        preset: { name: 'concentric' },
+        preset: { name: 'circle' },
       },
     }}
   />

@@ -1,0 +1,18 @@
+{
+  "title": {
+    "zh": "中文分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "Force.jsx",
+      "title": "力导布局下的关系扩散",
+      "screenshot": ""
+    },
+    {
+      "filename": "Dagre.jsx",
+      "title": "有向分层下的关系扩散",
+      "screenshot": ""
+    }
+  ]
+}
