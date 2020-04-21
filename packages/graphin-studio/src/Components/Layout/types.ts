@@ -1,4 +1,4 @@
 export interface LayoutProps {
-    children?: any;
-    className?: any;
+  children?: any;
+  className?: any;
 }

@@ -15,12 +15,12 @@
  * @category Utils
  */
 const uniqueElementsBy = <T>(
-    arr: T[], // eslint-disable-line
-    fn: (a: T, b: T) => boolean, // eslint-disable-line
+  arr: T[], // eslint-disable-line
+  fn: (a: T, b: T) => boolean, // eslint-disable-line
 ) =>
-    arr.reduce((acc, v) => {
-        if (!acc.some((x) => fn(v, x))) acc.push(v);
-        return acc;
-    }, []);
+  arr.reduce((acc, v) => {
+    if (!acc.some(x => fn(v, x))) acc.push(v);
+    return acc;
+  }, []);
 
 export default uniqueElementsBy;

@@ -7,7 +7,7 @@ const ICON_FONT_FAMILY_MAP: {
 
 export const registerFontFamily = (extendIcons: ExtendIcon[]): void => {
   ICON_FONT_FAMILY_MAP.graphin = fonts.glyphs as IconFontMapItem[];
-  extendIcons.forEach((item) => {
+  extendIcons.forEach(item => {
     ICON_FONT_FAMILY_MAP[item.fontFamily] = item.map;
   });
 };
@@ -26,7 +26,7 @@ export default (type: string, fontFamily: string) => {
     };
   });
 
-  const matchIcon = icons.find((icon) => {
+  const matchIcon = icons.find(icon => {
     return icon.name === type;
   }) || { unicode: '', name: '' };
 

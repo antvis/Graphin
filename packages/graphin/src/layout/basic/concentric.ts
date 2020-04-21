@@ -144,7 +144,7 @@ class ConcentricLayout {
     let maxNodeSize = 0;
     // 计算每个节点的concentric权重value
     const nodeValues: NodeValue[] = nodes
-      .map((node) => {
+      .map(node => {
         return {
           value: options.concentric!(node),
           node,
@@ -161,7 +161,7 @@ class ConcentricLayout {
     // put the values into levels
     const levels: Level[] = [[]];
     let currentLevel: Level = levels[0];
-    nodeValues.forEach((node) => {
+    nodeValues.forEach(node => {
       if (currentLevel.length > 0) {
         const firstItem = currentLevel[0].value;
         const diff = Math.abs(firstItem - node.value);
@@ -189,7 +189,7 @@ class ConcentricLayout {
     // find the metrics for each level
     let r = 0;
 
-    levels.forEach((level) => {
+    levels.forEach(level => {
       const sweep = options.sweep === undefined ? 2 * Math.PI - (2 * Math.PI) / level.length : options.sweep;
       level.dTheta = sweep / Math.max(1, level.length - 1);
       const { dTheta } = level;

@@ -91,7 +91,7 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
   const swap: { pre?: any; current?: any } = {};
   let requestAnimationFrameId: number;
 
-  globalWorker.onmessage = (e) => {
+  globalWorker.onmessage = e => {
     const { forceData, done } = e.data;
     // renderIndex = renderIndex + 1;
     // allData.push(forceData);
