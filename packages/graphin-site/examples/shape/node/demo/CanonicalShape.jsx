@@ -21,6 +21,8 @@ data.nodes = data.nodes.map((node) => {
   node.style = node.style || {};
   // 修改节点大小
   node.style.nodeSize = 36;
+  // 设置节点徽标
+  node.badge = 4;
   return node;
 });
 data.edges = data.edges.map((edge, index) => {

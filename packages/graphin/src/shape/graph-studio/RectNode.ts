@@ -96,7 +96,7 @@ export default (g6: any) => {
         });
       }
 
-      if (!cfg.degree) return keyShape;
+      if (!cfg.badge) return keyShape;
 
       const children = group.addGroup(
         {
@@ -122,7 +122,7 @@ export default (g6: any) => {
           id: 'rect-children-icon',
           x: 12 / 2,
           y: 12 / 2,
-          text: cfg.degree > 100 ? '99+' : cfg.degree,
+          text: cfg.badge,
           fontSize: 10,
           textAlign: 'center',
           textBaseline: 'middle',

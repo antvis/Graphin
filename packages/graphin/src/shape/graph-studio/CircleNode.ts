@@ -89,7 +89,7 @@ export default (g6: any) => {
         });
       }
 
-      if (!cfg.degree) return keyShape;
+      if (!cfg.badge) return keyShape;
 
       const children = group.addGroup(
         {
@@ -114,7 +114,7 @@ export default (g6: any) => {
           id: 'circle-children-icon',
           x: outerSize / 2 - 9,
           y: -outerSize / 2 + 9,
-          text: cfg.degree > 100 ? '99+' : cfg.degree,
+          text: cfg.badge,
           fontSize: 10,
           textAlign: 'center',
           textBaseline: 'middle',
