@@ -1,0 +1,13 @@
+{
+  "title": {
+    "zh": "中文分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "Simple.jsx",
+      "title": "布局切换",
+      "screenshot": ""
+    }
+  ]
+}
