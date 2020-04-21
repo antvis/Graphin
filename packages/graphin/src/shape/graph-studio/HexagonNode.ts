@@ -90,11 +90,11 @@ export default (g6: any) => {
           attrs: {
             id: 'hexagon-label',
             x: outerSize / 2,
-            y: outerSize + 8,
+            y: outerSize + 14,
             fontSize: 12,
             text: cfg.label,
             textAlign: 'center',
-            fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
+            fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
           },
         });
       }
@@ -126,7 +126,7 @@ export default (g6: any) => {
           fontSize: 10,
           textAlign: 'center',
           textBaseline: 'middle',
-          fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
+          fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
         },
       });
       children.translate(outerSize / 2 - 16 / 2, 0);

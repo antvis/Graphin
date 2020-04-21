@@ -38,10 +38,10 @@ export default (g6: any) => {
           attrs: {
             id: 'simplicity-label',
             x: 4 + 7,
-            y: 0,
+            y: 4,
             fontSize: 12,
             text: cfg.label,
-            textAlign: 'center',
+            textAlign: 'left',
             fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
           },
         });

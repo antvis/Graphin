@@ -40,7 +40,7 @@ export default (g6: any) => {
           attrs: {
             id: 'simplicity-label',
             x: 12 + 7,
-            y: 2,
+            y: 6,
             fontSize: 12,
             text: cfg.label,
             textAlign: 'left',
