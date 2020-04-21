@@ -133,7 +133,7 @@ interface BehaviorMode {
 const graphinRegister = (props: GraphinProps) => {
   const { extend = {}, register = {}, options = {} } = props;
 
-  const defaultBehaviors = defaultRegister.behavior().filter((behavior) => {
+  const defaultBehaviors = defaultRegister.behavior().filter(behavior => {
     const behaviorName = behavior.name.split('-')[1];
     const disableName = `disable${toUpperCaseWithFirst(behaviorName)}`;
     return !options[disableName];
@@ -145,15 +145,15 @@ const graphinRegister = (props: GraphinProps) => {
   const registerEdges = [...defaultRegister.edgeShape(), ...edgeShape(G6)];
   const registerBehaviors = [...defaultBehaviors, ...behavior(G6)];
 
-  registerNodes.forEach((item) => {
+  registerNodes.forEach(item => {
     item.register(G6);
   });
-  registerEdges.forEach((item) => {
+  registerEdges.forEach(item => {
     item.register(G6);
   });
   const modes: Mode[] = [];
 
-  registerBehaviors.forEach((item) => {
+  registerBehaviors.forEach(item => {
     item.register(G6);
     const { name, mode } = item;
 
@@ -183,7 +183,7 @@ const graphinRegister = (props: GraphinProps) => {
   const extendNodes = [...defaultExtend.nodeShape!(), ...ExNodeShape()];
   const extendMarker = [...defaultExtend.marker!(), ...ExMarker()];
 
-  extendNodes.forEach((item) => {
+  extendNodes.forEach(item => {
     compiler(item);
   });
 

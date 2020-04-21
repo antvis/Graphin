@@ -26,7 +26,7 @@ const optimizeDrawingByNode = (isOptimize: boolean, node: NodeConfig) => {
  * @param {boolean} isOptimize 是否减少Shape的渲染，默认是非KeyShape节点
  */
 const optimizeDrawing = (graph: ExtendedGraph, isOptimize: boolean) => {
-  graph.getNodes().forEach((node) => {
+  graph.getNodes().forEach(node => {
     optimizeDrawingByNode(isOptimize, node);
   });
   /** 渲染 */
