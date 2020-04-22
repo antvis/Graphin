@@ -13,19 +13,21 @@ const INNER_SHAPES = [
   'CanonicalHexagonNode',
   'CanonicalPointNode',
   'CanonicalRectNode',
+  'CircleNode',
 ];
 
-const data = Utils.mock(20).random().graphin();
-data.nodes = data.nodes.map((node) => {
-  node.shape = INNER_SHAPES[Math.floor(Math.random() * INNER_SHAPES.length)];
+const data = Utils.mock(20).tree().graphin();
+data.nodes.forEach((node, index) => {
+  const shape = INNER_SHAPES[index % INNER_SHAPES.length];
+  node.shape = shape;
+  node.label = shape;
   node.style = node.style || {};
   // 修改节点大小
-  node.style.nodeSize = 36;
+  node.style.nodeSize = 26;
   // 设置节点徽标
   node.badge = 4;
-  return node;
 });
-data.edges = data.edges.map((edge, index) => {
+data.edges.forEach((edge, index) => {
   edge.shape = 'CanonicalLineEdge';
   edge.style = edge.style || {
     line: {},
@@ -34,13 +36,12 @@ data.edges = data.edges.map((edge, index) => {
   edge.style.line.dash = index % 3 === 0 ? [2, 2] : null;
   // 设置Edge的宽度
   edge.style.line.width = index % 3 === 1 ? 3 : 1;
-  return edge;
 });
 
 const App = () => {
   return (
     <div>
-      <Graphin data={data} />
+      <Graphin data={data} layout={{ name: 'force' }} />
     </div>
   );
 };
