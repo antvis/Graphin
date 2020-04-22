@@ -7,9 +7,9 @@ order: 2
 
 | 节点名称             | 含义       |
 | -------------------- | ---------- |
-| CircleNode           | 默认节点   |
-| CanonicalCircleNode  | 圆形节点   |
-| CanonicalRectNode    | 方形节点   |
-| CanonicalHexagonNode | 六边形节点 |
-| CanonicalStubNode    | 短线节点   |
-| CanonicalPointNode   | 小点节点   |
+| SimplicityNode           | 默认节点   |
+| CircleNode  | 圆形节点   |
+| RectNode    | 方形节点   |
+| HexagonNode | 六边形节点 |
+| StubNode    | 短线节点   |
+| PointNode   | 小点节点   |

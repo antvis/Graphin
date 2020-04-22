@@ -158,7 +158,7 @@ export class Mock {
           id: node.id,
           label: `node-${node.id}`,
           data: node,
-          shape: 'CanonicalCircleNode',
+          shape: 'CircleNode',
           style: {
             nodeSize: 24,
           },

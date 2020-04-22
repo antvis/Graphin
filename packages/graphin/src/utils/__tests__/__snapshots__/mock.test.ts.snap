@@ -1967,7 +1967,7 @@ Object {
       },
       "id": "node-0",
       "label": "node-node-0",
-      "shape": "CanonicalCircleNode",
+      "shape": "CircleNode",
       "style": Object {
         "nodeSize": 24,
       },
@@ -1981,7 +1981,7 @@ Object {
       },
       "id": "node-1",
       "label": "node-node-1",
-      "shape": "CanonicalCircleNode",
+      "shape": "CircleNode",
       "style": Object {
         "nodeSize": 24,
       },
@@ -1995,7 +1995,7 @@ Object {
       },
       "id": "node-2",
       "label": "node-node-2",
-      "shape": "CanonicalCircleNode",
+      "shape": "CircleNode",
       "style": Object {
         "nodeSize": 24,
       },
@@ -2009,7 +2009,7 @@ Object {
       },
       "id": "node-3",
       "label": "node-node-3",
-      "shape": "CanonicalCircleNode",
+      "shape": "CircleNode",
       "style": Object {
         "nodeSize": 24,
       },
@@ -2023,7 +2023,7 @@ Object {
       },
       "id": "node-4",
       "label": "node-node-4",
-      "shape": "CanonicalCircleNode",
+      "shape": "CircleNode",
       "style": Object {
         "nodeSize": 24,
       },
@@ -2037,7 +2037,7 @@ Object {
       },
       "id": "node-5",
       "label": "node-node-5",
-      "shape": "CanonicalCircleNode",
+      "shape": "CircleNode",
       "style": Object {
         "nodeSize": 24,
       },
@@ -2051,7 +2051,7 @@ Object {
       },
       "id": "node-6",
       "label": "node-node-6",
-      "shape": "CanonicalCircleNode",
+      "shape": "CircleNode",
       "style": Object {
         "nodeSize": 24,
       },
@@ -2065,7 +2065,7 @@ Object {
       },
       "id": "node-7",
       "label": "node-node-7",
-      "shape": "CanonicalCircleNode",
+      "shape": "CircleNode",
       "style": Object {
         "nodeSize": 24,
       },
@@ -2079,7 +2079,7 @@ Object {
       },
       "id": "node-8",
       "label": "node-node-8",
-      "shape": "CanonicalCircleNode",
+      "shape": "CircleNode",
       "style": Object {
         "nodeSize": 24,
       },
@@ -2093,7 +2093,7 @@ Object {
       },
       "id": "node-9",
       "label": "node-node-9",
-      "shape": "CanonicalCircleNode",
+      "shape": "CircleNode",
       "style": Object {
         "nodeSize": 24,
       },

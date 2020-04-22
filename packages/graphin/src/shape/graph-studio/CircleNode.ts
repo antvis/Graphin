@@ -7,7 +7,7 @@ import iconFont from '../../icons/iconFont';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (g6: any) => {
-  g6.registerNode('CanonicalCircleNode', {
+  g6.registerNode('CircleNode', {
     draw(cfg: G6Node, group: G.Group) {
       const hasLabel = cfg.label;
       const innerNodeSize = cfg.style?.nodeSize || 48;

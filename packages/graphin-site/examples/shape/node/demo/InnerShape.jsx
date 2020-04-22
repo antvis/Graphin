@@ -7,14 +7,7 @@ import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 /**
  * Graphin 内置几种预定义的节点样式，您可以根据需要选择合适的样式
  */
-const INNER_SHAPES = [
-  'CanonicalStubNode',
-  'CanonicalCircleNode',
-  'CanonicalHexagonNode',
-  'CanonicalPointNode',
-  'CanonicalRectNode',
-  'CircleNode',
-];
+const INNER_SHAPES = ['StubNode', 'CircleNode', 'HexagonNode', 'PointNode', 'RectNode', 'SimplicityNode'];
 
 const data = Utils.mock(20).tree().graphin();
 data.nodes.forEach((node, index) => {
@@ -28,7 +21,7 @@ data.nodes.forEach((node, index) => {
   node.badge = 4;
 });
 data.edges.forEach((edge, index) => {
-  edge.shape = 'CanonicalLineEdge';
+  edge.shape = 'LineEdge';
   edge.style = edge.style || {
     line: {},
   };

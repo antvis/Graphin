@@ -5,7 +5,7 @@
   },
   "demos": [
     {
-      "filename": "CanonicalShape.jsx",
+      "filename": "InnerShape.jsx",
       "title": "内置节点",
       "screenshot": ""
     },

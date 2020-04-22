@@ -19,7 +19,7 @@ function makeHexagon(border: number) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (g6: any) => {
-  g6.registerNode('CanonicalHexagonNode', {
+  g6.registerNode('HexagonNode', {
     draw(cfg: G6Node, group: G.Group) {
       const hasLabel = cfg.label;
       const innerNodeSize = cfg.style?.nodeSize || 48;
