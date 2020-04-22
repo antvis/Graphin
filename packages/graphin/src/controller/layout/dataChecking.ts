@@ -42,14 +42,14 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
       const { source, target } = edge;
       if (!source || !target) {
         // eslint-disable-next-line no-console
-        console.log(
+        console.warn(
           `edge requires  source and target，this '${JSON.stringify(edge)}' edge will be automatically filtered`,
         );
         return false;
       }
       if (!edge.data) {
         // eslint-disable-next-line no-console
-        console.log(`edge requires an data field，this '${JSON.stringify(edge)}' edge will be automatically filtered`);
+        console.warn(`edge requires an data field，this '${JSON.stringify(edge)}' edge will be automatically filtered`);
         return false;
       }
       /** 边是可以重复的，因为properties可能不一样 */
