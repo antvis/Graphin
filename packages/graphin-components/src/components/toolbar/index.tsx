@@ -1,6 +1,7 @@
 import React, { ReactElement, CSSProperties } from 'react';
 import { Graph } from '@antv/g6';
-import { Tooltip, Button, Icon, Popover, Progress } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Tooltip, Button, Popover, Progress } from 'antd';
 
 import useFullscreen from './useFullscreen';
 import useZoom from './useZoom';
@@ -162,7 +163,7 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
                 key={item.id}
               >
                 <Button onClick={item.action} disabled={item.disabled} style={item.style}>
-                  <Icon type={item.icon} />
+                  <LegacyIcon type={item.icon} />
                 </Button>
               </Popover>
             );
@@ -170,7 +171,7 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
           return (
             <Tooltip placement={placement} title={item.name} key={item.id}>
               <Button onClick={item.action} disabled={item.disabled} style={item.style}>
-                <Icon type={item.icon} />
+                <LegacyIcon type={item.icon} />
               </Button>
             </Tooltip>
           );

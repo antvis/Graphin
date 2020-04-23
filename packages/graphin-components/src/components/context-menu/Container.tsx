@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
-import { Menu, Icon } from 'antd'; // 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Menu } from 'antd'; // 'antd';
 
 import { Graph } from '@antv/g6';
 
@@ -41,7 +42,7 @@ const Container: React.FC<ContainerProps> = (props) => {
         type: item.iconType,
         style: { fontSize: '12px' },
       };
-      const icon = <Icon {...iconProps} />;
+      const icon = <LegacyIcon {...iconProps} />;
 
       return (
         <MenuItem key={item.key} className={item.key} onClick={() => onClickMenuItem(item)}>
