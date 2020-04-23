@@ -6,7 +6,7 @@ import { normalizeColor } from './utils';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (g6: any) => {
-  g6.registerNode('CanonicalStubNode', {
+  g6.registerNode('StubNode', {
     draw(cfg: G6Node, group: G.Group) {
       const hasLabel = cfg.label;
 
@@ -40,7 +40,7 @@ export default (g6: any) => {
           attrs: {
             id: 'simplicity-label',
             x: 12 + 7,
-            y: 2,
+            y: 6,
             fontSize: 12,
             text: cfg.label,
             textAlign: 'left',

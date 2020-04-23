@@ -109,8 +109,9 @@ describe('<Graphin />', () => {
     };
 
     const { asFragment } = render(<Graphin data={data} layout={layout} />);
+    const firstRender = asFragment();
 
-    expect(asFragment().children.length).toBe(2);
+    expect(firstRender.children.length).toBe(1);
   });
 
   it(
@@ -145,9 +146,7 @@ describe('<Graphin />', () => {
 
       rerender(
         <Graphin
-          data={mock(10)
-            .circle()
-            .graphin()}
+          data={mock(10).circle().graphin()}
           layout={layout}
           options={{
             animate: false,

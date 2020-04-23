@@ -6,7 +6,7 @@ import { normalizeColor } from './utils';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (g6: any) => {
-  g6.registerNode('CanonicalPointNode', {
+  g6.registerNode('PointNode', {
     draw(cfg: G6Node, group: G.Group) {
       const hasLabel = cfg.label;
 
@@ -38,10 +38,10 @@ export default (g6: any) => {
           attrs: {
             id: 'simplicity-label',
             x: 4 + 7,
-            y: 0,
+            y: 4,
             fontSize: 12,
             text: cfg.label,
-            textAlign: 'center',
+            textAlign: 'left',
             fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
           },
         });

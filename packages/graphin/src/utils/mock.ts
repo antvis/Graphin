@@ -55,13 +55,13 @@ export class Mock {
         });
       }
     }
-    this.nodeIds = this.nodes.map(node => node.id);
+    this.nodeIds = this.nodes.map((node) => node.id);
   };
 
   expand = (snodes: NodeData[]) => {
     this.edges = [];
     this.nodes = [];
-    snodes.forEach(node => {
+    snodes.forEach((node) => {
       for (let i = 0; i < this.options.nodeCount; i += 1) {
         this.nodes.push({
           id: `${node.id}-${i}`,
@@ -81,7 +81,7 @@ export class Mock {
   };
 
   type = (nodeType: string) => {
-    this.nodes = this.nodes.map(node => {
+    this.nodes = this.nodes.map((node) => {
       return {
         ...node,
         type: nodeType,
@@ -124,13 +124,13 @@ export class Mock {
     const tree = new Tree();
     const rootId = this.nodeIds[0];
 
-    this.nodeIds.forEach(id => {
+    this.nodeIds.forEach((id) => {
       tree.addNode({
         id,
       });
     });
 
-    tree.bfs(node => {
+    tree.bfs((node) => {
       if (node.id !== rootId) {
         this.edges.push({
           source: node.parent && node.parent.id,
@@ -153,16 +153,18 @@ export class Mock {
 
   graphin = (): Data => {
     return {
-      nodes: this.nodes.map(node => {
+      nodes: this.nodes.map((node) => {
         return {
           id: node.id,
           label: `node-${node.id}`,
           data: node,
-          shape: 'CanonicalCircleNode',
-          style: {},
+          shape: 'CircleNode',
+          style: {
+            nodeSize: 24,
+          },
         };
       }),
-      edges: this.edges.map(edge => {
+      edges: this.edges.map((edge) => {
         return {
           source: edge.source,
           target: edge.target,
