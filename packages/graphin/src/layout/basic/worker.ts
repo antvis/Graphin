@@ -4,7 +4,7 @@ import ForceLayout from '../force/ForceLayout';
 const forceOptions = {};
 
 export default () => {
-  onmessage = (e) => {
+  onmessage = e => {
     const { data } = e;
     /** parser an object with method */
     const newForceOptions = JSON.parse(JSON.stringify(forceOptions), (key, value) => {

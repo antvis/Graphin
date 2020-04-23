@@ -12,7 +12,7 @@ import {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (g6: any) => {
-  g6.registerEdge('CanonicalLineEdge', {
+  g6.registerEdge('LineEdge', {
     draw(cfg: G6Edge, group: G.Group) {
       const hasLabel = cfg.label;
       const { startPoint, endPoint } = cfg;

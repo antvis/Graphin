@@ -79,7 +79,7 @@ export default {
     /** process Nodes */
     const allNodes = graph.getNodes();
     const relativeNodes = [...relativeNodeSet];
-    const relativeNodesIds = relativeNodes.map((item) => item.get('id'));
+    const relativeNodesIds = relativeNodes.map(item => item.get('id'));
 
     const unRelativeNodes = allNodes.filter((item: Node) => {
       return relativeNodesIds.indexOf(item.get('id')) === -1;
@@ -116,7 +116,7 @@ export default {
         graph.setItemState(edge, 'highlight.dark', false);
         graph.setItemState(edge, 'highlight.light', true);
       });
-      unRelativeEdges.forEach((edge) => {
+      unRelativeEdges.forEach(edge => {
         edge.toBack();
         graph.setItemState(edge, 'highlight.light', false);
         graph.setItemState(edge, 'highlight.dark', true);

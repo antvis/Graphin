@@ -22,7 +22,7 @@ const renderNodeShape: NodeShapeFunction = (node: Node) => {
   const fontPosition = nodeSize! * 1.4;
 
   return {
-    shape: 'CircleNode',
+    shape: 'SimplicityNode',
     shapeComponents: [
       {
         shape: 'circle',

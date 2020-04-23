@@ -3,16 +3,16 @@ import G6 from '@antv/g6';
 import registerInnerMarker from '../icons/marker';
 import { GraphinProps } from '../types';
 import compiler from '../shape/render/compiler';
-import CircleNode from '../shape/render/CircleNode';
+import SimplicityNode from '../shape/render/SimplicityNode';
 
-import RegisterLineEdge from '../shape/g6/LineEdge';
-import RegisterCanonicalLineEdge from '../shape/graph-studio/LineEdge';
-import RegisterCanonicalLoopEdge from '../shape/graph-studio/LoopEdge';
-import RegisterCanonicalCircleNode from '../shape/graph-studio/CircleNode';
-import RegisterCanonicalRectNode from '../shape/graph-studio/RectNode';
-import RegisterCanonicalHexagonNode from '../shape/graph-studio/HexagonNode';
-import RegisterCanonicalPointNode from '../shape/graph-studio/PointNode';
-import RegisterCanonicalStubNode from '../shape/graph-studio/StubNode';
+import RegisterSimplicityLineEdge from '../shape/g6/LineEdge';
+import RegisterLineEdge from '../shape/graph-studio/LineEdge';
+import RegisterLoopEdge from '../shape/graph-studio/LoopEdge';
+import RegisterCircleNode from '../shape/graph-studio/CircleNode';
+import RegisterRectNode from '../shape/graph-studio/RectNode';
+import RegisterHexagonNode from '../shape/graph-studio/HexagonNode';
+import RegisterPointNode from '../shape/graph-studio/PointNode';
+import RegisterStubNode from '../shape/graph-studio/StubNode';
 import graphinHighlight from '../behaviors/graphin-highlight';
 import { registerFontFamily } from '../icons/iconFont';
 import { BehaviorModeItem } from './init';
@@ -21,33 +21,33 @@ const defaultRegister = {
   nodeShape: () => {
     return [
       {
-        name: 'CanonicalCircleNode',
+        name: 'CircleNode',
         register: () => {
-          RegisterCanonicalCircleNode(G6);
+          RegisterCircleNode(G6);
         },
       },
       {
-        name: 'CanonicalRectNode',
+        name: 'RectNode',
         register: () => {
-          RegisterCanonicalRectNode(G6);
+          RegisterRectNode(G6);
         },
       },
       {
-        name: 'CanonicalHexagonNode',
+        name: 'HexagonNode',
         register: () => {
-          RegisterCanonicalHexagonNode(G6);
+          RegisterHexagonNode(G6);
         },
       },
       {
-        name: 'RegisterCanonicalPointNode',
+        name: 'RegisterPointNode',
         register: () => {
-          RegisterCanonicalStubNode(G6);
+          RegisterStubNode(G6);
         },
       },
       {
-        name: 'CanonicalStubNode',
+        name: 'StubNode',
         register: () => {
-          RegisterCanonicalPointNode(G6);
+          RegisterPointNode(G6);
         },
       },
     ];
@@ -55,21 +55,21 @@ const defaultRegister = {
   edgeShape: () => {
     return [
       {
+        name: 'SimplicityLineEdge',
+        register: () => {
+          RegisterSimplicityLineEdge(G6);
+        },
+      },
+      {
         name: 'LineEdge',
         register: () => {
           RegisterLineEdge(G6);
         },
       },
       {
-        name: 'CanonicalLineEdge',
+        name: 'LoopEdge',
         register: () => {
-          RegisterCanonicalLineEdge(G6);
-        },
-      },
-      {
-        name: 'CanonicalLoopEdge',
-        register: () => {
-          RegisterCanonicalLoopEdge(G6);
+          RegisterLoopEdge(G6);
         },
       },
     ];
@@ -92,8 +92,8 @@ const defaultExtend: GraphinProps['extend'] = {
   nodeShape: () => {
     return [
       {
-        name: 'CircleNode',
-        render: CircleNode,
+        name: 'SimplicityNode',
+        render: SimplicityNode,
       },
     ];
   },

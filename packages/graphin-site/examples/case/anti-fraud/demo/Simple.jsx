@@ -57,10 +57,10 @@ const source = {
   ],
 };
 
-const nodes = source.nodes.map(node => {
+const nodes = source.nodes.map((node) => {
   return {
     data: node,
-    shape: 'CanonicalCircleNode',
+    shape: 'CircleNode',
     id: node.name,
     label: node.name,
     style: {
@@ -71,12 +71,12 @@ const nodes = source.nodes.map(node => {
   };
 });
 
-const edges = source.edges.map(edge => {
+const edges = source.edges.map((edge) => {
   return {
     data: edge,
     source: edge.source,
     target: edge.target,
-    shape: 'CanonicalLineEdge',
+    shape: 'LineEdge',
     label: edge.relative,
     style: {
       line: {

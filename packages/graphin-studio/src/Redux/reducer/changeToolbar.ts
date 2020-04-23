@@ -3,15 +3,17 @@ import Storage from '../../Service/Storage';
 import { GrapheneState } from '../../types';
 
 const changeToolbarReducer = (state: GrapheneState, direction: string) => {
-    const storage = new Storage('graphin-studio');
-    storage.set('config', {
-        ...storage.get('config'),
-        toolbar: {
-            direction,
-        },
-    });
+  const storage = new Storage('graphin-studio');
+  storage.set('config', {
+    ...storage.get('config'),
+    toolbar: {
+      direction,
+    },
+  });
 
-    return updateChain(state).$set('toolbar.direction', direction).value();
+  return updateChain(state)
+    .$set('toolbar.direction', direction)
+    .value();
 };
 
 export default changeToolbarReducer;

@@ -44,7 +44,7 @@ const search = (graph: Graph) => (words = '') => {
 
   const result: Node[] = [];
   nodes.forEach((node: Node) => {
-    const matchResult = wordsArray.map((word) => {
+    const matchResult = wordsArray.map(word => {
       return matchWord(node.data, word);
     });
 

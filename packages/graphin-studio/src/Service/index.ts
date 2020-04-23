@@ -9,9 +9,9 @@ import transform from '../Custom/transform';
  */
 // eslint-disable-next-line
 const queryNodes = (nodeIds: any[], nodeType: string) => {
-    const nodes = transform.nodes(getNodesById(nodeIds, nodeType));
+  const nodes = transform.nodes(getNodesById(nodeIds, nodeType));
 
-    return new Promise((resolve) => resolve(nodes));
+  return new Promise(resolve => resolve(nodes));
 };
 
 /**
@@ -22,17 +22,20 @@ const queryNodes = (nodeIds: any[], nodeType: string) => {
  */
 // eslint-disable-next-line
 const queryGraph = (count: number, mockType: string, options: any) => {
-    const data = Utils.mock(count).type('company')[mockType](options).value();
-    const nodes = getNodeProperties(data.nodes);
-    const graphinNodes = transform.nodes(nodes);
-    const graphinEdges = transform.edges(data.edges);
+  const data = Utils.mock(count)
+    .type('company')
+    [mockType](options)
+    .value();
+  const nodes = getNodeProperties(data.nodes);
+  const graphinNodes = transform.nodes(nodes);
+  const graphinEdges = transform.edges(data.edges);
 
-    return new Promise((resolve) =>
-        resolve({
-            nodes: graphinNodes,
-            edges: graphinEdges,
-        }),
-    );
+  return new Promise(resolve =>
+    resolve({
+      nodes: graphinNodes,
+      edges: graphinEdges,
+    }),
+  );
 };
 
 export default { queryNodes, queryGraph };

@@ -124,13 +124,13 @@ export class Mock {
     const tree = new Tree();
     const rootId = this.nodeIds[0];
 
-    this.nodeIds.forEach(id => {
+    this.nodeIds.forEach((id) => {
       tree.addNode({
         id,
       });
     });
 
-    tree.bfs(node => {
+    tree.bfs((node) => {
       if (node.id !== rootId) {
         this.edges.push({
           source: node.parent && node.parent.id,
@@ -158,8 +158,10 @@ export class Mock {
           id: node.id,
           label: `node-${node.id}`,
           data: node,
-          shape: 'CanonicalCircleNode',
-          style: {},
+          shape: 'CircleNode',
+          style: {
+            nodeSize: 24,
+          },
         };
       }),
       edges: this.edges.map((edge) => {

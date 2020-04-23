@@ -19,7 +19,7 @@ function makeHexagon(border: number) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (g6: any) => {
-  g6.registerNode('CanonicalHexagonNode', {
+  g6.registerNode('HexagonNode', {
     draw(cfg: G6Node, group: G.Group) {
       const hasLabel = cfg.label;
       const innerNodeSize = cfg.style?.nodeSize || 48;
@@ -90,16 +90,16 @@ export default (g6: any) => {
           attrs: {
             id: 'hexagon-label',
             x: outerSize / 2,
-            y: outerSize + 8,
+            y: outerSize + 14,
             fontSize: 12,
             text: cfg.label,
             textAlign: 'center',
-            fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
+            fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
           },
         });
       }
 
-      if (!cfg.degree) return keyShape;
+      if (!cfg.badge) return keyShape;
 
       const children = group.addGroup(
         {
@@ -122,11 +122,11 @@ export default (g6: any) => {
           id: 'hexagon-children-icon',
           x: 16 / 2,
           y: 16 / 2,
-          text: cfg.degree > 100 ? '99+' : cfg.degree,
+          text: cfg.badge,
           fontSize: 10,
           textAlign: 'center',
           textBaseline: 'middle',
-          fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
+          fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
         },
       });
       children.translate(outerSize / 2 - 16 / 2, 0);

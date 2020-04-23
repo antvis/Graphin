@@ -163,6 +163,8 @@ export interface Node {
   layout?: NodeLayoutType;
   /** 节点度数 */
   degree?: number;
+  /** 徽标文案 */
+  badge?: number | string;
   searchTypes?: string[];
 }
 

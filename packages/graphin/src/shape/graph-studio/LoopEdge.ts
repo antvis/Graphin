@@ -16,7 +16,7 @@ const RADIO = 0.75;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (g6: any) => {
   g6.registerEdge(
-    'CanonicalLoopEdge',
+    'LoopEdge',
     {
       draw(cfg: G6Edge, group: G.Group) {
         const hasLabel = cfg.label;
