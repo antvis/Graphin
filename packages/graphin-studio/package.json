@@ -9,6 +9,7 @@
     "deploy": "npm run build && gh-pages -d ./dist -r https://github.com/antvis/graphin-studio-site.git"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.0.6",
     "@antv/graphin": "*",
     "@antv/graphin-components": "*",
     "@types/classnames": "^2.2.9",

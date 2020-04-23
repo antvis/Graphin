@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-import { Select, Icon } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+
+import { Select } from 'antd';
 import './index.less';
 
 const SelectOption = Select.Option;
@@ -70,7 +72,7 @@ const LayoutSelector: React.FC<LayoutSelectorProps> = props => {
                     const { type: layoutType, name, icon, disabled } = item;
                     return (
                         <SelectOption key={layoutType} value={layoutType} disabled={disabled}>
-                            <Icon type={icon} /> &nbsp;{name}
+                            <LegacyIcon type={icon} /> &nbsp;{name}
                         </SelectOption>
                     );
                 })}

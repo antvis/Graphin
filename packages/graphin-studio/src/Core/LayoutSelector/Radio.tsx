@@ -1,5 +1,6 @@
 import React from 'react';
-import { Icon, Radio } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio';
 
 const radioStyle: React.CSSProperties = {
@@ -49,7 +50,7 @@ const LayoutSelector = (props: LayoutSelectorProps) => {
                     const { name, icon, disabled, desc } = item;
                     return (
                         <Radio key={name} value={name} disabled={disabled} style={radioStyle}>
-                            <Icon type={icon} /> &nbsp;{desc}
+                            <LegacyIcon type={icon} /> &nbsp;{desc}
                         </Radio>
                     );
                 })}

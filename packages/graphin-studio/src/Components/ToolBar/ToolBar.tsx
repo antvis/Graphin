@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { Divider, Tooltip, Button } from 'antd';
 import './index.less';
 
@@ -39,7 +40,7 @@ const ToolBar: React.FC<ToolBarProps> = props => {
                     <Tooltip key={id} placement="right" title={tooltip || name}>
                         <Button
                             disabled={disabled}
-                            icon={icon}
+                            icon={<LegacyIcon type={icon} />}
                             onClick={(): void => {
                                 if (onClick) {
                                     onClick(c);
