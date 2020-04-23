@@ -7,7 +7,7 @@ import gridLayout, { GridLayoutOptions } from '../../layout/basic/grid';
 import randomLayout, { RandomLayoutOptions } from '../../layout/basic/random';
 import TweakLayout from '../../layout/basic/tweak';
 import Graphin from '../../Graphin';
-import { Data, ForceSimulation, GraphinProps } from '../../types';
+import { Data, ForceSimulation, GraphinProps, LayoutOptionBase } from '../../types';
 
 export type LayoutOption =
   | CircleLayoutOption
@@ -16,7 +16,8 @@ export type LayoutOption =
   | RandomLayoutOptions
   | ForceLayoutOptions
   | DagreLayoutOption
-  | GridLayoutOptions;
+  | GridLayoutOptions
+  | LayoutOptionBase;
 
 const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
   const { graph } = graphin;

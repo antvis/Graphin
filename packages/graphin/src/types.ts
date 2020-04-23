@@ -166,6 +166,9 @@ export interface Node {
   /** 徽标文案 */
   badge?: number | string;
   searchTypes?: string[];
+
+  /** User Defined Propery */
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export type G6Node = Node & {
@@ -240,6 +243,9 @@ export interface Edge {
   id?: string;
   /** 边的弹簧长度，力导时使用 */
   spring?: number;
+
+  /** User Defined Property */
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export type G6Edge = Edge & {

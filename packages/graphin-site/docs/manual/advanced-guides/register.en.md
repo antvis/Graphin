@@ -52,13 +52,13 @@ register: {
     nodeShape: (G6) => [{
         name: "custom",
         register: () => {
-            G6.registerNode("custom", () => {})  // see document of G6 registerNode for details
+            G6.registerNode("custom", {})  // see document of G6 registerNode for details
         }
     }],
     edgeShape: (G6) => [{
         name: "custom",
         register: () => {
-            G6.registerEdge("custom", () => {})  // see document of G6 registerEdge for details
+            G6.registerEdge("custom", {})  // see document of G6 registerEdge for details
         }
     }],
     behavior: (G6) => [{
@@ -66,7 +66,7 @@ register: {
         options: {}
         name: "custom",
         register: () => {
-            G6.registerBehavior("custom", () => {})  // see document of  G6 registerBehavior for details
+            G6.registerBehavior("custom", {})  // see document of  G6 registerBehavior for details
         }
     }],
 }
