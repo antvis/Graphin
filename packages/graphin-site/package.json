@@ -19,15 +19,14 @@
     "url": "https://github.com/antvis/graphin"
   },
   "devDependencies": {
-    "@antv/gatsby-theme-antv": "^0.10.17",
-    "gatsby": "^2.17.7",
+    "@antv/gatsby-theme-antv": "^0.10.62",
     "@antv/graphin": "^1.0.2",
+    "gatsby": "^2.17.7",
     "gh-pages": "^2.1.1"
   },
   "dependencies": {
-    "@antv/graphin": "^1.1.0-beta.1",
-    "@antv/graphin-components": "^1.1.0-beta.1",
-    "antd": "^3.24.3",
+    "@antv/graphin": "*",
+    "@antv/graphin-components": "*",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-i18next": "^11.0.1"
