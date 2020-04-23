@@ -13,9 +13,7 @@ const chunk = (arr, size) =>
 const App = () => {
   const [state, setState] = React.useState({
     selected: [],
-    data: Utils.mock(20)
-      .random()
-      .graphin(),
+    data: Utils.mock(20).random().graphin(),
   });
 
   const { data, selected } = state;
@@ -24,12 +22,12 @@ const App = () => {
     const { graph } = graphRef.current;
 
     // TODO:框选进行关系扩散，暂时不支持多选
-    const onNodeSelectChange = e => {
+    const onNodeSelectChange = (e) => {
       if (e.target) {
-        console.info('圈选是targets参数');
+        console.info('圈选是targets参数'); //eslint-disable-line
         return;
       }
-      const nodes = e.targets.nodes.map(node => {
+      const nodes = e.targets.nodes.map((node) => {
         return node.get('model');
       });
 
@@ -54,12 +52,12 @@ const App = () => {
     const findConnectionData = { nodes: [], edges: [] };
     // 1度扩散，中间经历一个节点
     const sortArray = chunk(selected, 2);
-    sortArray.forEach(arr => {
+    sortArray.forEach((arr) => {
       const [source, target = selected[0]] = arr;
 
       const relativeNode = {
         id: `find-node-${source.id}-${target.id}`,
-        shape: 'CanonicalCircleNode',
+        shape: 'CircleNode',
         label: 'discover node',
         style: {
           primaryColor: '#ff7617',
@@ -75,7 +73,7 @@ const App = () => {
         {
           source: source.id,
           target: relativeNode.id,
-          shape: 'CanonicalLineEdge',
+          shape: 'LineEdge',
           label: '一度发现',
           style: {
             line: {
@@ -90,7 +88,7 @@ const App = () => {
         {
           source: relativeNode.id,
           target: target.id,
-          shape: 'CanonicalLineEdge',
+          shape: 'LineEdge',
           label: '一度发现',
           style: {
             line: {
@@ -119,7 +117,11 @@ const App = () => {
     <div className="App">
       <h3>
         基于力导的关系发现：按住Shift圈选你需要发现关系的节点
-        <button onClick={onFindConnections} style={{ float: 'right', height: '28px', lineHeight: '28px' }}>
+        <button
+          type="submit"
+          onClick={onFindConnections}
+          style={{ float: 'right', height: '28px', lineHeight: '28px' }}
+        >
           点击发现关系
         </button>
       </h3>
