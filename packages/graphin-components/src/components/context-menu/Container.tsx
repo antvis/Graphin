@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Menu, Icon } from '../ui'; // 'antd';
+import { Menu, Icon } from 'antd'; // 'antd';
 
 import { Graph } from '@antv/g6';
 
@@ -24,7 +24,7 @@ interface ContainerProps {
   onClose: () => void;
 }
 
-const Container: React.FC<ContainerProps> = props => {
+const Container: React.FC<ContainerProps> = (props) => {
   const { menu, onClose } = props;
 
   const onClickMenuItem = (item: MenuItemType) => {
@@ -34,7 +34,7 @@ const Container: React.FC<ContainerProps> = props => {
   };
 
   const menuItems = menu
-    .filter(item => !(item.visible === false)) // item.visible 不传时默认可见
+    .filter((item) => !(item.visible === false)) // item.visible 不传时默认可见
     .map((item, index) => {
       // render icon
       const iconProps = {

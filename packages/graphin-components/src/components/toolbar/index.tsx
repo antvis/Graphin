@@ -1,6 +1,6 @@
 import React, { ReactElement, CSSProperties } from 'react';
 import { Graph } from '@antv/g6';
-import { Tooltip, Button, Icon, Popover, Progress } from '../ui'; // 'antd';
+import { Tooltip, Button, Icon, Popover, Progress } from 'antd';
 
 import useFullscreen from './useFullscreen';
 import useZoom from './useZoom';
@@ -54,7 +54,7 @@ const defaultStyle: CSSProperties = {
   left: '48px',
 };
 
-const Toolbar: React.FC<ToolbarProps> = props => {
+const Toolbar: React.FC<ToolbarProps> = (props) => {
   const { graph, className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
   const { history } = apis;
   const { width = 0, height = 0 } = graphVars;
@@ -150,7 +150,7 @@ const Toolbar: React.FC<ToolbarProps> = props => {
   return (
     <div>
       <div className={`zoom-toolbar ${direction} ${className}`} style={style || defaultStyle}>
-        {buttonCfg.map(item => {
+        {buttonCfg.map((item) => {
           /** 需要自定义渲染 */
           if (item.renderTooltip) {
             return (
