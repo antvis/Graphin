@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div>
       <Graphin data={data} layout={{ name: 'concentric' }}>
-        <Toolbar />
+        <Toolbar style={{ position: 'absolute', bottom: 28, left: 28 }} />
         <ContextMenu
           render={() => {
             return (

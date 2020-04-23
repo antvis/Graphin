@@ -113,6 +113,13 @@ module.exports = {
         },
       },
       {
+        slug: 'advanced',
+        title: {
+          zh: '高级功能',
+          en: 'advanced',
+        },
+      },
+      {
         slug: 'case',
         title: {
           zh: '分析案例',
