@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react';
-import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { Menu } from 'antd'; // 'antd';
 
 import { Graph } from '@antv/g6';
@@ -10,7 +9,7 @@ export interface MenuItemType {
   key: string;
   visible?: boolean;
   /** antd icon type */
-  iconType?: string;
+  iconType?: ReactElement | HTMLElement;
   title?: string;
   width?: number;
   height?: number;
@@ -37,20 +36,13 @@ const Container: React.FC<ContainerProps> = (props) => {
   const menuItems = menu
     .filter((item) => !(item.visible === false)) // item.visible 不传时默认可见
     .map((item, index) => {
-      // render icon
-      const iconProps = {
-        type: item.iconType,
-        style: { fontSize: '12px' },
-      };
-      const icon = <LegacyIcon {...iconProps} />;
-
       return (
         <MenuItem key={item.key} className={item.key} onClick={() => onClickMenuItem(item)}>
           {item.render ? (
             item.render(props, index)
           ) : (
             <>
-              {item.iconType && icon}
+              {item.iconType}
               {item.title}
             </>
           )}
