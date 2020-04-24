@@ -9,6 +9,7 @@
     "deploy": "npm run build && gh-pages -d ./dist -r https://github.com/antvis/graphin-studio-site.git"
   },
   "dependencies": {
+    "@ant-design/compatible": "^1.0.2",
     "@ant-design/icons": "^4.0.6",
     "@antv/graphin": "*",
     "@antv/graphin-components": "*",
@@ -33,7 +34,7 @@
     "@babel/preset-react": "^7.0.0",
     "@types/react-router-dom": "^5.1.0",
     "babel-loader": "^8.0.6",
-    "babel-plugin-import": "^1.12.2",
+    "babel-plugin-import": "^1.13.0",
     "css-loader": "^3.2.0",
     "deepmerge": "^4.1.1",
     "file-loader": "^4.2.0",
