@@ -1,13 +1,16 @@
 {
-    "title": {
-        "zh": "中文分类",
-        "en": "Category"
+  "title": {
+    "zh": "中文分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "Simple.jsx",
+      "title": "demo-1: 内置的 Toolbar 功能体验"
     },
-    "demos": [
-        {
-            "filename": "renderRandomData.jsx",
-            "title": "渲染节点：无布局信息",
-            "screenshot": "https://gw.alipayobjects.com/mdn/rms_d314dd/afts/img/A*nBhpT5HbGOAAAAAAAAAAAABkARQnAQ"
-        }
-    ]
+    {
+      "filename": "Custom.jsx",
+      "title": "demo-2: 自定义 Toolbar "
+    }
+  ]
 }

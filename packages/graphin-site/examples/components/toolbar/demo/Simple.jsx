@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Card } from 'antd';
+
 import Graphin, { Utils } from '@antv/graphin';
 import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import { Toolbar, ContextMenu } from '@antv/graphin-components';
@@ -16,10 +16,14 @@ const App = () => {
   return (
     <div>
       <Graphin data={data} layout={{ name: 'concentric' }}>
-        <Toolbar />
+        <Toolbar style={{ position: 'absolute', bottom: 28, left: 28 }} />
         <ContextMenu
           render={() => {
-            return <Card title="Card title">Card content</Card>;
+            return (
+              <div style={{ height: 60, width: 150, background: '#fff', border: '1px solid #ddd' }}>
+                custom ContextMenu
+              </div>
+            );
           }}
         />
       </Graphin>

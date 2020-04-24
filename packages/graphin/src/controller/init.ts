@@ -23,8 +23,11 @@ export const initGraphAfterRender = (props: GraphinProps, graphDOM: HTMLDivEleme
 
 const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode: BehaviorsMode) => {
   const { clientWidth, clientHeight } = graphDOM;
+  /** default options  */
   const defaultOptions: Partial<ExtendedGraphOptions> = {
     // initial canvas
+    container: graphDOM,
+    renderer: 'canvas',
     width: clientWidth,
     height: clientHeight,
     // initial viewport state:
@@ -33,11 +36,6 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     // interaction options:
     minZoom: 0.2,
     maxZoom: 10,
-    disablePan: false, // 禁止画布平移
-    disableZoom: false, // 禁用画布缩放
-    disableDrag: false, // 禁用节点拖拽
-    delegateNode: false, // 节点代理
-    wheelSensitivity: 1, // 缩放的敏感度，我们在内部有不同设备的最佳匹配
     // rendering options:
     animate: true,
     animateCfg: {
@@ -49,72 +47,92 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     modes: {
       default: [],
     },
+    // Graphin unique options
+    disablePan: false, // 禁止画布平移
+    disableZoom: false, // 禁用画布缩放
+    disableDrag: false, // 禁用节点拖拽
+    wheelSensitivity: 1, // 缩放的敏感度，我们在内部有不同设备的最佳匹配
   };
 
+  /** merged options */
   const options: Partial<ExtendedGraphOptions> = {
     ...defaultOptions,
     ...(props.options || {}),
   };
 
+  /** deconstruct g6 Options */
   const {
-    pan,
-    zoom,
-    width,
-    height,
-    // interaction options:
-    autoPaint,
-    fitView,
-    fitViewPadding,
-    pixelRatio,
-    minZoom,
-    maxZoom,
     disableZoom, // 禁用画布缩放
     disablePan, // 禁用移动画布
     disableDrag, // 禁用节点拖拽
-
+    disableClick, // 禁止节点点击
+    disableBrush, // 禁止框选
     wheelSensitivity, // 缩放的敏感度，我们在内部有不同设备的最佳匹配
-    // rendering options:
-    animate,
-    animateCfg,
-    plugins,
+    pan, // 默认移动到位置
+    zoom, // 默认缩放比例
+
+    modes, // 需要内置default mode
+
+    ...g6Options
   } = options as ExtendedGraphOptions;
 
-  const defaultModes: (string | BehaviorModeItem)[] = ['click-select'];
-
-  if (!disablePan) {
-    defaultModes.push('drag-canvas');
-  }
-  if (!disableDrag) {
-    defaultModes.push({
-      type: 'drag-node',
-      delegate: false,
-    });
-  }
-  if (!disableZoom) {
-    defaultModes.push({
+  /** Graphin built-in g6 behaviors */
+  const innerBehaviors = [
+    // 拖拽画布
+    {
+      type: 'drag-canvas',
+      disable: disablePan,
+      options: {},
+    },
+    // 缩放画布
+    {
       type: 'zoom-canvas',
-      sensitivity: wheelSensitivity,
+      disable: disableZoom,
+      options: {
+        sensitivity: wheelSensitivity,
+      },
+    },
+    // 画布框选
+    {
+      type: 'brush-select',
+      disable: disableBrush,
+      options: {
+        trigger: 'shift',
+        includeEdges: false,
+      },
+    },
+    // 点击选择
+    {
+      type: 'click-select',
+      disable: disableClick,
+      options: {
+        multiple: true, // 允许多选
+        trigger: 'alt',
+      },
+    },
+    // 拖拽节点
+    {
+      type: 'drag-node',
+      disable: disableDrag,
+      options: {},
+    },
+  ];
+  const defaultModes = innerBehaviors
+    .filter(c => {
+      return !c.disable;
+    })
+    .map(c => {
+      return {
+        type: c.type,
+        ...c.options,
+      };
     });
-  }
 
   const instance: GraphType = new G6.Graph({
-    container: graphDOM,
-    renderer: 'canvas',
-
-    width,
-    height,
-    fitView,
-    fitViewPadding,
-    autoPaint,
-    pixelRatio,
-    animate,
-    animateCfg,
-    minZoom,
-    maxZoom,
-    plugins,
+    ...g6Options,
     modes: {
       ...behaviorsMode, // Add multiple G6 behavior modes
-      default: [...defaultModes, ...options.modes!.default!, ...behaviorsMode.default],
+      default: [...defaultModes, ...modes!.default!, ...behaviorsMode.default],
     },
   });
 

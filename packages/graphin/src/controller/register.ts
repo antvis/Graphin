@@ -3,23 +3,73 @@ import G6 from '@antv/g6';
 import registerInnerMarker from '../icons/marker';
 import { GraphinProps } from '../types';
 import compiler from '../shape/render/compiler';
-import CircleNode from '../shape/render/CircleNode';
+import SimplicityNode from '../shape/render/SimplicityNode';
 
-import RegisterLineEdge from '../shape/g6/LineEdge';
+import RegisterSimplicityLineEdge from '../shape/g6/LineEdge';
+import RegisterLineEdge from '../shape/graph-studio/LineEdge';
+import RegisterLoopEdge from '../shape/graph-studio/LoopEdge';
+import RegisterCircleNode from '../shape/graph-studio/CircleNode';
+import RegisterRectNode from '../shape/graph-studio/RectNode';
+import RegisterHexagonNode from '../shape/graph-studio/HexagonNode';
+import RegisterPointNode from '../shape/graph-studio/PointNode';
+import RegisterStubNode from '../shape/graph-studio/StubNode';
 import graphinHighlight from '../behaviors/graphin-highlight';
 import { registerFontFamily } from '../icons/iconFont';
 import { BehaviorModeItem } from './init';
 
 const defaultRegister = {
   nodeShape: () => {
-    return [];
+    return [
+      {
+        name: 'CircleNode',
+        register: () => {
+          RegisterCircleNode(G6);
+        },
+      },
+      {
+        name: 'RectNode',
+        register: () => {
+          RegisterRectNode(G6);
+        },
+      },
+      {
+        name: 'HexagonNode',
+        register: () => {
+          RegisterHexagonNode(G6);
+        },
+      },
+      {
+        name: 'RegisterPointNode',
+        register: () => {
+          RegisterStubNode(G6);
+        },
+      },
+      {
+        name: 'StubNode',
+        register: () => {
+          RegisterPointNode(G6);
+        },
+      },
+    ];
   },
   edgeShape: () => {
     return [
       {
+        name: 'SimplicityLineEdge',
+        register: () => {
+          RegisterSimplicityLineEdge(G6);
+        },
+      },
+      {
         name: 'LineEdge',
         register: () => {
           RegisterLineEdge(G6);
+        },
+      },
+      {
+        name: 'LoopEdge',
+        register: () => {
+          RegisterLoopEdge(G6);
         },
       },
     ];
@@ -42,8 +92,8 @@ const defaultExtend: GraphinProps['extend'] = {
   nodeShape: () => {
     return [
       {
-        name: 'CircleNode',
-        render: CircleNode,
+        name: 'SimplicityNode',
+        render: SimplicityNode,
       },
     ];
   },
@@ -83,7 +133,7 @@ interface BehaviorMode {
 const graphinRegister = (props: GraphinProps) => {
   const { extend = {}, register = {}, options = {} } = props;
 
-  const defaultBehaviors = defaultRegister.behavior().filter(behavior => {
+  const defaultBehaviors = defaultRegister.behavior().filter((behavior) => {
     const behaviorName = behavior.name.split('-')[1];
     const disableName = `disable${toUpperCaseWithFirst(behaviorName)}`;
     return !options[disableName];
@@ -95,15 +145,15 @@ const graphinRegister = (props: GraphinProps) => {
   const registerEdges = [...defaultRegister.edgeShape(), ...edgeShape(G6)];
   const registerBehaviors = [...defaultBehaviors, ...behavior(G6)];
 
-  registerNodes.forEach(item => {
+  registerNodes.forEach((item) => {
     item.register(G6);
   });
-  registerEdges.forEach(item => {
+  registerEdges.forEach((item) => {
     item.register(G6);
   });
   const modes: Mode[] = [];
 
-  registerBehaviors.forEach(item => {
+  registerBehaviors.forEach((item) => {
     item.register(G6);
     const { name, mode } = item;
 
@@ -133,7 +183,7 @@ const graphinRegister = (props: GraphinProps) => {
   const extendNodes = [...defaultExtend.nodeShape!(), ...ExNodeShape()];
   const extendMarker = [...defaultExtend.marker!(), ...ExMarker()];
 
-  extendNodes.forEach(item => {
+  extendNodes.forEach((item) => {
     compiler(item);
   });
 

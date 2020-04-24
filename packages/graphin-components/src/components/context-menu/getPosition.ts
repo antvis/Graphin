@@ -22,7 +22,9 @@ const calculate = (
   { canvasBox, menuBox }: { canvasBox: CanvasBox; menuBox: MenuBox },
 ): Position => {
   const { menuWidth, menuHeight } = menuBox;
+
   const { canvasWidth, canvasHeight } = canvasBox;
+
   let { x, y } = position;
   if (menuHeight + y > canvasHeight) {
     y -= menuHeight;

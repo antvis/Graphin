@@ -8,16 +8,16 @@ import ToolBar from './ToolBar';
 import TreeSelector from './TreeSelector';
 
 export {
-    EnhancedCheckbox,
-    FoldingPanel,
-    Item,
-    Layout,
-    Side,
-    Header,
-    Main,
-    Footer,
-    Property,
-    SearchBar,
-    ToolBar,
-    TreeSelector,
+  EnhancedCheckbox,
+  FoldingPanel,
+  Item,
+  Layout,
+  Side,
+  Header,
+  Main,
+  Footer,
+  Property,
+  SearchBar,
+  ToolBar,
+  TreeSelector,
 };

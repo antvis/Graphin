@@ -1,3 +1,76 @@
+#### 2020-04-23
+
+##### Chores
+
+*  🔀 add GitHub Action to sync Gitee ([79d9d937](https://github.com/antvis/graphin/commit/79d9d93769a9087fd170bb85126a90fc84e590dd))
+
+##### New Features
+
+* remove defaultNode and optimize code ([494328e0](https://github.com/antvis/graphin/commit/494328e090b006f9eca2a0dd1a81d3a64590763c))
+* update deps ([15d72ab2](https://github.com/antvis/graphin/commit/15d72ab2f4e389fd67fbf80e7c9e1c6f3484a8c7))
+* add style.nodeSize for mock utils ([7bff17b2](https://github.com/antvis/graphin/commit/7bff17b25183a4b2e7c2d4c2d3985d472637ff7f))
+*  add layout switching example ([4d9e0cb8](https://github.com/antvis/graphin/commit/4d9e0cb840078ed002706e9292f39b05c60c7f46))
+* add risk knowledge graph case ([20ceff2f](https://github.com/antvis/graphin/commit/20ceff2f12058ce830eac12422cdd5e9102d3531))
+* add graphin analysis case ([70c59e03](https://github.com/antvis/graphin/commit/70c59e033b090af53b2e9d503ce4e31212da2ad3))
+* fix lerna npmclient ([902a6cf2](https://github.com/antvis/graphin/commit/902a6cf2928bfbd8c6548e799a9a3e7b3e8cfe7d))
+*  add tree for mock ([64909f67](https://github.com/antvis/graphin/commit/64909f677b0826339bb0cfe23f8d21d8d100f856))
+*  complete radial layout ([4abf3236](https://github.com/antvis/graphin/commit/4abf323646650cdbf2b461f6d0da0d7a557ee4ef))
+*  add simple Timebar demo ([98ffdae8](https://github.com/antvis/graphin/commit/98ffdae85c1303ce97adc2d1f5cb5fd2cf1495ee))
+*  Complete the demo of Toolbar and ContextMenu ([2557d6db](https://github.com/antvis/graphin/commit/2557d6dbfed478212576f9ea5894f04b3e070cd0))
+*  fix graphin options ([d0db5ca0](https://github.com/antvis/graphin/commit/d0db5ca0b79b5088b7b82885797cff7ef77fcadd))
+*  fix the preset layout ([9aca83e4](https://github.com/antvis/graphin/commit/9aca83e4fcfff04c9724598118ca6b8df94eb27b))
+* Only arrow functions in the class can be packaged ([70c50c8b](https://github.com/antvis/graphin/commit/70c50c8bd7feb47a2e84c6b68ddb9552874dc335))
+*  add base layout example ([e892bf8a](https://github.com/antvis/graphin/commit/e892bf8a8d2b92b4cc48c6c39c81adc1a2b96635))
+* **site:**
+  *  add force demo ([fa33d703](https://github.com/antvis/graphin/commit/fa33d7039110eb0a566752d77a0354effdc1ddaf))
+  *  add  example/components ([777391b3](https://github.com/antvis/graphin/commit/777391b3ce630898c6e5c1de70054af451f59ccf))
+
+##### Bug Fixes
+
+* update npmClient ([e38808fd](https://github.com/antvis/graphin/commit/e38808fdd7ae047f4ab1c20a6292c8a4802ed2c6))
+*  replace tnpm with yarn to avoid ci error ([24682a8b](https://github.com/antvis/graphin/commit/24682a8b321861d8fe90eb2a8841b6d32ef3482e))
+*  support user defined property in date props ([49d0076f](https://github.com/antvis/graphin/commit/49d0076f77398caa520b36d6631daa8ca853c1b7))
+*  fetch data url ([988b580d](https://github.com/antvis/graphin/commit/988b580d955e702296ccd5293167fffa54a846cb))
+*  Support multiple behavior modes closes [#62](https://github.com/antvis/graphin/pull/62) ([f7f88968](https://github.com/antvis/graphin/commit/f7f8896829c8fd5c04c6698d73ed80acb9f201f6))
+* **test:**  graphin first render fragment should have only one child ([d3cfa49a](https://github.com/antvis/graphin/commit/d3cfa49a13579a3016d3a70267ee58cc95c49e87))
+* **common:**  update jest snapshot ([c78380e5](https://github.com/antvis/graphin/commit/c78380e5ce6b88b5cbd82d707a141720857e46c9))
+* **site:**  resolve style conflicts [#44](https://github.com/antvis/graphin/pull/44) ([3425139e](https://github.com/antvis/graphin/commit/3425139eef700a10723d5533424de5479fee001a))
+
+##### Other Changes
+
+* **common:**
+  *  Jest does not support ES module ([4beabd56](https://github.com/antvis/graphin/commit/4beabd56c79063f84b7063ea839f01685fbf7563))
+  *  uniform inner shape name ([f34af717](https://github.com/antvis/graphin/commit/f34af717b0cd7628ca0f24dd6428b6f799c4ed6d))
+  *  downgrade ts target to es2015 ([4967aba7](https://github.com/antvis/graphin/commit/4967aba71d5ea319edc7b5ae821ab7f5640060b0))
+  *  replace degre with badge and explore it to user ([df4c426b](https://github.com/antvis/graphin/commit/df4c426b00ea791ffa0599b4d1f4fbdc63d4132d))
+  *  fix inner shape label position and badge color ([f5f2f6f7](https://github.com/antvis/graphin/commit/f5f2f6f745b0ac55761d351fc293d9b310f02292))
+  *  new inner shape demo ([7abb7d11](https://github.com/antvis/graphin/commit/7abb7d11a78281ed0dc943ce8543783a7b9039e5))
+  *  update history change list ([bb908daa](https://github.com/antvis/graphin/commit/bb908daa56898a6784d83f3132392c52aeeda3fc))
+  *  add change log generator tool ([3abd8e3f](https://github.com/antvis/graphin/commit/3abd8e3f0a883ca2f21e85cf85e1067ef71bbf8c))
+  *  add change log generator tool ([57df91f7](https://github.com/antvis/graphin/commit/57df91f74b887b65dc7f4079dab4ad0547f9ed0c))
+  *  update edge label default color ([a1ded89e](https://github.com/antvis/graphin/commit/a1ded89ebdfbc464bbd6acbfc01b98831b6f307e))
+  *  adjust leabel position and label color ([365ab77b](https://github.com/antvis/graphin/commit/365ab77befca552ad3d5a80ee30024a93f6e8e24))
+  *  update dark style of graph studio shape ([faa9e7d2](https://github.com/antvis/graphin/commit/faa9e7d2c1aeac206974e956fe60ca3d48284818))
+  *  support user-defined layout option declaration ([40e9179b](https://github.com/antvis/graphin/commit/40e9179b1c4b28461f9bfb627a5e75da6ef1bd94))
+  *  fix behavior document ([9c863783](https://github.com/antvis/graphin/commit/9c8637831da9cddf10b6d3e14f494dca085d6e23))
+  *  opt tween animation of force layout in worker mode to make it more smoothly ([a07335b6](https://github.com/antvis/graphin/commit/a07335b6695a04fe8f80ac65c6f90daa97a1f184))
+  *  invalid data path ([cc617d0b](https://github.com/antvis/graphin/commit/cc617d0bb8aeca96f12734768b176d3041c4eb69))
+  *  new stub and point shape ([8cdc46a5](https://github.com/antvis/graphin/commit/8cdc46a545ae737be59cdfdd59b5e78ab1150c3e))
+  *  new hexagon shape ([901e9d9b](https://github.com/antvis/graphin/commit/901e9d9bdeb3566ae46778537710d17aae7f03fb))
+  *  new node/edge shape ([6b0cb8bd](https://github.com/antvis/graphin/commit/6b0cb8bda5f215cab3f77601543fa1f12f3c0672))
+  *  upgrade prettier to 2.0.2 to support ts optional chain ([c85e620e](https://github.com/antvis/graphin/commit/c85e620e5bb25ca882d78e9b802fd08179f96fcc))
+  *  update copyright ([f4cc64f6](https://github.com/antvis/graphin/commit/f4cc64f6e70ac66f0c4f472dd8c3f9556f895797))
+  *  replace graphin studio with graph studio ([0a5182aa](https://github.com/antvis/graphin/commit/0a5182aa1d6dbdc733b7ac05c617ba15b1535af7))
+* antvis/Graphin into doc/graphin-shape-demo ([c52c7dab](https://github.com/antvis/graphin/commit/c52c7dab8cce5ada860c43c23a61f2cb00a34839))
+*  update to version 1.1.0-beta.1 ([4c0519d0](https://github.com/antvis/graphin/commit/4c0519d08827f9929767bd9d5403d2e86ea8affb))
+*  format code ([509a3ef9](https://github.com/antvis/graphin/commit/509a3ef90cc8952bcafb25e4e31d19f60feed8d3))
+*  update graphin-studio prettier config ([5e5ec40a](https://github.com/antvis/graphin/commit/5e5ec40acb79d117b0760bbf684cc74ed8845eec))
+* find-connections and node-expand ([4a62c187](https://github.com/antvis/graphin/commit/4a62c1877c45711bfccad6c4b3e46f80290f38c9))
+*  update layout apis docs ([bc0af2f0](https://github.com/antvis/graphin/commit/bc0af2f0580943a29a7915a72fe03116ea78efde))
+*  add webworker for force layout ([53903091](https://github.com/antvis/graphin/commit/5390309107410f27d9e9b9d88579f6f92c984c68))
+*  fix full screen bugs ([50ca0ccc](https://github.com/antvis/graphin/commit/50ca0ccc640ad93070ccabe8b0fa02f12ea89094))
+*  demand loading antd for components ([5098991e](https://github.com/antvis/graphin/commit/5098991e36742f82e106be2e505dc3a64f324d4d))
+
 #### v1.0.5(2020-02-17)
 
 ##### New Features

@@ -17,7 +17,7 @@ describe('<Toolbar />', () => {
 
     const { asFragment, queryAllByTestId } = render(
       <Graphin data={data} layout={layout}>
-        <Toolbar />
+        <Toolbar style={{ position: 'fixed', right: 68, top: 68 }} />
       </Graphin>,
     );
   });

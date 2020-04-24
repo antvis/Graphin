@@ -1,0 +1,13 @@
+{
+  "title": {
+    "zh": "中文分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "Simple.jsx",
+      "title": "风控知识图谱",
+      "screenshot": ""
+    }
+  ]
+}
