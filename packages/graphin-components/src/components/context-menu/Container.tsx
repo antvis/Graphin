@@ -8,7 +8,7 @@ const MenuItem = Menu.Item;
 export interface MenuItemType {
   key: string;
   visible?: boolean;
-  /** antd icon type */
+  /** @ant-design/icons */
   iconType?: ReactElement | HTMLElement;
   title?: string;
   width?: number;
@@ -24,7 +24,7 @@ interface ContainerProps {
   onClose: () => void;
 }
 
-const Container: React.FC<ContainerProps> = (props) => {
+const Container: React.FC<ContainerProps> = props => {
   const { menu, onClose } = props;
 
   const onClickMenuItem = (item: MenuItemType) => {
@@ -34,7 +34,7 @@ const Container: React.FC<ContainerProps> = (props) => {
   };
 
   const menuItems = menu
-    .filter((item) => !(item.visible === false)) // item.visible 不传时默认可见
+    .filter(item => !(item.visible === false)) // item.visible 不传时默认可见
     .map((item, index) => {
       return (
         <MenuItem key={item.key} className={item.key} onClick={() => onClickMenuItem(item)}>

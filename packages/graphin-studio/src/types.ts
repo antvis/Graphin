@@ -1,5 +1,5 @@
 import { Graph } from '@antv/graphin';
-
+import { Data } from '@antv/graphin/dist/types';
 export interface NodeLayoutType {
   /** 节点度数 */
   degree?: number;
@@ -87,10 +87,7 @@ export interface EdgeModel {
   [key: string]: any; // eslint-disable-line
 }
 
-export interface GraphData {
-  nodes: Node[];
-  edges: Edge[];
-}
+export type GraphData = Data;
 export interface Layout {
   name: string;
   options?: any; // eslint-disable-line

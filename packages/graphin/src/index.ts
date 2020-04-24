@@ -12,7 +12,6 @@ export * from './types';
 export type Graph = G6.Graph;
 export type GraphNode = G6.Node;
 export type GraphEdge = G6.Edge;
-
 export interface GraphEvent extends MouseEvent {
   item: G6.Node & G6.Edge;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

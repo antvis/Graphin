@@ -9,7 +9,7 @@ const renderToolbar = (renderProps: RenderProps, state: GrapheneState, dispatch:
   const { layout } = state;
   const { layouts } = renderProps.apis.getInfo();
 
-  const RadioLayouts = layouts.map((items) => {
+  const RadioLayouts = layouts.map(items => {
     return {
       ...items,
       options: {},
@@ -23,6 +23,7 @@ const renderToolbar = (renderProps: RenderProps, state: GrapheneState, dispatch:
       icon: <LayoutOutlined />,
       disabled: false,
       style: {},
+      action: () => {},
       renderTooltip: () => {
         return (
           <LayoutSelector
