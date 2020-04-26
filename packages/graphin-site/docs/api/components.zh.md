@@ -31,16 +31,16 @@ RenderProps extend 了 ContextMenu 的 Props：
 
 MenuItem 的配置项
 
-|   属性        | 类型                                                        | 是否必选 | 说明                |
-| ------------- | ----------------------------------------------------------- | -------- | ------------------- |
-| key           | string                                                      | **是**   | React 组件 key      |
-| visible       | boolean                                                     | 否       | G6 实例             |
-| iconType      | string                                                      | 否       | antd icon 类型      |
-| title         | string                                                      | 否       | 菜单项文本          |
-| width         | number                                                      | 否       | 菜单宽度            |
-| height        | number                                                      | 否       | 菜单高度            |
-| onClick       | (props: [ContainerProps](#containerprops)) => void;         | 否       | 点击回调            |
-| render        | (props: [ContainerProps](#containerprops)) => ReactElement; | 否       | 自定义渲染函数      |
+|   属性   | 类型                                                        | 是否必选 | 说明                         |
+| -------- | ----------------------------------------------------------- | -------- | ---------------------------- |
+| key      | string                                                      | **是**   | React 组件 key               |
+| visible  | boolean                                                     | 否       | G6 实例                      |
+| iconType | ReactElement/HTMLElement                                    | 否       | icon 实例：@ant-design/icons |
+| title    | string                                                      | 否       | 菜单项文本                   |
+| width    | number                                                      | 否       | 菜单宽度                     |
+| height   | number                                                      | 否       | 菜单高度                     |
+| onClick  | (props: [ContainerProps](#containerprops)) => void;         | 否       | 点击回调                     |
+| render   | (props: [ContainerProps](#containerprops)) => ReactElement; | 否       | 自定义渲染函数               |
 
 ### ContainerProps
 
@@ -68,15 +68,15 @@ Props：
 
 ### MenuItem
 
-|   属性        | 类型                   | 是否必选 | 说明                     |
-| ------------- | ---------------------- | -------- | ------------------------ |
-| id            | string                 | **是**   | 唯一标识                 |
-| name          | string                 | **是**   | 菜单项文本               |
-| icon          | string                 | **是**   | 菜单项 icon 类型（antd） |
-| action        | horizontal \| vertical | **是**   | 点击事件回调             |
-| disabled      | boolean                | 否       | 是否禁用菜单项           |
-| style         | CSSProperties          | 否       | 自定义样式               |
-| renderTooltip | () => ReactElement;    | 否       | 自定义工具栏渲染函数     |
+|   属性        | 类型                     | 是否必选 | 说明                         |
+| ------------- | ------------------------ | -------- | ---------------------------- |
+| id            | string                   | **是**   | 唯一标识                     |
+| name          | string                   | **是**   | 菜单项文本                   |
+| icon          | ReactElement/HTMLElement | 否       | icon 实例：@ant-design/icons |
+| action        | horizontal \| vertical   | **是**   | 点击事件回调                 |
+| disabled      | boolean                  | 否       | 是否禁用菜单项               |
+| style         | CSSProperties            | 否       | 自定义样式                   |
+| renderTooltip | () => ReactElement;      | 否       | 自定义工具栏渲染函数         |
 
 ### RenderProps
 
