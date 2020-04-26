@@ -7,6 +7,7 @@ window.reactDom = require('react-dom');
 window.antd = require('antd');
 window.graphin = require('@antv/graphin');
 window.graphinComponents = require('@antv/graphin-components');
+window.icons = require('@ant-design/icons');
 
 require('@antv/graphin/dist/index.css');
 require('@antv/graphin-components/dist/index.css');
