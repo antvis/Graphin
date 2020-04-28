@@ -1,5 +1,7 @@
-import { G6Event, G6KeyboardEvent } from '../types';
-import { Node, Edge } from '@antv/g6';
+import { G6Event, G6KeyboardEvent, EdgeData, NodeData } from '../types';
+import { IGraph } from '@antv/g6/lib/interface/graph';
+import { INode, IEdge } from '@antv/g6/lib/interface/item';
+// import { Node, Edge } from '@antv/g6';
 
 export default {
   getDefaultCfg() {
@@ -20,25 +22,26 @@ export default {
   clearStates() {
     // eslint-disable-next-line
     const { graph } = this as any;
-    graph.getNodes().forEach((node: Node) => {
-      graph.clearItemStates(node);
+    graph.getNodes().forEach((node: NodeData) => {
+      graph.clearItemStates(node, ['highlight.source', 'highlight.target', 'highlight.dark', 'highlight.light']);
     });
-    graph.getEdges().forEach((edge: Edge) => {
-      graph.clearItemStates(edge);
+    graph.getEdges().forEach((edge: EdgeData) => {
+      graph.clearItemStates(edge, ['selected']);
     });
   },
   onCanvasClick() {
     this.clearStates();
   },
+  // TODO NEED TO redefine "this" type
   onEdgeClick(e: G6Event) {
     // eslint-disable-next-line
-    const { graph } = this as any;
+    const { graph }: { graph: IGraph } = this as any;
     const currentEdge = e.item;
     const sourceNode = currentEdge.get('source');
     const targetNode = currentEdge.get('target');
     this.clearStates();
     currentEdge.toFront();
-    graph.getNodes().forEach((node: Node) => {
+    graph.getNodes().forEach((node: INode) => {
       const id = node.get('id');
       if (id === sourceNode.get('id') || id === targetNode.get('id')) {
         graph.setItemState(sourceNode, 'highlight.source', true);
@@ -52,19 +55,20 @@ export default {
       }
     });
   },
-  process(node: Node) {
+  // TODO NEED TO redefine "this" type
+  process(node: INode) {
     // eslint-disable-next-line
-    const { graph } = this as any;
+    const { graph }: { graph: IGraph } = this as any;
     /** process Edges */
     const allEdges = graph.getEdges();
 
     const relativeEdges = node.getEdges();
-    const relativeEdgesIds = relativeEdges.map((edge: Edge) => edge.get('id'));
-    const unRelativeEdges: Edge[] = [];
+    const relativeEdgesIds = relativeEdges.map((edge: IEdge) => edge.get('id'));
+    const unRelativeEdges: IEdge[] = [];
 
     const relativeNodeSet = new Set([node]);
 
-    allEdges.forEach((edge: Edge) => {
+    allEdges.forEach((edge: IEdge) => {
       const id = edge.get('id');
       const source = edge.get('source');
       const target = edge.get('target');
@@ -79,9 +83,9 @@ export default {
     /** process Nodes */
     const allNodes = graph.getNodes();
     const relativeNodes = [...relativeNodeSet];
-    const relativeNodesIds = relativeNodes.map(item => item.get('id'));
+    const relativeNodesIds = relativeNodes.map((item) => item.get('id'));
 
-    const unRelativeNodes = allNodes.filter((item: Node) => {
+    const unRelativeNodes = allNodes.filter((item: INode) => {
       return relativeNodesIds.indexOf(item.get('id')) === -1;
     });
     return {
@@ -91,15 +95,17 @@ export default {
       unRelativeNodes,
     };
   },
+  // TODO NEED TO redefine "this" type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick(e: G6Event) {
-    const { keydown, graph } = this as any; // eslint-disable-line
+    const { keydown, graph }: { keydown: string; graph: IGraph } = this as any; // eslint-disable-line
     const currentNode = e.item;
-    const { relativeEdges, unRelativeEdges, relativeNodes, unRelativeNodes } = this.process(currentNode);
+    const { relativeEdges, unRelativeEdges, relativeNodes, unRelativeNodes } = this.process(currentNode as INode);
     // 单选
     if (!keydown) {
       this.clearStates();
 
-      relativeNodes.forEach((node: Node) => {
+      relativeNodes.forEach((node: INode) => {
         if (currentNode.get('id') === node.get('id')) {
           graph.setItemState(currentNode, 'selected', true);
         } else {
@@ -107,23 +113,23 @@ export default {
           graph.setItemState(node, 'highlight.light', true);
         }
       });
-      unRelativeNodes.forEach((node: Node) => {
+      unRelativeNodes.forEach((node: INode) => {
         graph.setItemState(node, 'highlight.light', false);
         graph.setItemState(node, 'highlight.dark', true);
       });
-      relativeEdges.forEach((edge: Edge) => {
+      relativeEdges.forEach((edge: IEdge) => {
         edge.toFront();
         graph.setItemState(edge, 'highlight.dark', false);
         graph.setItemState(edge, 'highlight.light', true);
       });
-      unRelativeEdges.forEach(edge => {
+      unRelativeEdges.forEach((edge: IEdge) => {
         edge.toBack();
         graph.setItemState(edge, 'highlight.light', false);
         graph.setItemState(edge, 'highlight.dark', true);
       });
     } else {
       //  按住ctrl 多选
-      relativeEdges.forEach((edge: Edge) => {
+      relativeEdges.forEach((edge: IEdge) => {
         graph.setItemState(edge, 'highlight.dark', false);
         graph.setItemState(edge, 'highlight.light', true);
       });

@@ -81,7 +81,9 @@ const defaultRegister = {
         mode: 'default',
         options: {},
         register: () => {
-          G6.registerBehavior('graphin-highlight', graphinHighlight);
+          // TODO better support for registerBehavior
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          G6.registerBehavior('graphin-highlight', graphinHighlight as any);
         },
       },
     ];

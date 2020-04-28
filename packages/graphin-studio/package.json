@@ -11,6 +11,7 @@
   "dependencies": {
     "@ant-design/compatible": "^1.0.2",
     "@ant-design/icons": "^4.0.6",
+    "@antv/g6": "^3.4.8",
     "@antv/graphin": "*",
     "@antv/graphin-components": "*",
     "@types/classnames": "^2.2.9",

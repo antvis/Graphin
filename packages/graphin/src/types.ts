@@ -1,38 +1,24 @@
-import G6, { GraphOptions } from '@antv/g6';
 import { ReactNode } from 'react';
+import G6 from '@antv/g6';
 import ForceLayout from './layout/force/ForceLayout';
 import Graphin from './Graphin';
 import { LayoutOption } from './controller/layout/defaultLayouts';
-import { G } from '@antv/g6/types/g';
+import { Item, EdgeConfig, NodeConfig } from '@antv/g6/lib/types';
 
-/** export types  */
-export type G6Type = any; // eslint-disable-line
-export type Graph = G6.Graph;
-
-export type GraphNode = G6.Node;
-export type GraphEdge = G6.Edge;
-
-/** 以下用到类型G6中并没有类型定义，需要我们增强一下 */
-export interface GraphType extends G6.Graph {
-  canvas: Canvas;
-
-  nodes: Node[];
-
-  edges: Edge[];
-
-  autoPaint(): void;
-
-  emit: (eventName: string) => any; // eslint-disable-line
-}
+export type GraphClass = typeof G6['Graph'];
+export type Graph = InstanceType<GraphClass>;
+type GraphOptions = ConstructorParameters<GraphClass>[0];
+export type GraphNode = NodeConfig;
+export type GraphEdge = EdgeConfig;
 
 /** G6 没有暴露这个类型 */
 export interface G6Event extends MouseEvent {
-  item: G6.Node & G6.Edge;
+  item: Item;
   target: MouseEvent['target'];
 }
 
 export interface G6KeyboardEvent extends KeyboardEvent {
-  item: G6.Node & G6.Edge;
+  item: Item;
   target: KeyboardEvent['target'];
 }
 
@@ -42,11 +28,6 @@ export interface ExtendedGraphOptions extends GraphOptions {
    * 默认缩放比例
    */
   zoom?: number;
-  /**
-   * 像素比率
-   * 默认值 1.0
-   */
-  pixelRatio?: number;
 
   pan?: { x: number; y: number };
 
@@ -64,27 +45,27 @@ export interface ExtendedGraphOptions extends GraphOptions {
   [key: string]: any; // eslint-disable-line
 }
 
-type CanvasKey = keyof Canvas;
+// type CanvasKey = keyof Canvas;
 
-/** G6 没有暴露这个类型 */
-export interface Canvas {
-  get(key: CanvasKey): Canvas[CanvasKey];
-  width: number;
-  height: number;
-}
+// /** G6 没有暴露这个类型 */
+// export interface Canvas {
+//   get(key: CanvasKey): Canvas[CanvasKey];
+//   width: number;
+//   height: number;
+// }
 
-export interface ExtendedGraph extends Graph {
-  /**
-   * 画布实例
-   */
-  canvas: Canvas;
+// export interface ExtendedGraph extends Graph {
+//   /**
+//    * 画布实例
+//    */
+//   canvas: Canvas;
 
-  nodes: Node[];
+//   nodes: Node[];
 
-  edges: Edge[];
+//   edges: Edge[];
 
-  autoPaint(): void;
-}
+//   autoPaint(): void;
+// }
 
 /** 默认节点样式 */
 export interface NodeStyle {
@@ -150,6 +131,8 @@ export interface Node {
   id: string;
   /** 节点类型 */
   shape?: string;
+  /** 节点类型 */
+  type?: string;
   /** 节点文本 */
   label?: string;
   /** 节点样式 */
@@ -234,6 +217,8 @@ export interface Edge {
   target: string;
   /** 边的类型 */
   shape?: string;
+  /** 边的类型 */
+  type?: string;
 
   /** 边的文本 */
   label?: string;
@@ -282,7 +267,8 @@ export interface EdgeShape {
 }
 
 export interface ShapeComponent {
-  shape: G.ShapeType;
+  shape?: string;
+  type?: string;
   attrs: {
     /** 这个shape图形的ID，用户自定义，保证不重复即可 */
     id: string;
@@ -296,7 +282,8 @@ export interface ShapeComponent {
 export interface NodeShapeFunction {
   (node: Node): {
     /** 自定义Shape的名称，之后数据指定即可调用这个Shape定义 */
-    shape: string;
+    shape?: string;
+    type?: string;
     shapeComponents: ShapeComponent[];
     state: {
       [stateName: string]: {
@@ -351,7 +338,7 @@ export interface Register {
   /** 节点名称 */
   name: string;
   /** register执行函数,参数为G6对象 */
-  register: (G6: G6Type) => void;
+  register: (g6: typeof G6) => void;
 }
 
 export interface BehaviorRegister extends Register {
@@ -375,11 +362,11 @@ export interface GraphinProps {
   };
   register?: {
     /** 通过G6原生方法，注册节点 */
-    nodeShape?: (G6: G6Type) => Register[];
+    nodeShape?: (g6: typeof G6) => Register[];
     /** 通过G6原生方法，注册边 */
-    edgeShape?: (G6: G6Type) => Register[];
+    edgeShape?: (g6: typeof G6) => Register[];
     /** 通过G6原生方法，注册事件 */
-    behavior?: (G6: G6Type) => BehaviorRegister[];
+    behavior?: (g6: typeof G6) => BehaviorRegister[];
   };
 
   children?: ReactNode;
@@ -398,7 +385,7 @@ export interface GraphinState {
   width: number;
   height: number;
   data: Data;
-  graph?: GraphType;
+  graph?: Graph;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   graphSave?: any;
   forceSimulation?: ForceSimulation | null;
@@ -414,7 +401,7 @@ export interface NodeModel {
 }
 
 export interface LayoutOptionBase {
-  graph: GraphType;
+  graph: Graph;
   width: number;
   height: number;
   data: Data;

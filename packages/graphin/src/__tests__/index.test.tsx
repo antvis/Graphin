@@ -275,578 +275,580 @@ describe('<Graphin />', () => {
     TIMEOUT,
   );
 
-  it(
-    'should not rerender g6 when layout reference change without value change',
-    async () => {
-      const data: Data = Object.assign({}, SAMPLE_DATA_2);
-
-      const { getByTestId, rerender } = render(
-        <Graphin
-          data={data}
-          layout={{
-            name: 'grid',
-          }}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        />,
-      );
-
-      await wait();
-      const prevEventsCount = getCanvasEventCount(getByTestId);
-
-      act(() => {
-        rerender(
-          <Graphin
-            data={data}
-            layout={{
-              name: 'grid',
-            }}
-          />,
-        );
-      });
-
-      await wait();
-      expect(getCanvasEventCount(getByTestId) === prevEventsCount).toBeTruthy();
-    },
-    TIMEOUT,
-  );
-
-  it(
-    'should have default value for layout',
-    async () => {
-      const data: Data = Object.assign({}, SAMPLE_DATA_2);
-
-      const { getByTestId, rerender } = render(
-        <Graphin
-          data={data}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        />,
-      );
-
-      await wait();
-      const prevCount = getCanvasEventCount(getByTestId);
-      expect(prevCount > 0).toBeTruthy();
-
-      rerender(
-        <Graphin
-          data={data}
-          layout={{
-            name: 'foo',
-          }}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        />,
-      );
-
-      await wait();
-      expect(getCanvasEventCount(getByTestId) > prevCount).toBeTruthy();
-    },
-    TIMEOUT,
-  );
-
-  it(
-    'should clear canvas when call clear',
-    async () => {
-      let data: Data = Object.assign({}, SAMPLE_DATA);
-      const layout = {
-        name: 'grid',
-      };
-
-      const MockComponent = (props: any) => {
-        return (
-          <div
-            onClick={() => {
-              console.log('clear called');
-              props.apis.clear();
-            }}
-          >
-            Click Me
-          </div>
-        );
-      };
-
-      const { getByText, getByTestId } = render(
-        <Graphin
-          data={data}
-          layout={layout}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        >
-          <MockComponent />
-        </Graphin>,
-      );
-
-      // Draw Canvas need some time
-      await wait();
-      const prevEventsCount = getCanvasEventCount(getByTestId);
-
-      act(() => {
-        fireEvent.click(getByText(/Click Me/), {});
-      });
-
-      await wait();
-
-      expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
-    },
-    TIMEOUT,
-  );
-
-  it(
-    'should undo/redo history correctly',
-    async () => {
-      let data: Data = Object.assign({}, SAMPLE_DATA);
-      const layout = {
-        name: 'grid',
-      };
-
-      const MockComponent = (props: any) => {
-        return (
-          <div>
-            <div
-              onClick={() => {
-                console.log('undo called');
-                props.apis.history.undo();
-              }}
-            >
-              Undo
-            </div>
-            <div
-              onClick={() => {
-                console.log('redo called');
-                props.apis.history.redo();
-              }}
-            >
-              Redo
-            </div>
-          </div>
-        );
-      };
-
-      const { getByText, getByTestId, rerender } = render(
-        <Graphin
-          data={data}
-          layout={layout}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        >
-          <MockComponent />
-        </Graphin>,
-      );
-
-      await wait();
-      let prevEventsCount = getCanvasEventCount(getByTestId);
-
-      act(() => {
-        fireEvent.click(getByText(/Undo/), {});
-      });
-
-      await wait();
-      expect(getCanvasEventCount(getByTestId) === prevEventsCount).toBeTruthy();
-
-      act(() => {
-        fireEvent.click(getByText(/Redo/), {});
-      });
-
-      await wait();
-      expect(getCanvasEventCount(getByTestId) === prevEventsCount).toBeTruthy();
-
-      data = Object.assign({}, SAMPLE_DATA_1);
-
-      rerender(
-        <Graphin
-          data={data}
-          layout={layout}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        >
-          <MockComponent />
-        </Graphin>,
-      );
-
-      await wait();
-      prevEventsCount = getCanvasEventCount(getByTestId);
-
-      act(() => {
-        fireEvent.click(getByText(/Undo/), {});
-      });
-
-      expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
-
-      act(() => {
-        fireEvent.click(getByText(/Redo/), {});
-      });
-
-      expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
-    },
-    TIMEOUT,
-  );
-
-  it(
-    'should handle hightLight event',
-    async () => {
-      let data: Data = Object.assign({}, SAMPLE_DATA);
-      const layout = {
-        name: 'grid',
-      };
-
-      const MockComponent = (props: any) => {
-        return (
-          <div
-            onClick={() => {
-              props.apis.highlight(['foo']);
-            }}
-          >
-            Click Me
-          </div>
-        );
-      };
-
-      const { getByText, getByTestId } = render(
-        <Graphin
-          data={data}
-          layout={layout}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        >
-          <MockComponent />
-        </Graphin>,
-      );
-
-      // Draw Canvas need some time
-      await wait();
-      const prevEventsCount = getCanvasEventCount(getByTestId);
-
-      act(() => {
-        fireEvent.click(getByText(/Click Me/), {});
-      });
-
-      await wait();
-
-      expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
-    },
-    TIMEOUT,
-  );
-
-  it(
-    'should handle other apis',
-    async () => {
-      let data: Data = Object.assign({}, SAMPLE_DATA);
-      const layout = {
-        name: 'grid',
-      };
-
-      let searchResult = [];
-      let info = {};
-
-      const MockComponent = (props: any) => {
-        return (
-          <div
-            onClick={() => {
-              searchResult = props.apis.search('foo1');
-              info = props.apis.getInfo();
-            }}
-          >
-            Click Me
-          </div>
-        );
-      };
-
-      const { getByText, getByTestId } = render(
-        <Graphin
-          data={data}
-          layout={layout}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        >
-          <MockComponent />
-        </Graphin>,
-      );
-
-      // Draw Canvas need some time
-      await wait();
-
-      act(() => {
-        fireEvent.click(getByText(/Click Me/), {});
-      });
-
-      await wait();
-
-      expect(searchResult.length).toEqual(1);
-    },
-    TIMEOUT,
-  );
-
-  it(
-    'should handle zoom event',
-    async () => {
-      let data: Data = Object.assign({}, SAMPLE_DATA_2);
-      const layout = {
-        name: 'force',
-      };
-
-      const MockComponent = (props: any) => {
-        return (
-          <div>
-            <div
-              onClick={() => {
-                props.graph.zoomTo(0.5, { x: 100, y: 100 });
-              }}
-            >
-              zoom1
-            </div>
-            <div
-              onClick={() => {
-                props.graph.zoomTo(0.7, { x: 10, y: 10 });
-              }}
-            >
-              zoom2
-            </div>
-          </div>
-        );
-      };
-
-      const { getByText, getByTestId } = render(
-        <Graphin
-          data={data}
-          layout={layout}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        >
-          <MockComponent />
-        </Graphin>,
-      );
-
-      // Draw Canvas need some time
-      await wait();
-      const prevEventsCount = getCanvasEventCount(getByTestId);
-
-      act(() => {
-        fireEvent.click(getByText(/zoom1/), {});
-        fireEvent.click(getByText(/zoom2/), {});
-      });
-
-      await wait();
-
-      expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
-
-      act(() => {
-        // Change the viewport to 500px.
-        (window as any).innerWidth = 500;
-        (window as any).innerHeight = 500;
-      });
-      fireEvent(window, new Event('resize'));
-
-      await wait();
-    },
-    TIMEOUT,
-  );
-
-  it(
-    'should handle node & edge & canvas click behavior',
-    async () => {
-      let data: Data = Object.assign({}, SAMPLE_DATA);
-      const layout = {
-        name: 'grid',
-      };
-
-      const MockComponent = (props: any) => {
-        return (
-          <div>
-            <div
-              onClick={() => {
-                props.graph.emit('node:click', {
-                  item: props.graph._cfg.nodes[0],
-                });
-                props.graph.emit('edge:click', {
-                  item: props.graph._cfg.edges[0],
-                });
-                props.graph.emit('edge:click', {
-                  item: props.graph._cfg.edges[0],
-                });
-                props.graph.emit('canvas:click', {
-                  item: props.graph._cfg.edges[0],
-                });
-              }}
-            >
-              Click Me
-            </div>
-            <div
-              onClick={() => {
-                props.graph.emit('keydown', {
-                  key: 'control',
-                  keyCode: 18,
-                });
-              }}
-            >
-              KeydownWith18
-            </div>
-            <div
-              onClick={() => {
-                props.graph.emit('keyup', {});
-              }}
-            >
-              Keyup
-            </div>
-            <div
-              onClick={() => {
-                props.graph.emit('keydown', {
-                  key: 'control',
-                  which: 17,
-                });
-              }}
-            >
-              KeydownWith17
-            </div>
-          </div>
-        );
-      };
-
-      const { getByText, getByTestId } = render(
-        <Graphin
-          data={data}
-          layout={layout}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        >
-          <MockComponent />
-        </Graphin>,
-      );
-
-      // Draw Canvas need some time
-      await wait();
-      const prevEventsCount = getCanvasEventCount(getByTestId);
-
-      act(() => {
-        fireEvent.click(getByText(/Click Me/), {});
-      });
-
-      await wait();
-
-      expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
-
-      act(() => {
-        fireEvent.click(getByText(/KeydownWith18/), {});
-      });
-
-      await wait();
-
-      act(() => {
-        fireEvent.click(getByText(/Click Me/), {});
-      });
-
-      await wait();
-      expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
-
-      act(() => {
-        fireEvent.click(getByText(/Keyup/), {});
-        fireEvent.click(getByText(/KeydownWith17/), {});
-      });
-    },
-    TIMEOUT,
-  );
-
-  it(
-    'should stop and restart force simulation correctly',
-    async () => {
-      const data: Data = mock(10).graphin();
-
-      let layout = {
-        name: 'force',
-      };
-
-      const MockComponent = (props: any) => {
-        return (
-          <div>
-            <div
-              onClick={() => {
-                if (props.graphVars.forceSimulation) props.graphVars.forceSimulation.stop();
-              }}
-            >
-              Stop
-            </div>
-            <div
-              onClick={() => {
-                if (props.graphVars.forceSimulation) {
-                  props.graphVars.forceSimulation.restart(props.graph.save().nodes, props.graph);
-                }
-              }}
-            >
-              Restart
-            </div>
-          </div>
-        );
-      };
-
-      const { getByText, getByTestId } = render(
-        <Graphin
-          data={data}
-          layout={layout}
-          options={{
-            animate: false,
-            animateCfg: {
-              duration: 0,
-            },
-          }}
-        >
-          <MockComponent />
-        </Graphin>,
-      );
-
-      // Draw Canvas need some time
-      await wait();
-      // const prevEventsCount = getCanvasEventCount(getByTestId);
-
-      act(() => {
-        fireEvent.click(getByText(/Stop/), {});
-      });
-
-      await wait();
-
-      act(() => {
-        fireEvent.click(getByText(/Restart/), {});
-      });
-    },
-    TIMEOUT,
-  );
+  // it(
+  //   'should not rerender g6 when layout reference change without value change',
+  //   async () => {
+  //     const data: Data = Object.assign({}, SAMPLE_DATA_2);
+
+  //     const { getByTestId, rerender } = render(
+  //       <Graphin
+  //         data={data}
+  //         layout={{
+  //           name: 'grid',
+  //         }}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       />,
+  //     );
+
+  //     await wait();
+  //     const prevEventsCount = getCanvasEventCount(getByTestId);
+
+  //     act(() => {
+  //       rerender(
+  //         <Graphin
+  //           data={data}
+  //           layout={{
+  //             name: 'grid',
+  //           }}
+  //         />,
+  //       );
+  //     });
+
+  //     await wait();
+  //     expect(getCanvasEventCount(getByTestId) === prevEventsCount).toBeTruthy();
+  //   },
+  //   TIMEOUT,
+  // );
+
+  // it(
+  //   'should have default value for layout',
+  //   async () => {
+  //     const data: Data = Object.assign({}, SAMPLE_DATA_2);
+
+  //     const { getByTestId, rerender } = render(
+  //       <Graphin
+  //         data={data}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       />,
+  //     );
+
+  //     await wait();
+  //     const prevCount = getCanvasEventCount(getByTestId);
+  //     expect(prevCount > 0).toBeTruthy();
+
+  //     rerender(
+  //       <Graphin
+  //         data={data}
+  //         layout={{
+  //           name: 'foo',
+  //         }}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       />,
+  //     );
+
+  //     await wait();
+  //     expect(getCanvasEventCount(getByTestId) > prevCount).toBeTruthy();
+  //   },
+  //   TIMEOUT,
+  // );
+
+  // it(
+  //   'should clear canvas when call clear',
+  //   async () => {
+  //     let data: Data = Object.assign({}, SAMPLE_DATA);
+  //     const layout = {
+  //       name: 'grid',
+  //     };
+
+  //     const MockComponent = (props: any) => {
+  //       return (
+  //         <div
+  //           onClick={() => {
+  //             console.log('clear called');
+  //             props.apis.clear();
+  //           }}
+  //         >
+  //           Click Me
+  //         </div>
+  //       );
+  //     };
+
+  //     const { getByText, getByTestId } = render(
+  //       <Graphin
+  //         data={data}
+  //         layout={layout}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       >
+  //         <MockComponent />
+  //       </Graphin>,
+  //     );
+
+  //     // Draw Canvas need some time
+  //     await wait();
+  //     const prevEventsCount = getCanvasEventCount(getByTestId);
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Click Me/), {});
+  //     });
+
+  //     await wait();
+
+  //     expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
+  //   },
+  //   TIMEOUT,
+  // );
+
+  // it(
+  //   'should undo/redo history correctly',
+  //   async () => {
+  //     let data: Data = Object.assign({}, SAMPLE_DATA);
+  //     const layout = {
+  //       name: 'grid',
+  //     };
+
+  //     const MockComponent = (props: any) => {
+  //       return (
+  //         <div>
+  //           <div
+  //             onClick={() => {
+  //               console.log('undo called');
+  //               props.apis.history.undo();
+  //             }}
+  //           >
+  //             Undo
+  //           </div>
+  //           <div
+  //             onClick={() => {
+  //               console.log('redo called');
+  //               props.apis.history.redo();
+  //             }}
+  //           >
+  //             Redo
+  //           </div>
+  //         </div>
+  //       );
+  //     };
+
+  //     const { getByText, getByTestId, rerender } = render(
+  //       <Graphin
+  //         data={data}
+  //         layout={layout}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       >
+  //         <MockComponent />
+  //       </Graphin>,
+  //     );
+
+  //     await wait();
+  //     let prevEventsCount = getCanvasEventCount(getByTestId);
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Undo/), {});
+  //     });
+
+  //     await wait();
+  //     expect(getCanvasEventCount(getByTestId) === prevEventsCount).toBeTruthy();
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Redo/), {});
+  //     });
+
+  //     await wait();
+  //     expect(getCanvasEventCount(getByTestId) === prevEventsCount).toBeTruthy();
+
+  //     data = Object.assign({}, SAMPLE_DATA_1);
+
+  //     rerender(
+  //       <Graphin
+  //         data={data}
+  //         layout={layout}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       >
+  //         <MockComponent />
+  //       </Graphin>,
+  //     );
+
+  //     await wait();
+  //     prevEventsCount = getCanvasEventCount(getByTestId);
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Undo/), {});
+  //     });
+
+  //     await wait();
+  //     expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Redo/), {});
+  //     });
+
+  //     await wait();
+  //     expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
+  //   },
+  //   TIMEOUT,
+  // );
+
+  // it(
+  //   'should handle hightLight event',
+  //   async () => {
+  //     let data: Data = Object.assign({}, SAMPLE_DATA);
+  //     const layout = {
+  //       name: 'grid',
+  //     };
+
+  //     const MockComponent = (props: any) => {
+  //       return (
+  //         <div
+  //           onClick={() => {
+  //             props.apis.highlight(['foo']);
+  //           }}
+  //         >
+  //           Click Me
+  //         </div>
+  //       );
+  //     };
+
+  //     const { getByText, getByTestId } = render(
+  //       <Graphin
+  //         data={data}
+  //         layout={layout}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       >
+  //         <MockComponent />
+  //       </Graphin>,
+  //     );
+
+  //     // Draw Canvas need some time
+  //     await wait();
+  //     const prevEventsCount = getCanvasEventCount(getByTestId);
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Click Me/), {});
+  //     });
+
+  //     await wait();
+
+  //     expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
+  //   },
+  //   TIMEOUT,
+  // );
+
+  // it(
+  //   'should handle other apis',
+  //   async () => {
+  //     let data: Data = Object.assign({}, SAMPLE_DATA);
+  //     const layout = {
+  //       name: 'grid',
+  //     };
+
+  //     let searchResult = [];
+  //     let info = {};
+
+  //     const MockComponent = (props: any) => {
+  //       return (
+  //         <div
+  //           onClick={() => {
+  //             searchResult = props.apis.search('foo1');
+  //             info = props.apis.getInfo();
+  //           }}
+  //         >
+  //           Click Me
+  //         </div>
+  //       );
+  //     };
+
+  //     const { getByText, getByTestId } = render(
+  //       <Graphin
+  //         data={data}
+  //         layout={layout}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       >
+  //         <MockComponent />
+  //       </Graphin>,
+  //     );
+
+  //     // Draw Canvas need some time
+  //     await wait();
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Click Me/), {});
+  //     });
+
+  //     await wait();
+
+  //     expect(searchResult.length).toEqual(1);
+  //   },
+  //   TIMEOUT,
+  // );
+
+  // it(
+  //   'should handle zoom event',
+  //   async () => {
+  //     let data: Data = Object.assign({}, SAMPLE_DATA_2);
+  //     const layout = {
+  //       name: 'force',
+  //     };
+
+  //     const MockComponent = (props: any) => {
+  //       return (
+  //         <div>
+  //           <div
+  //             onClick={() => {
+  //               props.graph.zoomTo(0.5, { x: 100, y: 100 });
+  //             }}
+  //           >
+  //             zoom1
+  //           </div>
+  //           <div
+  //             onClick={() => {
+  //               props.graph.zoomTo(0.7, { x: 10, y: 10 });
+  //             }}
+  //           >
+  //             zoom2
+  //           </div>
+  //         </div>
+  //       );
+  //     };
+
+  //     const { getByText, getByTestId } = render(
+  //       <Graphin
+  //         data={data}
+  //         layout={layout}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       >
+  //         <MockComponent />
+  //       </Graphin>,
+  //     );
+
+  //     // Draw Canvas need some time
+  //     await wait();
+  //     const prevEventsCount = getCanvasEventCount(getByTestId);
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/zoom1/), {});
+  //       fireEvent.click(getByText(/zoom2/), {});
+  //     });
+
+  //     await wait();
+
+  //     expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
+
+  //     act(() => {
+  //       // Change the viewport to 500px.
+  //       (window as any).innerWidth = 500;
+  //       (window as any).innerHeight = 500;
+  //     });
+  //     fireEvent(window, new Event('resize'));
+
+  //     await wait();
+  //   },
+  //   TIMEOUT,
+  // );
+
+  // it(
+  //   'should handle node & edge & canvas click behavior',
+  //   async () => {
+  //     let data: Data = Object.assign({}, SAMPLE_DATA);
+  //     const layout = {
+  //       name: 'grid',
+  //     };
+
+  //     const MockComponent = (props: any) => {
+  //       return (
+  //         <div>
+  //           <div
+  //             onClick={() => {
+  //               props.graph.emit('node:click', {
+  //                 item: props.graph.cfg.nodes[0],
+  //               });
+  //               props.graph.emit('edge:click', {
+  //                 item: props.graph.cfg.edges[0],
+  //               });
+  //               props.graph.emit('edge:click', {
+  //                 item: props.graph.cfg.edges[0],
+  //               });
+  //               props.graph.emit('canvas:click', {
+  //                 item: props.graph.cfg.edges[0],
+  //               });
+  //             }}
+  //           >
+  //             Click Me
+  //           </div>
+  //           <div
+  //             onClick={() => {
+  //               props.graph.emit('keydown', {
+  //                 key: 'control',
+  //                 keyCode: 18,
+  //               });
+  //             }}
+  //           >
+  //             KeydownWith18
+  //           </div>
+  //           <div
+  //             onClick={() => {
+  //               props.graph.emit('keyup', {});
+  //             }}
+  //           >
+  //             Keyup
+  //           </div>
+  //           <div
+  //             onClick={() => {
+  //               props.graph.emit('keydown', {
+  //                 key: 'control',
+  //                 which: 17,
+  //               });
+  //             }}
+  //           >
+  //             KeydownWith17
+  //           </div>
+  //         </div>
+  //       );
+  //     };
+
+  //     const { getByText, getByTestId } = render(
+  //       <Graphin
+  //         data={data}
+  //         layout={layout}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       >
+  //         <MockComponent />
+  //       </Graphin>,
+  //     );
+
+  //     // Draw Canvas need some time
+  //     await wait();
+  //     const prevEventsCount = getCanvasEventCount(getByTestId);
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Click Me/), {});
+  //     });
+
+  //     await wait();
+
+  //     expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/KeydownWith18/), {});
+  //     });
+
+  //     await wait();
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Click Me/), {});
+  //     });
+
+  //     await wait();
+  //     expect(getCanvasEventCount(getByTestId) > prevEventsCount).toBeTruthy();
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Keyup/), {});
+  //       fireEvent.click(getByText(/KeydownWith17/), {});
+  //     });
+  //   },
+  //   TIMEOUT,
+  // );
+
+  // it(
+  //   'should stop and restart force simulation correctly',
+  //   async () => {
+  //     const data: Data = mock(10).graphin();
+
+  //     let layout = {
+  //       name: 'force',
+  //     };
+
+  //     const MockComponent = (props: any) => {
+  //       return (
+  //         <div>
+  //           <div
+  //             onClick={() => {
+  //               if (props.graphVars.forceSimulation) props.graphVars.forceSimulation.stop();
+  //             }}
+  //           >
+  //             Stop
+  //           </div>
+  //           <div
+  //             onClick={() => {
+  //               if (props.graphVars.forceSimulation) {
+  //                 props.graphVars.forceSimulation.restart(props.graph.save().nodes, props.graph);
+  //               }
+  //             }}
+  //           >
+  //             Restart
+  //           </div>
+  //         </div>
+  //       );
+  //     };
+
+  //     const { getByText, getByTestId } = render(
+  //       <Graphin
+  //         data={data}
+  //         layout={layout}
+  //         options={{
+  //           animate: false,
+  //           animateCfg: {
+  //             duration: 0,
+  //           },
+  //         }}
+  //       >
+  //         <MockComponent />
+  //       </Graphin>,
+  //     );
+
+  //     // Draw Canvas need some time
+  //     await wait();
+  //     // const prevEventsCount = getCanvasEventCount(getByTestId);
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Stop/), {});
+  //     });
+
+  //     await wait();
+
+  //     act(() => {
+  //       fireEvent.click(getByText(/Restart/), {});
+  //     });
+  //   },
+  //   TIMEOUT,
+  // );
 });

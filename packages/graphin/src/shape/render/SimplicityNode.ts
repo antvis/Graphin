@@ -22,10 +22,10 @@ const renderNodeShape: NodeShapeFunction = (node: Node) => {
   const fontPosition = nodeSize! * 1.4;
 
   return {
-    shape: 'SimplicityNode',
+    type: 'CircleNode',
     shapeComponents: [
       {
-        shape: 'circle',
+        type: 'circle',
         attrs: {
           id: 'circle-container',
           x: 0,
@@ -39,7 +39,7 @@ const renderNodeShape: NodeShapeFunction = (node: Node) => {
       },
       // G6 iconfont 方案。https://www.yuque.com/antv/g6/acaihu
       {
-        shape: 'text',
+        type: 'text',
         attrs: {
           id: 'node-icon',
           x: 0,
@@ -50,10 +50,11 @@ const renderNodeShape: NodeShapeFunction = (node: Node) => {
           fontFamily,
           textAlign: 'center',
           textBaseline: 'middle',
+          cursor: 'pointer',
         },
       },
       {
-        shape: 'text',
+        type: 'text',
         attrs: {
           id: 'text-desc',
           text: node.label || node.data.label,

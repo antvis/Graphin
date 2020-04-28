@@ -27,6 +27,7 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
     })
     .map((node) => {
       return {
+        type: node.type || 'CircleNode',
         shape: node.shape || 'CircleNode',
         ...node,
         data: {
@@ -56,8 +57,9 @@ const dataChecking = (data: Data = { nodes: [], edges: [] }): Data => {
       return true;
     })
     .map((edge) => {
-      const { source, target, shape, style } = edge;
+      const { source, target, shape, style, type } = edge;
       return {
+        type: type || source === target ? 'loop' : 'LineEdge',
         shape: shape || source === target ? 'loop' : 'LineEdge',
         style,
         loopCfg: {
