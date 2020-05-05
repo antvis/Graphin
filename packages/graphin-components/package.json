@@ -24,7 +24,7 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
-    "@testing-library/jest-dom": "^4.2.0",
+    "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^9.3.0",
     "@types/react-router-dom": "^5.1.0",
     "babel-jest": "^25.4.0",
