@@ -49,8 +49,8 @@ export default (g6: any) => {
           lineWidth: cfg.style?.dark ? 1 : cfg.style?.line?.width || 1,
           lineDash: cfg.style?.line?.dash,
           endArrow: {
-            d,
-            path: `M ${d},0 L -${d},-${d} L -${d},${d} Z`,
+            d: -d / 2,
+            path: `M 0,0 L ${d},${d / 2} L ${d},-${d / 2} Z`,
           },
         },
         draggable: true,
@@ -112,8 +112,8 @@ export default (g6: any) => {
         stroke: data.style?.dark ? GREY.dark : lineColor.dark,
         lineWidth: basicLineWidth,
         endArrow: {
-          d,
-          path: `M ${d},0 L -${d},-${d} L -${d},${d} Z`,
+          d: -d / 2,
+          path: `M 0,0 L ${d},${d / 2} L ${d},-${d / 2} Z`,
         },
       };
       targetAttrs.selected = {
@@ -128,8 +128,8 @@ export default (g6: any) => {
         targetAttrs.main = {
           lineWidth: basicLineWidth + 1,
           endArrow: {
-            d: deltaD,
-            path: `M ${deltaD},0 L -${deltaD},-${deltaD} L -${deltaD},${deltaD} Z`,
+            d: -deltaD / 2,
+            path: `M 0,0 L ${deltaD},${deltaD / 2} L ${deltaD},-${deltaD / 2} Z`,
           },
         };
       }
@@ -138,8 +138,8 @@ export default (g6: any) => {
         targetAttrs.main = {
           lineWidth: basicLineWidth + 1,
           endArrow: {
-            d: deltaD,
-            path: `M ${deltaD},0 L -${deltaD},-${deltaD}  L -${deltaD},${deltaD} Z`,
+            d: -deltaD / 2,
+            path: `M 0,0 L ${deltaD},${deltaD / 2} L ${deltaD},-${deltaD / 2} Z`,
           },
         };
         targetAttrs.selected = {
@@ -151,8 +151,8 @@ export default (g6: any) => {
           stroke: GREY.dark,
           lineWidth: 1,
           endArrow: {
-            d: 2,
-            path: 'M 2,0 L -2,-2 L -2,2 Z',
+            d: -1,
+            path: 'M 0,0 L 2,1 L 2,-1 Z',
           },
         };
         targetAttrs.text = {
