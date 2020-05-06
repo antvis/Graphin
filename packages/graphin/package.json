@@ -41,7 +41,6 @@
   "author": "Ant Financial",
   "license": "MIT",
   "dependencies": {
-    "@antv/g": "^3.4.7",
     "@antv/g-canvas": "^0.4.9",
     "@antv/g6": "^3.4.7",
     "deepmerge": "^4.0.0",

@@ -136,6 +136,9 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     },
   });
 
+  // close local refresh issue to avoid clip ghost
+  instance.get('canvas').set('localRefresh', false);
+
   // 平移
   if (pan) instance.moveTo(pan.x, pan.y);
 
