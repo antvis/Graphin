@@ -1,14 +1,14 @@
-import { G } from '@antv/g6/types/g';
+import { Group, Shape } from '@antv/g-canvas';
+import { INode } from '@antv/g6/lib/interface/item';
 import G6 from '@antv/g6';
 import { G6Node } from '../../types';
 import { GREY, PRIMARY_NODE_COLOR, EnumNodeAndEdgeStatus, DEFAULT_ICON_FONT_FAMILY } from './constants';
 import { normalizeColor } from './utils';
 import iconFont from '../../icons/iconFont';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default (g6: any) => {
+export default (g6: typeof G6) => {
   g6.registerNode('CircleNode', {
-    draw(cfg: G6Node, group: G.Group) {
+    draw(cfg: G6Node, group: Group) {
       const hasLabel = cfg.label;
       const innerNodeSize = cfg.style?.nodeSize || 48;
       const innerSize = innerNodeSize > 28 ? innerNodeSize : 28;
@@ -23,6 +23,8 @@ export default (g6: any) => {
           y: 0,
           r: outerSize / 2,
         },
+        draggable: true,
+        name: 'circle-floor',
       });
       group.addShape('circle', {
         attrs: {
@@ -33,6 +35,8 @@ export default (g6: any) => {
           fill: '#000',
           opacity: 0.05,
         },
+        draggable: true,
+        name: 'circle-selected',
       });
       group.addShape('circle', {
         attrs: {
@@ -43,12 +47,16 @@ export default (g6: any) => {
           stroke: cfg.style?.dark ? GREY.normal : color.normal,
           lineWidth: 2,
         },
+        name: 'circle-border',
+        draggable: true,
       });
       const inner = group.addGroup(
         {
           attrs: {
             id: 'circle-inner-group',
           },
+          draggable: true,
+          name: 'circle-inner-group',
           // tslint:disable-next-line: align
         },
         {},
@@ -61,6 +69,8 @@ export default (g6: any) => {
           r: innerSize / 2,
           fill: cfg.style?.dark ? GREY.dark : color.dark,
         },
+        draggable: true,
+        name: 'circle-inner',
       });
       inner.addShape('text', {
         attrs: {
@@ -74,6 +84,8 @@ export default (g6: any) => {
           fontFamily: cfg.style?.fontFamily || DEFAULT_ICON_FONT_FAMILY,
           fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
         },
+        draggable: true,
+        name: 'circle-icon',
       });
       if (hasLabel) {
         group.addShape('text', {
@@ -86,6 +98,8 @@ export default (g6: any) => {
             textAlign: 'center',
             fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
           },
+          draggable: true,
+          name: 'circle-label',
         });
       }
 
@@ -96,6 +110,8 @@ export default (g6: any) => {
           attrs: {
             id: 'circle-children-group',
           },
+          draggable: true,
+          name: 'circle-children-group',
           // tslint:disable-next-line: align
         },
         {},
@@ -108,6 +124,8 @@ export default (g6: any) => {
           r: 9,
           fill: cfg.style?.dark ? '#1E202D' : color.dark,
         },
+        draggable: true,
+        name: 'circle-children',
       });
       children.addShape('text', {
         attrs: {
@@ -120,31 +138,35 @@ export default (g6: any) => {
           textBaseline: 'middle',
           fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
         },
+        draggable: true,
+        name: 'circle-children-icon',
       });
       return keyShape;
     },
-    setState(name: EnumNodeAndEdgeStatus, value: string, node: G6.Node) {
+    setState(name: EnumNodeAndEdgeStatus, value: string, node: INode) {
       if (!name) return;
       const data: G6Node = node.get('model');
       const container = node.getContainer();
       // const circleFloor = container.get('children').find(node => node.attr().id === 'circle-floor');
-      const circleBorder = container.get('children').find((item: G.Shape) => item.attr().id === 'circle-border');
-      const circleSelected = container.get('children').find((item: G.Shape) => item.attr().id === 'circle-selected');
+      const circleBorder = container.get('children').find((item: Shape.Base) => item.attr().id === 'circle-border');
+      const circleSelected = container.get('children').find((item: Shape.Base) => item.attr().id === 'circle-selected');
       const circleInnerGroup = container
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'circle-inner-group');
-      const circleInner = circleInnerGroup.get('children').find((item: G.Shape) => item.attr().id === 'circle-inner');
-      const circleIcon = circleInnerGroup.get('children').find((item: G.Shape) => item.attr().id === 'circle-icon');
-      const circleLabel = container.get('children').find((item: G.Shape) => item.attr().id === 'circle-label');
+        .find((item: Shape.Base) => item.attr().id === 'circle-inner-group');
+      const circleInner = circleInnerGroup
+        .get('children')
+        .find((item: Shape.Base) => item.attr().id === 'circle-inner');
+      const circleIcon = circleInnerGroup.get('children').find((item: Shape.Base) => item.attr().id === 'circle-icon');
+      const circleLabel = container.get('children').find((item: Shape.Base) => item.attr().id === 'circle-label');
       const circleChildrenGroup = container
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'circle-children-group');
+        .find((item: Shape.Base) => item.attr().id === 'circle-children-group');
       const circleChildren = circleChildrenGroup
         ?.get('children')
-        .find((item: G.Shape) => item.attr().id === 'circle-children');
+        .find((item: Shape.Base) => item.attr().id === 'circle-children');
       const circleChildrenIcon = circleChildrenGroup
         ?.get('children')
-        .find((item: G.Shape) => item.attr().id === 'circle-children-icon');
+        .find((item: Shape.Base) => item.attr().id === 'circle-children-icon');
 
       const color = data.style?.dark ? GREY : normalizeColor(data.style?.primaryColor || PRIMARY_NODE_COLOR);
       const innerNodeSize = data.style?.nodeSize || 48;
@@ -202,5 +224,6 @@ export default (g6: any) => {
       if (circleChildren) circleChildren.attr(targetAttrs.children);
       if (circleChildrenIcon) circleChildrenIcon.attr(targetAttrs.childrenIcon);
     },
-  });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 };

@@ -39,6 +39,8 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
           attrs: {
             ...component.attrs,
           },
+          draggable: true,
+          name: component.attrs?.id,
         });
       });
       return g6Shapes[keyshapeIndex];
