@@ -51,6 +51,7 @@ export class Mock {
           source: `node-${i}`,
           target: `node-${j}`,
           label: `edge-${i}_${j}`,
+          type: nodeType,
           properties: [],
         });
       }
@@ -73,6 +74,7 @@ export class Mock {
           source: `${node.id}-${i}`,
           target: node.id,
           label: `edge-${i}_${node.id}`,
+          type: node.type,
           properties: [],
         });
       }
