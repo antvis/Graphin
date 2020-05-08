@@ -1,9 +1,9 @@
 import { useLayoutEffect } from 'react';
-import { G6Event } from '@antv/graphin/dist/types';
+import { G6Event } from '@antv/graphin';
 
 import handleNodeClick from './node-click';
 import handleCanvasClick from './canvas-click';
-import { GrapheneState } from '../types';
+import { GrapheneState } from '@types';
 
 // eslint-disable-next-line
 const useGraphEvents = (state: GrapheneState, graphRef: any, dispatch: React.Dispatch<any>) => {
