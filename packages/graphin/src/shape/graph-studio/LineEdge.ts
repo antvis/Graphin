@@ -33,7 +33,7 @@ export default (g6: any) => {
           id: 'selected',
           ...attrs,
           lineWidth: 1,
-          stroke: '#000',
+          stroke: lineColor.dark,
           opacity: 0.05,
         },
         draggable: true,
