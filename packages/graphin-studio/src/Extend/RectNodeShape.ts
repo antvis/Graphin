@@ -17,6 +17,8 @@ const defaultStyles = {
   /** text 文本 */
   fontColor: '#3b3b3b',
   fontSize: 12,
+  /** state */
+  dark: '#eee',
 };
 type Style = typeof defaultStyles;
 // eslint-disable-next-line
