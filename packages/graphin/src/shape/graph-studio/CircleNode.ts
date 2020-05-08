@@ -68,7 +68,7 @@ export default (g6: typeof G6) => {
           y: 0,
           r: innerSize / 2,
           fill: color.dark,
-          opacity: 0.8,
+          opacity: 0.3,
         },
         draggable: true,
         name: 'circle-inner',
@@ -79,11 +79,11 @@ export default (g6: typeof G6) => {
           x: 0,
           y: 0,
           text: iconFont(cfg.style?.icon || cfg.data.type || '', cfg.style?.fontFamily! || DEFAULT_ICON_FONT_FAMILY),
-          fontSize: 20,
+          fontSize: 14,
           textAlign: 'center',
           textBaseline: 'middle',
           fontFamily: cfg.style?.fontFamily || DEFAULT_ICON_FONT_FAMILY,
-          fill: '#FFFFFF',
+          fill: color.dark,
         },
         draggable: true,
         name: 'circle-icon',
@@ -137,7 +137,7 @@ export default (g6: typeof G6) => {
           fontSize: 10,
           textAlign: 'center',
           textBaseline: 'middle',
-          fill: '#FFFFFF',
+          fill: color.dark,
         },
         draggable: true,
         name: 'circle-children-icon',
@@ -186,7 +186,7 @@ export default (g6: typeof G6) => {
           fill: color.dark,
         },
         icon: {
-          fill: '#FFFFFF',
+          fill: color.dark,
         },
         label: {
           fill: data.style?.dark ? '#8D93B0' : '#3B3B3B',
@@ -210,7 +210,7 @@ export default (g6: typeof G6) => {
       if (name === EnumNodeAndEdgeStatus.DARK && value) {
         targetAttrs.border.stroke = color.dark;
         targetAttrs.inner.fill = color.dark;
-        targetAttrs.icon.fill = '#FFFFFF';
+        targetAttrs.icon.fill = color.dark;
         targetAttrs.label.fill = '#8D93B0';
         targetAttrs.children.fill = color.normal;
         targetAttrs.childrenIcon.fill = '#FFFFFF';
