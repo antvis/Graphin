@@ -9,7 +9,7 @@ import iconFont from '../../icons/iconFont';
 export default (g6: typeof G6) => {
   g6.registerNode('CircleNode', {
     draw(cfg: G6Node, group: Group) {
-      const hasLabel = cfg.label;
+      const hasLabel = cfg?.data?.label;
       const innerNodeSize = cfg.style?.nodeSize || 48;
       const innerSize = innerNodeSize > 28 ? innerNodeSize : 28;
       const outerSize = innerSize + 4;
@@ -94,7 +94,7 @@ export default (g6: typeof G6) => {
             x: 0,
             y: outerSize / 2 + 14,
             fontSize: 12,
-            text: cfg.label,
+            text: cfg?.data?.label,
             textAlign: 'center',
             fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
           },
