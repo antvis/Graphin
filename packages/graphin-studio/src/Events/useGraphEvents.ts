@@ -14,6 +14,9 @@ const useGraphEvents = (state: GrapheneState, graphRef: any, dispatch: React.Dis
         handleNodeClick({ ...state, e, dispatch });
         console.log(e.item);
       },
+      'edge:click': (e: G6Event) => {
+        console.log(e.item);
+      },
       'canvas:click': (e: G6Event) => {
         handleCanvasClick({ ...state, e, dispatch });
       },
