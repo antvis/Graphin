@@ -51,7 +51,7 @@ export default (g6: any) => {
             id: 'selected',
             ...attrs,
             lineWidth: 1,
-            stroke: '#000',
+            stroke: lineColor.dark,
             opacity: 0.05,
           },
           draggable: true,
@@ -63,7 +63,7 @@ export default (g6: any) => {
             id: 'main',
             ...attrs,
             lineAppendWidth: 4,
-            stroke: cfg.style?.dark ? GREY.dark : lineColor.dark,
+            stroke: lineColor.dark,
             lineWidth: cfg.style?.dark ? 1 : cfg.style?.line?.width || 1,
             lineDash: cfg.style?.line.dash,
             endArrow: {
@@ -129,7 +129,7 @@ export default (g6: any) => {
         };
 
         targetAttrs.main = {
-          stroke: data.style?.dark ? GREY.dark : lineColor.dark,
+          stroke: lineColor.dark,
           lineWidth: basicLineWidth,
           endArrow: {
             d: -d / 2,
