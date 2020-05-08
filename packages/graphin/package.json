@@ -20,7 +20,7 @@
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "eventemitter3": "^4.0.0",
-    "father": "^2.23.1",
+    "father-build": "^1.18.0",
     "jest": "^24.9.0",
     "jest-canvas-mock": "^2.1.2",
     "jsdom-worker": "^0.1.0",
