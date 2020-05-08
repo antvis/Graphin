@@ -28,11 +28,17 @@ const transform = {
   },
   edges: (edges: EdgeData[]) => {
     return edges.map(edge => {
+      const BizTypes = storage.get('bizTypes') as BizType[];
+      const bizType = BizTypes.find(item => {
+        return item.type === edge.type;
+      }) || { style: {} };
+
       const { source, target } = edge;
       return {
         source,
         target,
         data: edge,
+        style: bizType.style,
       };
     });
   },

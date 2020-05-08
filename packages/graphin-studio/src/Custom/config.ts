@@ -42,6 +42,9 @@ const style = {
   fontColor: '#3b3b3b',
   /** dark 置灰 */
   dark: '#eee',
+  line: {
+    color: '#9900EF',
+  }
 };
 export interface BizType {
   /** 节点的类型 */
@@ -58,7 +61,12 @@ const bizTypes: BizType[] = nodeTypes.map((node, index) => {
     name: node.name,
     style: {
       ...style,
-      primaryColor: colors[index] || randomColor(),
+      ...{
+        primaryColor: colors[index] || randomColor(),
+        line: {
+          color: colors[index] || randomColor(),
+        }
+      }
     },
   };
 });

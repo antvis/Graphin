@@ -42,7 +42,12 @@ const NodeColorPicker: React.FC<StylingProps> = (props) => {
           ...item,
           style: {
             ...item.style,
-            primaryColor: color,
+            ...{
+              primaryColor: color,
+              line: {
+                color,
+              }
+            }
           },
         };
       }
@@ -60,9 +65,15 @@ const NodeColorPicker: React.FC<StylingProps> = (props) => {
         style: ((node as unknown) as Node).data.type === type ? matchBizType.style : node.style,
       };
     });
+    const newEdges = preData.edges.map((edge) => {
+      return {
+        ...edge,
+        style: ((edge as unknown) as Node).data.type === type ? matchBizType.style : edge.style,
+      };
+    })
     const newData = {
       nodes: newNodes,
-      edges: preData.edges,
+      edges: newEdges,
     };
     dispatch({
       type: 'graph/changeData',
