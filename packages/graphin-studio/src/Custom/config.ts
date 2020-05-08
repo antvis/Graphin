@@ -40,8 +40,6 @@ const style = {
   fontSize: 12,
   /** 文本的字体颜色 */
   fontColor: '#3b3b3b',
-  /** dark 置灰 */
-  dark: '#eee',
 };
 export interface BizType {
   /** 节点的类型 */
