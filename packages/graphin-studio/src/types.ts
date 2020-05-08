@@ -1,5 +1,5 @@
-import { Graph } from '@antv/graphin';
-import { Data } from '@antv/graphin/dist/types';
+import { Graph } from '@antv/g6';
+import { Data } from '@antv/graphin';
 export interface NodeLayoutType {
   /** 节点度数 */
   degree?: number;

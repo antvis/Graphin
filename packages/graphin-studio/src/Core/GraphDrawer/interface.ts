@@ -1,5 +1,5 @@
-import { Graph } from '@antv/graphin';
-import { GrapheneState, Dispatch } from '../../types';
+import { Graph } from '@antv/g6';
+import { GrapheneState, Dispatch } from '@types';
 
 export interface GraphDrawerProps {
   dispatch: Dispatch;

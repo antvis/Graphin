@@ -1,5 +1,6 @@
+// import { NodeShapeFunction } from '@antv/graphin';
+import { Node } from '@types';
 import { NodeShapeFunction } from '@antv/graphin';
-import { Node } from '../types';
 
 const defaultStyles = {
   /** container 容齐 */

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GraphData } from '@antv/g6/lib/types';
-import { Node } from '@antv/graphin/dist/types';
+import { Node } from '@antv/graphin';
 import ColorPicker from './ColorPicker';
 import Storage from '../../Service/Storage/index';
 import { StylingProps } from './interface';

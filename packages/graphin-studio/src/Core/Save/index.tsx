@@ -1,7 +1,5 @@
 import React from 'react';
-import { Graph } from '@antv/graphin';
-import { Input } from 'antd';
-import Item from '../../Components/Item/Item';
+import { Graph } from '@antv/g6';
 import './index.less';
 
 interface SaveProps {
