@@ -14,7 +14,7 @@ export default (g6: typeof G6) => {
       const innerSize = innerNodeSize > 28 ? innerNodeSize : 28;
       const outerSize = innerSize + 4;
 
-      const color = cfg.style?.dark ? GREY : normalizeColor(cfg.style?.primaryColor || PRIMARY_NODE_COLOR);
+      const color = normalizeColor(cfg.style?.primaryColor || PRIMARY_NODE_COLOR);
 
       const keyShape = group.addShape('circle', {
         attrs: {
