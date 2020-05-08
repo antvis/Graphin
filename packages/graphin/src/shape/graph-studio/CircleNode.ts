@@ -2,7 +2,7 @@ import { Group, Shape } from '@antv/g-canvas';
 import { INode } from '@antv/g6/lib/interface/item';
 import G6 from '@antv/g6';
 import { G6Node } from '../../types';
-import { GREY, PRIMARY_NODE_COLOR, EnumNodeAndEdgeStatus, DEFAULT_ICON_FONT_FAMILY } from './constants';
+import { PRIMARY_NODE_COLOR, EnumNodeAndEdgeStatus, DEFAULT_ICON_FONT_FAMILY } from './constants';
 import { normalizeColor } from './utils';
 import iconFont from '../../icons/iconFont';
 
@@ -32,7 +32,7 @@ export default (g6: typeof G6) => {
           x: 0,
           y: 0,
           r: 0,
-          fill: '#000',
+          fill: color.dark,
           opacity: 0.05,
         },
         draggable: true,
@@ -44,7 +44,7 @@ export default (g6: typeof G6) => {
           x: 0,
           y: 0,
           r: outerSize / 2,
-          stroke: cfg.style?.dark ? GREY.normal : color.normal,
+          stroke: color.normal,
           lineWidth: 2,
         },
         name: 'circle-border',
@@ -67,7 +67,8 @@ export default (g6: typeof G6) => {
           x: 0,
           y: 0,
           r: innerSize / 2,
-          fill: cfg.style?.dark ? GREY.dark : color.dark,
+          fill: color.dark,
+          opacity: 0.8,
         },
         draggable: true,
         name: 'circle-inner',
@@ -82,7 +83,7 @@ export default (g6: typeof G6) => {
           textAlign: 'center',
           textBaseline: 'middle',
           fontFamily: cfg.style?.fontFamily || DEFAULT_ICON_FONT_FAMILY,
-          fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
+          fill: '#FFFFFF',
         },
         draggable: true,
         name: 'circle-icon',
@@ -136,7 +137,7 @@ export default (g6: typeof G6) => {
           fontSize: 10,
           textAlign: 'center',
           textBaseline: 'middle',
-          fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
+          fill: '#FFFFFF',
         },
         draggable: true,
         name: 'circle-children-icon',
@@ -168,7 +169,7 @@ export default (g6: typeof G6) => {
         ?.get('children')
         .find((item: Shape.Base) => item.attr().id === 'circle-children-icon');
 
-      const color = data.style?.dark ? GREY : normalizeColor(data.style?.primaryColor || PRIMARY_NODE_COLOR);
+      const color = normalizeColor(data.style?.primaryColor || PRIMARY_NODE_COLOR);
       const innerNodeSize = data.style?.nodeSize || 48;
       const innerSize = innerNodeSize > 28 ? innerNodeSize : 28;
       const outerSize = innerSize + 4;
@@ -185,7 +186,7 @@ export default (g6: typeof G6) => {
           fill: color.dark,
         },
         icon: {
-          fill: data.style?.dark ? '#8D93B0' : '#FFFFFF',
+          fill: '#FFFFFF',
         },
         label: {
           fill: data.style?.dark ? '#8D93B0' : '#3B3B3B',
@@ -194,7 +195,7 @@ export default (g6: typeof G6) => {
           fill: color.normal,
         },
         childrenIcon: {
-          fill: data.style?.dark ? '#8D93B0' : '#FFFFFF',
+          fill: '#FFFFFF',
         },
       };
 
@@ -206,14 +207,13 @@ export default (g6: typeof G6) => {
       if (name === EnumNodeAndEdgeStatus.LIGHT && value) {
         targetAttrs.selected.r = outerSize / 2 + 10;
       }
-
       if (name === EnumNodeAndEdgeStatus.DARK && value) {
-        targetAttrs.border.stroke = GREY.dark;
-        targetAttrs.inner.fill = GREY.dark;
-        targetAttrs.icon.fill = '#8D93B0';
+        targetAttrs.border.stroke = color.dark;
+        targetAttrs.inner.fill = color.dark;
+        targetAttrs.icon.fill = '#FFFFFF';
         targetAttrs.label.fill = '#8D93B0';
-        targetAttrs.children.fill = GREY.normal;
-        targetAttrs.childrenIcon.fill = '#8D93B0';
+        targetAttrs.children.fill = color.normal;
+        targetAttrs.childrenIcon.fill = '#FFFFFF';
       }
 
       circleBorder.attr(targetAttrs.border);
