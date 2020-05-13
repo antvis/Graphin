@@ -87,3 +87,23 @@ Props：
 | apis       | [Apis](/zh/docs/api/graphin/#apis)  | 否       | Graphin API          |  |
 | graphVars  | { width?: number; height: number; } | 否       | G6 图表信息          |
 | direction  | horizontal \| vertical              | 否       | Toolbar 布局方向     |
+
+## \<Legend /> 组件
+
+Props：
+
+|   属性   | 类型                                                                                      | 是否必选 | 说明             |
+| -------- | ----------------------------------------------------------------------------------------- | -------- | ---------------- |
+| options  | [Option](#Option)[]                                                                       | **是**   | Legend 的配置    |
+| onchange | (checked: [Option](#Option), newOptions: [Option](#Option)[], props: LegendProps) => any; | 否       | 点击后的回调函数 |
+| graph    | Graph                                                                                     | 否       | G6 实例          |
+| apis     | [Apis](/zh/docs/api/graphin/#apis)                                                        | 否       | Graphin API      |
+
+### Option
+
+|   属性  | 类型             | 是否必选 | 说明                |
+| ------- | ---------------- | -------- | ------------------- |
+| label   | string           | **是**   | 标签名              |
+| color   | string           | **是**   | 小圆点的颜色        |
+| value   | string ｜ number | **是**   | 每个 Item 的 Key 值 |
+| checked | boolean          | 否       | 默认全部选中        |
