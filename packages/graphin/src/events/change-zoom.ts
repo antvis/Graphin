@@ -20,11 +20,11 @@ const changeZoom = (graphin: Graphin) => {
   const extendedGraph = graph as ExtendedGraph;
 
   /** 缩放的时候隐藏IMAGE/TEXT */
-  let timer: NodeJS.Timeout | null = null;
+  let timer: null | number = null;
   graph!.on('viewportchange', (evt: ExtendedG6Event) => {
     if (evt.action === 'zoom' && isZoomOptimize(graph, evt)) {
       if (timer) window.clearTimeout(timer);
-      timer = setTimeout(() => {
+      timer = window.setTimeout(() => {
         try {
           if (graphin.state.forceSimulation) {
             /** 如果存在力导，那么缩放结束且力导未结束前，只展示keyShape */
