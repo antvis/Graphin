@@ -23,7 +23,13 @@ export default {
     // eslint-disable-next-line
     const { graph } = this as any;
     graph.getNodes().forEach((node: NodeData) => {
-      graph.clearItemStates(node, ['highlight.source', 'highlight.target', 'highlight.dark', 'highlight.light']);
+      graph.clearItemStates(node, [
+        'selected',
+        'highlight.source',
+        'highlight.target',
+        'highlight.dark',
+        'highlight.light',
+      ]);
     });
     graph.getEdges().forEach((edge: EdgeData) => {
       graph.clearItemStates(edge, ['selected']);
@@ -129,6 +135,7 @@ export default {
       });
     } else {
       //  按住ctrl 多选
+
       relativeEdges.forEach((edge: IEdge) => {
         graph.setItemState(edge, 'highlight.dark', false);
         graph.setItemState(edge, 'highlight.light', true);
