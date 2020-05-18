@@ -3,8 +3,6 @@ import { cloneDeep } from 'lodash';
 import { LayoutOptionBase, Data } from '../../types';
 
 export interface DagreLayoutOption extends LayoutOptionBase {
-  /** 中心点坐标 */
-  // center: [number, number];
   /** 节点大小 */
   nodeSize: [number, number];
   /**  节点水平间距(px) */
@@ -15,7 +13,7 @@ export interface DagreLayoutOption extends LayoutOptionBase {
   align: string; // TODO 更换为枚举值
 }
 
-const dagreLayout = (data: Data, options: DagreLayoutOption): Data => {
+const dagreLayout = (data: Data, options: Partial<DagreLayoutOption>): Data => {
   const source = cloneDeep(data);
   // eslint-disable-next-line new-cap
   const layout = new G6.Layout.dagre({
