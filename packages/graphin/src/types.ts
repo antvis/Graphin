@@ -4,6 +4,7 @@ import ForceLayout from './layout/force/ForceLayout';
 import Graphin from './Graphin';
 import { LayoutOption } from './controller/layout/defaultLayouts';
 import { Item, EdgeConfig, NodeConfig } from '@antv/g6/lib/types';
+import G6ItemNode from '@antv/g6/lib/item/node';
 
 export type GraphClass = typeof G6['Graph'];
 export type Graph = InstanceType<GraphClass>;
@@ -236,8 +237,8 @@ export interface Edge {
 export type G6Edge = Edge & {
   startPoint: G6Node;
   endPoint: G6Node;
-  sourceNode: G6.Node;
-  targetNode: G6.Node;
+  sourceNode: G6ItemNode;
+  targetNode: G6ItemNode;
 };
 
 export type NodeData = Node['data'];

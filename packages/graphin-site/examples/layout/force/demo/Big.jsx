@@ -33,13 +33,13 @@ const legend = [
     name: 'Other',
   },
 ];
-const colors = legend.map(c => c.color);
+const colors = legend.map((c) => c.color);
 const App = () => {
   const [data, setData] = React.useState({ nodes: [], edges: [] });
   React.useEffect(() => {
-    fetch('../../data/web.json')
-      .then(res => res.json())
-      .then(res => {
+    fetch('../data/web.json')
+      .then((res) => res.json())
+      .then((res) => {
         const nodes = res.nodes.map((node, index) => {
           return {
             id: String(index),
@@ -52,7 +52,7 @@ const App = () => {
             },
           };
         });
-        const edges = res.links.map(edge => {
+        const edges = res.links.map((edge) => {
           return {
             source: String(edge.source),
             target: String(edge.target),
