@@ -118,10 +118,10 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     },
   ];
   const defaultModes = innerBehaviors
-    .filter((c) => {
+    .filter(c => {
       return !c.disable;
     })
-    .map((c) => {
+    .map(c => {
       return {
         type: c.type,
         ...c.options,

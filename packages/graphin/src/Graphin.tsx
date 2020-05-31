@@ -16,6 +16,7 @@ import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimul
 
 /** utils */
 import shallowEqual from './utils/shallowEqual';
+import deepEqual from './utils/deepEqual';
 
 import './index.less';
 
@@ -83,8 +84,8 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
   }
 
   componentDidUpdate(prevProps: GraphinProps) {
-    const isDataChange = this.shouldUpdateWithDeps(prevProps, ['data']);
-    const isLayoutChange = this.shouldUpdateWithDeps(prevProps, ['layout']);
+    const isDataChange = this.shouldUpdate(prevProps, 'data');
+    const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
 
     // only rerender when data or layout change
     if (isDataChange || isLayoutChange) {
@@ -144,21 +145,13 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     );
   };
 
-  shouldUpdateWithDeps(prevProps: GraphinProps, deps: string[]) {
-    const { props } = this;
-    let shouldUpdate = false;
-    deps.forEach((key) => {
-      const prevVal = prevProps[key] as DiffValue;
-      const currentVal = props[key] as DiffValue;
-      if (prevVal !== currentVal) {
-        if (!prevVal || !currentVal) {
-          shouldUpdate = true;
-        } else if (!shallowEqual(prevVal, currentVal)) {
-          shouldUpdate = true;
-        }
-      }
-    });
-    return shouldUpdate;
+  shouldUpdate(prevProps: GraphinProps, key: string) {
+    const prevVal = prevProps[key] as DiffValue;
+    const currentVal = this.props[key] as DiffValue;
+    // console.time('deep equal');
+    const isEqual = deepEqual(prevVal, currentVal);
+    // console.timeEnd('deep equal');
+    return !isEqual;
   }
 
   handleEvents() {
@@ -278,7 +271,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
       children = [children];
     }
 
-    return React.Children.map(children, (child) => {
+    return React.Children.map(children, child => {
       // do not pass props if element is a DOM element or not a valid react element.
       if (!React.isValidElement(child) || typeof child.type === 'string') {
         return child;
@@ -296,7 +289,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         <div
           data-testid="custom-element"
           className="graphin-core"
-          ref={(node) => {
+          ref={node => {
             this.graphDOM = node;
           }}
         />
