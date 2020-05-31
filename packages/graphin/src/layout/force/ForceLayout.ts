@@ -130,7 +130,7 @@ class ForceLayout {
     this.props = {
       stiffness: 200.0,
       enableWorker: false,
-      defSpringLen: (edge) => {
+      defSpringLen: edge => {
         return edge.data.spring || 200;
       },
       repulsion: 200.0 * 5,
@@ -181,7 +181,7 @@ class ForceLayout {
     if (!options) {
       return;
     }
-    Object.keys(options).forEach((key) => {
+    Object.keys(options).forEach(key => {
       this.props[key] = options[key];
     });
   };
@@ -224,7 +224,7 @@ class ForceLayout {
     /** 初始化点和边的信息 */
     const { width, height } = this.props;
 
-    this.nodes.forEach((node) => {
+    this.nodes.forEach(node => {
       const x = node.data.x || width / 2;
       const y = node.data.y || height / 2;
       const vec = new Vector(x, y);
@@ -240,7 +240,7 @@ class ForceLayout {
       this.nodePoints.set(node.id, new Point(vec, String(node.id), node.data, mass));
     });
 
-    this.edges.forEach((edge) => {
+    this.edges.forEach(edge => {
       const source = this.nodePoints.get(edge.source.id) as Point;
       const target = this.nodePoints.get(edge.target.id) as Point;
       const length = this.props.defSpringLen(edge, source, target);
@@ -264,7 +264,7 @@ class ForceLayout {
   calTotalEnergy = () => {
     let energy = 0.0;
 
-    this.nodes.forEach((node) => {
+    this.nodes.forEach(node => {
       const point = this.nodePoints.get(node.id) as Point;
       const speed = point.v.magnitude();
 
@@ -387,7 +387,7 @@ class ForceLayout {
   render = () => {
     const render = this.registers.get('render');
     const nodes: NodeType[] = [];
-    this.nodePoints.forEach((node) => {
+    this.nodePoints.forEach(node => {
       nodes.push({
         ...(this.nodeSet[node.id] && this.nodeSet[node.id].data),
         x: node.p.x,
@@ -454,7 +454,7 @@ class ForceLayout {
   };
 
   updateHookesLaw = () => {
-    this.edges.forEach((edge) => {
+    this.edges.forEach(edge => {
       const spring = this.edgeSprings.get(edge.id);
       const v = spring.target.p.subtract(spring.source.p);
       const displacement = spring.length - v.magnitude();
@@ -472,7 +472,7 @@ class ForceLayout {
 
       point.updateAcc(direction.scalarMultip(-radio));
     };
-    this.nodes.forEach((node) => {
+    this.nodes.forEach(node => {
       // 默认的向心力指向画布中心
       const degree = (node.data && node.data.layout && node.data.layout.degree) as number;
       const leafNode = degree === 1;
@@ -515,7 +515,7 @@ class ForceLayout {
   };
 
   updateVelocity = (interval: number) => {
-    this.nodes.forEach((node) => {
+    this.nodes.forEach(node => {
       const point = this.nodePoints.get(node.id);
       point.v = point.v
         .add(point.a.scalarMultip(interval)) // 根据加速度求速度公式 V_curr= a*@t + V_pre
@@ -530,7 +530,7 @@ class ForceLayout {
 
   updatePosition = (interval: number) => {
     let sum = 0;
-    this.nodes.forEach((node) => {
+    this.nodes.forEach(node => {
       const point = this.nodePoints.get(node.id);
       const distance = point.v.scalarMultip(interval);
       sum = sum + distance.magnitude();
@@ -559,7 +559,7 @@ class ForceLayout {
    * @param {[type]} data [description]
    */
   addNodes = (data: NodeType[]) => {
-    data.forEach((node) => {
+    data.forEach(node => {
       this.addNode(new Node(node));
     });
   };
@@ -639,7 +639,7 @@ class ForceLayout {
       const mass = this.getMass(node);
       this.nodePoints.set(node.id, new Point(vec, node.id, node.data, mass));
 
-      this.edges.forEach((edge) => {
+      this.edges.forEach(edge => {
         const source = this.nodePoints.get(edge.source.id);
         const target = this.nodePoints.get(edge.target.id);
         if (source.id === node.id || target.id === node.id) {
