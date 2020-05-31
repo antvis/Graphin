@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import G6 from '@antv/g6';
+import { ComboConfig } from '@antv/g6/src/types';
 import ForceLayout from './layout/force/ForceLayout';
 import Graphin from './Graphin';
 import { LayoutOption } from './controller/layout/defaultLayouts';
@@ -121,6 +122,8 @@ export interface Node {
   data: {
     /** 唯一标示ID，必选 */
     id: string;
+    /** comboId */
+    comboId?: string;
     /** 节点数据类型 */
     type?: string;
     /** 节点文本 */
@@ -130,6 +133,8 @@ export interface Node {
   };
   /** 唯一标示ID，必选 */
   id: string;
+  /** comboId */
+  comboId?: string;
   /** 节点类型 */
   shape?: string;
   /** 节点类型 */
@@ -249,6 +254,8 @@ export interface Data {
   nodes: Node[];
   /** 边 */
   edges: Edge[];
+  /** combo */
+  combos?: ComboConfig[];
 }
 export interface Layout {
   /** 布局名称，必选 */

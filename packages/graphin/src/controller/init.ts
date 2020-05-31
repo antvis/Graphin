@@ -52,6 +52,8 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     disableZoom: false, // 禁用画布缩放
     disableDrag: false, // 禁用节点拖拽
     wheelSensitivity: 1, // 缩放的敏感度，我们在内部有不同设备的最佳匹配
+    // 必须将 groupByTypes 设置为 false，带有 combo 的图中元素的视觉层级才能合理:https://g6.antv.vision/zh/docs/manual/middle/combo
+    groupByTypes: false,
   };
 
   /** merged options */
@@ -114,6 +116,15 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     {
       type: 'drag-node',
       disable: disableDrag,
+      options: {},
+    },
+    // combo
+    {
+      type: 'drag-combo',
+      options: {},
+    },
+    {
+      type: 'collapse-expand-combo',
       options: {},
     },
   ];
