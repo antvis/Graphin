@@ -1,4 +1,4 @@
-import { Data, InnerEdgeStyle } from '../../types';
+import { Data } from '../../types';
 import * as _ from 'lodash';
 
 interface CheckerOption {
@@ -30,22 +30,7 @@ function isOdd(number: number) {
 //   };
 // }
 
-function makePolyEdge(
-  edges: {
-    data: { source: string; target: string; properties?: object[] | undefined };
-    poly?: { distance: number };
-    source: string;
-    target: string;
-    shape: string;
-    label?: string | undefined;
-    style: InnerEdgeStyle | undefined;
-    id?: string | undefined;
-    spring?: number | undefined;
-    loopCfg: { position: string; dist: number };
-  }[],
-  data: Data,
-  options: CheckerOption,
-) {
+function makePolyEdge(edges: Data['edges'], data: Data, options: CheckerOption) {
   if (!options.edge.autoPoly) return edges;
   const noLoopEdges = edges.filter((edge) => edge.source !== edge.target);
   const loopEdges = edges.filter((edge) => edge.source === edge.target);
@@ -95,7 +80,7 @@ function makePolyEdge(
 }
 
 function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
-  let transformedEdges = edges
+  let transformedEdges: Data['edges'] = edges
     .filter((edge) => {
       const { source, target } = edge;
       if (!source || !target) {
@@ -117,7 +102,17 @@ function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
       const { shape, style } = edge;
       return {
         shape: shape || 'LineEdge',
-        style,
+        style: style || {
+          line: {
+            width: 1,
+          },
+          label: {
+            size: 1,
+          },
+        },
+        poly: {
+          distance: 0,
+        },
         loopCfg: {
           position: 'top',
           dist: 20,

@@ -67,7 +67,7 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
       graph.refreshPositions();
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log(error);
+      console.error(error);
     }
   });
   /**  4. Start force  simulator */

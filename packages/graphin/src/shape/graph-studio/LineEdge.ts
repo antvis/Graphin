@@ -78,7 +78,6 @@ export default (g6: any) => {
             : Math.atan((endPoint.y - startPoint.y) / (endPoint.x - startPoint.x)),
         );
         label.translate((startPoint.x + endPoint.x) / 2, (startPoint.y + endPoint.y) / 2);
-        // label.translate(-5, -5);
       }
       return key;
     },
