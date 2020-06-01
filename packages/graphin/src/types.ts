@@ -42,6 +42,23 @@ export interface ExtendedGraphOptions extends GraphOptions {
   isZoomOptimize?: (graph?: Graph, e?: G6Event) => boolean;
   keyShapeZoom?: number;
   autoFollowWithForce?: boolean;
+
+  /**
+   * 开启多边支持，默认否
+   *
+   * @type {boolean}
+   * @memberof ExtendedGraphOptions
+   */
+  autoPolyEdge: boolean;
+
+  /**
+   * 开启自环边支持，默认是
+   *
+   * @type {boolean}
+   * @memberof ExtendedGraphOptions
+   */
+  autoLoopEdge: boolean;
+
   autoPinWithForce?: boolean;
   restartForceOnDrag?: boolean;
   [key: string]: any; // eslint-disable-line
@@ -234,6 +251,16 @@ export interface Edge {
   id?: string;
   /** 边的弹簧长度，力导时使用 */
   spring?: number;
+
+  /**
+   * 多边
+   *
+   * @type {[number, number][]}
+   * @memberof Edge
+   */
+  poly?: {
+    distance: number;
+  };
 
   /** User Defined Property */
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any

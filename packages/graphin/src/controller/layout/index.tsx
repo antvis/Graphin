@@ -1,4 +1,4 @@
-import dataChecking from './dataChecking';
+import checkData from './dataChecker';
 import { GraphinProps, Data, ForceSimulation, ExtendLayout } from '../../types';
 import Graphin from '../../Graphin';
 import defaultLayouts, { LayoutOption } from './defaultLayouts';
@@ -9,7 +9,7 @@ interface LayoutParams {
 }
 
 const layoutInfo = (layouts: ExtendLayout[]) => {
-  return layouts.map(item => {
+  return layouts.map((item) => {
     const { desc, name, icon } = item;
     return {
       desc,
@@ -38,7 +38,12 @@ const layoutController = (
   let { layout } = props;
 
   // 数据的校验
-  const data = dataChecking(PropsData);
+  const data = checkData(PropsData, {
+    edge: {
+      autoPoly: !!graphin.g6Options?.autoPolyEdge,
+      autoLoop: !!graphin.g6Options?.autoLoopEdge,
+    },
+  });
 
   // 重置forceSimulation
 
@@ -63,7 +68,7 @@ const layoutController = (
     };
   }
 
-  const hasPosition = data.nodes.every(node => {
+  const hasPosition = data.nodes.every((node) => {
     return node.x && node.y;
   });
 
@@ -86,7 +91,7 @@ const layoutController = (
   };
 
   // 得到当前匹配的布局函数
-  const matchLayout = layouts.find(item => item.name === name) || {
+  const matchLayout = layouts.find((item) => item.name === name) || {
     name: '',
     icon: '',
     layout: (inputData: Data) => {

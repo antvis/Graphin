@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+import '../../edge/demo/node_modules/@antv/graphin/dist/index.css'; // 引入Graphin CSS
 
 /**
  * Graphin 内置几种预定义的节点样式，您可以根据需要选择合适的样式

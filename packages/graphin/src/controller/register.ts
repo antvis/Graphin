@@ -7,6 +7,7 @@ import SimplicityNode from '../shape/render/SimplicityNode';
 
 import RegisterSimplicityLineEdge from '../shape/g6/LineEdge';
 import RegisterLineEdge from '../shape/graph-studio/LineEdge';
+import RegisterPolyEdge from '../shape/graph-studio/PolyEdge';
 import RegisterLoopEdge from '../shape/graph-studio/LoopEdge';
 import RegisterCircleNode from '../shape/graph-studio/CircleNode';
 import RegisterRectNode from '../shape/graph-studio/RectNode';
@@ -70,6 +71,12 @@ const defaultRegister = {
         name: 'LoopEdge',
         register: () => {
           RegisterLoopEdge(G6);
+        },
+      },
+      {
+        name: 'PolyEdge',
+        register: () => {
+          RegisterPolyEdge(G6);
         },
       },
     ];

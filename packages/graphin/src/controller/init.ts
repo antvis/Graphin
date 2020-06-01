@@ -54,6 +54,11 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     wheelSensitivity: 1, // 缩放的敏感度，我们在内部有不同设备的最佳匹配
     // 必须将 groupByTypes 设置为 false，带有 combo 的图中元素的视觉层级才能合理:https://g6.antv.vision/zh/docs/manual/middle/combo
     groupByTypes: false,
+
+    // 默认关闭多边设置
+    autoPolyEdge: false,
+    // 默认开启多边设置
+    autoLoopEdge: true,
   };
 
   /** merged options */
@@ -129,10 +134,10 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     },
   ];
   const defaultModes = innerBehaviors
-    .filter(c => {
+    .filter((c) => {
       return !c.disable;
     })
-    .map(c => {
+    .map((c) => {
       return {
         type: c.type,
         ...c.options,
@@ -157,7 +162,7 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
   if (zoom) instance.zoomTo(zoom, pan!);
 
   return {
-    options: props.options || defaultOptions,
+    options: options || defaultOptions,
     instance,
     width: clientWidth,
     height: clientHeight,
