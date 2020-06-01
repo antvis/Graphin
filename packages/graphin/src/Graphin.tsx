@@ -271,7 +271,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
       children = [children];
     }
 
-    return React.Children.map(children, child => {
+    return React.Children.map(children, (child) => {
       // do not pass props if element is a DOM element or not a valid react element.
       if (!React.isValidElement(child) || typeof child.type === 'string') {
         return child;
@@ -289,7 +289,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         <div
           data-testid="custom-element"
           className="graphin-core"
-          ref={node => {
+          ref={(node) => {
             this.graphDOM = node;
           }}
         />
