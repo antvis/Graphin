@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "@antv/gatsby-theme-antv": "^0.10.62",
-    "@antv/graphin": "^1.0.2",
     "gatsby": "^2.17.7",
     "gh-pages": "^2.1.1"
   },

@@ -54,12 +54,12 @@ import '@antv/graphin/dist/index.css'; // Don't forget to import css
 import './styles.css';
 
 const App = () => {
-    const data = Utils.mock(10).graphin();
-    return (
-        <div className="App">
-            <Graphin data={data} />
-        </div>
-    );
+  const data = Utils.mock(10).graphin();
+  return (
+    <div className="App">
+      <Graphin data={data} />
+    </div>
+  );
 };
 
 const rootElement = document.getElementById('root');
@@ -68,51 +68,53 @@ ReactDOM.render(<App />, rootElement);
 
 ### Graphin and G6 compatible table
 
-| Graphin Version | G6 Version |
-| --------------- | ---------- |
-| before 1.0.1    | 3.1.9      |
-| ^1.0.2          | ^3.2.0     |
+| Graphin Version | G6 Version | graphin-components antd Version |
+| --------------- | ---------- | ------------------------------- |
+| before 1.0.1    | 3.1.9      | 3.24.3                          |
+| ^1.0.2          | ^3.2.0     | 3.24.3                          |
+| ^1.0.5          | ^3.3.0     | 3.24.3                          |
+| ^1.1.0          | ^3.4.0     | 4.0.3                           |
 
 ### Develop Graphin
 
--   Set npmClient
+- Set npmClient
 
 Set your npmClient in lerna.json, developers in China can set npmClient to [cnpm](https://www.npmjs.com/package/cnpm)
 
 ```json
 // ./lerna.json
 {
-    "packages": ["packages/*"],
-    "npmClient": "yarn",
-    "version": "0.0.0"
+  "packages": ["packages/*"],
+  "npmClient": "yarn",
+  "version": "0.0.0"
 }
 ```
 
--   Install dependencies
+- Install dependencies
 
 ```bash
 npm i
 ```
 
--   Install dependencies for each package
+- Install dependencies for each package
 
 ```bash
 npm run bootstrap
 ```
 
--   Start the local compilation of graphin and graphin-components
+- Start the local compilation of graphin and graphin-components
 
 ```bash
 npm run start
 ```
 
--   Start the Graphin studio demo after `npm run start`
+- Start the Graphin studio demo after `npm run start`
 
 ```bash
 npm run studio
 ```
 
--   Start the Graphin Doc site
+- Start the Graphin Doc site
 
 ```bash
 npm run site
@@ -120,10 +122,10 @@ npm run site
 
 ### More Info
 
--   [Introduction to Graphin](https://graphin.antv.vision/zh/docs/manual/introduction)
--   [Getting started](https://graphin.antv.vision/zh/docs/manual/getting-started)
--   [API documentation](https://graphin.antv.vision/zh/docs/api/graphin)
--   [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)
+- [Introduction to Graphin](https://graphin.antv.vision/zh/docs/manual/introduction)
+- [Getting started](https://graphin.antv.vision/zh/docs/manual/getting-started)
+- [API documentation](https://graphin.antv.vision/zh/docs/api/graphin)
+- [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)
 
 ### DingTalk
 

@@ -3,10 +3,10 @@ import { G6Event } from './types';
 import getPosition from './getPosition';
 import { ContextMenuProps } from './index';
 
-export type MenuStyle = {
+export interface MenuStyle {
   width: number;
   height: number;
-};
+}
 
 interface State {
   visible: boolean;

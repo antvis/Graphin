@@ -1,5 +1,5 @@
-import { G } from '@antv/g6/types/g';
-import G6 from '@antv/g6';
+import { Group, Shape } from '@antv/g-canvas';
+import { INode } from '@antv/g6/lib/interface/item';
 import { G6Node } from '../../types';
 import { GREY, PRIMARY_NODE_COLOR, EnumNodeAndEdgeStatus, DEFAULT_ICON_FONT_FAMILY } from './constants';
 import { normalizeColor } from './utils';
@@ -20,7 +20,7 @@ function makeHexagon(border: number) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (g6: any) => {
   g6.registerNode('HexagonNode', {
-    draw(cfg: G6Node, group: G.Group) {
+    draw(cfg: G6Node, group: Group) {
       const hasLabel = cfg.label;
       const innerNodeSize = cfg.style?.nodeSize || 48;
       const innerSize = innerNodeSize > 28 ? innerNodeSize : 28;
@@ -34,6 +34,8 @@ export default (g6: any) => {
           points: makeHexagon(outerSize),
           // fill: '#10121A',
         },
+        draggable: true,
+        name: 'hexagon-floor',
       });
       group.addShape('polygon', {
         attrs: {
@@ -42,6 +44,8 @@ export default (g6: any) => {
           stroke: cfg.style?.dark ? '#1E202D' : color.normal,
           lineWidth: 2,
         },
+        draggable: true,
+        name: 'hexagon-border',
       });
       const selected = group.addShape('polygon', {
         attrs: {
@@ -50,6 +54,8 @@ export default (g6: any) => {
           fill: '#FFF',
           opacity: 0.15,
         },
+        draggable: true,
+        name: 'hexagon-selected',
       });
       selected.translate(-5, -5);
 
@@ -58,6 +64,8 @@ export default (g6: any) => {
           attrs: {
             id: 'hexagon-inner-group',
           },
+          draggable: true,
+          name: 'hexagon-inner-group',
           // tslint:disable-next-line: align
         },
         {},
@@ -68,6 +76,8 @@ export default (g6: any) => {
           points: makeHexagon(innerSize),
           fill: cfg.style?.dark ? '#1E202D' : color.dark,
         },
+        draggable: true,
+        name: 'hexagon-inner',
       });
       inner.translate((outerSize - innerSize) / 2, (outerSize - innerSize) / 2);
 
@@ -83,6 +93,8 @@ export default (g6: any) => {
           fontFamily: cfg.style?.fontFamily || DEFAULT_ICON_FONT_FAMILY,
           fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
         },
+        draggable: true,
+        name: 'hexagon-name',
       });
 
       if (hasLabel) {
@@ -96,6 +108,8 @@ export default (g6: any) => {
             textAlign: 'center',
             fill: cfg.style?.dark ? '#8D93B0' : '#3B3B3B',
           },
+          draggable: true,
+          name: 'hexagon-label',
         });
       }
 
@@ -106,6 +120,8 @@ export default (g6: any) => {
           attrs: {
             id: 'hexagon-children-group',
           },
+          draggable: true,
+          name: 'hexagon-children-group',
           // tslint:disable-next-line: align
         },
         {},
@@ -116,6 +132,8 @@ export default (g6: any) => {
           points: makeHexagon(16),
           fill: cfg.style?.dark ? '#1E202D' : color.normal,
         },
+        draggable: true,
+        name: 'hexagon-children',
       });
       children.addShape('text', {
         attrs: {
@@ -128,33 +146,39 @@ export default (g6: any) => {
           textBaseline: 'middle',
           fill: cfg.style?.dark ? '#8D93B0' : '#FFFFFF',
         },
+        draggable: true,
+        name: 'hexagon-children-icon',
       });
       children.translate(outerSize / 2 - 16 / 2, 0);
       return keyShape;
     },
-    setState(name: EnumNodeAndEdgeStatus, value: string, node: G6.Node) {
+    setState(name: EnumNodeAndEdgeStatus, value: string, node: INode) {
       if (!name) return;
       const data: G6Node = node.get('model');
       const container = node.getContainer();
-      const hexagonBorder = container.get('children').find((item: G.Shape) => item.attr().id === 'hexagon-border');
-      const hexagonSelected = container.get('children').find((item: G.Shape) => item.attr().id === 'hexagon-selected');
+      const hexagonBorder = container.get('children').find((item: Shape.Base) => item.attr().id === 'hexagon-border');
+      const hexagonSelected = container
+        .get('children')
+        .find((item: Shape.Base) => item.attr().id === 'hexagon-selected');
       const hexagonInnerGroup = container
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'hexagon-inner-group');
+        .find((item: Shape.Base) => item.attr().id === 'hexagon-inner-group');
       const hexagonInner = hexagonInnerGroup
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'hexagon-inner');
-      const hexagonIcon = hexagonInnerGroup.get('children').find((item: G.Shape) => item.attr().id === 'hexagon-icon');
-      const hexagonLabel = container.get('children').find((item: G.Shape) => item.attr().id === 'hexagon-label');
+        .find((item: Shape.Base) => item.attr().id === 'hexagon-inner');
+      const hexagonIcon = hexagonInnerGroup
+        .get('children')
+        .find((item: Shape.Base) => item.attr().id === 'hexagon-icon');
+      const hexagonLabel = container.get('children').find((item: Shape.Base) => item.attr().id === 'hexagon-label');
       const hexagonChildrenGroup = container
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'hexagon-children-group');
+        .find((item: Shape.Base) => item.attr().id === 'hexagon-children-group');
       const hexagonChildren = hexagonChildrenGroup
         ?.get('children')
-        .find((item: G.Shape) => item.attr().id === 'hexagon-children');
+        .find((item: Shape.Base) => item.attr().id === 'hexagon-children');
       const hexagonChildrenIcon = hexagonChildrenGroup
         ?.get('children')
-        .find((item: G.Shape) => item.attr().id === 'hexagon-children-icon');
+        .find((item: Shape.Base) => item.attr().id === 'hexagon-children-icon');
 
       const color = data.style?.dark ? GREY : normalizeColor(data.style?.primaryColor || PRIMARY_NODE_COLOR);
       const innerNodeSize = data.style?.nodeSize || 48;

@@ -1,5 +1,5 @@
-import { G } from '@antv/g6/types/g';
-import G6 from '@antv/g6';
+import { Group, Shape } from '@antv/g-canvas';
+import { IEdge } from '@antv/g6/lib/interface/item';
 import { G6Edge } from '../../types';
 import { normalizeColor } from './utils';
 import {
@@ -13,10 +13,10 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (g6: any) => {
   g6.registerEdge('LineEdge', {
-    draw(cfg: G6Edge, group: G.Group) {
+    draw(cfg: G6Edge, group: Group) {
       const hasLabel = cfg.label;
       const { startPoint, endPoint } = cfg;
-      const d = (cfg.style?.line.width || 1) + 1;
+      const d = (cfg.style?.line?.width || 1) + 1;
 
       const attrs = {
         path: [
@@ -25,7 +25,7 @@ export default (g6: any) => {
         ],
       };
 
-      const lineColor = cfg.style?.line.color ? normalizeColor(cfg.style?.line.color) : EDGE_LINE_DEFAULT_COLOR;
+      const lineColor = cfg.style?.line?.color ? normalizeColor(cfg.style?.line?.color) : EDGE_LINE_DEFAULT_COLOR;
       const labelColor = cfg.style?.label?.color ? normalizeColor(cfg.style?.label?.color) : EDGE_LABEL_DEFAULT_COLOR;
 
       group.addShape('path', {
@@ -36,6 +36,8 @@ export default (g6: any) => {
           stroke: '#000',
           opacity: 0.05,
         },
+        draggable: true,
+        name: 'selected',
       });
 
       const key = group.addShape('path', {
@@ -44,13 +46,15 @@ export default (g6: any) => {
           ...attrs,
           lineAppendWidth: 4,
           stroke: cfg.style?.dark ? GREY.dark : lineColor.dark,
-          lineWidth: cfg.style?.dark ? 1 : cfg.style?.line.width || 1,
-          lineDash: cfg.style?.line.dash,
+          lineWidth: cfg.style?.dark ? 1 : cfg.style?.line?.width || 1,
+          lineDash: cfg.style?.line?.dash,
           endArrow: {
-            d,
-            path: `M ${d},0 L -${d},-${d} L -${d},${d} Z`,
+            d: -d / 2,
+            path: `M 0,0 L ${d},${d / 2} L ${d},-${d / 2} Z`,
           },
         },
+        draggable: true,
+        name: 'main',
       });
 
       if (hasLabel) {
@@ -65,6 +69,8 @@ export default (g6: any) => {
             fontFamily: cfg.style?.label?.family,
             fill: cfg.style?.dark ? HIDDEN_LABEL_COLOR.normal : labelColor.dark,
           },
+          draggable: true,
+          name: 'label',
         });
         label.rotate(
           endPoint.x - startPoint.x === 0
@@ -76,24 +82,24 @@ export default (g6: any) => {
       }
       return key;
     },
-    setState(name: EnumNodeAndEdgeStatus, value: string, edge: G6.Edge) {
+    setState(name: EnumNodeAndEdgeStatus, value: string, edge: IEdge) {
       if (!name) return;
       const data: G6Edge = edge.get('model');
       const mainShape = edge
         .getContainer()
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'main');
+        .find((item: Shape.Base) => item.attr().id === 'main');
       const selectedShape = edge
         .getContainer()
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'selected');
+        .find((item: Shape.Base) => item.attr().id === 'selected');
       const textShape = edge
         .getContainer()
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'label');
-      const d = (data.style?.line.width || 1) + 1;
-      const basicLineWidth = data.style?.dark ? 1 : data.style?.line.width || 1;
-      const lineColor = data.style?.line.color ? normalizeColor(data.style?.line.color) : EDGE_LINE_DEFAULT_COLOR;
+        .find((item: Shape.Base) => item.attr().id === 'label');
+      const d = (data.style?.line?.width || 1) + 1;
+      const basicLineWidth = data.style?.dark ? 1 : data.style?.line?.width || 1;
+      const lineColor = data.style?.line?.color ? normalizeColor(data.style?.line?.color) : EDGE_LINE_DEFAULT_COLOR;
       const labelColor = data.style?.label?.color ? normalizeColor(data.style?.label?.color) : EDGE_LABEL_DEFAULT_COLOR;
 
       const targetAttrs = {
@@ -106,8 +112,8 @@ export default (g6: any) => {
         stroke: data.style?.dark ? GREY.dark : lineColor.dark,
         lineWidth: basicLineWidth,
         endArrow: {
-          d,
-          path: `M ${d},0 L -${d},-${d} L -${d},${d} Z`,
+          d: -d / 2,
+          path: `M 0,0 L ${d},${d / 2} L ${d},-${d / 2} Z`,
         },
       };
       targetAttrs.selected = {
@@ -122,8 +128,8 @@ export default (g6: any) => {
         targetAttrs.main = {
           lineWidth: basicLineWidth + 1,
           endArrow: {
-            d: deltaD,
-            path: `M ${deltaD},0 L -${deltaD},-${deltaD} L -${deltaD},${deltaD} Z`,
+            d: -deltaD / 2,
+            path: `M 0,0 L ${deltaD},${deltaD / 2} L ${deltaD},-${deltaD / 2} Z`,
           },
         };
       }
@@ -132,8 +138,8 @@ export default (g6: any) => {
         targetAttrs.main = {
           lineWidth: basicLineWidth + 1,
           endArrow: {
-            d: deltaD,
-            path: `M ${deltaD},0 L -${deltaD},-${deltaD}  L -${deltaD},${deltaD} Z`,
+            d: -deltaD / 2,
+            path: `M 0,0 L ${deltaD},${deltaD / 2} L ${deltaD},-${deltaD / 2} Z`,
           },
         };
         targetAttrs.selected = {
@@ -145,8 +151,8 @@ export default (g6: any) => {
           stroke: GREY.dark,
           lineWidth: 1,
           endArrow: {
-            d: 2,
-            path: 'M 2,0 L -2,-2 L -2,2 Z',
+            d: -1,
+            path: 'M 0,0 L 2,1 L 2,-1 Z',
           },
         };
         targetAttrs.text = {

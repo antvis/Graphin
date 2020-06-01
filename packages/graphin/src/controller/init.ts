@@ -39,7 +39,7 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     // rendering options:
     animate: true,
     animateCfg: {
-      onFrame: null,
+      onFrame: undefined,
       duration: 500,
       easing: 'easeLinear',
     },
@@ -140,6 +140,9 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
       default: [...defaultModes, ...modes!.default!, ...behaviorsMode.default],
     },
   });
+
+  // close local refresh issue to avoid clip ghost
+  instance.get('canvas').set('localRefresh', false);
 
   // 平移
   if (pan) instance.moveTo(pan.x, pan.y);
