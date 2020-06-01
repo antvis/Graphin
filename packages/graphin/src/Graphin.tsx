@@ -12,16 +12,7 @@ import apisController from './apis';
 import eventController from './events/index';
 
 /** types  */
-import {
-  GraphinProps,
-  GraphinState,
-  ExtendedGraphOptions,
-  GraphType,
-  ForceSimulation,
-  Data,
-  Layout,
-  ExtendLayout,
-} from './types';
+import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimulation, Data, Layout } from './types';
 
 /** utils */
 import shallowEqual from './utils/shallowEqual';
@@ -156,7 +147,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
   shouldUpdateWithDeps(prevProps: GraphinProps, deps: string[]) {
     const { props } = this;
     let shouldUpdate = false;
-    deps.forEach(key => {
+    deps.forEach((key) => {
       const prevVal = prevProps[key] as DiffValue;
       const currentVal = props[key] as DiffValue;
       if (prevVal !== currentVal) {
@@ -178,12 +169,12 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     return this;
   };
 
-  renderGraphWithLifeCycle = (fristRender: boolean) => {
+  renderGraphWithLifeCycle = (firstRender: boolean) => {
     const { data } = this.state;
     this.graph!.changeData(cloneDeep(data));
     this.graph!.emit('afterchangedata');
     this.handleSaveHistory();
-    if (fristRender) {
+    if (firstRender) {
       initGraphAfterRender(this.props, this.graphDOM, this.graph);
     }
   };
@@ -287,7 +278,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
       children = [children];
     }
 
-    return React.Children.map(children, child => {
+    return React.Children.map(children, (child) => {
       // do not pass props if element is a DOM element or not a valid react element.
       if (!React.isValidElement(child) || typeof child.type === 'string') {
         return child;
@@ -305,7 +296,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         <div
           data-testid="custom-element"
           className="graphin-core"
-          ref={node => {
+          ref={(node) => {
             this.graphDOM = node;
           }}
         />
