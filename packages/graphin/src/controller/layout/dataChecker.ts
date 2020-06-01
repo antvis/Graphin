@@ -32,28 +32,28 @@ function isOdd(number: number) {
 
 function makePolyEdge(edges: Data['edges'], data: Data, options: CheckerOption) {
   if (!options.edge.autoPoly) return edges;
-  const noLoopEdges = edges.filter((edge) => edge.source !== edge.target);
-  const loopEdges = edges.filter((edge) => edge.source === edge.target);
-  const groups = _.groupBy(noLoopEdges, (edge) => {
+  const noLoopEdges = edges.filter(edge => edge.source !== edge.target);
+  const loopEdges = edges.filter(edge => edge.source === edge.target);
+  const groups = _.groupBy(noLoopEdges, edge => {
     // a => b === b => a
     const name = [edge.source, edge.target].sort();
     return `${name[0]}-${name[1]}`;
   });
-  const polyGroups = _.pickBy(groups, (group) => group.length > 1);
-  const directGroups = _.pickBy(groups, (group) => group.length <= 1);
+  const polyGroups = _.pickBy(groups, group => group.length > 1);
+  const directGroups = _.pickBy(groups, group => group.length <= 1);
 
-  const polyEdges = _.flatMap(polyGroups, (group) => {
+  const polyEdges = _.flatMap(polyGroups, group => {
     let distance = isEven(group.length) ? 0 : -5;
     return group
-      .map((edge) => {
+      .map(edge => {
         return {
           edge,
           point: [edge.source, edge.target].sort(),
         };
       })
       .map(({ edge, point }, index) => {
-        const source = data.nodes.find((node) => node.id === point[0]);
-        const target = data.nodes.find((node) => node.id === point[1]);
+        const source = data.nodes.find(node => node.id === point[0]);
+        const target = data.nodes.find(node => node.id === point[1]);
 
         if (!source || !target) throw new Error('Invalid Edge, Cannot Find Source/Target Node');
 
@@ -81,7 +81,7 @@ function makePolyEdge(edges: Data['edges'], data: Data, options: CheckerOption) 
 
 function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
   let transformedEdges: Data['edges'] = edges
-    .filter((edge) => {
+    .filter(edge => {
       const { source, target } = edge;
       if (!source || !target) {
         // eslint-disable-next-line no-console
@@ -98,7 +98,7 @@ function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
       /** 边是可以重复的，因为properties可能不一样 */
       return true;
     })
-    .map((edge) => {
+    .map(edge => {
       const { shape, style } = edge;
       return {
         shape: shape || 'LineEdge',
@@ -125,7 +125,7 @@ function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
         },
       };
     })
-    .map((edge) => {
+    .map(edge => {
       // loop edge checker
       if (!options.edge.autoLoop) return edge;
       // skip user-defined shape
@@ -144,7 +144,7 @@ function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
 function checkNodes(nodes: Data['nodes'], _data: Data, _options: CheckerOption) {
   const nodeIds: string[] = [];
   const graphinNodes = nodes
-    .filter((node) => {
+    .filter(node => {
       const { id } = node;
       // 如果节点不存在，则忽略该节点
       if (!id) {
@@ -163,7 +163,7 @@ function checkNodes(nodes: Data['nodes'], _data: Data, _options: CheckerOption) 
       nodeIds.push(id);
       return true;
     })
-    .map((node) => {
+    .map(node => {
       return {
         shape: node.shape || 'CircleNode',
         ...node,
@@ -178,7 +178,7 @@ function checkNodes(nodes: Data['nodes'], _data: Data, _options: CheckerOption) 
 
 // Checking data, filter out invalid data and fill in optional field with default value
 const checkData = (data: Data = { nodes: [], edges: [] }, options: CheckerOption): Data => {
-  const { edges = [], nodes = [] } = data;
+  const { edges = [], nodes = [], combos } = data;
   // nodes
   const graphinNodes = checkNodes(nodes, data, options);
 
@@ -188,6 +188,7 @@ const checkData = (data: Data = { nodes: [], edges: [] }, options: CheckerOption
   return {
     nodes: graphinNodes,
     edges: graphinEdges,
+    combos,
   };
 };
 
