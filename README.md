@@ -40,7 +40,7 @@ Please checkout the specific package：
 #### Install
 
 ```bash
-npm run --save @antv/graphin
+npm install --save @antv/graphin
 ```
 
 #### Usage
