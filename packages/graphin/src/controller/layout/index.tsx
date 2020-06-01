@@ -101,7 +101,14 @@ const layoutController = (
     },
   };
 
-  return matchLayout.layout(data, options as LayoutOption);
+  const layoutData = matchLayout.layout(data, options as LayoutOption);
+  return {
+    ...layoutData,
+    data: {
+      ...layoutData.data,
+      combos: data.combos,
+    },
+  };
 };
 
 export default layoutController;
