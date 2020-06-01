@@ -155,8 +155,8 @@ export class Mock {
     const comboIds = new Set();
     this.nodes = this.nodes.map((node, index) => {
       const comboIndex = Math.ceil((index + 1) / chunkSize);
-      console.log('comboIndex', comboIndex);
       const comboId = `combo-${comboIndex}`;
+      comboIds.add(comboId);
       return {
         ...node,
         comboId,
