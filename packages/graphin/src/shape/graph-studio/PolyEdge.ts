@@ -1,5 +1,6 @@
-import { G } from '@antv/g6/types/g';
-import G6 from '@antv/g6';
+import Group from '@antv/g-canvas/lib/group';
+import { IShape } from '@antv/g-canvas/lib/interfaces';
+import { IEdge } from '@antv/g6/lib/interface/item';
 import { G6Edge } from '../../types';
 import { normalizeColor } from './utils';
 import {
@@ -33,7 +34,7 @@ function getPolyEdgeControlPoint(p1: Position, p2: Position, d: number) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (g6: any) => {
   g6.registerEdge('PolyEdge', {
-    draw(cfg: G6Edge, group: G.Group) {
+    draw(cfg: G6Edge, group: Group) {
       const hasLabel = cfg.label;
       const { startPoint, endPoint } = cfg;
       const d = (cfg.style?.line.width || 1) + 1;
@@ -99,21 +100,21 @@ export default (g6: any) => {
       }
       return key;
     },
-    setState(name: EnumNodeAndEdgeStatus, value: string, edge: G6.Edge) {
+    setState(name: EnumNodeAndEdgeStatus, value: string, edge: IEdge) {
       if (!name) return;
       const data: G6Edge = edge.get('model');
       const mainShape = edge
         .getContainer()
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'main');
+        .find((item: IShape) => item.attr().id === 'main');
       const selectedShape = edge
         .getContainer()
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'selected');
+        .find((item: IShape) => item.attr().id === 'selected');
       const textShape = edge
         .getContainer()
         .get('children')
-        .find((item: G.Shape) => item.attr().id === 'label');
+        .find((item: IShape) => item.attr().id === 'label');
       const d = (data.style?.line.width || 1) + 1;
       const basicLineWidth = data.style?.dark ? 1 : data.style?.line.width || 1;
       const lineColor = data.style?.line.color ? normalizeColor(data.style?.line.color) : EDGE_LINE_DEFAULT_COLOR;

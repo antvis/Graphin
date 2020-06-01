@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import G6 from '@antv/g6';
-import { ComboConfig } from '@antv/g6/src/types';
+import { ComboConfig } from '@antv/g6/lib/types';
 import ForceLayout from './layout/force/ForceLayout';
 import Graphin from './Graphin';
 import { LayoutOption } from './controller/layout/defaultLayouts';
