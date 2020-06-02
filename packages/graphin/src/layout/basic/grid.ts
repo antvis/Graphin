@@ -24,8 +24,8 @@ const gridLayout = (data: Data, options: GridLayoutOptions) => {
   const cols = Math.round(Math.sqrt(count * (height / width))); // 列的个数
   const rows = Math.round(Math.sqrt(count * (width / height))); // 行的个数
   const start = {
-    x: /* width / 2 */ -(cols / 2 - 1) * (nodeSize + nodeSep / 2),
-    y: /* height / 2 */ -(rows / 2 - 1) * (nodeSize + nodeSep / 2),
+    x: width / 2 - (cols / 2 - 1) * (nodeSize + nodeSep / 2),
+    y: height / 2 - (rows / 2 - 1) * (nodeSize + nodeSep / 2),
   };
 
   const resultNodes = nodes.map((node, index: number) => {

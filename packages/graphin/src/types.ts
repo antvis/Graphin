@@ -302,7 +302,9 @@ export interface Layout {
   /** 布局名称，必选 */
   name: string;
   /** 布局配置，可选 */
-  options?: object;
+  options?: {
+    [key: string]: any;
+  };
 }
 
 /** 用户自定义shape的样式 */
@@ -454,4 +456,5 @@ export interface LayoutOptionBase {
   width: number;
   height: number;
   data: Data;
+  hasPosition: boolean;
 }
