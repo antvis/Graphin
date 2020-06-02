@@ -101,7 +101,7 @@ function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
     .map(edge => {
       const { shape, style } = edge;
       return {
-        shape: shape || 'LineEdge',
+        type: shape || 'LineEdge',
         style: style || {
           line: {
             width: 1,
@@ -129,8 +129,8 @@ function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
       // loop edge checker
       if (!options.edge.autoLoop) return edge;
       // skip user-defined shape
-      if (edge.shape === 'LineEdge' && edge.source === edge.target) {
-        edge.shape = 'loop';
+      if (edge.type === 'LineEdge' && edge.source === edge.target) {
+        edge.type = 'loop';
       }
       return edge;
     });
@@ -165,7 +165,7 @@ function checkNodes(nodes: Data['nodes'], _data: Data, _options: CheckerOption) 
     })
     .map(node => {
       return {
-        shape: node.shape || 'CircleNode',
+        type: node.shape || 'CircleNode',
         ...node,
         data: {
           ...node.data,
