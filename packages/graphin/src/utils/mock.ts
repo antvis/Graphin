@@ -136,6 +136,7 @@ export class Mock {
         this.edges.push({
           source: node.parent && node.parent.id,
           target: node.id,
+          label: `edge-${node.parent && node.parent.id}_${node.id}`,
           properties: [],
         });
       }

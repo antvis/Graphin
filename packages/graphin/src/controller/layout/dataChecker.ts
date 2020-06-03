@@ -57,8 +57,8 @@ function makePolyEdge(edges: Data['edges'], data: Data, options: CheckerOption) 
 
         if (!source || !target) throw new Error('Invalid Edge, Cannot Find Source/Target Node');
 
-        if (isEven(group.length) && isEven(index)) distance += 40;
-        if (isOdd(group.length) && (isOdd(index) || index === 0)) distance += 40;
+        if (isEven(group.length) && isEven(index)) distance += 20;
+        if (isOdd(group.length) && (isOdd(index) || index === 0)) distance += 20;
         const polyEdge = {
           ...edge,
           shape: 'PolyEdge',
@@ -107,7 +107,7 @@ function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
             width: 1,
           },
           label: {
-            size: 1,
+            size: 12,
           },
         },
         poly: {
