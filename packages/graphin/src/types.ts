@@ -303,7 +303,7 @@ export interface Layout {
   name: string;
   /** 布局配置，可选 */
   options?: {
-    [key: string]: any;
+    [key: string]: any; // eslint-disable-line
   };
 }
 

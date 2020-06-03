@@ -1,5 +1,5 @@
 import G6 from '@antv/g6';
-import G, { Shape } from '@antv/g-canvas';
+import { Shape } from '@antv/g-canvas';
 import { ExtendNodeShape, ShapeComponent } from '../../types';
 import { Item } from '@antv/g6/lib/types';
 
