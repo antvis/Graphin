@@ -12,19 +12,11 @@ import apisController from './apis';
 import eventController from './events/index';
 
 /** types  */
-import {
-  GraphinProps,
-  GraphinState,
-  ExtendedGraphOptions,
-  GraphType,
-  ForceSimulation,
-  Data,
-  Layout,
-  ExtendLayout,
-} from './types';
+import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimulation, Data, Layout } from './types';
 
 /** utils */
-import shallowEqual from './utils/shallowEqual';
+// import shallowEqual from './utils/shallowEqual';
+import deepEqual from './utils/deepEqual';
 
 import './index.less';
 
@@ -92,8 +84,8 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
   }
 
   componentDidUpdate(prevProps: GraphinProps) {
-    const isDataChange = this.shouldUpdateWithDeps(prevProps, ['data']);
-    const isLayoutChange = this.shouldUpdateWithDeps(prevProps, ['layout']);
+    const isDataChange = this.shouldUpdate(prevProps, 'data');
+    const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
 
     // only rerender when data or layout change
     if (isDataChange || isLayoutChange) {
@@ -153,21 +145,14 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     );
   };
 
-  shouldUpdateWithDeps(prevProps: GraphinProps, deps: string[]) {
-    const { props } = this;
-    let shouldUpdate = false;
-    deps.forEach(key => {
-      const prevVal = prevProps[key] as DiffValue;
-      const currentVal = props[key] as DiffValue;
-      if (prevVal !== currentVal) {
-        if (!prevVal || !currentVal) {
-          shouldUpdate = true;
-        } else if (!shallowEqual(prevVal, currentVal)) {
-          shouldUpdate = true;
-        }
-      }
-    });
-    return shouldUpdate;
+  shouldUpdate(prevProps: GraphinProps, key: string) {
+    /* eslint-disable react/destructuring-assignment */
+    const prevVal = prevProps[key] as DiffValue;
+    const currentVal = this.props[key] as DiffValue;
+    // console.time('deep equal');
+    const isEqual = deepEqual(prevVal, currentVal);
+    // console.timeEnd('deep equal');
+    return !isEqual;
   }
 
   handleEvents() {
@@ -178,12 +163,12 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     return this;
   };
 
-  renderGraphWithLifeCycle = (fristRender: boolean) => {
+  renderGraphWithLifeCycle = (firstRender: boolean) => {
     const { data } = this.state;
     this.graph!.changeData(cloneDeep(data));
     this.graph!.emit('afterchangedata');
     this.handleSaveHistory();
-    if (fristRender) {
+    if (firstRender) {
       initGraphAfterRender(this.props, this.graphDOM, this.graph);
     }
   };

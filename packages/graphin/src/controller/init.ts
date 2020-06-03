@@ -32,14 +32,14 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     height: clientHeight,
     // initial viewport state:
     zoom: 1,
-    pan: { x: clientWidth / 2, y: clientHeight / 2 },
+    // pan: { x: clientWidth / 2, y: clientHeight / 2 },
     // interaction options:
     minZoom: 0.2,
     maxZoom: 10,
     // rendering options:
     animate: true,
     animateCfg: {
-      onFrame: null,
+      onFrame: undefined,
       duration: 500,
       easing: 'easeLinear',
     },
@@ -52,6 +52,13 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     disableZoom: false, // 禁用画布缩放
     disableDrag: false, // 禁用节点拖拽
     wheelSensitivity: 1, // 缩放的敏感度，我们在内部有不同设备的最佳匹配
+    // 必须将 groupByTypes 设置为 false，带有 combo 的图中元素的视觉层级才能合理:https://g6.antv.vision/zh/docs/manual/middle/combo
+    groupByTypes: false,
+
+    // 默认关闭多边设置
+    autoPolyEdge: false,
+    // 默认开启多边设置
+    autoLoopEdge: true,
   };
 
   /** merged options */
@@ -116,12 +123,21 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
       disable: disableDrag,
       options: {},
     },
+    // combo
+    {
+      type: 'drag-combo',
+      options: {},
+    },
+    {
+      type: 'collapse-expand-combo',
+      options: {},
+    },
   ];
   const defaultModes = innerBehaviors
-    .filter(c => {
+    .filter((c) => {
       return !c.disable;
     })
-    .map(c => {
+    .map((c) => {
       return {
         type: c.type,
         ...c.options,
@@ -136,6 +152,9 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     },
   });
 
+  // close local refresh issue to avoid clip ghost
+  instance.get('canvas').set('localRefresh', false);
+
   // 平移
   if (pan) instance.moveTo(pan.x, pan.y);
 
@@ -143,7 +162,7 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
   if (zoom) instance.zoomTo(zoom, pan!);
 
   return {
-    options: props.options || defaultOptions,
+    options: options || defaultOptions,
     instance,
     width: clientWidth,
     height: clientHeight,

@@ -1,8 +1,9 @@
-import G6, { Node } from '@antv/g6';
-import { G } from '@antv/g6/types/g';
+import G6 from '@antv/g6';
+import { Shape } from '@antv/g-canvas';
 import { ExtendNodeShape, ShapeComponent } from '../../types';
+import { Item } from '@antv/g6/lib/types';
 
-const reset = (shapes: G.Shape[], shapeComponents: ShapeComponent[]) => {
+const reset = (shapes: Shape.Base[], shapeComponents: ShapeComponent[]) => {
   shapes.forEach((shape, index: number) => {
     if (!shapeComponents[index].noReset)
       shape.attr({
@@ -23,7 +24,7 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
   G6.registerNode(registerName, {
     // 自定义Shape
     // eslint-disable-next-line
-    draw(inputCfg: any, group: G.Group) {
+    draw(inputCfg: any, group: any) {
       /** 得到用户返回的shapeComponents，然后拼装 */
 
       const { shapeComponents, state: RenderState } = renderNodeShape(inputCfg);
@@ -34,17 +35,19 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
       let keyshapeIndex = 0;
       const g6Shapes = shapeComponents.map((component, index: number) => {
         if (component.isKeyShape) keyshapeIndex = index;
-        return group.addShape(component.shape, {
+        return group.addShape(component.type || component.shape, {
           attrs: {
             ...component.attrs,
           },
+          draggable: true,
+          name: component.attrs?.id,
         });
       });
       return g6Shapes[keyshapeIndex];
     },
 
     // 设置各种交互状态
-    setState(name: string, value: string, node: Node) {
+    setState(name: string, value: string, node: Item) {
       const { id } = node.get('model').data;
       const initShapeComponent = initShapeComponentMap[id];
       const initState = initStateMap[id];
@@ -62,7 +65,7 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
       Object.keys(initState).forEach(key => {
         // state 的 key 和 behavior 里触发的 name 匹配
         if (name === key) {
-          shapes.forEach((g6Shape: G.Shape) => {
+          shapes.forEach((g6Shape: Shape.Base) => {
             const originAttrs = g6Shape.attr();
             const customAttrs = initState[key][originAttrs.id];
             if (customAttrs) {

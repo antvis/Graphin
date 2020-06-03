@@ -1,7 +1,7 @@
 import ForceLayout, { ForceProps } from '../force/ForceLayout';
 import { optimizeDrawing, optimizeDrawingByNode } from '../../perf/optimizeDrawing';
 
-import { LayoutOptionBase, Data, Node as NodeType, ForceSimulation, ExtendedGraph } from '../../types';
+import { LayoutOptionBase, Data, Node as NodeType, ForceSimulation } from '../../types';
 
 import forceWithWorker from './forceWithWorker';
 
@@ -39,7 +39,7 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
     animation: animation !== undefined ? animation : true,
     done: () => {
       if (isOptimization) {
-        optimizeDrawing(graph as ExtendedGraph, false);
+        optimizeDrawing(graph, false);
       }
       done(graph);
     },
@@ -67,7 +67,7 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
       graph.refreshPositions();
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log(error);
+      console.error(error);
     }
   });
   /**  4. Start force  simulator */

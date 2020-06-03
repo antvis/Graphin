@@ -1,4 +1,4 @@
-import dataChecking from './dataChecking';
+import checkData from './dataChecker';
 import { GraphinProps, Data, ForceSimulation, ExtendLayout } from '../../types';
 import Graphin from '../../Graphin';
 import defaultLayouts, { LayoutOption } from './defaultLayouts';
@@ -38,7 +38,12 @@ const layoutController = (
   let { layout } = props;
 
   // 数据的校验
-  const data = dataChecking(PropsData);
+  const data = checkData(PropsData, {
+    edge: {
+      autoPoly: !!graphin.g6Options?.autoPolyEdge,
+      autoLoop: !!graphin.g6Options?.autoLoopEdge,
+    },
+  });
 
   // 重置forceSimulation
 
@@ -64,7 +69,7 @@ const layoutController = (
   }
 
   const hasPosition = data.nodes.every(node => {
-    return node.x && node.y;
+    return !window.isNaN(Number(node.x)) && !window.isNaN(Number(node.y));
   });
 
   if (!(layout && layout.name)) {
@@ -96,7 +101,14 @@ const layoutController = (
     },
   };
 
-  return matchLayout.layout(data, options as LayoutOption);
+  const layoutData = matchLayout.layout(data, options as LayoutOption);
+  return {
+    ...layoutData,
+    data: {
+      ...layoutData.data,
+      combos: data.combos,
+    },
+  };
 };
 
 export default layoutController;

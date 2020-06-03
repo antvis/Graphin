@@ -440,7 +440,7 @@ Object {
         "nodeSize": 20,
         "primaryColor": "#515151",
       },
-      "x": 75,
+      "x": 37,
       "y": 275,
     },
     Object {
@@ -500,7 +500,7 @@ Object {
         "nodeSize": 20,
         "primaryColor": "#515151",
       },
-      "x": 75,
+      "x": 37,
       "y": 475,
     },
     Object {
@@ -560,7 +560,7 @@ Object {
         "nodeSize": 20,
         "primaryColor": "#515151",
       },
-      "x": 237,
+      "x": 123,
       "y": 475,
     },
     Object {
@@ -620,7 +620,7 @@ Object {
         "nodeSize": 20,
         "primaryColor": "#515151",
       },
-      "x": 399,
+      "x": 209,
       "y": 475,
     },
     Object {
@@ -680,7 +680,7 @@ Object {
         "nodeSize": 20,
         "primaryColor": "#515151",
       },
-      "x": 561,
+      "x": 295,
       "y": 475,
     },
     Object {
@@ -740,7 +740,7 @@ Object {
         "nodeSize": 20,
         "primaryColor": "#515151",
       },
-      "x": 723,
+      "x": 381,
       "y": 475,
     },
     Object {
@@ -800,7 +800,7 @@ Object {
         "nodeSize": 20,
         "primaryColor": "#515151",
       },
-      "x": 885,
+      "x": 467,
       "y": 475,
     },
     Object {
@@ -860,7 +860,7 @@ Object {
         "nodeSize": 20,
         "primaryColor": "#515151",
       },
-      "x": 1047,
+      "x": 553,
       "y": 475,
     },
     Object {
@@ -920,7 +920,7 @@ Object {
         "nodeSize": 20,
         "primaryColor": "#515151",
       },
-      "x": 1209,
+      "x": 639,
       "y": 475,
     },
     Object {
@@ -980,7 +980,7 @@ Object {
         "nodeSize": 20,
         "primaryColor": "#515151",
       },
-      "x": 75,
+      "x": 37,
       "y": 75,
     },
   ],

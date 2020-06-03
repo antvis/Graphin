@@ -7,6 +7,7 @@ import SimplicityNode from '../shape/render/SimplicityNode';
 
 import RegisterSimplicityLineEdge from '../shape/g6/LineEdge';
 import RegisterLineEdge from '../shape/graph-studio/LineEdge';
+import RegisterPolyEdge from '../shape/graph-studio/PolyEdge';
 import RegisterLoopEdge from '../shape/graph-studio/LoopEdge';
 import RegisterCircleNode from '../shape/graph-studio/CircleNode';
 import RegisterRectNode from '../shape/graph-studio/RectNode';
@@ -72,6 +73,12 @@ const defaultRegister = {
           RegisterLoopEdge(G6);
         },
       },
+      {
+        name: 'PolyEdge',
+        register: () => {
+          RegisterPolyEdge(G6);
+        },
+      },
     ];
   },
   behavior: () => {
@@ -81,7 +88,9 @@ const defaultRegister = {
         mode: 'default',
         options: {},
         register: () => {
-          G6.registerBehavior('graphin-highlight', graphinHighlight);
+          // TODO better support for registerBehavior
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          G6.registerBehavior('graphin-highlight', graphinHighlight as any);
         },
       },
     ];

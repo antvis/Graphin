@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 import hexToRgba from '../../utils/hexToRgba';
-import { Item } from '@antv/g6';
-import { G } from '@antv/g6/types/g';
+import { Item } from '@antv/g6/lib/types';
+import G from '@antv/g-canvas';
 
-const reset = (shape: G.Shape, initStyle: G.Attrs) => {
+const reset = (shape: G.Shape.Base, initStyle: G.ShapeAttrs) => {
   const { lineWidth, stroke } = initStyle;
   shape.stopAnimate();
   shape.attr('lineWidth', lineWidth);

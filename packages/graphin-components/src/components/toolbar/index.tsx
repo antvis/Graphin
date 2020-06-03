@@ -1,6 +1,15 @@
 import React, { ReactElement, CSSProperties } from 'react';
 import { Graph } from '@antv/g6';
-import { Tooltip, Button, Icon, Popover, Progress } from '../ui'; // 'antd';
+
+import {
+  FullscreenExitOutlined,
+  FullscreenOutlined,
+  ZoomOutOutlined,
+  ZoomInOutlined,
+  UndoOutlined,
+  RedoOutlined,
+} from '@ant-design/icons';
+import { Tooltip, Button, Popover, Progress } from 'antd';
 
 import useFullscreen from './useFullscreen';
 import useZoom from './useZoom';
@@ -15,7 +24,7 @@ const MAX_ZOOM = 2;
 interface MenuItem {
   id: string;
   name: string;
-  icon: string;
+  icon: ReactElement;
   disabled?: boolean;
   style?: object;
   action: () => void;
@@ -54,7 +63,7 @@ const defaultStyle: CSSProperties = {
   left: '48px',
 };
 
-const Toolbar: React.FC<ToolbarProps> = props => {
+const Toolbar: React.FC<ToolbarProps> = (props) => {
   const { graph, className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
   const { history } = apis;
   const { width = 0, height = 0 } = graphVars;
@@ -77,28 +86,28 @@ const Toolbar: React.FC<ToolbarProps> = props => {
     {
       id: 'fullscreen',
       name: fullscreen ? '还原' : '全屏',
-      icon: fullscreen ? 'fullscreen-exit' : 'fullscreen',
+      icon: fullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />,
       disabled: false,
       action: toggleFullscreen,
     },
     {
       id: 'zoomIn',
       name: '放大',
-      icon: 'zoom-in',
+      icon: <ZoomInOutlined />,
       disabled: zoom >= MAX_ZOOM,
       action: () => handleGraphZoom(true),
     },
     {
       id: 'zoomOut',
       name: '缩小',
-      icon: 'zoom-out',
+      icon: <ZoomOutOutlined />,
       disabled: zoom <= MIN_ZOOM,
       action: () => handleGraphZoom(false),
     },
     {
       id: 'undo',
       name: `撤销操作,进度:${historyInfo.currentStep} / ${historyInfo.allStep}`,
-      icon: 'undo',
+      icon: <UndoOutlined />,
       disabled: false,
       action: () => {
         history.undo();
@@ -117,7 +126,7 @@ const Toolbar: React.FC<ToolbarProps> = props => {
     {
       id: 'redo',
       name: `重做操作,进度:${historyInfo.currentStep} / ${historyInfo.allStep}`,
-      icon: 'redo',
+      icon: <RedoOutlined />,
       disabled: false,
       action: () => {
         history.redo();
@@ -150,7 +159,7 @@ const Toolbar: React.FC<ToolbarProps> = props => {
   return (
     <div>
       <div className={`zoom-toolbar ${direction} ${className}`} style={style || defaultStyle}>
-        {buttonCfg.map(item => {
+        {buttonCfg.map((item) => {
           /** 需要自定义渲染 */
           if (item.renderTooltip) {
             return (
@@ -162,7 +171,7 @@ const Toolbar: React.FC<ToolbarProps> = props => {
                 key={item.id}
               >
                 <Button onClick={item.action} disabled={item.disabled} style={item.style}>
-                  <Icon type={item.icon} />
+                  {item.icon}
                 </Button>
               </Popover>
             );
@@ -170,7 +179,7 @@ const Toolbar: React.FC<ToolbarProps> = props => {
           return (
             <Tooltip placement={placement} title={item.name} key={item.id}>
               <Button onClick={item.action} disabled={item.disabled} style={item.style}>
-                <Icon type={item.icon} />
+                {item.icon}
               </Button>
             </Tooltip>
           );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, act, fireEvent, cleanup } from '@testing-library/react';
+import { SelectOutlined } from '@ant-design/icons';
 import '@testing-library/jest-dom/extend-expect';
 import { getMockG6Event, getMockGraph } from '../../../../__mock__/g6';
 import { ContextMenu, isEqual, ContextMenuProps } from '../index';
@@ -24,21 +25,21 @@ describe('<ContextMenu />', () => {
     const mockCallback = jest.fn(() => {});
 
     // TODO icon 测试
-    const { asFragment, queryByText, rerender, getByText, unmount } = render(
+    const { asFragment, queryByText, rerender, getByText } = render(
       <ContextMenu
         graph={mockGraph}
         options={[
           {
             key: 'select',
             title: 'Select',
-            iconType: 'icon',
+            iconType: <SelectOutlined />,
             visible: true,
             onClick: mockCallback,
           },
           {
             key: 'invert-select',
             title: 'Invert Select',
-            iconType: 'icon',
+            iconType: <SelectOutlined />,
             visible: false,
             onClick: () => {},
           },
@@ -144,7 +145,7 @@ describe('<ContextMenu />', () => {
       {
         key: 'select',
         text: 'Select',
-        icon: 'icon',
+        icon: <SelectOutlined />,
         visible: true,
         onClick: () => {},
       },
@@ -162,7 +163,7 @@ describe('<ContextMenu />', () => {
       {
         key: 'select',
         title: 'Select',
-        iconType: 'icon',
+        iconType: <SelectOutlined />,
         visible: false,
         onClick: () => {},
       },

@@ -1,5 +1,7 @@
 import { notification, Modal } from 'antd';
+import React from 'react';
 import copy2Clipboard from 'copy-to-clipboard';
+import { CopyOutlined, DeleteOutlined, SelectOutlined } from '@ant-design/icons';
 import { GrapheneState, Dispatch } from '../types';
 
 interface ContextMenu extends GrapheneState {
@@ -56,7 +58,7 @@ const renderContextMenu = (option: ContextMenu) => {
     {
       key: 'copyId',
       title: '复制ID',
-      iconType: 'copy',
+      iconType: <CopyOutlined />,
       visible: true,
       onClick: copyId,
     },
@@ -68,14 +70,14 @@ const renderContextMenu = (option: ContextMenu) => {
     {
       key: 'deleteNode',
       title: '删除实体',
-      iconType: 'delete',
+      iconType: <DeleteOutlined />,
       visible: true,
       onClick: deleteNodes,
     },
     {
       key: 'invertSelect',
       title: '反选实体',
-      iconType: 'select',
+      iconType: <SelectOutlined />,
       visible: false,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onClick: () => {},

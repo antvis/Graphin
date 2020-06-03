@@ -1,8 +1,8 @@
-import G6 from '@antv/g6';
+import { Item } from '@antv/g6/lib/types';
 
 /** G6 没有暴露这个类型 */
 export interface G6Event extends MouseEvent {
-  item: G6.Node & G6.Edge;
+  item: Item;
   target: Event['target'];
   action?: string;
 }

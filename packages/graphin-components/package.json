@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin-components",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "Components for graphin",
   "main": "./dist/index",
   "types": "./dist/graphin-components/src/index.d",
@@ -14,7 +14,6 @@
   "license": "MIT",
   "sideEffects": false,
   "peerDependencies": {
-    "antd": "^3.23.5",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   },
@@ -50,8 +49,11 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@antv/g6": "~3.2.0",
-    "@antv/graphin": "^1.1.0-beta.1"
+    "@ant-design/compatible": "^1.0.2",
+    "@ant-design/icons": "^4.0.6",
+    "antd": "^4.1.4",
+    "@antv/g6": "^3.4.7",
+    "@antv/graphin": "^1.2.0"
   },
   "publishConfig": {
     "access": "public"

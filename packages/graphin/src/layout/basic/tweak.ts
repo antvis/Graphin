@@ -15,7 +15,9 @@ const tweak = (data: Data, options: ForceLayoutOptions) => {
   const { graph, width, height } = options;
 
   const { nodes: currNodes, edges: currEdges } = data;
-  const { nodes: preNodes } = graph.save();
+  // TODO: Graph Type export TreeData
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { nodes: preNodes } = graph.save() as any;
 
   /** 将图上之前节点的位置信息存储在positionMap中 */
   const positionMap = new Map();

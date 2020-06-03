@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "the react toolkit for graph analysis based on g6",
   "main": "./dist/index",
   "types": "./dist/index.d",
@@ -14,6 +14,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.0",
     "@testing-library/react": "^9.3.0",
+    "@types/jest": "^25.2.3",
     "@types/lodash": "^4.14.141",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
@@ -41,7 +42,8 @@
   "author": "Ant Financial",
   "license": "MIT",
   "dependencies": {
-    "@antv/g6": "~3.2.3",
+    "@antv/g-canvas": "^0.4.12",
+    "@antv/g6": "^3.5.0",
     "deepmerge": "^4.0.0",
     "lodash": "^4.17.15",
     "react": "^16.8.6",

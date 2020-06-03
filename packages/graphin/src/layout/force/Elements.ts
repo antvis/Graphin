@@ -12,7 +12,7 @@ export class Node {
 
   constructor(data: NodeType) {
     this.id = data.id;
-    this.data = data || {};
+    this.data = data || ({} as NodeType);
     this.x = data.x || 0;
     this.y = data.y || 0;
   }
@@ -31,6 +31,6 @@ export class Edge {
     this.id = id;
     this.source = source;
     this.target = target;
-    this.data = data || {};
+    this.data = data || ({} as EdgeType);
   }
 }

@@ -45,7 +45,7 @@ interface Return {
 
 let globalWorker: undefined | Worker;
 const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
-  const { isOptimization, graph, ...others } = options;
+  const { graph, ...others } = options;
   if (globalWorker) {
     globalWorker.terminate();
   }
@@ -124,7 +124,6 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
         preNode.deltaY = deltaY;
       });
 
-      let stepIndex = 0;
       /** 补间动画 */
       const step = () => {
         // console.time('cost');
@@ -138,7 +137,7 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
           item.y = item.y + item.deltaY;
         });
         graph.refreshPositions();
-        stepIndex++;
+
         // console.timeEnd('cost');
         requestAnimationFrameId = window.requestAnimationFrame(step);
       };

@@ -1,4 +1,4 @@
-import dataChecking from '../layout/dataChecking';
+import checkData from '../layout/dataChecker';
 
 // eslint-disable-next-line
 const nodeIdErrorInput: any = {
@@ -73,37 +73,47 @@ const edgeErrorInput: any = {
 // eslint-disable-next-line
 const edgeDupInput: any = {
   nodes: [],
-  edges: [{ source: '1', target: '2', data: {} }, { source: '1', target: '2', data: {} }],
+  edges: [
+    { source: '1', target: '2', data: {} },
+    { source: '1', target: '2', data: {} },
+  ],
 };
 
 // eslint-disable-next-line
 const noopInput: any = {};
 
+const CheckerOption = {
+  edge: {
+    autoLoop: true,
+    autoPoly: false,
+  },
+};
+
 describe('DataChecking', () => {
   it('should skip node when node id is missing or null', () => {
-    expect(dataChecking(nodeIdErrorInput).nodes.length).toBe(0);
+    expect(checkData(nodeIdErrorInput, CheckerOption).nodes.length).toBe(0);
   });
   it('should skip node when node data is missing or null', () => {
-    expect(dataChecking(nodeDataErrorInput).nodes.length).toBe(0);
+    expect(checkData(nodeDataErrorInput, CheckerOption).nodes.length).toBe(0);
   });
 
   it('should skip node when node id is duplicated', () => {
-    expect(dataChecking(nodeIdDupInput).nodes.length).toBe(1);
+    expect(checkData(nodeIdDupInput, CheckerOption).nodes.length).toBe(1);
   });
 
   it('should skip edge when source/target/data is missing or null', () => {
-    expect(dataChecking(edgeErrorInput).edges.length).toBe(0);
+    expect(checkData(edgeErrorInput, CheckerOption).edges.length).toBe(0);
   });
 
   it('should reserve edge when source/target is duplicated', () => {
-    expect(dataChecking(edgeDupInput).edges.length).toBe(2);
+    expect(checkData(edgeDupInput, CheckerOption).edges.length).toBe(2);
   });
 
   it('should return empty result when input noop', () => {
-    expect(dataChecking(noopInput).edges.length).toBe(0);
-    expect(dataChecking(noopInput).nodes.length).toBe(0);
-    expect(dataChecking().nodes.length).toBe(0);
-    expect(dataChecking().edges.length).toBe(0);
+    expect(checkData(noopInput, CheckerOption).edges.length).toBe(0);
+    expect(checkData(noopInput, CheckerOption).nodes.length).toBe(0);
+    expect(checkData(undefined, CheckerOption).nodes.length).toBe(0);
+    expect(checkData(undefined, CheckerOption).edges.length).toBe(0);
   });
 
   // TODO

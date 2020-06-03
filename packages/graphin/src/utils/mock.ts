@@ -24,6 +24,8 @@ export class Mock {
 
   nodeIds: string[];
 
+  combosData: any; // eslint-disable-line  @typescript-eslint/no-explicit-any
+
   constructor(count: number) {
     this.options = defaultOptions;
     this.options.nodeCount = count;
@@ -55,13 +57,13 @@ export class Mock {
         });
       }
     }
-    this.nodeIds = this.nodes.map((node) => node.id);
+    this.nodeIds = this.nodes.map(node => node.id);
   };
 
   expand = (snodes: NodeData[]) => {
     this.edges = [];
     this.nodes = [];
-    snodes.forEach((node) => {
+    snodes.forEach(node => {
       for (let i = 0; i < this.options.nodeCount; i += 1) {
         this.nodes.push({
           id: `${node.id}-${i}`,
@@ -81,7 +83,7 @@ export class Mock {
   };
 
   type = (nodeType: string) => {
-    this.nodes = this.nodes.map((node) => {
+    this.nodes = this.nodes.map(node => {
       return {
         ...node,
         type: nodeType,
@@ -124,17 +126,18 @@ export class Mock {
     const tree = new Tree();
     const rootId = this.nodeIds[0];
 
-    this.nodeIds.forEach((id) => {
+    this.nodeIds.forEach(id => {
       tree.addNode({
         id,
       });
     });
 
-    tree.bfs((node) => {
+    tree.bfs(node => {
       if (node.id !== rootId) {
         this.edges.push({
           source: node.parent && node.parent.id,
           target: node.id,
+          label: `edge-${node.parent && node.parent.id}_${node.id}`,
           properties: [],
         });
       }
@@ -151,20 +154,42 @@ export class Mock {
     };
   };
 
+  combos = (chunkSize: number) => {
+    const comboIds = new Set();
+    this.nodes = this.nodes.map((node, index) => {
+      const comboIndex = Math.ceil((index + 1) / chunkSize);
+      const comboId = `combo-${comboIndex}`;
+      comboIds.add(comboId);
+      return {
+        ...node,
+        comboId,
+      };
+    });
+    this.combosData = [...comboIds].map(c => {
+      return {
+        id: c,
+        label: c,
+      };
+    });
+
+    return this;
+  };
+
   graphin = (): Data => {
     return {
-      nodes: this.nodes.map((node) => {
+      nodes: this.nodes.map(node => {
         return {
           id: node.id,
           label: `node-${node.id}`,
           data: node,
           shape: 'CircleNode',
+          comboId: node.comboId,
           style: {
             nodeSize: 24,
           },
         };
       }),
-      edges: this.edges.map((edge) => {
+      edges: this.edges.map(edge => {
         return {
           source: edge.source,
           target: edge.target,
@@ -172,6 +197,7 @@ export class Mock {
           data: edge,
         };
       }),
+      combos: this.combosData,
     };
   };
 }
