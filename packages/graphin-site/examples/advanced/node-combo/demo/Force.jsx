@@ -8,9 +8,9 @@ import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import '@antv/graphin-components/dist/index.css'; // 引入Graphin CSS
 
 const App = () => {
-  const data = Utils.mock(20)
+  const data = Utils.mock(15)
     .tree()
-    .combos(8)
+    .combos(5)
     .graphin();
   console.log(data);
   return (
@@ -20,7 +20,7 @@ const App = () => {
         options={{
           layout: {
             type: 'comboForce',
-            nodeSpacing: d => 8,
+            nodeSpacing: d => 28,
           },
         }}
       ></Graphin>
