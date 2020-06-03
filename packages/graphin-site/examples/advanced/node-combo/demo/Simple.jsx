@@ -69,11 +69,10 @@ const walk = (schema, func) => {
 };
 
 /** 1. 将树形结构转变为Graphin可以识别的数据结构 */
-const transTree2Graphin = source => {
+const transTree2Graphin = sourceData => {
   const nodes = [];
   const combos = [];
-  walk(source, (node, comboId) => {
-    console.log(node, comboId);
+  walk(sourceData, (node, comboId) => {
     if (node.children) {
       const combo = { id: node.id, label: node.id, parentId: comboId };
       if (comboId === 'root') {
@@ -83,7 +82,7 @@ const transTree2Graphin = source => {
     } else {
       nodes.push({
         id: node.id,
-        comboId: comboId,
+        comboId,
         label: node.id,
         data: node,
         shape: 'CircleNode',
@@ -110,7 +109,7 @@ const layout = data => {
       nodeMap.set(node.comboId, [...NodeMapNodes, node]);
     }
   });
-  console.log(nodeMap, [...nodeMap.values()]);
+
   const [circleNodes, gridNodes, singleNodes] = [...nodeMap.values()];
 
   const layoutCircleNodes = new Layout.Circle(
@@ -135,7 +134,7 @@ const layout = data => {
       r: 100,
     },
   );
-  console.log('layoutCircleNodes', layoutGridNodes);
+
   const layoutSingleNodes = new Layout.Circle(
     { nodes: singleNodes },
     {
@@ -148,7 +147,7 @@ const layout = data => {
   );
 
   const layoutNodes = [...layoutCircleNodes, ...layoutGridNodes, ...layoutSingleNodes];
-  console.log(layoutNodes);
+
   return {
     nodes: layoutNodes,
     combos,
@@ -160,10 +159,9 @@ const graphinData = transTree2Graphin(source);
 const data = layout(graphinData);
 
 const App = () => {
-  console.log(data);
   return (
     <div className="App">
-      <Graphin data={data}></Graphin>
+      <Graphin data={data} />
     </div>
   );
 };
