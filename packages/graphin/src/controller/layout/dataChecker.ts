@@ -1,4 +1,4 @@
-import { Data, InnerEdgeStyle } from '../../types';
+import { Data } from '../../types';
 import * as _ from 'lodash';
 
 interface CheckerOption {
@@ -30,45 +30,30 @@ function isOdd(number: number) {
 //   };
 // }
 
-function makePolyEdge(
-  edges: {
-    data: { source: string; target: string; properties?: object[] | undefined };
-    poly?: { distance: number };
-    source: string;
-    target: string;
-    shape: string;
-    label?: string | undefined;
-    style: InnerEdgeStyle | undefined;
-    id?: string | undefined;
-    spring?: number | undefined;
-    loopCfg: { position: string; dist: number };
-  }[],
-  data: Data,
-  options: CheckerOption,
-) {
+function makePolyEdge(edges: Data['edges'], data: Data, options: CheckerOption) {
   if (!options.edge.autoPoly) return edges;
-  const noLoopEdges = edges.filter((edge) => edge.source !== edge.target);
-  const loopEdges = edges.filter((edge) => edge.source === edge.target);
-  const groups = _.groupBy(noLoopEdges, (edge) => {
+  const noLoopEdges = edges.filter(edge => edge.source !== edge.target);
+  const loopEdges = edges.filter(edge => edge.source === edge.target);
+  const groups = _.groupBy(noLoopEdges, edge => {
     // a => b === b => a
     const name = [edge.source, edge.target].sort();
     return `${name[0]}-${name[1]}`;
   });
-  const polyGroups = _.pickBy(groups, (group) => group.length > 1);
-  const directGroups = _.pickBy(groups, (group) => group.length <= 1);
+  const polyGroups = _.pickBy(groups, group => group.length > 1);
+  const directGroups = _.pickBy(groups, group => group.length <= 1);
 
-  const polyEdges = _.flatMap(polyGroups, (group) => {
+  const polyEdges = _.flatMap(polyGroups, group => {
     let distance = isEven(group.length) ? 0 : -5;
     return group
-      .map((edge) => {
+      .map(edge => {
         return {
           edge,
           point: [edge.source, edge.target].sort(),
         };
       })
       .map(({ edge, point }, index) => {
-        const source = data.nodes.find((node) => node.id === point[0]);
-        const target = data.nodes.find((node) => node.id === point[1]);
+        const source = data.nodes.find(node => node.id === point[0]);
+        const target = data.nodes.find(node => node.id === point[1]);
 
         if (!source || !target) throw new Error('Invalid Edge, Cannot Find Source/Target Node');
 
@@ -95,8 +80,8 @@ function makePolyEdge(
 }
 
 function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
-  let transformedEdges = edges
-    .filter((edge) => {
+  let transformedEdges: Data['edges'] = edges
+    .filter(edge => {
       const { source, target } = edge;
       if (!source || !target) {
         // eslint-disable-next-line no-console
@@ -113,11 +98,21 @@ function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
       /** 边是可以重复的，因为properties可能不一样 */
       return true;
     })
-    .map((edge) => {
+    .map(edge => {
       const { shape, style } = edge;
       return {
-        shape: shape || 'LineEdge',
-        style,
+        type: shape || 'LineEdge',
+        style: style || {
+          line: {
+            width: 1,
+          },
+          label: {
+            size: 1,
+          },
+        },
+        poly: {
+          distance: 0,
+        },
         loopCfg: {
           position: 'top',
           dist: 20,
@@ -130,12 +125,12 @@ function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
         },
       };
     })
-    .map((edge) => {
+    .map(edge => {
       // loop edge checker
       if (!options.edge.autoLoop) return edge;
       // skip user-defined shape
-      if (edge.shape === 'LineEdge' && edge.source === edge.target) {
-        edge.shape = 'loop';
+      if (edge.type === 'LineEdge' && edge.source === edge.target) {
+        edge.type = 'loop';
       }
       return edge;
     });
@@ -149,7 +144,7 @@ function checkEdges(edges: Data['edges'], data: Data, options: CheckerOption) {
 function checkNodes(nodes: Data['nodes'], _data: Data, _options: CheckerOption) {
   const nodeIds: string[] = [];
   const graphinNodes = nodes
-    .filter((node) => {
+    .filter(node => {
       const { id } = node;
       // 如果节点不存在，则忽略该节点
       if (!id) {
@@ -168,9 +163,9 @@ function checkNodes(nodes: Data['nodes'], _data: Data, _options: CheckerOption) 
       nodeIds.push(id);
       return true;
     })
-    .map((node) => {
+    .map(node => {
       return {
-        shape: node.shape || 'CircleNode',
+        type: node.shape || 'CircleNode',
         ...node,
         data: {
           ...node.data,
@@ -183,7 +178,7 @@ function checkNodes(nodes: Data['nodes'], _data: Data, _options: CheckerOption) 
 
 // Checking data, filter out invalid data and fill in optional field with default value
 const checkData = (data: Data = { nodes: [], edges: [] }, options: CheckerOption): Data => {
-  const { edges = [], nodes = [] } = data;
+  const { edges = [], nodes = [], combos } = data;
   // nodes
   const graphinNodes = checkNodes(nodes, data, options);
 
@@ -193,6 +188,7 @@ const checkData = (data: Data = { nodes: [], edges: [] }, options: CheckerOption
   return {
     nodes: graphinNodes,
     edges: graphinEdges,
+    combos,
   };
 };
 

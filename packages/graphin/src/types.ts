@@ -1,10 +1,9 @@
 import { ReactNode } from 'react';
 import G6 from '@antv/g6';
-import { ComboConfig } from '@antv/g6/lib/types';
 import ForceLayout from './layout/force/ForceLayout';
 import Graphin from './Graphin';
 import { LayoutOption } from './controller/layout/defaultLayouts';
-import { Item, EdgeConfig, NodeConfig } from '@antv/g6/lib/types';
+import { ComboConfig, Item, EdgeConfig, NodeConfig } from '@antv/g6/lib/types';
 import G6ItemNode from '@antv/g6/lib/item/node';
 
 export type GraphClass = typeof G6['Graph'];
@@ -212,15 +211,16 @@ export interface InnerEdgeStyle {
   /** Line 样式 */
   line: {
     width: number;
-    color: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B];
+    color?: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B];
     dash?: [number, number];
   };
   /** Label样式 */
   label?: {
     size: number;
-    color: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B];
-    family: string;
+    color?: [COLOR_RGB_R, COLOR_RGB_G, COLOR_RGB_B];
+    family?: string;
   };
+
   dark?: string;
   [key: string]: string | number | undefined | object;
 }
@@ -251,6 +251,20 @@ export interface Edge {
   id?: string;
   /** 边的弹簧长度，力导时使用 */
   spring?: number;
+
+  /**
+   * 自环
+   *
+   * @type {({
+   *     position: string,
+   *     dist: number,
+   *   })}
+   * @memberof Edge
+   */
+  loopCfg?: {
+    position: string;
+    dist: number;
+  };
 
   /**
    * 多边
@@ -288,7 +302,9 @@ export interface Layout {
   /** 布局名称，必选 */
   name: string;
   /** 布局配置，可选 */
-  options?: object;
+  options?: {
+    [key: string]: any;
+  };
 }
 
 /** 用户自定义shape的样式 */
@@ -440,4 +456,5 @@ export interface LayoutOptionBase {
   width: number;
   height: number;
   data: Data;
+  hasPosition: boolean;
 }

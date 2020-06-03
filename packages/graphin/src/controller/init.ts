@@ -32,7 +32,7 @@ const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode:
     height: clientHeight,
     // initial viewport state:
     zoom: 1,
-    pan: { x: clientWidth / 2, y: clientHeight / 2 },
+    // pan: { x: clientWidth / 2, y: clientHeight / 2 },
     // interaction options:
     minZoom: 0.2,
     maxZoom: 10,

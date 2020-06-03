@@ -39,6 +39,7 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
             h: height,
           },
         };
+
         return {
           data: randomLayout(data, { ...defaultOptions, ...options }) as Data,
         };
@@ -52,11 +53,11 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
       layout: (data: Data, options: LayoutOption): { data: Data } => {
         const defaultOptions = {
           /** 圆心 x坐标 */
-          x: 0,
-          // x: width / 2,
+
+          x: width / 2,
           /** 圆心 y坐标 */
-          y: 0,
-          // y: height / 2,
+
+          y: height / 2,
           /** 半径，默认半径为节点数*10 */
           r: data.nodes.length * 10,
         };
@@ -73,7 +74,7 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
         const defaultOptions = {
           /** 中心点坐标 */
           // WARNING: center is not working any more ?
-          // center: [0, 0],
+          center: [0, 0],
           /** 节点大小 */
           nodeSize: [50, 50],
           /**  节点水平间距(px) */
@@ -95,8 +96,7 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
       layout: (data: Data, options: LayoutOption): { data: Data } => {
         const defaultOptions = {
           /** 中心点坐标 */
-          // center: [width / 2, height / 2],
-          center: [0, 0],
+          center: [width / 2, height / 2],
           /** 防止覆盖 */
           preventOverlap: true,
           /** 节点大小 */
@@ -169,6 +169,7 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
           data,
           /** 前置布局，默认为 concentric */
           preset: {
+            /** 特殊情况处理：前置布局为force，但是前置的数据也为空，则证明是初始化force布局，否则为正常前置force布局 */
             name: (prevProps.layout && prevProps.layout.name) || 'concentric',
             options: {},
           },
@@ -197,11 +198,10 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
         const layouOpts = { ...defaultOptions, ...options };
         let { name: presetName, options: presetOptions = {} } = layouOpts.preset;
 
-        /** 特殊情况处理：前置布局为force，但是前置的数据也为空，则证明是初始化force布局，否则为正常前置force布局 */
-        if (presetName === 'force' && prevProps.data.nodes.length === 0) {
+        if (presetName === 'force' && data.nodes.length === 0) {
           presetName = 'concentric';
-          presetOptions = {};
         }
+
         let presetData = data;
         // 处理 前置布局后的数据
         if (presetName === 'force') {
@@ -209,7 +209,7 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
         } else {
           const layouts = defaultLayouts(graphin, prevProps);
           const presetLayout =
-            layouts.find((item) => {
+            layouts.find(item => {
               return item.name === presetName;
             }) || layouts[5]; // concentric
           presetData = presetLayout?.layout(data, presetOptions as ForceLayoutOptions).data as Data;

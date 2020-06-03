@@ -9,7 +9,7 @@ interface LayoutParams {
 }
 
 const layoutInfo = (layouts: ExtendLayout[]) => {
-  return layouts.map((item) => {
+  return layouts.map(item => {
     const { desc, name, icon } = item;
     return {
       desc,
@@ -68,8 +68,8 @@ const layoutController = (
     };
   }
 
-  const hasPosition = data.nodes.every((node) => {
-    return node.x && node.y;
+  const hasPosition = data.nodes.every(node => {
+    return !isNaN(Number(node.x)) && !isNaN(Number(node.y));
   });
 
   if (!(layout && layout.name)) {
@@ -91,7 +91,7 @@ const layoutController = (
   };
 
   // 得到当前匹配的布局函数
-  const matchLayout = layouts.find((item) => item.name === name) || {
+  const matchLayout = layouts.find(item => item.name === name) || {
     name: '',
     icon: '',
     layout: (inputData: Data) => {

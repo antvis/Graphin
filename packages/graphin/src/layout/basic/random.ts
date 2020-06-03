@@ -25,8 +25,8 @@ const randomLayout = (data: Data, cfg: RandomLayoutOptions) => {
   const newNodes = nodes.map(node => {
     return {
       ...node,
-      x: x + Math.round(Math.random() * w),
-      y: y + Math.round(Math.random() * h),
+      x: Math.round(Math.random() * w),
+      y: Math.round(Math.random() * h),
     };
   });
 
