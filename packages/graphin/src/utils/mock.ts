@@ -23,7 +23,8 @@ export class Mock {
   options: OptionType;
 
   nodeIds: string[];
-  combosData: any;
+
+  combosData: any; // eslint-disable-line  @typescript-eslint/no-explicit-any
 
   constructor(count: number) {
     this.options = defaultOptions;
@@ -151,6 +152,7 @@ export class Mock {
       edges: this.edges,
     };
   };
+
   combos = (chunkSize: number) => {
     const comboIds = new Set();
     this.nodes = this.nodes.map((node, index) => {

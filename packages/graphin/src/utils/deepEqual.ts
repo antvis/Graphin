@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const deepEqual = (x: any, y: any): boolean => {
   /** 1. NaN */
-  if (isNaN(x) && isNaN(y) && typeof x === 'number' && typeof y === 'number') {
+  if (window.isNaN(x) && window.isNaN(y) && typeof x === 'number' && typeof y === 'number') {
     return true;
   }
   /** 2. primitives and function reference */
@@ -21,7 +22,7 @@ const deepEqual = (x: any, y: any): boolean => {
   if (!(x instanceof Object && y instanceof Object)) {
     return false;
   }
-  const isEqualArray = [];
+  const isEqualArray: boolean[] = [];
   const xKey = Object.keys(x);
   const yKey = Object.keys(y);
   if (xKey.length !== yKey.length) {

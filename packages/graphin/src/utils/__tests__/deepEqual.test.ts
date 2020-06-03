@@ -12,10 +12,10 @@ describe('compare ', () => {
     expect(
       deepEqual(
         () => {
-          console.log('hello');
+          console.log('hello'); // eslint-disable-line  no-console
         },
         () => {
-          console.log('hello');
+          console.log('hello'); // eslint-disable-line  no-console
         },
       ),
     ).toEqual(true);
@@ -34,13 +34,13 @@ describe('compare ', () => {
     const a = {
       name: 'pomelo',
       do: () => {
-        console.log('do.');
+        console.log('do.'); // eslint-disable-line  no-console
       },
       circle: {
         a: [
           'a',
           {
-            name: 'a',
+            name: 'a', // eslint-disable-line  no-console
           },
         ],
       },
@@ -48,7 +48,7 @@ describe('compare ', () => {
     const b = {
       name: 'pomelo',
       do: () => {
-        console.log('do.');
+        console.log('do.'); // eslint-disable-line  no-console
       },
       circle: {
         a: [
@@ -62,7 +62,7 @@ describe('compare ', () => {
     const c = {
       name: 'pomelo',
       do: () => {
-        console.log('do');
+        console.log('do'); // eslint-disable-line  no-console
       },
       circle: {
         a: [

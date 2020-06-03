@@ -354,7 +354,7 @@ class ForceLayout {
       return;
     }
     const step = () => {
-      const { done, tickInterval, minEnergyThreshold, MaxIterations } = this.props;
+      const { done, tickInterval } = this.props;
 
       this.tick(tickInterval);
 
@@ -482,7 +482,7 @@ class ForceLayout {
         leaf: 2,
         single: 2,
         others: 1,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line
         center: (_node: any) => {
           return {
             x: this.props.width / 2,

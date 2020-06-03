@@ -1,10 +1,10 @@
 import React from 'react';
 import Graphin from '@antv/graphin/src/Graphin';
-import { render, act, fireEvent, cleanup } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import '@testing-library/jest-dom/extend-expect';
 
-import Legend, { LegendProps, LegendOption } from '../index';
+import Legend, { LegendOption } from '../index';
 
 describe('<Legend />', () => {
   it('You shall pass', () => {
@@ -28,7 +28,7 @@ describe('<Legend />', () => {
       },
     ];
 
-    const { asFragment, queryAllByTestId } = render(
+    render(
       <Graphin data={data} layout={layout}>
         <Legend options={options} onChange={() => {}} />
       </Graphin>,
