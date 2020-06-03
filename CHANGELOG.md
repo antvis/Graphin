@@ -1,3 +1,21 @@
+## Graphin 1.4.1
+
+##### New Features
+
+* **site:**  add node combo static layout demo ([54faf117](https://github.com/antvis/graphin/commit/54faf117a9e985f05222d207ef7df4073142e12e))
+* **components:**  update version to 1.4.0 ([7cf8daf9](https://github.com/antvis/graphin/commit/7cf8daf9bcf856f8e97a0aeda5993cbdd37063c6))
+
+##### Other Changes
+
+* **common:**
+  *  fix poly edge display error when poly edge's count > 2 ([160ec2e5](https://github.com/antvis/graphin/commit/160ec2e5713261843d11c549aca2d0958e01f906))
+  *  fix label size issue in default cfg ([06cc99e2](https://github.com/antvis/graphin/commit/06cc99e2165fe4a8cfa119f5bd317ee93f98145d))
+* **graphin:**  fix ci ([eb56c951](https://github.com/antvis/graphin/commit/eb56c9510aa8f45d0f6abc444c9800ead19d93ae))
+
+##### Code Style Changes
+
+* **graphin:**  remove console.log ([25c51ac6](https://github.com/antvis/graphin/commit/25c51ac607ca363fde563579500b4c8c34222678))
+
 ## Graphin 1.4.0
 
 ##### New Features
