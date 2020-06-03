@@ -16,6 +16,20 @@ interface Position {
   y: number;
 }
 
+// function getControlPoint(p1, p2, d) {
+//   const pm = {
+//     x: (p2.x + p1.x) / 2,
+//     y: (p2.y + p1.y) / 2,
+//   };
+//   const dx = p2.x - p1.x;
+//   const dy = p2.y - p1.y;
+//   const y = pm.y - (dx * d) / Math.sqrt(dx ** 2 + dy ** 2) || 0;
+//   const x = pm.x + (dy * d) / Math.sqrt(dx ** 2 + dy ** 2) || 0;
+//   return {
+//     x, y,
+//   };
+// }
+
 function getPolyEdgeControlPoint(p1: Position, p2: Position, d: number) {
   const pm = {
     x: (p2.x + p1.x) / 2,
@@ -40,7 +54,18 @@ export default (g6: any) => {
 
       const d = (cfg.style?.line?.width || 1) + 1;
 
-      const controlPoints = getPolyEdgeControlPoint(startPoint, endPoint, cfg.poly?.distance || 0);
+      const points = [
+        { id: cfg.source, point: startPoint },
+        { id: cfg.target, point: endPoint },
+      ]
+        .sort((a, b) => {
+          if (a.id < b.id) return -1;
+          if (a.id > b.id) return 1;
+          return 0;
+        })
+        .map((item) => item.point);
+
+      const controlPoints = getPolyEdgeControlPoint(points[0], points[1], cfg.poly?.distance || 0);
 
       const attrs = {
         path: [

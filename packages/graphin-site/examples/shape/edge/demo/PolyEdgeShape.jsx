@@ -5,13 +5,33 @@ import Graphin, { Utils } from '@antv/graphin';
 import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import '@antv/graphin-components/dist/index.css'; // 引入Graphin CSS
 
+const data = Utils.mock(5).circle().graphin();
+// 5边 MOCK
+const polyEdge1 = (c) => {
+  const item = { source: 'node-0', target: 'node-1', label: `edge-0_1_${c}` };
+  return {
+    ...item,
+    data: {
+      ...item,
+      properties: [],
+    },
+  };
+};
+for (let i = 0; i < 3; i++) data.edges.push(polyEdge1(i));
+// 4边 MOCK
+const polyEdge2 = (c) => {
+  const item = { source: 'node-0', target: 'node-2', label: `edge-0_2_${c}` };
+  return {
+    ...item,
+    data: {
+      ...item,
+      properties: [],
+    },
+  };
+};
+for (let i = 0; i < 2; i++) data.edges.push(polyEdge2(i));
+
 const App = () => {
-  const [state, setState] = React.useState({
-    data: Utils.mock(5).circle().graphin(),
-  });
-
-  const { data, selected } = state;
-
   return (
     <div className="App">
       <Graphin
