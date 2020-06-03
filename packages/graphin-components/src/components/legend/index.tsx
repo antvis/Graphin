@@ -13,11 +13,12 @@ export interface LegendOption {
 }
 export interface LegendProps {
   options: LegendOption[];
-  onChange?: (checked: LegendOption, newOptions: LegendOption[], props: any) => any;
+  onChange?: (checked: LegendOption, newOptions: LegendOption[], props: any) => any; // eslint-disable-line
 }
 
 const Legend: React.FunctionComponent<LegendProps> = props => {
   const { onChange = () => {} } = props;
+  // eslint-disable-next-line react/destructuring-assignment
   const mergedOptions = props.options.map(c => {
     const { checked } = c;
     return {
@@ -42,14 +43,17 @@ const Legend: React.FunctionComponent<LegendProps> = props => {
       {options.map((option: LegendOption) => {
         const { label, checked, color } = option;
         return (
-          <li
+          <li // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
             key={option.value}
             onClick={() => {
               handleClick(option);
             }}
             className="item"
+            onKeyDown={() => {
+              handleClick(option);
+            }}
           >
-            <span className="dot" style={{ background: checked ? color : '#ddd' }}></span>
+            <span className="dot" style={{ background: checked ? color : '#ddd' }} />
             <span className="label" style={{ color: checked ? '#000000d9' : '#ddd' }}>
               {label}
             </span>

@@ -15,7 +15,7 @@ import eventController from './events/index';
 import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimulation, Data, Layout } from './types';
 
 /** utils */
-import shallowEqual from './utils/shallowEqual';
+// import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
 
 import './index.less';
@@ -146,6 +146,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
   };
 
   shouldUpdate(prevProps: GraphinProps, key: string) {
+    /* eslint-disable react/destructuring-assignment */
     const prevVal = prevProps[key] as DiffValue;
     const currentVal = this.props[key] as DiffValue;
     // console.time('deep equal');
@@ -271,7 +272,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
       children = [children];
     }
 
-    return React.Children.map(children, (child) => {
+    return React.Children.map(children, child => {
       // do not pass props if element is a DOM element or not a valid react element.
       if (!React.isValidElement(child) || typeof child.type === 'string') {
         return child;
@@ -289,7 +290,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         <div
           data-testid="custom-element"
           className="graphin-core"
-          ref={(node) => {
+          ref={node => {
             this.graphDOM = node;
           }}
         />

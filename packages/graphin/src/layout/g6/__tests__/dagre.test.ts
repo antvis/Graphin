@@ -1,5 +1,5 @@
 import { Data } from '../../../types';
-import DagreLayout, { DagreLayoutOption } from '../dagre';
+import DagreLayout from '../dagre';
 import json from '../../basic/__tests__/__mock__/concentric.input.json';
 
 const defaultOptions = {

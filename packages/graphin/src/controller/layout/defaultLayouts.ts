@@ -200,6 +200,7 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
 
         if (presetName === 'force' && data.nodes.length === 0) {
           presetName = 'concentric';
+          presetOptions = {};
         }
 
         let presetData = data;

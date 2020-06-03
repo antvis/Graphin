@@ -69,7 +69,7 @@ const layoutController = (
   }
 
   const hasPosition = data.nodes.every(node => {
-    return !isNaN(Number(node.x)) && !isNaN(Number(node.y));
+    return !window.isNaN(Number(node.x)) && !window.isNaN(Number(node.y));
   });
 
   if (!(layout && layout.name)) {
