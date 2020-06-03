@@ -24,7 +24,7 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
   G6.registerNode(registerName, {
     // 自定义Shape
     // eslint-disable-next-line
-    draw(inputCfg: any, group: G.Group) {
+    draw(inputCfg: any, group: any) {
       /** 得到用户返回的shapeComponents，然后拼装 */
 
       const { shapeComponents, state: RenderState } = renderNodeShape(inputCfg);
@@ -62,7 +62,7 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
       // 如果为为selected状态，则不作高亮
       // if (node.hasState('selected') && name === 'highlight.light' && value) return;
 
-      Object.keys(initState).forEach((key) => {
+      Object.keys(initState).forEach(key => {
         // state 的 key 和 behavior 里触发的 name 匹配
         if (name === key) {
           shapes.forEach((g6Shape: Shape.Base) => {
