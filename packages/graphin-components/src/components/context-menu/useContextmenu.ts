@@ -50,8 +50,8 @@ const useContextmenu = (props: ContextMenuProps): [State, React.Dispatch<React.S
   useEffect(() => {
     if (!graph) return;
     graph.on(`${bindType}:contextmenu`, (e: G6Event) => {
+      e.preventDefault();
       if (keydown) {
-        e.preventDefault();
         return;
       }
 
