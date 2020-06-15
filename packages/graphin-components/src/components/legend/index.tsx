@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.less';
 
 export interface LegendOption {
@@ -16,21 +16,24 @@ export interface LegendProps {
   onChange?: (checked: LegendOption, newOptions: LegendOption[], props: any) => any; // eslint-disable-line
 }
 
-const Legend: React.FunctionComponent<LegendProps> = props => {
-  const { onChange = () => {} } = props;
+const Legend: React.FunctionComponent<LegendProps> = (props) => {
+  const { onChange = () => {}, options: originalOptions } = props;
   // eslint-disable-next-line react/destructuring-assignment
-  const mergedOptions = props.options.map(c => {
-    const { checked } = c;
-    return {
-      ...c,
-      checked: typeof checked === 'boolean' ? checked : true,
-    };
-  });
-  const [options, setOptions] = React.useState(mergedOptions);
 
+  const mergedOptions: { (options: LegendOption[]): LegendOption[] } = (options) =>
+    options.map((c) => {
+      const { checked } = c;
+      return {
+        ...c,
+        checked: typeof checked === 'boolean' ? checked : true,
+      };
+    });
+  const [options, setOptions] = React.useState(mergedOptions(originalOptions));
+
+  useEffect(() => setOptions(originalOptions), [originalOptions]);
   const handleClick = (option: LegendOption) => {
     const checkedValue = { ...option, checked: !option.checked };
-    const result = options.map(c => {
+    const result = options.map((c) => {
       const matched = c.value === option.value;
       return matched ? checkedValue : c;
     });
