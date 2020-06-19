@@ -30,7 +30,8 @@ const Legend: React.FunctionComponent<LegendProps> = (props) => {
     });
   const [options, setOptions] = React.useState(mergedOptions(originalOptions));
 
-  useEffect(() => setOptions(originalOptions), [originalOptions]);
+  useEffect(() => setOptions(mergedOptions(originalOptions)), [originalOptions]);
+
   const handleClick = (option: LegendOption) => {
     const checkedValue = { ...option, checked: !option.checked };
     const result = options.map((c) => {
