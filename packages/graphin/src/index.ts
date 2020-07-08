@@ -3,6 +3,8 @@ import Utils from './utils';
 import Layout from './layout';
 import { Item } from '@antv/g6/lib/types';
 
+export { default as G6 } from '@antv/g6';
+
 export default Graphin;
 export { Utils, Layout };
 

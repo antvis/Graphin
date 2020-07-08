@@ -1,4 +1,12 @@
-## Graphin 1.4.1
+#### 2020-07-08
+
+### Graphin v1.4.2
+
+##### New Features
+
+* **common:**  export G6 from @antv/g6 ([fc6885e4](https://github.com/antvis/graphin/commit/fc6885e483517def815129dcac22708ac5c44589))
+
+### Graphin v1.4.1
 
 ##### New Features
 
@@ -16,7 +24,7 @@
 
 * **graphin:**  remove console.log ([25c51ac6](https://github.com/antvis/graphin/commit/25c51ac607ca363fde563579500b4c8c34222678))
 
-## Graphin 1.4.0
+### Graphin v1.4.0
 
 ##### New Features
 
@@ -71,7 +79,7 @@
   - upgrade g6 to 3.3.6 and upgrade ts definitions ([03eb7d18](https://github.com/antvis/graphin/commit/03eb7d18d1b4c648e1f60e9563910b4218c54d24))
   - upgrade @antv/g6 to ^3.3.5 ([a9d043fd](https://github.com/antvis/graphin/commit/a9d043fdc5136ab7bdf9ade932616b3e617ca728))
 
-## Graphin 1.3.0
+### Graphin v1.3.0
 
 ##### Other Changes
 
@@ -82,7 +90,7 @@
 - **upgrade:** upgrade prettier to 2.0 ([3a71fb9b](https://github.com/antvis/graphin/commit/3a71fb9bc42b06f59a71517ab542ef04af356331))
 - **build:** add jest ts definite types ([1f947edc](https://github.com/antvis/graphin/commit/1f947edc9e054eacc96e9dacc93b0008eaefda4d))
 
-#### 2020-04-23
+### Graphin v1.2.2
 
 ##### Chores
 
@@ -155,7 +163,7 @@
 - fix full screen bugs ([50ca0ccc](https://github.com/antvis/graphin/commit/50ca0ccc640ad93070ccabe8b0fa02f12ea89094))
 - demand loading antd for components ([5098991e](https://github.com/antvis/graphin/commit/5098991e36742f82e106be2e505dc3a64f324d4d))
 
-#### v1.0.5(2020-02-17)
+### Graphin v1.0.5
 
 ##### New Features
 
@@ -168,7 +176,7 @@
 - release graphin v1.0.4 ([a4263cd6](https://github.com/antvis/graphin/commit/a4263cd60e6855afe4a0636da452f719d641f09f))
 - graphin v1.0.3 ([5d522dbe](https://github.com/antvis/graphin/commit/5d522dbec6d3d07e78c5a20c55a15180b5a72ab6))
 
-#### v1.0.3(2019-11-29)
+### Graphin v1.0.3
 
 ##### Documentation Changes
 
@@ -216,7 +224,7 @@
 - add layout demo ([5615c67b](https://github.com/antvis/graphin/commit/5615c67b53a548d66f08d69300149ff1a8715625))
 - add graphin-site/examples ([d3dfc810](https://github.com/antvis/graphin/commit/d3dfc810d4813165612d530690baefd56226db6f))
 
-#### v1.0.2(2019-11-29)
+### Graphin 1.0.2
 
 ##### Other Changes
 
@@ -230,7 +238,7 @@
 - update codepen url in get started ([45b6c423](https://github.com/antvis/graphin/commit/45b6c423ad1ca27cb5fdef770cb3f7f83e2d0d60))
 - fix ci ([20354818](https://github.com/antvis/graphin/commit/20354818f2e2cdaf5a56989baf9cbc17bc03f398))
 
-#### v1.0.0(2019-11-22)
+### Graphin v1.0.0
 
 ##### Other Changes
 
@@ -239,13 +247,13 @@
 - fix extend.icon issue ([ac2bb18f](https://github.com/antvis/graphin/commit/ac2bb18f64211619b48b6e616f1df47625e981f5))
 - update readme ([dd9daff8](https://github.com/antvis/graphin/commit/dd9daff8899769afe333a0db2aaa80f9626f3a30))
 
-#### v1.0.0-beta.11(2019-11-22)
+### Graphin v1.0.0-beta.11
 
 ##### Bug Fixes
 
 - iconfont extend issue ([01450a6e](https://github.com/antvis/graphin/commit/01450a6e5a243c7f186b55df94314ff2d27fa559))
 
-#### v1.0.0-beta.9(2019-11-21)
+### Graphin v1.0.0-beta.9
 
 ##### New Features
 
@@ -330,7 +338,7 @@
 
 - fix studio iframe style ([7b27422c](https://github.com/antvis/graphin/commit/7b27422c793fc9680ee9ff8591917a923a047c4c))
 
-#### v1.0.0-beta.8(2019-11-18)
+### Graphin v1.0.0-beta.8
 
 ##### New Features
 
