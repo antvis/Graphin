@@ -277,12 +277,12 @@ class ForceLayout {
 
   slienceForce = () => {
     console.time('force time without animate');
-    const firstTickInterval = 0.22;
+
     for (let i = 0; this.averageDistance > 0.5 || i < 1; i++) {
-      const tickInterval = Math.max(0.02, firstTickInterval - i * 0.002);
-      this.tick(tickInterval);
+      this.tick(this.props.tickInterval);
       this.iterations++;
     }
+
     console.timeEnd('force time without animate');
     console.log('迭代次数:', this.iterations);
     this.render();
