@@ -276,27 +276,17 @@ class ForceLayout {
   };
 
   slienceForce = () => {
+    console.time('force time without animate');
     const firstTickInterval = 0.22;
-    for (let i = 0; i < this.props.MaxIterations; i++) {
+    for (let i = 0; this.averageDistance > 0.5 || i < 1; i++) {
       const tickInterval = Math.max(0.02, firstTickInterval - i * 0.002);
       this.tick(tickInterval);
-      const energy = this.calTotalEnergy();
-      /** 如果需要监控信息，则提供给用户 */
-      const monitor = this.registers.get('monitor');
-      if (monitor) {
-        monitor(this.reportMointor(energy));
-      }
-      if (
-        energy <= this.props.minEnergyThreshold ||
-        i === this.props.MaxIterations - 1 // 1000000次/(1000/60) = 60000s = 1min
-      ) {
-        this.render();
-        if (this.props.done) {
-          this.props.done();
-        }
-        break;
-      }
+      this.iterations++;
     }
+    console.timeEnd('force time without animate');
+    console.log('迭代次数:', this.iterations);
+    this.render();
+    this.props.done && this.props.done();
   };
 
   /** polyfill: support webworker requestAnimationFrame */

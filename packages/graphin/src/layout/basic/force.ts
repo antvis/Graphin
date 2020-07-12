@@ -4,6 +4,7 @@ import { optimizeDrawing, optimizeDrawingByNode } from '../../perf/optimizeDrawi
 import { LayoutOptionBase, Data, Node as NodeType, ForceSimulation } from '../../types';
 
 import forceWithWorker from './forceWithWorker';
+import { isBoolean } from 'lodash';
 
 export interface ForceLayoutOptions extends ForceProps, LayoutOptionBase {
   isOptimization?: boolean;
@@ -26,6 +27,8 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
     ...others
   } = options;
 
+  let animationCfg = isBoolean(animation) ? animation : true;
+
   /** Webworker solution. Otherwise, browser UI rendering is blocked */
   if (enableWorker && data.nodes.length > 100) {
     // 100以下的节点不走webworker
@@ -36,7 +39,7 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
   const simulation = new ForceLayout({
     width,
     height,
-    animation: animation !== undefined ? animation : true,
+    animation: animationCfg,
     done: () => {
       if (isOptimization) {
         optimizeDrawing(graph, false);
@@ -49,8 +52,15 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
   // 2. Mount Data
   simulation.setData(data);
 
+  let resultData = data;
+
   // 3. Custom rendering function
   simulation.register('render', (forceData: Data) => {
+    if (!animationCfg) {
+      // 如果不需要动画
+      resultData = forceData;
+      return;
+    }
     try {
       forceData.nodes.forEach((item: NodeType) => {
         const node = graph.findById(item.id);
@@ -74,7 +84,7 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
   simulation.start();
 
   return {
-    data,
+    data: resultData,
     simulation,
   };
 };
