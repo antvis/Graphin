@@ -8,6 +8,17 @@ const data = Utils.mock(20)
   .tree()
   .graphin();
 
-const App = () => <Graphin data={data} layout={{ name: 'force', options: { preset: 'concentric' } }} />;
+const App = () => (
+  <Graphin
+    data={data}
+    layout={{
+      name: 'force',
+      options: {
+        preset: 'concentric',
+        animation: false,
+      },
+    }}
+  />
+);
 
 ReactDOM.render(<App />, document.getElementById('container'));
