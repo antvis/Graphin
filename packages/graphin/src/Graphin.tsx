@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { ErrorInfo } from 'react';
+import { Graph as GraphType } from '@antv/g6';
 
 import { cloneDeep } from 'lodash';
 /** controller */
@@ -12,7 +13,7 @@ import apisController from './apis';
 import eventController from './events/index';
 
 /** types  */
-import { GraphinProps, GraphinState, ExtendedGraphOptions, GraphType, ForceSimulation, Data, Layout } from './types';
+import { GraphinProps, GraphinState, ExtendedGraphOptions, ForceSimulation, Data, Layout } from './types';
 
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
@@ -272,7 +273,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
       children = [children];
     }
 
-    return React.Children.map(children, child => {
+    return React.Children.map(children, (child) => {
       // do not pass props if element is a DOM element or not a valid react element.
       if (!React.isValidElement(child) || typeof child.type === 'string') {
         return child;
@@ -290,7 +291,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         <div
           data-testid="custom-element"
           className="graphin-core"
-          ref={node => {
+          ref={(node) => {
             this.graphDOM = node;
           }}
         />
