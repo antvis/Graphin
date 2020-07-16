@@ -71,17 +71,17 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
 
   const [fullscreen, toggleFullscreen] = useFullscreen(graphinContainer);
   const [zoom, handleZoom] = useZoom(1);
-  const handleGraphZoom = (isZoom: boolean) => {
+  const handleGraphZoom = (isZoom: boolean, curZoom) => {
     const center = {
       x: width / 2,
       y: height / 2,
     };
     const newZoom = handleZoom(isZoom);
-    if (graph) graph.zoomTo(newZoom, center);
+    graph?.zoomTo(newZoom, center);
   };
 
   const historyInfo = history.getInfo();
-
+  const curZoom = graph?.getZoom().toFixed(2);
   let buttonCfg: MenuItem[] = [
     {
       id: 'fullscreen',
@@ -95,14 +95,14 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
       name: '放大',
       icon: <ZoomInOutlined />,
       disabled: zoom >= MAX_ZOOM,
-      action: () => handleGraphZoom(true),
+      action: () => handleGraphZoom(true, curZoom),
     },
     {
       id: 'zoomOut',
       name: '缩小',
       icon: <ZoomOutOutlined />,
       disabled: zoom <= MIN_ZOOM,
-      action: () => handleGraphZoom(false),
+      action: () => handleGraphZoom(false, curZoom),
     },
     {
       id: 'undo',
