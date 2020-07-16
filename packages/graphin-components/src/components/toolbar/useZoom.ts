@@ -12,7 +12,7 @@ const getNextZoom = (curZoom, isZoomIn, minZoom, maxZoom) => {
   return zoom;
 };
 interface FunHandleZoom {
-  (isZoomIn: boolean): number;
+  (isZoomIn: boolean, curZoom?: number): number;
 }
 interface FunUseZoom {
   (initZoom: number): [number, FunHandleZoom];
@@ -20,8 +20,8 @@ interface FunUseZoom {
 
 const useZoom: FunUseZoom = (initZoom = 1) => {
   const [zoom, setZoom] = useState(initZoom);
-  const handleZoom: FunHandleZoom = isZoomIn => {
-    const newZoom = getNextZoom(zoom, isZoomIn, MIN_ZOOM, MAX_ZOOM);
+  const handleZoom: FunHandleZoom = (isZoomIn, curZoom) => {
+    const newZoom = getNextZoom(curZoom || zoom, isZoomIn, MIN_ZOOM, MAX_ZOOM);
     setZoom(newZoom);
     return newZoom;
   };
