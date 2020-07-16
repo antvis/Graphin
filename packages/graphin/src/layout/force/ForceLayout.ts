@@ -276,17 +276,17 @@ class ForceLayout {
   };
 
   slienceForce = () => {
-    console.time('force time without animate');
+    const { done } = this.props;
+    console.time('force time without animate'); // eslint-disable-line
 
     for (let i = 0; this.averageDistance > 0.5 || i < 1; i++) {
       this.tick(this.props.tickInterval);
       this.iterations++;
     }
 
-    console.timeEnd('force time without animate');
-    console.log('迭代次数:', this.iterations);
+    console.timeEnd('force time without animate'); // eslint-disable-line
     this.render();
-    this.props.done && this.props.done();
+    done && done(); // eslint-disable-line
   };
 
   /** polyfill: support webworker requestAnimationFrame */

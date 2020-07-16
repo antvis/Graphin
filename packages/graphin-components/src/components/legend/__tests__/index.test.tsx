@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Graphin from '@antv/graphin/src/Graphin';
-import { render, screen, waitFor, waitForDomChange, fireEvent } from '@testing-library/react';
+import { render, screen, waitForDomChange, fireEvent } from '@testing-library/react';
 
 import '@testing-library/jest-dom/extend-expect';
 

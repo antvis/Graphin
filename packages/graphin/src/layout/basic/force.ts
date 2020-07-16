@@ -27,7 +27,7 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
     ...others
   } = options;
 
-  let animationCfg = isBoolean(animation) ? animation : true;
+  const animationCfg = isBoolean(animation) ? animation : true;
 
   /** Webworker solution. Otherwise, browser UI rendering is blocked */
   if (enableWorker && data.nodes.length > 100) {
