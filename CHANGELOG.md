@@ -1,28 +1,45 @@
+#### 2020-07-17
+
+### Graphin v1.4.3
+
+- **graphin:**
+  - remove eslint error ([766a27cf](https://github.com/antvis/graphin/commit/766a27cf98785a969e778d5c0ea42985ec60e715))
+  - fix tickInterval ([8da0543a](https://github.com/antvis/graphin/commit/8da0543a1eae0a33ea4e11ee7f1e7c1bdadaf66a))
+- update docs and version ([c8cfd776](https://github.com/antvis/graphin/commit/c8cfd77685dc9737a3fe7248f9941c20593dabb2))
+- fix force layout without animate ([6ab38e4d](https://github.com/antvis/graphin/commit/6ab38e4d6fd3a7e94d5f6267234ec85d7a309066))
+- **components:** update version to 1.4.1 ([a6f31ab4](https://github.com/antvis/graphin/commit/a6f31ab482bfcddff739b8b4913313159aacd1ea))
+
+##### Other Changes
+
+- **common:**
+  - fix typescript typing error ([f6d3ffbc](https://github.com/antvis/graphin/commit/f6d3ffbc9ce07550ce3cabec4694f66e6d1953d2))
+  - export G6 from @antv/g6 ([9c17d292](https://github.com/antvis/graphin/commit/9c17d292aa10a891fc45c59f9e0b419a06250acf))
+
 #### 2020-07-08
 
 ### Graphin v1.4.2
 
 ##### New Features
 
-* **common:**  export G6 from @antv/g6 ([fc6885e4](https://github.com/antvis/graphin/commit/fc6885e483517def815129dcac22708ac5c44589))
+- **common:** export G6 from @antv/g6 ([fc6885e4](https://github.com/antvis/graphin/commit/fc6885e483517def815129dcac22708ac5c44589))
 
 ### Graphin v1.4.1
 
 ##### New Features
 
-* **site:**  add node combo static layout demo ([54faf117](https://github.com/antvis/graphin/commit/54faf117a9e985f05222d207ef7df4073142e12e))
-* **components:**  update version to 1.4.0 ([7cf8daf9](https://github.com/antvis/graphin/commit/7cf8daf9bcf856f8e97a0aeda5993cbdd37063c6))
+- **site:** add node combo static layout demo ([54faf117](https://github.com/antvis/graphin/commit/54faf117a9e985f05222d207ef7df4073142e12e))
+- **components:** update version to 1.4.0 ([7cf8daf9](https://github.com/antvis/graphin/commit/7cf8daf9bcf856f8e97a0aeda5993cbdd37063c6))
 
 ##### Other Changes
 
-* **common:**
-  *  fix poly edge display error when poly edge's count > 2 ([160ec2e5](https://github.com/antvis/graphin/commit/160ec2e5713261843d11c549aca2d0958e01f906))
-  *  fix label size issue in default cfg ([06cc99e2](https://github.com/antvis/graphin/commit/06cc99e2165fe4a8cfa119f5bd317ee93f98145d))
-* **graphin:**  fix ci ([eb56c951](https://github.com/antvis/graphin/commit/eb56c9510aa8f45d0f6abc444c9800ead19d93ae))
+- **common:**
+  - fix poly edge display error when poly edge's count > 2 ([160ec2e5](https://github.com/antvis/graphin/commit/160ec2e5713261843d11c549aca2d0958e01f906))
+  - fix label size issue in default cfg ([06cc99e2](https://github.com/antvis/graphin/commit/06cc99e2165fe4a8cfa119f5bd317ee93f98145d))
+- **graphin:** fix ci ([eb56c951](https://github.com/antvis/graphin/commit/eb56c9510aa8f45d0f6abc444c9800ead19d93ae))
 
 ##### Code Style Changes
 
-* **graphin:**  remove console.log ([25c51ac6](https://github.com/antvis/graphin/commit/25c51ac607ca363fde563579500b4c8c34222678))
+- **graphin:** remove console.log ([25c51ac6](https://github.com/antvis/graphin/commit/25c51ac607ca363fde563579500b4c8c34222678))
 
 ### Graphin v1.4.0
 
