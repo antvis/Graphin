@@ -27,10 +27,11 @@ const changeZoom = (graphin: Graphin) => {
           try {
             if (graphin.state.forceSimulation) {
               /** 如果存在力导，那么缩放结束且力导未结束前，只展示keyShape */
-              if (graphin.state.forceSimulation.done) optimizeDrawing(graph, false);
-            }
-            /** 只有缩放比率大于keyShapeZoom，才展示所有的，否则只展示keyshape */
-            if (graph!.getZoom() > keyShapeZoom) {
+              if (graphin.state.forceSimulation.done && graph!.getZoom() > keyShapeZoom) {
+                optimizeDrawing(graph, false);
+              }
+            } else if (graph!.getZoom() > keyShapeZoom) {
+              /** 只有缩放比率大于keyShapeZoom，才展示所有的，否则只展示keyshape */
               optimizeDrawing(graph, false);
             }
           } catch (error) {

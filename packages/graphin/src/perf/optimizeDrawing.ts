@@ -9,7 +9,7 @@ import { Graph } from '../types';
  */
 const optimizeDrawingByNode = (isOptimize: boolean, node: Item) => {
   const shapes = node.getContainer().get('children');
-  const keyShape = shapes.find((item: any) => item.isKeyShape); //eslint-disable-line
+  const keyShape = shapes.find((item: any) => item.cfg.isKeyShape); //eslint-disable-line
   keyShape.show();
 
   shapes.forEach((shape: G.Shape.Base) => {

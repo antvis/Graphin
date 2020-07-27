@@ -16,7 +16,7 @@ export default (g6: typeof G6) => {
 
       const color = cfg.style?.dark ? GREY : normalizeColor(cfg.style?.primaryColor || PRIMARY_NODE_COLOR);
 
-      const keyShape = group.addShape('circle', {
+      group.addShape('circle', {
         attrs: {
           id: 'circle-floor',
           x: 0,
@@ -38,7 +38,7 @@ export default (g6: typeof G6) => {
         draggable: true,
         name: 'circle-selected',
       });
-      group.addShape('circle', {
+      const keyShape = group.addShape('circle', {
         attrs: {
           id: 'circle-border',
           x: 0,
