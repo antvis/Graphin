@@ -32,7 +32,7 @@ export default {
       ]);
     });
     graph.getEdges().forEach((edge: EdgeData) => {
-      graph.clearItemStates(edge, ['selected']);
+      graph.clearItemStates(edge, ['selected', 'highlight.dark', 'highlight.light']);
     });
   },
   onCanvasClick() {
@@ -47,6 +47,9 @@ export default {
     const targetNode = currentEdge.get('target');
     this.clearStates();
     currentEdge.toFront();
+    graph.getEdges().forEach((edge: IEdge) => {
+      graph.setItemState(edge, 'highlight.dark', true);
+    });
     graph.getNodes().forEach((node: INode) => {
       const id = node.get('id');
       if (id === sourceNode.get('id') || id === targetNode.get('id')) {
@@ -54,6 +57,9 @@ export default {
         graph.setItemState(targetNode, 'highlight.target', true);
         graph.setItemState(node, 'highlight.dark', false);
         graph.setItemState(node, 'highlight.light', true);
+        /** Edge */
+        graph.setItemState(currentEdge, 'highlight.dark', false);
+        graph.setItemState(currentEdge, 'highlight.light', true);
         graph.setItemState(currentEdge, 'selected', true);
       } else {
         graph.setItemState(node, 'highlight.light', false);
@@ -89,7 +95,7 @@ export default {
     /** process Nodes */
     const allNodes = graph.getNodes();
     const relativeNodes = [...relativeNodeSet];
-    const relativeNodesIds = relativeNodes.map((item) => item.get('id'));
+    const relativeNodesIds = relativeNodes.map(item => item.get('id'));
 
     const unRelativeNodes = allNodes.filter((item: INode) => {
       return relativeNodesIds.indexOf(item.get('id')) === -1;
