@@ -46,7 +46,7 @@ export type Tdirection = 'horizontal' | 'vertical';
 export interface ToolbarProps {
   style?: CSSProperties;
   graphDOM?: HTMLElement;
-  graph?: Graph;
+  graph: Graph;
   apis?: any; // eslint-disable-line
   className?: string;
   graphVars?: {
@@ -64,20 +64,20 @@ const defaultStyle: CSSProperties = {
 };
 
 const Toolbar: React.FC<ToolbarProps> = (props) => {
-  const { graph, className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
+  const { graph , className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
   const { history } = apis;
   const { width = 0, height = 0 } = graphVars;
   const graphinContainer = document.getElementById('graphin-container') as HTMLElement;
 
   const [fullscreen, toggleFullscreen] = useFullscreen(graphinContainer);
   const [zoom, handleZoom] = useZoom(1);
-  const handleGraphZoom = (isZoom: boolean, curZoom) => {
+  const handleGraphZoom = (isZoom: boolean, _curZoom) => {// eslint-disable-line
     const center = {
       x: width / 2,
       y: height / 2,
     };
     const newZoom = handleZoom(isZoom);
-    graph?.zoomTo(newZoom, center);
+    graph.zoomTo(newZoom, center); // eslint-disable-line
   };
 
   const historyInfo = history.getInfo();
