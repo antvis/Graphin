@@ -194,6 +194,10 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
           /** 是否开启动画 */
           animation: true,
         };
+        const noopLayout = () => {
+          return [];
+        };
+        const extendLayout = prevProps.extend?.layout || noopLayout;
 
         const layouOpts = { ...defaultOptions, ...options };
         let { name: presetName, options: presetOptions = {} } = layouOpts.preset;
@@ -208,7 +212,8 @@ const defaultLayouts = (graphin: Graphin, prevProps: GraphinProps) => {
         if (presetName === 'force') {
           presetData = TweakLayout(presetData, options as ForceLayoutOptions).data;
         } else {
-          const layouts = defaultLayouts(graphin, prevProps);
+          const layouts = [...defaultLayouts(graphin, prevProps), ...extendLayout(graphin, prevProps)];
+
           const presetLayout =
             layouts.find(item => {
               return item.name === presetName;
