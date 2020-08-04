@@ -25,7 +25,7 @@ const workerDepString = [
   Spring.toString(),
   Node.toString(),
   Edge.toString(),
-  getDegree.toString(),
+  `var getDegree = ${getDegree.toString()};`,
   ForceLayout.toString(),
 ];
 
@@ -91,7 +91,7 @@ const forceLayout = (data: Data, options: ForceLayoutOptions): Return => {
   const swap: { pre?: any; current?: any } = {};
   let requestAnimationFrameId: number;
 
-  globalWorker.onmessage = e => {
+  globalWorker.onmessage = (e) => {
     const { forceData, done } = e.data;
     // renderIndex = renderIndex + 1;
     // allData.push(forceData);
