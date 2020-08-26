@@ -4,10 +4,16 @@ import { G6Event } from '../types';
 const dragWithForce = (graphin: Graphin) => {
   const { graph, g6Options } = graphin;
 
-  const { autoFollowWithForce = true, autoPinWithForce = true, restartForceOnDrag = true } = g6Options!;
+  const {
+    autoFollowWithForce = true,
+    autoPinWithForce = true,
+    restartForceOnDrag = true,
+    disableDrag = false,
+  } = g6Options!;
 
   /** 拖拽Force节点：start */
   graph!.on('node:dragstart', () => {
+    if (disableDrag) return;
     if (graphin.state.forceSimulation) {
       graphin.state.forceSimulation.stop();
     }
@@ -15,6 +21,7 @@ const dragWithForce = (graphin: Graphin) => {
 
   /** 拖拽结束 */
   graph!.on('node:dragend', (e: G6Event) => {
+    if (disableDrag) return;
     if (graphin.state.forceSimulation && autoFollowWithForce && restartForceOnDrag) {
       const nodeModel = e.item.get('model');
       nodeModel.x = e.x;
