@@ -4,7 +4,7 @@ import { SelectOutlined } from '@ant-design/icons';
 import '@testing-library/jest-dom/extend-expect';
 import { getMockG6Event, getMockGraph } from '../../../../__mock__/g6';
 import { ContextMenu, isEqual, ContextMenuProps } from '../index';
-import getPosition from '../getPosition';
+import getPosition from '../position-calc';
 
 const mockGraph = getMockGraph();
 const mockG6Event = getMockG6Event();

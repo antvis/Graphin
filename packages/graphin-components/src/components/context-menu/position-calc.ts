@@ -1,21 +1,21 @@
 import { Graph } from '@antv/g6';
-import { MenuStyle } from './useContextmenu';
+import { MenuStyle } from './use-context-menu';
 import { G6Event, Canvas } from './types';
 
-type Position = {
+interface Position {
   x: number;
   y: number;
-};
+}
 
-type CanvasBox = {
+interface CanvasBox {
   canvasWidth: number;
   canvasHeight: number;
-};
+}
 
-type MenuBox = {
+interface MenuBox {
   menuWidth: number;
   menuHeight: number;
-};
+}
 
 const calculate = (
   position: Position,

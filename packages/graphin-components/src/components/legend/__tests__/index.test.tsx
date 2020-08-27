@@ -15,7 +15,7 @@ const MockComponent = (props: { options: LegendOption[] }) => {
   useEffect(() => {
     setTimeout(() => {
       setOptions(propOptions);
-    }, 3000);
+    }, 300);
   }, [propOptions]);
 
   return <Legend options={options} onChange={onChangeMock} />;

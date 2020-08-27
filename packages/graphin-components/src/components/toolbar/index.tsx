@@ -11,8 +11,8 @@ import {
 } from '@ant-design/icons';
 import { Tooltip, Button, Popover, Progress } from 'antd';
 
-import useFullscreen from './useFullscreen';
-import useZoom from './useZoom';
+import useFullscreen from './use-fullscreen';
+import useZoom from './use-zoom';
 import './index.less';
 
 const MIN_ZOOM = 0.1;
@@ -64,14 +64,15 @@ const defaultStyle: CSSProperties = {
 };
 
 const Toolbar: React.FC<ToolbarProps> = (props) => {
-  const { graph , className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
+  const { graph, className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
   const { history } = apis;
   const { width = 0, height = 0 } = graphVars;
   const graphinContainer = document.getElementById('graphin-container') as HTMLElement;
 
   const [fullscreen, toggleFullscreen] = useFullscreen(graphinContainer);
   const [zoom, handleZoom] = useZoom(1);
-  const handleGraphZoom = (isZoom: boolean, _curZoom) => {// eslint-disable-line
+  const handleGraphZoom = (isZoom: boolean, _curZoom) => {
+    // eslint-disable-line
     const center = {
       x: width / 2,
       y: height / 2,
