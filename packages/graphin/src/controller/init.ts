@@ -240,7 +240,7 @@ function init(props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode: Beha
 const initGraph = (props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode: BehaviorsMode) => {
   const [instance, options] = init(props, graphDOM, behaviorsMode);
 
-  switchLocalRefresh(instance, false);
+  switchLocalRefresh(instance, true);
   doPan(options.pan, instance);
   doZoom(options.zoom, instance, options.pan);
 
