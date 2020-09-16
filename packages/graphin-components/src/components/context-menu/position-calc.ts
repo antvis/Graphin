@@ -1,21 +1,21 @@
 import { Graph } from '@antv/g6';
-import { MenuStyle } from './useContextmenu';
+import { MenuStyle } from './use-context-menu';
 import { G6Event, Canvas } from './types';
 
-type Position = {
+interface Position {
   x: number;
   y: number;
-};
+}
 
-type CanvasBox = {
+interface CanvasBox {
   canvasWidth: number;
   canvasHeight: number;
-};
+}
 
-type MenuBox = {
+interface MenuBox {
   menuWidth: number;
   menuHeight: number;
-};
+}
 
 const calculate = (
   position: Position,
@@ -39,9 +39,8 @@ const calculate = (
   };
 };
 
-const getPosition = (graph: Graph, e: G6Event, menuItem: MenuStyle): Position => {
-  // FIXME G6 getBBox 类型不正确
-  const { maxY, minX } = e.item.getBBox() as any; // eslint-disable-line
+const getItemPosition = (graph: Graph, e: G6Event, menuItem: MenuStyle) => {
+  const { maxY, minX } = e.item.getBBox(); // eslint-disable-line
   const canvasXY = graph.getCanvasByPoint(minX, maxY);
   const canvas = graph.get('canvas') as Canvas;
 
@@ -58,6 +57,19 @@ const getPosition = (graph: Graph, e: G6Event, menuItem: MenuStyle): Position =>
     x,
     y,
   };
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getCanvasPosition = (_graph: Graph, e: G6Event, _menuItem: MenuStyle) => {
+  return {
+    x: e.x,
+    y: e.y,
+  };
+};
+
+const getPosition = (graph: Graph, e: G6Event, menuItem: MenuStyle): Position => {
+  if (e.item) return getItemPosition(graph, e, menuItem);
+  return getCanvasPosition(graph, e, menuItem);
 };
 
 export default getPosition;

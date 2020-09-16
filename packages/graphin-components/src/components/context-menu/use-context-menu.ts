@@ -1,6 +1,6 @@
 import { useState, useEffect, isValidElement } from 'react';
 import { G6Event } from './types';
-import getPosition from './getPosition';
+import getPosition from './position-calc';
 import { ContextMenuProps } from './index';
 
 export interface MenuStyle {

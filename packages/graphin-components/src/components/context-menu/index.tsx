@@ -1,8 +1,8 @@
 import React, { memo, isValidElement } from 'react';
 import { Graph } from '@antv/g6';
 
-import useContextmenu from './useContextmenu';
-import Container, { MenuItemType } from './Container';
+import useContextmenu from './use-context-menu';
+import Container, { MenuItemType } from './menu-container';
 import { G6Event } from './types';
 import './index.less';
 
@@ -24,7 +24,7 @@ export interface ContextMenuProps {
   onContextmenu?: (e: G6Event, graph: Graph) => boolean; // 有这么一种业务场景，用户在关系扩散中，右键菜单希望是展开或者收起与其相关的叶子节点。这个时候，ContextMenu组件是否需要提供一种hook函数，来控制默认的右键行为
 }
 
-export const ContextMenu: React.FC<ContextMenuProps> = props => {
+export const ContextMenu: React.FC<ContextMenuProps> = (props) => {
   const { graph, render, options } = props;
 
   const [state, setState] = useContextmenu(props);

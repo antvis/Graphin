@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "declaration": true,
     "module": "esnext",
     "target": "es2015",
