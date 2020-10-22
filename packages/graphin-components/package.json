@@ -51,7 +51,7 @@
   "dependencies": {
     "@ant-design/compatible": "^1.0.2",
     "@ant-design/icons": "^4.0.6",
-    "@antv/g6": "^3.7.3",
+    "@antv/g6": "^3.8.1",
     "@antv/graphin": "^1.2.0",
     "antd": "^4.1.4"
   },
