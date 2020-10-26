@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Fragment } from 'react';
-import { render, act, fireEvent, waitForElement, cleanup } from '@testing-library/react';
+import { render, act, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Graphin from '../Graphin';
 import { Data } from '../types';
