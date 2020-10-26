@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import G6, { Graph } from '@antv/g6';
+import { Fisheye } from '@antv/g6';
 
 const delegateStyle = {
   fill: '#f00',
@@ -7,7 +7,7 @@ const delegateStyle = {
   stroke: '#666',
 };
 
-let fisheye = new G6.Fisheye({
+let fisheye = new Fisheye({
   r: 200,
   showLabel: true,
   delegateStyle,
@@ -21,7 +21,7 @@ const useFishEye: (graph) => [boolean, () => void] = (graph) => {
       graph.removePlugin(fisheye);
     } else {
       setFishEyeState(true);
-      fisheye = new G6.Fisheye({
+      fisheye = new Fisheye({
         r: 200,
         showLabel: true,
         delegateStyle,
