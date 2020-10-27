@@ -4,7 +4,7 @@ import { render } from '@testing-library/react'; */
 
 import '@testing-library/jest-dom/extend-expect';
 
-import Legend, { LegendOption } from '../index';
+// import Legend, { LegendOption } from '../index';
 
 /* const onChangeMock = jest.fn();
 
@@ -23,7 +23,7 @@ const MockComponent = (props: { options: LegendOption[] }) => {
 
 describe('<Legend />', () => {
   it('Legend should render correctly', () => {
-    const data = {
+    /* const data = {
       nodes: [],
       edges: [],
     };
@@ -41,14 +41,12 @@ describe('<Legend />', () => {
         value: 'company',
         color: 'blue',
       },
-    ];
-
+    ]; */
     /* render(
       <Graphin data={data} layout={layout}>
         <Legend options={options} onChange={() => {}} />
       </Graphin>,
     ); */
-
     /* expect(screen.getByText('人群')).toBeInTheDocument();
     expect(screen.getByText('公司')).toBeInTheDocument(); */
   });
