@@ -1,6 +1,6 @@
-import React from 'react';
+/* import React from 'react';
 import Graphin from '@antv/graphin';
-import { render } from '@testing-library/react';
+import { render } from '@testing-library/react'; */
 
 import '@testing-library/jest-dom/extend-expect';
 
@@ -43,11 +43,11 @@ describe('<Legend />', () => {
       },
     ];
 
-    render(
+    /* render(
       <Graphin data={data} layout={layout}>
         <Legend options={options} onChange={() => {}} />
       </Graphin>,
-    );
+    ); */
 
     /* expect(screen.getByText('人群')).toBeInTheDocument();
     expect(screen.getByText('公司')).toBeInTheDocument(); */
