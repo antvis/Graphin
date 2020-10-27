@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Graphin from '@antv/graphin/src/Graphin';
+import Graphin from '@antv/graphin';
 import { Graph } from '@antv/g6';
 
 import Toolbar from '../index';

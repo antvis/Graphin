@@ -1,5 +1,5 @@
 import React from 'react';
-import Graphin from '@antv/graphin/src/Graphin';
+import Graphin from '@antv/graphin';
 import { render } from '@testing-library/react';
 
 import '@testing-library/jest-dom/extend-expect';
