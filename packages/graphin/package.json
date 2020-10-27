@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.0",
-    "@testing-library/react": "^9.3.0",
+    "@testing-library/react": "^9.5.0",
     "@types/jest": "^25.2.3",
     "@types/lodash": "^4.14.141",
     "@types/react": "^16.9.2",
@@ -43,7 +43,7 @@
   "license": "MIT",
   "dependencies": {
     "@antv/g-canvas": "^0.5.1",
-    "@antv/g6": "^3.7.3",
+    "@antv/g6": "^3.8.1",
     "deepmerge": "^4.0.0",
     "lodash": "^4.17.15",
     "react": "^16.8.6",

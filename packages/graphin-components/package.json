@@ -24,7 +24,7 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "@testing-library/jest-dom": "^4.2.0",
-    "@testing-library/react": "^9.3.0",
+    "@testing-library/react": "^9.5.0",
     "@types/react-router-dom": "^5.1.0",
     "babel-jest": "^25.4.0",
     "babel-loader": "^8.0.6",
@@ -51,7 +51,7 @@
   "dependencies": {
     "@ant-design/compatible": "^1.0.2",
     "@ant-design/icons": "^4.0.6",
-    "@antv/g6": "^3.7.3",
+    "@antv/g6": "^3.8.1",
     "@antv/graphin": "^1.2.0",
     "antd": "^4.1.4"
   },

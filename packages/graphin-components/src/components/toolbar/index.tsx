@@ -8,9 +8,12 @@ import {
   ZoomInOutlined,
   UndoOutlined,
   RedoOutlined,
+  EyeOutlined,
+  EyeInvisibleOutlined,
 } from '@ant-design/icons';
 import { Tooltip, Button, Popover, Progress } from 'antd';
 
+import useFishEye from './use-fisheye';
 import useFullscreen from './use-fullscreen';
 import useZoom from './use-zoom';
 import './index.less';
@@ -69,21 +72,22 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
   const { width = 0, height = 0 } = graphVars;
   const graphinContainer = document.getElementById('graphin-container') as HTMLElement;
 
+  const [fishEyeState, toggleFishEye] = useFishEye(graph);
   const [fullscreen, toggleFullscreen] = useFullscreen(graphinContainer);
   const [zoom, handleZoom] = useZoom(1);
-  const handleGraphZoom = (isZoom: boolean, _curZoom) => {
-    // eslint-disable-line
+  const handleGraphZoom = (isZoom: boolean) => {
+    const curZoom = +graph?.getZoom().toFixed(2);
     const center = {
       x: width / 2,
       y: height / 2,
     };
-    const newZoom = handleZoom(isZoom);
-    graph.zoomTo(newZoom, center); // eslint-disable-line
+    const newZoom = handleZoom(isZoom, curZoom);
+    graph.zoomTo(newZoom, center);
   };
 
   const historyInfo = history.getInfo();
-  const curZoom = graph?.getZoom().toFixed(2);
-  let buttonCfg: MenuItem[] = [
+  let buttonCfg: MenuItem[];
+  buttonCfg = [
     {
       id: 'fullscreen',
       name: fullscreen ? '还原' : '全屏',
@@ -96,14 +100,20 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
       name: '放大',
       icon: <ZoomInOutlined />,
       disabled: zoom >= MAX_ZOOM,
-      action: () => handleGraphZoom(true, curZoom),
+      action: () => handleGraphZoom(true),
     },
     {
       id: 'zoomOut',
       name: '缩小',
       icon: <ZoomOutOutlined />,
       disabled: zoom <= MIN_ZOOM,
-      action: () => handleGraphZoom(false, curZoom),
+      action: () => handleGraphZoom(false),
+    },
+    {
+      id: 'fishEye',
+      name: fishEyeState ? '关闭鱼眼放大镜' : '开启鱼眼放大镜',
+      icon: fishEyeState ? <EyeInvisibleOutlined /> : <EyeOutlined />,
+      action: toggleFishEye,
     },
     {
       id: 'undo',
