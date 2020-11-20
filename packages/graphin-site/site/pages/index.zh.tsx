@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Banner from '@antv/gatsby-theme-antv/site/components/Banner';
 import Features from '@antv/gatsby-theme-antv/site/components/Features';
 import Cases from '@antv/gatsby-theme-antv/site/components/Cases';
-
+import Solution from '../components/Solution';
 import './index.less';
 
 const IndexPage = () => {
@@ -35,13 +35,46 @@ const IndexPage = () => {
       description: t('沉淀分析方法，内置分析组件，专注关系可视分析领域'),
     },
   ];
+  const solutions = [
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*99jtSaqlpKoAAAAAAAAAAAAAARQnAQ',
+      link: '',
+
+      description: t('AntV可视分析解决方案'),
+    },
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*LR7AS48cdOIAAAAAAAAAAAAAARQnAQ',
+      link: '',
+      description: t('云安全'),
+    },
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*qDi4RYggJJAAAAAAAAAAAAAAARQnAQ',
+      link: '',
+      description: t('知识图谱'),
+    },
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*uRQRTYLhg9sAAAAAAAAAAAAAARQnAQ',
+      link: '',
+      description: t('企业风控'),
+    },
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*p0e3T7DGQ_IAAAAAAAAAAAAAARQnAQ',
+      link: '',
+      description: t('图数据库'),
+    },
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*rfTMSJhfUXQAAAAAAAAAAAAAARQnAQ',
+      link: '',
+      description: t('性能优化'),
+    },
+  ];
 
   const notifications = [
     {
-      type: t('点线析源远'),
-      title: t('G6 3.2.0 全新发布！'),
-      date: '2019.11.22',
-      link: 'https://github.com/antvis/g6',
+      type: t('重磅推出'),
+      title: t('AntV图可视分析解决方案，来啦～'),
+      date: '2020.11.22',
+      link: '',
     },
     {
       type: t('小试牛刀'),
@@ -52,15 +85,6 @@ const IndexPage = () => {
   ];
 
   const cases = [
-    // {
-    //     logo: 'https://gw.alipayobjects.com/zos/basement_prod/f90e2f08-630b-4b02-8886-5c7c174a3fca.svg',
-    //     title: t('Graphin Studio'),
-    //     description: t(
-    //         'GraphinStudio 是基于 Graphin 开发的通用关系分析平台，具有关系扩散，关系发现，布局切换等功能',
-    //     ),
-    //     link: `/${i18n.language}/GraphinStudio`,
-    //     image: 'https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*Y9y9QqfXYdkAAAAAAAAAAABkARQnAQ',
-    // },
     {
       logo: 'https://img.alicdn.com/tfs/TB1rh1xy7T2gK0jSZFkXXcIQFXa-128-128.svg',
       title: t('Graph Studio'),
@@ -98,6 +122,7 @@ const IndexPage = () => {
         className="banner"
       />
 
+      <Solution items={solutions} />
       <Features features={features} style={{ width: '100%' }} />
       <Cases cases={cases} className="graph-cases" />
     </>
