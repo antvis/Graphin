@@ -1,5 +1,8 @@
 import React from 'react';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Typography } from 'antd';
+
+
+const { Title, Paragraph, Text, Link } = Typography;
 import './index.less';
 // import { description } from 'core-js/fn/symbol/match';
 const { Meta } = Card;
@@ -17,17 +20,23 @@ interface Solutions {
 const Solution: React.FC<Solutions> = ({ items = [], style, abstract }) => {
   return (
     <div style={style} className="antvis-solution">
+      <Typography>
+        {/* <Title>解决方案</Title> */}
+        <Paragraph>
+          {abstract}
+        </Paragraph>
+      </Typography>
       <Row
         gutter={[
-          { xs: 8, sm: 24, md: 32, lg: 48 },
-          { xs: 8, sm: 24, md: 32, lg: 48 },
+          16,
+          { xs: 8, sm: 24, md: 24, lg: 16 },
         ]}
       >
-        <Col>{abstract}</Col>
+        {/* <Col>{abstract}</Col> */}
         {items.map((item) => {
           const { image, description, link } = item;
           return (
-            <Col xs={24} sm={6} md={6} lg={4} xl={4}>
+            <Col xs={24} sm={6} md={6} lg={4} xl={4}  >
               <Card
                 style={{ width: '100%' }}
                 hoverable
