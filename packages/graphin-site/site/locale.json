@@ -16,5 +16,14 @@
     "分析探索": "Analytical exploration",
     "沉淀分析方法，内置分析组件，专注关系可视分析领域": "Precipitation analysis method, built-in analysis component, focus on relational visual analysis",
     "Graph Studio 是阿里云Dataworks团队围绕Graph Compute引擎打造的一站式图开发平台。其中基于Graphin开发的图分析平台提供了数据检索、关系扩散、布局切换、节点筛选、关联高亮、分享等常用图分析能力，能够帮助用户快速完成相关分析工作": 
-        "Graph Studio is a one-stop graph development platform built by the Alibaba Cloud Dataworks Team based on Graph Compute. The graph analysis which is based on Graphin in this platform provides common graph analysis capabilities such as data retrieval, relationship diffusion, layout switching, node selection, association highlighting, and sharing, which can help users quickly complete related analysis work."
+        "Graph Studio is a one-stop graph development platform built by the Alibaba Cloud Dataworks Team based on Graph Compute. The graph analysis which is based on Graphin in this platform provides common graph analysis capabilities such as data retrieval, relationship diffusion, layout switching, node selection, association highlighting, and sharing, which can help users quickly complete related analysis work.",
+    "基于 AntV 团队在图分析业务领域中的沉淀与思考，面向产品经理、设计师、前端工程师，分别从产品设计、设计规范、技术方案三个角度详细介绍图可视化与图可视分析的解决方案，以及针对专业领域分析师，提出的子领域可视分析解决方案。": "Based on the precipitation and thinking in the graph analysis, we introduced the solutions of graph visualization and graph visualization analysis in detail from the three perspectives of product design, design specifications, and technical solutions for product managers, designers, and front-end engineers. And we also proposed five sub-field visual analysis solutions for professional analysts.",
+    "AntV可视分析解决方案": "Graph Analysis",
+    "云安全": "Cloud Security",
+    "知识图谱": "Knowledge Graph",
+    "企业风控": "Risk Control",
+    "图数据库": "Graph Database",
+    "性能优化": "Performance",
+    "重磅推出": "Heavy launch",
+    "AntV图可视分析解决方案，来啦～": "AntV graph visual analysis solution is coming"
 }

@@ -40,7 +40,7 @@ const IndexPage = () => {
       image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*99jtSaqlpKoAAAAAAAAAAAAAARQnAQ',
       link: 'https://gw.alipayobjects.com/os/bmw-prod/6badedb4-5bed-4cb8-b39a-132e7e19603b.pdf',
 
-      description: t('AntV可视分析解决方案'),
+      description: t('解决方案'),
     },
     {
       image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*LR7AS48cdOIAAAAAAAAAAAAAARQnAQ',
