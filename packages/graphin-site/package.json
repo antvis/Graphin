@@ -27,6 +27,7 @@
     "@ant-design/icons": "^4.0.6",
     "@antv/graphin": "*",
     "@antv/graphin-components": "*",
+    "antd": "^4.8.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-i18next": "^11.0.1"

@@ -38,33 +38,33 @@ const IndexPage = () => {
   const solutions = [
     {
       image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*99jtSaqlpKoAAAAAAAAAAAAAARQnAQ',
-      link: '',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/6badedb4-5bed-4cb8-b39a-132e7e19603b.pdf',
 
       description: t('AntV可视分析解决方案'),
     },
     {
       image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*LR7AS48cdOIAAAAAAAAAAAAAARQnAQ',
-      link: '',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/660e1732-ff10-4f00-8594-a08d5a2d11d8.pdf',
       description: t('云安全'),
     },
     {
       image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*qDi4RYggJJAAAAAAAAAAAAAAARQnAQ',
-      link: '',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/e59ca575-b23b-4a60-a88e-ae1fab938593.pdf',
       description: t('知识图谱'),
     },
     {
       image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*uRQRTYLhg9sAAAAAAAAAAAAAARQnAQ',
-      link: '',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/0b872268-1388-457f-9358-c41327a861e1.pdf',
       description: t('企业风控'),
     },
     {
       image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*p0e3T7DGQ_IAAAAAAAAAAAAAARQnAQ',
-      link: '',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/a381a006-85e8-4c55-83b3-278a02f83535.pdf',
       description: t('图数据库'),
     },
     {
       image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*rfTMSJhfUXQAAAAAAAAAAAAAARQnAQ',
-      link: '',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/cf756b00-86ec-4f8e-b885-f4f5808cb739.pdf',
       description: t('性能优化'),
     },
   ];
@@ -74,7 +74,7 @@ const IndexPage = () => {
       type: t('重磅推出'),
       title: t('AntV图可视分析解决方案，来啦～'),
       date: '2020.11.22',
-      link: '',
+      link: 'https://www.yuque.com/antv/g6/solution',
     },
     {
       type: t('小试牛刀'),
@@ -96,6 +96,10 @@ const IndexPage = () => {
       image: 'https://img.alicdn.com/tfs/TB1laWQyVT7gK0jSZFpXXaTkpXa-600-600.gif',
     },
   ];
+
+  const abstract = t(
+    '去年开源日，我们推出了 G6 3.x 版本以及基于 G6 的图分析组件 Graphin 1.0，专注于图分析引擎与开箱即用的图分析组件。经过一年的版本迭代与业务落地打磨，我们对于“解决方案”四个字有了更深入的理解，终于可以自信地说：图可视分析的解决方案，它来啦～',
+  );
 
   const bannerButtons = [
     {
@@ -122,7 +126,7 @@ const IndexPage = () => {
         className="banner"
       />
 
-      <Solution items={solutions} />
+      <Solution items={solutions} abstract={abstract} />
       <Features features={features} style={{ width: '100%' }} />
       <Cases cases={cases} className="graph-cases" />
     </>
