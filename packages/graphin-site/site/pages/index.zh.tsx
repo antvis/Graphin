@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Banner from '@antv/gatsby-theme-antv/site/components/Banner';
 import Features from '@antv/gatsby-theme-antv/site/components/Features';
 import Cases from '@antv/gatsby-theme-antv/site/components/Cases';
-
+import Solution from '../components/Solution';
 import './index.less';
 
 const IndexPage = () => {
@@ -35,13 +35,46 @@ const IndexPage = () => {
       description: t('沉淀分析方法，内置分析组件，专注关系可视分析领域'),
     },
   ];
+  const solutions = [
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*99jtSaqlpKoAAAAAAAAAAAAAARQnAQ',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/6badedb4-5bed-4cb8-b39a-132e7e19603b.pdf',
+
+      description: t('解决方案'),
+    },
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*LR7AS48cdOIAAAAAAAAAAAAAARQnAQ',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/660e1732-ff10-4f00-8594-a08d5a2d11d8.pdf',
+      description: t('云安全'),
+    },
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*qDi4RYggJJAAAAAAAAAAAAAAARQnAQ',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/e59ca575-b23b-4a60-a88e-ae1fab938593.pdf',
+      description: t('知识图谱'),
+    },
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*uRQRTYLhg9sAAAAAAAAAAAAAARQnAQ',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/0b872268-1388-457f-9358-c41327a861e1.pdf',
+      description: t('企业风控'),
+    },
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*p0e3T7DGQ_IAAAAAAAAAAAAAARQnAQ',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/a381a006-85e8-4c55-83b3-278a02f83535.pdf',
+      description: t('图数据库'),
+    },
+    {
+      image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*rfTMSJhfUXQAAAAAAAAAAAAAARQnAQ',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/cf756b00-86ec-4f8e-b885-f4f5808cb739.pdf',
+      description: t('性能优化'),
+    },
+  ];
 
   const notifications = [
     {
-      type: t('点线析源远'),
-      title: t('G6 3.2.0 全新发布！'),
-      date: '2019.11.22',
-      link: 'https://github.com/antvis/g6',
+      type: t('重磅推出'),
+      title: t('AntV图可视分析解决方案，来啦～'),
+      date: '2020.11.22',
+      link: 'https://www.yuque.com/antv/g6/solution',
     },
     {
       type: t('小试牛刀'),
@@ -52,15 +85,6 @@ const IndexPage = () => {
   ];
 
   const cases = [
-    // {
-    //     logo: 'https://gw.alipayobjects.com/zos/basement_prod/f90e2f08-630b-4b02-8886-5c7c174a3fca.svg',
-    //     title: t('Graphin Studio'),
-    //     description: t(
-    //         'GraphinStudio 是基于 Graphin 开发的通用关系分析平台，具有关系扩散，关系发现，布局切换等功能',
-    //     ),
-    //     link: `/${i18n.language}/GraphinStudio`,
-    //     image: 'https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*Y9y9QqfXYdkAAAAAAAAAAABkARQnAQ',
-    // },
     {
       logo: 'https://img.alicdn.com/tfs/TB1rh1xy7T2gK0jSZFkXXcIQFXa-128-128.svg',
       title: t('Graph Studio'),
@@ -72,6 +96,10 @@ const IndexPage = () => {
       image: 'https://img.alicdn.com/tfs/TB1laWQyVT7gK0jSZFpXXaTkpXa-600-600.gif',
     },
   ];
+
+  const abstract = t(
+    '基于 AntV 团队在图分析业务领域中的沉淀与思考，面向产品经理、设计师、前端工程师，分别从产品设计、设计规范、技术方案三个角度详细介绍图可视化与图可视分析的解决方案，以及针对专业领域分析师，提出的子领域可视分析解决方案。',
+  );
 
   const bannerButtons = [
     {
@@ -98,6 +126,7 @@ const IndexPage = () => {
         className="banner"
       />
 
+      <Solution items={solutions} abstract={abstract} />
       <Features features={features} style={{ width: '100%' }} />
       <Cases cases={cases} className="graph-cases" />
     </>

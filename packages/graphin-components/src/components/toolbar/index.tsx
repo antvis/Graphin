@@ -49,7 +49,7 @@ export type Tdirection = 'horizontal' | 'vertical';
 export interface ToolbarProps {
   style?: CSSProperties;
   graphDOM?: HTMLElement;
-  graph: Graph;
+  graph?: Graph;
   apis?: any; // eslint-disable-line
   className?: string;
   graphVars?: {
@@ -67,7 +67,8 @@ const defaultStyle: CSSProperties = {
 };
 
 const Toolbar: React.FC<ToolbarProps> = (props) => {
-  const { graph, className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
+  const { graph: GraphFromProps, className = '', render, graphVars = {}, apis, direction = 'vertical', style } = props;
+  const graph = GraphFromProps!; // 断言一定存在，因为通过 React.cloneElement 的方式，历史原因，就不改这块了
   const { history } = apis;
   const { width = 0, height = 0 } = graphVars;
   const graphinContainer = document.getElementById('graphin-container') as HTMLElement;
@@ -76,7 +77,7 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
   const [fullscreen, toggleFullscreen] = useFullscreen(graphinContainer);
   const [zoom, handleZoom] = useZoom(1);
   const handleGraphZoom = (isZoom: boolean) => {
-    const curZoom = +graph?.getZoom().toFixed(2);
+    const curZoom = +graph.getZoom().toFixed(2);
     const center = {
       x: width / 2,
       y: height / 2,
