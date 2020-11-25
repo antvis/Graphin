@@ -1,7 +1,7 @@
 import G6 from '@antv/g6';
 import { Shape } from '@antv/g-canvas';
-import { ExtendNodeShape, ShapeComponent } from '../../types';
-import { Item } from '@antv/g6/lib/types';
+import { Item, ModelConfig } from '@antv/g6/lib/types';
+import { ExtendNodeShape, ShapeComponent, Node } from '../../types';
 
 const reset = (shapes: Shape.Base[], shapeComponents: ShapeComponent[]) => {
   shapes.forEach((shape, index: number) => {
@@ -62,7 +62,7 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
       // 如果为为selected状态，则不作高亮
       // if (node.hasState('selected') && name === 'highlight.light' && value) return;
 
-      Object.keys(initState).forEach(key => {
+      Object.keys(initState).forEach((key) => {
         // state 的 key 和 behavior 里触发的 name 匹配
         if (name === key) {
           shapes.forEach((g6Shape: Shape.Base) => {
@@ -79,6 +79,11 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
           });
         }
       });
+    },
+    update(cfg: ModelConfig, node: Item) {
+      // @ts-ignore
+      const { update = () => {} } = renderNodeShape(cfg as Node);
+      update(cfg, node);
     },
   });
 };
