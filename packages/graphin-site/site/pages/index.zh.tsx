@@ -38,7 +38,7 @@ const IndexPage = () => {
   const solutions = [
     {
       image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*99jtSaqlpKoAAAAAAAAAAAAAARQnAQ',
-      link: 'https://gw.alipayobjects.com/os/bmw-prod/6badedb4-5bed-4cb8-b39a-132e7e19603b.pdf',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/c8ddbda8-c742-4c11-9c68-3783dd5954b9.pdf',
 
       description: t('解决方案'),
     },
@@ -49,7 +49,7 @@ const IndexPage = () => {
     },
     {
       image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*qDi4RYggJJAAAAAAAAAAAAAAARQnAQ',
-      link: 'https://gw.alipayobjects.com/os/bmw-prod/e59ca575-b23b-4a60-a88e-ae1fab938593.pdf',
+      link: 'https://gw.alipayobjects.com/os/bmw-prod/b6686d7a-2860-43a4-a75e-880490d5a414.pdf',
       description: t('知识图谱'),
     },
     {
@@ -98,7 +98,7 @@ const IndexPage = () => {
   ];
 
   const abstract = t(
-    '基于 AntV 团队在图分析业务领域中的沉淀与思考，面向产品经理、设计师、前端工程师，分别从产品设计、设计规范、技术方案三个角度详细介绍图可视化与图可视分析的解决方案，以及针对专业领域分析师，提出的子领域可视分析解决方案。',
+    '一份联合了阿里巴巴集团和蚂蚁集团 8 个 BG/BU，30 多位相关的产品经理，设计师，工程师，基于各个业务领域实践产出的图可视分析解决方案白皮书。业务的发展让我们意识到，除了图技术的迭代，对于图认知的”迭代“同样需要我们重视，这是一次新的尝试，让我们一同探索，助力图分析业务更好地创新',
   );
 
   const bannerButtons = [
