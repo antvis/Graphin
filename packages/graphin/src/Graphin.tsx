@@ -21,6 +21,7 @@ import deepEqual from './utils/deepEqual';
 
 import './index.less';
 
+export const GraphinContext = React.createContext();
 type DiffValue = Data | Layout | undefined;
 
 class Graph extends React.PureComponent<GraphinProps, GraphinState> {
@@ -287,6 +288,11 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
   render() {
     const { isGraphReady } = this.state;
     return (
+      <GraphinContext.Provider
+        value={{
+          graph: this.graph,
+        }}
+      >
       <div id="graphin-container">
         <div
           data-testid="custom-element"
@@ -295,8 +301,9 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
             this.graphDOM = node;
           }}
         />
-        <div className="graphin-components">{isGraphReady && this.renderChildren()}</div>
-      </div>
+          <div className="graphin-components">{this.state.isReady && this.props.children}</div>
+        </div>
+      </GraphinContext.Provider>
     );
   }
 }
