@@ -10,6 +10,11 @@ const initState = (graph: Graph, data: Data) => {
 
   const { nodes = [], edges = [] } = data;
   nodes.forEach(node => {
+    /**
+     * TODO
+     * graphin 2.0  将改造这块: node.data.states 将改为 node.status
+     * 1.x 版本先暂定这样
+     */
     if (node?.data?.states) {
       const { states = {} } = node.data;
       Object.keys(states).forEach(k => {
