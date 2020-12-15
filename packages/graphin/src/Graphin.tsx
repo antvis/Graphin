@@ -14,7 +14,7 @@ import eventController from './events/index';
 
 /** types  */
 import { GraphinProps, GraphinState, ExtendedGraphOptions, ForceSimulation, Data, Layout } from './types';
-
+import { IconLoader } from './typings';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
@@ -22,6 +22,10 @@ import deepEqual from './utils/deepEqual';
 import './index.less';
 
 export const GraphinContext = React.createContext();
+const ICON_FONT_FAMILY_MAP: {
+  [key: string]: IconFontMapItem[];
+} = {};
+
 type DiffValue = Data | Layout | undefined;
 
 class Graph extends React.PureComponent<GraphinProps, GraphinState> {
@@ -29,15 +33,29 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
   graph?: GraphType;
 
-  history: HistoryController;
+  static registerNode(nodeName, options, extendedNodeName) {
+    G6.registerNode(nodeName, options, extendedNodeName);
+  }
 
-  forceSimulation: ForceSimulation | null;
+  static registerEdge(edgeName, options, extendedEdgeName) {
+    G6.registerEdge(edgeName, options, extendedEdgeName);
+  }
 
-  g6Options?: Partial<ExtendedGraphOptions>;
+  static registerCombo(comboName, options, extendedComboName) {
+    G6.registerCombo(comboName, options, extendedComboName);
+  }
 
-  getLayoutInfo: () => any; // eslint-disable-line
+  static registerBehavior(behaviorName: string, behavior) {
+    G6.registerBehavior(behaviorName, behavior);
+  }
 
-  clearEvents?: () => void;
+  static registerFontFamily(iconLoader: IconLoader) {
+    /**  注册 font icon */
+    const iconLoaders = iconLoader();
+    iconLoaders.forEach(item => {
+      ICON_FONT_FAMILY_MAP[item.fontFamily] = item.map;
+    });
+  }
 
   constructor(props: GraphinProps) {
     super(props);
