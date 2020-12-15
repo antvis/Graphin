@@ -1,4 +1,4 @@
-## @antv/graphin-components
+## @antv/graphin-icons
 
 [中文](./README-cn.ZH.md)
 
