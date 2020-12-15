@@ -1,0 +1,22 @@
+{
+  "name": "graphin-dumi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "dumi dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dumi": "^1.0.37"
+  },
+  "dependencies": {
+    "@antv/graphin": "*",
+    "@antv/graphin-components": "*",
+    "@antv/hierarchy": "^0.6.6",
+    "antd": "^4.9.3",
+    "d3": "^6.2.0"
+  }
+}

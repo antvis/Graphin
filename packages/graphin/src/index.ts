@@ -1,12 +1,13 @@
-import Graphin from './Graphin';
+import Graphin, { GraphinContext } from './Graphin';
 import Utils from './utils';
 import Layout from './layout';
+
 import { Item } from '@antv/g6/lib/types';
 
 export { default as G6 } from '@antv/g6';
 
 export default Graphin;
-export { Utils, Layout };
+export { Utils, Layout, GraphinContext };
 
 export * from './types';
 
