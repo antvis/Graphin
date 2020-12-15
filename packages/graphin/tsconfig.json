@@ -10,7 +10,8 @@
     "jsx": "react",
     "strict": true,
     "lib": ["dom", "esnext"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types/", "./typings"]
   },
   "include": ["src"]
 }
