@@ -35,11 +35,11 @@ const defaultHullCfg = {
   padding: 10,
 };
 
-interface HullCfg {
-  /** 包裹的 id */
-  id: string;
+export interface HullCfg {
   /** 在包裹内部的节点实例或节点 Id 数组 */
   members: string[];
+  /** 包裹的 id */
+  id?: string;
   /**
    * 包裹的类型：
    * round-convex: 生成圆角凸包轮廓，
@@ -50,14 +50,14 @@ interface HullCfg {
   /** 不在轮廓内部的节点数组，只在 bubble 类型的包裹中生效 */
   nonMembers?: string[];
   /** 轮廓的样式属性 */
-  style?: {
+  style?: Partial<{
     /** 填充颜色 */
     fill: string;
     /** 描边颜色 */
     stroke: string;
     /**  透明度 */
     opacity: number;
-  };
+  }>;
   /** 轮廓边缘和内部成员的间距 */
   padding?: number;
 }
@@ -70,6 +70,7 @@ let hullInstances: any[];
 const Hull: React.FunctionComponent<IHullProps> = (props) => {
   React.useEffect(() => {
     const graphin = React.useContext(GraphinContext);
+    console.log('graphin', graphin);
     //@ts-ignore
     const { graph } = graphin;
     const { options } = props;
