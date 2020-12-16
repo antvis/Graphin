@@ -26,7 +26,7 @@ import '@antv/graphin-components/dist/index.css';
 const App = () => {
   const hullOptions = [
     {
-      members: ['node-1', 'node-2'], // 必须参数
+      members: ['node-1', 'node-2', 'node-7'], // 必须参数
     },
     {
       members: ['node-4', 'node-5'],
@@ -40,7 +40,7 @@ const App = () => {
   ];
   return (
     <div className="App">
-      <Graphin data={Utils.mock(10).graphin()} layout={layout}>
+      <Graphin data={Utils.mock(10).graphin()}>
         <Hull options={hullOptions} />
       </Graphin>
     </div>

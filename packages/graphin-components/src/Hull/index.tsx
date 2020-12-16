@@ -61,36 +61,36 @@ export interface HullCfg {
   /** 轮廓边缘和内部成员的间距 */
   padding?: number;
 }
+
 export interface IHullProps {
+  /**
+   * @description 配置
+   */
   options: HullCfg[];
 }
 
 let hullInstances: any[];
 
 const Hull: React.FunctionComponent<IHullProps> = (props) => {
+  const graphin = React.useContext(GraphinContext);
+
   React.useEffect(() => {
-    const graphin = React.useContext(GraphinContext);
-    console.log('graphin', graphin);
     //@ts-ignore
     const { graph } = graphin;
     const { options } = props;
 
-    const handleAfterLayout = () => {
-      hullInstances = options.map((item) => {
-        return graph.createHull(deepMergeCfg(defaultHullCfg, item));
-      });
-    };
+    hullInstances = options.map((item) => {
+      return graph.createHull(deepMergeCfg(defaultHullCfg, item));
+    });
+
     const handleAfterUpdateItem = () => {
       hullInstances.forEach((item) => {
         item.updateData(item.members);
       });
     };
 
-    graph.on('afterlayout', handleAfterLayout);
     graph.on('afterupdateitem', handleAfterUpdateItem);
-
     return () => {
-      graph.off('afterlayout', handleAfterLayout);
       graph.on('afterupdateitem', handleAfterUpdateItem);
     };
   }, []);

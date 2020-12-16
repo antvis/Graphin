@@ -1,5 +1,5 @@
 import React from 'react';
-import Graphin, { Utils } from '@antv/graphin';
+import Graphin, { Utils, GraphinContext } from '@antv/graphin';
 import Hull, { HullCfg } from '../index';
 // Do not forget to import CSS
 import '@antv/graphin/dist/index.css';
@@ -10,7 +10,7 @@ const Demo = () => {
       members: ['node-1', 'node-2'], // 必须参数
     },
     {
-      members: ['node-4', 'node-5'],
+      members: ['node-node-3', 'node-4'],
       type: 'bubble',
       padding: 10,
       style: {
