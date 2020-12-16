@@ -197,3 +197,10 @@ export interface Layout {
     [key: string]: any; // eslint-disable-line
   };
 }
+
+export interface IconLoader {
+  (): {
+    fontFamily: string;
+    map: {}[];
+  }[];
+}
