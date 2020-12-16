@@ -25,14 +25,11 @@ import '@antv/graphin-components/dist/index.css';
 
 const App = () => {
   const hullOptions = [
-    // 必须参数
     {
-      id: 'hull-1',
-      numbers: ['node-1', 'node-2'],
+      members: ['node-1', 'node-2'], // 必须参数
     },
     {
-      id: 'hull-2',
-      numbers: ['node-4', 'node-5'],
+      members: ['node-4', 'node-5'],
       type: 'bubble',
       padding: 10,
       style: {

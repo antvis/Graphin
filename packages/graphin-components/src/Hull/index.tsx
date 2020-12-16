@@ -2,6 +2,7 @@ import React from 'react';
 
 //@ts-ignore
 import { GraphinContext } from '@antv/graphin';
+import Utils from '../utils';
 
 /**
  * deep merge hull config
@@ -22,7 +23,7 @@ const deepMergeCfg = (defaultCfg: typeof defaultHullCfg, cfg: HullCfg) => {
 };
 
 const defaultHullCfg = {
-  id: 'g6-hull',
+  id: Utils.createUuid(),
   members: [],
   type: 'round-convex',
   nonMembers: [],
@@ -45,7 +46,7 @@ interface HullCfg {
    * smooth-convex: 生成平滑凸包轮廓
    * bubble: 产生一种可以避开 nonMembers 的平滑凹包轮廓（算法）。
    * 默认值是 round-convex。 */
-  type?: 'round-convex' | 'round-convex' | 'smooth-convex' | 'bubble';
+  type?: 'round-convex' | 'smooth-convex' | 'bubble';
   /** 不在轮廓内部的节点数组，只在 bubble 类型的包裹中生效 */
   nonMembers?: string[];
   /** 轮廓的样式属性 */
