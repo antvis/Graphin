@@ -17,6 +17,11 @@ node_modules
 **/es
 jspm_packages/
 
+packages/graphin-docs/docs/.umi
+packages/graphin-docs/src/.umi
+packages/graphin-components/src/.umi
+packages/graphin/src/.umi
+
 # Optional npm cache directory
 .npm
 
@@ -44,6 +49,7 @@ package-lock.json
 
 # yarn-lock
 yarn.lock
+
 
 
 # ignore dist files
