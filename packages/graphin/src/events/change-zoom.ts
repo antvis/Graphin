@@ -30,7 +30,7 @@ const changeZoom = (graphin: Graphin) => {
               if (graphin.state.forceSimulation.done && graph!.getZoom() > keyShapeZoom) {
                 optimizeDrawing(graph, false);
               }
-            } else if (graph!.getZoom() > keyShapeZoom) {
+            } else if (1 || graph!.getZoom() > keyShapeZoom) {
               /** 只有缩放比率大于keyShapeZoom，才展示所有的，否则只展示keyshape */
               optimizeDrawing(graph, false);
             }

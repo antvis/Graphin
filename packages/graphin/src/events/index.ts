@@ -1,7 +1,7 @@
 import { debounce } from 'lodash';
 import handleResize from './window-resize';
-import handleZoom from './change-zoom';
-import dragWithForce from './drag-with-force';
+// import handleZoom from './change-zoom';
+// import dragWithForce from './drag-with-force';
 import Graphin from '../Graphin';
 
 const handleGraphEvents = (graphin: Graphin) => {
@@ -12,23 +12,23 @@ const handleGraphEvents = (graphin: Graphin) => {
   const handleResizeEvent = debounce(() => {
     handleResize(graphin);
   }, 100);
-  window.addEventListener('resize', handleResizeEvent, false);
+  // window.addEventListener('resize', handleResizeEvent, false);
 
   /**
    * 监听wheel/zoom事件
    */
-  handleZoom(graphin);
+  // handleZoom(graphin);
   /**
    * 基于力导的节点拖拽
    */
-  dragWithForce(graphin);
+  // dragWithForce(graphin);
 
   /**
    * 事件清除
    */
   return {
     clear: () => {
-      window.removeEventListener('resize', handleResizeEvent, false);
+      // window.removeEventListener('resize', handleResizeEvent, false);
     },
   };
 };

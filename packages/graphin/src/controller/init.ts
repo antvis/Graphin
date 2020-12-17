@@ -11,6 +11,7 @@ interface BehaviorsMode {
 }
 
 const ZOOM_RANGE = [0.2, 10];
+export let graphinInstance: any;
 
 function generateDefaultGraphOptions(graphDOM: HTMLDivElement): Partial<ExtendedGraphOptions> {
   const { clientWidth, clientHeight } = graphDOM;
@@ -216,10 +217,10 @@ function init(props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode: Beha
       collapseExpand: true,
     },
   })
-    .filter((c) => {
+    .filter(c => {
       return !c.disable;
     })
-    .map((c) => {
+    .map(c => {
       return {
         type: c.type,
         ...c.options,
@@ -228,7 +229,9 @@ function init(props: GraphinProps, graphDOM: HTMLDivElement, behaviorsMode: Beha
 
   const instance: GraphType = new G6.Graph({
     ...g6Options,
+    animate: true,
     modes: {
+      ...props.options.modes,
       ...behaviorsMode, // Add multiple G6 behavior modes
       default: [...defaultModes, ...modes!.default!, ...behaviorsMode.default],
     },

@@ -15,7 +15,7 @@ import RegisterHexagonNode from '../shape/graph-studio/HexagonNode';
 import RegisterPointNode from '../shape/graph-studio/PointNode';
 import RegisterStubNode from '../shape/graph-studio/StubNode';
 import graphinHighlight from '../behaviors/graphin-highlight';
-import { registerFontFamily } from '../icons/iconFont';
+
 import { BehaviorModeItem } from './init';
 
 const defaultRegister = {
@@ -140,29 +140,34 @@ interface BehaviorMode {
 }
 
 const graphinRegister = (props: GraphinProps) => {
+  /**  内置 Graphin 的节点 */
+
   const { extend = {}, register = {}, options = {} } = props;
 
-  const defaultBehaviors = defaultRegister.behavior().filter((behavior) => {
+  const defaultBehaviors = defaultRegister.behavior().filter(behavior => {
     const behaviorName = behavior.name.split('-')[1];
     const disableName = `disable${toUpperCaseWithFirst(behaviorName)}`;
     return !options[disableName];
   });
 
-  // props.register 处理
+  /** props.register 兼容性说明 */
+  if (register) {
+    console.info(' reigster是过时的方法，请使用 Graphin.reigsterX，详情参考:...');
+  }
   const { nodeShape = dummyRegister, edgeShape = dummyRegister, behavior = dummyRegister } = register;
   const registerNodes = [...defaultRegister.nodeShape(), ...nodeShape(G6)];
   const registerEdges = [...defaultRegister.edgeShape(), ...edgeShape(G6)];
   const registerBehaviors = [...defaultBehaviors, ...behavior(G6)];
 
-  registerNodes.forEach((item) => {
+  registerNodes.forEach(item => {
     item.register(G6);
   });
-  registerEdges.forEach((item) => {
+  registerEdges.forEach(item => {
     item.register(G6);
   });
   const modes: Mode[] = [];
 
-  registerBehaviors.forEach((item) => {
+  registerBehaviors.forEach(item => {
     item.register(G6);
     const { name, mode } = item;
 
@@ -177,6 +182,7 @@ const graphinRegister = (props: GraphinProps) => {
     default: [],
   };
 
+  /** 兼容 G6.options.mode */
   const behaviorMode = modes.reduce((acc, curr) => {
     const { mode, ...others } = curr;
     if (!acc[mode]) {
@@ -189,15 +195,17 @@ const graphinRegister = (props: GraphinProps) => {
   // props.extend 处理
   const { icon = dummyIcon, nodeShape: ExNodeShape = dummyExtend, marker: ExMarker = dummyExtend } = extend;
 
+  if (extend.marker) {
+    console.info('extend.marker 已经废弃，图标的定义请使用fonticon形式，详情参考:...');
+  }
   const extendNodes = [...defaultExtend.nodeShape!(), ...ExNodeShape()];
   const extendMarker = [...defaultExtend.marker!(), ...ExMarker()];
 
-  extendNodes.forEach((item) => {
+  extendNodes.forEach(item => {
     compiler(item);
   });
 
   registerInnerMarker(extendMarker);
-  registerFontFamily(icon());
 
   return behaviorMode;
 };

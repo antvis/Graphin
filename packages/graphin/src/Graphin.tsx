@@ -1,37 +1,37 @@
 // @ts-nocheck
 import React, { ErrorInfo } from 'react';
-import { Graph as GraphType } from '@antv/g6';
+import G6, { Graph as GraphType } from '@antv/g6';
 
 import { cloneDeep } from 'lodash';
 /** controller */
 import initController, { initGraphAfterRender } from './controller/init';
 import registerController from './controller/register';
-import HistoryController from './controller/history';
 
 import layoutController from './controller/layout';
 import apisController from './apis';
 import eventController from './events/index';
 
 /** types  */
-import { GraphinProps, GraphinState, ExtendedGraphOptions, ForceSimulation, Data, Layout } from './types';
+import { GraphinProps, ForceSimulation, Data, Layout } from './types';
 import { IconLoader } from './typings';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
 
 import './index.less';
+import { ICON_FONT_FAMILY_MAP } from './icons/iconFont';
+
+/** Context */
 
 export const GraphinContext = React.createContext();
-const ICON_FONT_FAMILY_MAP: {
-  [key: string]: IconFontMapItem[];
-} = {};
 
 type DiffValue = Data | Layout | undefined;
 
-class Graph extends React.PureComponent<GraphinProps, GraphinState> {
+class Graphin extends React.PureComponent<GraphinProps> {
   graphDOM: HTMLDivElement | null = null;
-
+  /** G6的实例 */
   graph?: GraphType;
+  forceSimulation: ForceSimulation | null;
 
   static registerNode(nodeName, options, extendedNodeName) {
     G6.registerNode(nodeName, options, extendedNodeName);
@@ -59,22 +59,17 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
   constructor(props: GraphinProps) {
     super(props);
-    this.state = {
-      isGraphReady: false,
-      data: props.data,
-      forceSimulation: null,
-      width: 0,
-      height: 0,
-      graphSave: null,
-    };
-    this.history = new HistoryController();
+    this.data = props.data;
     this.forceSimulation = null;
-    this.getLayoutInfo = () => {};
+    this.height = props.height || 500;
+    this.width = props.width || 500;
+    this.state = {
+      isReady: false,
+    };
   }
 
   componentDidMount() {
     const { data } = this.props;
-    // register props.extend and props.register
     const behaviorsMode = registerController(this.props);
     // init G6 instance
     const { instance, width, height, options } = initController(
@@ -82,57 +77,103 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
       this.graphDOM as HTMLDivElement,
       behaviorsMode,
     );
+
     this.g6Options = options;
     this.graph = instance as GraphType;
     const { data: newData, forceSimulation } = layoutController(this.getContext(), { data });
     this.forceSimulation = forceSimulation!;
 
-    this.setState(
-      {
-        isGraphReady: true,
-        graph: this.graph,
-        width,
-        height,
-        data: newData,
-        forceSimulation,
-      },
-      () => {
-        this.renderGraphWithLifeCycle(true);
-      },
-    );
+    this.width = width;
+    this.height = height;
+    this.data = newData;
+    this.data.forceSimulation;
+
+    this.renderGraphWithLifeCycle(true);
+
     this.handleEvents();
+    this.isGraphReady = true;
+    this.setState({
+      isReady: true,
+    });
   }
 
+  /**
+   * 组件更新的时候
+   * @param prevProps
+   */
   componentDidUpdate(prevProps: GraphinProps) {
+    console.time('componentDidUpdate');
     const isDataChange = this.shouldUpdate(prevProps, 'data');
     const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
+    const isOptionsChange = this.shouldUpdate(prevProps, 'options');
+    console.timeEnd('componentDidUpdate');
 
-    // only rerender when data or layout change
-    if (isDataChange || isLayoutChange) {
-      let { data: currentData } = this.state;
-      if (isDataChange) {
-        const { data } = this.props;
-        currentData = data;
-      }
-      const { data, forceSimulation } = layoutController(this.getContext(), { data: currentData, prevProps });
-      this.forceSimulation = forceSimulation!;
-      this.setState(
-        {
-          data,
-          forceSimulation,
-        },
-        () => {
-          // rerender Graph
-          this.renderGraphWithLifeCycle();
-        },
-      );
+    /** 如果都没有改变，不渲染 */
+    if (!isDataChange && !isLayoutChange && !isOptionsChange) {
+      return;
     }
-  }
+    /** 布局策略改变了，相当于重新渲染：render and initState */
+    if (isLayoutChange) {
+      const { data, forceSimulation } = layoutController(this.getContext(), { data: this.props.data, prevProps });
+      this.data = data;
+      this.forceSimulation = forceSimulation!;
+      this.renderGraphWithLifeCycle(true);
+      return;
+    }
+    // // 如果仅是数据变化，需要对数据做diff
+    // if (isDataChange) {
+    //   const { nodes, edges, combos } = this.props.data;
+    //   const { nodes: PreNodes, edges: PreEdges, combos: PreCombos } = prevProps.data;
+    //   // 先判断节点
+    //   console.time('is data change');
+    //   const addNodes = [];
+    //   nodes.forEach(node => {
+    //     const { id, status, ...others } = node;
+    //     const matchNode = PreNodes.find(n => n.id === id); //需要替换成Map，看下性能
+    //     if (!matchNode) {
+    //       addNodes.push(node);
+    //       return;
+    //     }
+    //     const { status: PrevStatus, ...prevOthers } = matchNode;
+    //     if (JSON.stringify(status) !== JSON.stringify(PrevStatus)) {
+    //       Object.keys(status).forEach(k => {
+    //         graph.setItemState(id, k, status[k]);
+    //       });
+    //     }
+    //     if (JSON.stringify(others) !== JSON.stringify(prevOthers)) {
+    //       this.graph?.updateItem(id, node);
+    //     }
+    //   });
+    //   console.timeEnd('is data change');
 
+    //   addNodes.forEach(node => {
+    //     this.graph?.addItem('node', node);
+    //   });
+    //   console.log(this.graph);
+    //   this.graph?.render();
+    //   console.log('addNodes', addNodes);
+    // }
+
+    if (isDataChange) {
+      const { data } = this.props;
+      this.data = this.props.data;
+    }
+    const { data, forceSimulation } = layoutController(this.getContext(), { data: this.data, prevProps });
+    this.data = data;
+    this.forceSimulation = forceSimulation!;
+    this.renderGraphWithLifeCycle();
+  }
+  /**
+   * 组件移除的时候
+   */
   componentWillUnmount() {
     this.clearEvents!();
   }
-
+  /**
+   * 组件崩溃的时候
+   * @param error
+   * @param info
+   */
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error('Catch component error: ', error, info);
   }
@@ -142,36 +183,20 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     return apisController(context);
   };
 
-  getHistoryInfo = () => {
-    return this.history.getHistoryInfo();
-  };
-
   clear = () => {
     this.graph!.clear();
     this.history.reset();
     this.clearEvents!();
-
-    this.setState(
-      {
-        data: { nodes: [], edges: [] },
-
-        forceSimulation: null,
-        graphSave: null,
-      },
-      () => {
-        const { data } = this.state;
-        this.renderGraph(data);
-      },
-    );
+    this.data = { nodes: [], edges: [] };
+    this.forceSimulation = null;
+    this.renderGraph();
   };
 
   shouldUpdate(prevProps: GraphinProps, key: string) {
     /* eslint-disable react/destructuring-assignment */
     const prevVal = prevProps[key] as DiffValue;
     const currentVal = this.props[key] as DiffValue;
-    // console.time('deep equal');
     const isEqual = deepEqual(prevVal, currentVal);
-    // console.timeEnd('deep equal');
     return !isEqual;
   }
 
@@ -184,10 +209,20 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
   };
 
   renderGraphWithLifeCycle = (firstRender: boolean) => {
-    const { data } = this.state;
-    this.graph!.changeData(cloneDeep(data));
+    console.time('cloneDeep-data');
+    const newData = cloneDeep(this.data);
+    console.timeEnd('cloneDeep-data');
+
+    console.time('change-data');
+    // this.graph!.changeData(newData);
+    this.graph?.data(newData);
+    this.graph?.render();
+    console.timeEnd('change-data');
+
     this.graph!.emit('afterchangedata');
-    this.handleSaveHistory();
+    this.graph!.emit('layout:done');
+    console.log(this.graph);
+
     if (firstRender) {
       initGraphAfterRender(this.props, this.graphDOM, this.graph);
     }
@@ -200,48 +235,8 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     }
   };
 
-  handleSaveHistory = () => {
-    const currentState = {
-      ...this.state,
-      graphSave: cloneDeep(this.graph!.save()),
-    };
-    this.history.save(currentState);
-  };
-
-  handleUndo = () => {
-    this.stopForceSimulation();
-
-    const prevState = this.history.undo();
-    if (prevState) {
-      this.setState(
-        {
-          ...prevState,
-        },
-        () => {
-          this.renderGraphByHistory();
-        },
-      );
-    }
-  };
-
-  handleRedo = () => {
-    this.stopForceSimulation();
-
-    const nextState = this.history.redo();
-    if (nextState) {
-      this.setState(
-        {
-          ...nextState,
-        },
-        () => {
-          this.renderGraphByHistory();
-        },
-      );
-    }
-  };
-
-  renderGraph = (data: Data) => {
-    this.graph!.changeData(cloneDeep(data));
+  renderGraph = () => {
+    this.graph!.changeData(cloneDeep(this.data));
     /**
      * TODO 移除 `afterchangedata` Event
      * 此方法应该放到G6的changeData方法中去emit
@@ -249,80 +244,25 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     this.graph!.emit('afterchangedata');
   };
 
-  renderGraphByHistory = () => {
-    const { forceSimulation, graphSave } = this.state;
-    if (forceSimulation) {
-      forceSimulation.restart(graphSave.nodes || [], this.graph!);
-    }
-    this.renderGraph(graphSave);
-  };
-
-  renderChildren = () => {
-    let { children } = this.props;
-
-    const combineProps = {
-      graph: this.graph,
-      graphDOM: this.graphDOM,
-      graphVars: this.state,
-      apis: this.getApis(),
-    };
-
-    if (!children) {
-      return null;
-    }
-
-    if (typeof children === 'function') {
-      return children(combineProps);
-    }
-
-    /**
-     * 1. <Graphin> <div> this is text <ContextMenu />  </div> </Graphin>
-     * 2. <Graphin> <CustomerComponent> this is text  <ContextMenu /> </CustomerComponent> </Graphin>
-     * 3. <Graphin> <Fragment> this is text  <ContextMenu /> </Graphin>
-     */
-    if (
-      React.isValidElement(children) &&
-      (String(children.type) === 'Symbol(react.fragment)' || typeof children.type === 'string')
-    ) {
-      console.error('Please do not wrap components inside dom element or Fragment when using Graphin');
-      return children;
-    }
-
-    if (!Array.isArray(children)) {
-      children = [children];
-    }
-
-    return React.Children.map(children, (child) => {
-      // do not pass props if element is a DOM element or not a valid react element.
-      if (!React.isValidElement(child) || typeof child.type === 'string') {
-        return child;
-      }
-      return React.cloneElement(child, {
-        ...combineProps,
-      });
-    });
-  };
-
   render() {
-    const { isGraphReady } = this.state;
     return (
       <GraphinContext.Provider
         value={{
           graph: this.graph,
         }}
       >
-      <div id="graphin-container">
-        <div
-          data-testid="custom-element"
-          className="graphin-core"
-          ref={(node) => {
-            this.graphDOM = node;
-          }}
-        />
+        <div id="graphin-container">
+          <div
+            data-testid="custom-element"
+            className="graphin-core"
+            ref={node => {
+              this.graphDOM = node;
+            }}
+          />
           <div className="graphin-components">{this.state.isReady && this.props.children}</div>
         </div>
       </GraphinContext.Provider>
     );
   }
 }
-export default Graph;
+export default Graphin;

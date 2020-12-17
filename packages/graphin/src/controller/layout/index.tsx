@@ -40,8 +40,8 @@ const layoutController = (
   // 数据的校验
   const data = checkData(PropsData, {
     edge: {
-      autoPoly: !!graphin.g6Options?.autoPolyEdge,
-      autoLoop: !!graphin.g6Options?.autoLoopEdge,
+      autoPoly: true, // !!graphin?.g6Options?.autoPolyEdge,
+      autoLoop: true, // !!graphin?.g6Options?.autoLoopEdge,
     },
   });
 
@@ -57,9 +57,9 @@ const layoutController = (
   const layouts = [...defaultLayouts(graphin, prevProps), ...extendLayout(graphin, prevProps)];
 
   // eslint-disable-next-line no-param-reassign
-  graphin.getLayoutInfo = () => {
-    return layoutInfo(layouts);
-  };
+  // graphin.getLayoutInfo = () => {
+  //   return layoutInfo(layouts);
+  // };
 
   // 当没有节点，则不参加布局
   if (data.nodes && data.nodes.length === 0) {
