@@ -1,4 +1,15 @@
-# Statistic
+---
+title: Statistic 画布统计
+group:
+  path: /mark
+  title: 标示组件
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
+# Statistic 画布统计
 
 类似 antd 的 [Statistic 统计数值] (https://ant.design/components/statistic-cn/),Graphin 中也需要一个实时统计画布节点信息的组件。
 
@@ -18,7 +29,7 @@
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

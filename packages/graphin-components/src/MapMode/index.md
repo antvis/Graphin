@@ -1,4 +1,15 @@
-# MapMode
+---
+title: MapMode 地图模式
+group:
+  path: /special
+  title: 特殊分析
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
+# MapMode 地图模式
 
 MapMode 地图模式，功能做完善了可以考虑单独成 packages/graphin-geospatial
 
@@ -13,7 +24,7 @@ MapMode 地图模式，功能做完善了可以考虑单独成 packages/graphin-
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

@@ -1,3 +1,14 @@
+---
+title: MiniMap 小地图
+group:
+  path: /interaction
+  title: 交互组件
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
 # MiniMap
 
 MiniMap 小地图导航 是一种常见的交互组件，当数据量很大， 小地图导航可以让用户看到当前画布内容位于全局的什么位置，从而不丢失分析的全局感，是非常有效的组件
@@ -13,7 +24,7 @@ MiniMap 小地图导航 是一种常见的交互组件，当数据量很大， �
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

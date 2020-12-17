@@ -1,3 +1,14 @@
+---
+title: Tooltip 提示框
+group:
+  path: /interaction
+  title: 交互组件
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
 # Tooltip
 
 Tooltip 提示框是一种快速浏览信息的交互组件，常用于图的节点和边上。通过鼠标悬停在节点或边上时，出现一个提示框，鼠标移出节点则取消提示框。这在快速查询元素详细信息时非常有帮助。
@@ -13,7 +24,7 @@ Tooltip 提示框是一种快速浏览信息的交互组件，常用于图的节
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

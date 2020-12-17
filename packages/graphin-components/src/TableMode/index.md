@@ -1,3 +1,14 @@
+---
+title: TableMode 表格模式
+group:
+  path: /analysis
+  title: 分析配套
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
 # TableMode
 
 TableMode 表格模式是一种系统组件，虽然不能直观展示图中关联关系，但是对于罗列点、边属性信息有较大优势，作为分析能力的一个补充。
@@ -14,7 +25,7 @@ TableMode 表格模式是一种系统组件，虽然不能直观展示图中关�
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

@@ -1,3 +1,14 @@
+---
+title: FindPathPanel 寻找路面板
+group:
+  path: /analysis
+  title: 分析组件
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
 # FindPathPanel
 
 FindPathPanel 寻找路径组件 是一种算法分析组件。当我们多选的时候，选中节点达到两个的时候了，该组件会呈现为呼吸灯提示，点击即可打开面板。在面板上，画布中选中的两个节点会作为 source 和 target 节点（当然也支持类似高德路线那样，点击箭头切换起始方向），下面会出现一个路径 List 列表，起始第一个路径为 最短路径，其余的路径是两个点经过的路径，按照节点个数倒叙排序
@@ -13,7 +24,7 @@ FindPathPanel 寻找路径组件 是一种算法分析组件。当我们多选�
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

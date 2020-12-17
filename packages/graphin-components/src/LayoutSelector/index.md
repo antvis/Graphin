@@ -1,4 +1,15 @@
-# LayoutSelector
+---
+title: LayoutSelector 布局切换器
+group:
+  path: /analysis
+  title: 分析配套
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
+# LayoutSelector 布局切换器
 
 LayoutSelector 布局切换器，是常见的一种图分析配套组件，通过切换布局的类型，同时支持用户自定义调参，以此达到最好的布局效果
 
@@ -15,7 +26,7 @@ LayoutSelector 布局切换器，是常见的一种图分析配套组件，通�
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

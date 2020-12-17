@@ -5,7 +5,6 @@
   "main": "./dist/index",
   "types": "./dist/graphin-components/src/index.d",
   "scripts": {
-    "docs": "dumi dev",
     "start": "father build --watch",
     "build": "father build",
     "build:umd": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --env.NODE_ENV=production  -c ./webpack.config.js ",
@@ -29,7 +28,6 @@
     "babel-plugin-transform-default-import": "^1.0.0",
     "css-loader": "^3.2.0",
     "deepmerge": "^4.1.1",
-    "dumi": "^1.1.0-rc.7",
     "eventemitter3": "^4.0.0",
     "father": "^2.23.1",
     "file-loader": "^4.2.0",

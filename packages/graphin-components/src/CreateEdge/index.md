@@ -1,3 +1,14 @@
+---
+title: CreateEdge 边建联组件
+group:
+  path: /interaction
+  title: 交互组件
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
 # CreateEdge 边建联组件
 
 CreateEdge 边建联组件 是一种常见的交互组件。当我们的图分析过程中，需要建立新的图模型，边的创建就尤为关键。一般用户的操作路径是这样的，点击 `编辑ICON` 的 button，激活边建联模式，鼠标 hover 到节点上的时候，能够呈现`+`号，提示用户当前可以连线。连线默认采用`click`的方式，点击另一个节点后即可建立边，整个过程可以参考 G6 的`create-edge`实现：https://g6.antv.vision/zh/examples/interaction/createEdge#click
@@ -14,7 +25,7 @@ CreateEdge 边建联组件 是一种常见的交互组件。当我们的图分�
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

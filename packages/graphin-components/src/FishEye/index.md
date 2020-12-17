@@ -1,4 +1,15 @@
-# FishEye
+---
+title: FishEye 鱼眼放大镜
+group:
+  path: /interaction
+  title: 交互组件
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
+# FishEye 鱼眼放大镜
 
 FishEye 鱼眼放大镜，是常见的一种图分析配套组件，用于查看局部细节，当图的节点和边很多的时候，很有效果。
 
@@ -14,7 +25,7 @@ FishEye 鱼眼放大镜，是常见的一种图分析配套组件，用于查看
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

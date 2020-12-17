@@ -1,6 +1,17 @@
-# Sheetbar
+---
+title: Sheetbar 多画布
+group:
+  path: /analysis
+  title: 分析配套
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
 
-多画布模式，类似 excel 表格那样的 sheet 页签，支持多画布操作和用户的二次分析
+# Sheetbar 多画布
+
+类似 excel 表格那样的 sheet 页签，支持多画布操作和用户的二次分析
 
 ## 功能特性
 
@@ -10,7 +21,7 @@
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

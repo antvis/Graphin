@@ -1,3 +1,14 @@
+---
+title: SnapshotGallery 快照画廊
+group:
+  path: /analysis
+  title: 分析配套
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
 # SnapshotGallery 快照画廊
 
 SnapshotGallery 快照画廊是由一系列分析结果快照保存组成的事件长廊，Graphin 形象地称之为快照画廊。与传统单一的快照功能相比，快照画廊能够将片断的分析快照保存在系统上，以供分析师能够回看和二次分析。相比工具栏里的“撤销回退”功能，快照画廊更佳可视化，与分析系统集成度更佳。
@@ -15,7 +26,7 @@ SnapshotGallery 快照画廊是由一系列分析结果快照保存组成的事�
 
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
