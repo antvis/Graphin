@@ -1,4 +1,15 @@
-# Hull
+---
+title: Hull 轮廓包裹
+group:
+  path: /mark
+  title: 标示组件
+nav:
+  title: Components
+  path: /components
+  order: 1
+---
+
+# Hull 轮廓包裹
 
 Hull 轮廓包裹，是常见的一种图分析组件，可以将所属在一组的节点描边产生轮廓，从而在视觉上区分分组，轮廓组件不破坏原先的节点布局，是一种高效简单的分析组件
 
@@ -12,9 +23,15 @@ Hull 轮廓包裹，是常见的一种图分析组件，可以将所属在一组
 
 > 欢迎 github 的伙伴 讨论设计和组件方案，开源共建。
 
+## Demo
+
+<code src='./demo/Simple.tsx'></code>
+
+<API src='./index.tsx'></API>
+
 ## 用法
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
