@@ -1,9 +1,21 @@
+import { join } from 'path';
 const isProduction = process.env.NODE_ENV === 'production';
-
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 export default {
-  title: 'Graphin Components',
+  title: 'graphin docs',
   mode: 'site',
-  resolve: { includes: ['src/Hull/demo'] },
+  resolve: {
+    includes: [
+      /** Graphin Core */
+      'packages/graphin/docs/',
+      /** Graphin Components */
+      'packages/graphin-components/src/',
+    ],
+  },
+  alias: {
+    '@antv/graphin': join(__dirname, 'packages', 'graphin'),
+    '@antv/graphin-components': join(__dirname, 'packages', 'graphin-components'),
+  },
   extraBabelPlugins: [
     [
       'import',
@@ -50,7 +62,7 @@ export default {
     ios: false,
   },
   theme: {
-    '@s-site-menu-width': '208px',
+    '@s-site-menu-width': '280px',
   },
   links: process.env.NODE_ENV === 'development' ? ['https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd.css'] : [],
   scripts:

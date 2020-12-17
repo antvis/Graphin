@@ -21,6 +21,7 @@ packages/graphin-docs/docs/.umi
 packages/graphin-docs/src/.umi
 packages/graphin-components/src/.umi
 packages/graphin/src/.umi
+.umi
 
 # Optional npm cache directory
 .npm

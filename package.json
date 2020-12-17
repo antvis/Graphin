@@ -1,7 +1,8 @@
 {
   "name": "graphin",
   "scripts": {
-    "start": "lerna run start --parallel  --ignore @antv/graphin-studio --ignore graphin-site",
+    "docs": "dumi dev",
+    "start": "lerna run start --parallel  --ignore @antv/graphin-studio --ignore graphin-site --ignore graphin-dumi",
     "site": "cd ./packages/graphin-site && npm run start",
     "studio": "cd ./packages/graphin-studio && npm run start",
     "bootstrap": "lerna bootstrap",
@@ -29,6 +30,7 @@
     "@typescript-eslint/parser": "^2.3.1",
     "conventional-changelog": "^3.1.18",
     "conventional-changelog-cli": "^2.0.31",
+    "dumi": "^1.1.0-rc.7",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.4.0",
