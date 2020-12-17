@@ -35,12 +35,12 @@ import '@antv/graphin-components/dist/index.css';
 const { BreathingLamp } = FindPathPanel;
 
 const App = () => {
-  const handleClossCallback = () => {};
+  const handleCloseCallback = () => {};
 
   return (
     <div className="App">
       <Graphin data={Utils.mock(10).graphin()}>
-        <FindPathPanel onClose={handleClossCallback} />
+        <FindPathPanel onClose={handleCloseCallback} />
         <Toolbar>
           <Toolbar.Item>
             <BreathingLamp />

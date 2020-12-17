@@ -8,30 +8,29 @@
 
 [中文](./README-cn.ZH.md)
 
-Graphin's components lib for building graph analysis studio. Graphin is the graph analysis toolkit based on [G6 3.x](https://github.com/antvis/g6).
+This is Graphin's library of pre-built React components for common analytical use cases. Graphin is a graph analysis solution based on [G6 4.x](https://github.com/antvis/g6).
 
 Components list:
 
-| 组件            | 分类         | 名称       | 说明                                                 |
-| --------------- | ------------ | ---------- | ---------------------------------------------------- |
-| ContextMenu     | 交互组件     | 右键菜单   | 帮助用户进行节点或边操作：打标，扩散，发现           |
-| Tooltip         | 交互组件     | 提示框     | 帮助用户快速浏览节点或边的信息                       |
-| MiniMap         | 交互组件     | 小地图     | 帮助用户进行全局导航                                 |
-| Toolbar         | 交互组件     | 工具栏     | 帮助用户进行画布操作：缩小，放大，全屏               |
-| RedoUndo        | 交互组件     | 撤销回退   | 帮助用户进行全局导航                                 |
-| FishEye         | 交互组件     | 鱼眼放大镜 | 帮助用户进行查看细节                                 |
-| CreateEdge      | 交互组件     | 边建联组件 | 帮助用户进行关系建联                                 |
-| Legend          | 标示组件     | 图例       | 帮助用户进行节点和边的类型标示：颜色，大小，属性     |
-| Hull            | 标示组件     | 轮廓       | 帮助用户进行节点归类示                               |
-| Statistic       | 标示组件     | 统计面板   | 帮助用户进行画布状态的监控标示                       |
-| SnapshotGallery | 分析配套组件 | 快照画廊   | 提供快照保存复现功能，帮助用户分析过程不中断         |
-| LayoutSelector  | 分析配套组件 | 布局切换器 | 帮助用户切换布局，自主调节参数，从而达到最佳布局效果 |
-| Sheetbar        | 分析配套组件 | 多画布组件 | 帮助用户二次分析，多画布管理                         |
-| TableMode       | 分析配套组件 | 表格模式   | 帮助通过表格查看关系源数据                           |
-| FindPathPanel   | 算法分析组件 | 寻找路径   | 帮助用户计算两个节点间的最短路径和可能路径列表       |
-| MapMode         | 高级分析组件 | 地图模式   | 帮助用户分析地理关系数据                             |
-| Timebar         | 高级分析组件 | 时间轴     | 帮助用户分析时序关系数据                             |
-
+| Component       | Category                      | Description                                                                 |
+| --------------- | ----------------------------- | --------------------------------------------------------------------------- |
+| ContextMenu     | Interactive Component         | Help users perform node or edge operations such as tagging or expansion     |
+| Tooltip         | Interactive Component         | Help users quickly browse node or edge information                          |
+| MiniMap         | Interactive Component         | Help users to navigate around the canvas                                    |
+| Toolbar         | Interactive Component         | Help users with canvas operations: zoom out, zoom in, full screen etc.      |
+| RedoUndo        | Interactive Component         | Help users manage graph history                                             |
+| FishEye         | Interactive Component         | Help users to enlarge cluttered graph details                               |
+| CreateEdge      | Interactive Component         | Help users draw connections between nodes                                   |
+| Legend          | Labeling Component            | Displays categorical information about nodes and/or edges                    |
+| Hull            | Labeling Component            | Help users group similar nodes together                                     |
+| Statistic       | Labeling Component            | Help users monitor canvas information                                       |
+| SnapshotGallery | Analytical Component          | Provide snapshot saving and replaying function as part of an image carousel |
+| LayoutSelector  | Analytical Component          | Help users switch layouts and configure layout options for optimal display  |
+| Sheetbar        | Analytical Component          | Help users analyze and manage multiple canvases                             |
+| TableMode       | Analytical Component          | Help users view relational data as tables                                   |
+| FindPathPanel   | Algorithm Based Component     | Help users calculate the shortest path and possible paths between two nodes |
+| MapMode         | Advanced Analytical Component | Help users analyze geospatial relational data                               |
+| Timebar         | Advanced Analytical Component | Help users analyze time series relational data                              |
 ## Install
 
 ```bash
@@ -40,7 +39,7 @@ npm install @antv/graphin-components --save
 
 ```
 
-UMD bundle is available in [releases](https://github.com/antvis/Graphin/releases). External dependencys: react, react-dom, antd.
+UMD bundle is available in [releases](https://github.com/antvis/Graphin/releases). Peer dependencies: react, react-dom, antd.
 
 ## Usage
 
@@ -50,7 +49,7 @@ import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar } from '@antv/graphin-components';
 
-// Do not forget to import CSS
+// Do not forget to import required CSS
 import '@antv/graphin/dist/index.css';
 import '@antv/graphin-components/dist/index.css';
 
