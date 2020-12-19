@@ -29,7 +29,7 @@ Similar to antd's [Statistic Component](https://ant.design/components/statistic/
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

@@ -1,5 +1,5 @@
 ---
-title: LayoutSelector 
+title: LayoutSelector
 group:
   path: /analysis
   title: Analytical Component
@@ -26,7 +26,7 @@ LayoutSelector is a common graph analysis component that switches the type of la
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

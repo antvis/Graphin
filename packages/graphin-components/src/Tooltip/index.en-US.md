@@ -24,7 +24,7 @@ Tooltip is an interactive component for quickly accessing nodes or edges informa
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

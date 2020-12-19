@@ -21,7 +21,7 @@ Multi-canvas mode, similar to excel sheet tabs, supports multi-canvas operations
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

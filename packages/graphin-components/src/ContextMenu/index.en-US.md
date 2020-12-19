@@ -25,7 +25,7 @@ ContextMenu is a right-click menu, usually for further operations on nodes. For 
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

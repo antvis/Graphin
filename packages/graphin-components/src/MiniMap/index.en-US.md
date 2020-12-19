@@ -24,7 +24,7 @@ MiniMap is a common interactive component that allows users to see where the con
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

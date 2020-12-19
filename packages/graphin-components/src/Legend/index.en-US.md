@@ -26,7 +26,7 @@ Legend is a common graph analysis companion component, which usually colors node
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

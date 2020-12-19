@@ -28,7 +28,7 @@ FindPathPanel is an algorithmic analysis component. The user flow is as follows:
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

@@ -26,7 +26,7 @@ SnapshotGallery consists of a series of saved snapshots from a user's analysis, 
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

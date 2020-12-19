@@ -24,7 +24,7 @@ Timebar is a common analysis component that analyzes graph data in a temporal di
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

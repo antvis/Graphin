@@ -11,10 +11,11 @@ nav:
 
 # CreateEdge
 
-The CreateEdge edge builder is a common interactive component. For example, it is used when creating a UML diagram model to connect the nodes. The general user flow is as follows: 
+The CreateEdge edge builder is a common interactive component. For example, it is used when creating a UML diagram model to connect the nodes. The general user flow is as follows:
+
 1. Click on the button of the Edit icon to activate the edge build mode
 2. When the mouse hovers over the node, a + sign indicates that the node can be connected.
-3. Click on another node to create an edge. 
+3. Click on another node to create an edge.
 
 The whole process can be seen in G6's create-edge implementation: https://g6.antv.vision/en/examples/interaction/createEdge#click
 
@@ -30,7 +31,7 @@ The whole process can be seen in G6's create-edge implementation: https://g6.ant
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

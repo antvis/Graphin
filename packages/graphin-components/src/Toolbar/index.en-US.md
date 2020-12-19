@@ -9,7 +9,6 @@ nav:
   order: 1
 ---
 
-
 # Toolbar
 
 Toolbar makes common analysis operations easily accessible. In Graphin version 1.x, we built in undo and redo, fisheye magnifier, canvas zoom, full screen, node focus, canvas snapshot download, etc. However we got feedback from some businesses that they would prefer Graphin to expose the API for these features and allow the business to customize the style and interface layout. Therefore, in Graphin 2.x, Toolbar will be redesigned and positioned as a container for various toolbar operations.
@@ -21,14 +20,13 @@ Toolbar makes common analysis operations easily accessible. In Graphin version 1
 - Support for user-defined components: e.g. integrating the FishEye component
 - Support for APIs such as `Graphin.apis.zoomIn()`
 
-
 ## Reference
 
 > We welcome the Github community to discuss the component design and implementation, and build an open-source solution together.
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
@@ -61,7 +59,7 @@ const App = () => {
           </Toolbar.Item>
         </Toolbar>
       </Graphin>
-      /**  User-defined, get Graphin instance by useContext **/
+      /** User-defined, get Graphin instance by useContext **/
       <Graphin data={Utils.mock(10).graphin()}>
         <Toolbar>
           <FishEye />

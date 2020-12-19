@@ -25,7 +25,7 @@ Hull, a common graph analysis component, which allows contour wrapping of nodes 
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

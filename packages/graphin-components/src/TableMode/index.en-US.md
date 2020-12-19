@@ -25,7 +25,7 @@ TableMode displays nodes and edges properties in a table to complement the exist
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

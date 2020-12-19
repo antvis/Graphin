@@ -24,7 +24,7 @@ MapMode allows overlaying a graph on top of a map. Can consider splitting it as 
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
@@ -45,4 +45,7 @@ const App = () => {
 const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
+
+```
+
 ```
