@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Components for graphin",
   "main": "./dist/index",
-  "types": "./dist/graphin-components/src/index.d",
+  "types": "./dist/src/index.d.ts",
   "scripts": {
     "start": "father build --watch",
     "build": "father build",
