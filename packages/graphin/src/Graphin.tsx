@@ -3,16 +3,9 @@ import React, { ErrorInfo } from 'react';
 import G6, { Graph as GraphType } from '@antv/g6';
 
 import { cloneDeep } from 'lodash';
-/** controller */
-import initController, { initGraphAfterRender } from './controller/init';
-import registerController from './controller/register';
-
-import layoutController from './controller/layout';
-import apisController from './apis';
-import eventController from './events/index';
 
 /** types  */
-import { GraphinProps, ForceSimulation, Data, Layout } from './types';
+import { GraphinProps, Data, Layout } from './types';
 import { IconLoader } from './typings';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
@@ -21,18 +14,16 @@ import deepEqual from './utils/deepEqual';
 import './index.less';
 import { ICON_FONT_FAMILY_MAP } from './icons/iconFont';
 
+import { TREE_LAYOUTS } from './consts';
+import Events from './Events';
+
 /** Context */
 
-export const GraphinContext = React.createContext();
+export const GraphinContext: React.Context<{ graph: GraphType }> = React.createContext();
 
 type DiffValue = Data | Layout | undefined;
 
 class Graphin extends React.PureComponent<GraphinProps> {
-  graphDOM: HTMLDivElement | null = null;
-  /** G6的实例 */
-  graph?: GraphType;
-  forceSimulation: ForceSimulation | null;
-
   static registerNode(nodeName, options, extendedNodeName) {
     G6.registerNode(nodeName, options, extendedNodeName);
   }
@@ -57,10 +48,33 @@ class Graphin extends React.PureComponent<GraphinProps> {
     });
   }
 
+  /** Graph的DOM */
+  graphDOM: HTMLDivElement | null = null;
+
+  /** G6 instance */
+  graph?: GraphType;
+
+  /** layout */
+  layout: {
+    type: string;
+    instance: null;
+    destroyed: true;
+  };
+
+  /** 是否为 Tree Graph */
+  isTree: boolean;
+
+  /** G6实例中的 nodes,edges,combos 的 model，会比props.data中多一些引用赋值产生的属性，比如node中的 x,y */
+  data;
+
   constructor(props: GraphinProps) {
     super(props);
     this.data = props.data;
-    this.forceSimulation = null;
+    this.layout = {
+      type: '',
+      instance: '',
+      destroyed: false,
+    };
     this.height = props.height || 500;
     this.width = props.width || 500;
     this.state = {
@@ -68,30 +82,101 @@ class Graphin extends React.PureComponent<GraphinProps> {
     };
   }
 
+  initData = data => {
+    if (data.children) {
+      this.isTree = true;
+    }
+    console.time('clone data');
+    this.data = cloneDeep(data);
+    console.timeEnd('clone data');
+  };
+
+  initGraphInstance = () => {
+    const { data, layout, width, height } = this.props;
+    /**  width and height */
+    const { clientWidth, clinetHeight } = this.graphDOM;
+    /** shallow clone */
+    this.initData(data);
+
+    this.width = width || clientWidth;
+    this.height = height || clinetHeight;
+
+    /** graph type */
+    this.isTree = Boolean(data.children);
+
+    this.options = {
+      container: this.graphDOM,
+      renderer: 'canvas',
+      width: this.width,
+      height: 500,
+      animate: true,
+      defaultNode: {
+        type: 'circle',
+        size: [30],
+        labelCfg: {
+          position: 'bottom',
+        },
+      },
+      modes: {
+        default: [
+          // 画布拖拽
+          'drag-canvas',
+          // 拖拽节点
+          'drag-node',
+          // 点击选择
+          {
+            type: 'click-select',
+            disable: false,
+            options: {
+              multiple: true, // 允许多选
+              trigger: 'alt',
+            },
+          },
+          // 缩放画布
+          {
+            type: 'zoom-canvas',
+            disable: true,
+            options: {},
+          },
+        ],
+      },
+      fitView: true,
+
+      layout: {
+        ...layout,
+      },
+    };
+
+    if (this.isTree) {
+      this.graph = new G6.TreeGraph(this.options);
+    } else {
+      this.graph = new G6.Graph(this.options);
+    }
+
+    this.graph.data(this.data);
+    this.updateLayout();
+    this.graph.get('canvas').set('localRefresh', false);
+    this.graph.render();
+    this.initStatus();
+  };
+
+  updateLayout = () => {
+    if (!this.graph || this.graph.destroyed || !this.data || !this.data.nodes || !this.data.nodes.length) {
+      return false;
+    }
+    const { layout } = this.props;
+    const { type, ...layoutOptions } = layout;
+    const instance = new G6.Layout[type](layoutOptions);
+    instance.init(this.data);
+    instance.execute();
+    /** 变量存储 */
+    this.layout.type = type;
+    this.layout.options = layoutOptions;
+    this.layout.instance = instance;
+  };
+
   componentDidMount() {
-    const { data } = this.props;
-    const behaviorsMode = registerController(this.props);
-    // init G6 instance
-    const { instance, width, height, options } = initController(
-      this.props,
-      this.graphDOM as HTMLDivElement,
-      behaviorsMode,
-    );
-
-    this.g6Options = options;
-    this.graph = instance as GraphType;
-    const { data: newData, forceSimulation } = layoutController(this.getContext(), { data });
-    this.forceSimulation = forceSimulation!;
-
-    this.width = width;
-    this.height = height;
-    this.data = newData;
-    this.data.forceSimulation;
-
-    this.renderGraphWithLifeCycle(true);
-
-    this.handleEvents();
-    this.isGraphReady = true;
+    this.initGraphInstance();
     this.setState({
       isReady: true,
     });
@@ -101,74 +186,87 @@ class Graphin extends React.PureComponent<GraphinProps> {
    * 组件更新的时候
    * @param prevProps
    */
+  updateOptions = () => {
+    const { options } = this.props;
+    return options;
+  };
+
+  /** 初始化状态 */
+  initStatus = () => {
+    if (!this.isTree) {
+      const { data } = this.props;
+      const { nodes = [], edges = [] } = data;
+      nodes.forEach(node => {
+        const { states } = node;
+        if (states) {
+          Object.keys(states).forEach(k => {
+            this.graph.setItemState(node.id, k, states[k]);
+          });
+        }
+      });
+      edges.forEach(edge => {
+        const { states } = edge;
+        if (states) {
+          Object.keys(states).forEach(k => {
+            this.graph.setItemState(edge.id, k, states[k]);
+          });
+        }
+      });
+    }
+  };
+
   componentDidUpdate(prevProps: GraphinProps) {
-    console.time('componentDidUpdate');
+    console.time('did-update');
     const isDataChange = this.shouldUpdate(prevProps, 'data');
     const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
     const isOptionsChange = this.shouldUpdate(prevProps, 'options');
-    console.timeEnd('componentDidUpdate');
+    console.timeEnd('did-update');
+    const { data, layout, options } = this.props;
+    const isGraphTypeChange = prevProps.data.children !== data.children;
 
-    /** 如果都没有改变，不渲染 */
-    if (!isDataChange && !isLayoutChange && !isOptionsChange) {
-      return;
+    /** 配置变化 */
+    if (isGraphTypeChange) {
+      this.initGraphInstance();
+      console.log('%c isGraphTypeChange', 'color:grey');
     }
-    /** 布局策略改变了，相当于重新渲染：render and initState */
-    if (isLayoutChange) {
-      const { data, forceSimulation } = layoutController(this.getContext(), { data: this.props.data, prevProps });
-      this.data = data;
-      this.forceSimulation = forceSimulation!;
-      this.renderGraphWithLifeCycle(true);
-      return;
+    if (isOptionsChange) {
+      this.updateOptions();
+      console.log('isOptionsChange');
     }
-    // // 如果仅是数据变化，需要对数据做diff
-    // if (isDataChange) {
-    //   const { nodes, edges, combos } = this.props.data;
-    //   const { nodes: PreNodes, edges: PreEdges, combos: PreCombos } = prevProps.data;
-    //   // 先判断节点
-    //   console.time('is data change');
-    //   const addNodes = [];
-    //   nodes.forEach(node => {
-    //     const { id, status, ...others } = node;
-    //     const matchNode = PreNodes.find(n => n.id === id); //需要替换成Map，看下性能
-    //     if (!matchNode) {
-    //       addNodes.push(node);
-    //       return;
-    //     }
-    //     const { status: PrevStatus, ...prevOthers } = matchNode;
-    //     if (JSON.stringify(status) !== JSON.stringify(PrevStatus)) {
-    //       Object.keys(status).forEach(k => {
-    //         graph.setItemState(id, k, status[k]);
-    //       });
-    //     }
-    //     if (JSON.stringify(others) !== JSON.stringify(prevOthers)) {
-    //       this.graph?.updateItem(id, node);
-    //     }
-    //   });
-    //   console.timeEnd('is data change');
-
-    //   addNodes.forEach(node => {
-    //     this.graph?.addItem('node', node);
-    //   });
-    //   console.log(this.graph);
-    //   this.graph?.render();
-    //   console.log('addNodes', addNodes);
-    // }
-
+    /** 数据变化 */
     if (isDataChange) {
-      const { data } = this.props;
-      this.data = this.props.data;
+      this.initData(data);
+      this.updateLayout();
+      this.graph!.changeData(this.data);
+      this.initStatus();
+      console.log('%c isDataChange', 'color:grey');
+      return;
     }
-    const { data, forceSimulation } = layoutController(this.getContext(), { data: this.data, prevProps });
-    this.data = data;
-    this.forceSimulation = forceSimulation!;
-    this.renderGraphWithLifeCycle();
+    /** 布局变化 */
+    if (isLayoutChange) {
+      /**
+       * TODO
+       * 1. preset 前置布局判断问题
+       * 2. enablework 问题
+       * 3. G6 LayoutController 里的逻辑
+       */
+      this.updateLayout();
+      if (this.options?.animate) {
+        this.graph!.positionsAnimate();
+      } else {
+        this.graph!.refreshPositions();
+      }
+      console.log('%c isLayoutChange', 'color:grey');
+    }
   }
+
   /**
    * 组件移除的时候
    */
   componentWillUnmount() {
-    this.clearEvents!();
+    this.clear();
   }
+
   /**
    * 组件崩溃的时候
    * @param error
@@ -178,18 +276,10 @@ class Graphin extends React.PureComponent<GraphinProps> {
     console.error('Catch component error: ', error, info);
   }
 
-  getApis = () => {
-    const context = this.getContext();
-    return apisController(context);
-  };
-
   clear = () => {
     this.graph!.clear();
-    this.history.reset();
-    this.clearEvents!();
-    this.data = { nodes: [], edges: [] };
-    this.forceSimulation = null;
-    this.renderGraph();
+    this.data = { nodes: [], edges: [], combos: [] };
+    this.graph!.destroy();
   };
 
   shouldUpdate(prevProps: GraphinProps, key: string) {
@@ -200,51 +290,8 @@ class Graphin extends React.PureComponent<GraphinProps> {
     return !isEqual;
   }
 
-  handleEvents() {
-    this.clearEvents = eventController(this.getContext()).clear;
-  }
-
-  getContext = () => {
-    return this;
-  };
-
-  renderGraphWithLifeCycle = (firstRender: boolean) => {
-    console.time('cloneDeep-data');
-    const newData = cloneDeep(this.data);
-    console.timeEnd('cloneDeep-data');
-
-    console.time('change-data');
-    // this.graph!.changeData(newData);
-    this.graph?.data(newData);
-    this.graph?.render();
-    console.timeEnd('change-data');
-
-    this.graph!.emit('afterchangedata');
-    this.graph!.emit('layout:done');
-    console.log(this.graph);
-
-    if (firstRender) {
-      initGraphAfterRender(this.props, this.graphDOM, this.graph);
-    }
-  };
-
-  stopForceSimulation = () => {
-    const { forceSimulation } = this.state;
-    if (forceSimulation) {
-      forceSimulation.stop();
-    }
-  };
-
-  renderGraph = () => {
-    this.graph!.changeData(cloneDeep(this.data));
-    /**
-     * TODO 移除 `afterchangedata` Event
-     * 此方法应该放到G6的changeData方法中去emit
-     */
-    this.graph!.emit('afterchangedata');
-  };
-
   render() {
+    console.log('%c graphin render...', 'color:lightblue');
     return (
       <GraphinContext.Provider
         value={{
@@ -259,7 +306,14 @@ class Graphin extends React.PureComponent<GraphinProps> {
               this.graphDOM = node;
             }}
           />
-          <div className="graphin-components">{this.state.isReady && this.props.children}</div>
+          <div className="graphin-components">
+            {this.state.isReady && (
+              <React.Fragment>
+                <Events graphDOM={this.graphDOM} />
+                {this.props.children}
+              </React.Fragment>
+            )}
+          </div>
         </div>
       </GraphinContext.Provider>
     );
