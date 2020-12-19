@@ -182,7 +182,7 @@ export class Mock {
           id: node.id,
           label: `node-${node.id}`,
           data: node,
-          shape: 'CircleNode',
+          type: 'circle',
           comboId: node.comboId,
           style: {
             nodeSize: 24,
@@ -206,13 +206,3 @@ const mock = (count: number) => {
   return new Mock(count);
 };
 export default mock;
-
-/**
- * mock(10).type('company').value()
- * mock(10).type('company').circle('node-1').value()
- * mock(10).type('company').random('node-1').value()
- * mock(10).type('company').random('node-1').value()
- *
- *
- * graphin()
- */
