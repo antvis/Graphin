@@ -1,8 +1,8 @@
-declare global {
-  /** Graphin2.0 */
-  namespace Graphin {
-    type Props = GraphinProps;
-  }
+export interface GraphinState {
+  isReady: boolean;
+}
+export interface ITreeData {
+  children: [];
 }
 
 interface UserProperties {
@@ -64,21 +64,94 @@ export enum NodeShape {
   RECT = 'rect',
 }
 
+export interface IGraphData {
+  nodes: IUserNode[] | [];
+  edges: IUserEdge[] | [];
+  combos: Combo[] | [] | undefined | null;
+  children?: any;
+}
+export interface ITreeData {
+  id: string;
+  children: Partial<ITreeData>[];
+}
+
 interface GraphinProps {
+  /**
+   * 本质是解构G6的options
+   *
+   * modes 代表的交互行为，转变为快捷配置，canvas相关的直接内置，节点交互相关的转移到组件层面
+   * plugins 代表的组件，转变为graphin-components
+   *
+   */
+  width?: number;
+  height?: number;
+
   defaultNodeStyle?: Partial<NodeStyle>;
   defaultEdgeStyle?: Partial<EdgeStyle>;
   defaultComboStyle?: Partial<ComboStyle>;
-  data: {
-    nodes: UserNode[] | [];
-    edges: UserEdge[] | [];
-    combos: Combo[] | [] | undefined | null;
-  };
+  data: ITreeData | IGraphData;
   layout: Layout;
-  options: {};
+  options: {
+    canvas: {
+      drag: {
+        enable: boolean;
+      };
+      brush: {
+        enable: boolean;
+        options: {};
+      };
+      zoom: {
+        enable: boolean;
+        zoomRang: [number, number];
+        defaultValue: [number, number];
+        wheelSensitivity: number;
+      };
+      fitview: {
+        enable: boolean;
+      };
+      fitcenter: boolean;
+    };
+    node: {
+      drag: {
+        enable: boolean;
+      };
+      select: {
+        enable: boolean;
+      };
+      hover: {
+        enable: boolean;
+      };
+      highlight: {
+        enable: boolean;
+      };
+      disable: {
+        enable: boolean;
+      };
+    };
+    edge: {
+      /** 边没有拖拽 */
+      select: {
+        enable: boolean;
+      };
+      hover: {
+        enable: boolean;
+      };
+      highlight: {
+        enable: boolean;
+      };
+      disable: {
+        enable: boolean;
+      };
+    };
+    combo: {
+      drag: boolean;
+    };
+  };
+
   // children: React.ReactChildren;
 }
 
-export interface UserNode extends BaseNode, Partial<RestNode>, UserProperties {}
+export interface IUserNode extends BaseNode, Partial<RestNode>, UserProperties {}
 export interface GraphinNode extends BaseNode, RestNode, UserProperties {}
 
 export interface EdgeStyle {
@@ -116,7 +189,7 @@ export interface EdgeStyle {
   };
 }
 
-export interface UserEdge extends BaseEdge, Partial<RestEdge>, UserProperties {}
+export interface IUserEdge extends BaseEdge, Partial<RestEdge>, UserProperties {}
 export interface GraphinEdge extends BaseEdge, RestEdge, UserProperties {}
 
 export interface Combo {}
@@ -191,11 +264,9 @@ export interface ComboStyle {}
 
 export interface Layout {
   /** 布局名称，必选 */
-  name: string;
+  type: string;
   /** 布局配置，可选 */
-  options?: {
-    [key: string]: any; // eslint-disable-line
-  };
+  [key: string]: any; // eslint-disable-line
 }
 
 export interface IconLoader {
@@ -203,4 +274,16 @@ export interface IconLoader {
     fontFamily: string;
     map: {}[];
   }[];
+}
+
+declare global {
+  /** Graphin2.0 */
+  namespace IGraphin {
+    type Props = GraphinProps;
+    type State = GraphinState;
+    type UserNode = IUserNode;
+    type UserEdge = IUserEdge;
+    type GraphData = IGraphData;
+    type TreeData = ITreeData;
+  }
 }

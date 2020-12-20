@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GraphinContext } from './Graphin';
+import GraphinContext from './GraphinContext';
 import { debounce } from '@antv/util';
 
 interface Props {
@@ -15,7 +15,6 @@ const Events: React.FunctionComponent<Props> = props => {
     /** 内置 resize */
     const handleResizeEvent = debounce(() => {
       const { clientWidth, clientHeight } = graphDOM;
-      console.log('container', clientWidth, clientHeight);
       graph.set('width', clientWidth);
       graph.set('height', clientHeight);
       const canvas = graph.get('canvas');
@@ -29,7 +28,6 @@ const Events: React.FunctionComponent<Props> = props => {
 
     window.addEventListener('resize', handleResizeEvent, false);
     return () => {
-      console.log('remove event');
       window.removeEventListener('resize', handleResizeEvent, false);
     };
   }, []);

@@ -1,4 +1,4 @@
-import { IconFontMapItem } from '../types';
+// import { IconFontMapItem } from '../types';
 
 export const ICON_FONT_FAMILY_MAP: {
   [key: string]: any[];
@@ -11,14 +11,14 @@ export default (type: string, fontFamily: string) => {
     console.warn(`fontFamily ${fontFamily} not found`);
     return '';
   }
-  const icons = selectedIconFont.map((icon: IconFontMapItem) => {
+  const icons = selectedIconFont.map((icon: any) => {
     return {
       name: icon.name,
       unicode: String.fromCodePoint(icon.unicode_decimal),
     };
   });
 
-  const matchIcon = icons.find(icon => {
+  const matchIcon = icons.find((icon) => {
     return icon.name === type;
   }) || { unicode: '', name: '' };
 
