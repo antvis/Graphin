@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import Grahpin from '@antv/graphin';
-import { Behavior } from '@antv/graphin-components';
+import { Behaviors } from '@antv/graphin';
 interface ICompactBoxProps {}
 
-const { TreeCollapse } = Behavior;
+const { TreeCollapse } = Behaviors;
 
 const CompactBox: React.FunctionComponent<ICompactBoxProps> = props => {
   const [state, setState] = React.useState({
