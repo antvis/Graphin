@@ -64,6 +64,10 @@ export default {
   theme: {
     '@s-site-menu-width': '280px',
   },
+  locales: [
+    ['zh-CN', '中文'],
+    ['en-US', 'English'],
+  ],
   links: process.env.NODE_ENV === 'development' ? ['https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd.css'] : [],
   scripts:
     process.env.NODE_ENV === 'development'
