@@ -1,7 +1,7 @@
 ---
-title: 数据渲染
+title: 数据类型
 group:
-  path: /
+  path: /render
 nav:
   title: Graphin
   path: /graphin

@@ -42,7 +42,7 @@ const App = () => {
   const { data, selected } = state;
   const graphRef = React.createRef();
   React.useEffect(() => {
-    const { graph } = graphRef.current;
+    const { graph } = graphRef.current as any;
 
     // 按住Shift框选,按住Option键 多选，进行关系扩散
     const onNodeSelectChange = e => {
@@ -82,20 +82,20 @@ const App = () => {
       <Graphin
         data={data}
         layout={{
-          name: 'force',
-          options: {
-            animation: true,
-            defSpringLen: (_edge, source, target) => {
-              /** 默认返回的是 200 的弹簧长度 */
+          type: 'force',
+          // options: {
+          //   animation: true,
+          //   defSpringLen: (_edge, source, target) => {
+          //     /** 默认返回的是 200 的弹簧长度 */
 
-              /** 如果你要想要产生聚类的效果，可以考虑 根据边两边节点的度数来动态设置边的初始化长度：度数越小，则边越短 */
-              const nodeSize = 30;
-              const Sdegree = source.data.layout.degree;
-              const Tdegree = target.data.layout.degree;
-              const minDegree = Math.min(Sdegree, Tdegree);
-              return minDegree < 3 ? nodeSize * 5 : minDegree * nodeSize;
-            },
-          },
+          //     /** 如果你要想要产生聚类的效果，可以考虑 根据边两边节点的度数来动态设置边的初始化长度：度数越小，则边越短 */
+          //     const nodeSize = 30;
+          //     const Sdegree = source.data.layout.degree;
+          //     const Tdegree = target.data.layout.degree;
+          //     const minDegree = Math.min(Sdegree, Tdegree);
+          //     return minDegree < 3 ? nodeSize * 5 : minDegree * nodeSize;
+          //   },
+          // },
         }}
         ref={graphRef}
       >

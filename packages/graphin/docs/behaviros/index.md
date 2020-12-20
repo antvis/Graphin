@@ -1,7 +1,10 @@
 ---
-title: 交互行为
+title: 基本介绍
+order: 0
 group:
-  path: /
+  path: /behaviors
+  title: 交互行为
+  order: 3
 nav:
   title: Graphin
   path: /graphin
@@ -26,4 +29,4 @@ Graphin 中的交互行为都是可组合的，例如内置了 DragCavans,ZoomCa
 
 ### 通过 disabled 来禁用该交互行为
 
-<code src='../data/Network.tsx'>
+<code src='../render/data/Network.tsx'>

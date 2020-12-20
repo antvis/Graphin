@@ -13,7 +13,7 @@ const layout = {
 export default () => {
   return (
     <div>
-      <Graphin data={data} layout={layout}></Graphin>
+      <Graphin data={data} layout={layout} />
     </div>
   );
 };
