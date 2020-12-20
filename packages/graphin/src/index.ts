@@ -1,18 +1,17 @@
-import Graphin, { GraphinContext } from './Graphin';
+import Graphin from './Graphin';
+import GraphinContext from './GraphinContext';
 import Utils from './utils';
 import Layout from './layout';
 
-import { Item } from '@antv/g6/lib/types';
+import Behaviors from './behaviors';
 
 export { default as G6 } from '@antv/g6';
 
 export default Graphin;
-export { Utils, Layout, GraphinContext };
-
-export * from './types';
+export { Utils, Layout, GraphinContext, Behaviors };
 
 export interface GraphEvent extends MouseEvent {
-  item: Item;
+  item: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   target: any;
 }

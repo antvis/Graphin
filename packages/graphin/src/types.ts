@@ -1,9 +1,11 @@
 import { ReactNode } from 'react';
-import G6 from '@antv/g6';
+
 import ForceLayout from './layout/force/ForceLayout';
 import Graphin from './Graphin';
 import { LayoutOption } from './controller/layout/defaultLayouts';
 import { ComboConfig, Item, EdgeConfig, NodeConfig } from '@antv/g6/lib/types';
+
+import G6 from '@antv/g6';
 import G6ItemNode from '@antv/g6/lib/item/node';
 
 export type GraphClass = typeof G6['Graph'];
