@@ -1,6 +1,6 @@
 import React from 'react';
-import Graphin, { Utils, GraphinContext } from '@antv/graphin';
-
+import Graphin, { Utils, GraphinContext, Behaviors } from '@antv/graphin';
+const { ClickSelect } = Behaviors;
 const CustomComponent = props => {
   const { selected } = props;
   const graphin = React.useContext(GraphinContext);
@@ -26,12 +26,12 @@ const Demo = () => {
     graph.on('node:click', e => {
       const node = e.item.getModel();
       console.log(node);
-      setState(preState => {
-        return {
-          ...preState,
-          selected: [e.item.getModel()],
-        };
-      });
+      // setState(preState => {
+      //   return {
+      //     ...preState,
+      //     selected: [e.item.getModel()],
+      //   };
+      // });
       graph.setItemState(node.id, 'selected', true);
     });
   }, []);
@@ -42,6 +42,7 @@ const Demo = () => {
   return (
     <div>
       <Graphin data={data} layout={layout} ref={graphinRef}>
+        {/* <ClickSelect disabled={true} /> */}
         <CustomComponent selected={selected} />
       </Graphin>
     </div>

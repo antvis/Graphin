@@ -4,4 +4,3 @@
 // export { default as Legend, LegendProps } from './components/legend';
 
 export { default as Hull, HullCfg } from './Hull';
-export { default as Behavior } from './Behavior';

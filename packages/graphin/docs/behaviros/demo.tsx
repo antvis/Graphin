@@ -8,13 +8,14 @@ const layout = {
   type: 'grid',
 };
 
-const { DragCanvas, ZoomCanvas } = Behaviors;
+const { DragCanvas, ZoomCanvas, DragNode } = Behaviors;
 export default () => {
   return (
     <div>
       <Graphin data={data} layout={layout}>
         <DragCanvas direction="x" />
         <ZoomCanvas enableOptimize={true} />
+        <DragNode />
       </Graphin>
     </div>
   );

@@ -1,15 +1,15 @@
 import TreeCollapse from './TreeCollapse';
 import DragCanvas from './DragCanvas';
 import ZoomCanvas from './ZoomCanvas';
+import DragNode from './DragNode';
+import ClickSelect from './ClickSelect';
+import BrushSelect from './BrushSelect';
 
-const Behaviors: {
-  TreeCollapse: typeof TreeCollapse;
-  DragCanvas: typeof DragCanvas;
-  ZoomCanvas: typeof ZoomCanvas;
-} = {
+export default {
   TreeCollapse,
   DragCanvas,
   ZoomCanvas,
+  ClickSelect,
+  BrushSelect,
+  DragNode,
 };
-
-export default Behaviors;

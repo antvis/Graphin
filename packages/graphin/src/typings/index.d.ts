@@ -85,10 +85,9 @@ interface GraphinProps {
    */
   width?: number;
   height?: number;
-
-  defaultNodeStyle?: Partial<NodeStyle>;
-  defaultEdgeStyle?: Partial<EdgeStyle>;
-  defaultComboStyle?: Partial<ComboStyle>;
+  defaultNode?: Partial<NodeStyle> | any;
+  defaultEdge?: Partial<EdgeStyle> | any;
+  defaultCombo?: Partial<ComboStyle> | any;
   data: ITreeData | IGraphData;
   layout: Layout;
   options: {
@@ -196,16 +195,13 @@ export interface Combo {}
 
 export interface NodeStyle {
   /** 节点的主要容器 */
-  keyShape: {
-    /** 节点的形状 */
-    shape: NodeShape;
-    /** 节点的大小 */
-    size: [number] | [number, number];
-    /** 填充色 */
-    fill: string;
-    /** 包围边颜色 */
-    stroke: string;
-  };
+  /** 节点的大小 */
+  size: [number] | [number, number];
+  /** 填充色 */
+  fill: string;
+  /** 包围边颜色 */
+  stroke: string;
+
   /** 节点的文本 */
   label: {
     /** label的名称 */
