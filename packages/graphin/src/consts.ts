@@ -15,11 +15,13 @@ export const G6_DEFAULT_NODE = {
 };
 
 export const G6_DEFAULT_EDGE = {
-  type: 'arc',
-
-  labelCfg: {
-    autoRotate: true,
-    refY: -10,
+  size: 1,
+  color: '#e2e2e2',
+  style: {
+    endArrow: {
+      path: 'M 0,0 L 8,4 L 8,-4 Z',
+      fill: '#e2e2e2',
+    },
   },
 };
 

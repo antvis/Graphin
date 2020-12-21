@@ -22,6 +22,8 @@ import Events from './Events';
 import GraphinContext from './GraphinContext';
 /** 内置 Behaviros */
 import Behaviors from './behaviors';
+/** 内置布局 */
+import LayoutController from './layout';
 
 const { DragCanvas, ZoomCanvas, DragNode, ClickSelect, BrushSelect } = Behaviors;
 
@@ -53,6 +55,9 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     iconLoaders.forEach(item => {
       ICON_FONT_FAMILY_MAP[item.fontFamily] = item.map;
     });
+  }
+  static registerLayout(layoutName, layout) {
+    G6.registerLayout(layoutName, layout);
   }
 
   /** Graph的DOM */
@@ -88,7 +93,8 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
   constructor(props: IGraphin.Props) {
     super(props);
     this.data = props.data;
-    this.isTree = Boolean(props.data && props.data.children);
+    this.isTree =
+      Boolean(props.data && props.data.children) || TREE_LAYOUTS.indexOf(props.layout && props.layout.type) !== -1;
     this.graph = {} as IGraph;
     this.layout = {
       type: '',
@@ -133,7 +139,7 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     this.height = Number(height) || clinetHeight || 500;
 
     /** graph type */
-    this.isTree = Boolean(data.children);
+    this.isTree = Boolean(data.children) || TREE_LAYOUTS.indexOf(props.layout && props.layout.type) !== -1;
 
     this.options = {
       container: this.graphDOM,
@@ -144,46 +150,45 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
       defaultNode: this.defaultStyle.node,
       defaultEdge: this.defaultStyle.edge,
       defaultCombo: this.defaultStyle.combo,
-      layout: {
-        ...layout,
-      },
+      // layout: {
+      //   ...layout,
+      // },
       modes,
       ...otherOptions,
     };
 
     if (this.isTree) {
-      // this.options.layout = { ...layout };
+      this.options.layout = { ...layout };
+
       this.graph = new G6.TreeGraph(this.options);
     } else {
       this.graph = new G6.Graph(this.options);
     }
 
     this.graph.data(this.data);
-    // this.updateLayout();
+    /** 初始化布局 */
+    if (!this.isTree) {
+      this.layout = new LayoutController(this);
+      this.layout.start();
+    }
     this.graph.get('canvas').set('localRefresh', false);
     this.graph.render();
     this.initStatus();
   };
 
   updateLayout = () => {
-    if (!this.graph || this.graph.destroyed || !this.data || !this.data.nodes || !this.data.nodes.length) {
+    if (
+      !this.graph ||
+      this.graph.destroyed ||
+      !this.data ||
+      !this.data.nodes ||
+      !this.data.nodes.length ||
+      this.isTree
+    ) {
       return false;
     }
 
-    const { layout = { type: 'grid' } } = this.props;
-    const { type = 'grid', ...layoutOptions } = layout;
-    const params = {
-      ...layoutOptions,
-      width: this.width / 2,
-      height: this.height / 2,
-    };
-    const instance = new G6.Layout[type](params);
-    instance.init(this.data);
-    instance.execute();
-    /** 变量存储 */
-    this.layout.type = type;
-    this.layout.options = layoutOptions;
-    this.layout.instance = instance;
+    this.layout.changeLayout();
   };
 
   componentDidMount() {
@@ -248,7 +253,7 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     /** 数据变化 */
     if (isDataChange) {
       this.initData(data);
-      this.updateLayout();
+      // this.updateLayout();
       this.graph!.changeData(this.data);
       this.initStatus();
 
@@ -263,15 +268,14 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
        * 2. enablework 问题
        * 3. G6 LayoutController 里的逻辑
        */
-      // this.updateLayout();
-      // if (this.options?.animate) {
-      //   this.graph!.positionsAnimate();
-      // } else {
-      //   this.graph!.refreshPositions();
-      // }
-
+      this.updateLayout();
+      if (this.options?.animate) {
+        this.graph!.positionsAnimate();
+      } else {
+        this.graph!.refreshPositions();
+      }
       /** 走G6的layoutController */
-      this.graph.updateLayout(layout);
+      // this.graph.updateLayout();
       console.log('%c isLayoutChange', 'color:grey');
     }
   }
@@ -307,7 +311,7 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
   }
 
   render() {
-    console.log('%c graphin render...', 'color:lightblue', this.graph.cfg);
+    console.log('%c graphin render...', 'color:lightblue', this);
     const { isReady } = this.state;
     const { modes } = this.props;
     return (
