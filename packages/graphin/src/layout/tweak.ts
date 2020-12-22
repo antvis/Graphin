@@ -1,5 +1,4 @@
-import { Data, Node, Edge } from '../../types';
-import { ForceLayoutOptions } from './force';
+import { Data, Node, Edge } from '../types';
 
 /* eslint-disable no-param-reassign */
 const getRandomPosition = () => {
@@ -7,17 +6,15 @@ const getRandomPosition = () => {
 };
 /**
  *
- * @param data
+ * @param currentData
  * @param options
  */
 
-const tweak = (data: Data, options: ForceLayoutOptions) => {
-  const { graph, width, height } = options;
-
-  const { nodes: currNodes, edges: currEdges } = data;
-  // TODO: Graph Type export TreeData
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { nodes: preNodes } = graph.save() as any;
+const width = 500;
+const height = 300;
+const tweak = (currentData: Data, prevData: Data) => {
+  const { nodes: currNodes, edges: currEdges } = currentData;
+  const { nodes: preNodes } = prevData;
 
   /** 将图上之前节点的位置信息存储在positionMap中 */
   const positionMap = new Map();
@@ -74,16 +71,15 @@ const tweak = (data: Data, options: ForceLayoutOptions) => {
       node.x = position.x;
       node.y = position.y;
     } else {
-      node.x = Math.round(Math.random() * width);
-      node.y = Math.round(Math.random() * height);
+      node.x = width / 2 + Math.round(Math.random() * width);
+      node.y = height / 2 + Math.round(Math.random() * height);
     }
   });
 
   return {
-    data: {
-      nodes: currNodes,
-      edges: currEdges,
-    },
+    ...currentData,
+    nodes: currNodes,
+    edges: currEdges,
   };
 };
 export default tweak;
