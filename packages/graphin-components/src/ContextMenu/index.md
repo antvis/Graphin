@@ -23,6 +23,13 @@ ContextMenu 是右键菜单，通常是对节点进行进一步操作的组件�
 
 > 欢迎 github 的伙伴 讨论设计和组件方案，开源共建。
 
+## demo
+
+<!-- <code src='./demos/ContextMenu' > -->
+<!-- <code src='./demos/AntdMenu' > -->
+
+<code src='./demos/PieMenu' >
+
 ## 用法
 
 ```tsx | pure

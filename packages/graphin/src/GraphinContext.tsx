@@ -5,5 +5,5 @@ const defaultContext = {
   graph: {} as IGraph,
 };
 
-const GraphinContext: React.Context<{ graph: IGraph }> = React.createContext(defaultContext);
+const GraphinContext: React.Context<{ graph: IGraph; [key: string]: any }> = React.createContext(defaultContext);
 export default GraphinContext;

@@ -14,6 +14,7 @@
   "license": "MIT",
   "sideEffects": false,
   "devDependencies": {
+    "@ant-design/icons": "^4.3.0",
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -36,6 +37,7 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "react-pie-menu": "^0.2.5",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
     "ts-jest": "^25.4.0",
