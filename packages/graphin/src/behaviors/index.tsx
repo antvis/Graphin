@@ -4,6 +4,7 @@ import ZoomCanvas from './ZoomCanvas';
 import DragNode from './DragNode';
 import ClickSelect from './ClickSelect';
 import BrushSelect from './BrushSelect';
+import ResizeCanvas from './ResizeCanvas';
 
 export default {
   TreeCollapse,
@@ -12,4 +13,5 @@ export default {
   ClickSelect,
   BrushSelect,
   DragNode,
+  ResizeCanvas,
 };

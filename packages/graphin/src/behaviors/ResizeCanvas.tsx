@@ -1,11 +1,12 @@
 import * as React from 'react';
-import GraphinContext from './GraphinContext';
+import GraphinContext from '../GraphinContext';
 import { debounce } from '@antv/util';
 
-interface Props {
+export interface ResizeCanvasProps {
   graphDOM: HTMLDivElement;
 }
-const Events: React.FunctionComponent<Props> = props => {
+
+const ResizeCanvas: React.FunctionComponent<ResizeCanvasProps> = props => {
   const { graphDOM } = props;
   const graphin = React.useContext(GraphinContext);
   React.useEffect(() => {
@@ -35,4 +36,4 @@ const Events: React.FunctionComponent<Props> = props => {
   return null;
 };
 
-export default Events;
+export default ResizeCanvas;
