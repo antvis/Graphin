@@ -20,6 +20,7 @@ import {
 } from '@ant-design/icons';
 
 const iconMap = {
+  'graphin-force': <ShareAltOutlined />,
   random: <TrademarkCircleFilled />,
   concentric: <ChromeFilled />,
   circle: <BranchesOutlined />,
@@ -57,6 +58,7 @@ const LayoutSelector = props => {
 };
 
 const layouts = [
+  { type: 'graphin-force' },
   {
     type: 'grid',
     // begin: [0, 0], // 可选，
@@ -188,7 +190,7 @@ const layouts = [
   },
 ];
 export default () => {
-  const [type, setLayout] = React.useState('grid');
+  const [type, setLayout] = React.useState('graphin-force');
   const handleChange = value => {
     console.log('value', value);
     setLayout(value);

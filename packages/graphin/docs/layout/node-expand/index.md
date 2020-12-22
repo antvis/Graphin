@@ -9,6 +9,10 @@ nav:
   order: 2
 ---
 
-## node-expand
+## graphin-force
 
-<code src='./index.tsx'>
+<code src='./demos/graphin-force.tsx'>
+
+## gForce
+
+<code src='./demos/g-force.tsx'>

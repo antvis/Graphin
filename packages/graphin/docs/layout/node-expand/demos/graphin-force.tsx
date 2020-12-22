@@ -82,9 +82,9 @@ const App = () => {
       <Graphin
         data={data}
         layout={{
-          type: 'force',
+          type: 'graphin-force',
           // options: {
-          //   animation: true,
+          //   animation: false,
           //   defSpringLen: (_edge, source, target) => {
           //     /** 默认返回的是 200 的弹簧长度 */
 
