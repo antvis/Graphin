@@ -11,7 +11,7 @@
     "strict": true,
     "lib": ["dom", "esnext"],
     "esModuleInterop": true,
-    "typeRoots": ["./node_modules/@types/", "./typings"]
+    "typeRoots": ["./node_modules/@types/", "./typings/index.d.ts"]
   },
   "include": ["src"]
 }

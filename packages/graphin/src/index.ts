@@ -6,7 +6,7 @@ import Layout from './layout';
 import Behaviors from './behaviors';
 
 export { default as G6 } from '@antv/g6';
-
+import registerGraphinForce from './layout/registerGraphinForce';
 export default Graphin;
 export { Utils, Layout, GraphinContext, Behaviors };
 
@@ -15,3 +15,6 @@ export interface GraphEvent extends MouseEvent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   target: any;
 }
+
+/** 注册 */
+registerGraphinForce();

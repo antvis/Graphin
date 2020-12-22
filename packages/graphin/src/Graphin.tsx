@@ -3,7 +3,7 @@ import React, { ErrorInfo } from 'react';
 // todo ,G6@unpack版本将规范类型的输出
 import G6, { Graph, Graph as IGraph } from '@antv/g6';
 
-import { cloneDeep } from 'lodash';
+import { cloneDeep, takeRightWhile } from 'lodash';
 
 /** types  */
 import { IconLoader } from './typings';
@@ -16,8 +16,6 @@ import { ICON_FONT_FAMILY_MAP } from './icons/iconFont';
 
 import { TREE_LAYOUTS, G6_DEFAULT_NODE, G6_DEFAULT_COMBO, G6_DEFAULT_EDGE } from './consts';
 
-/** 内置事件 */
-import Events from './Events';
 /** Context */
 import GraphinContext from './GraphinContext';
 /** 内置 Behaviros */
@@ -25,7 +23,7 @@ import Behaviors from './behaviors';
 /** 内置布局 */
 import LayoutController from './layout';
 
-const { DragCanvas, ZoomCanvas, DragNode, ClickSelect, BrushSelect } = Behaviors;
+const { DragCanvas, ZoomCanvas, DragNode, ClickSelect, BrushSelect, ResizeCanvas } = Behaviors;
 
 type DiffValue = any;
 interface RegisterFunction {
@@ -92,15 +90,12 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
 
   constructor(props: IGraphin.Props) {
     super(props);
-    this.data = props.data;
+    this.data = { ...props.data };
+    this.options = { ...props.options };
     this.isTree =
       Boolean(props.data && props.data.children) || TREE_LAYOUTS.indexOf(props.layout && props.layout.type) !== -1;
     this.graph = {} as IGraph;
-    this.layout = {
-      type: '',
-      instance: '',
-      destroyed: false,
-    };
+    this.layout = {};
     this.height = Number(props.height);
     this.width = Number(props.width);
     this.state = {
@@ -124,8 +119,8 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
   };
 
   initGraphInstance = () => {
-    const { data, layout, width, height, modes, animate = true, ...otherOptions } = this.props;
-    if (modes) {
+    const { data, layout, width, height, modes = { default: [] }, animate, ...otherOptions } = this.props;
+    if (modes.default.length > 0) {
       //TODO :给用户正确的引导，推荐使用Graphin的Bheaviors组件
       console.info('%c suggestion: you can use @antv/graphin Behaviros components', 'color:lightgreen');
     }
@@ -146,7 +141,7 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
       renderer: 'canvas',
       width: this.width,
       height: this.height,
-      animate,
+      animate: animate === false ? false : true,
       defaultNode: this.defaultStyle.node,
       defaultEdge: this.defaultStyle.edge,
       defaultCombo: this.defaultStyle.combo,
@@ -177,17 +172,6 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
   };
 
   updateLayout = () => {
-    if (
-      !this.graph ||
-      this.graph.destroyed ||
-      !this.data ||
-      !this.data.nodes ||
-      !this.data.nodes.length ||
-      this.isTree
-    ) {
-      return false;
-    }
-
     this.layout.changeLayout();
   };
 
@@ -253,10 +237,11 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     /** 数据变化 */
     if (isDataChange) {
       this.initData(data);
-      // this.updateLayout();
-      this.graph!.changeData(this.data);
-      this.initStatus();
+      this.layout.changeLayout();
+      this.graph.data(this.data);
+      this.graph.changeData(this.data);
 
+      this.initStatus();
       console.log('%c isDataChange', 'color:grey');
       return;
     }
@@ -268,12 +253,9 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
        * 2. enablework 问题
        * 3. G6 LayoutController 里的逻辑
        */
-      this.updateLayout();
-      if (this.options?.animate) {
-        this.graph!.positionsAnimate();
-      } else {
-        this.graph!.refreshPositions();
-      }
+      this.layout.changeLayout();
+      this.layout.refreshPosition();
+
       /** 走G6的layoutController */
       // this.graph.updateLayout();
       console.log('%c isLayoutChange', 'color:grey');
@@ -297,6 +279,8 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
   }
 
   clear = () => {
+    this.layout && this.layout.destroyed && this.layout.destroy(); // tree graph
+    this.layout = {};
     this.graph!.clear();
     this.data = { nodes: [], edges: [], combos: [] };
     this.graph!.destroy();
@@ -344,10 +328,13 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
                     <ClickSelect />
                     {/* 圈选节点 */}
                     <BrushSelect />
+                    {/** resize 画布 */}
                   </React.Fragment>
                 )}
 
-                <Events graphDOM={this.graphDOM} />
+                {/** resize 画布 */}
+                <ResizeCanvas graphDOM={this.graphDOM} />
+
                 {this.props.children}
               </>
             )}
