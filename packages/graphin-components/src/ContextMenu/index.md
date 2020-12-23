@@ -25,8 +25,8 @@ ContextMenu 是右键菜单，通常是对节点进行进一步操作的组件�
 
 ## demo
 
-<!-- <code src='./demos/ContextMenu' > -->
-<!-- <code src='./demos/AntdMenu' > -->
+<code src='./demos/ContextMenu' >
+<code src='./demos/AntdMenu' >
 
 <code src='./demos/PieMenu' >
 

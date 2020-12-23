@@ -55,11 +55,24 @@ const ContextMenu: React.FunctionComponent<IContextMenuProps> & { Menu: typeof M
     let y = e.canvasY + graphTop + offsetY;
 
     // when the menu is (part of) out of the canvas
+
     if (x + bbox.width > width) {
       x = e.canvasX - bbox.width - offsetX + graphLeft;
     }
     if (y + bbox.height > height) {
       y = e.canvasY - bbox.height - offsetY + graphTop;
+    }
+
+    if (bindType === 'node') {
+      // 如果是节点，则x，y指定到节点的中心点
+      // eslint-disable-next-line no-underscore-dangle
+      const { x: PointX, y: PointY } = e.item.getModel();
+      const CenterCanvas = graph.getCanvasByPoint(PointX, PointY);
+
+      const daltX = e.canvasX - CenterCanvas.x;
+      const daltY = e.canvasY - CenterCanvas.y;
+      x = x - daltX;
+      y = y - daltY;
     }
 
     /** 设置变量 */
@@ -82,12 +95,19 @@ const ContextMenu: React.FunctionComponent<IContextMenuProps> & { Menu: typeof M
   useEffect(() => {
     graph.on(`${bindType}:contextmenu`, handleShow);
     graph.on('canvas:click', handleClose);
+    graph.on('canvas:drag', handleClose);
+    graph.on('canvas:drag', handleClose);
+    graph.on('wheelzoom', handleClose);
+
     return () => {
       graph.off(`${bindType}:contextmenu`, handleShow);
       graph.off('canvas:click', handleClose);
+      graph.off('canvas:drag', handleClose);
+      graph.off('wheelzoom', handleClose);
     };
   }, []);
   const { x, y, visible, item } = state;
+
   const positionStyle: React.CSSProperties = {
     position: 'absolute',
     left: x,

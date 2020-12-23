@@ -2,9 +2,10 @@ import React from 'react';
 import Graphin, { Utils, GraphinContext } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 import PieMenu, { Slice } from 'react-pie-menu';
-
 // Do not forget to import CSS
 import '@antv/graphin/dist/index.css';
+import { ThemeProvider } from 'styled-components';
+import theme from './PieMenuTheme';
 
 const PieMenuDemo = () => {
   const graphin = React.useContext(GraphinContext);
@@ -12,30 +13,33 @@ const PieMenuDemo = () => {
     console.log('click', graphin);
     graphin.contextmenu.handleClose();
   };
-  const { x, y } = graphin.contextmenu;
+
   const nodeSize = 30;
-  const radius = 80;
+  const radius = 60;
   const centerX = 0;
   const centerY = 0;
+  const zoom = graphin.graph.getZoom();
+  const styles = {
+    transform: `scale(${zoom})`,
+    transformOrigin: 'left',
+  };
 
   return (
-    <div>
-      <PieMenu
-        radius={`${radius}px`}
-        centerRadius={`${nodeSize / 2}px`}
-        centerX={`${centerX}px`}
-        centerY={`${centerY}px`}
-      >
-        {/* Contents */}
-        <Slice>1</Slice>
-        <Slice onSelect={() => window.open('https://www.facebook.com', '_blank')}>2</Slice>
-        <Slice onSelect={() => window.open('https://www.twitter.com', '_blank')}>3</Slice>
-        <Slice onSelect={() => window.open('https://www.linkedin.com', '_blank')}>4</Slice>
-        <Slice onSelect={() => window.open('https://github.com/psychobolt/react-pie-menu', '_blank')}>5</Slice>
-        <Slice onSelect={() => window.open('https://en.wikipedia.org/wiki/RSS', '_blank')}>6</Slice>
-        <Slice onSelect={() => window.open('https://www.pinterest.com/', '_blank')}>7</Slice>
-        <Slice>8</Slice>
-      </PieMenu>
+    <div style={{ ...styles }}>
+      <ThemeProvider theme={theme}>
+        <PieMenu
+          radius={`${radius}px`}
+          centerRadius={`${nodeSize / 2}px`}
+          centerX={`${centerX}px`}
+          centerY={`${centerY}px`}
+        >
+          {/* Contents */}
+          <Slice>delete</Slice>
+          <Slice onSelect={() => window.open('https://www.facebook.com', '_blank')}>tag</Slice>
+          <Slice onSelect={() => window.open('https://www.twitter.com', '_blank')}>fetch</Slice>
+          <Slice onSelect={() => window.open('https://www.linkedin.com', '_blank')}>copy</Slice>
+        </PieMenu>
+      </ThemeProvider>
     </div>
   );
 };
