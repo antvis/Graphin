@@ -1,8 +1,10 @@
 ---
 title: MiniMap 小地图
+order: 2
 group:
   path: /interaction
   title: 交互组件
+  order: 0
 nav:
   title: Components
   path: /components

@@ -3,6 +3,7 @@ title: Hull 轮廓包裹
 group:
   path: /mark
   title: 标示组件
+  order: 1
 nav:
   title: Components
   path: /components

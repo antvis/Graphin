@@ -3,6 +3,7 @@ title: FishEye 鱼眼放大镜
 group:
   path: /interaction
   title: 交互组件
+  order: 0
 nav:
   title: Components
   path: /components

@@ -1,5 +1,6 @@
 ---
 title: MiniMap
+order: 2
 group:
   path: /interaction
   title: Interactive Component

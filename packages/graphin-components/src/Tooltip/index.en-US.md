@@ -1,5 +1,6 @@
 ---
 title: Tooltip
+order: 1
 group:
   path: /interaction
   title: Interaction Component

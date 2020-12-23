@@ -1,5 +1,6 @@
 ---
 title: ContextMenu
+order: 0
 group:
   path: /interaction
   title: Interactive Component

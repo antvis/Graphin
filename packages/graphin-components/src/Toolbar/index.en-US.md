@@ -1,5 +1,6 @@
 ---
 title: Toolbar
+order: 3
 group:
   path: /interaction
   title: Interactive Component

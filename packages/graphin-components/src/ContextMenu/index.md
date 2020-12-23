@@ -1,8 +1,10 @@
 ---
 title: ContextMenu 右键菜单
+order: 0
 group:
   path: /interaction
   title: 交互组件
+  order: 0
 nav:
   title: Components
   path: /components

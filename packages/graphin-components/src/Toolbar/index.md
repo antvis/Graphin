@@ -1,8 +1,10 @@
 ---
 title: Toolbar 工具栏
+order: 3
 group:
   path: /interaction
   title: 交互组件
+  order: 0
 nav:
   title: Components
   path: /components

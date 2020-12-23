@@ -16,11 +16,11 @@ const CreateEdge: React.FunctionComponent<Props> = (props) => {
   const { active } = state;
   React.useEffect(() => {
     const graphin = React.useContext(GraphinContext);
-    //@ts-ignore
+    // @ts-ignore
     const { graph } = graphin;
     graph.on('aftercreateedge', (e) => {
-      const edges = graph.save().edges;
-      //TODO:边的处理，等G6拆包之后
+      const { edges } = graph.save();
+      // TODO:边的处理，等G6拆包之后
       // G6.Util.processParallelEdges(edges);
       const newEdges = graph.getEdges();
       newEdges.forEach((edge, i) => {
@@ -32,7 +32,7 @@ const CreateEdge: React.FunctionComponent<Props> = (props) => {
 
   React.useEffect(() => {
     const graphin = React.useContext(GraphinContext);
-    //@ts-ignore
+    // @ts-ignore
     const { graph } = graphin;
 
     if (active) {

@@ -3,6 +3,7 @@ title: CreateEdge 边建联组件
 group:
   path: /interaction
   title: 交互组件
+  order: 0
 nav:
   title: Components
   path: /components

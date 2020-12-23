@@ -3,10 +3,11 @@ title: Sheetbar 多画布
 group:
   path: /analysis
   title: 分析配套
+  order: 3
 nav:
   title: Components
   path: /components
-  order: 1
+  order: 3
 ---
 
 # Sheetbar 多画布

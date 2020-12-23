@@ -1,8 +1,10 @@
 ---
 title: Tooltip 提示框
+order: 1
 group:
   path: /interaction
   title: 交互组件
+  order: 0
 nav:
   title: Components
   path: /components
