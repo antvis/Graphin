@@ -1,7 +1,8 @@
 //@ts-nocheck
 import React, { ErrorInfo } from 'react';
 // todo ,G6@unpack版本将规范类型的输出
-import G6, { Graph, Graph as IGraph } from '@antv/g6';
+import G6, { Graph as IGraph } from '@antv/g6';
+import { ILayout } from '@antv/g6/lib/interface/layout';
 
 import { cloneDeep, get, takeRightWhile } from 'lodash';
 
@@ -70,7 +71,7 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
       },
     });
   }
-  static registerLayout(layoutName, layout) {
+  static registerLayout(layoutName: string, layout: ILayout) {
     G6.registerLayout(layoutName, layout);
   }
 
