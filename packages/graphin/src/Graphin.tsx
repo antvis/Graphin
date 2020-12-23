@@ -126,7 +126,7 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     };
   }
 
-  initData = data => {
+  initData = (data) => {
     if (data.children) {
       this.isTree = true;
     }
@@ -213,18 +213,18 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     if (!this.isTree) {
       const { data } = this.props;
       const { nodes = [], edges = [] } = data;
-      nodes.forEach(node => {
+      nodes.forEach((node) => {
         const { states } = node;
         if (states) {
-          Object.keys(states).forEach(k => {
+          Object.keys(states).forEach((k) => {
             this.graph.setItemState(node.id, k, states[k]);
           });
         }
       });
-      edges.forEach(edge => {
+      edges.forEach((edge) => {
         const { states } = edge;
         if (states) {
-          Object.keys(states).forEach(k => {
+          Object.keys(states).forEach((k) => {
             this.graph.setItemState(edge.id, k, states[k]);
           });
         }
@@ -325,29 +325,31 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
           <div
             data-testid="custom-element"
             className="graphin-core"
-            ref={node => {
+            ref={(node) => {
               this.graphDOM = node;
             }}
           />
           <div className="graphin-components">
             {isReady && (
               <>
-                {/** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
-                !modes && (
-                  <React.Fragment>
-                    {/* 拖拽画布 */}
-                    <DragCanvas />
-                    {/* 缩放画布 */}
-                    <ZoomCanvas />
-                    {/* 拖拽节点 */}
-                    <DragNode />
-                    {/* 点击节点 */}
-                    <ClickSelect />
-                    {/* 圈选节点 */}
-                    <BrushSelect />
-                    {/** resize 画布 */}
-                  </React.Fragment>
-                )}
+                {
+                  /** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
+                  !modes && (
+                    <React.Fragment>
+                      {/* 拖拽画布 */}
+                      <DragCanvas />
+                      {/* 缩放画布 */}
+                      <ZoomCanvas />
+                      {/* 拖拽节点 */}
+                      <DragNode />
+                      {/* 点击节点 */}
+                      <ClickSelect />
+                      {/* 圈选节点 */}
+                      <BrushSelect />
+                      {/** resize 画布 */}
+                    </React.Fragment>
+                  )
+                }
 
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM} />
