@@ -71,7 +71,7 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
       },
     });
   }
-  static registerLayout(layoutName: string, layout: ILayout) {
+  static registerLayout(layoutName: string, layout: any) {
     G6.registerLayout(layoutName, layout);
   }
 

@@ -52,10 +52,6 @@ export interface RestEdge {
   };
 }
 
-export enum NodeStatus {
-  SELECTED = 'selected',
-  ACTIVE = 'active',
-}
 /**
  * 节点的形状
  */
@@ -223,6 +219,7 @@ export interface NodeStyle {
     size: number;
     /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
     fill: string;
+    fontFamily: string;
   };
   /** 节点的徽标 */
   badge: {
@@ -234,26 +231,24 @@ export interface NodeStyle {
     fill: string;
     /** 徽标内文本的颜色 */
     fontColor: string;
-  };
-  /**  节点的打标信息，例如 Pin,Locked */
-  tag: {
     /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
     type: 'font' | 'image' | 'text';
-    /** 根据类型，填写对应的值 */
-    value: string;
-    /** 放置的位置，ef：LT（left top）左上角 */
-    position: 'LT' | 'RT' | 'RB' | 'LB';
-    /** 填充的颜色 */
+  };
+}
+
+export interface NodeStatus {
+  [key: string]: | boolean | Partial<{
     fill: string;
-  };
-  status: {
-    /** 状态的类型 */
-    type: 'shadow' | 'border';
-    hover: {};
-    selected: {};
-    highlight: {};
-    disable: {};
-  };
+    stroke: string;
+    opacity: string;
+    // shadow 表示增加一圈类似阴影的东西，border 表示在外层增加一个
+    additionType: 'shadow' | 'border';
+    additionStyle: {
+      fill: string;
+      stroke: string;
+      opacity: string;
+    }
+  }>
 }
 
 export interface ComboStyle {}
