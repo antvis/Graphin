@@ -216,7 +216,7 @@ export interface NodeStyle {
     /** 根据类型，填写对应的值 */
     value: string;
     /** 图标大小 */
-    size: number;
+    size: number | number[];
     /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
     fill: string;
     fontFamily: string;
@@ -226,29 +226,36 @@ export interface NodeStyle {
     /** 放置的位置，ef：LT（left top）左上角 */
     position: 'LT' | 'RT' | 'RB' | 'LB';
     value: number | string;
+    // type = image 时生效，表示图片的宽度和高度
     size: [number, number] | [number];
     /** 徽标填充色 */
     fill: string;
+     /** 徽标描边色 */
+    stroke: string;
     /** 徽标内文本的颜色 */
-    fontColor: string;
+    color: string;
+    fontSize: number;
+    fontFamily: string;
     /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
     type: 'font' | 'image' | 'text';
   };
 }
 
 export interface NodeStatus {
-  [key: string]: | boolean | Partial<{
-    fill: string;
-    stroke: string;
-    opacity: string;
-    // shadow 表示增加一圈类似阴影的东西，border 表示在外层增加一个
-    additionType: 'shadow' | 'border';
-    additionStyle: {
-      fill: string;
-      stroke: string;
-      opacity: string;
-    }
-  }>
+  [key: string]:
+    | boolean
+    | Partial<{
+        fill: string;
+        stroke: string;
+        opacity: string;
+        // shadow 表示增加一圈类似阴影的东西，border 表示在外层增加一个
+        additionType: 'shadow' | 'border';
+        additionStyle: {
+          fill: string;
+          stroke: string;
+          opacity: string;
+        };
+      }>;
 }
 
 export interface ComboStyle {}
