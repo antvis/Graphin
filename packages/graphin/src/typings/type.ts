@@ -230,7 +230,7 @@ export interface NodeStyle {
     size: [number, number] | [number];
     /** 徽标填充色 */
     fill: string;
-     /** 徽标描边色 */
+    /** 徽标描边色 */
     stroke: string;
     /** 徽标内文本的颜色 */
     color: string;

@@ -12,38 +12,38 @@ const defaultNodeStyle = {
   stroke: '',
   label: {
     value: '',
-    fill: ''
-  }
-}
+    fill: '',
+  },
+};
 
 const DEFAULT_ICON_FONT_FAMILY = 'graphin';
 
 const convertSizeToWH = (size: number | number[]) => {
-  let width = 0
-  let height = 0
+  let width = 0;
+  let height = 0;
   if (isNumber(size)) {
     width = size;
-    height = size
+    height = size;
   } else if (isArray(size)) {
     if (size.length === 1) {
-      width = size[0]
-      height = size[0]
+      width = size[0];
+      height = size[0];
     } else if (size.length === 2) {
-      width = size[0]
-      height = size[1]
+      width = size[0];
+      height = size[1];
     }
   }
-  return [width, height]
-}
+  return [width, height];
+};
 
 export default (g6: typeof G6) => {
   g6.registerNode('graphin-circle', {
     draw(cfg: IUserNode, group: IGroup) {
       // const { style } = cfg
-      const style = Object.assign({}, defaultNodeStyle, cfg.style)
+      const style = Object.assign({}, defaultNodeStyle, cfg.style);
       // const innerNodeSize = style.size || 48;
 
-      const { fill, stroke, size, label, icon, badge } = style
+      const { fill, stroke, size, label, icon, badge } = style;
 
       let r = 30;
       if (isNumber(size)) {
@@ -60,10 +60,10 @@ export default (g6: typeof G6) => {
           r: r + 5,
           fill: '#2B384E',
           opacity: 0.9,
-          lineWidth: 0
+          lineWidth: 0,
         },
         name: 'halo-shape',
-        visible: false
+        visible: false,
       });
 
       // focus stroke for selected
@@ -75,10 +75,10 @@ export default (g6: typeof G6) => {
           fill: '#2B384E',
           stroke: '#fff',
           strokeOpacity: 0.85,
-          lineWidth: 1
+          lineWidth: 1,
         },
         name: 'selected-shape',
-        visible: false
+        visible: false,
       });
 
       // keyshape
@@ -116,9 +116,9 @@ export default (g6: typeof G6) => {
 
       // keyShape 中间的 icon
       if (icon) {
-        const { type } = icon
+        const { type } = icon;
         if (type === 'text' || type === 'font') {
-          const { value, fontFamily = DEFAULT_ICON_FONT_FAMILY, fill } = icon
+          const { value, fontFamily = DEFAULT_ICON_FONT_FAMILY, fill } = icon;
           group.addShape('text', {
             attrs: {
               x: 0,
@@ -128,20 +128,20 @@ export default (g6: typeof G6) => {
               textAlign: 'center',
               textBaseline: 'middle',
               fontFamily: fontFamily,
-              fill
+              fill,
             },
             capture: false,
             name: 'circle-icon',
           });
         } else if (type === 'image') {
-          const { size: iconSize, value } = icon
-          const [width, height] = convertSizeToWH(iconSize)
+          const { size: iconSize, value } = icon;
+          const [width, height] = convertSizeToWH(iconSize);
 
           group.addShape('image', {
             attrs: {
               x: -width / 2,
               y: -height / 2,
-              img: value
+              img: value,
             },
             capture: false,
             name: 'circle-icon',
@@ -149,35 +149,34 @@ export default (g6: typeof G6) => {
         }
       }
 
-      
       if (badge) {
-        const { type, position, value: badgeValue, size: badgeSize, fill, stroke, color, fontSize, fontFamily } = badge
-        let badgeX = 0
-        let badgeY = 0
-        const bbox: BBox = keyShape.getBBox()
+        const { type, position, value: badgeValue, size: badgeSize, fill, stroke, color, fontSize, fontFamily } = badge;
+        let badgeX = 0;
+        let badgeY = 0;
+        const bbox: BBox = keyShape.getBBox();
         // left top
         if (position === 'LT') {
-          badgeX = bbox.minX
-          badgeY = bbox.minY
+          badgeX = bbox.minX;
+          badgeY = bbox.minY;
         } else if (position === 'LB') {
           // left bottom
-          badgeX = bbox.minX
-          badgeY = bbox.maxY
+          badgeX = bbox.minX;
+          badgeY = bbox.maxY;
         } else if (position === 'RT') {
           // right top
-          badgeX = bbox.maxX
-          badgeY = bbox.minY
+          badgeX = bbox.maxX;
+          badgeY = bbox.minY;
         } else if (position === 'RB') {
           // right bottom
-          badgeX = bbox.maxX
-          badgeY = bbox.maxY
+          badgeX = bbox.maxX;
+          badgeY = bbox.maxY;
         }
 
-        const [width, height] = convertSizeToWH(badgeSize)
-        let textLen = 0
+        const [width, height] = convertSizeToWH(badgeSize);
+        let textLen = 0;
         if (type === 'font' || type === 'text') {
           // 获取 badge 上文本的长度
-          textLen = getTextSize(badgeValue, fontSize)[0]
+          textLen = getTextSize(badgeValue, fontSize)[0];
 
           if (width === height) {
             group.addShape('circle', {
@@ -186,9 +185,9 @@ export default (g6: typeof G6) => {
                 fill,
                 stroke,
                 x: badgeX,
-                y: badgeY
-              }
-            })
+                y: badgeY,
+              },
+            });
           } else {
             group.addShape('rect', {
               attrs: {
@@ -197,9 +196,9 @@ export default (g6: typeof G6) => {
                 fill,
                 stroke,
                 x: badgeX,
-                y: badgeY
-              }
-            })
+                y: badgeY,
+              },
+            });
           }
 
           group.addShape('text', {
@@ -211,18 +210,18 @@ export default (g6: typeof G6) => {
               textAlign: 'center',
               textBaseline: 'middle',
               fontFamily: fontFamily,
-              fill
+              fill,
             },
             capture: false,
             name: 'circle-badge',
           });
         } else if (type === 'image') {
-          textLen = width > height ? width : height
+          textLen = width > height ? width : height;
           group.addShape('image', {
             attrs: {
               x: -width / 2,
               y: -height / 2,
-              img: badgeValue
+              img: badgeValue,
             },
             capture: false,
             name: 'circle-badge',
@@ -231,9 +230,7 @@ export default (g6: typeof G6) => {
       }
       return keyShape;
     },
-    setState(name: string, value: string, item: INode) {
-     
-    },
+    setState(name: string, value: string, item: INode) {},
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any);
 };
