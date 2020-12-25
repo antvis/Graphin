@@ -1,10 +1,8 @@
-import { IGroup, BBox } from '@antv/g-base';
-import { INode } from '@antv/g6/lib/interface/item';
+import { IGroup } from '@antv/g-base';
+import { isArray, isNumber, isObject } from '@antv/util';
+import { INode, IItemBase } from '@antv/g6/lib/interface/item';
 import G6 from '@antv/g6';
 import { IUserNode, NodeStyle } from '../typings/type';
-import iconFont from '../icons/iconFont';
-import { isArray, isNumber } from '@antv/util';
-import { getTextSize } from '@antv/g6/lib/util/graphic';
 
 const defaultNodeStyle = {
   size: 16,
@@ -64,7 +62,7 @@ export default () => {
           opacity: 0.9,
           lineWidth: 0,
         },
-        name: 'halo-shape',
+        name: 'hover-shape',
         visible: false,
       });
   
@@ -99,18 +97,18 @@ export default () => {
   
       // 文本
       if (label) {
-        if (label.value) {
+        const { value, fill, fontSize } = label
+        if (value) {
           const labelPos = this.getLabelXYByPosition(style)
   
           group.addShape('text', {
             attrs: {
-              id: 'circle-label',
               x: labelPos.x,
               y: labelPos.y,
-              fontSize: 12,
-              text: label.value,
+              fontSize,
+              text: value,
               textAlign: 'center',
-              fill: label.fill,
+              fill,
               textBaseline: labelPos.textBaseline
             },
             draggable: true,
@@ -260,14 +258,49 @@ export default () => {
       
       return keyShape;
     },
-    setState(name: string, value: string, item: INode) {},
+    setState(name: string, value: string, item: INode) {
+      debugger
+      const group = item.get('group');
+      const model = item.getModel();
+      if (name === 'hover') {
+        const hoverShape = group.find((e: IItemBase) => e.get('name') === 'hover-shape');
+        if (!hoverShape) return
+        // const keyShape = item.getKeyShape();
+        if (value) {
+          hoverShape.show();
+          // keyShape.attr('fill', colorSet.activeFill || '#314264'); // TODO: change according to the main color of the node
+        }
+        else {
+          hoverShape.hide();
+        }
+      } else if (name === 'selected') {
+        const selectedShape = group.find((e: IItemBase) => e.get('name') === 'selected-shape');
+
+        if (!selectedShape) return
+
+        const label = group.find((e: IItemBase) => e.get('name') === 'text-shape');
+        const keyShape = item.getKeyShape();
+        if (value) {
+          selectedShape.show();
+          // keyShape.attr('fill', colorSet.selectedFill || keyShapeStroke);
+          keyShape.attr('fillOpacity', 1);
+          label && label.attr('fontWeight', 800);
+        }
+        else {
+          selectedShape.hide();
+          // keyShape.attr('fill', colorSet.mainFill || '#2B384E');
+          keyShape.attr('fillOpacity', 1);
+          label && label.attr('fontWeight', 400);
+        }
+      }
+    },
     getLabelXYByPosition(cfg: NodeStyle): {
       x: number;
       y: number;
       textBaseline?: string;
     } {
       const { label, size } = cfg
-      const { position: labelPosition, value, offset = 0 } = label
+      const { position: labelPosition, offset = 0 } = label
   
       // 默认的位置（最可能的情形），所以放在最上面
       if (labelPosition === 'center') {
@@ -312,6 +345,51 @@ export default () => {
       }
       return style;
     },
+    update(cfg: IUserNode, item: INode) {
+      const { style } = cfg
+      if (!style) return
+
+      // 更新 keyShape 的样式
+      const keyShape = item.getKeyShape();
+      for(let key in style) {
+        const value = (style as any)[key]
+        if (value && !isObject(value)) {
+          keyShape.attr(key, value)
+        }
+
+        // 更新 KeyShape 的大小
+        if (key === 'size') {
+          const sizeValue = convertSizeToWH(value)
+          keyShape.attr('r', sizeValue[0] / 2)
+        }
+      }
+
+      // 更新 label
+      const { label, icon, badges = [] } = style
+      if (label) {
+        const { value, fill, fontSize  } = label
+        const group = item.get('group')
+        const itemLabel = group.find((element: IItemBase) => element.get('name') === 'circle-label')
+        itemLabel.attr('text', value)
+        itemLabel.attr('fill', fill)
+        itemLabel.attr('fontSize', fontSize)
+
+        // 更新 label 位置
+        const labelPos = this.getLabelXYByPosition(style)
+        for(let key in labelPos) {
+          if (!labelPos[key]) return
+          itemLabel.attr(key, labelPos[key])
+        }
+      }
+
+      if (icon) {
+
+      }
+
+      if (badges.length > 0) {
+
+      }
+    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any);
 }
