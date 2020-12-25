@@ -43,10 +43,9 @@ const convertSizeToWH = (size: number | number[] | undefined) => {
 export default () => {
   G6.registerNode('graphin-circle', {
     draw(cfg: IUserNode, group: IGroup) {
-      debugger
       const style = Object.assign({}, defaultNodeStyle, cfg.style);
   
-      const { fill, stroke, size, label, icon, badge } = style;
+      const { fill, stroke, size, label, icon, badges = [] } = style;
   
       let r = 30;
       if (isNumber(size)) {
@@ -89,7 +88,7 @@ export default () => {
         attrs: {
           x: 0,
           y: 0,
-          r: r / 2,
+          r,
           stroke,
           fill,
           lineWidth: 2,
@@ -129,8 +128,8 @@ export default () => {
             attrs: {
               x: 0,
               y: 0,
-              text: fontFamily ? iconFont(value, fontFamily) : value,
-              fontSize: 20,
+              text: value,
+              fontSize: 10,
               textAlign: 'center',
               textBaseline: 'middle',
               fontFamily: fontFamily,
@@ -157,85 +156,108 @@ export default () => {
         }
       }
   
-      if (badge) {
-        const { type, position, value: badgeValue = '', size: badgeSize, fill, stroke, color, fontSize, fontFamily = 'graphin' } = badge;
+      // badges 会存在多个的情况
+      badges.forEach(badge => {
+        const { type, position, value: badgeValue = '', 
+          size: badgeSize, fill, stroke, color, 
+          fontSize, fontFamily = 'graphin',
+          padding = 0, offset = [0, 0] } = badge;
         let badgeX = 0;
         let badgeY = 0;
-        const bbox: BBox = keyShape.getBBox();
+        
         // left top
         if (position === 'LT') {
-          badgeX = bbox.minX;
-          badgeY = bbox.minY;
+          badgeX = r * Math.cos(Math.PI * 3 / 4);
+          badgeY = -r * Math.sin(Math.PI * 3 / 4);
         } else if (position === 'LB') {
           // left bottom
-          badgeX = bbox.minX;
-          badgeY = bbox.maxY;
+          badgeX = r * Math.cos(Math.PI * 5 / 4);
+          badgeY = -r * Math.sin(Math.PI * 5 / 4);
         } else if (position === 'RT') {
           // right top
-          badgeX = bbox.maxX;
-          badgeY = bbox.minY;
+          badgeX = r * Math.cos(Math.PI * 1 / 4);
+          badgeY = -r * Math.sin(Math.PI * 1 / 4);
         } else if (position === 'RB') {
           // right bottom
-          badgeX = bbox.maxX;
-          badgeY = bbox.maxY;
+          badgeX = r * Math.cos(Math.PI * 7 / 4);
+          badgeY = -r * Math.sin(Math.PI * 7 / 4);
         }
-  
+
         const [width, height] = convertSizeToWH(badgeSize);
-        let textLen = 0;
-        if (type === 'font' || type === 'text') {
-          // 获取 badge 上文本的长度
-          textLen = getTextSize(badgeValue, fontSize)[0];
+
+        // 绘制 badge 的外层容器，根据宽度和高度确定是 circle 还是 rect
+
+        let realX = badgeX
+        let realY = badgeY
+        if (width === height) {
+          group.addShape('circle', {
+            attrs: {
+              r: width / 2 + padding,
+              fill,
+              stroke,
+              x: realX + offset[0],
+              y: realY + offset[1],
+            },
+          });
+        } else {
+          realX = badgeX - width - padding * 2
+          realY = badgeY - height - padding * 2
   
-          if (width === height) {
-            group.addShape('circle', {
-              attrs: {
-                r: textLen / 2,
-                fill,
-                stroke,
-                x: badgeX,
-                y: badgeY,
-              },
-            });
-          } else {
-            group.addShape('rect', {
-              attrs: {
-                width: textLen,
-                height,
-                fill,
-                stroke,
-                x: badgeX,
-                y: badgeY,
-              },
-            });
+          if (position === 'LB') {
+            realY = badgeY
+          } else if (position === 'RT') {
+            realX = badgeX
+            realY = badgeY - height - padding * 2
+          } else if (position === 'RB') {
+            realX = badgeX
+            realY = badgeY
           }
-  
+
+          realX += offset[0]
+          realY += offset[1]
+          group.addShape('rect', {
+            attrs: {
+              width: width + padding * 2,
+              height: height + padding * 2,
+              fill,
+              stroke,
+              x: realX,
+              y: realY,
+              radius: (height + padding * 2) / 3
+            },
+          });
+        }
+
+        if (type === 'font' || type === 'text') {
           group.addShape('text', {
             attrs: {
-              x: 0,
-              y: 0,
-              text: iconFont(badgeValue as string, fontFamily),
-              fontSize: 20,
+              x: width !== height ? realX + width / 2 + padding : realX,
+              y: width !== height ? realY + height / 2 + padding : realY,
+              text: badgeValue,
+              fontSize,
               textAlign: 'center',
               textBaseline: 'middle',
               fontFamily: fontFamily,
-              fill,
+              fill: color,
             },
             capture: false,
-            name: 'circle-badge',
+            name: 'circle-badge-content',
           });
         } else if (type === 'image') {
-          textLen = width > height ? width : height;
           group.addShape('image', {
             attrs: {
-              x: -width / 2,
-              y: -height / 2,
+              x: realX - width / 2,
+              y: realX - height / 2,
+              width,
+              height,
               img: badgeValue,
             },
             capture: false,
-            name: 'circle-badge',
+            name: 'circle-badge-content',
           });
         }
-      }
+      })
+      
       return keyShape;
     },
     setState(name: string, value: string, item: INode) {},

@@ -202,7 +202,7 @@ export class Mock {
     };
   };
 
-  graphinMock = (label?: NodeStyleLabel, icon?: NodeStyleIcon, badge?: NodeStyleBadge) => {
+  graphinMock = (label?: NodeStyleLabel, icon?: NodeStyleIcon, badges?: NodeStyleBadge[]) => {
     return {
       nodes: this.nodes.map(node => {
         return {
@@ -219,7 +219,7 @@ export class Mock {
               fontSize: 14
             },
             icon, 
-            badge
+            badges
           },
         };
       }),

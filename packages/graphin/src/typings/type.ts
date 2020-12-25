@@ -230,6 +230,10 @@ export type NodeStyleBadge = Partial<{
   color: string;
   fontSize: number;
   fontFamily: string;
+  // badge 中文本距离四周的偏移量
+  padding: number;
+  // badge 在 x 和 y 方向上的偏移量
+  offset: [number, number];
 }>
 
 
@@ -247,7 +251,7 @@ export interface NodeStyle {
   /** 节点的中间位置图标区域 */
   icon: NodeStyleIcon;
   /** 节点的徽标 */
-  badge: NodeStyleBadge;
+  badges: NodeStyleBadge[];
 }
 
 export interface NodeStatus {
