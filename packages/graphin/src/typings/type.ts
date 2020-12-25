@@ -268,6 +268,10 @@ export interface Layout {
 export interface IconLoader {
   (): {
     fontFamily: string;
-    map: {}[];
-  }[];
+    glyphs: {
+      name: string;
+      unicode_decimal: number;
+      [key: string]: any;
+    }[];
+  };
 }

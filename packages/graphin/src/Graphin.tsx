@@ -3,16 +3,15 @@ import React, { ErrorInfo } from 'react';
 // todo ,G6@unpack版本将规范类型的输出
 import G6, { Graph, Graph as IGraph } from '@antv/g6';
 
-import { cloneDeep, takeRightWhile } from 'lodash';
+import { cloneDeep, get, takeRightWhile } from 'lodash';
 
 /** types  */
-import { IconLoader } from './typings';
+import { IconLoader } from './typings/type';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
 
 import './index.less';
-import { ICON_FONT_FAMILY_MAP } from './icons/iconFont';
 
 import { TREE_LAYOUTS, G6_DEFAULT_NODE, G6_DEFAULT_COMBO, G6_DEFAULT_EDGE } from './consts';
 
@@ -47,33 +46,29 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     G6.registerBehavior(behaviorName, behavior);
   }
 
-  static registerFontFamily(iconLoader: IconLoader) {
+  static registerFontFamily(iconLoader: IconLoader): { [icon: string]: any } {
     /**  注册 font icon */
-    const iconLoaders = iconLoader();
-    iconLoaders.forEach(item => {
-      ICON_FONT_FAMILY_MAP[item.fontFamily] = item.map;
+    const iconFont = iconLoader();
+    const { glyphs, fontFamily } = iconFont;
+    const icons = glyphs.map(item => {
+      return {
+        name: item.name,
+        unicode: String.fromCodePoint(item.unicode_decimal),
+      };
     });
 
-    return (fontFamily: string) => {
-      const selectedIconFont = ICON_FONT_FAMILY_MAP[fontFamily];
-      // fontFamily not found
-      if (!selectedIconFont) {
-        console.warn(`fontFamily ${fontFamily} not found`);
-        return '';
-      }
-      const icons = selectedIconFont.map((icon: any) => {
-        return {
-          name: icon.name,
-          unicode: String.fromCodePoint(icon.unicode_decimal),
-        };
-      });
-
-      const matchIcon = icons.find(icon => {
-        return icon.name === type;
-      }) || { unicode: '', name: '' };
-
-      return matchIcon.unicode;
-    };
+    return new Proxy(icons, {
+      get: (target, propKey, receiver) => {
+        const matchIcon = target.find(icon => {
+          return icon.name === propKey;
+        });
+        if (!matchIcon) {
+          console.error(`%c fontFamily:${fontFamily},does not found ${propKey} icon`);
+          return '';
+        }
+        return matchIcon?.unicode;
+      },
+    });
   }
   static registerLayout(layoutName, layout) {
     G6.registerLayout(layoutName, layout);
