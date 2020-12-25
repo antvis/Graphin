@@ -7,6 +7,7 @@ import Behaviors from './behaviors';
 
 export { default as G6 } from '@antv/g6';
 import registerGraphinForce from './layout/registerGraphinForce';
+import { registerGraphinCircle } from './shape'
 export default Graphin;
 export { Utils, Layout, GraphinContext, Behaviors };
 
@@ -20,3 +21,6 @@ export interface GraphEvent extends MouseEvent {
 
 /** 注册 Graphin force 布局 */
 registerGraphinForce();
+
+/** 注册 Graphin Circle Node */
+registerGraphinCircle()

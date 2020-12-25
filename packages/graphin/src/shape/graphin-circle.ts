@@ -8,16 +8,20 @@ import { getTextSize } from '@antv/g6/lib/util/graphic';
 
 const defaultNodeStyle = {
   size: 16,
-  fill: '',
-  stroke: '',
+  fill: 'red',
+  stroke: 'blue',
   label: {
-    value: '',
-    fill: '',
+    value: 'xxx',
+    fill: 'green',
   },
 };
 
 const DEFAULT_ICON_FONT_FAMILY = 'graphin';
 
+/**
+ * 将 size 转换为宽度和高度
+ * @param size 
+ */
 const convertSizeToWH = (size: number | number[]) => {
   let width = 0;
   let height = 0;
@@ -36,22 +40,21 @@ const convertSizeToWH = (size: number | number[]) => {
   return [width, height];
 };
 
-export default (g6: typeof G6) => {
-  g6.registerNode('graphin-circle', {
+export default () => {
+  G6.registerNode('graphin-circle', {
     draw(cfg: IUserNode, group: IGroup) {
-      // const { style } = cfg
+      debugger
       const style = Object.assign({}, defaultNodeStyle, cfg.style);
-      // const innerNodeSize = style.size || 48;
-
+  
       const { fill, stroke, size, label, icon, badge } = style;
-
+  
       let r = 30;
       if (isNumber(size)) {
         r = size / 2;
       } else if (isArray(size)) {
         r = size[0] / 2;
       }
-
+  
       // halo for hover
       group.addShape('circle', {
         attrs: {
@@ -65,7 +68,7 @@ export default (g6: typeof G6) => {
         name: 'halo-shape',
         visible: false,
       });
-
+  
       // focus stroke for selected
       group.addShape('circle', {
         attrs: {
@@ -80,7 +83,7 @@ export default (g6: typeof G6) => {
         name: 'selected-shape',
         visible: false,
       });
-
+  
       // keyshape
       const keyShape = group.addShape('circle', {
         attrs: {
@@ -94,7 +97,7 @@ export default (g6: typeof G6) => {
         name: 'circle-keyshape',
         draggable: true,
       });
-
+  
       // 文本
       if (label) {
         if (label.value) {
@@ -113,7 +116,7 @@ export default (g6: typeof G6) => {
           });
         }
       }
-
+  
       // keyShape 中间的 icon
       if (icon) {
         const { type } = icon;
@@ -136,7 +139,7 @@ export default (g6: typeof G6) => {
         } else if (type === 'image') {
           const { size: iconSize, value } = icon;
           const [width, height] = convertSizeToWH(iconSize);
-
+  
           group.addShape('image', {
             attrs: {
               x: -width / 2,
@@ -148,7 +151,7 @@ export default (g6: typeof G6) => {
           });
         }
       }
-
+  
       if (badge) {
         const { type, position, value: badgeValue, size: badgeSize, fill, stroke, color, fontSize, fontFamily } = badge;
         let badgeX = 0;
@@ -171,13 +174,13 @@ export default (g6: typeof G6) => {
           badgeX = bbox.maxX;
           badgeY = bbox.maxY;
         }
-
+  
         const [width, height] = convertSizeToWH(badgeSize);
         let textLen = 0;
         if (type === 'font' || type === 'text') {
           // 获取 badge 上文本的长度
           textLen = getTextSize(badgeValue, fontSize)[0];
-
+  
           if (width === height) {
             group.addShape('circle', {
               attrs: {
@@ -200,7 +203,7 @@ export default (g6: typeof G6) => {
               },
             });
           }
-
+  
           group.addShape('text', {
             attrs: {
               x: 0,
@@ -233,4 +236,4 @@ export default (g6: typeof G6) => {
     setState(name: string, value: string, item: INode) {},
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any);
-};
+}

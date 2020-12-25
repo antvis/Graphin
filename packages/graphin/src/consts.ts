@@ -1,7 +1,7 @@
 export const TREE_LAYOUTS = ['dendrogram', 'compactBox', 'mindmap', 'indented'];
 
 export const G6_DEFAULT_NODE = {
-  type: 'circle',
+  type: 'graphin-circle',
   size: [30, 30],
   fill: '#9EC9FF',
   stroke: '#5B8FF9',

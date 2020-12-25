@@ -180,12 +180,16 @@ export class Mock {
       nodes: this.nodes.map(node => {
         return {
           id: node.id,
-          label: `node-${node.id}`,
           data: node,
-          type: 'circle',
+          type: 'graphin-circle',
           comboId: node.comboId,
           style: {
-            nodeSize: 24,
+            size: 24,
+            label: {
+              position: 'bottom',
+              value: `node-${node.id}`,
+              
+            }
           },
         };
       }),
