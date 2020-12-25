@@ -53,6 +53,27 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     iconLoaders.forEach(item => {
       ICON_FONT_FAMILY_MAP[item.fontFamily] = item.map;
     });
+
+    return (fontFamily: string) => {
+      const selectedIconFont = ICON_FONT_FAMILY_MAP[fontFamily];
+      // fontFamily not found
+      if (!selectedIconFont) {
+        console.warn(`fontFamily ${fontFamily} not found`);
+        return '';
+      }
+      const icons = selectedIconFont.map((icon: any) => {
+        return {
+          name: icon.name,
+          unicode: String.fromCodePoint(icon.unicode_decimal),
+        };
+      });
+
+      const matchIcon = icons.find(icon => {
+        return icon.name === type;
+      }) || { unicode: '', name: '' };
+
+      return matchIcon.unicode;
+    };
   }
   static registerLayout(layoutName, layout) {
     G6.registerLayout(layoutName, layout);
