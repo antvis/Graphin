@@ -1,7 +1,7 @@
 import { IGroup, BBox } from '@antv/g-base';
 import { INode } from '@antv/g6/lib/interface/item';
 import G6 from '@antv/g6';
-import { IUserNode } from '../typings/type';
+import { IUserNode, NodeStyle } from '../typings/type';
 import iconFont from '../icons/iconFont';
 import { isArray, isNumber } from '@antv/util';
 import { getTextSize } from '@antv/g6/lib/util/graphic';
@@ -16,13 +16,13 @@ const defaultNodeStyle = {
   },
 };
 
-const DEFAULT_ICON_FONT_FAMILY = 'graphin';
-
 /**
  * 将 size 转换为宽度和高度
  * @param size 
  */
-const convertSizeToWH = (size: number | number[]) => {
+const convertSizeToWH = (size: number | number[] | undefined) => {
+  if (!size) return [0, 0];
+
   let width = 0;
   let height = 0;
   if (isNumber(size)) {
@@ -101,15 +101,18 @@ export default () => {
       // 文本
       if (label) {
         if (label.value) {
+          const labelPos = this.getLabelXYByPosition(style)
+  
           group.addShape('text', {
             attrs: {
               id: 'circle-label',
-              x: 0,
-              y: r / 2 + 14,
+              x: labelPos.x,
+              y: labelPos.y,
               fontSize: 12,
-              text: cfg.label,
+              text: label.value,
               textAlign: 'center',
               fill: label.fill,
+              textBaseline: labelPos.textBaseline
             },
             draggable: true,
             name: 'circle-label',
@@ -121,12 +124,12 @@ export default () => {
       if (icon) {
         const { type } = icon;
         if (type === 'text' || type === 'font') {
-          const { value, fontFamily = DEFAULT_ICON_FONT_FAMILY, fill } = icon;
+          const { value = '', fontFamily, fill } = icon;
           group.addShape('text', {
             attrs: {
               x: 0,
               y: 0,
-              text: iconFont(value, fontFamily),
+              text: fontFamily ? iconFont(value, fontFamily) : value,
               fontSize: 20,
               textAlign: 'center',
               textBaseline: 'middle',
@@ -145,6 +148,8 @@ export default () => {
               x: -width / 2,
               y: -height / 2,
               img: value,
+              width,
+              height
             },
             capture: false,
             name: 'circle-icon',
@@ -153,7 +158,7 @@ export default () => {
       }
   
       if (badge) {
-        const { type, position, value: badgeValue, size: badgeSize, fill, stroke, color, fontSize, fontFamily } = badge;
+        const { type, position, value: badgeValue = '', size: badgeSize, fill, stroke, color, fontSize, fontFamily = 'graphin' } = badge;
         let badgeX = 0;
         let badgeY = 0;
         const bbox: BBox = keyShape.getBBox();
@@ -234,6 +239,57 @@ export default () => {
       return keyShape;
     },
     setState(name: string, value: string, item: INode) {},
+    getLabelXYByPosition(cfg: NodeStyle): {
+      x: number;
+      y: number;
+      textBaseline?: string;
+    } {
+      const { label, size } = cfg
+      const { position: labelPosition, value, offset = 0 } = label
+  
+      // 默认的位置（最可能的情形），所以放在最上面
+      if (labelPosition === 'center') {
+        return { x: 0, y: 0 };
+      }
+  
+      const wh = convertSizeToWH(size);
+  
+      const width = wh[0];
+      const height = wh[1];
+  
+      let style: any;
+      switch (labelPosition) {
+        case 'top':
+          style = {
+            x: 0,
+            y: 0 - height / 2 - offset,
+            textBaseline: 'bottom', // 文本在图形的上面
+          };
+          break;
+        case 'bottom':
+          style = {
+            x: 0,
+            y: height / 2 + offset,
+            textBaseline: 'top',
+          };
+          break;
+        case 'left':
+          style = {
+            x: 0 - width / 2 - offset,
+            y: 0,
+            textAlign: 'right',
+          };
+          break;
+        default:
+          style = {
+            x: width / 2 + offset,
+            y: 0,
+            textAlign: 'left',
+          };
+          break;
+      }
+      return style;
+    },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any);
 }
