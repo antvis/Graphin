@@ -15,6 +15,7 @@ export default {
   alias: {
     '@antv/graphin': join(__dirname, 'packages', 'graphin'),
     '@antv/graphin-components': join(__dirname, 'packages', 'graphin-components'),
+    '@antv/graphin-icons': join(__dirname, 'packages', 'graphin-icons'),
   },
   extraBabelPlugins: [
     [
