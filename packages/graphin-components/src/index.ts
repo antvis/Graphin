@@ -5,3 +5,4 @@
 
 export { default as Hull, HullCfg } from './Hull';
 export { default as ContextMenu } from './ContextMenu';
+export { default as VisSettingPanel } from './VisSettingPanel';
