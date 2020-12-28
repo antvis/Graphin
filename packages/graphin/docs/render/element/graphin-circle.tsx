@@ -3,8 +3,7 @@ import Graphin, { Utils, Behaviors } from '@antv/graphin';
 import IconLoader from '@antv/graphin-icons'
 
 const iconLoader = Graphin.registerFontFamily(IconLoader)
-const iconValue = iconLoader('graphin', 'home')
-console.log('iconValue', iconValue)
+const iconValue = iconLoader.home
 const { ZoomCanvas } = Behaviors;
 
 const defaultIcon = {
@@ -90,7 +89,7 @@ const defaultBadge = [
 
 const data = Utils.mock(10)
   .circle()
-  .graphinMock(null, defaultIcon as any, defaultBadge as any);
+  .graphinMock(null, defaultIcon as any);
 const layout = {
   type: 'circular',
 };

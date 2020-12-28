@@ -27,7 +27,7 @@ export interface RestNode {
   /** 节点的样式，默认为默认样式 */
   style: Partial<NodeStyle>;
   /**  节点当前的状态 */
-  status: NodeStatus[];
+  status: NodeStatus;
   /** 布局的相关信息 */
   layout: {};
 }
@@ -263,11 +263,13 @@ export interface NodeStatus {
         opacity: string;
         // shadow 表示增加一圈类似阴影的东西，border 表示在外层增加一个
         additionType: 'shadow' | 'border';
-        additionStyle: {
+        additionStyle: Partial<{
           fill: string;
           stroke: string;
           opacity: string;
-        };
+          shadowColor: string;
+          shadowBlur: number;
+        }>;
       }>;
 }
 

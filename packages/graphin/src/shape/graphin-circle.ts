@@ -1,18 +1,8 @@
 import { IGroup } from '@antv/g-base';
+import G6 from '@antv/g6';
 import { isArray, isNumber, isObject } from '@antv/util';
 import { INode, IItemBase } from '@antv/g6/lib/interface/item';
-import G6 from '@antv/g6';
-import { IUserNode, NodeStyle } from '../typings/type';
-
-const defaultNodeStyle = {
-  size: 16,
-  fill: 'red',
-  stroke: 'blue',
-  label: {
-    value: 'xxx',
-    fill: 'green',
-  },
-};
+import { IUserNode, NodeStyle, NodeStatus } from '../typings/type';
 
 /**
  * 将 size 转换为宽度和高度
@@ -40,12 +30,70 @@ const convertSizeToWH = (size: number | number[] | undefined) => {
 
 export default () => {
   G6.registerNode('graphin-circle', {
+    options: {
+      style: {
+        size: 60,
+        fill: 'rgb(239, 244, 255)',
+        stroke: 'rgb(95, 149, 255)',
+        label: {
+          position: 'bottom',
+          value: '',
+          fill: 'rgb(0, 0, 0)',
+          fontSize: 12,
+          offset: 0
+        },
+        icon: {
+          type: 'image',
+          value: 'https://gw.alipayobjects.com/zos/bmw-prod/5d015065-8505-4e7a-baec-976f81e3c41d.svg',
+          size: 20
+        },
+        badges: [
+          {
+            position: 'RT',
+            type: 'text',
+            value: '99+',
+            size: [24, 16],
+            fill: 'rgb(223, 234, 255)',
+            stroke: '#4572d9',
+            color: 'rgb(250, 250, 250)',
+            fontSize: 12,
+            padding: 0,
+            offset: [0, 0]
+          },
+          {
+            position: 'RB',
+            type: 'text',
+            value: 'LOCK',
+            size: [48, 16],
+            fill: 'rgb(223, 234, 255)',
+            stroke: '#4572d9',
+            color: 'rgb(250, 250, 250)',
+            fontSize: 12,
+            padding: 0,
+            offset: [0, 0]
+          }
+        ]
+      },
+      status: {
+        selected: {
+          additionType: 'shadow',
+          fill: 'rgb(255, 255, 255)',
+          stroke: 'rgb(95, 149, 255)',
+          lineWidth: 4,
+          shadowColor: 'rgb(95, 149, 255)',
+          shadowBlur: 10,
+          'text-shape': {
+            fontWeight: 500,
+          },
+        },
+      }
+    },
     draw(cfg: IUserNode, group: IGroup) {
-      const style = Object.assign({}, defaultNodeStyle, cfg.style);
+      const style = Object.assign({}, cfg.style, this.options.style) as NodeStyle;
   
       const { fill, stroke, size, label, icon, badges = [] } = style;
   
-      let r = 30;
+      let r = 0;
       if (isNumber(size)) {
         r = size / 2;
       } else if (isArray(size)) {
@@ -72,8 +120,8 @@ export default () => {
           x: 0,
           y: 0,
           r: r + 5,
-          fill: '#2B384E',
-          stroke: '#fff',
+          fill: 'rgb(95, 149, 255)',
+          stroke: 'rgb(255, 255, 255)',
           strokeOpacity: 0.85,
           lineWidth: 1,
         },
@@ -260,8 +308,14 @@ export default () => {
     },
     setState(name: string, value: string, item: INode) {
       debugger
+      console.log(this.options.status)
       const group = item.get('group');
       const model = item.getModel();
+
+      const status = Object.assign({}, this.options.status, model.status) as NodeStatus
+      const currentStatus = status[name]
+
+      
       if (name === 'hover') {
         const hoverShape = group.find((e: IItemBase) => e.get('name') === 'hover-shape');
         if (!hoverShape) return

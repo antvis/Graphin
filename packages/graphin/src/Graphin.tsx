@@ -174,7 +174,6 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
 
       this.graph = new G6.TreeGraph(this.options);
     } else {
-      debugger
       this.graph = new G6.Graph(this.options);
     }
 
