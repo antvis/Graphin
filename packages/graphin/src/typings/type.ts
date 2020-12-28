@@ -261,6 +261,8 @@ export interface NodeStatus {
         fill: string;
         stroke: string;
         opacity: string;
+        shadowColor: string;
+        shadowBlur: number;
         // shadow 表示增加一圈类似阴影的东西，border 表示在外层增加一个
         additionType: 'shadow' | 'border';
         additionStyle: Partial<{

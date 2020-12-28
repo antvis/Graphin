@@ -1,8 +1,8 @@
 import { IGroup } from '@antv/g-base';
 import G6 from '@antv/g6';
-import { isArray, isNumber, isObject } from '@antv/util';
+import { deepMix, isArray, isNumber, isObject } from '@antv/util';
 import { INode, IItemBase } from '@antv/g6/lib/interface/item';
-import { IUserNode, NodeStyle, NodeStatus } from '../typings/type';
+import { IUserNode, NodeStyle } from '../typings/type';
 
 /**
  * 将 size 转换为宽度和高度
@@ -35,6 +35,7 @@ export default () => {
         size: 60,
         fill: 'rgb(239, 244, 255)',
         stroke: 'rgb(95, 149, 255)',
+        opacity: 1,
         label: {
           position: 'bottom',
           value: '',
@@ -52,7 +53,7 @@ export default () => {
             position: 'RT',
             type: 'text',
             value: '99+',
-            size: [24, 16],
+            size: [24, 24],
             fill: 'rgb(223, 234, 255)',
             stroke: '#4572d9',
             color: 'rgb(250, 250, 250)',
@@ -61,7 +62,7 @@ export default () => {
             offset: [0, 0]
           },
           {
-            position: 'RB',
+            position: 'LB',
             type: 'text',
             value: 'LOCK',
             size: [48, 16],
@@ -76,20 +77,25 @@ export default () => {
       },
       status: {
         selected: {
-          additionType: 'shadow',
-          fill: 'rgb(255, 255, 255)',
-          stroke: 'rgb(95, 149, 255)',
-          lineWidth: 4,
-          shadowColor: 'rgb(95, 149, 255)',
-          shadowBlur: 10,
-          'text-shape': {
-            fontWeight: 500,
-          },
+          // shadowColor: 'rgb(95, 149, 255)',
+          // shadowBlur: 30,
+          additionType: 'border',
+          additionStyle: {
+            fill: 'rgb(239, 244, 255)',
+            stroke: '#6C43D5',
+            lineWidth: 3
+          }
         },
+        hover: {
+          additionType: 'shadow',
+          additionStyle: {
+            fill: 'rgb(239, 244, 255)'
+          }
+        }
       }
     },
     draw(cfg: IUserNode, group: IGroup) {
-      const style = Object.assign({}, cfg.style, this.options.style) as NodeStyle;
+      const style = deepMix({}, this.options.style, cfg.style) as NodeStyle;
   
       const { fill, stroke, size, label, icon, badges = [] } = style;
   
@@ -105,12 +111,12 @@ export default () => {
         attrs: {
           x: 0,
           y: 0,
-          r: r + 5,
+          r: r + 17,
           fill: '#2B384E',
           opacity: 0.9,
-          lineWidth: 0,
+          lineWidth: 1,
         },
-        name: 'hover-shape',
+        name: 'border-shape',
         visible: false,
       });
   
@@ -119,13 +125,11 @@ export default () => {
         attrs: {
           x: 0,
           y: 0,
-          r: r + 5,
-          fill: 'rgb(95, 149, 255)',
-          stroke: 'rgb(255, 255, 255)',
-          strokeOpacity: 0.85,
+          r: r + 16,
+          fill: 'rgb(239, 244, 255)',
           lineWidth: 1,
         },
-        name: 'selected-shape',
+        name: 'shadow-shape',
         visible: false,
       });
   
@@ -137,7 +141,7 @@ export default () => {
           r,
           stroke,
           fill,
-          lineWidth: 2,
+          lineWidth: 5,
         },
         name: 'circle-keyshape',
         draggable: true,
@@ -307,43 +311,92 @@ export default () => {
       return keyShape;
     },
     setState(name: string, value: string, item: INode) {
-      debugger
-      console.log(this.options.status)
       const group = item.get('group');
       const model = item.getModel();
 
-      const status = Object.assign({}, this.options.status, model.status) as NodeStatus
-      const currentStatus = status[name]
+      let currentStatusStyle = undefined//status[name]
 
-      
+      // 如果 model.status 不存在，或值为 true，则取默认的状态样式
+      // @ts-ignore
+      if ( !model.status || model.status[name]) {
+        currentStatusStyle = this.options.status[name]
+      }
+
+      if (!currentStatusStyle) return
+
+      const { fill, stroke, opacity, shadowColor, shadowBlur, additionType, additionStyle } = currentStatusStyle
+      const keyShape = item.getKeyShape();
+
+      let keyShapeAttrs = {} as any
+      if (value) {
+        // 当设置状态时候，keyShape 取 status 中的值
+        if (fill) {
+          keyShapeAttrs.fill = fill
+        }
+        if (stroke) {
+          keyShapeAttrs.stroke = stroke
+        }
+        if (opacity) {
+          keyShapeAttrs.opacity = opacity
+        }
+        if (shadowColor) {
+          keyShapeAttrs.shadowColor = shadowColor
+        }
+        if (shadowBlur) {
+          keyShapeAttrs.shadowBlur = shadowBlur
+        }
+      } else {
+        // 当取消状态时，还原 keyShape 的样式，取 style 里面的值
+        const keyShapeStyle = this.options.style
+        const { fill: originFill, stroke: originStroke, opacity: originOpacity, shadowColor: originShadowColor, shadowBlur: originShadowBlur } = keyShapeStyle
+        keyShapeAttrs = {
+          fill: originFill, 
+          stroke: originStroke, 
+          opacity: originOpacity, 
+          shadowColor: originShadowColor, 
+          shadowBlur: originShadowBlur
+        }
+      }
+
+      for (let key in keyShapeAttrs) {
+        keyShape.attr(key, keyShapeAttrs[key])
+      }
+
+      let additionShapeName = ''
+      if (additionType === 'shadow') {
+        additionShapeName = 'shadow-shape'
+      } else if (additionType === 'border') {
+        additionShapeName = 'border-shape'
+      }
+
       if (name === 'hover') {
-        const hoverShape = group.find((e: IItemBase) => e.get('name') === 'hover-shape');
+        const hoverShape = group.find((e: IItemBase) => e.get('name') === additionShapeName);
         if (!hoverShape) return
-        // const keyShape = item.getKeyShape();
         if (value) {
           hoverShape.show();
-          // keyShape.attr('fill', colorSet.activeFill || '#314264'); // TODO: change according to the main color of the node
+          for (let styleKey in additionStyle) {
+            hoverShape.attr(styleKey, additionStyle[styleKey])
+          }
         }
         else {
           hoverShape.hide();
         }
       } else if (name === 'selected') {
-        const selectedShape = group.find((e: IItemBase) => e.get('name') === 'selected-shape');
+        const selectedShape = group.find((e: IItemBase) => e.get('name') === additionShapeName);
 
         if (!selectedShape) return
 
         const label = group.find((e: IItemBase) => e.get('name') === 'text-shape');
-        const keyShape = item.getKeyShape();
+        
         if (value) {
           selectedShape.show();
-          // keyShape.attr('fill', colorSet.selectedFill || keyShapeStroke);
-          keyShape.attr('fillOpacity', 1);
+          for (let styleKey in additionStyle) {
+            selectedShape.attr(styleKey, additionStyle[styleKey])
+          }
           label && label.attr('fontWeight', 800);
         }
         else {
           selectedShape.hide();
-          // keyShape.attr('fill', colorSet.mainFill || '#2B384E');
-          keyShape.attr('fillOpacity', 1);
           label && label.attr('fontWeight', 400);
         }
       }

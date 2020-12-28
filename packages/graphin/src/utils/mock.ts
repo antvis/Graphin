@@ -213,7 +213,7 @@ export class Mock {
           style: {
             size: 48,
             label: label || {
-              position: 'top',
+              position: 'bottom',
               value: `node-${node.id}`,
               fill: 'red',
               fontSize: 14

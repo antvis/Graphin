@@ -1,5 +1,5 @@
-import React from 'react';
-import Graphin, { Utils, Behaviors } from '@antv/graphin';
+import React, { useEffect } from 'react';
+import Graphin, { Utils, Behaviors,GraphinContext } from '@antv/graphin';
 import IconLoader from '@antv/graphin-icons'
 
 const iconLoader = Graphin.registerFontFamily(IconLoader)
@@ -15,6 +15,20 @@ const defaultIcon = {
   /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
   fill: 'green',
   fontFamily: 'graphin'
+}
+const  EventCenter =()=>{
+  const { graph } = React.useContext(GraphinContext)
+  useEffect(()=>{
+    graph.on('node:mouseenter',(evt)=>{
+      graph.setItemState(evt.item, 'hover', true)
+    })
+
+    graph.on('node:mouseleave',(evt)=>{
+      graph.setItemState(evt.item, 'hover', false)
+    })
+  },[])
+ 
+  return null
 }
 
 const defaultBadge = [
@@ -94,13 +108,13 @@ const layout = {
   type: 'circular',
 };
 
-console.log('data', data)
 
 export default () => {
   return (
     <div>
       <Graphin data={data} layout={layout}>
         <ZoomCanvas disabled={true} />
+        <EventCenter />
       </Graphin>
     </div>
   );
