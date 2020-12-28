@@ -7,9 +7,11 @@ import '@antv/graphin/dist/index.css';
 const { Menu } = ContextMenu;
 
 const App = () => {
+  const data = Utils.mock(5).circle().graphin()
+  console.log('mock data', data)
   return (
     <div className="App">
-      <Graphin data={Utils.mock(5).circle().graphin()} layout={{ type: 'graphin-force' }}>
+      <Graphin data={data} layout={{ type: 'graphin-force' }}>
         <ContextMenu>
           <Menu>
             <Menu.Item>menu item</Menu.Item>

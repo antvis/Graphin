@@ -27,7 +27,7 @@ export interface RestNode {
   /** 节点的样式，默认为默认样式 */
   style: Partial<NodeStyle>;
   /**  节点当前的状态 */
-  status: NodeStatus[];
+  status: NodeStatus;
   /** 布局的相关信息 */
   layout: {};
 }
@@ -52,10 +52,6 @@ export interface RestEdge {
   };
 }
 
-export enum NodeStatus {
-  SELECTED = 'selected',
-  ACTIVE = 'active',
-}
 /**
  * 节点的形状
  */
@@ -193,6 +189,54 @@ export interface GraphinEdge extends BaseEdge, RestEdge, UserProperties {}
 
 export interface Combo {}
 
+export type NodeStyleLabel = Partial<{
+  /** label的名称 */
+  value: string;
+  /** 展示位置 */
+  position: 'top' | 'bottom' | 'left' | 'right' | 'center';
+  /** 文本填充色 */
+  fill: string;
+  /** 文本大小 */
+  fontSize: number;
+  /** 文本在各自方向上的偏移量，主要为了便于调整文本位置 */
+  offset: number;
+}>
+
+export type NodeStyleIcon = Partial<{
+  /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
+  type: 'font' | 'image' | 'text';
+  /** 根据类型，填写对应的值 */
+  value: string;
+  /** 图标大小 */
+  size: number | number[];
+  /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
+  fill: string;
+  fontFamily: string;
+}>
+
+export type NodeStyleBadge = Partial<{
+  /** 放置的位置，ef：LT（left top）左上角 */
+  position: 'LT' | 'RT' | 'RB' | 'LB';
+  /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
+  type: 'font' | 'image' | 'text';
+  value: number | string;
+  // type = image 时生效，表示图片的宽度和高度
+  size: [number, number] | [number];
+  /** 徽标填充色 */
+  fill: string;
+  /** 徽标描边色 */
+  stroke: string;
+  /** 徽标内文本的颜色 */
+  color: string;
+  fontSize: number;
+  fontFamily: string;
+  // badge 中文本距离四周的偏移量
+  padding: number;
+  // badge 在 x 和 y 方向上的偏移量
+  offset: [number, number];
+}>
+
+
 export interface NodeStyle {
   /** 节点的主要容器 */
   /** 节点的大小 */
@@ -203,57 +247,32 @@ export interface NodeStyle {
   stroke: string;
 
   /** 节点的文本 */
-  label: {
-    /** label的名称 */
-    value: string;
-    /** 展示位置 */
-    position: 'top' | 'bottom' | 'left' | 'right';
-    /** 文本填充色 */
-    fill: string;
-    /** 文本大小 */
-    fontSize: number;
-  };
+  label: NodeStyleLabel;
   /** 节点的中间位置图标区域 */
-  icon: {
-    /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
-    type: 'font' | 'image' | 'text';
-    /** 根据类型，填写对应的值 */
-    value: string;
-    /** 图标大小 */
-    size: number;
-    /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
-    fill: string;
-  };
+  icon: NodeStyleIcon;
   /** 节点的徽标 */
-  badge: {
-    /** 放置的位置，ef：LT（left top）左上角 */
-    position: 'LT' | 'RT' | 'RB' | 'LB';
-    value: number | string;
-    size: [number, number] | [number];
-    /** 徽标填充色 */
-    fill: string;
-    /** 徽标内文本的颜色 */
-    fontColor: string;
-  };
-  /**  节点的打标信息，例如 Pin,Locked */
-  tag: {
-    /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
-    type: 'font' | 'image' | 'text';
-    /** 根据类型，填写对应的值 */
-    value: string;
-    /** 放置的位置，ef：LT（left top）左上角 */
-    position: 'LT' | 'RT' | 'RB' | 'LB';
-    /** 填充的颜色 */
-    fill: string;
-  };
-  status: {
-    /** 状态的类型 */
-    type: 'shadow' | 'border';
-    hover: {};
-    selected: {};
-    highlight: {};
-    disable: {};
-  };
+  badges: NodeStyleBadge[];
+}
+
+export interface NodeStatus {
+  [key: string]:
+    | boolean
+    | Partial<{
+        fill: string;
+        stroke: string;
+        opacity: string;
+        shadowColor: string;
+        shadowBlur: number;
+        // shadow 表示增加一圈类似阴影的东西，border 表示在外层增加一个
+        additionType: 'shadow' | 'border';
+        additionStyle: Partial<{
+          fill: string;
+          stroke: string;
+          opacity: string;
+          shadowColor: string;
+          shadowBlur: number;
+        }>;
+      }>;
 }
 
 export interface ComboStyle {}
