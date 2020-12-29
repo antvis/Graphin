@@ -45,7 +45,7 @@ npm install --save @antv/graphin
 
 #### Usage
 
-```jsx
+```jsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';

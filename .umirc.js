@@ -7,9 +7,12 @@ export default {
   resolve: {
     includes: [
       /** Graphin Core */
-      'packages/graphin/docs/',
+      // 'packages/graphin/docs/',
       /** Graphin Components */
-      'packages/graphin-components/src/',
+      // 'packages/graphin-components/src/',
+
+      /** local develop */
+      'packages/graphin/docs/geamaker/',
     ],
   },
   alias: {
@@ -53,6 +56,7 @@ export default {
           react: 'window.React',
           'react-dom': 'window.ReactDOM',
           antd: 'window.antd',
+          '@antv/g6': 'window.G6',
         }
       : {},
   targets: {
@@ -76,6 +80,11 @@ export default {
           'https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js',
           'https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js',
           'https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd-with-locales.js',
+          /** G6 **/
+          'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6.min.js',
+          'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6Layout.worker.js',
+          'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6Layout.worker.js.map',
+          'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6.min.js.map',
         ]
       : [],
 };
