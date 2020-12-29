@@ -13,8 +13,9 @@
   },
   "devDependencies": {
     "@ant-design/icons": "^4.3.0",
-    "@antv/hierarchy": "^0.6.6",
+    "@antv/g-base": "^0.5.5",
     "@antv/graphin-icons": "*",
+    "@antv/hierarchy": "^0.6.6",
     "@antv/util": "^2.0.9",
     "@babel/core": "^7.12.10",
     "@testing-library/jest-dom": "^4.2.0",
