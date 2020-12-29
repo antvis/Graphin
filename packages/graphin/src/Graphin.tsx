@@ -105,7 +105,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         },
         () => {
           // rerender Graph
-          this.renderGraphWithLifeCycle();
+          this.renderGraphWithLifeCycle(false, isDataChange, isLayoutChange);
         },
       );
     }
@@ -165,21 +165,23 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
     return this;
   };
 
-  renderGraphWithLifeCycle = (firstRender: boolean) => {
+  renderGraphWithLifeCycle = (firstRender: boolean, isDataChange: boolean, isLayoutChange: boolean) => {
     const { data } = this.state;
     const cloneData = cloneDeep(data);
 
-    if (firstRender) {
+    if (firstRender || isLayoutChange) {
       // 为了提高fitview的效率 取边上4个点去进行第一次的fitview
       const firstRenderData = this.getBorderNodes(cloneData.nodes);
       if (this.graph) {
         this.graph.changeData(firstRenderData);
         this.graph.fitView(20);
-        this.graph.emit('firstrender');
+        if (firstRender) {
+          this.graph.emit('firstrender');
+        }
       }
     }
     this.graph!.changeData(cloneData);
-    this.graph!.emit('afterchangedata');
+    this.graph!.emit('afterchangedata', { isDataChange, isLayoutChange });
     // 设置图中的状态为data传入的state
     initState(this.graph, data);
     this.handleSaveHistory();
