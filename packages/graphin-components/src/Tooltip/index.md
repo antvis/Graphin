@@ -15,6 +15,18 @@ nav:
 
 Tooltip 提示框是一种快速浏览信息的交互组件，常用于图的节点和边上。通过鼠标悬停在节点或边上时，出现一个提示框，鼠标移出节点则取消提示框。这在快速查询元素详细信息时非常有帮助。
 
+## 内置组件：<Tooltip.Node /> <Tooltip.Edge />
+
+<code src='./demos/index.tsx'>
+
+<API src='./index.tsx'>
+<API src='./Node.tsx'>
+<API src='./Edge.tsx'>
+
+## 开放组件：集成 Antd 的 Popover 组件
+
+<code src='./demos/Antd.tsx'>
+
 ## 功能特性
 
 - Tooltip 作为容器组件，给内部的组件提供事件唤起和坐标定位功能,提供 Node 和 Edge 两种容器
@@ -38,19 +50,7 @@ import '@antv/graphin-components/dist/index.css';
 const App = () => {
   return (
     <div className="App">
-      <Graphin data={Utils.mock(10).graphin()}>
-        <Tooltip.Node>
-          {(e) => {
-            return <CustomContent>{e.item.getModel().name}</CustomContent>;
-          }}
-        </Tooltip.Node>
-
-        <Tooltip.Edge>
-          {(e) => {
-            return <CustomContent>{e.item.getModel().name}</CustomContent>;
-          }}
-        </Tooltip.Edge>
-      </Graphin>
+      <Graphin data={Utils.mock(10).graphin()}></Graphin>
     </div>
   );
 };
