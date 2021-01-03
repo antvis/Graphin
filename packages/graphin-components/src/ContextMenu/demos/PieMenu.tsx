@@ -11,7 +11,7 @@ const PieMenuDemo = () => {
   const graphin = React.useContext(GraphinContext);
   const handleClick = () => {
     console.log('click', graphin);
-    graphin.contextmenu.handleClose();
+    graphin.contextmenu.node.handleClose();
   };
 
   const nodeSize = 30;
@@ -48,7 +48,7 @@ const App = () => {
   return (
     <div className="App">
       <Graphin data={Utils.mock(5).circle().graphin()}>
-        <ContextMenu style={{ width: 125 }}>
+        <ContextMenu style={{ width: 125 }} bindType="node">
           <PieMenuDemo />
         </ContextMenu>
       </Graphin>

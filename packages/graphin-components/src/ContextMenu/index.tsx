@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { GraphinContext } from '@antv/graphin';
+import { GraphinContext, IG6GraphEvent } from '@antv/graphin';
 import Menu from './Menu';
 
 const defaultStyle: React.CSSProperties = {
@@ -7,41 +7,41 @@ const defaultStyle: React.CSSProperties = {
   background: '#fff',
 };
 
-interface IContextMenuProps {
-  children: React.ReactChildren;
+interface ContextMenuProps {
+  children: React.ReactChildren | JSX.Element;
   style?: React.CSSProperties;
   bindType?: 'node' | 'edge' | 'canvas';
 }
 
-interface IState {
-  /** 当前壮体啊 */
+interface State {
+  /** 当前状态 */
   visible: boolean;
   x: number;
   y: number;
   /** 触发的元素 */
-  item?: {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  item?: IG6GraphEvent['item'];
 }
 
 let containerRef: HTMLDivElement | null;
 
-const ContextMenu: React.FunctionComponent<IContextMenuProps> & { Menu: typeof Menu } = (props) => {
+const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Menu } = (props) => {
   const { children, bindType = 'node', style } = props;
   const graphin = React.useContext(GraphinContext);
   const { graph } = graphin;
 
-  const [state, setState] = React.useState<IState>({
+  const [state, setState] = React.useState<State>({
     visible: false,
     x: 0,
     y: 0,
-    item: {},
+    item: null,
   });
-  const handleShow = (e) => {
+  const handleShow = (e: IG6GraphEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
     const width: number = graph.get('width');
     const height: number = graph.get('height');
-    console.log(containerRef);
 
     const bbox = (containerRef as HTMLDivElement).getBoundingClientRect();
 
@@ -66,7 +66,7 @@ const ContextMenu: React.FunctionComponent<IContextMenuProps> & { Menu: typeof M
     if (bindType === 'node') {
       // 如果是节点，则x，y指定到节点的中心点
       // eslint-disable-next-line no-underscore-dangle
-      const { x: PointX, y: PointY } = e.item.getModel();
+      const { x: PointX, y: PointY } = (e.item && e.item.getModel()) as { x: number; y: number };
       const CenterCanvas = graph.getCanvasByPoint(PointX, PointY);
 
       const daltX = e.canvasX - CenterCanvas.x;
@@ -76,23 +76,32 @@ const ContextMenu: React.FunctionComponent<IContextMenuProps> & { Menu: typeof M
     }
 
     /** 设置变量 */
-    setState({
-      visible: true,
-      x,
-      y,
-      item: e.item,
+    setState((preState) => {
+      return {
+        ...preState,
+        visible: true,
+        x,
+        y,
+        item: e.item,
+      };
     });
   };
   const handleClose = () => {
-    setState({
-      item: state.item,
-      visible: false,
-      x: 0,
-      y: 0,
+    setState((preState) => {
+      if (preState.visible) {
+        return {
+          ...preState,
+          visible: false,
+          x: 0,
+          y: 0,
+        };
+      }
+      return preState;
     });
   };
 
   useEffect(() => {
+    // @ts-ignore
     graph.on(`${bindType}:contextmenu`, handleShow);
     graph.on('canvas:click', handleClose);
     graph.on('canvas:drag', handleClose);
@@ -116,13 +125,20 @@ const ContextMenu: React.FunctionComponent<IContextMenuProps> & { Menu: typeof M
 
   /** 将一些方法和数据传递给子组件 */
   graphin.contextmenu = {
-    handleOpen: handleShow,
-    handleClose,
-    item,
-    visible,
-    x,
-    y,
+    ...graphin.contextmenu,
+    [bindType]: {
+      handleOpen: handleShow,
+      handleClose,
+      item,
+      visible,
+      x,
+      y,
+      bindType,
+    },
   };
+
+  const id = item && item.getModel && item.getModel().id;
+
   return (
     <React.Fragment>
       <div
@@ -131,6 +147,7 @@ const ContextMenu: React.FunctionComponent<IContextMenuProps> & { Menu: typeof M
         }}
         className="graphin-components-contextmenu"
         style={{ ...defaultStyle, ...style, ...positionStyle }}
+        key={id}
       >
         {visible && children}
       </div>

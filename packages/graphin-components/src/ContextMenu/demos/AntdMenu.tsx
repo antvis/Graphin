@@ -12,7 +12,7 @@ const AntdMenu = () => {
   const graphin = React.useContext(GraphinContext);
   const handleClick = () => {
     console.log('click', graphin);
-    graphin.contextmenu.handleClose();
+    graphin.contextmenu.node.handleClose();
   };
   return (
     <Menu onClick={handleClick} style={{ width: 156 }} mode="vertical">
@@ -57,7 +57,7 @@ const App = () => {
   return (
     <div className="App">
       <Graphin data={Utils.mock(5).circle().graphin()}>
-        <ContextMenu style={{ width: 156 }}>
+        <ContextMenu style={{ width: 156 }} bindType="node">
           <AntdMenu />
         </ContextMenu>
       </Graphin>
