@@ -4,8 +4,9 @@
 const options: { [key: string]: any } = {
   circular: {},
   concentric: {
-    linkDistance: 200, // 可选，边长
+    linkDistance: 400, // 可选，边长
     preventOverlap: true, // 可选，必须配合 nodeSize
+    nodeSize: 60,
   },
   dagre: {},
   force: {

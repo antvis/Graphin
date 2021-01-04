@@ -1,5 +1,5 @@
-import Force from './force';
-import Graphin from '../Graphin';
+import Force from '../force';
+import Graphin from '../../Graphin';
 
 export default () => {
   Graphin.registerLayout('graphin-force', {
@@ -43,7 +43,8 @@ export default () => {
       const self = this;
       self.nodes = data.nodes;
       self.edges = data.edges;
-      const { width, height, graph } = this;
+      console.log(this, this.getDefaultCfg());
+      const { width, height, graph, ...layoutConfig } = this;
       const { animation, done = () => {}, ...others } = this.getDefaultCfg();
 
       /** 1. Create a force simulator */
@@ -55,6 +56,7 @@ export default () => {
           done(graph);
         },
         ...others,
+        ...layoutConfig,
       });
 
       // 2. Mount Data
@@ -121,9 +123,7 @@ export default () => {
     destroy() {
       const self = this;
       self.destroyed = true;
-      debugger;
       self.simulation.stop();
-
       self.simulation = null;
     },
   });

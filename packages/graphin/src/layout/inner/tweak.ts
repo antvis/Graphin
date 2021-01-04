@@ -1,4 +1,4 @@
-import { Data, Node, Edge } from '../types';
+import { Data, Node, Edge } from '../../types';
 
 /* eslint-disable no-param-reassign */
 const getRandomPosition = () => {

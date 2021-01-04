@@ -1,10 +1,12 @@
 import G6 from '@antv/g6';
-import defaultOptions from './options';
+import defaultOptions from './utils/options';
 
-import Tweak from './tweak';
+import Tweak from './inner/tweak';
+
 const FORCE_LAYOUTS = ['force', 'graphin-force', 'g6force', 'gForce', 'comboForce'];
 class LayoutController {
   [x: string]: any;
+
   constructor(graphin: any) {
     this.graphin = graphin;
     this.graph = this.graphin.graph;
@@ -18,22 +20,25 @@ class LayoutController {
    */
   init() {
     const { options, graphin } = this;
+
     const { data } = graphin;
     const { type } = options;
+
     if (!G6.Layout[type]) {
       console.warn(`${type} layout not found, current layout is grid`);
     }
-    const LayoutClass = G6.Layout[type] || G6.Layout['grid'];
+    const LayoutClass = G6.Layout[type] || G6.Layout.grid;
     this.graph.emit('beforelayout');
     this.processForce();
     this.instance = new LayoutClass(this.options);
     this.instance.init(data);
   }
+
   /** 启动布局 */
   start() {
     this.instance.execute();
   }
-  restart() {}
+
   /** 重新布局 */
   changeLayout() {
     const { graph, data, isTree } = this.graphin;
@@ -51,6 +56,7 @@ class LayoutController {
     this.init();
     this.start();
   }
+
   /** 更新布局参数 */
   updateOptions = () => {
     const { width, height, props } = this.graphin;
@@ -62,9 +68,14 @@ class LayoutController {
     this.prevOptions = (this.options && { ...this.options }) || { type: 'random', ...defaultParams };
 
     // TODO :默认布局的处理，Combo布局的处理
-    const { layout = { type: 'grid' } } = props;
-    const { type = 'grid' } = layout;
+    const { layout = { type: 'concentric' } } = props;
+    const { type = 'concentric' } = layout;
     const defaultCfg = defaultOptions[type] || {};
+    console.log({
+      ...defaultParams,
+      ...defaultCfg,
+      ...layout,
+    });
 
     this.options = {
       ...defaultParams,
@@ -72,6 +83,7 @@ class LayoutController {
       ...layout,
     };
   };
+
   processForce = () => {
     const { options, graphin } = this;
     const { graph } = graphin;
@@ -134,8 +146,9 @@ class LayoutController {
 
     /** 布局切换 */
   };
+
   refreshPosition = () => {
-    let { animate } = this.graphin.options;
+    const { animate } = this.graphin.options;
 
     if (animate) {
       this.graph.positionsAnimate();
@@ -143,9 +156,15 @@ class LayoutController {
       this.graph.refreshPositions();
     }
   };
+
   destroy = () => {
-    this.presetLayout && this.presetLayout.destroy && this.presetLayout.destroy();
-    this.instance && this.instance.destroy && this.instance.destroy();
+    if (this.presetLayout && this.presetLayout.destroy) {
+      this.presetLayout.destroy();
+    }
+    if (this.instance && this.instance.destroy) {
+      this.instance.destroy();
+    }
+
     this.presetLayout = null;
     this.instace = null;
   };

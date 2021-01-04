@@ -1,5 +1,5 @@
 /** placeholder function, the real execution of ForceLayout is through the iline worker */
-import ForceLayout from '../force/ForceLayout';
+import ForceLayout from './ForceLayout';
 
 const forceOptions = {};
 
