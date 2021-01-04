@@ -5,6 +5,8 @@ import DragNode from './DragNode';
 import ClickSelect from './ClickSelect';
 import BrushSelect from './BrushSelect';
 import ResizeCanvas from './ResizeCanvas';
+import LassoSelect from './LassoSelect';
+import DragCombo from './DragCombo';
 
 export default {
   TreeCollapse,
@@ -14,4 +16,6 @@ export default {
   BrushSelect,
   DragNode,
   ResizeCanvas,
+  LassoSelect,
+  DragCombo,
 };

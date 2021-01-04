@@ -1,5 +1,6 @@
 import * as React from 'react';
 import useBehaviorHook from './useBehaviorHook';
+
 const defaultConfig = {
   /** 是否禁用该功能 */
   disabled: false,
@@ -16,9 +17,9 @@ const defaultConfig = {
   selectedState: 'selected',
 };
 
-export type IDragCanvasProps = Partial<typeof defaultConfig>;
+export type DragNodeProps = Partial<typeof defaultConfig>;
 
-const DragNode: React.FunctionComponent<IDragCanvasProps> = props => {
+const DragNode: React.FunctionComponent<DragNodeProps> = props => {
   useBehaviorHook({
     type: 'drag-node',
     userProps: props,
