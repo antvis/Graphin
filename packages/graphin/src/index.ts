@@ -4,10 +4,12 @@ import Utils from './utils';
 import Layout from './layout';
 
 import Behaviors from './behaviors';
+import registerGraphinForce from './layout/inner/registerGraphinForce';
+import registerRenderLayout from './layout/inner/registerRenderLayout';
+import { registerGraphinCircle } from './shape';
 
 export { default as G6 } from '@antv/g6';
-import registerGraphinForce from './layout/registerGraphinForce';
-import { registerGraphinCircle } from './shape'
+
 export default Graphin;
 export { Utils, Layout, GraphinContext, Behaviors };
 
@@ -21,6 +23,8 @@ export interface GraphEvent extends MouseEvent {
 
 /** 注册 Graphin force 布局 */
 registerGraphinForce();
+/** 注册 Graphin render 布局 */
+registerRenderLayout();
 
 /** 注册 Graphin Circle Node */
-registerGraphinCircle()
+registerGraphinCircle();
