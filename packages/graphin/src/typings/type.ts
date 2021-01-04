@@ -72,76 +72,53 @@ export interface ITreeData {
 }
 
 export interface GraphinProps {
+  /** 数据 */
+  data: ITreeData | IGraphData;
+  /** 布局 */
+  layout?: Layout;
+
+  /** 默认的节点样式 */
+  defaultNode?: Partial<NodeStyle> | any;
+  /** 默认的边样式 */
+  defaultEdge?: Partial<EdgeStyle> | any;
+  /** 默认的Combo样式 */
+  defaultCombo?: Partial<ComboStyle> | any;
   /**
-   * 本质是解构G6的options
-   *
-   * modes 代表的交互行为，转变为快捷配置，canvas相关的直接内置，节点交互相关的转移到组件层面
-   * plugins 代表的组件，转变为graphin-components
+   * 节点默认状态样式
    *
    */
+  nodeStateStyles?: {};
+  /**
+   * 边默认状态样式
+   */
+  edgeStateStyles?: {};
+  /** 宽度 */
   width?: number;
+  /** 高度 */
   height?: number;
-  defaultNode?: Partial<NodeStyle> | any;
-  defaultEdge?: Partial<EdgeStyle> | any;
-  defaultCombo?: Partial<ComboStyle> | any;
-  data: ITreeData | IGraphData;
-  layout: Layout;
-  options: {
-    canvas: {
-      drag: {
-        enable: boolean;
-      };
-      brush: {
-        enable: boolean;
-        options: {};
-      };
-      zoom: {
-        enable: boolean;
-        zoomRang: [number, number];
-        defaultValue: [number, number];
-        wheelSensitivity: number;
-      };
-      fitview: {
-        enable: boolean;
-      };
-      fitcenter: boolean;
-    };
-    node: {
-      drag: {
-        enable: boolean;
-      };
-      select: {
-        enable: boolean;
-      };
-      hover: {
-        enable: boolean;
-      };
-      highlight: {
-        enable: boolean;
-      };
-      disable: {
-        enable: boolean;
-      };
-    };
-    edge: {
-      /** 边没有拖拽 */
-      select: {
-        enable: boolean;
-      };
-      hover: {
-        enable: boolean;
-      };
-      highlight: {
-        enable: boolean;
-      };
-      disable: {
-        enable: boolean;
-      };
-    };
-    combo: {
-      drag: boolean;
-    };
+  /**
+   * 是否启用全局动画
+   */
+  animate?: false;
+  /* 动画设置,仅在 animate 为 true 时有效 */
+  animateCfg?: {
+    /**
+     * 帧回调函数，用于自定义节点运动路径，为空时线性运动
+     */
+    onFrame: undefined;
+    /**
+     * 动画时长(ms)
+     */
+    duration: number;
+    /**
+     * 指定动画动效
+     */
+    easing: string;
   };
+  /**
+   * 边直接连接到节点的中心，不再考虑锚点
+   */
+  linkCenter?: boolean;
 
   // children: React.ReactChildren;
 }
@@ -200,7 +177,7 @@ export type NodeStyleLabel = Partial<{
   fontSize: number;
   /** 文本在各自方向上的偏移量，主要为了便于调整文本位置 */
   offset: number;
-}>
+}>;
 
 export type NodeStyleIcon = Partial<{
   /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
@@ -212,7 +189,7 @@ export type NodeStyleIcon = Partial<{
   /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
   fill: string;
   fontFamily: string;
-}>
+}>;
 
 export type NodeStyleBadge = Partial<{
   /** 放置的位置，ef：LT（left top）左上角 */
@@ -234,8 +211,7 @@ export type NodeStyleBadge = Partial<{
   padding: number;
   // badge 在 x 和 y 方向上的偏移量
   offset: [number, number];
-}>
-
+}>;
 
 export interface NodeStyle {
   /** 节点的主要容器 */

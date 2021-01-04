@@ -3,7 +3,7 @@ import { GraphinProps, GraphinState, IUserNode, IUserEdge, IGraphData, ITreeData
 
 declare global {
   /** Graphin2.0 */
-  export namespace IGraphin {
+  export namespace Graphin {
     type Props = GraphinProps;
     type State = GraphinState;
     type UserNode = IUserNode;
