@@ -1,10 +1,9 @@
-//@ts-nocheck
+// @ts-nocheck
 import React, { ErrorInfo } from 'react';
 // todo ,G6@unpack版本将规范类型的输出
 import G6, { Graph as IGraph } from '@antv/g6';
-import { ILayout } from '@antv/g6/lib/interface/layout';
 
-import { cloneDeep, get, takeRightWhile } from 'lodash';
+import { cloneDeep } from 'lodash';
 
 /** types  */
 import { IconLoader } from './typings/type';
@@ -26,11 +25,13 @@ import LayoutController from './layout';
 const { DragCanvas, ZoomCanvas, DragNode, ClickSelect, BrushSelect, ResizeCanvas } = Behaviors;
 
 type DiffValue = any;
-interface RegisterFunction {
+
+export interface RegisterFunction {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (name: string, options: { [key: string]: any }, extendName?: string): void;
 }
 
-class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
+class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
   static registerNode: RegisterFunction = (nodeName, options, extendedNodeName) => {
     G6.registerNode(nodeName, options, extendedNodeName);
   };
@@ -43,10 +44,12 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     G6.registerCombo(comboName, options, extendedComboName);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static registerBehavior(behaviorName: string, behavior: any) {
     G6.registerBehavior(behaviorName, behavior);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static registerFontFamily(iconLoader: IconLoader): { [icon: string]: any } {
     /**  注册 font icon */
     const iconFont = iconLoader();
@@ -71,6 +74,8 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
       },
     });
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static registerLayout(layoutName: string, layout: any) {
     G6.registerLayout(layoutName, layout);
   }
@@ -82,11 +87,7 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
   graph: IGraph;
 
   /** layout */
-  layout: {
-    type: string;
-    instance: null;
-    destroyed: true;
-  };
+  layout: LayoutController;
 
   width: number;
 
@@ -96,7 +97,7 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
   isTree: boolean;
 
   /** G6实例中的 nodes,edges,combos 的 model，会比props.data中多一些引用赋值产生的属性，比如node中的 x,y */
-  data;
+  data: Graphin.TreeData | Graphin.GraphData;
 
   /** 默认样式 */
   defaultStyle: {
@@ -105,28 +106,44 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     combo: {};
   };
 
-  constructor(props: IGraphin.Props) {
+  options: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
+  };
+
+  constructor(props: Graphin.Props) {
     super(props);
-    this.data = { ...props.data };
-    this.options = { ...props.options };
-    this.isTree =
-      Boolean(props.data && props.data.children) || TREE_LAYOUTS.indexOf(props.layout && props.layout.type) !== -1;
+
+    const {
+      data,
+      layout,
+      width,
+      height,
+      defaultNode = G6_DEFAULT_NODE,
+      defaultEdge = G6_DEFAULT_EDGE,
+      defaultCombo = G6_DEFAULT_COMBO,
+      ...otherOptions
+    } = props;
+
+    this.data = data;
+    this.isTree = Boolean(props.data && props.data.children) || TREE_LAYOUTS.indexOf(layout && layout.type) !== -1;
     this.graph = {} as IGraph;
-    this.layout = {};
-    this.height = Number(props.height);
-    this.width = Number(props.width);
+    this.height = Number(height);
+    this.width = Number(width);
     this.state = {
       isReady: false,
     };
     /** 默认的样式 */
     this.defaultStyle = {
-      node: props.defaultNode || G6_DEFAULT_NODE,
-      edge: props.defaultEdge || G6_DEFAULT_EDGE,
-      combo: props.defaultCombo || G6_DEFAULT_COMBO,
+      node: defaultNode,
+      edge: defaultEdge,
+      combo: defaultCombo,
     };
+    this.options = { ...otherOptions };
+    this.layout = {};
   }
 
-  initData = (data) => {
+  initData = (data: Graphin.Props['data']) => {
     if (data.children) {
       this.isTree = true;
     }
@@ -138,33 +155,30 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
   initGraphInstance = () => {
     const { data, layout, width, height, modes = { default: [] }, animate, ...otherOptions } = this.props;
     if (modes.default.length > 0) {
-      //TODO :给用户正确的引导，推荐使用Graphin的Bheaviors组件
+      // TODO :给用户正确的引导，推荐使用Graphin的Bheaviors组件
       console.info('%c suggestion: you can use @antv/graphin Behaviros components', 'color:lightgreen');
     }
     /**  width and height */
-    const { clientWidth, clinetHeight } = this.graphDOM;
+    const { clientWidth, clientHeight } = this.graphDOM as HTMLDivElement;
     /** shallow clone */
     this.initData(data);
 
     /** 重新计算宽度 */
     this.width = Number(width) || clientWidth || 500;
-    this.height = Number(height) || clinetHeight || 500;
+    this.height = Number(height) || clientHeight || 500;
 
     /** graph type */
-    this.isTree = Boolean(data.children) || TREE_LAYOUTS.indexOf(props.layout && props.layout.type) !== -1;
-
+    this.isTree = Boolean(data.children) || TREE_LAYOUTS.indexOf(layout && layout.type) !== -1;
+    console.log(' this.defaultStyle.node', this.defaultStyle.node);
     this.options = {
       container: this.graphDOM,
       renderer: 'canvas',
       width: this.width,
       height: this.height,
-      animate: animate === false ? false : true,
+      animate: animate !== false,
       defaultNode: this.defaultStyle.node,
       defaultEdge: this.defaultStyle.edge,
       defaultCombo: this.defaultStyle.combo,
-      // layout: {
-      //   ...layout,
-      // },
       modes,
       ...otherOptions,
     };
@@ -213,18 +227,18 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     if (!this.isTree) {
       const { data } = this.props;
       const { nodes = [], edges = [] } = data;
-      nodes.forEach((node) => {
+      nodes.forEach(node => {
         const { states } = node;
         if (states) {
-          Object.keys(states).forEach((k) => {
+          Object.keys(states).forEach(k => {
             this.graph.setItemState(node.id, k, states[k]);
           });
         }
       });
-      edges.forEach((edge) => {
+      edges.forEach(edge => {
         const { states } = edge;
         if (states) {
-          Object.keys(states).forEach((k) => {
+          Object.keys(states).forEach(k => {
             this.graph.setItemState(edge.id, k, states[k]);
           });
         }
@@ -232,7 +246,7 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
     }
   };
 
-  componentDidUpdate(prevProps: IGraphin.Props) {
+  componentDidUpdate(prevProps: Graphin.Props) {
     console.time('did-update');
     const isDataChange = this.shouldUpdate(prevProps, 'data');
     const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
@@ -296,14 +310,16 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
   }
 
   clear = () => {
-    this.layout && this.layout.destroyed && this.layout.destroy(); // tree graph
+    if (this.layout && this.layout.destroyed) {
+      this.layout.destroy(); // tree graph
+    }
     this.layout = {};
     this.graph!.clear();
     this.data = { nodes: [], edges: [], combos: [] };
     this.graph!.destroy();
   };
 
-  shouldUpdate(prevProps: IGraphin.Props, key: string) {
+  shouldUpdate(prevProps: Graphin.Props, key: string) {
     /* eslint-disable react/destructuring-assignment */
     const prevVal = prevProps[key] as DiffValue;
     const currentVal = this.props[key] as DiffValue;
@@ -319,40 +335,39 @@ class Graphin extends React.PureComponent<IGraphin.Props, IGraphin.State> {
       <GraphinContext.Provider
         value={{
           graph: this.graph,
+          G6,
         }}
       >
         <div id="graphin-container">
           <div
             data-testid="custom-element"
             className="graphin-core"
-            ref={(node) => {
+            ref={node => {
               this.graphDOM = node;
             }}
           />
           <div className="graphin-components">
             {isReady && (
               <>
-                {
-                  /** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
-                  !modes && (
-                    <React.Fragment>
-                      {/* 拖拽画布 */}
-                      <DragCanvas />
-                      {/* 缩放画布 */}
-                      <ZoomCanvas />
-                      {/* 拖拽节点 */}
-                      <DragNode />
-                      {/* 点击节点 */}
-                      <ClickSelect />
-                      {/* 圈选节点 */}
-                      <BrushSelect />
-                      {/** resize 画布 */}
-                    </React.Fragment>
-                  )
-                }
+                {/** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
+                !modes && (
+                  <React.Fragment>
+                    {/* 拖拽画布 */}
+                    <DragCanvas />
+                    {/* 缩放画布 */}
+                    <ZoomCanvas />
+                    {/* 拖拽节点 */}
+                    <DragNode />
+                    {/* 点击节点 */}
+                    <ClickSelect />
+                    {/* 圈选节点 */}
+                    <BrushSelect />
+                    {/** resize 画布 */}
+                  </React.Fragment>
+                )}
 
                 {/** resize 画布 */}
-                <ResizeCanvas graphDOM={this.graphDOM} />
+                <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
 
                 {this.props.children}
               </>
