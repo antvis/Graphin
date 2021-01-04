@@ -10,3 +10,17 @@ nav:
   path: /graphin
   order: 1
 ---
+
+# DragNode
+
+<API src='../../src/behaviors/DragNode.tsx'>
+
+# ClickSelect
+
+<API src='../../src/behaviors/ClickSelect.tsx'>
+
+# TreeCollapse
+
+仅数据结构为树，内部渲染为 TreeGraph 的时候，该交互引入才可生效
+
+<API src='../../src/behaviors/TreeCollapse.tsx'>
