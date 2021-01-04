@@ -137,7 +137,7 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
     },
   };
 
-  const id = item && item.getModel && item.getModel().id;
+  const id = (item && !item.destroyed && item.getModel && item.getModel().id) || '';
 
   return (
     <React.Fragment>

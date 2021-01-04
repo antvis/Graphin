@@ -49,21 +49,25 @@ const Menu: React.FunctionComponent<MenuProps> & {
   const { options, onChange } = props;
 
   const handleClick = (e) => {
-    const { contextmenu } = graphin;
+    try {
+      const { contextmenu } = graphin;
 
-    let item = null;
-    if (bindType === 'node') {
-      item = contextmenu.node.item.getModel();
-    }
-    if (bindType === 'edge') {
-      item = contextmenu.edge.item.getModel();
-    }
-    if (bindType === 'canvas') {
-      item = null;
-    }
-
-    if (onChange) {
-      onChange(e, item);
+      let item = null;
+      if (bindType === 'node') {
+        item = contextmenu.node.item.getModel();
+      }
+      if (bindType === 'edge') {
+        item = contextmenu.edge.item.getModel();
+      }
+      if (bindType === 'canvas') {
+        item = null;
+      }
+      if (onChange) {
+        onChange(e, item);
+        contextmenu[bindType].handleClose();
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
