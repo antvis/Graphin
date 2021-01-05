@@ -35,9 +35,24 @@ export interface Item {
 }
 const Item = (props) => {
   const { children, onClick } = props;
+  const graphin = React.useContext(GraphinContext);
+  const handleClose = () => {
+    onClick();
+    const { contextmenu } = graphin;
+    // 临时方案
+    if (contextmenu.node) {
+      contextmenu.node.handleClose();
+    }
+    if (contextmenu.edge) {
+      contextmenu.edge.handleClose();
+    }
+    if (contextmenu.canvas) {
+      contextmenu.canvas.handleClose();
+    }
+  };
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events
   // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-  return <li onClick={onClick}>{children}</li>;
+  return <li onClick={handleClose}>{children}</li>;
 };
 
 const Menu: React.FunctionComponent<MenuProps> & {

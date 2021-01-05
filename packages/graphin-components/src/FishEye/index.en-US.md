@@ -13,6 +13,12 @@ nav:
 
 FishEye Magnifier, a common graph analysis companion component is used to enlarge local details and is very useful when the graph has many nodes and edges.
 
+## Demo
+
+<code src='./demos/index.tsx'>
+
+<API src='./index.tsx'>
+
 ## Features
 
 - Support for all G6.FishEye capabilities
@@ -22,28 +28,3 @@ FishEye Magnifier, a common graph analysis companion component is used to enlarg
 ## Reference
 
 > We welcome the Github community to discuss the component design and implementation, and build an open-source solution together.
-
-## Usage
-
-```tsx | pure
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Graphin, { Utils } from '@antv/graphin';
-import { FishEye } from '@antv/graphin-components';
-// Do not forget to import CSS
-import '@antv/graphin/dist/index.css';
-import '@antv/graphin-components/dist/index.css';
-
-const App = () => {
-  return (
-    <div className="App">
-      <Graphin data={Utils.mock(10).graphin()}>
-        <FishEye />
-      </Graphin>
-    </div>
-  );
-};
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
-```
