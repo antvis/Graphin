@@ -6,13 +6,11 @@ export default {
   mode: 'site',
   resolve: {
     includes: [
-      /** Graphin Core */
-      // 'packages/graphin/docs/',
-      /** Graphin Components */
-      // 'packages/graphin-components/src/',
+      'packages/graphin/docs/',
+      'packages/graphin-components/src/',
 
       /** local develop */
-      'packages/graphin/docs/geamaker/',
+      // 'packages/graphin/docs/geamaker/',
     ],
   },
   alias: {
@@ -85,6 +83,8 @@ export default {
           'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6Layout.worker.js',
           'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6Layout.worker.js.map',
           'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6.min.js.map',
+          /** lodash */
+          'https://gw.alipayobjects.com/os/lib/lodash/4.17.20/lodash.min.js',
         ]
       : [],
 };
