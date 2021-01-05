@@ -14,12 +14,13 @@ Graphin 取名意为 Graph Insight（图的分析洞察），是一个基于 [G6
 
 ![graphin](https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*N-5PT6UO9LAAAAAAAAAAAABkARQnAQ)
 
-Graphin 采用 lerna 管理仓库，packages 中包含以下 4 个 package：
+Graphin 采用 lerna 管理仓库，packages 中包含以下 5 个 package：
 
 ```bash
 /packages
     graphin
     graphin-components
+    graphin-icons
     graphin-studio
     graphin-site
 ```
@@ -33,7 +34,115 @@ Graphin 采用 lerna 管理仓库，packages 中包含以下 4 个 package：
 | [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)             | Graphin 文档官网                                       |
 | [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)               | Graphin 演示 DEMO：基于 Graphin 实现的通用关系分析平台 |
 
-### Graphin 快速开始
+## 升级指引
+
+从 V1 到 V2
+
+2.0 相比 1.0 版本，对 G6 的能力进行了全面的支持与升级：注册机制，布局机制，元素样式等和 G6 保持一致，支持树图，以及更好的组件化方案
+
+### layout 布局
+
+- 配置 和 G6 的 layout 保持一致，因此你可以使用[G6 的 Layout 配置](https://g6.antv.vision/zh/docs/api/graphLayout/guide)
+- 用法 和 G6 的 layout 保持一致 , layout.options 需要解构
+
+```jsx | pure
+//v1
+<Graphin data={data} layout={{ name: 'grid', options: options }} />
+//v2
+<Graphin data={data} layout={{ name: 'grid', ...options }} />
+```
+
+### data 数据
+
+- 网图数据：Graphin2.0 的数据结构不变，但是数据内容发生了一些变化，新增状态字段和样式字段，方便业务处理，具体详见：
+- 树图数据：Graphin2.0 支持树图，如果数据结构为 tree，则在内部渲染 TreeGraph
+
+```tsx
+const data = {
+  nodes: [
+    {
+      id: 'node-1',
+      // 样式字段
+      style: {
+        label: {
+          value: 'node-1-label',
+        },
+      },
+      // 状态字段
+      status: {
+        selected: true,
+      },
+    },
+  ],
+};
+
+<Graphin data={data} />;
+```
+
+### behavior
+
+交互行为，之前在 G6 中需要通过 modes 引入，在 Graphin 中支持组件化引入，同时支持组件属性配置，从而完成数据驱动。在升级 V2 版本，这块不用感知
+
+### extend
+
+Graphin 中全面移除 extend 接口，之前 nodeShape，icon，layout 可以通过注册接口实现。extend.marker 彻底移除
+
+- 扩展节点
+
+```tsx
+// v1
+<Graphin extend={{ nodeShape: renderNodeShape }} />;
+
+// v2
+Graphin.registerNode(renderNodeShape);
+```
+
+- 扩展布局
+
+```tsx
+// layout
+<Graphin extend={{ nodeShape: customLayout }} />;
+
+// v2
+Graphin.registerLayout(customLayout);
+```
+
+- 扩展 icon
+
+```tsx
+// layout
+<Graphin extend={{ icon: customIconFunction }} />;
+
+// v2
+Graphin.reigsterFontFamily(iconloader); // 详情查看 自定义 icon
+```
+
+- 扩展 marker （彻底移除）
+
+### register
+
+和 G6 的注册机制完全保持一致
+
+```tsx
+// 注册节点，详情参考 https://g6.antv.vision/zh/docs/api/registerItem#g6registernodenodename-options-extendednodename
+Graphin.registerNode();
+
+// 注册边，详情参考 https://g6.antv.vision/zh/docs/api/registerItem#g6registeredgeedgename-options-extendededgename
+Graphin.registerEdge();
+
+// 注册Combo，详情参考 https://g6.antv.vision/zh/docs/api/registerItem#g6registercombocomboname-options-extendedcomboname
+Graphin.registerCombo();
+
+// 注册布局，详情参考 https://g6.antv.vision/zh/docs/api/registerLayout#g6registerlayoutlayoutname-layout
+Graphin.registerLayout();
+
+// 注册行为，详情参考 https://g6.antv.vision/zh/docs/api/Behavior
+Graphin.registerBehavior();
+```
+
+Graphin
+
+## Graphin 快速开始
 
 #### 安装
 
@@ -52,12 +161,12 @@ import '@antv/graphin/dist/index.css'; // 别忘了引入Graphin CSS
 import './styles.css';
 
 const App = () => {
-    const data = Utils.mock(10).graphin();
-    return (
-        <div className="App">
-            <Graphin data={data} />
-        </div>
-    );
+  const data = Utils.mock(10).graphin();
+  return (
+    <div className="App">
+      <Graphin data={data} />
+    </div>
+  );
 };
 
 const rootElement = document.getElementById('root');
@@ -73,44 +182,44 @@ ReactDOM.render(<App />, rootElement);
 
 ### 开发 Graphin
 
--   设置 npmClient
+- 设置 npmClient
 
 在 lerna.json 中设置你的 npmClient，中国地区的朋友可以设置 [cnpm](https://www.npmjs.com/package/cnpm)
 
 ```json
 // ./lerna.json
 {
-    "packages": ["packages/*"],
-    "npmClient": "cnpm",
-    "version": "0.0.0"
+  "packages": ["packages/*"],
+  "npmClient": "cnpm",
+  "version": "0.0.0"
 }
 ```
 
--   安装依赖
+- 安装依赖
 
 ```bash
 cnpm i
 ```
 
--   安装各 packages 的依赖
+- 安装各 packages 的依赖
 
 ```bash
 npm run bootstrap
 ```
 
--   启动 graphin 与 graphin-components 的本地编译
+- 启动 graphin 与 graphin-components 的本地编译
 
 ```bash
 npm run start
 ```
 
--   在`npm run start`后，启动 Graphin Demo：Graphin Studio
+- 在`npm run start`后，启动 Graphin Demo：Graphin Studio
 
 ```bash
 npm run studio
 ```
 
--   启动 Graphin 文档站点
+- 启动 Graphin 文档站点
 
 ```bash
 npm run site
@@ -118,10 +227,10 @@ npm run site
 
 ### 更多信息
 
--   [Graphin 简介](https://graphin.antv.vision/zh/docs/manual/introduction)
--   [快速上手](https://graphin.antv.vision/zh/docs/manual/getting-started)
--   [API 文档](https://graphin.antv.vision/zh/docs/api/graphin)
--   [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)
+- [Graphin 简介](https://graphin.antv.vision/zh/docs/manual/introduction)
+- [快速上手](https://graphin.antv.vision/zh/docs/manual/getting-started)
+- [API 文档](https://graphin.antv.vision/zh/docs/api/graphin)
+- [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)
 
 ### 钉钉群
 
