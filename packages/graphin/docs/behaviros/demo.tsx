@@ -5,10 +5,10 @@ const data = Utils.mock(10)
   .circle()
   .graphin();
 const layout = {
-  type: 'grid',
+  type: 'concentric',
 };
 
-const { DragCanvas, ZoomCanvas, DragNode } = Behaviors;
+const { DragCanvas, ZoomCanvas, DragNode, ActivateRelations } = Behaviors;
 export default () => {
   return (
     <div>
@@ -16,6 +16,7 @@ export default () => {
         <DragCanvas direction="x" />
         <ZoomCanvas enableOptimize />
         <DragNode />
+        <ActivateRelations />
       </Graphin>
     </div>
   );

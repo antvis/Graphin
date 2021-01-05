@@ -19,6 +19,10 @@ nav:
 
 <API src='../../src/behaviors/ClickSelect.tsx'>
 
+# ActivateRelations
+
+<API src='../../src/behaviors/ActivateRelations.tsx'>
+
 # TreeCollapse
 
 仅数据结构为树，内部渲染为 TreeGraph 的时候，该交互引入才可生效
