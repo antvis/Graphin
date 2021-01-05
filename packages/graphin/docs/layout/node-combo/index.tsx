@@ -1,9 +1,11 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import Graphin, { Utils } from '@antv/graphin';
+import Graphin, { Utils, Behaviors } from '@antv/graphin';
 import * as d3 from 'd3';
+// 引入Graphin CSS
+import '@antv/graphin/dist/index.css';
 
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+const { DragCombo } = Behaviors;
 
 /** 构造数据 */
 
@@ -181,7 +183,9 @@ const Demo = () => {
             nodeSpacing: d => 28,
           },
         }}
-      />
+      >
+        <DragCombo />
+      </Graphin>
     </div>
   );
 };
