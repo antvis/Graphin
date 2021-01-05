@@ -3,8 +3,8 @@ import Point from './Point';
 import { Node, Edge } from './Elements';
 import Spring from './Spring';
 import { getDegree } from '../utils/graph';
-import { Data, Node as NodeType, Graph } from '../../types';
-import { Item } from '@antv/g6/lib/types';
+import { IGraphData as Data, IUserNode as NodeType } from '../../typings/type';
+import { Item, Graph } from '@antv/g6/';
 
 type ForceNodeType = Node;
 
@@ -155,6 +155,7 @@ class ForceLayout {
     this.sourceData = {
       nodes: [],
       edges: [],
+      combos: [],
     };
     this.nodes = [];
     this.edges = [];

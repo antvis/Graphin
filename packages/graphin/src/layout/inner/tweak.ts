@@ -1,4 +1,4 @@
-import { Data, Node, Edge } from '../../types';
+import { IGraphData, IUserNode, IUserEdge } from '../../typings/type';
 
 /* eslint-disable no-param-reassign */
 const getRandomPosition = () => {
@@ -12,13 +12,13 @@ const getRandomPosition = () => {
 
 const width = 500;
 const height = 300;
-const tweak = (currentData: Data, prevData: Data) => {
+const tweak = (currentData: IGraphData, prevData: IGraphData) => {
   const { nodes: currNodes, edges: currEdges } = currentData;
   const { nodes: preNodes } = prevData;
 
   /** 将图上之前节点的位置信息存储在positionMap中 */
   const positionMap = new Map();
-  preNodes.forEach((item: Node) => {
+  preNodes.forEach((item: IUserNode) => {
     const { id, x, y } = item;
     positionMap.set(id, {
       x,
@@ -27,7 +27,7 @@ const tweak = (currentData: Data, prevData: Data) => {
   });
 
   const incrementNodesMap = new Map();
-  currNodes.forEach((node: Node) => {
+  currNodes.forEach((node: IUserNode) => {
     const { id } = node;
     const position = positionMap.get(id);
     if (position) {
@@ -39,7 +39,7 @@ const tweak = (currentData: Data, prevData: Data) => {
   });
 
   const incrementPositonMap = new Map();
-  currEdges.forEach((edge: Edge) => {
+  currEdges.forEach((edge: IUserEdge) => {
     const { source, target } = edge;
 
     const nodeInSource = incrementNodesMap.get(source);
@@ -63,7 +63,7 @@ const tweak = (currentData: Data, prevData: Data) => {
     }
   });
 
-  currNodes.forEach((node: Node) => {
+  currNodes.forEach((node: IUserNode) => {
     const { id } = node;
     const position = positionMap.get(id) || incrementPositonMap.get(id);
 

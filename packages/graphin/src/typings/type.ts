@@ -29,7 +29,14 @@ export interface RestNode {
   /**  节点当前的状态 */
   status: NodeStatus;
   /** 布局的相关信息 */
-  layout: {};
+  layout: {
+    /** 度数 */
+    degree?: number;
+    /** 力导参数 */
+    force?: {
+      mass?: number;
+    };
+  };
 }
 
 /** 基础边类型 */

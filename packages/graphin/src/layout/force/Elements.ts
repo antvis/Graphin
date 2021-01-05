@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { Node as NodeType, Edge as EdgeType } from '../../types';
+import { IUserNode as NodeType, IUserEdge as EdgeType } from '../../typings/type';
 
 export class Node {
   id: string;

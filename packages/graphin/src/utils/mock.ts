@@ -1,6 +1,5 @@
-import { NodeData, EdgeData, Data } from '../types';
 import Tree from './Tree';
-import { NodeStyleLabel, NodeStyleIcon, NodeStyleBadge } from '../typings/type';
+import { NodeStyleLabel, NodeStyleIcon, NodeStyleBadge, IUserNode, IUserEdge, IGraphData } from '../typings/type';
 
 const defaultOptions = {
   /** 节点 */
@@ -17,9 +16,9 @@ type OptionType = typeof defaultOptions;
  * 4.
  */
 export class Mock {
-  nodes: NodeData[];
+  nodes: IUserNode[];
 
-  edges: EdgeData[];
+  edges: IUserEdge[];
 
   options: OptionType;
 
@@ -61,7 +60,7 @@ export class Mock {
     this.nodeIds = this.nodes.map(node => node.id);
   };
 
-  expand = (snodes: NodeData[]) => {
+  expand = (snodes: IUserNode[]) => {
     this.edges = [];
     this.nodes = [];
     snodes.forEach(node => {
@@ -98,7 +97,7 @@ export class Mock {
     if (this.nodeIds.indexOf(id) === -1) {
       id = 'node-0';
     }
-    this.edges = this.edges.filter((edge: EdgeData) => {
+    this.edges = this.edges.filter((edge: IUserEdge) => {
       return edge.source === id || edge.target === id;
     });
     return this;
@@ -113,7 +112,7 @@ export class Mock {
     /**  随机ID */
     const randomArray: string[] = this.nodeIds.sort(() => Math.random() - 0.5).slice(0, length);
 
-    this.edges = this.edges.filter((edge: EdgeData) => {
+    this.edges = this.edges.filter((edge: IUserEdge) => {
       return randomArray.indexOf(edge.target) !== -1;
     });
 
@@ -136,7 +135,7 @@ export class Mock {
     tree.bfs(node => {
       if (node.id !== rootId) {
         this.edges.push({
-          source: node.parent && node.parent.id,
+          source: (node.parent && node.parent.id) as string,
           target: node.id,
           label: `edge-${node.parent && node.parent.id}_${node.id}`,
           properties: [],
@@ -176,17 +175,19 @@ export class Mock {
     return this;
   };
 
-  graphin = (): Data => {
+  graphin = (): IGraphData => {
     return {
       nodes: this.nodes.map(node => {
         return {
           id: node.id,
-          label: `node-${node.id}`,
           data: node,
           type: 'circle',
           comboId: node.comboId,
           style: {
-            nodeSize: 24,
+            size: [24],
+            label: {
+              value: `node-${node.id}`,
+            },
           },
         };
       }),
@@ -216,10 +217,10 @@ export class Mock {
               position: 'bottom',
               value: `node-${node.id}`,
               fill: 'red',
-              fontSize: 14
+              fontSize: 14,
             },
-            icon, 
-            badges
+            icon,
+            badges,
           },
         };
       }),
@@ -233,7 +234,7 @@ export class Mock {
       }),
       combos: this.combosData,
     };
-  };  
+  };
 }
 
 const mock = (count: number) => {

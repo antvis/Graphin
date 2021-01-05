@@ -8,12 +8,16 @@ import registerGraphinForce from './layout/inner/registerGraphinForce';
 import registerRenderLayout from './layout/inner/registerRenderLayout';
 import { registerGraphinCircle } from './shape';
 
-export { default as G6 } from '@antv/g6';
+export {
+  /** G6类抛出去 */
+  default as G6,
+  /** 外部用户需要断言的 G6 类型 */
+  Graph,
+  IG6GraphEvent,
+} from '@antv/g6';
 
 export default Graphin;
 export { Utils, Layout, GraphinContext, Behaviors };
-
-export { IG6GraphEvent } from '@antv/g6/es/types';
 
 export interface GraphEvent extends MouseEvent {
   item: any;

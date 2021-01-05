@@ -1,12 +1,12 @@
 import { IGroup } from '@antv/g-base';
-import G6 from '@antv/g6';
+import G6, { INode, IItemBase } from '@antv/g6';
 import { deepMix, isArray, isNumber, isObject } from '@antv/util';
-import { INode, IItemBase } from '@antv/g6/lib/interface/item';
+
 import { IUserNode, NodeStyle } from '../typings/type';
 
 /**
  * 将 size 转换为宽度和高度
- * @param size 
+ * @param size
  */
 const convertSizeToWH = (size: number | number[] | undefined) => {
   if (!size) return [0, 0];
@@ -41,12 +41,12 @@ export default () => {
           value: '',
           fill: 'rgb(0, 0, 0)',
           fontSize: 12,
-          offset: 0
+          offset: 0,
         },
         icon: {
           type: 'image',
           value: 'https://gw.alipayobjects.com/zos/bmw-prod/5d015065-8505-4e7a-baec-976f81e3c41d.svg',
-          size: 20
+          size: 20,
         },
         badges: [
           {
@@ -59,7 +59,7 @@ export default () => {
             color: 'rgb(250, 250, 250)',
             fontSize: 12,
             padding: 0,
-            offset: [0, 0]
+            offset: [0, 0],
           },
           {
             position: 'LB',
@@ -71,9 +71,9 @@ export default () => {
             color: 'rgb(250, 250, 250)',
             fontSize: 12,
             padding: 0,
-            offset: [0, 0]
-          }
-        ]
+            offset: [0, 0],
+          },
+        ],
       },
       status: {
         selected: {
@@ -83,29 +83,29 @@ export default () => {
           additionStyle: {
             fill: 'rgb(239, 244, 255)',
             stroke: '#6C43D5',
-            lineWidth: 3
-          }
+            lineWidth: 3,
+          },
         },
         hover: {
           additionType: 'shadow',
           additionStyle: {
-            fill: 'rgb(239, 244, 255)'
-          }
-        }
-      }
+            fill: 'rgb(239, 244, 255)',
+          },
+        },
+      },
     },
     draw(cfg: IUserNode, group: IGroup) {
       const style = deepMix({}, this.options.style, cfg.style) as NodeStyle;
-  
+
       const { fill, stroke, size, label, icon, badges = [] } = style;
-  
+
       let r = 0;
       if (isNumber(size)) {
         r = size / 2;
       } else if (isArray(size)) {
         r = size[0] / 2;
       }
-  
+
       // halo for hover
       group.addShape('circle', {
         attrs: {
@@ -119,7 +119,7 @@ export default () => {
         name: 'border-shape',
         visible: false,
       });
-  
+
       // focus stroke for selected
       group.addShape('circle', {
         attrs: {
@@ -132,7 +132,7 @@ export default () => {
         name: 'shadow-shape',
         visible: false,
       });
-  
+
       // keyshape
       const keyShape = group.addShape('circle', {
         attrs: {
@@ -146,13 +146,13 @@ export default () => {
         name: 'circle-keyshape',
         draggable: true,
       });
-  
+
       // 文本
       if (label) {
-        const { value, fill, fontSize } = label
+        const { value, fill, fontSize } = label;
         if (value) {
-          const labelPos = this.getLabelXYByPosition(style)
-  
+          const labelPos = this.getLabelXYByPosition(style);
+
           group.addShape('text', {
             attrs: {
               x: labelPos.x,
@@ -161,14 +161,14 @@ export default () => {
               text: value,
               textAlign: 'center',
               fill,
-              textBaseline: labelPos.textBaseline
+              textBaseline: labelPos.textBaseline,
             },
             draggable: true,
             name: 'circle-label',
           });
         }
       }
-  
+
       // keyShape 中间的 icon
       if (icon) {
         const { type } = icon;
@@ -182,7 +182,7 @@ export default () => {
               fontSize: 10,
               textAlign: 'center',
               textBaseline: 'middle',
-              fontFamily: fontFamily,
+              fontFamily,
               fill,
             },
             capture: false,
@@ -191,54 +191,63 @@ export default () => {
         } else if (type === 'image') {
           const { size: iconSize, value } = icon;
           const [width, height] = convertSizeToWH(iconSize);
-  
+
           group.addShape('image', {
             attrs: {
               x: -width / 2,
               y: -height / 2,
               img: value,
               width,
-              height
+              height,
             },
             capture: false,
             name: 'circle-icon',
           });
         }
       }
-  
+
       // badges 会存在多个的情况
       badges.forEach(badge => {
-        const { type, position, value: badgeValue = '', 
-          size: badgeSize, fill, stroke, color, 
-          fontSize, fontFamily = 'graphin',
-          padding = 0, offset = [0, 0] } = badge;
+        const {
+          type,
+          position,
+          value: badgeValue = '',
+          size: badgeSize,
+          fill,
+          stroke,
+          color,
+          fontSize,
+          fontFamily = 'graphin',
+          padding = 0,
+          offset = [0, 0],
+        } = badge;
         let badgeX = 0;
         let badgeY = 0;
-        
+
         // left top
         if (position === 'LT') {
-          badgeX = r * Math.cos(Math.PI * 3 / 4);
-          badgeY = -r * Math.sin(Math.PI * 3 / 4);
+          badgeX = r * Math.cos((Math.PI * 3) / 4);
+          badgeY = -r * Math.sin((Math.PI * 3) / 4);
         } else if (position === 'LB') {
           // left bottom
-          badgeX = r * Math.cos(Math.PI * 5 / 4);
-          badgeY = -r * Math.sin(Math.PI * 5 / 4);
+          badgeX = r * Math.cos((Math.PI * 5) / 4);
+          badgeY = -r * Math.sin((Math.PI * 5) / 4);
         } else if (position === 'RT') {
           // right top
-          badgeX = r * Math.cos(Math.PI * 1 / 4);
-          badgeY = -r * Math.sin(Math.PI * 1 / 4);
+          badgeX = r * Math.cos((Math.PI * 1) / 4);
+          badgeY = -r * Math.sin((Math.PI * 1) / 4);
         } else if (position === 'RB') {
           // right bottom
-          badgeX = r * Math.cos(Math.PI * 7 / 4);
-          badgeY = -r * Math.sin(Math.PI * 7 / 4);
+          badgeX = r * Math.cos((Math.PI * 7) / 4);
+          badgeY = -r * Math.sin((Math.PI * 7) / 4);
         }
 
         const [width, height] = convertSizeToWH(badgeSize);
 
         // 绘制 badge 的外层容器，根据宽度和高度确定是 circle 还是 rect
 
-        let realX = badgeX
-        let realY = badgeY
+        let realX = badgeX;
+        let realY = badgeY;
         if (width === height) {
           group.addShape('circle', {
             attrs: {
@@ -250,21 +259,21 @@ export default () => {
             },
           });
         } else {
-          realX = badgeX - width - padding * 2
-          realY = badgeY - height - padding * 2
-  
+          realX = badgeX - width - padding * 2;
+          realY = badgeY - height - padding * 2;
+
           if (position === 'LB') {
-            realY = badgeY
+            realY = badgeY;
           } else if (position === 'RT') {
-            realX = badgeX
-            realY = badgeY - height - padding * 2
+            realX = badgeX;
+            realY = badgeY - height - padding * 2;
           } else if (position === 'RB') {
-            realX = badgeX
-            realY = badgeY
+            realX = badgeX;
+            realY = badgeY;
           }
 
-          realX += offset[0]
-          realY += offset[1]
+          realX += offset[0];
+          realY += offset[1];
           group.addShape('rect', {
             attrs: {
               width: width + padding * 2,
@@ -273,7 +282,7 @@ export default () => {
               stroke,
               x: realX,
               y: realY,
-              radius: (height + padding * 2) / 3
+              radius: (height + padding * 2) / 3,
             },
           });
         }
@@ -287,7 +296,7 @@ export default () => {
               fontSize,
               textAlign: 'center',
               textBaseline: 'middle',
-              fontFamily: fontFamily,
+              fontFamily,
               fill: color,
             },
             capture: false,
@@ -306,119 +315,125 @@ export default () => {
             name: 'circle-badge-content',
           });
         }
-      })
-      
+      });
+
       return keyShape;
     },
     setState(name: string, value: string, item: INode) {
       const group = item.get('group');
       const model = item.getModel();
 
-      let currentStatusStyle = undefined//status[name]
+      let currentStatusStyle; // status[name]
 
       // 如果 model.status 不存在，或值为 true，则取默认的状态样式
       // @ts-ignore
-      if ( !model.status || model.status[name]) {
-        currentStatusStyle = this.options.status[name]
+      if (!model.status || model.status[name]) {
+        currentStatusStyle = this.options.status[name];
       }
 
-      if (!currentStatusStyle) return
+      if (!currentStatusStyle) return;
 
-      const { fill, stroke, opacity, shadowColor, shadowBlur, additionType, additionStyle } = currentStatusStyle
+      const { fill, stroke, opacity, shadowColor, shadowBlur, additionType, additionStyle } = currentStatusStyle;
       const keyShape = item.getKeyShape();
 
-      let keyShapeAttrs = {} as any
+      let keyShapeAttrs = {} as any;
       if (value) {
         // 当设置状态时候，keyShape 取 status 中的值
         if (fill) {
-          keyShapeAttrs.fill = fill
+          keyShapeAttrs.fill = fill;
         }
         if (stroke) {
-          keyShapeAttrs.stroke = stroke
+          keyShapeAttrs.stroke = stroke;
         }
         if (opacity) {
-          keyShapeAttrs.opacity = opacity
+          keyShapeAttrs.opacity = opacity;
         }
         if (shadowColor) {
-          keyShapeAttrs.shadowColor = shadowColor
+          keyShapeAttrs.shadowColor = shadowColor;
         }
         if (shadowBlur) {
-          keyShapeAttrs.shadowBlur = shadowBlur
+          keyShapeAttrs.shadowBlur = shadowBlur;
         }
       } else {
         // 当取消状态时，还原 keyShape 的样式，取 style 里面的值
-        const keyShapeStyle = this.options.style
-        const { fill: originFill, stroke: originStroke, opacity: originOpacity, shadowColor: originShadowColor, shadowBlur: originShadowBlur } = keyShapeStyle
+        const keyShapeStyle = this.options.style;
+        const {
+          fill: originFill,
+          stroke: originStroke,
+          opacity: originOpacity,
+          shadowColor: originShadowColor,
+          shadowBlur: originShadowBlur,
+        } = keyShapeStyle;
         keyShapeAttrs = {
-          fill: originFill, 
-          stroke: originStroke, 
-          opacity: originOpacity, 
-          shadowColor: originShadowColor, 
-          shadowBlur: originShadowBlur
-        }
+          fill: originFill,
+          stroke: originStroke,
+          opacity: originOpacity,
+          shadowColor: originShadowColor,
+          shadowBlur: originShadowBlur,
+        };
       }
 
-      for (let key in keyShapeAttrs) {
-        keyShape.attr(key, keyShapeAttrs[key])
+      for (const key in keyShapeAttrs) {
+        keyShape.attr(key, keyShapeAttrs[key]);
       }
 
-      let additionShapeName = ''
+      let additionShapeName = '';
       if (additionType === 'shadow') {
-        additionShapeName = 'shadow-shape'
+        additionShapeName = 'shadow-shape';
       } else if (additionType === 'border') {
-        additionShapeName = 'border-shape'
+        additionShapeName = 'border-shape';
       }
 
       if (name === 'hover') {
         const hoverShape = group.find((e: IItemBase) => e.get('name') === additionShapeName);
-        if (!hoverShape) return
+        if (!hoverShape) return;
         if (value) {
           hoverShape.show();
-          for (let styleKey in additionStyle) {
-            hoverShape.attr(styleKey, additionStyle[styleKey])
+          for (const styleKey in additionStyle) {
+            hoverShape.attr(styleKey, additionStyle[styleKey]);
           }
-        }
-        else {
+        } else {
           hoverShape.hide();
         }
       } else if (name === 'selected') {
         const selectedShape = group.find((e: IItemBase) => e.get('name') === additionShapeName);
 
-        if (!selectedShape) return
+        if (!selectedShape) return;
 
         const label = group.find((e: IItemBase) => e.get('name') === 'text-shape');
-        
+
         if (value) {
           selectedShape.show();
-          for (let styleKey in additionStyle) {
-            selectedShape.attr(styleKey, additionStyle[styleKey])
+          for (const styleKey in additionStyle) {
+            selectedShape.attr(styleKey, additionStyle[styleKey]);
           }
           label && label.attr('fontWeight', 800);
-        }
-        else {
+        } else {
           selectedShape.hide();
           label && label.attr('fontWeight', 400);
         }
       }
     },
-    getLabelXYByPosition(cfg: NodeStyle): {
+    getLabelXYByPosition(
+      cfg: NodeStyle,
+    ): {
       x: number;
       y: number;
       textBaseline?: string;
     } {
-      const { label, size } = cfg
-      const { position: labelPosition, offset = 0 } = label
-  
+      const { label, size } = cfg;
+      const { position: labelPosition, offset = 0 } = label;
+
       // 默认的位置（最可能的情形），所以放在最上面
       if (labelPosition === 'center') {
         return { x: 0, y: 0 };
       }
-  
+
       const wh = convertSizeToWH(size);
-  
+
       const width = wh[0];
       const height = wh[1];
-  
+
       let style: any;
       switch (labelPosition) {
         case 'top':
@@ -453,50 +468,48 @@ export default () => {
       return style;
     },
     update(cfg: IUserNode, item: INode) {
-      const { style } = cfg
-      if (!style) return
+      const { style } = cfg;
+      if (!style) return;
 
       // 更新 keyShape 的样式
       const keyShape = item.getKeyShape();
-      for(let key in style) {
-        const value = (style as any)[key]
+      for (const key in style) {
+        const value = (style as any)[key];
         if (value && !isObject(value)) {
-          keyShape.attr(key, value)
+          keyShape.attr(key, value);
         }
 
         // 更新 KeyShape 的大小
         if (key === 'size') {
-          const sizeValue = convertSizeToWH(value)
-          keyShape.attr('r', sizeValue[0] / 2)
+          const sizeValue = convertSizeToWH(value);
+          keyShape.attr('r', sizeValue[0] / 2);
         }
       }
 
       // 更新 label
-      const { label, icon, badges = [] } = style
+      const { label, icon, badges = [] } = style;
       if (label) {
-        const { value, fill, fontSize  } = label
-        const group = item.get('group')
-        const itemLabel = group.find((element: IItemBase) => element.get('name') === 'circle-label')
-        itemLabel.attr('text', value)
-        itemLabel.attr('fill', fill)
-        itemLabel.attr('fontSize', fontSize)
+        const { value, fill, fontSize } = label;
+        const group = item.get('group');
+        const itemLabel = group.find((element: IItemBase) => element.get('name') === 'circle-label');
+        itemLabel.attr('text', value);
+        itemLabel.attr('fill', fill);
+        itemLabel.attr('fontSize', fontSize);
 
         // 更新 label 位置
-        const labelPos = this.getLabelXYByPosition(style)
-        for(let key in labelPos) {
-          if (!labelPos[key]) return
-          itemLabel.attr(key, labelPos[key])
+        const labelPos = this.getLabelXYByPosition(style);
+        for (const key in labelPos) {
+          if (!labelPos[key]) return;
+          itemLabel.attr(key, labelPos[key]);
         }
       }
 
       if (icon) {
-
       }
 
       if (badges.length > 0) {
-
       }
-    }
+    },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any);
-}
+};
