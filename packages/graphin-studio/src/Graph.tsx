@@ -18,12 +18,49 @@ import NodeEdgeCount from './Core/NodeEdgeCount';
 import '@antv/graphin/dist/index.css';
 import '@antv/graphin-components/dist/index.css';
 
+console.log('out', Graphin.instance);
+
+Graphin.registerNode(
+  'custom-node',
+  {
+    draw(cfg, group) {
+      console.log(cfg);
+      const keyshape = group.addShape('circle', {
+        attrs: {
+          id: 'circle-floor',
+          x: 0,
+          y: 0,
+          r: 20,
+          fill: 'red',
+        },
+        draggable: true,
+        name: 'circle-floor',
+      });
+      const text = group.addShape('text', {
+        attrs: {
+          fontSize: 12,
+          x: 0,
+          y: 0,
+          text: cfg.id,
+          fill: '#ddd',
+        },
+        draggable: true,
+        name: 'text',
+      });
+      return keyshape;
+    },
+  },
+  'single-node',
+);
+
 const Graphene = (props: GraphProps) => {
   const graphRef = useRef(null) as any; // eslint-disable-line
   const { dispatch, data, layout, toolbar, store } = props;
 
   useGraphEvents(store, graphRef, dispatch);
   React.useEffect(() => {
+    console.log('did mount');
+
     dispatch({
       type: 'graph/graphRef',
       payload: graphRef,
@@ -43,6 +80,13 @@ const Graphene = (props: GraphProps) => {
         top: '0px',
         left: '0px',
       }) as React.CSSProperties;
+
+  data.nodes.forEach(node => {
+    node.type = 'graphin-node';
+    node.shape = 'graphin-node';
+  });
+  console.log(data, Graphin.instance);
+
   return (
     <div style={{ height: '100%' }}>
       <Graphin data={data} layout={layout} ref={graphRef} extend={extend}>

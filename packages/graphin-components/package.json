@@ -1,9 +1,9 @@
 {
   "name": "@antv/graphin-components",
-  "version": "1.5.0",
+  "version": "2.0.0-beta.1",
   "description": "Components for graphin",
   "main": "./dist/index",
-  "types": "./dist/graphin-components/src/index.d",
+  "types": "./dist/src/index.d.ts",
   "scripts": {
     "start": "father build --watch",
     "build": "father build",
@@ -13,11 +13,8 @@
   "author": "",
   "license": "MIT",
   "sideEffects": false,
-  "peerDependencies": {
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
-  },
   "devDependencies": {
+    "@ant-design/icons": "^4.3.0",
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -26,6 +23,7 @@
     "@testing-library/jest-dom": "^4.2.0",
     "@testing-library/react": "^9.5.0",
     "@types/react-router-dom": "^5.1.0",
+    "@types/styled-components": "^5.1.7",
     "babel-jest": "^25.4.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.12.2",
@@ -40,8 +38,11 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "react-color": "^2.19.3",
+    "react-pie-menu": "^0.2.5",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
+    "styled-components": "^5.2.1",
     "ts-jest": "^25.4.0",
     "typescript": "^3.6.4",
     "webpack": "^4.41.5",
@@ -49,11 +50,16 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
+    "@antv/g6": "*",
+    "@antv/graphin": "*",
+    "react-color": "^2.19.3"
+  },
+  "peerDependencies": {
+    "antd": "^4.x",
     "@ant-design/compatible": "^1.0.2",
     "@ant-design/icons": "^4.0.6",
-    "@antv/g6": "^3.8.1",
-    "@antv/graphin": "^1.2.0",
-    "antd": "^4.1.4"
+    "react": "^16.x",
+    "react-dom": "^16.x"
   },
   "publishConfig": {
     "access": "public"

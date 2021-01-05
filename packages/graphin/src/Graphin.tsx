@@ -1,338 +1,381 @@
 // @ts-nocheck
 import React, { ErrorInfo } from 'react';
-import { Graph as GraphType } from '@antv/g6';
+// todo ,G6@unpack版本将规范类型的输出
+import G6, { Graph as IGraph } from '@antv/g6';
 
-import { cloneDeep, uniqBy } from 'lodash';
-/** controller */
-import initController, { initGraphAfterRender } from './controller/init';
-import registerController from './controller/register';
-import HistoryController from './controller/history';
-
-import layoutController from './controller/layout';
-import apisController from './apis';
-import eventController from './events/index';
+import { cloneDeep } from 'lodash';
 
 /** types  */
-import { GraphinProps, GraphinState, ExtendedGraphOptions, ForceSimulation, Data, Layout } from './types';
-
+import { IconLoader } from './typings/type';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
-import initState from './controller/state';
 
 import './index.less';
 
-type DiffValue = Data | Layout | undefined;
+import { TREE_LAYOUTS, G6_DEFAULT_NODE, G6_DEFAULT_COMBO, G6_DEFAULT_EDGE } from './consts';
 
-class Graph extends React.PureComponent<GraphinProps, GraphinState> {
+/** Context */
+import GraphinContext from './GraphinContext';
+/** 内置 Behaviros */
+import Behaviors from './behaviors';
+/** 内置布局 */
+import LayoutController from './layout';
+
+const { DragCanvas, ZoomCanvas, DragNode, ClickSelect, BrushSelect, ResizeCanvas } = Behaviors;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type DiffValue = any;
+
+export interface RegisterFunction {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (name: string, options: { [key: string]: any }, extendName?: string): void;
+}
+
+class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
+  static registerNode: RegisterFunction = (nodeName, options, extendedNodeName) => {
+    G6.registerNode(nodeName, options, extendedNodeName);
+  };
+
+  static registerEdge: RegisterFunction = (edgeName, options, extendedEdgeName) => {
+    G6.registerEdge(edgeName, options, extendedEdgeName);
+  };
+
+  static registerCombo: RegisterFunction = (comboName, options, extendedComboName) => {
+    G6.registerCombo(comboName, options, extendedComboName);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static registerBehavior(behaviorName: string, behavior: any) {
+    G6.registerBehavior(behaviorName, behavior);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static registerFontFamily(iconLoader: IconLoader): { [icon: string]: any } {
+    /**  注册 font icon */
+    const iconFont = iconLoader();
+    const { glyphs, fontFamily } = iconFont;
+    const icons = glyphs.map(item => {
+      return {
+        name: item.name,
+        unicode: String.fromCodePoint(item.unicode_decimal),
+      };
+    });
+
+    return new Proxy(icons, {
+      get: (target, propKey, receiver) => {
+        const matchIcon = target.find(icon => {
+          return icon.name === propKey;
+        });
+        if (!matchIcon) {
+          console.error(`%c fontFamily:${fontFamily},does not found ${propKey} icon`);
+          return '';
+        }
+        return matchIcon?.unicode;
+      },
+    });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static registerLayout(layoutName: string, layout: any) {
+    G6.registerLayout(layoutName, layout);
+  }
+
+  /** Graph的DOM */
   graphDOM: HTMLDivElement | null = null;
 
-  graph?: GraphType;
+  /** G6 instance */
+  graph: IGraph;
 
-  history: HistoryController;
+  /** layout */
+  layout: LayoutController;
 
-  forceSimulation: ForceSimulation | null;
+  width: number;
 
-  g6Options?: Partial<ExtendedGraphOptions>;
+  height: number;
 
-  getLayoutInfo: () => any; // eslint-disable-line
+  /** 是否为 Tree Graph */
+  isTree: boolean;
 
-  clearEvents?: () => void;
+  /** G6实例中的 nodes,edges,combos 的 model，会比props.data中多一些引用赋值产生的属性，比如node中的 x,y */
+  data: Graphin.TreeData | Graphin.GraphData;
 
-  constructor(props: GraphinProps) {
+  /** 默认样式 */
+  defaultStyle: {
+    node: {};
+    edge: {};
+    combo: {};
+  };
+
+  options: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
+  };
+
+  constructor(props: Graphin.Props) {
     super(props);
+
+    const {
+      data,
+      layout,
+      width,
+      height,
+      defaultNode = G6_DEFAULT_NODE,
+      defaultEdge = G6_DEFAULT_EDGE,
+      defaultCombo = G6_DEFAULT_COMBO,
+      ...otherOptions
+    } = props;
+
+    this.data = data;
+    this.isTree = Boolean(props.data && props.data.children) || TREE_LAYOUTS.indexOf(layout && layout.type) !== -1;
+    this.graph = {} as IGraph;
+    this.height = Number(height);
+    this.width = Number(width);
     this.state = {
-      isGraphReady: false,
-      data: props.data,
-      forceSimulation: null,
-      width: 0,
-      height: 0,
-      graphSave: null,
+      isReady: false,
     };
-    this.history = new HistoryController();
-    this.forceSimulation = null;
-    this.getLayoutInfo = () => {};
+    /** 默认的样式 */
+    this.defaultStyle = {
+      node: defaultNode,
+      edge: defaultEdge,
+      combo: defaultCombo,
+    };
+    this.options = { ...otherOptions };
+    this.layout = {};
   }
+
+  initData = (data: Graphin.Props['data']) => {
+    if (data.children) {
+      this.isTree = true;
+    }
+    console.time('clone data');
+    this.data = cloneDeep(data);
+    console.timeEnd('clone data');
+  };
+
+  initGraphInstance = () => {
+    const { data, layout, width, height, modes = { default: [] }, animate, ...otherOptions } = this.props;
+    if (modes.default.length > 0) {
+      // TODO :给用户正确的引导，推荐使用Graphin的Bheaviors组件
+      console.info('%c suggestion: you can use @antv/graphin Behaviros components', 'color:lightgreen');
+    }
+    /**  width and height */
+    const { clientWidth, clientHeight } = this.graphDOM as HTMLDivElement;
+    /** shallow clone */
+    this.initData(data);
+
+    /** 重新计算宽度 */
+    this.width = Number(width) || clientWidth || 500;
+    this.height = Number(height) || clientHeight || 500;
+
+    /** graph type */
+    this.isTree = Boolean(data.children) || TREE_LAYOUTS.indexOf(layout && layout.type) !== -1;
+    console.log(' this.defaultStyle.node', this.defaultStyle.node);
+    this.options = {
+      container: this.graphDOM,
+      renderer: 'canvas',
+      width: this.width,
+      height: this.height,
+      animate: animate !== false,
+      defaultNode: this.defaultStyle.node,
+      defaultEdge: this.defaultStyle.edge,
+      defaultCombo: this.defaultStyle.combo,
+      modes,
+      ...otherOptions,
+    };
+
+    if (this.isTree) {
+      this.options.layout = { ...layout };
+
+      this.graph = new G6.TreeGraph(this.options);
+    } else {
+      this.graph = new G6.Graph(this.options);
+    }
+
+    this.graph.data(this.data);
+    /** 初始化布局 */
+    if (!this.isTree) {
+      this.layout = new LayoutController(this);
+      this.layout.start();
+    }
+    this.graph.get('canvas').set('localRefresh', false);
+    this.graph.render();
+    this.initStatus();
+  };
+
+  updateLayout = () => {
+    this.layout.changeLayout();
+  };
 
   componentDidMount() {
-    const { data } = this.props;
-    // register props.extend and props.register
-    const behaviorsMode = registerController(this.props);
-    // init G6 instance
-    const { instance, width, height, options } = initController(
-      this.props,
-      this.graphDOM as HTMLDivElement,
-      behaviorsMode,
-    );
-    this.g6Options = options;
-    this.graph = instance as GraphType;
-    const { data: newData, forceSimulation } = layoutController(this.getContext(), { data });
-    this.forceSimulation = forceSimulation!;
-
-    this.setState(
-      {
-        isGraphReady: true,
-        graph: this.graph,
-        width,
-        height,
-        data: newData,
-        forceSimulation,
-      },
-      () => {
-        this.renderGraphWithLifeCycle(true);
-      },
-    );
-    this.handleEvents();
+    this.initGraphInstance();
+    this.setState({
+      isReady: true,
+    });
   }
 
-  componentDidUpdate(prevProps: GraphinProps) {
+  /**
+   * 组件更新的时候
+   * @param prevProps
+   */
+  updateOptions = () => {
+    const { options } = this.props;
+    return options;
+  };
+
+  /** 初始化状态 */
+  initStatus = () => {
+    if (!this.isTree) {
+      const { data } = this.props;
+      const { nodes = [], edges = [] } = data;
+      nodes.forEach(node => {
+        const { states } = node;
+        if (states) {
+          Object.keys(states).forEach(k => {
+            this.graph.setItemState(node.id, k, states[k]);
+          });
+        }
+      });
+      edges.forEach(edge => {
+        const { states } = edge;
+        if (states) {
+          Object.keys(states).forEach(k => {
+            this.graph.setItemState(edge.id, k, states[k]);
+          });
+        }
+      });
+    }
+  };
+
+  componentDidUpdate(prevProps: Graphin.Props) {
+    console.time('did-update');
     const isDataChange = this.shouldUpdate(prevProps, 'data');
     const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
+    const isOptionsChange = this.shouldUpdate(prevProps, 'options');
+    console.timeEnd('did-update');
+    const { data, layout, options } = this.props;
+    const isGraphTypeChange = prevProps.data.children !== data.children;
 
-    // only rerender when data or layout change
-    if (isDataChange || isLayoutChange) {
-      let { data: currentData } = this.state;
-      if (isDataChange) {
-        const { data } = this.props;
-        currentData = data;
-      }
-      const { data, forceSimulation } = layoutController(this.getContext(), { data: currentData, prevProps });
-      this.forceSimulation = forceSimulation!;
-      this.setState(
-        {
-          data,
-          forceSimulation,
-        },
-        () => {
-          // rerender Graph
-          this.renderGraphWithLifeCycle(false, isDataChange, isLayoutChange);
-        },
-      );
+    /** 图类型变化 */
+    if (isGraphTypeChange) {
+      this.initGraphInstance();
+      console.log('%c isGraphTypeChange', 'color:grey');
+    }
+    /** 配置变化 */
+    if (isOptionsChange) {
+      this.updateOptions();
+      console.log('isOptionsChange');
+    }
+    /** 数据变化 */
+    if (isDataChange) {
+      this.initData(data);
+      this.layout.changeLayout();
+      this.graph.data(this.data);
+      this.graph.changeData(this.data);
+
+      this.initStatus();
+      console.log('%c isDataChange', 'color:grey');
+      return;
+    }
+    /** 布局变化 */
+    if (isLayoutChange) {
+      /**
+       * TODO
+       * 1. preset 前置布局判断问题
+       * 2. enablework 问题
+       * 3. G6 LayoutController 里的逻辑
+       */
+      this.layout.changeLayout();
+      this.layout.refreshPosition();
+
+      /** 走G6的layoutController */
+      // this.graph.updateLayout();
+      console.log('%c isLayoutChange', 'color:grey');
     }
   }
 
+  /**
+   * 组件移除的时候
+   */
   componentWillUnmount() {
-    this.clearEvents!();
+    this.clear();
   }
 
+  /**
+   * 组件崩溃的时候
+   * @param error
+   * @param info
+   */
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error('Catch component error: ', error, info);
   }
 
-  getApis = () => {
-    const context = this.getContext();
-    return apisController(context);
-  };
-
-  getHistoryInfo = () => {
-    return this.history.getHistoryInfo();
-  };
-
   clear = () => {
+    if (this.layout && this.layout.destroyed) {
+      this.layout.destroy(); // tree graph
+    }
+    this.layout = {};
     this.graph!.clear();
-    this.history.reset();
-    this.clearEvents!();
-
-    this.setState(
-      {
-        data: { nodes: [], edges: [] },
-
-        forceSimulation: null,
-        graphSave: null,
-      },
-      () => {
-        const { data } = this.state;
-        this.renderGraph(data);
-      },
-    );
+    this.data = { nodes: [], edges: [], combos: [] };
+    this.graph!.destroy();
   };
 
-  shouldUpdate(prevProps: GraphinProps, key: string) {
+  shouldUpdate(prevProps: Graphin.Props, key: string) {
     /* eslint-disable react/destructuring-assignment */
     const prevVal = prevProps[key] as DiffValue;
     const currentVal = this.props[key] as DiffValue;
-    // console.time('deep equal');
     const isEqual = deepEqual(prevVal, currentVal);
-    // console.timeEnd('deep equal');
     return !isEqual;
   }
 
-  handleEvents() {
-    this.clearEvents = eventController(this.getContext()).clear;
-  }
-
-  getContext = () => {
-    return this;
-  };
-
-  renderGraphWithLifeCycle = (firstRender: boolean, isDataChange: boolean, isLayoutChange: boolean) => {
-    const { data } = this.state;
-    const cloneData = cloneDeep(data);
-
-    if (firstRender || isLayoutChange) {
-      // 为了提高fitview的效率 取边上4个点去进行第一次的fitview
-      const firstRenderData = this.getBorderNodes(cloneData.nodes);
-      if (this.graph) {
-        this.graph.changeData(firstRenderData);
-        this.graph.fitView(20);
-        if (firstRender) {
-          this.graph.emit('firstrender');
-        }
-      }
-    }
-    this.graph!.changeData(cloneData);
-    this.graph!.emit('afterchangedata', { isDataChange, isLayoutChange });
-    // 设置图中的状态为data传入的state
-    initState(this.graph, data);
-    this.handleSaveHistory();
-    if (firstRender) {
-      initGraphAfterRender(this.props, this.graphDOM, this.graph);
-    }
-  };
-
-  // 获取边角的4个顶点：所有节点x,y分别为最大最小的节点
-  getBorderNodes = (nodes = []) => {
-    const xOrderedNodes = cloneDeep(nodes).sort((pre, next) => pre.x - next.x);
-    const yOrderedNodes = cloneDeep(nodes).sort((pre, next) => pre.y - next.y);
-    const borderNodes = uniqBy(
-      [
-        xOrderedNodes[0],
-        xOrderedNodes[xOrderedNodes.length - 1],
-        yOrderedNodes[0],
-        yOrderedNodes[yOrderedNodes.length - 1],
-      ],
-      'id',
-    ).filter((node) => node);
-    return {
-      nodes: borderNodes,
-      edges: [],
-    };
-  };
-
-  stopForceSimulation = () => {
-    const { forceSimulation } = this.state;
-    if (forceSimulation) {
-      forceSimulation.stop();
-    }
-  };
-
-  handleSaveHistory = () => {
-    const currentState = {
-      ...this.state,
-      graphSave: cloneDeep(this.graph!.save()),
-    };
-    this.history.save(currentState);
-  };
-
-  handleUndo = () => {
-    this.stopForceSimulation();
-
-    const prevState = this.history.undo();
-    if (prevState) {
-      this.setState(
-        {
-          ...prevState,
-        },
-        () => {
-          this.renderGraphByHistory();
-        },
-      );
-    }
-  };
-
-  handleRedo = () => {
-    this.stopForceSimulation();
-
-    const nextState = this.history.redo();
-    if (nextState) {
-      this.setState(
-        {
-          ...nextState,
-        },
-        () => {
-          this.renderGraphByHistory();
-        },
-      );
-    }
-  };
-
-  renderGraph = (data: Data) => {
-    this.graph!.changeData(cloneDeep(data));
-    /**
-     * TODO 移除 `afterchangedata` Event
-     * 此方法应该放到G6的changeData方法中去emit
-     */
-    this.graph!.emit('afterchangedata');
-  };
-
-  renderGraphByHistory = () => {
-    const { forceSimulation, graphSave } = this.state;
-    if (forceSimulation) {
-      forceSimulation.restart(graphSave.nodes || [], this.graph!);
-    }
-    this.renderGraph(graphSave);
-  };
-
-  renderChildren = () => {
-    let { children } = this.props;
-
-    const combineProps = {
-      graph: this.graph,
-      graphDOM: this.graphDOM,
-      graphVars: this.state,
-      apis: this.getApis(),
-    };
-
-    if (!children) {
-      return null;
-    }
-
-    if (typeof children === 'function') {
-      return children(combineProps);
-    }
-
-    /**
-     * 1. <Graphin> <div> this is text <ContextMenu />  </div> </Graphin>
-     * 2. <Graphin> <CustomerComponent> this is text  <ContextMenu /> </CustomerComponent> </Graphin>
-     * 3. <Graphin> <Fragment> this is text  <ContextMenu /> </Graphin>
-     */
-    if (
-      React.isValidElement(children) &&
-      (String(children.type) === 'Symbol(react.fragment)' || typeof children.type === 'string')
-    ) {
-      console.error('Please do not wrap components inside dom element or Fragment when using Graphin');
-      return children;
-    }
-
-    if (!Array.isArray(children)) {
-      children = [children];
-    }
-
-    return React.Children.map(children, (child) => {
-      // do not pass props if element is a DOM element or not a valid react element.
-      if (!React.isValidElement(child) || typeof child.type === 'string') {
-        return child;
-      }
-      return React.cloneElement(child, {
-        ...combineProps,
-      });
-    });
-  };
-
   render() {
-    const { isGraphReady } = this.state;
+    console.log('%c graphin render...', 'color:lightblue', this);
+    const { isReady } = this.state;
+    const { modes } = this.props;
     return (
-      <div id="graphin-container">
-        <div
-          data-testid="custom-element"
-          className="graphin-core"
-          ref={(node) => {
-            this.graphDOM = node;
-          }}
-        />
-        <div className="graphin-components">{isGraphReady && this.renderChildren()}</div>
-      </div>
+      <GraphinContext.Provider
+        value={{
+          graph: this.graph,
+        }}
+      >
+        <div id="graphin-container">
+          <div
+            data-testid="custom-element"
+            className="graphin-core"
+            ref={node => {
+              this.graphDOM = node;
+            }}
+          />
+          <div className="graphin-components">
+            {isReady && (
+              <>
+                {/** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
+                !modes && (
+                  <React.Fragment>
+                    {/* 拖拽画布 */}
+                    <DragCanvas />
+                    {/* 缩放画布 */}
+                    <ZoomCanvas />
+                    {/* 拖拽节点 */}
+                    <DragNode />
+                    {/* 点击节点 */}
+                    <ClickSelect />
+                    {/* 圈选节点 */}
+                    <BrushSelect />
+                    {/** resize 画布 */}
+                  </React.Fragment>
+                )}
+
+                {/** resize 画布 */}
+                <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
+
+                {this.props.children}
+              </>
+            )}
+          </div>
+        </div>
+      </GraphinContext.Provider>
     );
   }
 }
-export default Graph;
+export default Graphin;

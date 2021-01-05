@@ -16,9 +16,12 @@ module.exports = {
     },
   },
   rules: {
+    ' @typescript-eslint/interface-name-prefix': 0,
+    'import/no-extraneous-dependencies': 0,
+    'no-console': 0,
+    'import/prefer-default-export': 0,
     'import/extensions': 0,
     'import/no-unresolved': 0,
-    'no-console': ['error', { allow: ['warn', 'error'] }],
     'react/prop-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'error',

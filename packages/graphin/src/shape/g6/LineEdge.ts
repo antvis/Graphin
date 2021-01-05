@@ -1,5 +1,8 @@
 import { Item } from '@antv/g6/lib/types';
 import setEdgeState from './setState.edge';
+import Graphin from '../../Graphin';
+
+
 
 // eslint-disable-next-line
 export default (G6: any) => {

@@ -13,5 +13,5 @@
     "module": "esnext",
     "esModuleInterop": true
   },
-  "include": ["src", "../graphin/src"]
+  "include": ["src","src/**/demo/*.tsx"]
 }

@@ -1,5 +1,6 @@
 import { NodeData, EdgeData, Data } from '../types';
 import Tree from './Tree';
+import { NodeStyleLabel, NodeStyleIcon, NodeStyleBadge } from '../typings/type';
 
 const defaultOptions = {
   /** 节点 */
@@ -182,7 +183,7 @@ export class Mock {
           id: node.id,
           label: `node-${node.id}`,
           data: node,
-          shape: 'CircleNode',
+          type: 'circle',
           comboId: node.comboId,
           style: {
             nodeSize: 24,
@@ -200,19 +201,42 @@ export class Mock {
       combos: this.combosData,
     };
   };
+
+  graphinMock = (label?: NodeStyleLabel, icon?: NodeStyleIcon, badges?: NodeStyleBadge[]) => {
+    return {
+      nodes: this.nodes.map(node => {
+        return {
+          id: node.id,
+          data: node,
+          type: 'graphin-circle',
+          comboId: node.comboId,
+          style: {
+            size: 48,
+            label: label || {
+              position: 'bottom',
+              value: `node-${node.id}`,
+              fill: 'red',
+              fontSize: 14
+            },
+            icon, 
+            badges
+          },
+        };
+      }),
+      edges: this.edges.map(edge => {
+        return {
+          source: edge.source,
+          target: edge.target,
+          label: edge.label,
+          data: edge,
+        };
+      }),
+      combos: this.combosData,
+    };
+  };  
 }
 
 const mock = (count: number) => {
   return new Mock(count);
 };
 export default mock;
-
-/**
- * mock(10).type('company').value()
- * mock(10).type('company').circle('node-1').value()
- * mock(10).type('company').random('node-1').value()
- * mock(10).type('company').random('node-1').value()
- *
- *
- * graphin()
- */
