@@ -53,7 +53,7 @@
   "license": "MIT",
   "dependencies": {
     "@antv/g-canvas": "^0.5.1",
-    "@antv/g6": "^4.0.3",
+    "@antv/g6": "^4.1.0-beta.1",
     "@antv/util": "^2.0.10",
     "deepmerge": "^4.0.0",
     "lodash": "^4.17.15",
