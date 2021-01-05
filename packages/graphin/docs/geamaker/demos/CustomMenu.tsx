@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GraphinContext } from '@antv/graphin';
+import { GraphinContext, Utils } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 import { manageExpandCollapseArray, getMixedGraph, icons } from './utils';
 
@@ -89,6 +89,19 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
     });
     handleClose();
   };
+  const handleFind = () => {
+    const newData = Utils.mock(5)
+      .expand([model])
+      .graphin();
+    updateState({
+      ...state,
+      data: {
+        nodes: [...state.data.nodes, ...newData.nodes],
+        edges: [...state.data.edges, ...newData.edges],
+      },
+    });
+    handleClose();
+  };
   if (isCluster) {
     return (
       <Menu bindType="node">
@@ -100,7 +113,7 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
   return (
     <Menu bindType="node">
       <Menu.Item onClick={handleCollapse}>Collapse the Cluster</Menu.Item>
-      <Menu.Item>Find 1-degre Neighbors</Menu.Item>
+      <Menu.Item onClick={handleFind}>Find 1-degre Neighbors</Menu.Item>
       <Menu.Item>Find 2-degre Neighbors</Menu.Item>
       <Menu.Item>Find 3-degre Neighbors</Menu.Item>
       <Menu.Item>Hide the Node</Menu.Item>

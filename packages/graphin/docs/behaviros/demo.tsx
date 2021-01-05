@@ -14,7 +14,7 @@ export default () => {
     <div>
       <Graphin data={data} layout={layout}>
         <DragCanvas direction="x" />
-        <ZoomCanvas enableOptimize={true} />
+        <ZoomCanvas enableOptimize />
         <DragNode />
       </Graphin>
     </div>
