@@ -50,7 +50,6 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@antv/g6": "*",
     "@antv/graphin": "*",
     "react-color": "^2.19.3"
   },
