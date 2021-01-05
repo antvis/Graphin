@@ -2,7 +2,9 @@
   "name": "graphin",
   "scripts": {
     "docs": "dumi dev",
-    "start": "lerna run start --parallel  --ignore @antv/graphin-studio --ignore graphin-site --ignore graphin-dumi",
+    "build-docs": "dumi build",
+    "start-graphin": "cd packages/graphin && npm run start ",
+    "start-graphin-components": "cd packages/graphin-components && npm run start",
     "site": "cd ./packages/graphin-site && npm run start",
     "studio": "cd ./packages/graphin-studio && npm run start",
     "bootstrap": "lerna bootstrap",
