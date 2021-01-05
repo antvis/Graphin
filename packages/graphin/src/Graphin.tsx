@@ -24,6 +24,7 @@ import LayoutController from './layout';
 
 const { DragCanvas, ZoomCanvas, DragNode, ClickSelect, BrushSelect, ResizeCanvas } = Behaviors;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DiffValue = any;
 
 export interface RegisterFunction {
@@ -335,7 +336,6 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       <GraphinContext.Provider
         value={{
           graph: this.graph,
-          G6,
         }}
       >
         <div id="graphin-container">

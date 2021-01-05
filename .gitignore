@@ -51,6 +51,7 @@ package-lock.json
 # yarn-lock
 yarn.lock
 
+.umi
 
 
 # ignore dist files
