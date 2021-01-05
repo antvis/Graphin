@@ -48,7 +48,9 @@
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "author": "Ant Financial",
   "license": "MIT",
   "dependencies": {

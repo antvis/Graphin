@@ -8,6 +8,9 @@
     "build": "father build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "sideEffects": [
+    "*.css"
+  ],
   "author": "",
   "license": "ISC",
   "publishConfig": {

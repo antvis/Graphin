@@ -12,7 +12,9 @@
   },
   "author": "",
   "license": "MIT",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "devDependencies": {
     "@ant-design/icons": "^4.3.0",
     "@babel/cli": "^7.6.2",

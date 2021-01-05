@@ -4,6 +4,8 @@ console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 export default {
   title: 'graphin docs',
   mode: 'site',
+  base: '/graphin-docs/',
+  publicPath: '/graphin-docs/',
   resolve: {
     includes: [
       'packages/graphin/docs/',
@@ -48,15 +50,12 @@ export default {
     devServerRender: false,
   },
   exportStatic: {},
-  externals:
-    process.env.NODE_ENV === 'development'
-      ? {
-          react: 'window.React',
-          'react-dom': 'window.ReactDOM',
-          antd: 'window.antd',
-          '@antv/g6': 'window.G6',
-        }
-      : {},
+  externals: {
+    react: 'window.React',
+    'react-dom': 'window.ReactDOM',
+    antd: 'window.antd',
+    '@antv/g6': 'window.G6',
+  },
   targets: {
     chrome: 80,
     firefox: false,
@@ -71,20 +70,17 @@ export default {
     ['zh-CN', '中文'],
     ['en-US', 'English'],
   ],
-  links: process.env.NODE_ENV === 'development' ? ['https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd.css'] : [],
-  scripts:
-    process.env.NODE_ENV === 'development'
-      ? [
-          'https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js',
-          'https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js',
-          'https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd-with-locales.js',
-          /** G6 **/
-          'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6.min.js',
-          'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6Layout.worker.js',
-          'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6Layout.worker.js.map',
-          'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6.min.js.map',
-          /** lodash */
-          'https://gw.alipayobjects.com/os/lib/lodash/4.17.20/lodash.min.js',
-        ]
-      : [],
+  links: ['https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd.css'],
+  scripts: [
+    'https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js',
+    'https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js',
+    'https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd-with-locales.js',
+    /** G6 **/
+    'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6.min.js',
+    'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6Layout.worker.js',
+    'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6Layout.worker.js.map',
+    'https://gw.alipayobjects.com/os/lib/antv/g6/4.0.3/dist/g6.min.js.map',
+    /** lodash */
+    'https://gw.alipayobjects.com/os/lib/lodash/4.17.20/lodash.min.js',
+  ],
 };
