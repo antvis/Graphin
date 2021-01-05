@@ -7,6 +7,7 @@ import BrushSelect from './BrushSelect';
 import ResizeCanvas from './ResizeCanvas';
 import LassoSelect from './LassoSelect';
 import DragCombo from './DragCombo';
+import ActivateRelations from './ActivateRelations';
 
 export default {
   TreeCollapse,
@@ -18,4 +19,5 @@ export default {
   ResizeCanvas,
   LassoSelect,
   DragCombo,
+  ActivateRelations,
 };
