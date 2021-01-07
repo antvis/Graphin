@@ -1,26 +1,25 @@
 import { Graph } from '@antv/g6';
-import { handleAutoZoom, handleRealZoom, handleChangeZoom, handleZoomIn, handleZoomOut } from './zoom';
-import { focusNodeById, highlightNodeById } from './element';
+// import { handleAutoZoom, handleRealZoom, handleChangeZoom, handleZoomIn, handleZoomOut } from './zoom';
+// import { focusNodeById, highlightNodeById } from './element';
+import * as zoomApis from './zoom';
+import * as elementApis from './element';
 
-const Api = (graph: Graph) => {
-  const apis = {
-    /**
-     * @description 自动缩放
-     */
-    handleAutoZoom: handleAutoZoom(graph),
-    /**
-     * @description 缩放真实大小
-     */
-    handleRealZoom: handleRealZoom(graph),
-    handleChangeZoom: handleChangeZoom(graph),
-    handleZoomIn: handleZoomIn(graph),
-    handleZoomOut: handleZoomOut(graph),
+import { ApisType } from './types';
 
-    focusNodeById: focusNodeById(graph),
-    highlightNodeById: highlightNodeById(graph),
-  };
-  return apis;
+const apis = {
+  ...zoomApis,
+  ...elementApis,
 };
 
-type ApiType = typeof Api;
-export default Api;
+const ApiController = (graph: Graph) => {
+  const apiKeys = Object.keys(apis);
+  return apiKeys.reduce((acc, curr) => {
+    return {
+      ...acc,
+      // @ts-ignore
+      [curr]: apis[curr](graph),
+    };
+  }, {}) as ApisType;
+};
+
+export default ApiController;

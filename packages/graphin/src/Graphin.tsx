@@ -22,7 +22,8 @@ import Behaviors from './behaviors';
 /** 内置布局 */
 import LayoutController from './layout';
 /** 内置API */
-import Api from './apis';
+import ApiController from './apis';
+import { ApisType } from './apis/types';
 
 const { DragCanvas, ZoomCanvas, DragNode, ClickSelect, BrushSelect, ResizeCanvas } = Behaviors;
 
@@ -114,6 +115,8 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     [key: string]: any;
   };
 
+  apis: ApisType;
+
   constructor(props: Graphin.Props) {
     super(props);
 
@@ -203,7 +206,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     this.graph.get('canvas').set('localRefresh', false);
     this.graph.render();
     this.initStatus();
-    this.apis = Api(this.graph);
+    this.apis = ApiController(this.graph);
   };
 
   updateLayout = () => {
@@ -339,7 +342,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       <GraphinContext.Provider
         value={{
           graph: this.graph,
-          apis: Api(this.graph),
+          apis: this.apis,
         }}
       >
         <div id="graphin-container">
