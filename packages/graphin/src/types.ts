@@ -306,6 +306,8 @@ export interface Layout {
   options?: {
     [key: string]: any; // eslint-disable-line
   };
+  /** 布局变化时是否做fitview，可选 */
+  layoutChangeFitview?: boolean;
 }
 
 /** 用户自定义shape的样式 */
