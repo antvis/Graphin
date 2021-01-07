@@ -91,11 +91,15 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
 
     // only rerender when data or layout change
     if (isDataChange || isLayoutChange) {
-      let { data: currentData } = this.state;
-      if (isDataChange) {
-        const { data } = this.props;
+      // 每次都从props.data中取数据
+      let { data: currentData } = this.props;
+
+      if (this.props?.layout?.name === 'force') {
+        // hack: Graphin2.0 将优化这一布局机制
+        const { data } = this.state;
         currentData = data;
       }
+
       const { data, forceSimulation } = layoutController(this.getContext(), { data: currentData, prevProps });
       this.forceSimulation = forceSimulation!;
       this.setState(
@@ -202,7 +206,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         yOrderedNodes[yOrderedNodes.length - 1],
       ],
       'id',
-    ).filter((node) => node);
+    ).filter(node => node);
     return {
       nodes: borderNodes,
       edges: [],
@@ -308,7 +312,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
       children = [children];
     }
 
-    return React.Children.map(children, (child) => {
+    return React.Children.map(children, child => {
       // do not pass props if element is a DOM element or not a valid react element.
       if (!React.isValidElement(child) || typeof child.type === 'string') {
         return child;
@@ -326,7 +330,7 @@ class Graph extends React.PureComponent<GraphinProps, GraphinState> {
         <div
           data-testid="custom-element"
           className="graphin-core"
-          ref={(node) => {
+          ref={node => {
             this.graphDOM = node;
           }}
         />
