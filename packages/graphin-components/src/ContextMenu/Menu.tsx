@@ -34,7 +34,7 @@ export interface Item {
   [key: string]: any;
 }
 const Item = (props) => {
-  const { children, onClick } = props;
+  const { children, onClick = () => {} } = props;
   const graphin = React.useContext(GraphinContext);
   const handleClose = () => {
     onClick();
