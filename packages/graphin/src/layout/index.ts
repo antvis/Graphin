@@ -2,16 +2,23 @@ import G6 from '@antv/g6';
 import defaultOptions from './utils/options';
 
 import Tweak from './inner/tweak';
+import Graphin from '../Graphin';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isEmpty = (data: any) => {
+  if (data && data.nodes && data.nodes.length !== 0) {
+    return false;
+  }
+  return true;
+};
 const FORCE_LAYOUTS = ['force', 'graphin-force', 'g6force', 'gForce', 'comboForce'];
 class LayoutController {
   [x: string]: any;
 
-  constructor(graphin: any) {
-    this.graphin = graphin;
+  constructor(context: Graphin) {
+    this.graphin = context;
     this.graph = this.graphin.graph;
-    this.presetLayout = {};
-    this.updateOptions();
+    this.presetLayout = null;
     this.init();
   }
 
@@ -19,17 +26,21 @@ class LayoutController {
    * 初始化布局
    */
   init() {
+    /** 更新布局参数 */
+    this.updateOptions();
     const { options, graphin } = this;
-
     const { data } = graphin;
     const { type } = options;
+
+    /** 力导布局特殊处理 */
+    this.processForce();
 
     if (!G6.Layout[type]) {
       console.warn(`${type} layout not found, current layout is grid`);
     }
     const LayoutClass = G6.Layout[type] || G6.Layout.grid;
     this.graph.emit('beforelayout');
-    this.processForce();
+
     this.instance = new LayoutClass(this.options);
     this.instance.init(data);
   }
@@ -48,40 +59,65 @@ class LayoutController {
     if (FORCE_LAYOUTS.indexOf(this.options.type) !== -1) {
       this.destroy();
     }
-
-    this.updateOptions();
-
-    /** 布局切换 */
-
+    /** 设置前置布局参数 */
+    this.prevOptions = { ...this.options };
+    /** 重新走初始化流程 */
     this.init();
     this.start();
   }
 
   /** 更新布局参数 */
   updateOptions = () => {
+    const DEFAULT_LAYOUT = {
+      type: 'grid',
+    };
     const { width, height, props } = this.graphin;
-    const defaultParams = {
+    const { data, layout = DEFAULT_LAYOUT } = props;
+    /** 如果数据为空，不进行布局 */
+
+    const { type = 'grid', preset } = layout;
+
+    /** 通用布局参数 */
+    const commonLayoutParams = {
       width,
       height,
       center: [width / 2, height / 2],
     };
-    this.prevOptions = (this.options && { ...this.options }) || { type: 'random', ...defaultParams };
-
-    // TODO :默认布局的处理，Combo布局的处理
-    const { layout = { type: 'concentric' } } = props;
-    const { type = 'concentric' } = layout;
-    const defaultCfg = defaultOptions[type] || {};
-    console.log({
-      ...defaultParams,
-      ...defaultCfg,
-      ...layout,
-    });
+    /**  */
 
     this.options = {
-      ...defaultParams,
-      ...defaultCfg,
+      ...commonLayoutParams,
+      // Graphin配置的最佳Options
+      ...(defaultOptions[type] || {}),
       ...layout,
     };
+
+    if (isEmpty(this.graphin.data)) {
+      this.prevOptions = {};
+      return;
+    }
+
+    /** 力导布局有前置布局的概念，特殊处理 */
+    if (FORCE_LAYOUTS.indexOf(type) !== -1) {
+      // 布局切换产生的prevType 是最低优先级
+      let presetType = this.prevOptions.type || 'grid';
+      if (preset?.type) {
+        // 用户给的preset.type是第一优先级
+        presetType = preset.type;
+      }
+      if (isEmpty(this.graphin.data)) {
+        // 特殊场景处理，不带preset的力导，第二次渲染
+        presetType = preset.type || 'grid';
+      }
+
+      this.options.preset = {
+        type: presetType,
+        ...commonLayoutParams,
+        // Graphin配置的最佳Options
+        ...(defaultOptions[presetType] || {}),
+        ...preset,
+      };
+    }
   };
 
   processForce = () => {
@@ -121,19 +157,20 @@ class LayoutController {
       current: FORCE_LAYOUTS.indexOf(this.options.type) !== -1,
     };
     const isSameLayoutType = this.options.type === this.prevOptions.type;
-
+    if (isEmpty(graphin.data)) {
+      return;
+    }
     if (isForceLayout.current && !isSameLayoutType) {
       /**
        * 当前布局为force，且两次布局类型不一致
        * 应当设置当前布局的preset为前一个布局
-       *
        */
 
-      const preset = (this.options.layout && this.options.layout.preset) || this.prevOptions;
-
-      this.presetLayout = new G6.Layout[preset.type](preset || {});
+      const { preset } = this.options;
+      this.presetLayout = new G6.Layout[preset.type]({ ...preset } || {});
       this.presetLayout.init(graphin.data);
       this.presetLayout.execute();
+      this.presetLayout.data = { ...graphin.data };
     }
 
     if (isForceLayout.current && isForceLayout.prev) {
@@ -141,7 +178,16 @@ class LayoutController {
        * 当前布局类型为force， 前一次布局也为force
        * 渐进布局
        */
-      graphin.data = Tweak(graphin.data, this.graph.save());
+      let prevData = this.graph.save(); // 必须从graph上取数据的原因是，用户可能拖拽改变数据
+      const { preset } = this.options;
+      if (isEmpty(prevData)) {
+        // preset.type = 'grid';
+        this.presetLayout = new G6.Layout[preset.type]({ ...preset } || {});
+        this.presetLayout.init(graphin.data);
+        this.presetLayout.execute();
+        prevData = graphin.data;
+      }
+      graphin.data = Tweak(graphin.data, prevData);
     }
 
     /** 布局切换 */
