@@ -1,5 +1,5 @@
 ---
-title: 大图探索
+title: 大图探索（优化）
 group:
   path: /case
   title: 场景案例
@@ -11,10 +11,6 @@ nav:
 
 # 大图探索
 
-## louvain 算法聚合
+> louvain 算法聚合 + 节点展开收起 + 颜色属性映射 + 渐进分析扩散 + 鱼眼放大镜 + MiniMap 导航
 
 <code src='./demos/index.tsx'>
-
-## 原始数据渲染
-
-<code src='./demos/save-render.tsx'>

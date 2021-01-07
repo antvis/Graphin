@@ -2,6 +2,7 @@ import G6 from '@antv/g6';
 
 import Graphin from '@antv/graphin';
 import iconLoader from '@antv/graphin-icons';
+import '@antv/graphin-icons/dist/index.css';
 
 export const icons = Graphin.registerFontFamily(iconLoader);
 

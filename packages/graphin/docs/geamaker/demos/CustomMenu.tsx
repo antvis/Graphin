@@ -2,9 +2,9 @@ import * as React from 'react';
 import { GraphinContext, Utils } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 import { manageExpandCollapseArray, getMixedGraph, icons } from './utils';
+import { clusterColorMap } from './color';
 
 const { Menu } = ContextMenu;
-const AntColor = '#3D2D70';
 
 interface CustomMenuProps {
   updateState: any;
@@ -40,21 +40,23 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
     const mixedGraphData = getMixedGraph(clusteredData, source, nodeMap, aggregatedNodeMap, expandArray, collapseArray);
 
     mixedGraphData.nodes.forEach(node => {
+      const primaryColor = clusterColorMap.get(node.clusterId);
       if (!node.type) {
         node.type = 'graphin-circle';
         node.style = {
-          fill: AntColor,
+          fill: '#fff',
           strokeWidth: 2,
-          stroke: AntColor,
+          stroke: primaryColor,
           size: [20, 20],
           label: {
             value: `${node.id}`,
+            fill: '#000',
           },
           icon: {
             fontFamily: 'graphin',
             type: 'font',
             value: icons.user,
-            fill: '#fff',
+            fill: primaryColor,
             size: 15,
           },
           badges: [],
@@ -90,7 +92,7 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
     handleClose();
   };
   const handleFind = () => {
-    const newData = Utils.mock(5)
+    const newData = Utils.mock(3)
       .expand([model])
       .graphin();
     updateState({

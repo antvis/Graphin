@@ -1,14 +1,24 @@
 import React from 'react';
 import Graphin, { Behaviors } from '@antv/graphin';
-import { ContextMenu } from '@antv/graphin-components';
+import { ContextMenu, FishEye, MiniMap } from '@antv/graphin-components';
 import G6 from '@antv/g6';
+import { colorSets, clusterColorMap } from './color';
 
 import CustomMenu from './CustomMenu';
 import { icons } from './utils';
 
+const { Menu } = ContextMenu;
+
+console.log('colorSets', colorSets);
 const layout = {
   type: 'graphin-force',
   animation: true,
+  preset: {
+    type: 'concentric',
+    linkDistance: 400, // 可选，边长
+    preventOverlap: true, // 可选，必须配合 nodeSize
+    nodeSize: 60,
+  },
 };
 
 /** Graphin */
@@ -18,31 +28,33 @@ const { ZoomCanvas, DragNode } = Behaviors;
 const { louvain } = G6.Algorithm;
 const { uniqueId } = G6.Util;
 
-const AlibabaColor = '#FF6A00';
-
 const nodeMap = {};
 const aggregatedNodeMap = {};
 
 /** 转化函数 */
 const transClusterData = (data, sourceData) => {
-  const nodes = data.clusters.map(node => {
+  const nodes = data.clusters.map((node, index) => {
+    const primaryColor = colorSets[index].mainFill;
+    clusterColorMap.set(node.id, primaryColor);
+
     const clusterNode = {
       ...node,
       type: 'graphin-circle',
       style: {
-        fill: AlibabaColor,
+        fill: '#fff',
         strokeWidth: 2,
-        stroke: AlibabaColor,
-        size: [30, 30],
+        stroke: primaryColor,
+        size: [40, 40],
         label: {
-          value: `ID:${node.id}  count:${node.nodes.length}`,
+          value: `cluster-${node.id}(${node.nodes.length})`,
+          fill: '#000',
         },
         icon: {
           fontFamily: 'graphin',
           type: 'font',
-          value: icons.plus,
-          fill: '#fff',
-          size: 20,
+          value: icons.team,
+          fill: primaryColor,
+          size: 30,
         },
         badges: [
           {
@@ -50,8 +62,8 @@ const transClusterData = (data, sourceData) => {
             type: 'text',
             value: node.nodes.length,
             size: [14, 14],
-            fill: AlibabaColor,
-            stroke: AlibabaColor,
+            fill: primaryColor,
+            stroke: primaryColor,
             color: '#fff',
             fontSize: 12,
             padding: 0,
@@ -66,11 +78,20 @@ const transClusterData = (data, sourceData) => {
   });
 
   const edges = data.clusterEdges.map(edge => {
+    const size = Math.log(edge.count) || 0.5;
+    const id = `edge-${uniqueId()}`;
     return {
       ...edge,
-      size: Math.log(edge.count),
+      id,
       label: '',
-      id: `edge-${uniqueId()}`,
+      size: size > 0.5 ? size : 0.5,
+      color: '#545872',
+      style: {
+        endArrow: {
+          path: 'M 0,0 L 8,4 L 8,-4 Z',
+          fill: '#545872',
+        },
+      },
     };
   });
 
@@ -83,36 +104,77 @@ const transClusterData = (data, sourceData) => {
     edges,
   };
 };
-
+let refreshData;
 const App = () => {
   const [state, setState] = React.useState({
     data: {},
     source: {},
     clusteredData: {},
+    visible: false,
   });
   React.useEffect(() => {
     fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/relations.json')
       .then(res => res.json())
       .then(res => {
         const clusteredData = louvain(res, false, 'weight');
-        setState({
-          source: res,
-          data: transClusterData(clusteredData, res),
-          clusteredData,
+
+        const data = transClusterData(clusteredData, res);
+        refreshData = data;
+        setState(preState => {
+          return {
+            ...preState,
+            data,
+            source: res,
+            clusteredData,
+          };
         });
       });
   }, []);
 
-  const { data } = state;
-
+  const { data, visible } = state;
+  const handleClose = () => {
+    setState(preState => {
+      return {
+        ...preState,
+        visible: false,
+      };
+    });
+  };
+  const handleOpen = () => {
+    setState(preState => {
+      return {
+        ...preState,
+        visible: true,
+      };
+    });
+  };
+  const handleRefresh = () => {
+    setState(preState => {
+      return {
+        ...preState,
+        data: refreshData,
+      };
+    });
+  };
+  // if (!data) {
+  //   return null;
+  // }
   return (
     <div>
-      <Graphin data={data} layout={layout}>
+      <Graphin data={data} layout={layout} height={900}>
         <ZoomCanvas enableOptimize />
         <DragNode />
+        <MiniMap />
         <ContextMenu>
           <CustomMenu state={state} updateState={setState} nodeMap={nodeMap} aggregatedNodeMap={aggregatedNodeMap} />
         </ContextMenu>
+        <ContextMenu bindType="canvas">
+          <Menu bindType="canvas">
+            <Menu.Item onClick={handleOpen}>开启鱼眼</Menu.Item>
+            <Menu.Item onClick={handleRefresh}>重置画布</Menu.Item>
+          </Menu>
+        </ContextMenu>
+        <FishEye options={{ showLabel: false }} visible={visible} handleEscListener={handleClose} />
       </Graphin>
     </div>
   );
