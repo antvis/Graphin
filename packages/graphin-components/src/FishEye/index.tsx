@@ -17,7 +17,7 @@ const defaultOptions = {
     fillOpacity: 0.1,
     fill: '#ccc',
   },
-  // showLabel: true,
+  showLabel: false,
 };
 export interface FishEyeProps {
   /**
@@ -46,6 +46,19 @@ const FishEye: React.FunctionComponent<FishEyeProps> = (props) => {
       ...defaultOptions,
       ...options,
     };
+
+    if (FishEyeOptions.showLabel) {
+      // 先将图上的label全部隐藏
+
+      graph.getNodes().forEach((node) => {
+        node
+          .getContainer()
+          .getChildren()
+          .forEach((shape) => {
+            if (shape.get('type') === 'text') shape.hide();
+          });
+      });
+    }
     const fishEye = new G6.Fisheye(FishEyeOptions);
     const escListener = (e) => {
       if (e.keyCode === 27) {
