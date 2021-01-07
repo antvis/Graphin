@@ -45,9 +45,10 @@ npm run --save @antv/graphin
 
 ### Usage
 
-```jsx
+```jsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import Graphin, { Utils } from '@antv/graphin';
 
 import '@antv/graphin/dist/index.css'; // 别忘了引入Graphin CSS

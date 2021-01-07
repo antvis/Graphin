@@ -28,13 +28,17 @@ const convertSizeToWH = (size: number | number[] | undefined) => {
   return [width, height];
 };
 
+const AlibabaColor = '#FF6A00';
+const AntColor = '#3D2D70';
+const NodeSize = 24;
+
 export default () => {
   G6.registerNode('graphin-circle', {
     options: {
       style: {
-        size: 60,
+        size: NodeSize,
         fill: 'rgb(239, 244, 255)',
-        stroke: 'rgb(95, 149, 255)',
+        stroke: AntColor,
         opacity: 1,
         label: {
           position: 'bottom',
@@ -44,46 +48,50 @@ export default () => {
           offset: 0,
         },
         icon: {
-          type: 'image',
-          value: 'https://gw.alipayobjects.com/zos/bmw-prod/5d015065-8505-4e7a-baec-976f81e3c41d.svg',
-          size: 20,
+          type: 'text',
+          value: '',
+          size: NodeSize,
         },
         badges: [
-          {
-            position: 'RT',
-            type: 'text',
-            value: '99+',
-            size: [24, 24],
-            fill: 'rgb(223, 234, 255)',
-            stroke: '#4572d9',
-            color: 'rgb(250, 250, 250)',
-            fontSize: 12,
-            padding: 0,
-            offset: [0, 0],
-          },
-          {
-            position: 'LB',
-            type: 'text',
-            value: 'LOCK',
-            size: [48, 16],
-            fill: 'rgb(223, 234, 255)',
-            stroke: '#4572d9',
-            color: 'rgb(250, 250, 250)',
-            fontSize: 12,
-            padding: 0,
-            offset: [0, 0],
-          },
+          // {
+          //   position: 'RT',
+          //   type: 'text',
+          //   value: '99+',
+          //   size: [24, 24],
+          //   fill: 'rgb(223, 234, 255)',
+          //   stroke: '#4572d9',
+          //   color: 'rgb(250, 250, 250)',
+          //   fontSize: 12,
+          //   padding: 0,
+          //   offset: [0, 0],
+          // },
+          // {
+          //   position: 'LB',
+          //   type: 'text',
+          //   value: 'LOCK',
+          //   size: [48, 16],
+          //   fill: 'rgb(223, 234, 255)',
+          //   stroke: '#4572d9',
+          //   color: 'rgb(250, 250, 250)',
+          //   fontSize: 12,
+          //   padding: 0,
+          //   offset: [0, 0],
+          // },
         ],
       },
       status: {
         selected: {
           // shadowColor: 'rgb(95, 149, 255)',
           // shadowBlur: 30,
-          additionType: 'border',
+          // additionType: 'border',
+          // additionStyle: {
+          //   fill: 'rgb(239, 244, 255)',
+          //   stroke: '#6C43D5',
+          //   lineWidth: 3,
+          // },
+          additionType: 'shadow',
           additionStyle: {
             fill: 'rgb(239, 244, 255)',
-            stroke: '#6C43D5',
-            lineWidth: 3,
           },
         },
         hover: {
@@ -141,7 +149,7 @@ export default () => {
           r,
           stroke,
           fill,
-          lineWidth: 5,
+          lineWidth: 2,
         },
         name: 'circle-keyshape',
         draggable: true,
@@ -173,17 +181,19 @@ export default () => {
       if (icon) {
         const { type } = icon;
         if (type === 'text' || type === 'font') {
-          const { value = '', fontFamily, fill } = icon;
+          const { value = '', fontFamily, fill: IconFill, size: IconSize } = icon;
+
           group.addShape('text', {
             attrs: {
               x: 0,
               y: 0,
               text: value,
-              fontSize: 10,
+              // @ts-ignore
+              fontSize: IconSize,
               textAlign: 'center',
               textBaseline: 'middle',
               fontFamily,
-              fill,
+              fill: IconFill,
             },
             capture: false,
             name: 'circle-icon',

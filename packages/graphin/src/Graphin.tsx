@@ -337,7 +337,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
   render() {
     console.log('%c graphin render...', 'color:lightblue', this);
     const { isReady } = this.state;
-    const { modes } = this.props;
+    const { modes, style } = this.props;
     return (
       <GraphinContext.Provider
         value={{
@@ -352,6 +352,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
             ref={node => {
               this.graphDOM = node;
             }}
+            style={style}
           />
           <div className="graphin-components">
             {isReady && (
