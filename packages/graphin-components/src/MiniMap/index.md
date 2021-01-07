@@ -15,6 +15,8 @@ nav:
 
 MiniMap 小地图导航 是一种常见的交互组件，当数据量很大， 小地图导航可以让用户看到当前画布内容位于全局的什么位置，从而不丢失分析的全局感，是非常有效的组件
 
+<code src='./demos/index.tsx'>
+
 ## 功能特性
 
 - MiniMap 技术底座应该是 G6.MiniMap，可以通过组件内部 didmount 的时候 addPlugins 的方式注入
