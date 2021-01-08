@@ -19,6 +19,7 @@ class LayoutController {
     this.graphin = context;
     this.graph = this.graphin.graph;
     this.presetLayout = null;
+    this.prevOptions = {};
     this.init();
   }
 
