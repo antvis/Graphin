@@ -70,13 +70,13 @@ class LayoutController {
   /** 更新布局参数 */
   updateOptions = () => {
     const DEFAULT_LAYOUT = {
-      type: 'grid',
+      type: 'concentric',
     };
     const { width, height, props } = this.graphin;
     const { data, layout = DEFAULT_LAYOUT } = props;
     /** 如果数据为空，不进行布局 */
 
-    const { type = 'grid', preset } = layout;
+    const { type = 'concentric', preset } = layout;
 
     /** 通用布局参数 */
     const commonLayoutParams = {
