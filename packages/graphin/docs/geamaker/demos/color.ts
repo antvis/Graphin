@@ -20,40 +20,39 @@ const subjectColors = [
 
 const colorSets = [
   {
-    mainFill: '#e91e63',
+    mainFill: '#5b8ff9',
   },
   {
-    mainFill: '#d05ce3',
+    mainFill: '#5ad8a6',
   },
   {
-    mainFill: '#9a67ea',
+    mainFill: '#5d7092',
   },
   {
-    mainFill: '#607d8b',
+    mainFill: '#f6bd16',
   },
   {
-    mainFill: '#3f51b5',
+    mainFill: '#e8684a',
   },
   {
-    mainFill: '#2196f3',
+    mainFill: '#6dc8ec',
   },
   {
-    mainFill: '#62efff',
+    mainFill: '#9270CA',
   },
   {
-    mainFill: '#4caf50',
+    mainFill: '#ff9d4d',
   },
   {
-    mainFill: '#ff9800',
+    mainFill: '#269a99',
   },
   {
-    mainFill: '#795548',
+    mainFill: '#ff99c3',
   },
   {
     mainFill: '#ff5722',
   },
-
-  // #00e676
 ];
+
 const clusterColorMap = new Map();
 export { clusterColorMap, colorSets };

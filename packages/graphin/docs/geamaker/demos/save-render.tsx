@@ -2,6 +2,7 @@ import React from 'react';
 import Graphin, { Utils } from '@antv/graphin';
 import { icons } from './utils';
 import { ContextMenu, FishEye } from '@antv/graphin-components';
+import hexToRgba from '../../../src/utils/hexToRgba';
 
 const { Menu } = ContextMenu;
 
@@ -13,19 +14,19 @@ const trans = data => {
       ...node,
       type: 'graphin-circle',
       style: {
-        fill: '#fff',
+        fill: '#ffb897',
         strokeWidth: 2,
         stroke: AlibabaColor,
         size: [30, 30],
         label: {
-          value: `${node.id}`,
+          value: '',
           fill: '#666',
         },
         icon: {
-          fontFamily: 'graphin',
-          type: 'font',
-          value: icons.user,
-          fill: AlibabaColor,
+          // fontFamily: 'graphin',
+          type: 'text',
+          value: `${node.id}`,
+          fill: '#000',
           size: 14,
         },
         badges: [],
@@ -37,6 +38,7 @@ const trans = data => {
       ...edge,
       size: 1,
       color: '#666',
+      label: edge.id,
       style: {
         endArrow: {
           path: 'M 0,0 L 8,4 L 8,-4 Z',
@@ -87,7 +89,7 @@ export default () => {
     <div>
       <Graphin
         data={data}
-        layout={{ type: 'graphin-force', preset: { type: 'grid' } }}
+        layout={{ type: 'force', preset: { type: 'grid' }, defSpringLen: () => 100 }}
         style={{
           background: '#fff', // '#17113f'
         }}

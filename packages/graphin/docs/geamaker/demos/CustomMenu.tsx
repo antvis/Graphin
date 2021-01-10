@@ -14,6 +14,7 @@ interface CustomMenuProps {
 }
 let collapseArray = [];
 let expandArray = [];
+const NODE_SIZE = 20;
 
 const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
   const { updateState, state, nodeMap, aggregatedNodeMap } = props;
@@ -45,9 +46,9 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
         node.type = 'graphin-circle';
         node.style = {
           fill: '#fff',
-          strokeWidth: 2,
+          strokeWidth: 0.5,
           stroke: primaryColor,
-          size: [20, 20],
+          size: [NODE_SIZE, NODE_SIZE],
           label: {
             value: `${node.id}`,
             fill: '#000',
@@ -57,7 +58,7 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
             type: 'font',
             value: icons.user,
             fill: primaryColor,
-            size: 15,
+            size: NODE_SIZE * 0.5,
           },
           badges: [],
         };

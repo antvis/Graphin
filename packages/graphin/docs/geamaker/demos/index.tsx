@@ -3,6 +3,7 @@ import Graphin, { Behaviors } from '@antv/graphin';
 import { ContextMenu, FishEye, MiniMap } from '@antv/graphin-components';
 import G6 from '@antv/g6';
 import { colorSets, clusterColorMap } from './color';
+import hexToRgba from '../../../src/utils/hexToRgba';
 
 import CustomMenu from './CustomMenu';
 import { icons } from './utils';
@@ -30,6 +31,8 @@ const { uniqueId } = G6.Util;
 
 const nodeMap = {};
 const aggregatedNodeMap = {};
+const nodeSize = 40;
+const badgeSize = 12;
 
 /** 转化函数 */
 const transClusterData = (data, sourceData) => {
@@ -41,31 +44,31 @@ const transClusterData = (data, sourceData) => {
       ...node,
       type: 'graphin-circle',
       style: {
-        fill: '#fff',
-        strokeWidth: 2,
+        fill: hexToRgba(primaryColor, 0.1), // '#fff',
+        strokeWidth: 1.2,
         stroke: primaryColor,
-        size: [40, 40],
+        size: [nodeSize, nodeSize],
         label: {
           value: `cluster-${node.id}(${node.nodes.length})`,
-          fill: '#000',
+          fill: hexToRgba('#000', '0.85'),
         },
         icon: {
           fontFamily: 'graphin',
           type: 'font',
           value: icons.team,
           fill: primaryColor,
-          size: 30,
+          size: nodeSize / 1.6,
         },
         badges: [
           {
             position: 'RT',
             type: 'text',
             value: node.nodes.length,
-            size: [14, 14],
+            size: [badgeSize, badgeSize],
             fill: primaryColor,
             stroke: primaryColor,
             color: '#fff',
-            fontSize: 12,
+            fontSize: badgeSize * 0.8,
             padding: 0,
             offset: [0, 0],
           },
@@ -85,12 +88,12 @@ const transClusterData = (data, sourceData) => {
       id,
       label: '',
       size: size > 0.5 ? size : 0.5,
-      color: '#545872',
+      color: '#AAB7C4', // '#545872',
       style: {
-        endArrow: {
-          path: 'M 0,0 L 8,4 L 8,-4 Z',
-          fill: '#545872',
-        },
+        // endArrow: {
+        //   path: 'M 0,0 L 8,4 L 8,-4 Z',
+        //   fill: '#545872',
+        // },
       },
     };
   });

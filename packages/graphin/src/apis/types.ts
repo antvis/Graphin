@@ -5,7 +5,7 @@ export interface ApisType {
   handleZoomIn: () => { text: string; ratio: number };
   handleZoomOut: () => { text: string; ratio: number };
   focusNodeById: (nodeId: string) => void;
-  highlightNodeById: (nodeId: string) => void;
+  highlightNodeById: (nodeId: string[]) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // [key: string]: (a?:any) => void;
 }
