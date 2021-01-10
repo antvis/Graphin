@@ -6,11 +6,11 @@ import { Graph } from '@antv/g6';
  */
 export const highlightNodeById = (graph: Graph) => (nodeIds: string[]) => {
   graph.getNodes().forEach(node => {
-    graph.clearItemStates(node, ['highlight.light', 'highlight.dark']);
+    graph.clearItemStates(node, ['active', 'inactive']);
     if (nodeIds.indexOf(node.get('id')) !== -1) {
-      graph.setItemState(node, 'highlight.light', false);
+      graph.setItemState(node, 'active', true);
     } else {
-      graph.setItemState(node, 'highlight.dark', true);
+      graph.setItemState(node, 'active', false);
     }
   });
 };
