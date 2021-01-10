@@ -6,9 +6,13 @@ const defaultContext = {
   graph: {} as IGraph,
   apis: {} as ApisType,
 };
+export interface GraphinContextType {
+  graph: IGraph;
+  apis: ApisType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const GraphinContext: React.Context<{ graph: IGraph; apis: ApisType; [key: string]: any }> = React.createContext(
-  defaultContext,
-);
+const GraphinContext: React.Context<GraphinContextType> = React.createContext(defaultContext);
+
 export default GraphinContext;
