@@ -37,6 +37,8 @@ Graphin 采用 lerna 管理仓库，packages 中包含以下 5 个 package：
 
 ## Graphin 快速开始
 
+> Graphin 2.0 组件文档：https://antv.vision/graphin-docs/
+
 ### 安装
 
 ```bash

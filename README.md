@@ -38,6 +38,8 @@ Please checkout the specific package：
 
 ## Graphin Quick Start
 
+> Graphin 2.0 组件文档：https://antv.vision/graphin-docs/
+
 ### Install
 
 ```bash
