@@ -1,17 +1,24 @@
 import * as React from 'react';
 import Graphin, { Utils } from '@antv/graphin';
+import iconsLoader from '@antv/graphin-icons';
 import { Legend } from '@antv/graphin-components';
+
+const icons = Graphin.registerFontFamily(iconsLoader);
 
 const data = Utils.mock(5).circle().graphin();
 data.nodes.forEach((node, index) => {
   const isCompany = index % 3 === 0;
   node.data.type = isCompany ? 'company' : 'person';
+  node.type = 'graphin-circle';
   node.style = {
-    fill: isCompany ? 'red' : '#f79e26',
+    fill: isCompany ? 'green' : 'yellow',
+    size: [30],
     icon: {
       type: 'font',
       fontFamily: 'graphin',
-      value: isCompany ? 'company' : 'user',
+      value: isCompany ? icons.company : icons.user,
+      size: 14,
+      fill: '#fff',
     },
   };
 });

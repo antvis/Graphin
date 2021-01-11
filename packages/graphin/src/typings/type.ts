@@ -1,10 +1,3 @@
-export interface GraphinState {
-  isReady: boolean;
-}
-export interface ITreeData {
-  children: [];
-}
-
 export interface UserProperties {
   [key: string]: any;
 }
