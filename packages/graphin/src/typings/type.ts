@@ -141,31 +141,36 @@ export interface EdgeStyle {
     position: '' | 'T';
     autoRote: boolean;
   };
-  animation: {};
-  /**
-   * 自环
-   *
-   * @type {({
-   *     position: string,
-   *     dist: number,
-   *   })}
-   * @memberof Edge
-   */
-  loopCfg: {
-    // 是否开启自环
-    enable: boolean;
-    position: string;
-    dist: number;
+  // 边上的动画，当 animation 不为 null 时，边上增加动画
+  animation?: {
+    /**
+     * dotted：表示边上虚线运动的动画效果
+     * dot：表示边上一个圆点的运动效果
+     * grow：边从无到有出现的效果
+     */
+    type: 'dotted' | 'dot' | 'grow';
+    // 一次动画的时长
+    duration: number;
+    // 动画函数，详情参考 https://github.com/d3/d3/blob/master/API.md#easings-d3-ease
+    easing: string;
+    // 动画执行延迟时间
+    delay: number;
+    // 是否重复执行动画
+    repeat: boolean;
   };
   /**
-   * 多边
-   *
-   * @type {[number, number][]}
-   * @memberof Edge
+   * 多边配置
    */
-  poly: {
-    distance: number;
-  };
+  parallel: Partial<{
+    // 多边之间的偏移量
+    offsetDiff: number;
+    // 多条边时边的类型
+    multiEdgeType: string;
+    // 单条边的类型
+    singleEdgeType: string;
+    // 自环边的类型
+    loopEdgeType: string;
+  }>;
 }
 
 export interface IUserEdge extends BaseEdge, Partial<RestEdge>, UserProperties {}
