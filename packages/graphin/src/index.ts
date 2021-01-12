@@ -5,7 +5,7 @@ import Layout from './layout';
 import Behaviors from './behaviors';
 import registerGraphinForce from './layout/inner/registerGraphinForce';
 import registerRenderLayout from './layout/inner/registerRenderLayout';
-import { registerGraphinCircle } from './shape';
+import { registerGraphinCircle, registerGraphinLine } from './shape';
 
 /** 注册 Graphin force 布局 */
 registerGraphinForce();
@@ -13,6 +13,9 @@ registerGraphinForce();
 registerRenderLayout();
 /** 注册 Graphin Circle Node */
 registerGraphinCircle();
+
+/** 注册 Graphin line Edge */
+registerGraphinLine();
 
 /** export */
 export default Graphin;

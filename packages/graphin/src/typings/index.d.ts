@@ -1,4 +1,4 @@
-import { IG6GraphEvent } from '@antv/g6/es/types';
+import { IG6GraphEvent } from '@antv/g6';
 import { GraphinProps, GraphinState, IUserNode, IUserEdge, IGraphData, ITreeData } from './type';
 
 declare global {

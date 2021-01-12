@@ -20,7 +20,7 @@ export interface RestNode {
   /** 节点的样式，默认为默认样式 */
   style: Partial<NodeStyle>;
   /**  节点当前的状态 */
-  status: NodeStatus;
+  status: ElementStatus;
   /** 布局的相关信息 */
   layout: {
     /** 度数 */
@@ -40,12 +40,38 @@ type BaseEdge = {
   target: string;
 };
 
+interface EdgeStatus {
+  [key: string]: {
+    stroke: string;
+    opacity: string;
+    shadowColor: string;
+    shadowBlur: number;
+    animation?: {
+      /**
+       * dotted：表示边上虚线运动的动画效果
+       * dot：表示边上一个圆点的运动效果
+       * grow：边从无到有出现的效果
+       */
+      type: 'dotted' | 'dot' | 'grow';
+      // 一次动画的时长
+      duration: number;
+      // 动画函数，详情参考 https://github.com/d3/d3/blob/master/API.md#easings-d3-ease
+      easing: string;
+      // 动画执行延迟时间
+      delay: number;
+      // 是否重复执行动画
+      repeat: boolean;
+    };
+  };
+}
+
 export interface RestEdge {
   /** 边的类型 */
   type?: string;
   /** 边的数据 */
-  data: {};
   style: Partial<EdgeStyle>;
+  /**  边当前的状态 */
+  status: EdgeStatus;
   layout: {
     /** 边的弹簧长度，力导时使用 */
     spring?: number;
@@ -120,6 +146,20 @@ export interface GraphinProps {
    */
   linkCenter?: boolean;
 
+  /**
+   * 多边配置
+   */
+  parallel: Partial<{
+    // 多边之间的偏移量
+    offsetDiff: number;
+    // 多条边时边的类型
+    multiEdgeType: string;
+    // 单条边的类型
+    singleEdgeType: string;
+    // 自环边的类型
+    loopEdgeType: string;
+  }>;
+
   // children: React.ReactChildren;
 }
 
@@ -128,36 +168,11 @@ export interface GraphinNode extends BaseNode, RestNode, UserProperties {}
 
 export interface EdgeStyle {
   /** 边的类型 */
-  shape: 'line' | '';
+  type: 'graphin-line' | 'line';
   label: {
     value: string | number;
     position: '' | 'T';
     autoRote: boolean;
-  };
-  animation: {};
-  /**
-   * 自环
-   *
-   * @type {({
-   *     position: string,
-   *     dist: number,
-   *   })}
-   * @memberof Edge
-   */
-  loopCfg: {
-    // 是否开启自环
-    enable: boolean;
-    position: string;
-    dist: number;
-  };
-  /**
-   * 多边
-   *
-   * @type {[number, number][]}
-   * @memberof Edge
-   */
-  poly: {
-    distance: number;
   };
 }
 
@@ -235,7 +250,7 @@ export interface NodeStyle {
   halo: any;
 }
 
-export interface NodeStatus {
+export interface ElementStatus {
   [key: string]:
     | boolean
     | Partial<{
