@@ -18,8 +18,8 @@ nav:
 
 ### Graphin Circle
 
-<code src='./demos/default.tsx'>
+<!-- <code src='./demos/default.tsx'> -->
 
 ### Graphin Circle
 
-<!-- <code src='./demos/graphin-circle.tsx'> -->
+<code src='./demos/index.tsx'>

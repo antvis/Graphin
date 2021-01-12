@@ -134,7 +134,7 @@ export default () => {
   return (
     <div>
       <Graphin data={data} layout={layout} defaultEdge={defaultEdge}>
-        <ZoomCanvas disabled={true} />
+        <ZoomCanvas />
         <EventCenter />
       </Graphin>
     </div>
