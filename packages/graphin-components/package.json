@@ -3,7 +3,7 @@
   "version": "2.0.0-beta.1",
   "description": "Components for graphin",
   "main": "./dist/index",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "start": "father build --watch",
     "build": "father build && npm run  build:umd",
