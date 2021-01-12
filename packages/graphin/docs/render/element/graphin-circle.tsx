@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import Graphin, { Utils, Behaviors,GraphinContext } from '@antv/graphin';
-import IconLoader from '@antv/graphin-icons'
+import Graphin, { Utils, Behaviors, GraphinContext } from '@antv/graphin';
+import IconLoader from '@antv/graphin-icons';
 
-const iconLoader = Graphin.registerFontFamily(IconLoader)
-const iconValue = iconLoader.home
+const iconLoader = Graphin.registerFontFamily(IconLoader);
+const iconValue = iconLoader.home;
 const { ZoomCanvas } = Behaviors;
 
 const defaultIcon = {
@@ -14,22 +14,22 @@ const defaultIcon = {
   size: 12,
   /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
   fill: 'green',
-  fontFamily: 'graphin'
-}
-const  EventCenter =()=>{
-  const { graph } = React.useContext(GraphinContext)
-  useEffect(()=>{
-    graph.on('node:mouseenter',(evt)=>{
-      graph.setItemState(evt.item, 'hover', true)
-    })
+  fontFamily: 'graphin',
+};
+const EventCenter = () => {
+  const { graph } = React.useContext(GraphinContext);
+  useEffect(() => {
+    graph.on('node:mouseenter', evt => {
+      graph.setItemState(evt.item, 'hover', true);
+    });
 
-    graph.on('node:mouseleave',(evt)=>{
-      graph.setItemState(evt.item, 'hover', false)
-    })
-  },[])
- 
-  return null
-}
+    graph.on('node:mouseleave', evt => {
+      graph.setItemState(evt.item, 'hover', false);
+    });
+  }, []);
+
+  return null;
+};
 
 const defaultBadge = [
   {
@@ -48,7 +48,7 @@ const defaultBadge = [
     color: '#000',
     fontSize: 12,
     padding: 2,
-    offset: [0, 0]
+    offset: [0, 0],
   },
   {
     /** 放置的位置，ef：LT（left top）左上角 */
@@ -66,7 +66,7 @@ const defaultBadge = [
     color: '#000',
     fontSize: 12,
     padding: 0,
-    offset: [0, 0]
+    offset: [0, 0],
   },
   {
     /** 放置的位置，ef：LT（left top）左上角 */
@@ -81,7 +81,7 @@ const defaultBadge = [
     /** 徽标描边色 */
     stroke: 'green',
     padding: 5,
-    offset: [0, 0]
+    offset: [0, 0],
   },
   {
     /** 放置的位置，ef：LT（left top）左上角 */
@@ -97,9 +97,9 @@ const defaultBadge = [
     /** 徽标描边色 */
     stroke: 'green',
     padding: 5,
-    offset: [3, 3]
-  }
-]
+    offset: [3, 3],
+  },
+];
 
 const data = Utils.mock(10)
   .circle()
@@ -108,11 +108,16 @@ const layout = {
   type: 'circular',
 };
 
+const defaultNode = {
+  style: {
+    fill: 'red',
+  },
+};
 
 export default () => {
   return (
     <div>
-      <Graphin data={data} layout={layout}>
+      <Graphin data={data} layout={layout} defaultNode={defaultNode}>
         <ZoomCanvas disabled={true} />
         <EventCenter />
       </Graphin>
