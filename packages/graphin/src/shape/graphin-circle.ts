@@ -1,6 +1,7 @@
 import { IGroup } from '@antv/g-base';
 import G6, { INode, IItemBase } from '@antv/g6';
 import { deepMix, isArray, isNumber, isObject } from '@antv/util';
+import hexToRgba from '../utils/hexToRgba';
 
 import { IUserNode, NodeStyle } from '../typings/type';
 
@@ -28,116 +29,180 @@ const convertSizeToWH = (size: number | number[] | undefined) => {
   return [width, height];
 };
 
-const AlibabaColor = '#FF6A00';
-const AntColor = '#3D2D70';
-const NodeSize = 24;
+const NodeSize = 36;
 
+const primaryColor = '#FF6A00';
+
+const Color = {
+  fill: hexToRgba(primaryColor, '0.1'),
+  stroke: primaryColor,
+  icon: '#fff',
+  badge: {
+    fill: primaryColor,
+    stroke: primaryColor,
+    font: '#fff',
+  },
+};
+
+const defaultStyle = {
+  keyshape: {
+    size: NodeSize,
+    fill: Color.fill,
+    stroke: Color.stroke,
+    lineWidth: 1,
+    opacity: 1,
+  },
+  label: {
+    position: 'bottom',
+    value: '',
+    fill: 'rgb(0, 0, 0)',
+    fontSize: 12,
+    offset: 0,
+  },
+  icon: {
+    type: 'text',
+    value: '',
+    size: NodeSize,
+    fill: Color.icon,
+  },
+  badges: [],
+  halo: {
+    r: NodeSize + NodeSize / 12,
+    fill: Color.fill,
+    lineWidth: 1,
+    opacity: 0.9,
+    visible: false,
+  },
+};
+
+/** 根据用户输入的json，解析成attr */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const paserAttr = (
+  schema: {
+    type?: string;
+    size?: number | [number, number];
+    value?: any;
+    [key: string]: any;
+  },
+  itemShapeName: string,
+) => {
+  const { type, size, value } = { ...schema };
+
+  if (type === 'font') {
+    schema.fontSize = size;
+    schema.text = value;
+  }
+  if (type === 'image') {
+    const [width, height] = convertSizeToWH(size);
+    schema.x = -width / 2;
+    schema.y = -height / 2;
+    schema.img = value;
+    schema.width = width;
+    schema.height = height;
+  }
+  if (itemShapeName === 'keyshape') {
+    schema.r = getRadiusBySize(size);
+  }
+
+  Object.keys(schema).forEach(key => {
+    if (schema[key] === undefined) {
+      delete schema[key];
+    }
+  });
+
+  return schema;
+};
+
+const defaultStatusStyle = {
+  selected: {
+    halo: {
+      visible: true,
+    },
+    keyshape: {
+      lineWidth: 5,
+    },
+
+    //  // 这里需要特殊处理
+    //  keyshape: {
+    //   size: [80, 80],
+    // },
+    // icon: {
+    //   type: 'font',
+    //   size: 40,
+    // },
+  },
+  hover: {
+    halo: {
+      visible: true,
+    },
+  },
+  active: {
+    halo: {
+      visible: true,
+    },
+  },
+  inactive: {
+    halo: {
+      visible: true,
+    },
+  },
+};
+
+function getRadiusBySize(size: number | [number] | [number, number] | undefined) {
+  let r;
+  if (isNumber(size)) {
+    r = size / 2;
+  } else if (isArray(size)) {
+    r = size[0] / 2;
+  }
+  return r;
+}
+const getStyles = (defaultStyle: any, cfgStyle: any) => {
+  const keyShapeStyle = {
+    ...defaultStyle.keyshape,
+    ...cfgStyle.keyshape,
+  };
+  const { size, fill } = keyShapeStyle;
+  const nodeSize = convertSizeToWH(size);
+  /*  halo 默认样式单独处理**/
+  const haloStyle = {
+    halo: {
+      x: 0,
+      y: 0,
+      r: nodeSize[0] / 2 + 15,
+      fill: fill,
+      lineWidth: 1,
+      opacity: 0.9,
+      visible: false,
+    },
+  };
+  return deepMix({}, defaultStyle, haloStyle, cfgStyle) as NodeStyle;
+};
 export default () => {
+  const defaultStyleMap: any = {};
   G6.registerNode('graphin-circle', {
     options: {
-      style: {
-        size: NodeSize,
-        fill: 'rgb(239, 244, 255)',
-        stroke: AntColor,
-        opacity: 1,
-        label: {
-          position: 'bottom',
-          value: '',
-          fill: 'rgb(0, 0, 0)',
-          fontSize: 12,
-          offset: 0,
-        },
-        icon: {
-          type: 'text',
-          value: '',
-          size: NodeSize,
-        },
-        badges: [
-          // {
-          //   position: 'RT',
-          //   type: 'text',
-          //   value: '99+',
-          //   size: [24, 24],
-          //   fill: 'rgb(223, 234, 255)',
-          //   stroke: '#4572d9',
-          //   color: 'rgb(250, 250, 250)',
-          //   fontSize: 12,
-          //   padding: 0,
-          //   offset: [0, 0],
-          // },
-          // {
-          //   position: 'LB',
-          //   type: 'text',
-          //   value: 'LOCK',
-          //   size: [48, 16],
-          //   fill: 'rgb(223, 234, 255)',
-          //   stroke: '#4572d9',
-          //   color: 'rgb(250, 250, 250)',
-          //   fontSize: 12,
-          //   padding: 0,
-          //   offset: [0, 0],
-          // },
-        ],
-      },
-      status: {
-        selected: {
-          // shadowColor: 'rgb(95, 149, 255)',
-          // shadowBlur: 30,
-          // additionType: 'border',
-          // additionStyle: {
-          //   fill: 'rgb(239, 244, 255)',
-          //   stroke: '#6C43D5',
-          //   lineWidth: 3,
-          // },
-          additionType: 'shadow',
-          additionStyle: {
-            fill: 'rgb(239, 244, 255)',
-          },
-        },
-        hover: {
-          additionType: 'shadow',
-          additionStyle: {
-            fill: 'rgb(239, 244, 255)',
-          },
-        },
-      },
+      style: defaultStyle,
+      status: defaultStatusStyle,
     },
     draw(cfg: IUserNode, group: IGroup) {
-      const style = deepMix({}, this.options.style, cfg.style) as NodeStyle;
+      const style = getStyles(this.options.style, cfg.style) as NodeStyle;
+      defaultStyleMap[cfg.id] = {
+        ...style,
+      };
 
-      const { fill, stroke, size, label, icon, badges = [] } = style;
+      const { label, icon, badges = [], halo, keyshape: keyShapeStyle } = style;
 
-      let r = 0;
-      if (isNumber(size)) {
-        r = size / 2;
-      } else if (isArray(size)) {
-        r = size[0] / 2;
-      }
+      const r = getRadiusBySize(keyShapeStyle.size) as number;
 
       // halo for hover
       group.addShape('circle', {
         attrs: {
           x: 0,
           y: 0,
-          r: r + 17,
-          fill: '#2B384E',
-          opacity: 0.9,
-          lineWidth: 1,
+          ...halo,
         },
-        name: 'border-shape',
-        visible: false,
-      });
-
-      // focus stroke for selected
-      group.addShape('circle', {
-        attrs: {
-          x: 0,
-          y: 0,
-          r: r + 16,
-          fill: 'rgb(239, 244, 255)',
-          lineWidth: 1,
-        },
-        name: 'shadow-shape',
+        name: 'halo',
         visible: false,
       });
 
@@ -147,11 +212,10 @@ export default () => {
           x: 0,
           y: 0,
           r,
-          stroke,
-          fill,
-          lineWidth: 2,
+          cursor: 'pointer',
+          ...keyShapeStyle,
         },
-        name: 'circle-keyshape',
+        name: 'keyshape',
         draggable: true,
       });
 
@@ -160,7 +224,6 @@ export default () => {
         const { value, fill, fontSize } = label;
         if (value) {
           const labelPos = this.getLabelXYByPosition(style);
-
           group.addShape('text', {
             attrs: {
               x: labelPos.x,
@@ -172,7 +235,7 @@ export default () => {
               textBaseline: labelPos.textBaseline,
             },
             draggable: true,
-            name: 'circle-label',
+            name: 'label',
           });
         }
       }
@@ -181,7 +244,7 @@ export default () => {
       if (icon) {
         const { type } = icon;
         if (type === 'text' || type === 'font') {
-          const { value = '', fontFamily, fill: IconFill, size: IconSize } = icon;
+          const { value = '', fontFamily, fill, size } = icon;
 
           group.addShape('text', {
             attrs: {
@@ -189,14 +252,14 @@ export default () => {
               y: 0,
               text: value,
               // @ts-ignore
-              fontSize: IconSize,
+              fontSize: size,
               textAlign: 'center',
               textBaseline: 'middle',
               fontFamily,
-              fill: IconFill,
+              fill,
             },
             capture: false,
-            name: 'circle-icon',
+            name: 'icon',
           });
         } else if (type === 'image') {
           const { size: iconSize, value } = icon;
@@ -211,7 +274,7 @@ export default () => {
               height,
             },
             capture: false,
-            name: 'circle-icon',
+            name: 'icon',
           });
         }
       }
@@ -227,7 +290,7 @@ export default () => {
           stroke,
           color,
           fontSize,
-          fontFamily = 'graphin',
+          fontFamily,
           padding = 0,
           offset = [0, 0],
         } = badge;
@@ -330,100 +393,69 @@ export default () => {
       return keyShape;
     },
     setState(name: string, value: string, item: INode) {
-      const group = item.get('group');
+      if (!name) return;
       const model = item.getModel();
+      // const originStyles = { ...model.style } as any;
 
-      let currentStatusStyle; // status[name]
+      const shapes = item.getContainer().get('children'); // 顺序根据 draw 时确定
+      const initStateStyle = deepMix({}, this.options.status, model.statusStyle);
 
-      // 如果 model.status 不存在，或值为 true，则取默认的状态样式
-      // @ts-ignore
-      if (!model.status || model.status[name]) {
-        currentStatusStyle = this.options.status[name];
-      }
+      console.log(defaultStyleMap);
 
-      if (!currentStatusStyle) return;
-
-      const { fill, stroke, opacity, shadowColor, shadowBlur, additionType, additionStyle } = currentStatusStyle;
-      const keyShape = item.getKeyShape();
-
-      let keyShapeAttrs = {} as any;
-      if (value) {
-        // 当设置状态时候，keyShape 取 status 中的值
-        if (fill) {
-          keyShapeAttrs.fill = fill;
-        }
-        if (stroke) {
-          keyShapeAttrs.stroke = stroke;
-        }
-        if (opacity) {
-          keyShapeAttrs.opacity = opacity;
-        }
-        if (shadowColor) {
-          keyShapeAttrs.shadowColor = shadowColor;
-        }
-        if (shadowBlur) {
-          keyShapeAttrs.shadowBlur = shadowBlur;
-        }
-      } else {
-        // 当取消状态时，还原 keyShape 的样式，取 style 里面的值
-        const keyShapeStyle = this.options.style;
-        const {
-          fill: originFill,
-          stroke: originStroke,
-          opacity: originOpacity,
-          shadowColor: originShadowColor,
-          shadowBlur: originShadowBlur,
-        } = keyShapeStyle;
-        keyShapeAttrs = {
-          fill: originFill,
-          stroke: originStroke,
-          opacity: originOpacity,
-          shadowColor: originShadowColor,
-          shadowBlur: originShadowBlur,
-        };
-      }
-
-      for (const key in keyShapeAttrs) {
-        keyShape.attr(key, keyShapeAttrs[key]);
-      }
-
-      let additionShapeName = '';
-      if (additionType === 'shadow') {
-        additionShapeName = 'shadow-shape';
-      } else if (additionType === 'border') {
-        additionShapeName = 'border-shape';
-      }
-
-      if (name === 'hover') {
-        const hoverShape = group.find((e: IItemBase) => e.get('name') === additionShapeName);
-        if (!hoverShape) return;
-        if (value) {
-          hoverShape.show();
-          for (const styleKey in additionStyle) {
-            hoverShape.attr(styleKey, additionStyle[styleKey]);
+      const setStatusStyle = (statusKey: string) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        shapes.forEach((g6Shape: any) => {
+          const itemShapeName = g6Shape.cfg.name;
+          const customAttrs = initStateStyle[statusKey][itemShapeName];
+          if (customAttrs) {
+            const { animate, visible, ...otherAttrs } = paserAttr(customAttrs, itemShapeName);
+            g6Shape.attr(otherAttrs);
+            g6Shape.cfg.visible = visible !== false;
+            if (animate) {
+              const { attrs, duration, easing, callback, delay } = animate;
+              g6Shape.animate(attrs, duration, easing, callback, delay);
+            }
           }
-        } else {
-          hoverShape.hide();
-        }
-      } else if (name === 'selected') {
-        const selectedShape = group.find((e: IItemBase) => e.get('name') === additionShapeName);
-
-        if (!selectedShape) return;
-
-        const label = group.find((e: IItemBase) => e.get('name') === 'text-shape');
-
-        if (value) {
-          selectedShape.show();
-          for (const styleKey in additionStyle) {
-            selectedShape.attr(styleKey, additionStyle[styleKey]);
+        });
+      };
+      const resetStatusStyle = (id: string) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        shapes.forEach((g6Shape: any) => {
+          const itemShapeName = g6Shape.cfg.name;
+          const orgiinStyle = defaultStyleMap[id as string][itemShapeName];
+          if (orgiinStyle) {
+            const { animate, visible, ...otherAttrs } = paserAttr(orgiinStyle, itemShapeName);
+            g6Shape.attr(otherAttrs);
+            g6Shape.cfg.visible = visible !== false;
+            if (animate) {
+              const { attrs, duration, easing, callback, delay } = animate;
+              g6Shape.animate(attrs, duration, easing, callback, delay);
+            }
           }
-          label && label.attr('fontWeight', 800);
-        } else {
-          selectedShape.hide();
-          label && label.attr('fontWeight', 400);
-        }
+        });
+      };
+
+      const status = item._cfg?.states || [];
+      try {
+        Object.keys(initStateStyle).forEach(key => {
+          if (name === key) {
+            if (value) {
+              setStatusStyle(key); // 匹配到status就改变
+            } else {
+              resetStatusStyle(model.id as string); //没匹配到就重置
+
+              status.forEach(statusKey => {
+                // 如果cfg.status中还有其他状态，那就重新设置回来
+                setStatusStyle(statusKey);
+              });
+            }
+          }
+        });
+      } catch (error) {
+        console.error(error);
       }
     },
+
     getLabelXYByPosition(
       cfg: NodeStyle,
     ): {
@@ -431,7 +463,9 @@ export default () => {
       y: number;
       textBaseline?: string;
     } {
-      const { label, size } = cfg;
+      const { label, keyshape } = cfg;
+
+      const { size } = keyshape;
       const { position: labelPosition, offset = 0 } = label;
 
       // 默认的位置（最可能的情形），所以放在最上面
@@ -478,8 +512,12 @@ export default () => {
       return style;
     },
     update(cfg: IUserNode, item: INode) {
-      const { style } = cfg;
-      if (!style) return;
+      if (!cfg.style) return;
+
+      const style = getStyles(this.options.style, cfg.style) as NodeStyle;
+      defaultStyleMap[cfg.id] = {
+        ...style,
+      };
 
       // 更新 keyShape 的样式
       const keyShape = item.getKeyShape();
@@ -501,7 +539,7 @@ export default () => {
       if (label) {
         const { value, fill, fontSize } = label;
         const group = item.get('group');
-        const itemLabel = group.find((element: IItemBase) => element.get('name') === 'circle-label');
+        const itemLabel = group.find((element: IItemBase) => element.get('name') === 'label');
         itemLabel.attr('text', value);
         itemLabel.attr('fill', fill);
         itemLabel.attr('fontSize', fontSize);
