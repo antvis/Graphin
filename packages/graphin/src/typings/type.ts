@@ -47,13 +47,38 @@ type BaseEdge = {
   target: string;
 };
 
+interface EdgeStatus {
+  [key: string]: {
+    stroke: string;
+    opacity: string;
+    shadowColor: string;
+    shadowBlur: number;
+    animation?: {
+      /**
+       * dotted：表示边上虚线运动的动画效果
+       * dot：表示边上一个圆点的运动效果
+       * grow：边从无到有出现的效果
+       */
+      type: 'dotted' | 'dot' | 'grow';
+      // 一次动画的时长
+      duration: number;
+      // 动画函数，详情参考 https://github.com/d3/d3/blob/master/API.md#easings-d3-ease
+      easing: string;
+      // 动画执行延迟时间
+      delay: number;
+      // 是否重复执行动画
+      repeat: boolean;
+    };
+  };
+}
+
 export interface RestEdge {
   /** 边的类型 */
   type?: string;
   /** 边的数据 */
   style: Partial<EdgeStyle>;
   /**  边当前的状态 */
-  status: ElementStatus;
+  status: EdgeStatus;
   layout: {
     /** 边的弹簧长度，力导时使用 */
     spring?: number;
@@ -128,37 +153,6 @@ export interface GraphinProps {
    */
   linkCenter?: boolean;
 
-  // children: React.ReactChildren;
-}
-
-export interface IUserNode extends BaseNode, Partial<RestNode>, UserProperties {}
-export interface GraphinNode extends BaseNode, RestNode, UserProperties {}
-
-export interface EdgeStyle {
-  /** 边的类型 */
-  shape: 'line' | '';
-  label: {
-    value: string | number;
-    position: '' | 'T';
-    autoRote: boolean;
-  };
-  // 边上的动画，当 animation 不为 null 时，边上增加动画
-  animation?: {
-    /**
-     * dotted：表示边上虚线运动的动画效果
-     * dot：表示边上一个圆点的运动效果
-     * grow：边从无到有出现的效果
-     */
-    type: 'dotted' | 'dot' | 'grow';
-    // 一次动画的时长
-    duration: number;
-    // 动画函数，详情参考 https://github.com/d3/d3/blob/master/API.md#easings-d3-ease
-    easing: string;
-    // 动画执行延迟时间
-    delay: number;
-    // 是否重复执行动画
-    repeat: boolean;
-  };
   /**
    * 多边配置
    */
@@ -172,6 +166,21 @@ export interface EdgeStyle {
     // 自环边的类型
     loopEdgeType: string;
   }>;
+
+  // children: React.ReactChildren;
+}
+
+export interface IUserNode extends BaseNode, Partial<RestNode>, UserProperties {}
+export interface GraphinNode extends BaseNode, RestNode, UserProperties {}
+
+export interface EdgeStyle {
+  /** 边的类型 */
+  type: 'graphin-line' | 'line';
+  label: {
+    value: string | number;
+    position: '' | 'T';
+    autoRote: boolean;
+  };
 }
 
 export interface IUserEdge extends BaseEdge, Partial<RestEdge>, UserProperties {}
