@@ -230,6 +230,7 @@ export class Mock {
           target: edge.target,
           label: edge.label,
           data: edge,
+          type: 'graphin-line',
         };
       }),
       combos: this.combosData,
