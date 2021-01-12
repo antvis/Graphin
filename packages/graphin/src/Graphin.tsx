@@ -25,7 +25,7 @@ import LayoutController from './layout';
 import ApiController from './apis';
 import { ApisType } from './apis/types';
 
-const { DragCanvas, ZoomCanvas, DragNode, ClickSelect, BrushSelect, ResizeCanvas } = Behaviors;
+const { DragCanvas, ZoomCanvas, DragNode, ClickSelect, BrushSelect, ResizeCanvas, Hoverable } = Behaviors;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DiffValue = any;
@@ -138,6 +138,11 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     this.width = Number(width);
     this.state = {
       isReady: false,
+      graphIndex: 0,
+      context: {
+        graph: this.graph,
+        apis: this.apis,
+      },
     };
     /** 默认的样式 */
     this.defaultStyle = {
@@ -214,9 +219,16 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
   };
 
   componentDidMount() {
+    console.log('did mount...');
+
     this.initGraphInstance();
     this.setState({
       isReady: true,
+
+      context: {
+        graph: this.graph,
+        apis: this.apis,
+      },
     });
   }
 
@@ -280,7 +292,17 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       this.graph.changeData(this.data);
 
       this.initStatus();
+      this.apis = ApiController(this.graph);
       console.log('%c isDataChange', 'color:grey');
+      this.setState(preState => {
+        return {
+          ...preState,
+          context: {
+            graph: this.graph,
+            apis: this.apis,
+          },
+        };
+      });
       return;
     }
     /** 布局变化 */
@@ -340,10 +362,13 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     const { modes, style } = this.props;
     return (
       <GraphinContext.Provider
-        value={{
-          graph: this.graph,
-          apis: this.apis,
-        }}
+        value={
+          this.state.context
+          //   {
+          //   graph: this.graph,
+          //   apis: this.apis,
+          // }
+        }
       >
         <div id="graphin-container">
           <div
@@ -370,13 +395,12 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
                     <ClickSelect />
                     {/* 圈选节点 */}
                     <BrushSelect />
-                    {/** resize 画布 */}
                   </React.Fragment>
                 )}
 
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
-
+                <Hoverable bindType="node" />
                 {this.props.children}
               </>
             )}

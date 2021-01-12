@@ -3,10 +3,10 @@
   "version": "2.0.0-beta.1",
   "description": "Components for graphin",
   "main": "./dist/index",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "start": "father build --watch",
-    "build": "father build",
+    "build": "father build && npm run  build:umd",
     "build:umd": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --env.NODE_ENV=production  -c ./webpack.config.js ",
     "test": "jest"
   },

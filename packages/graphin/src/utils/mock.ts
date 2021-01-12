@@ -177,14 +177,14 @@ export class Mock {
 
   graphin = (): IGraphData => {
     return {
+      // @ts-ignore
       nodes: this.nodes.map(node => {
         return {
           id: node.id,
           data: node,
-          type: 'circle',
+          type: 'graphin-circle',
           comboId: node.comboId,
           style: {
-            size: [24],
             label: {
               value: `node-${node.id}`,
             },
@@ -212,7 +212,9 @@ export class Mock {
           type: 'graphin-circle',
           comboId: node.comboId,
           style: {
-            size: 48,
+            keyshape: {
+              size: 48,
+            },
             label: label || {
               position: 'bottom',
               value: `node-${node.id}`,

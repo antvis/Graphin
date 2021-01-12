@@ -1,10 +1,3 @@
-export interface GraphinState {
-  isReady: boolean;
-}
-export interface ITreeData {
-  children: [];
-}
-
 export interface UserProperties {
   [key: string]: any;
 }
@@ -237,19 +230,24 @@ export type NodeStyleBadge = Partial<{
 
 export interface NodeStyle {
   /** 节点的主要容器 */
-  /** 节点的大小 */
-  size: [number] | [number, number];
-  /** 填充色 */
-  fill: string;
-  /** 包围边颜色 */
-  stroke: string;
-
+  keyshape: {
+    /** 节点的大小 */
+    size: number | [number] | [number, number];
+    /** 填充色 */
+    fill: string;
+    /** 包围边颜色 */
+    stroke: string;
+    /** 边框的宽度 */
+    lineWidth: number;
+  };
   /** 节点的文本 */
   label: NodeStyleLabel;
   /** 节点的中间位置图标区域 */
   icon: NodeStyleIcon;
   /** 节点的徽标 */
   badges: NodeStyleBadge[];
+  /** 光环 */
+  halo: any;
 }
 
 export interface ElementStatus {

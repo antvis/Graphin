@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   GraphinContext,
   Graph,
@@ -19,9 +19,13 @@ export interface LegendProps {
   sortKey: string;
   /**
    * @description  颜色映射的Key值
-   * @default "style.fill"
+   * @default "style.stroke"
    */
   colorKey?: string;
+  /**
+   * @description 样式
+   */
+  style?: React.CSSProperties;
 }
 export interface OptionType {
   /** 颜色 */
@@ -54,6 +58,7 @@ const calculate = ({
   colorKey: string;
 }) => {
   const data = graph.save();
+
   const treeData = data as TreeGraphData;
   const graphData = data as GraphData;
   const nodeMapByMapKey: Map<string | number, NodeConfig[]> = new Map();
@@ -151,10 +156,15 @@ export interface LegendContextType extends GraphinContextType {
     };
   };
 }
+const defaultStyle: React.CSSProperties = {
+  position: 'absolute',
+  top: '0px',
+  right: '0px',
+};
 const Legend: React.FunctionComponent<LegendProps> & { Node: typeof Node } = (props) => {
   const graphin = React.useContext<GraphinContextType>(GraphinContext);
   const { graph } = graphin;
-  const { bindType, sortKey, children, colorKey = 'style.fill' } = props;
+  const { bindType, sortKey, children, colorKey = 'style.stroke', style } = props;
   const { dataMap, options } = calculate({ bindType, sortKey, graph, colorKey });
 
   graphin.legend = {
@@ -168,7 +178,12 @@ const Legend: React.FunctionComponent<LegendProps> & { Node: typeof Node } = (pr
       options,
     },
   };
-  return <div className="graphin-components-legend">{children}</div>;
+  console.log('%c legend Container', 'color:red');
+  return (
+    <div className="graphin-components-legend" style={{ ...defaultStyle, ...style }}>
+      {children}
+    </div>
+  );
 };
 
 Legend.Node = Node;
