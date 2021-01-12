@@ -8,6 +8,7 @@ import ResizeCanvas from './ResizeCanvas';
 import LassoSelect from './LassoSelect';
 import DragCombo from './DragCombo';
 import ActivateRelations from './ActivateRelations';
+import Hoverable from './Hoverable';
 
 export default {
   TreeCollapse,
@@ -20,4 +21,5 @@ export default {
   LassoSelect,
   DragCombo,
   ActivateRelations,
+  Hoverable,
 };
