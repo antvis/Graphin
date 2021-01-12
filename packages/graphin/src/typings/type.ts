@@ -27,7 +27,7 @@ export interface RestNode {
   /** 节点的样式，默认为默认样式 */
   style: Partial<NodeStyle>;
   /**  节点当前的状态 */
-  status: NodeStatus;
+  status: ElementStatus;
   /** 布局的相关信息 */
   layout: {
     /** 度数 */
@@ -51,8 +51,9 @@ export interface RestEdge {
   /** 边的类型 */
   type?: string;
   /** 边的数据 */
-  data: {};
   style: Partial<EdgeStyle>;
+  /**  边当前的状态 */
+  status: ElementStatus;
   layout: {
     /** 边的弹簧长度，力导时使用 */
     spring?: number;
@@ -242,7 +243,7 @@ export interface NodeStyle {
   badges: NodeStyleBadge[];
 }
 
-export interface NodeStatus {
+export interface ElementStatus {
   [key: string]:
     | boolean
     | Partial<{
