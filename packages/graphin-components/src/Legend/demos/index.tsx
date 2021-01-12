@@ -11,8 +11,10 @@ data.nodes.forEach((node, index) => {
   node.data.type = isCompany ? 'company' : 'person';
   node.type = 'graphin-circle';
   node.style = {
-    fill: isCompany ? 'green' : 'yellow',
-    size: [30],
+    keyshape: {
+      fill: isCompany ? 'green' : 'yellow',
+      size: [30],
+    },
     icon: {
       type: 'font',
       fontFamily: 'graphin',
@@ -26,7 +28,7 @@ data.nodes.forEach((node, index) => {
 const Demo = () => {
   return (
     <Graphin data={data}>
-      <Legend bindType="node" sortKey="data.type" colorKey="style.fill">
+      <Legend bindType="node" sortKey="data.type" colorKey="style.keyshape.fill">
         <Legend.Node />
       </Legend>
     </Graphin>

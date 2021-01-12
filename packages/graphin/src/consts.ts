@@ -2,15 +2,13 @@ export const TREE_LAYOUTS = ['dendrogram', 'compactBox', 'mindmap', 'indented'];
 
 export const G6_DEFAULT_NODE = {
   type: 'graphin-circle',
-  size: [30, 30],
-  fill: '#9EC9FF',
-  stroke: '#5B8FF9',
-  lineWidth: 3,
-  labelCfg: {
-    position: 'bottom',
-  },
-  icon: {
-    show: true,
+  style: {
+    keyshape: {
+      size: [30, 30],
+      fill: 'red',
+      stroke: 'red',
+      lineWidth: 3,
+    },
   },
 };
 

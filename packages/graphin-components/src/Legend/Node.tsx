@@ -1,5 +1,5 @@
 import { GraphinContext } from '@antv/graphin/dist';
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.less';
 
 export interface LegendOption {
@@ -13,7 +13,6 @@ export interface LegendOption {
   checked?: boolean;
 }
 export interface LegendProps {
-  options: LegendOption[];
   style?: React.CSSProperties;
   onChange?: (checked: LegendOption, newOptions: LegendOption[], props: any) => any; // eslint-disable-line
 }
@@ -28,12 +27,20 @@ const LegendNode: React.FunctionComponent<LegendProps> = (props) => {
   const { onChange = () => {}, style } = props;
 
   const { options: defaultOptions, dataMap } = legend.node;
-
   const [state, setState] = React.useState({
     options: defaultOptions,
   });
 
+  /** 更新state依赖 */
+  useEffect(() => {
+    setState({
+      options: defaultOptions,
+    });
+  }, [defaultOptions]);
+
   const { options } = state;
+
+  console.log('options', options);
 
   const handleClick = (option: LegendOption) => {
     const checkedValue = { ...option, checked: !option.checked };
@@ -58,6 +65,7 @@ const LegendNode: React.FunctionComponent<LegendProps> = (props) => {
     /** 给用户的回调函数 */
     onChange(checkedValue, result, props);
   };
+  console.log('%c legend Content', 'color:red');
 
   return (
     <ul className="graphin-components-legend-content" style={style}>

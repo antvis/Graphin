@@ -1,6 +1,6 @@
 import React from 'react';
 import Graphin, { Behaviors } from '@antv/graphin';
-import { ContextMenu, FishEye, MiniMap } from '@antv/graphin-components';
+import { ContextMenu, FishEye, MiniMap, Legend } from '@antv/graphin-components';
 import G6 from '@antv/g6';
 import { colorSets, clusterColorMap } from './color';
 import hexToRgba from '../../../src/utils/hexToRgba';
@@ -44,13 +44,20 @@ const transClusterData = (data, sourceData) => {
       ...node,
       type: 'graphin-circle',
       style: {
-        fill: hexToRgba(primaryColor, 0.1), // '#fff',
-        strokeWidth: 1.2,
-        stroke: primaryColor,
-        size: [nodeSize, nodeSize],
+        keyshape: {
+          fill: hexToRgba(primaryColor, 0.1), // '#fff',
+          strokeWidth: 1.2,
+          stroke: primaryColor,
+          size: [nodeSize, nodeSize],
+        },
         label: {
           value: `cluster-${node.id}(${node.nodes.length})`,
           fill: hexToRgba('#000', '0.85'),
+        },
+        halo: {
+          fill: hexToRgba(primaryColor, 0.1), // '#fff',
+          strokeWidth: 1.2,
+          stroke: primaryColor,
         },
         icon: {
           fontFamily: 'graphin',
@@ -162,6 +169,7 @@ const App = () => {
   // if (!data) {
   //   return null;
   // }
+  console.log('GEAMAKER RENDER', state.data);
   return (
     <div>
       <Graphin data={data} layout={layout} height={900}>
@@ -178,6 +186,9 @@ const App = () => {
           </Menu>
         </ContextMenu>
         <FishEye options={{ showLabel: false }} visible={visible} handleEscListener={handleClose} />
+        <Legend bindType="node" sortKey="id" colorKey="style.keyshape.stroke">
+          <Legend.Node />
+        </Legend>
       </Graphin>
     </div>
   );
