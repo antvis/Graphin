@@ -68,7 +68,7 @@ export default () => {
 
       // 3. Custom rendering function
       self.simulation.register('render', (forceData: IGraphData) => {
-        if (!animation) {
+        if (!animation && data && data.nodes && data.nodes.length > 0) {
           // 如果不需要动画
           const { nodes } = forceData;
 

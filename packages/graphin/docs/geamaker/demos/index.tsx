@@ -3,7 +3,8 @@ import Graphin, { Behaviors } from '@antv/graphin';
 import { ContextMenu, FishEye, MiniMap, Legend } from '@antv/graphin-components';
 import G6 from '@antv/g6';
 import { colorSets, clusterColorMap } from './color';
-import hexToRgba from '../../../src/utils/hexToRgba';
+import hexToRgba, { hexToRgbaToHex } from '../../../src/utils/hexToRgba';
+import { Switch } from 'antd';
 
 import CustomMenu from './CustomMenu';
 import { icons } from './utils';
@@ -11,14 +12,22 @@ import { icons } from './utils';
 const { Menu } = ContextMenu;
 
 console.log('colorSets', colorSets);
-const layout = {
+const defaultLayout = {
   type: 'graphin-force',
-  animation: true,
   preset: {
     type: 'concentric',
-    linkDistance: 400, // 可选，边长
-    preventOverlap: true, // 可选，必须配合 nodeSize
-    nodeSize: 60,
+  },
+  animation: true,
+  defSpringLen: (_edge, source, target) => {
+    /** 默认返回的是 200 的弹簧长度 */
+    /** 如果你要想要产生聚类的效果，可以考虑 根据边两边节点的度数来动态设置边的初始化长度：度数越小，则边越短 */
+
+    const nodeSize = 30;
+    const Sdegree = source.data.layout.degree;
+    const Tdegree = target.data.layout.degree;
+    const minDegree = Math.min(Sdegree, Tdegree);
+    console.log(minDegree < 3 ? nodeSize * 5 : minDegree * nodeSize);
+    return minDegree < 3 ? nodeSize * 5 : minDegree * nodeSize;
   },
 };
 
@@ -45,17 +54,17 @@ const transClusterData = (data, sourceData) => {
       type: 'graphin-circle',
       style: {
         keyshape: {
-          fill: hexToRgba(primaryColor, 0.1), // '#fff',
+          fill: hexToRgbaToHex(primaryColor, 0.1), // '#fff',
           strokeWidth: 1.2,
           stroke: primaryColor,
           size: [nodeSize, nodeSize],
         },
         label: {
           value: `cluster-${node.id}(${node.nodes.length})`,
-          fill: hexToRgba('#000', '0.85'),
+          fill: hexToRgbaToHex('#000', 0.85),
         },
         halo: {
-          fill: hexToRgba(primaryColor, 0.1), // '#fff',
+          fill: hexToRgbaToHex(primaryColor, 0.1), // '#fff',
           strokeWidth: 1.2,
           stroke: primaryColor,
         },
@@ -121,6 +130,7 @@ const App = () => {
     source: {},
     clusteredData: {},
     visible: false,
+    layout: { ...defaultLayout, animation: true },
   });
   React.useEffect(() => {
     fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/relations.json')
@@ -141,7 +151,7 @@ const App = () => {
       });
   }, []);
 
-  const { data, visible } = state;
+  const { data, visible, layout } = state;
   const handleClose = () => {
     setState(preState => {
       return {
@@ -169,10 +179,31 @@ const App = () => {
   // if (!data) {
   //   return null;
   // }
+  const handleChangeAnimate = checked => {
+    console.log('checked', checked);
+    setState(preState => {
+      return {
+        ...preState,
+        layout: {
+          ...preState.layout,
+          animation: checked,
+        },
+      };
+    });
+  };
   console.log('GEAMAKER RENDER', state.data);
+
   return (
     <div>
       <Graphin data={data} layout={layout} height={900}>
+        <div style={{ position: 'absolute', top: '300px', left: '0px' }}>
+          <Switch
+            checkedChildren="开启动画"
+            unCheckedChildren="关闭动画"
+            defaultChecked
+            onChange={handleChangeAnimate}
+          />
+        </div>
         <ZoomCanvas enableOptimize />
         <DragNode />
         <MiniMap />
