@@ -3,6 +3,7 @@ import { GraphinContext, Utils } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 import { manageExpandCollapseArray, getMixedGraph, icons } from './utils';
 import { clusterColorMap } from './color';
+import { hexToRgbaToHex } from '../../../src/utils/hexToRgba';
 
 const { Menu } = ContextMenu;
 
@@ -45,10 +46,12 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
       if (!node.type) {
         node.type = 'graphin-circle';
         node.style = {
-          fill: '#fff',
-          strokeWidth: 0.5,
-          stroke: primaryColor,
-          size: [NODE_SIZE, NODE_SIZE],
+          keyshape: {
+            fill: hexToRgbaToHex(primaryColor, 0.1),
+            strokeWidth: 0.5,
+            stroke: primaryColor,
+            size: [NODE_SIZE, NODE_SIZE],
+          },
           label: {
             value: `${node.id}`,
             fill: '#000',
