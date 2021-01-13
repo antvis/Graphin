@@ -9,10 +9,14 @@ nav:
   order: 2
 ---
 
-## graphin-force
+## 无动画扩散
 
 <code src='./demos/graphin-force.tsx'>
 
+## 有动画扩散
+
+<code src='./demos/graphin-force-with-animate.tsx'>
+
 ## gForce
 
-<code src='./demos/g-force.tsx'>
+<!-- <code src='./demos/g-force.tsx'> -->
