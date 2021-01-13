@@ -1,5 +1,6 @@
 import Force from '../force';
 import Graphin from '../../Graphin';
+import { IGraphData } from '../../typings/type';
 
 export default () => {
   Graphin.registerLayout('graphin-force', {
@@ -11,7 +12,7 @@ export default () => {
         /** 前置布局，默认为 concentric */
         preset: {
           /** 特殊情况处理：前置布局为force，但是前置的数据也为空，则证明是初始化force布局，否则为正常前置force布局 */
-          name: 'random',
+          name: 'grid',
           options: {},
         },
         /** spring stiffness 弹簧劲度系数 * */
@@ -39,13 +40,16 @@ export default () => {
      * 初始化
      * @param {Object} data 数据
      */
-    init(data: any) {
+    init(data: IGraphData) {
       const self = this;
       self.nodes = data.nodes;
       self.edges = data.edges;
       console.log(this, this.getDefaultCfg());
-      const { width, height, graph, ...layoutConfig } = this;
-      const { animation, done = () => {}, ...others } = this.getDefaultCfg();
+      const { graph, ...layoutConfig } = this;
+
+      const options = { ...this.getDefaultCfg(), ...layoutConfig };
+
+      const { width, height, animation, done = () => {}, ...others } = options;
 
       /** 1. Create a force simulator */
       self.simulation = new Force({
@@ -62,17 +66,36 @@ export default () => {
       // 2. Mount Data
       self.simulation.setData(data);
 
-      let resultData = data;
-
       // 3. Custom rendering function
-      self.simulation.register('render', (forceData: any) => {
+      self.simulation.register('render', (forceData: IGraphData) => {
         if (!animation) {
           // 如果不需要动画
-          resultData = forceData;
-          return;
+          const { nodes } = forceData;
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          data.nodes.forEach((node, index: number) => {
+            const indexNode = nodes[index];
+
+            if (indexNode && indexNode.id === node.id) {
+              node.x = nodes[index].x;
+              node.y = nodes[index].y;
+            } else {
+              const matchNode = nodes.find(item => {
+                return item.id === node.id;
+              });
+              if (matchNode) {
+                node.x = matchNode.x;
+                node.y = matchNode.y;
+              }
+            }
+          });
+
+          return {
+            ...forceData,
+          };
         }
         try {
-          forceData.nodes.forEach((item: any) => {
+          forceData.nodes.forEach(item => {
             const node = graph.findById(item.id);
             if (node) {
               // 因为有可能画布删除了节点
@@ -101,7 +124,7 @@ export default () => {
      * 根据传入的数据进行布局
      * @param {Object} data 数据
      */
-    layout(data: any) {
+    layout(data: IGraphData) {
       const self = this;
       self.init(data);
       self.execute();
