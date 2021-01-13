@@ -2,7 +2,7 @@ import { IGroup } from '@antv/g-base';
 import G6, { INode, IItemBase } from '@antv/g6';
 import { deepMix, isArray, isNumber, isObject } from '@antv/util';
 import hexToRgba from '../utils/hexToRgba';
-
+import createUuid from '../utils/uuid';
 import { IUserNode, NodeStyle } from '../typings/type';
 
 /**
@@ -178,8 +178,8 @@ const getStyles = (defaultStyle: any, cfgStyle: any) => {
   };
   return deepMix({}, defaultStyle, haloStyle, cfgStyle) as NodeStyle;
 };
+
 export default () => {
-  const defaultStyleMap: any = {};
   G6.registerNode('graphin-circle', {
     options: {
       style: defaultStyle,
@@ -187,9 +187,8 @@ export default () => {
     },
     draw(cfg: IUserNode, group: IGroup) {
       const style = getStyles(this.options.style, cfg.style) as NodeStyle;
-      defaultStyleMap[cfg.id] = {
-        ...style,
-      };
+      /** 将初始化样式存储在model中 */
+      cfg._initialStyle = { ...style };
 
       const { label, icon, badges = [], halo, keyshape: keyShapeStyle } = style;
 
@@ -400,7 +399,7 @@ export default () => {
       const shapes = item.getContainer().get('children'); // 顺序根据 draw 时确定
       const initStateStyle = deepMix({}, this.options.status, model.statusStyle);
 
-      console.log(defaultStyleMap);
+      const initialStyle = item.getModel()._initialStyle as any;
 
       const setStatusStyle = (statusKey: string) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -422,7 +421,7 @@ export default () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         shapes.forEach((g6Shape: any) => {
           const itemShapeName = g6Shape.cfg.name;
-          const orgiinStyle = defaultStyleMap[id as string][itemShapeName];
+          const orgiinStyle = initialStyle[itemShapeName];
           if (orgiinStyle) {
             const { animate, visible, ...otherAttrs } = paserAttr(orgiinStyle, itemShapeName);
             g6Shape.attr(otherAttrs);
@@ -515,9 +514,7 @@ export default () => {
       if (!cfg.style) return;
 
       const style = getStyles(this.options.style, cfg.style) as NodeStyle;
-      defaultStyleMap[cfg.id] = {
-        ...style,
-      };
+      cfg._initialStyle = { ...style };
 
       // 更新 keyShape 的样式
       const keyShape = item.getKeyShape();

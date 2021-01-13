@@ -11,10 +11,9 @@ import { IconLoader } from './typings/type';
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
 
-import { registerGraphinCircle, registerGraphinLine } from './shape';
 import './index.less';
 
-import { TREE_LAYOUTS, DEFAULT_THEME, getDefaultStyleByTheme } from './consts';
+import { TREE_LAYOUTS, getDefaultStyleByTheme } from './consts';
 
 /** Context */
 import GraphinContext from './GraphinContext';
@@ -131,8 +130,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
 
       ...otherOptions
     } = props;
-    registerGraphinCircle();
-    registerGraphinLine();
+
     this.data = data;
     this.isTree = Boolean(props.data && props.data.children) || TREE_LAYOUTS.indexOf(layout && layout.type) !== -1;
     this.graph = {} as IGraph;
