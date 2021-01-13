@@ -11,9 +11,10 @@ import { IconLoader } from './typings/type';
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
 
+import { registerGraphinCircle, registerGraphinLine } from './shape';
 import './index.less';
 
-import { TREE_LAYOUTS, G6_DEFAULT_NODE, G6_DEFAULT_COMBO, G6_DEFAULT_EDGE } from './consts';
+import { TREE_LAYOUTS, DEFAULT_THEME, getDefaultStyleByTheme } from './consts';
 
 /** Context */
 import GraphinContext from './GraphinContext';
@@ -108,6 +109,8 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     node: {};
     edge: {};
     combo: {};
+    theme: 'light' | 'dark';
+    background: string;
   };
 
   options: {
@@ -125,12 +128,11 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       layout,
       width,
       height,
-      defaultNode = G6_DEFAULT_NODE,
-      defaultEdge = G6_DEFAULT_EDGE,
-      defaultCombo = G6_DEFAULT_COMBO,
+
       ...otherOptions
     } = props;
-
+    registerGraphinCircle();
+    registerGraphinLine();
     this.data = data;
     this.isTree = Boolean(props.data && props.data.children) || TREE_LAYOUTS.indexOf(layout && layout.type) !== -1;
     this.graph = {} as IGraph;
@@ -144,12 +146,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
         apis: this.apis,
       },
     };
-    /** 默认的样式 */
-    this.defaultStyle = {
-      node: defaultNode,
-      edge: defaultEdge,
-      combo: defaultCombo,
-    };
+
     this.options = { ...otherOptions };
     this.layout = {};
   }
@@ -164,7 +161,20 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
   };
 
   initGraphInstance = () => {
-    const { data, layout, width, height, modes = { default: [] }, animate, ...otherOptions } = this.props;
+    const {
+      theme,
+      data,
+      layout,
+      width,
+      height,
+      defaultCombo,
+      defaultEdge,
+      defaultNode,
+
+      modes = { default: [] },
+      animate,
+      ...otherOptions
+    } = this.props;
     if (modes.default.length > 0) {
       // TODO :给用户正确的引导，推荐使用Graphin的Bheaviors组件
       console.info('%c suggestion: you can use @antv/graphin Behaviros components', 'color:lightgreen');
@@ -178,18 +188,39 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     this.width = Number(width) || clientWidth || 500;
     this.height = Number(height) || clientHeight || 500;
 
+    this.theme = getDefaultStyleByTheme(theme);
+    const {
+      defaultNode: ThemeDefaultNode,
+      defaultEdge: ThemeDefaultEdge,
+      defaultCombo: ThemeDefaultCombo,
+    } = this.theme;
+
+    console.log({
+      ...ThemeDefaultNode,
+      ...defaultNode,
+    });
+
     /** graph type */
     this.isTree = Boolean(data.children) || TREE_LAYOUTS.indexOf(layout && layout.type) !== -1;
-    console.log(' this.defaultStyle.node', this.defaultStyle.node);
+
     this.options = {
       container: this.graphDOM,
       renderer: 'canvas',
       width: this.width,
       height: this.height,
       animate: animate !== false,
-      defaultNode: this.defaultStyle.node,
-      defaultEdge: this.defaultStyle.edge,
-      defaultCombo: this.defaultStyle.combo,
+      defaultNode: {
+        ...ThemeDefaultNode,
+        ...defaultNode,
+      },
+      defaultEdge: {
+        ...ThemeDefaultEdge,
+        ...defaultEdge,
+      },
+      defaultCombo: {
+        ...ThemeDefaultCombo,
+        ...defaultCombo,
+      },
       modes,
       ...otherOptions,
     };
@@ -270,9 +301,14 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     const isDataChange = this.shouldUpdate(prevProps, 'data');
     const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
     const isOptionsChange = this.shouldUpdate(prevProps, 'options');
+    const isThemeChange = this.shouldUpdate(prevProps, 'theme');
     console.timeEnd('did-update');
     const { data, layout, options } = this.props;
     const isGraphTypeChange = prevProps.data.children !== data.children;
+
+    if (isThemeChange) {
+      // TODO :Node/Edge/Combo 批量调用 updateItem 来改变
+    }
 
     /** 图类型变化 */
     if (isGraphTypeChange) {
@@ -360,6 +396,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     console.log('%c graphin render...', 'color:lightblue', this);
     const { isReady } = this.state;
     const { modes, style } = this.props;
+    console.log('theme', this.theme);
     return (
       <GraphinContext.Provider
         value={
@@ -377,7 +414,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
             ref={node => {
               this.graphDOM = node;
             }}
-            style={style}
+            style={{ background: this.theme?.background, ...style }}
           />
           <div className="graphin-components">
             {isReady && (

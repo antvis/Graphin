@@ -98,6 +98,12 @@ export interface ITreeData {
 }
 
 export interface GraphinProps {
+  /** 主题 */
+  theme: {
+    mode: 'light' | 'dark';
+    primaryColor: string;
+    primarySize: number;
+  };
   /** 数据 */
   data: ITreeData | IGraphData;
   /** 布局 */

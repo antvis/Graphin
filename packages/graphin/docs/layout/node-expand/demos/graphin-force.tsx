@@ -80,6 +80,7 @@ const App = () => {
         </button>
       </h3>
       <Graphin
+        theme={{ mode: 'dark' }}
         data={data}
         layout={{
           type: 'graphin-force',

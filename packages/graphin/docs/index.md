@@ -7,7 +7,7 @@ hero:
   desc: 图可视分析解决方案
   actions:
     - text: 快速开始 →
-      link: /docs/getting-started
+      link: /graphin/quick-start
 
 features:
   - icon: https://gw.alipayobjects.com/os/q/cms/images/k9ziitmp/13668549-b393-42a2-97c3-a6365ba87ac2_w96_h96.png
