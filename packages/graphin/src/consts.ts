@@ -40,7 +40,7 @@ export const DEFAULT_THEME = {
   mode: 'light',
   primaryColor: '#269a99', // '#3D76DD',
   nodeSize: 26,
-  edgeSize: 3,
+  edgeSize: 1,
   edgePrimaryColor: '#ddd',
 };
 
@@ -62,7 +62,7 @@ export interface ThemeType {
   nodeSize: number;
   /**
    * @description 边的大小，即边宽：lindwith
-   * @default 3
+   * @default 0.5
    */
   edgeSize: number;
   /**
@@ -72,7 +72,7 @@ export interface ThemeType {
   edgePrimaryColor: string;
 }
 
-export const genDefaultNode = ({
+export const genDefaultNodeStyle = ({
   nodeSize = 26,
   primaryColor = '#FF6A00',
   mode = 'light',
@@ -87,7 +87,7 @@ export const genDefaultNode = ({
     light: {
       fill: hexToRgba(primaryColor, '0.1'),
       stroke: primaryColor,
-      icon: '#fff',
+      icon: primaryColor,
       badge: {
         fill: primaryColor,
         stroke: primaryColor,
@@ -134,19 +134,41 @@ export const genDefaultNode = ({
         fill: Color.icon,
       },
       badges: [],
-      halo: {
-        r: nodeSize + nodeSize / 12,
-        fill: Color.fill,
-        lineWidth: 0,
-        opacity: 0.9,
-        visible: false,
+      halo: {},
+    },
+    status: {
+      selected: {
+        halo: {
+          visible: true,
+        },
+        keyshape: {
+          lineWidth: 5,
+        },
+      },
+      hover: {
+        halo: {
+          visible: true,
+        },
+      },
+      active: {
+        halo: {
+          visible: true,
+        },
+      },
+      inactive: {
+        halo: {
+          visible: true,
+        },
       },
     },
   };
-  return defaultStyle;
+  return {
+    defaultNodeStyle: { type: defaultStyle.type, style: defaultStyle.style },
+    defaultNodeStatusStyle: { status: defaultStyle.status },
+  };
 };
 
-export const genDefaultEdge = ({ edgeSize = 3, edgePrimaryColor = '#ddd', mode = 'light' }: ThemeType) => {
+export const genDefaultEdgeStyle = ({ edgeSize = 0.1, edgePrimaryColor = '#ddd', mode = 'light' }: ThemeType) => {
   const Colors = {
     light: {
       stroke: edgePrimaryColor,
@@ -163,14 +185,28 @@ export const genDefaultEdge = ({ edgeSize = 3, edgePrimaryColor = '#ddd', mode =
     style: {
       stroke: Color.stroke,
       lineWidth: edgeSize,
-      opacity: 1,
+      opacity: 0.9,
       labelCfg: {
         fill: Color.label,
         fontSize: 12,
       },
     },
+    status: {
+      selected: {
+        stroke: 'red',
+        animation: {
+          repeat: true,
+        },
+      },
+      hover: {
+        stroke: '#ddd',
+      },
+    },
   };
-  return defaultStyle;
+  return {
+    defaultEdgeStyle: { type: defaultStyle.type, style: defaultStyle.style },
+    defaultEdgeStatusStyle: { status: defaultStyle.status },
+  };
 };
 
 export const getDefaultStyleByTheme = (inputTheme: ThemeType) => {
@@ -206,8 +242,8 @@ export const getDefaultStyleByTheme = (inputTheme: ThemeType) => {
       nodeSize,
       mode: 'light',
       background: '#fff',
-      defaultNode: genDefaultNode(theme),
-      defaultEdge: genDefaultEdge(theme),
+      ...genDefaultNodeStyle(theme),
+      ...genDefaultEdgeStyle(theme),
       defaultCombo,
     };
   }
@@ -217,8 +253,8 @@ export const getDefaultStyleByTheme = (inputTheme: ThemeType) => {
     nodeSize,
     mode: 'dark',
     background: '#000',
-    defaultNode: genDefaultNode(theme),
-    defaultEdge: genDefaultEdge(theme),
+    ...genDefaultNodeStyle(theme),
+    ...genDefaultEdgeStyle(theme),
     defaultCombo,
   };
 };
