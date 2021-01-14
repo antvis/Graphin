@@ -4,23 +4,13 @@ import GraphinColorPick from './ColorPicker';
 import { Slider } from 'antd';
 import { NodeStyle } from '@antv/graphin';
 
-// interface KeyShapeStyle {
-//   /** 节点的主要容器 */
-//   /** 节点的大小 */
-//   size: [number] | [number, number];
-//   /** 填充色 */
-//   fill: string;
-//   /** 包围边颜色 */
-//   stroke: string;
-// }
+type haloStyle = NodeStyle['halo'];
 
-type KeyShapeStyle = NodeStyle['keyshape'];
-
-interface KeyShapeSettingProps extends KeyShapeStyle {
-  handleChange: (schema: { keyshape: Partial<KeyShapeStyle> }) => void;
+interface HaloSettingProps extends haloStyle {
+  handleChange: (schema: { halo: Partial<haloStyle> }) => void;
 }
 
-const KeyShapeSetting: React.FunctionComponent<KeyShapeSettingProps> = (props) => {
+const HaloSetting: React.FunctionComponent<HaloSettingProps> = (props) => {
   const { size, fill, stroke, handleChange } = props;
   return (
     <React.Fragment>
@@ -28,7 +18,7 @@ const KeyShapeSetting: React.FunctionComponent<KeyShapeSettingProps> = (props) =
         <Slider
           defaultValue={size[0]}
           onChange={(value) => {
-            handleChange({ keyshape: { size: [Number(value)] } });
+            handleChange({ halo: { size: [Number(value)] } });
           }}
         />
       </Item>
@@ -36,7 +26,7 @@ const KeyShapeSetting: React.FunctionComponent<KeyShapeSettingProps> = (props) =
         <GraphinColorPick
           color={stroke}
           onChange={(value) => {
-            handleChange({ keyshape: { stroke: value } });
+            handleChange({ halo: { stroke: value } });
           }}
         />
       </Item>
@@ -44,7 +34,7 @@ const KeyShapeSetting: React.FunctionComponent<KeyShapeSettingProps> = (props) =
         <GraphinColorPick
           color={fill}
           onChange={(value) => {
-            handleChange({ keyshape: { fill: value } });
+            handleChange({ halo: { fill: value } });
           }}
         />
       </Item>
@@ -52,4 +42,4 @@ const KeyShapeSetting: React.FunctionComponent<KeyShapeSettingProps> = (props) =
   );
 };
 
-export default KeyShapeSetting;
+export default HaloSetting;

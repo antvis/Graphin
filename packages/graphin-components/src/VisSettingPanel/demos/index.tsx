@@ -7,7 +7,7 @@ import '@antv/graphin/dist/index.css';
 const Demo = () => {
   return (
     <div className="App">
-      <Graphin data={Utils.mock(2).circle().graphin()}>
+      <Graphin data={Utils.mock(2).circle().graphin()} theme={{ mode: 'light' }}>
         <VisSettingPanel />
       </Graphin>
     </div>

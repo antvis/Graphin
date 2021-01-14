@@ -1,9 +1,10 @@
 import React from 'react';
 import { Collapse, Card, Tabs } from 'antd';
-import { NodeStyle } from './index';
+import { NodeStyle } from '@antv/graphin';
 import LabelSetting from './components/LabelSetting';
 import IconSetting from './components/IconSetting';
 import KeyShapeSetting from './components/KeyShapeSetting';
+import HaloSetting from './components/HaloSetting';
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
@@ -15,7 +16,7 @@ interface AntdPanelProps {
 
 const AntdPanel: React.FunctionComponent<AntdPanelProps> = (props) => {
   const { nodeStyleSchema, handleNodeStyleChange } = props;
-  const { label, badges, icon, ...keyShape } = nodeStyleSchema;
+  const { label, badges, icon, keyshape, halo } = nodeStyleSchema;
   const handleChange = (shema) => {
     console.log('shema', shema);
     handleNodeStyleChange(shema);
@@ -28,7 +29,10 @@ const AntdPanel: React.FunctionComponent<AntdPanelProps> = (props) => {
           <TabPane tab="Node" key="node">
             <Collapse defaultActiveKey={['keyshape']} bordered={false} style={{ background: '#fff' }}>
               <Panel header="节点" key="keyshape">
-                <KeyShapeSetting handleChange={handleChange} {...keyShape} />
+                <KeyShapeSetting handleChange={handleChange} {...keyshape} />
+              </Panel>
+              <Panel header="光晕" key="halo">
+                <HaloSetting handleChange={handleChange} {...keyshape} />
               </Panel>
               <Panel header="标签" key="label">
                 <LabelSetting handleChange={handleChange} {...label} />

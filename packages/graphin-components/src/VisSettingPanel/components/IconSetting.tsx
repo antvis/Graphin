@@ -3,22 +3,13 @@ import { Radio, Input, InputNumber } from 'antd';
 import Item from './Item';
 import { FontSizeOutlined, LinkOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import GraphinColorPick from './ColorPicker';
+import { NodeStyle } from '@antv/graphin';
 
 interface IconSettingProps extends NodeStyleIcon {
   handleChange: (schena: { icon: NodeStyleIcon }) => void;
 }
 
-export type NodeStyleIcon = Partial<{
-  /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
-  type: 'font' | 'image' | 'text';
-  /** 根据类型，填写对应的值 */
-  value: string;
-  /** 图标大小 */
-  size: number; // | number[];
-  /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
-  fill: string;
-  fontFamily: string;
-}>;
+export type NodeStyleIcon = Partial<NodeStyle['icon']>;
 
 const IconSetting = (props: IconSettingProps) => {
   const { handleChange, fill, size, value, type: IconType } = props;
@@ -101,7 +92,7 @@ const IconSetting = (props: IconSettingProps) => {
           size="small"
           min={1}
           max={100000}
-          defaultValue={size}
+          defaultValue={size as number}
           onChange={(e) => {
             handleChange({
               icon: {
