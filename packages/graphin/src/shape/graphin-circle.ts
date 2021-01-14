@@ -409,8 +409,8 @@ export default () => {
             g6Shape.attr(otherAttrs);
             g6Shape.cfg.visible = visible !== false;
             if (animate) {
-              const { attrs, duration, easing, callback, delay } = animate;
-              g6Shape.animate(attrs, duration, easing, callback, delay);
+              const { attrs, ...animateOptions } = animate;
+              g6Shape.animate(attrs, animateOptions);
             }
           }
         });
@@ -425,8 +425,8 @@ export default () => {
             g6Shape.attr(otherAttrs);
             g6Shape.cfg.visible = visible !== false;
             if (animate) {
-              const { attrs, duration, easing, callback, delay } = animate;
-              g6Shape.animate(attrs, duration, easing, callback, delay);
+              const { attrs, ...animateOptions } = animate;
+              g6Shape.animate(attrs, animateOptions);
             }
           }
         });
@@ -510,24 +510,27 @@ export default () => {
     },
     update(cfg: IUserNode, item: INode) {
       if (!cfg.style) return;
-      debugger;
-      const style = getStyles(cfg._initialStyle, cfg.style) as NodeStyle;
-      cfg._initialStyle = { ...style };
-      const shapes = item.getContainer().get('children'); // 顺序根据 draw 时确定
+      try {
+        const style = getStyles(cfg._initialStyle, cfg.style) as NodeStyle;
+        cfg._initialStyle = { ...style };
+        const shapes = item.getContainer().get('children'); // 顺序根据 draw 时确定
 
-      shapes.forEach((g6Shape: any) => {
-        const itemShapeName = g6Shape.cfg.name as 'icon' | 'keyshape' | 'halo' | 'label' | 'badges';
-        const customAttrs = style[itemShapeName];
-        if (customAttrs) {
-          const { animate, visible, ...otherAttrs } = paserAttr(customAttrs as any, itemShapeName);
-          g6Shape.attr(otherAttrs);
-          g6Shape.cfg.visible = visible !== false;
-          if (animate) {
-            const { attrs, duration, easing, callback, delay } = animate;
-            g6Shape.animate(attrs, duration, easing, callback, delay);
+        shapes.forEach((g6Shape: any) => {
+          const itemShapeName = g6Shape.cfg.name as 'icon' | 'keyshape' | 'halo' | 'label' | 'badges';
+          const customAttrs = style[itemShapeName];
+          if (customAttrs) {
+            const { animate, visible, ...otherAttrs } = paserAttr(customAttrs as any, itemShapeName);
+            g6Shape.attr(otherAttrs);
+            g6Shape.cfg.visible = visible !== false;
+            if (animate) {
+              const { attrs, ...animateOptions } = animate;
+              g6Shape.animate(attrs, animateOptions);
+            }
           }
-        }
-      });
+        });
+      } catch (error) {
+        console.error('error');
+      }
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any);
