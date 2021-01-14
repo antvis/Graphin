@@ -4,7 +4,7 @@
 const options: { [key: string]: any } = {
   circular: {},
   concentric: {
-    linkDistance: 400, // 可选，边长
+    minNodeSpacing: 60, // 可选，边长
     preventOverlap: true, // 可选，必须配合 nodeSize
     nodeSize: 60,
   },
