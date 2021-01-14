@@ -103,6 +103,9 @@ const paserAttr = (
   if (itemShapeName === 'keyshape') {
     schema.r = getRadiusBySize(size);
   }
+  if (itemShapeName === 'halo') {
+    schema.r = getRadiusBySize(size);
+  }
 
   Object.keys(schema).forEach(key => {
     if (schema[key] === undefined) {
@@ -157,39 +160,34 @@ function getRadiusBySize(size: number | [number] | [number, number] | undefined)
   }
   return r;
 }
-const getStyles = (defaultStyle: any, cfgStyle: any) => {
-  const keyShapeStyle = {
-    ...defaultStyle.keyshape,
-    ...cfgStyle.keyshape,
-  };
-  const { size, fill } = keyShapeStyle;
-  const nodeSize = convertSizeToWH(size);
+const getStyles = (defaultStyleCfg: any, cfgStyle: any) => {
+  const { halo, keyshape } = { ...defaultStyleCfg, ...cfgStyle } as any;
+  const nodeSize = convertSizeToWH(keyshape.size);
   /*  halo 默认样式单独处理**/
   const haloStyle = {
     halo: {
       x: 0,
       y: 0,
-      r: nodeSize[0] / 2 + 15,
-      fill: fill,
-      lineWidth: 1,
-      opacity: 0.9,
+      r: nodeSize[0] / 2 + 17, // 默认 halo的样式和keyshape相关
+      fill: keyshape.fill,
       visible: false,
+      ...halo,
     },
   };
-  return deepMix({}, defaultStyle, haloStyle, cfgStyle) as NodeStyle;
+
+  return deepMix({}, defaultStyleCfg, haloStyle, cfgStyle) as NodeStyle;
 };
 
 export default () => {
   G6.registerNode('graphin-circle', {
     options: {
-      style: defaultStyle,
-      status: defaultStatusStyle,
+      style: {},
+      status: {},
     },
     draw(cfg: IUserNode, group: IGroup) {
-      const style = getStyles(this.options.style, cfg.style) as NodeStyle;
+      const style = getStyles({}, cfg.style) as NodeStyle;
       /** 将初始化样式存储在model中 */
       cfg._initialStyle = { ...style };
-
       const { label, icon, badges = [], halo, keyshape: keyShapeStyle } = style;
 
       const r = getRadiusBySize(keyShapeStyle.size) as number;
@@ -393,11 +391,11 @@ export default () => {
     },
     setState(name: string, value: string, item: INode) {
       if (!name) return;
-      const model = item.getModel();
+      const model = item.getModel() as any;
       // const originStyles = { ...model.style } as any;
 
       const shapes = item.getContainer().get('children'); // 顺序根据 draw 时确定
-      const initStateStyle = deepMix({}, this.options.status, model.statusStyle);
+      const initStateStyle = deepMix({}, model.style.status);
 
       const initialStyle = item.getModel()._initialStyle as any;
 
@@ -512,48 +510,24 @@ export default () => {
     },
     update(cfg: IUserNode, item: INode) {
       if (!cfg.style) return;
-
-      const style = getStyles(this.options.style, cfg.style) as NodeStyle;
+      debugger;
+      const style = getStyles(cfg._initialStyle, cfg.style) as NodeStyle;
       cfg._initialStyle = { ...style };
+      const shapes = item.getContainer().get('children'); // 顺序根据 draw 时确定
 
-      // 更新 keyShape 的样式
-      const keyShape = item.getKeyShape();
-      for (const key in style) {
-        const value = (style as any)[key];
-        if (value && !isObject(value)) {
-          keyShape.attr(key, value);
+      shapes.forEach((g6Shape: any) => {
+        const itemShapeName = g6Shape.cfg.name as 'icon' | 'keyshape' | 'halo' | 'label' | 'badges';
+        const customAttrs = style[itemShapeName];
+        if (customAttrs) {
+          const { animate, visible, ...otherAttrs } = paserAttr(customAttrs as any, itemShapeName);
+          g6Shape.attr(otherAttrs);
+          g6Shape.cfg.visible = visible !== false;
+          if (animate) {
+            const { attrs, duration, easing, callback, delay } = animate;
+            g6Shape.animate(attrs, duration, easing, callback, delay);
+          }
         }
-
-        // 更新 KeyShape 的大小
-        if (key === 'size') {
-          const sizeValue = convertSizeToWH(value);
-          keyShape.attr('r', sizeValue[0] / 2);
-        }
-      }
-
-      // 更新 label
-      const { label, icon, badges = [] } = style;
-      if (label) {
-        const { value, fill, fontSize } = label;
-        const group = item.get('group');
-        const itemLabel = group.find((element: IItemBase) => element.get('name') === 'label');
-        itemLabel.attr('text', value);
-        itemLabel.attr('fill', fill);
-        itemLabel.attr('fontSize', fontSize);
-
-        // 更新 label 位置
-        const labelPos = this.getLabelXYByPosition(style);
-        for (const key in labelPos) {
-          if (!labelPos[key]) return;
-          itemLabel.attr(key, labelPos[key]);
-        }
-      }
-
-      if (icon) {
-      }
-
-      if (badges.length > 0) {
-      }
+      });
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any);
