@@ -168,6 +168,9 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       defaultCombo,
       defaultEdge,
       defaultNode,
+      nodeStateStyles,
+      edgeStateStyles,
+      comboStateStyles,
 
       modes = { default: [] },
       animate,
@@ -188,15 +191,13 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
 
     this.theme = getDefaultStyleByTheme(theme);
     const {
-      defaultNode: ThemeDefaultNode,
-      defaultEdge: ThemeDefaultEdge,
-      defaultCombo: ThemeDefaultCombo,
+      defaultNodeStyle,
+      defaultEdgeStyle,
+      defaultComboStyle,
+      defaultNodeStatusStyle,
+      defaultEdgeStatusStyle,
+      defaultComboStatusStyle,
     } = this.theme;
-
-    console.log({
-      ...ThemeDefaultNode,
-      ...defaultNode,
-    });
 
     /** graph type */
     this.isTree = Boolean(data.children) || TREE_LAYOUTS.indexOf(layout && layout.type) !== -1;
@@ -207,18 +208,33 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       width: this.width,
       height: this.height,
       animate: animate !== false,
+      /** 默认样式 */
       defaultNode: {
-        ...ThemeDefaultNode,
+        ...defaultNodeStyle,
         ...defaultNode,
       },
       defaultEdge: {
-        ...ThemeDefaultEdge,
+        ...defaultEdgeStyle,
         ...defaultEdge,
       },
       defaultCombo: {
-        ...ThemeDefaultCombo,
+        ...defaultComboStyle,
         ...defaultCombo,
       },
+      /** status 样式 */
+      nodeStateStyles: {
+        ...defaultNodeStatusStyle,
+        ...nodeStateStyles,
+      },
+      edgeStateStyles: {
+        ...defaultEdgeStatusStyle,
+        ...edgeStateStyles,
+      },
+      comboStateStyles: {
+        ...defaultComboStatusStyle,
+        ...comboStateStyles,
+      },
+
       modes,
       ...otherOptions,
     };
@@ -436,6 +452,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
                 <Hoverable bindType="node" />
+                {/* <Hoverable bindType="edge" /> */}
                 {this.props.children}
               </>
             )}

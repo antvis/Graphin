@@ -6,11 +6,14 @@ import Behaviors from './behaviors';
 import registerGraphinForce from './layout/inner/registerGraphinForce';
 import registerRenderLayout from './layout/inner/registerRenderLayout';
 import { registerGraphinCircle, registerGraphinLine } from './shape';
+/** export type */
+import { NodeStyle, EdgeStyle } from './typings/type';
 
 /** 注册 Graphin force 布局 */
 registerGraphinForce();
 /** 注册 Graphin render 布局 */
 registerRenderLayout();
+
 /** 注册 Graphin Circle Node */
 registerGraphinCircle();
 
@@ -20,8 +23,8 @@ registerGraphinLine();
 /** export */
 export default Graphin;
 export { Utils, Layout, GraphinContext, Behaviors };
-/** export type */
-export { GraphinContextType };
+
+export { GraphinContextType, NodeStyle, EdgeStyle };
 export {
   /** export G6 */
   default as G6,
