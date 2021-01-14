@@ -31,6 +31,9 @@ export interface RestNode {
     };
   };
 }
+export interface ElementStatus {
+  [key: string]: boolean;
+}
 
 /** 基础边类型 */
 type BaseEdge = {
@@ -233,19 +236,19 @@ export type NodeStyleBadge = Partial<{
   // badge 在 x 和 y 方向上的偏移量
   offset: [number, number];
 }>;
-
+export type NodeStyleKeyShape = Partial<{
+  /** 节点的大小 */
+  size: number | [number] | [number, number];
+  /** 填充色 */
+  fill: string;
+  /** 包围边颜色 */
+  stroke: string;
+  /** 边框的宽度 */
+  lineWidth: number;
+}>;
 export interface NodeStyle {
   /** 节点的主要容器 */
-  keyshape: {
-    /** 节点的大小 */
-    size: number | [number] | [number, number];
-    /** 填充色 */
-    fill: string;
-    /** 包围边颜色 */
-    stroke: string;
-    /** 边框的宽度 */
-    lineWidth: number;
-  };
+  keyshape: NodeStyleKeyShape;
   /** 节点的文本 */
   label: NodeStyleLabel;
   /** 节点的中间位置图标区域 */
@@ -256,7 +259,7 @@ export interface NodeStyle {
   halo: NodeStyleHalo;
 }
 
-export interface NodeStyleHalo {
+export type NodeStyleHalo = Partial<{
   /** 大小 */
   size: number | [number] | [number, number];
   /** 填充色 */
@@ -267,7 +270,7 @@ export interface NodeStyleHalo {
   lineWidth: number;
   /** 透明度 */
   opacity: number;
-}
+}>;
 export interface ComboStyle {}
 
 export interface Layout {
