@@ -4,14 +4,15 @@ import GraphinColorPick from './ColorPicker';
 import { Slider } from 'antd';
 import { NodeStyle } from '@antv/graphin';
 
-type haloStyle = NodeStyle['halo'];
+type HaloStyle = NodeStyle['halo'];
 
-interface HaloSettingProps extends haloStyle {
-  handleChange: (schema: { halo: Partial<haloStyle> }) => void;
+interface HaloSettingProps extends HaloStyle {
+  handleChange: (schema: { halo: Partial<HaloStyle> }) => void;
 }
 
 const HaloSetting: React.FunctionComponent<HaloSettingProps> = (props) => {
-  const { size, fill, stroke, handleChange } = props;
+  const { size = 26, fill, stroke, handleChange } = props;
+
   return (
     <React.Fragment>
       <Item title="大小">
@@ -24,7 +25,7 @@ const HaloSetting: React.FunctionComponent<HaloSettingProps> = (props) => {
       </Item>
       <Item title="描边颜色">
         <GraphinColorPick
-          color={stroke}
+          color={stroke as string}
           onChange={(value) => {
             handleChange({ halo: { stroke: value } });
           }}
@@ -32,7 +33,7 @@ const HaloSetting: React.FunctionComponent<HaloSettingProps> = (props) => {
       </Item>
       <Item title="填充色">
         <GraphinColorPick
-          color={fill}
+          color={fill as string}
           onChange={(value) => {
             handleChange({ halo: { fill: value } });
           }}

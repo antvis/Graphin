@@ -59,7 +59,7 @@ const LegendNode: React.FunctionComponent<LegendProps> = (props) => {
 
     nodes.forEach((node) => {
       graph.setItemState(node.id, 'active', checkedValue.checked);
-      graph.setItemState(node.id, 'inactice', !checkedValue.checked);
+      graph.setItemState(node.id, 'inactive', !checkedValue.checked);
     });
 
     /** 给用户的回调函数 */

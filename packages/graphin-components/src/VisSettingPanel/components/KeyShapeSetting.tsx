@@ -21,12 +21,12 @@ interface KeyShapeSettingProps extends KeyShapeStyle {
 }
 
 const KeyShapeSetting: React.FunctionComponent<KeyShapeSettingProps> = (props) => {
-  const { size, fill, stroke, handleChange } = props;
+  const { size = 26, fill, stroke, handleChange } = props;
   return (
     <React.Fragment>
       <Item title="大小">
         <Slider
-          defaultValue={size[0]}
+          defaultValue={size[0] as number}
           onChange={(value) => {
             handleChange({ keyshape: { size: [Number(value)] } });
           }}
@@ -34,7 +34,7 @@ const KeyShapeSetting: React.FunctionComponent<KeyShapeSettingProps> = (props) =
       </Item>
       <Item title="描边颜色">
         <GraphinColorPick
-          color={stroke}
+          color={stroke as string}
           onChange={(value) => {
             handleChange({ keyshape: { stroke: value } });
           }}
@@ -42,7 +42,7 @@ const KeyShapeSetting: React.FunctionComponent<KeyShapeSettingProps> = (props) =
       </Item>
       <Item title="填充色">
         <GraphinColorPick
-          color={fill}
+          color={fill as string}
           onChange={(value) => {
             handleChange({ keyshape: { fill: value } });
           }}
