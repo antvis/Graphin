@@ -6,24 +6,17 @@ const icons = Graphin.registerFontFamily(IconLoader);
 
 const { ZoomCanvas, Hoverable } = Behaviors;
 
-const EventCenter = () => {
-  const { graph } = React.useContext(GraphinContext);
-  useEffect(() => {
-    graph.on('node:mouseenter', evt => {
-      graph.setItemState(evt.item, 'hover', true);
-    });
-    graph.on('node:mouseleave', evt => {
-      graph.setItemState(evt.item, 'hover', false);
-    });
-  }, []);
-
-  return null;
-};
 const data = Utils.mock(5)
   .circle()
   .graphin();
 
 data.edges = [];
+
+data.nodes[0].style = {
+  keyshape: {
+    size: [20, 20],
+  },
+};
 
 console.log(data);
 
@@ -37,7 +30,6 @@ export default () => {
       <Graphin data={data} layout={layout}>
         <ZoomCanvas disabled />
         <Hoverable bindType="node" />
-        {/* <EventCenter /> */}
       </Graphin>
     </div>
   );

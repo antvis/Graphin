@@ -19,4 +19,4 @@ nav:
 
 ## gForce
 
-<!-- <code src='./demos/g-force.tsx'> -->
+<code src='./demos/g-force.tsx'>

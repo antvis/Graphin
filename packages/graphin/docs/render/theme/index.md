@@ -1,9 +1,9 @@
 ---
-title: 设置主题
+title: 主题设置
 order: 0
 group:
   path: /render
-  title: 设置主题
+  title: 元素渲染
   order: 0
 nav:
   title: Graphin
@@ -11,7 +11,7 @@ nav:
   order: 0
 ---
 
-Graphin 根据《图可视分析设计指引》，内置了 Theme
+Graphin 根据《图可视分析设计指引》，内置了 Theme，Theme
 
 ### Light
 
@@ -21,4 +21,4 @@ Graphin 根据《图可视分析设计指引》，内置了 Theme
 
 <code src='./dark.tsx'>
 
-<API src='../../../src/consts.ts' exports='["getDefaultStyleByTheme"]'>
+<!-- <API src='../../../src/consts.ts' exports='["getDefaultStyleByTheme"]'> -->
