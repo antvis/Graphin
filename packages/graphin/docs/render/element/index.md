@@ -14,12 +14,6 @@ nav:
 
 ## Typescript
 
-## 在线示例
-
-### Graphin Circle
-
-<!-- <code src='./demos/default.tsx'> -->
-
 ### Graphin Circle
 
 <code src='./demos/index.tsx'>

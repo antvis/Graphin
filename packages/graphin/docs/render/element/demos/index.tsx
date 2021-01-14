@@ -19,13 +19,13 @@ const defaultIcon = {
 const EventCenter = () => {
   const { graph } = React.useContext(GraphinContext);
   useEffect(() => {
-    graph.on('node:mouseenter', evt => {
-      graph.setItemState(evt.item, 'hover', true);
-    });
+    // graph.on('node:mouseenter', evt => {
+    //   graph.setItemState(evt.item, 'hover', true);
+    // });
 
-    graph.on('node:mouseleave', evt => {
-      graph.setItemState(evt.item, 'hover', false);
-    });
+    // graph.on('node:mouseleave', evt => {
+    //   graph.setItemState(evt.item, 'hover', false);
+    // });
 
     graph.on('edge:mouseenter', evt => {
       graph.setItemState(evt.item, 'selected', true);
@@ -39,81 +39,11 @@ const EventCenter = () => {
   return null;
 };
 
-const defaultBadge = [
-  {
-    /** 放置的位置，ef：LT（left top）左上角 */
-    position: 'RT',
-    /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
-    type: 'font',
-    value: iconValue,
-    // type = image 时表示图片的宽度和高度
-    size: [20, 10],
-    /** 徽标填充色 */
-    fill: 'pink',
-    /** 徽标描边色 */
-    stroke: 'green',
-    /** 徽标内文本的颜色 */
-    color: '#000',
-    fontSize: 12,
-    padding: 2,
-    offset: [0, 0],
-  },
-  {
-    /** 放置的位置，ef：LT（left top）左上角 */
-    position: 'LB',
-    /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
-    type: 'text',
-    value: '12',
-    // type = image 时表示图片的宽度和高度
-    size: 20,
-    /** 徽标填充色 */
-    fill: 'pink',
-    /** 徽标描边色 */
-    stroke: 'green',
-    /** 徽标内文本的颜色 */
-    color: '#000',
-    fontSize: 12,
-    padding: 0,
-    offset: [0, 0],
-  },
-  {
-    /** 放置的位置，ef：LT（left top）左上角 */
-    position: 'RB',
-    /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
-    type: 'image',
-    value: 'https://gw.alipayobjects.com/os/s/prod/antv/assets/image/logo-with-text-73b8a.svg',
-    // type = image 时表示图片的宽度和高度
-    size: 10,
-    /** 徽标填充色 */
-    fill: 'pink',
-    /** 徽标描边色 */
-    stroke: 'green',
-    padding: 5,
-    offset: [0, 0],
-  },
-  {
-    /** 放置的位置，ef：LT（left top）左上角 */
-    position: 'LT',
-    /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
-    type: 'text',
-    value: '999+',
-    // type = image 时表示图片的宽度和高度
-    size: [25, 15],
-    /** 徽标填充色 */
-    fill: 'pink',
-    color: '#000',
-    /** 徽标描边色 */
-    stroke: 'green',
-    padding: 5,
-    offset: [3, 3],
-  },
-];
-
 const data = Utils.mock(10)
   .circle()
-  .graphinMock(null, defaultIcon as any);
+  .graphin();
 const layout = {
-  type: 'circular',
+  type: 'concentric',
 };
 
 const defaultEdge = {
@@ -122,18 +52,66 @@ const defaultEdge = {
   },
   status: {
     selected: {
-      stroke: 'red',
+      stroke: '#ff0303a6',
       animation: {
         repeat: true,
       },
     },
   },
 };
+const defaultNode = {
+  type: 'graphin-circle',
+  style: {
+    keyshape: {
+      fill: '#ddd',
+      stroke: '#000',
+    },
+  },
+};
+const NodeSize = 26;
+const defaultNodeStatusStyle = {
+  status: {
+    selected: {
+      keyshape: {
+        stroke: '#ff0303a6',
+      },
+      halo: {
+        animate: {
+          attrs: ratio => {
+            const startR = 20;
+            const diff = NodeSize - startR;
+            return {
+              r: startR + diff * ratio,
+              opacity: 0.5 + 0.5 * ratio,
+            };
+          },
+          duration: 200,
+          easing: 'easeCubic',
+          delay: 0,
+          repeat: false,
+        },
+      },
+    },
+  },
+};
+
+// @ts-ignore
+data.nodes[0].style = {
+  keyshape: {
+    fill: '#ff0303a6',
+  },
+};
 
 export default () => {
   return (
     <div>
-      <Graphin data={data} layout={layout} defaultEdge={defaultEdge}>
+      <Graphin
+        data={data}
+        layout={layout}
+        defaultEdge={defaultEdge}
+        defaultNode={defaultNode}
+        nodeStateStyles={defaultNodeStatusStyle}
+      >
         <ZoomCanvas />
         <EventCenter />
       </Graphin>

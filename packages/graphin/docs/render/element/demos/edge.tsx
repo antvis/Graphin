@@ -50,7 +50,7 @@ const defaultEdge = {
 export default () => {
   return (
     <div>
-      <Graphin data={data} layout={layout} defaultEdge={defaultEdge}>
+      <Graphin data={data} layout={layout} defaultEdge={defaultEdge.style} edgeStateStyles={defaultEdge.status}>
         <ZoomCanvas />
         <EventCenter />
       </Graphin>
