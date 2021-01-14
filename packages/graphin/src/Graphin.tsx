@@ -4,6 +4,7 @@ import React, { ErrorInfo } from 'react';
 import G6, { Graph as IGraph } from '@antv/g6';
 
 import { cloneDeep } from 'lodash';
+import { deepMix, isArray, isNumber, isObject } from '@antv/util';
 
 /** types  */
 import { IconLoader } from './typings/type';
@@ -209,31 +210,13 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       height: this.height,
       animate: animate !== false,
       /** 默认样式 */
-      defaultNode: {
-        ...defaultNodeStyle,
-        ...defaultNode,
-      },
-      defaultEdge: {
-        ...defaultEdgeStyle,
-        ...defaultEdge,
-      },
-      defaultCombo: {
-        ...defaultComboStyle,
-        ...defaultCombo,
-      },
+      defaultNode: deepMix({}, defaultNodeStyle, defaultNode),
+      defaultEdge: deepMix({}, defaultEdgeStyle, defaultEdge),
+      defaultCombo: deepMix({}, defaultComboStyle, defaultCombo),
       /** status 样式 */
-      nodeStateStyles: {
-        ...defaultNodeStatusStyle,
-        ...nodeStateStyles,
-      },
-      edgeStateStyles: {
-        ...defaultEdgeStatusStyle,
-        ...edgeStateStyles,
-      },
-      comboStateStyles: {
-        ...defaultComboStatusStyle,
-        ...comboStateStyles,
-      },
+      nodeStateStyles: deepMix({}, defaultNodeStatusStyle, nodeStateStyles),
+      edgeStateStyles: deepMix({}, defaultEdgeStatusStyle, edgeStateStyles),
+      comboStateStyles: deepMix({}, defaultComboStatusStyle, comboStateStyles),
 
       modes,
       ...otherOptions,
@@ -451,7 +434,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
 
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
-                <Hoverable bindType="node" />
+                {/* <Hoverable bindType="node" /> */}
                 {/* <Hoverable bindType="edge" /> */}
                 {this.props.children}
               </>
