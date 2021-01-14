@@ -253,30 +253,21 @@ export interface NodeStyle {
   /** 节点的徽标 */
   badges: NodeStyleBadge[];
   /** 光环 */
-  halo: any;
+  halo: NodeStyleHalo;
 }
 
-export interface ElementStatus {
-  [key: string]:
-    | boolean
-    | Partial<{
-        fill: string;
-        stroke: string;
-        opacity: string;
-        shadowColor: string;
-        shadowBlur: number;
-        // shadow 表示增加一圈类似阴影的东西，border 表示在外层增加一个
-        additionType: 'shadow' | 'border';
-        additionStyle: Partial<{
-          fill: string;
-          stroke: string;
-          opacity: string;
-          shadowColor: string;
-          shadowBlur: number;
-        }>;
-      }>;
+export interface NodeStyleHalo {
+  /** 大小 */
+  size: number | [number] | [number, number];
+  /** 填充色 */
+  fill: string;
+  /** 包围边颜色 */
+  stroke: string;
+  /** 边框的宽度 */
+  lineWidth: number;
+  /** 透明度 */
+  opacity: number;
 }
-
 export interface ComboStyle {}
 
 export interface Layout {
