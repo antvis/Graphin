@@ -94,6 +94,7 @@ export const genDefaultNodeStyle = ({
         font: '#fff',
       },
       label: '#000',
+      disabled: '#ddd',
     },
     dark: {
       fill: hexToRgba(primaryColor, '0.3'),
@@ -105,6 +106,7 @@ export const genDefaultNodeStyle = ({
         font: '#fff',
       },
       label: '#fff',
+      disabled: '#ddd3',
     },
   };
 
@@ -157,7 +159,18 @@ export const genDefaultNodeStyle = ({
       },
       inactive: {
         halo: {
-          visible: true,
+          visible: false,
+        },
+        keyshape: {
+          lineWidth: 0,
+          fill: Color.disabled,
+          stroke: Color.disabled,
+        },
+        icon: {
+          fill: Color.disabled,
+        },
+        label: {
+          fill: Color.disabled,
         },
       },
     },
