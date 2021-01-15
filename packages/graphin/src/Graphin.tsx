@@ -2,9 +2,8 @@
 import React, { ErrorInfo } from 'react';
 // todo ,G6@unpack版本将规范类型的输出
 import G6, { Graph as IGraph } from '@antv/g6';
-
 import { cloneDeep } from 'lodash';
-import { deepMix, isArray, isNumber, isObject } from '@antv/util';
+import { deepMix } from '@antv/util';
 
 /** types  */
 import { IconLoader } from './typings/type';
@@ -252,10 +251,10 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     this.initGraphInstance();
     this.setState({
       isReady: true,
-
       context: {
         graph: this.graph,
         apis: this.apis,
+        theme: this.theme,
       },
     });
   }
@@ -323,7 +322,6 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       this.layout.changeLayout();
       this.graph.data(this.data);
       this.graph.changeData(this.data);
-
       this.initStatus();
       this.apis = ApiController(this.graph);
       console.log('%c isDataChange', 'color:grey');
@@ -395,15 +393,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     const { modes, style } = this.props;
     console.log('theme', this.theme);
     return (
-      <GraphinContext.Provider
-        value={
-          this.state.context
-          //   {
-          //   graph: this.graph,
-          //   apis: this.apis,
-          // }
-        }
-      >
+      <GraphinContext.Provider value={this.state.context}>
         <div id="graphin-container">
           <div
             data-testid="custom-element"
@@ -434,7 +424,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
 
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
-                {/* <Hoverable bindType="node" /> */}
+                <Hoverable bindType="node" />
                 {/* <Hoverable bindType="edge" /> */}
                 {this.props.children}
               </>
