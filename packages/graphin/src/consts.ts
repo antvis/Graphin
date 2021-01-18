@@ -1,5 +1,6 @@
-import hexToRgba, { hexToRgbaToHex } from './utils/hexToRgba';
-import G6 from '@antv/g6';
+import { NodeStyle } from '.';
+import { ComboStyle, EdgeStyle } from './typings/type';
+import hexToRgba from './utils/hexToRgba';
 
 interface ColorSetType {
   activeFill: string;
@@ -42,6 +43,7 @@ export const DEFAULT_THEME = {
   nodeSize: 26,
   edgeSize: 1,
   edgePrimaryColor: '#ddd',
+  background: '#fff',
 };
 
 export interface ThemeType {
@@ -70,6 +72,10 @@ export interface ThemeType {
    * @default #ddd
    */
   edgePrimaryColor: string;
+  /**
+   * @description 画布背景色
+   */
+  background: string;
 }
 
 export const genDefaultNodeStyle = ({
@@ -186,33 +192,64 @@ export const genDefaultEdgeStyle = ({ edgeSize = 0.1, edgePrimaryColor = '#ddd',
     light: {
       stroke: edgePrimaryColor,
       label: edgePrimaryColor,
+      disabled: '#ddd',
     },
     dark: {
       stroke: edgePrimaryColor,
       label: edgePrimaryColor,
+      disabled: '#ddd3',
     },
   };
   const Color = Colors[mode];
+
   const defaultStyle = {
     type: 'graphin-line',
     style: {
-      stroke: Color.stroke,
-      lineWidth: edgeSize,
-      opacity: 0.9,
-      labelCfg: {
+      keyshape: {
+        type: 'line',
+        lineWidth: 1,
+        stroke: Color.stroke,
+        opacity: 1,
+        lineAppendWidth: 9,
+        cursor: 'pointer',
+      },
+      halo: {
+        stroke: Color.stroke,
+        opacity: 0.4,
+        visible: false,
+        cursor: 'pointer',
+      },
+      label: {
+        value: '',
+        position: 'top',
         fill: Color.label,
-        fontSize: 12,
+        fontSize: '',
+        fontFamily: '',
+        textAlign: 'center',
       },
     },
     status: {
-      selected: {
-        stroke: 'red',
-        animation: {
-          repeat: true,
+      hover: {
+        halo: {
+          visible: true,
         },
       },
-      hover: {
-        stroke: '#ddd',
+      selected: {
+        halo: {
+          visible: true,
+        },
+        keyShape: {
+          lineWidth: 2,
+        },
+      },
+      disabled: {
+        halo: {
+          visible: false,
+        },
+        keyShape: {
+          lineWidth: 0.5,
+          stroke: Color.disabled,
+        },
       },
     },
   };
@@ -222,52 +259,39 @@ export const genDefaultEdgeStyle = ({ edgeSize = 0.1, edgePrimaryColor = '#ddd',
   };
 };
 
-export const getDefaultStyleByTheme = (inputTheme: ThemeType) => {
-  const theme = { ...DEFAULT_THEME, ...inputTheme };
-  const { mode, primaryColor, nodeSize } = theme;
-  const isLight = mode === 'light';
-  // const darkBackColor = '#5F95FF';
-  // const disableColor = '#777';
-  // const lightColorSet = G6.Util.getColorSetsBySubjectColors(
-  //   [primaryColor],
-  //   darkBackColor,
-  //   'light',
-  //   disableColor,
-  // )[0] as ColorSetType;
-  // const darkColorSet = G6.Util.getColorSetsBySubjectColors(
-  //   [primaryColor],
-  //   darkBackColor,
-  //   'dark',
-  //   disableColor,
-  // )[0] as ColorSetType;
-  // console.log(lightColorSet, darkColorSet);
-
-  const defaultCombo = {
+function genDefaultComboStyle(theme: ThemeType) {
+  const defaultStyle = {
     type: 'circle',
-    labelCfg: {
-      position: 'top',
+    style: {
+      labelCfg: {
+        position: 'top',
+      },
     },
+    status: {},
   };
-
-  if (isLight) {
-    return {
-      primaryColor,
-      nodeSize,
-      mode: 'light',
-      background: '#fff',
-      ...genDefaultNodeStyle(theme),
-      ...genDefaultEdgeStyle(theme),
-      defaultCombo,
-    };
-  }
-  // dark
   return {
-    primaryColor,
-    nodeSize,
-    mode: 'dark',
-    background: '#000',
+    defaultComboStyle: { type: defaultStyle.type, style: defaultStyle.style },
+    defaultComboStatusStyle: { status: defaultStyle.status },
+  };
+}
+
+export interface ThemeData extends ThemeType {
+  defaultNodeStyle: NodeStyle & { type: string };
+  defaultNodeStatusStyle: NodeStyle['status'];
+  defaultEdgeStyle: EdgeStyle & { type: string };
+  defaultEdgeStatusStyle: EdgeStyle['status'];
+  defaultComboStyle: ComboStyle & { type: string };
+  defaultComboStatusStyle: ComboStyle['status'];
+}
+
+export const getDefaultStyleByTheme = (inputTheme: ThemeType | undefined) => {
+  const theme = { ...DEFAULT_THEME, ...inputTheme } as ThemeType;
+  const isLight = theme.mode === 'light';
+  return {
+    ...theme,
+    background: isLight ? '#fff' : '#000',
     ...genDefaultNodeStyle(theme),
     ...genDefaultEdgeStyle(theme),
-    defaultCombo,
+    ...genDefaultComboStyle(theme),
   };
 };
