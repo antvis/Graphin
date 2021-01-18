@@ -11,3 +11,7 @@ nav:
 ## 基本介绍
 
 <code src='./demos/edge.tsx'>
+
+## 默认选中边
+
+<code src='./demos/selected-edge.tsx'>
