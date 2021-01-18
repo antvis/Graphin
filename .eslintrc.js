@@ -16,7 +16,8 @@ module.exports = {
     },
   },
   rules: {
-    ' @typescript-eslint/interface-name-prefix': 0,
+    'no-underscore-dangle': 0,
+    '@typescript-eslint/interface-name-prefix': 0,
     'import/no-extraneous-dependencies': 0,
     'no-console': 0,
     'import/prefer-default-export': 0,
