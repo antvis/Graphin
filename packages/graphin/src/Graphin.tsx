@@ -1,19 +1,14 @@
-// @ts-nocheck
 import React, { ErrorInfo } from 'react';
 // todo ,G6@unpack版本将规范类型的输出
-import G6, { Graph as IGraph } from '@antv/g6';
+import G6, { Graph as IGraph, GraphOptions, GraphData, TreeGraphData } from '@antv/g6';
 import { cloneDeep } from 'lodash';
 import { deepMix } from '@antv/util';
 
-/** types  */
-import { IconLoader } from './typings/type';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
 
 import './index.less';
-
-import { TREE_LAYOUTS, getDefaultStyleByTheme } from './consts';
 
 /** Context */
 import GraphinContext from './GraphinContext';
@@ -25,17 +20,30 @@ import LayoutController from './layout';
 import ApiController from './apis';
 import { ApisType } from './apis/types';
 
+/** types  */
+import { GraphinProps, IconLoader, GraphinData, GraphinTreeData } from './typings/type';
+import { TREE_LAYOUTS, getDefaultStyleByTheme, ThemeData } from './consts';
+
 const { DragCanvas, ZoomCanvas, DragNode, ClickSelect, BrushSelect, ResizeCanvas, Hoverable } = Behaviors;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DiffValue = any;
+
+export interface GraphinState {
+  isReady: boolean;
+  context: {
+    graph: IGraph;
+    apis: ApisType;
+    theme: ThemeData;
+  };
+}
 
 export interface RegisterFunction {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (name: string, options: { [key: string]: any }, extendName?: string): void;
 }
 
-class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
+class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   static registerNode: RegisterFunction = (nodeName, options, extendedNodeName) => {
     G6.registerNode(nodeName, options, extendedNodeName);
   };
@@ -66,7 +74,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     });
 
     return new Proxy(icons, {
-      get: (target, propKey) => {
+      get: (target, propKey: string) => {
         const matchIcon = target.find(icon => {
           return icon.name === propKey;
         });
@@ -101,25 +109,15 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
   isTree: boolean;
 
   /** G6实例中的 nodes,edges,combos 的 model，会比props.data中多一些引用赋值产生的属性，比如node中的 x,y */
-  data: Graphin.TreeData | Graphin.GraphData;
+  data: GraphinTreeData | GraphinData | undefined;
 
-  /** 默认样式 */
-  defaultStyle: {
-    node: {};
-    edge: {};
-    combo: {};
-    theme: 'light' | 'dark';
-    background: string;
-  };
-
-  options: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  };
+  options: GraphOptions;
 
   apis: ApisType;
 
-  constructor(props: Graphin.Props) {
+  theme: ThemeData;
+
+  constructor(props: GraphinProps) {
     super(props);
 
     const {
@@ -132,24 +130,29 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     } = props;
 
     this.data = data;
-    this.isTree = Boolean(props.data && props.data.children) || TREE_LAYOUTS.indexOf(layout && layout.type) !== -1;
+    this.isTree =
+      Boolean(props.data && props.data.children) || TREE_LAYOUTS.indexOf(String(layout && layout.type)) !== -1;
     this.graph = {} as IGraph;
     this.height = Number(height);
     this.width = Number(width);
+
+    this.theme = {} as ThemeData;
+    this.apis = {} as ApisType;
+
     this.state = {
       isReady: false,
-      graphIndex: 0,
       context: {
         graph: this.graph,
         apis: this.apis,
+        theme: this.theme,
       },
     };
 
-    this.options = { ...otherOptions };
-    this.layout = {};
+    this.options = { ...otherOptions } as GraphOptions;
+    this.layout = {} as LayoutController;
   }
 
-  initData = (data: Graphin.Props['data']) => {
+  initData = (data: GraphinProps['data']) => {
     if (data.children) {
       this.isTree = true;
     }
@@ -171,7 +174,6 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       nodeStateStyles,
       edgeStateStyles,
       comboStateStyles,
-
       modes = { default: [] },
       animate,
       ...otherOptions
@@ -189,7 +191,8 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     this.width = Number(width) || clientWidth || 500;
     this.height = Number(height) || clientHeight || 500;
 
-    this.theme = getDefaultStyleByTheme(theme);
+    const themeResult = getDefaultStyleByTheme(theme);
+
     const {
       defaultNodeStyle,
       defaultEdgeStyle,
@@ -197,10 +200,13 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       defaultNodeStatusStyle,
       defaultEdgeStatusStyle,
       defaultComboStatusStyle,
-    } = this.theme;
-
+    } = themeResult;
+    // @ts-ignore
+    this.theme = themeResult as ThemeData;
     /** graph type */
-    this.isTree = Boolean(data.children) || TREE_LAYOUTS.indexOf(layout && layout.type) !== -1;
+    this.isTree = Boolean(data.children) || TREE_LAYOUTS.indexOf(String(layout && layout.type)) !== -1;
+    const isGraphinNodeType = defaultNode?.type === undefined || defaultNode?.type === defaultNodeStyle.type;
+    const isGraphinEdgeType = defaultEdge?.type === undefined || defaultEdge?.type === defaultEdgeStyle.type;
 
     this.options = {
       container: this.graphDOM,
@@ -209,8 +215,8 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       height: this.height,
       animate: animate !== false,
       /** 默认样式 */
-      defaultNode: deepMix({}, defaultNodeStyle, defaultNode),
-      defaultEdge: deepMix({}, defaultEdgeStyle, defaultEdge),
+      defaultNode: isGraphinNodeType ? deepMix({}, defaultNodeStyle, defaultNode) : defaultNode,
+      defaultEdge: isGraphinEdgeType ? deepMix({}, defaultEdgeStyle, defaultEdge) : defaultEdge,
       defaultCombo: deepMix({}, defaultComboStyle, defaultCombo),
       /** status 样式 */
       nodeStateStyles: deepMix({}, defaultNodeStatusStyle, nodeStateStyles),
@@ -219,7 +225,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
 
       modes,
       ...otherOptions,
-    };
+    } as GraphOptions;
 
     if (this.isTree) {
       this.options.layout = { ...layout };
@@ -229,7 +235,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
       this.graph = new G6.Graph(this.options);
     }
 
-    this.graph.data(this.data);
+    this.graph.data(this.data as GraphData | TreeGraphData);
     /** 初始化布局 */
     if (!this.isTree) {
       this.layout = new LayoutController(this);
@@ -264,7 +270,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
    * @param prevProps
    */
   updateOptions = () => {
-    const { options } = this.props;
+    const { layout, data, ...options } = this.props;
     return options;
   };
 
@@ -272,34 +278,34 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
   initStatus = () => {
     if (!this.isTree) {
       const { data } = this.props;
-      const { nodes = [], edges = [] } = data;
+      const { nodes = [], edges = [] } = data as GraphinData;
       nodes.forEach(node => {
-        const { states } = node;
-        if (states) {
-          Object.keys(states).forEach(k => {
-            this.graph.setItemState(node.id, k, states[k]);
+        const { status } = node;
+        if (status) {
+          Object.keys(status).forEach(k => {
+            this.graph.setItemState(node.id, k, Boolean(status[k]));
           });
         }
       });
       edges.forEach(edge => {
-        const { states } = edge;
-        if (states) {
-          Object.keys(states).forEach(k => {
-            this.graph.setItemState(edge.id, k, states[k]);
+        const { status } = edge;
+        if (status) {
+          Object.keys(status).forEach(k => {
+            this.graph.setItemState(edge.id, k, Boolean(status[k]));
           });
         }
       });
     }
   };
 
-  componentDidUpdate(prevProps: Graphin.Props) {
+  componentDidUpdate(prevProps: GraphinProps) {
     console.time('did-update');
     const isDataChange = this.shouldUpdate(prevProps, 'data');
     const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
     const isOptionsChange = this.shouldUpdate(prevProps, 'options');
     const isThemeChange = this.shouldUpdate(prevProps, 'theme');
     console.timeEnd('did-update');
-    const { data, layout, options } = this.props;
+    const { data } = this.props;
     const isGraphTypeChange = prevProps.data.children !== data.children;
 
     if (isThemeChange) {
@@ -320,8 +326,8 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     if (isDataChange) {
       this.initData(data);
       this.layout.changeLayout();
-      this.graph.data(this.data);
-      this.graph.changeData(this.data);
+      this.graph.data(this.data as GraphData | TreeGraphData);
+      this.graph.changeData(this.data as GraphData | TreeGraphData);
       this.initStatus();
       this.apis = ApiController(this.graph);
       console.log('%c isDataChange', 'color:grey');
@@ -331,6 +337,7 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
           context: {
             graph: this.graph,
             apis: this.apis,
+            theme: this.theme,
           },
         };
       });
@@ -373,15 +380,15 @@ class Graphin extends React.PureComponent<Graphin.Props, Graphin.State> {
     if (this.layout && this.layout.destroyed) {
       this.layout.destroy(); // tree graph
     }
-    this.layout = {};
+    this.layout = {} as LayoutController;
     this.graph!.clear();
     this.data = { nodes: [], edges: [], combos: [] };
     this.graph!.destroy();
   };
 
-  shouldUpdate(prevProps: Graphin.Props, key: string) {
+  shouldUpdate(prevProps: GraphinProps, key: string) {
     /* eslint-disable react/destructuring-assignment */
-    const prevVal = prevProps[key] as DiffValue;
+    const prevVal = prevProps[key];
     const currentVal = this.props[key] as DiffValue;
     const isEqual = deepEqual(prevVal, currentVal);
     return !isEqual;
