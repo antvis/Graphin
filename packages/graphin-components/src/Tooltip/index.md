@@ -25,7 +25,7 @@ Tooltip 提示框是一种快速浏览信息的交互组件，常用于图的节
 
 ## 开放组件：集成 Antd 的 Popover 组件
 
-<code src='./demos/Antd.tsx'>
+<code src='./demos/Antd.tsx' />
 
 ## 功能特性
 
