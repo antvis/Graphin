@@ -1,10 +1,10 @@
 import { IGroup } from '@antv/g-base';
-import G6, { INode, IItemBase } from '@antv/g6';
-import { deepMix, isArray, isNumber, isObject } from '@antv/util';
-import hexToRgba from '../utils/hexToRgba';
-import createUuid from '../utils/uuid';
-import { IUserNode, NodeStyle } from '../typings/type';
 
+import G6, { INode } from '@antv/g6';
+import { deepMix, isArray, isNumber } from '@antv/util';
+
+import { IUserNode, NodeStyle } from '../typings/type';
+import { setStatusStyle } from './utils';
 /**
  * 将 size 转换为宽度和高度
  * @param size
@@ -29,55 +29,9 @@ const convertSizeToWH = (size: number | number[] | undefined) => {
   return [width, height];
 };
 
-const NodeSize = 36;
-
-const primaryColor = '#FF6A00';
-
-const Color = {
-  fill: hexToRgba(primaryColor, '0.1'),
-  stroke: primaryColor,
-  icon: '#fff',
-  badge: {
-    fill: primaryColor,
-    stroke: primaryColor,
-    font: '#fff',
-  },
-};
-
-const defaultStyle = {
-  keyshape: {
-    size: NodeSize,
-    fill: Color.fill,
-    stroke: Color.stroke,
-    lineWidth: 1,
-    opacity: 1,
-  },
-  label: {
-    position: 'bottom',
-    value: '',
-    fill: 'rgb(0, 0, 0)',
-    fontSize: 12,
-    offset: 0,
-  },
-  icon: {
-    type: 'text',
-    value: '',
-    size: NodeSize,
-    fill: Color.icon,
-  },
-  badges: [],
-  halo: {
-    r: NodeSize + NodeSize / 12,
-    fill: Color.fill,
-    lineWidth: 1,
-    opacity: 0.9,
-    visible: false,
-  },
-};
-
 /** 根据用户输入的json，解析成attr */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const paserAttr = (
+const parseAttr = (
   schema: {
     type?: string;
     size?: number | [number, number];
@@ -114,41 +68,6 @@ const paserAttr = (
   });
 
   return schema;
-};
-
-const defaultStatusStyle = {
-  selected: {
-    halo: {
-      visible: true,
-    },
-    keyshape: {
-      lineWidth: 5,
-    },
-
-    //  // 这里需要特殊处理
-    //  keyshape: {
-    //   size: [80, 80],
-    // },
-    // icon: {
-    //   type: 'font',
-    //   size: 40,
-    // },
-  },
-  hover: {
-    halo: {
-      visible: true,
-    },
-  },
-  active: {
-    halo: {
-      visible: true,
-    },
-  },
-  inactive: {
-    halo: {
-      visible: true,
-    },
-  },
 };
 
 function getRadiusBySize(size: number | [number] | [number, number] | undefined) {
@@ -392,58 +311,20 @@ export default () => {
     setState(name: string, value: string, item: INode) {
       if (!name) return;
       const model = item.getModel() as any;
-      // const originStyles = { ...model.style } as any;
-
       const shapes = item.getContainer().get('children'); // 顺序根据 draw 时确定
       const initStateStyle = deepMix({}, model.style.status);
-
       const initialStyle = item.getModel()._initialStyle as any;
-
-      const setStatusStyle = (statusKey: string) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        shapes.forEach((g6Shape: any) => {
-          const itemShapeName = g6Shape.cfg.name;
-          const customAttrs = initStateStyle[statusKey][itemShapeName];
-          if (customAttrs) {
-            const { animate, visible, ...otherAttrs } = paserAttr(customAttrs, itemShapeName);
-            g6Shape.attr(otherAttrs);
-            g6Shape.cfg.visible = visible !== false;
-            if (animate) {
-              const { attrs, ...animateOptions } = animate;
-              g6Shape.animate(attrs, animateOptions);
-            }
-          }
-        });
-      };
-      const resetStatusStyle = (id: string) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        shapes.forEach((g6Shape: any) => {
-          const itemShapeName = g6Shape.cfg.name;
-          const orgiinStyle = initialStyle[itemShapeName];
-          if (orgiinStyle) {
-            const { animate, visible, ...otherAttrs } = paserAttr(orgiinStyle, itemShapeName);
-            g6Shape.attr(otherAttrs);
-            g6Shape.cfg.visible = visible !== false;
-            if (animate) {
-              const { attrs, ...animateOptions } = animate;
-              g6Shape.animate(attrs, animateOptions);
-            }
-          }
-        });
-      };
-
       const status = item._cfg?.states || [];
       try {
-        Object.keys(initStateStyle).forEach(key => {
-          if (name === key) {
+        Object.keys(initStateStyle).forEach(statusKey => {
+          if (name === statusKey) {
             if (value) {
-              setStatusStyle(key); // 匹配到status就改变
+              setStatusStyle(shapes, initStateStyle[statusKey], parseAttr); // 匹配到status就改变
             } else {
-              resetStatusStyle(model.id as string); //没匹配到就重置
-
+              setStatusStyle(shapes, initialStyle, parseAttr); //没匹配到就重置
               status.forEach(statusKey => {
                 // 如果cfg.status中还有其他状态，那就重新设置回来
-                setStatusStyle(statusKey);
+                setStatusStyle(shapes, initStateStyle[statusKey], parseAttr);
               });
             }
           }
@@ -513,21 +394,8 @@ export default () => {
       try {
         const style = getStyles(cfg._initialStyle, cfg.style) as NodeStyle;
         cfg._initialStyle = { ...style };
-        const shapes = item.getContainer().get('children'); // 顺序根据 draw 时确定
-
-        shapes.forEach((g6Shape: any) => {
-          const itemShapeName = g6Shape.cfg.name as 'icon' | 'keyshape' | 'halo' | 'label' | 'badges';
-          const customAttrs = style[itemShapeName];
-          if (customAttrs) {
-            const { animate, visible, ...otherAttrs } = paserAttr(customAttrs as any, itemShapeName);
-            g6Shape.attr(otherAttrs);
-            g6Shape.cfg.visible = visible !== false;
-            if (animate) {
-              const { attrs, ...animateOptions } = animate;
-              g6Shape.animate(attrs, animateOptions);
-            }
-          }
-        });
+        const shapes = item.getContainer().get('children');
+        setStatusStyle(shapes, style, parseAttr);
       } catch (error) {
         console.error('error');
       }
