@@ -1,3 +1,5 @@
+import { ThemeType } from '../consts';
+
 export interface UserProperties {
   [key: string]: any;
 }
@@ -20,7 +22,7 @@ export interface RestNode {
   /** 节点的样式，默认为默认样式 */
   style: Partial<NodeStyle>;
   /**  节点当前的状态 */
-  status: ElementStatus;
+  status: Partial<ElementStatus>;
   /** 布局的相关信息 */
   layout: {
     /** 度数 */
@@ -32,6 +34,15 @@ export interface RestNode {
   };
 }
 export interface ElementStatus {
+  /** 是否选中 */
+  selected: boolean;
+  /** 是否Hover */
+  hover: boolean;
+  /** 是否激活 */
+  active: boolean;
+  /** 是否禁用 */
+  disabled: boolean;
+  /** 用户自定义的状态 */
   [key: string]: boolean;
 }
 
@@ -43,38 +54,13 @@ type BaseEdge = {
   target: string;
 };
 
-interface EdgeStatus {
-  [key: string]: {
-    stroke: string;
-    opacity: string;
-    shadowColor: string;
-    shadowBlur: number;
-    animation?: {
-      /**
-       * dotted：表示边上虚线运动的动画效果
-       * dot：表示边上一个圆点的运动效果
-       * grow：边从无到有出现的效果
-       */
-      type: 'dotted' | 'dot' | 'grow';
-      // 一次动画的时长
-      duration: number;
-      // 动画函数，详情参考 https://github.com/d3/d3/blob/master/API.md#easings-d3-ease
-      easing: string;
-      // 动画执行延迟时间
-      delay: number;
-      // 是否重复执行动画
-      repeat: boolean;
-    };
-  };
-}
-
 export interface RestEdge {
   /** 边的类型 */
   type?: string;
   /** 边的数据 */
   style: Partial<EdgeStyle>;
   /**  边当前的状态 */
-  status: EdgeStatus;
+  status: Partial<ElementStatus>;
   layout: {
     /** 边的弹簧长度，力导时使用 */
     spring?: number;
@@ -89,44 +75,49 @@ export enum NodeShape {
   RECT = 'rect',
 }
 
-export interface IGraphData {
+export interface GraphinData {
   nodes: IUserNode[] | [];
   edges: IUserEdge[] | [];
   combos: Combo[] | [] | undefined | null;
   children?: any;
 }
-export interface ITreeData {
+export interface GraphinTreeData {
   id: string;
-  children: Partial<ITreeData>[];
+  children: Partial<GraphinTreeData>[];
 }
 
 export interface GraphinProps {
+  /** user custom styles */
+  style?: React.CSSProperties;
   /** 主题 */
-  theme: {
-    mode: 'light' | 'dark';
-    primaryColor: string;
-    primarySize: number;
-  };
+  theme?: ThemeType;
   /** 数据 */
-  data: ITreeData | IGraphData;
+  data: GraphinTreeData | GraphinData;
   /** 布局 */
   layout?: Layout;
+  /** 模式 G6的options.modes,建议使用 behaviors components 代替 */
+  modes?: any;
 
   /** 默认的节点样式 */
-  defaultNode?: Partial<NodeStyle> | any;
+  defaultNode?: Partial<NodeStyle>;
   /** 默认的边样式 */
-  defaultEdge?: Partial<EdgeStyle> | any;
+  defaultEdge?: Partial<EdgeStyle>;
   /** 默认的Combo样式 */
   defaultCombo?: Partial<ComboStyle> | any;
-  /**
-   * 节点默认状态样式
-   *
-   */
-  nodeStateStyles?: {};
-  /**
-   * 边默认状态样式
-   */
-  edgeStateStyles?: {};
+
+  /** 默认的节点 状态样式 */
+  nodeStateStyles?: {
+    status: Partial<NodeStyle['status']>;
+  };
+  /** 默认的边 状态样式 */
+  edgeStateStyles?: {
+    status: Partial<EdgeStyle['status']>;
+  };
+  /** 默认的Combo样式 */
+  comboStateStyles?: {
+    status: Partial<ComboStyle['status']>;
+  };
+
   /** 宽度 */
   width?: number;
   /** 高度 */
@@ -158,7 +149,7 @@ export interface GraphinProps {
   /**
    * 多边配置
    */
-  parallel: Partial<{
+  parallel?: Partial<{
     // 多边之间的偏移量
     offsetDiff: number;
     // 多条边时边的类型
@@ -168,6 +159,8 @@ export interface GraphinProps {
     // 自环边的类型
     loopEdgeType: string;
   }>;
+  /** user custom props */
+  [key: string]: any;
 
   // children: React.ReactChildren;
 }
@@ -177,12 +170,50 @@ export interface GraphinNode extends BaseNode, RestNode, UserProperties {}
 
 export interface EdgeStyle {
   /** 边的类型 */
-  type: 'graphin-line' | 'line';
-  label: {
+  type?: 'graphin-line';
+  /** keyshape */
+  keyshape: Partial<{
+    /** 边的类型：目前是line 直线，未来可以扩展 */
+    type: string;
+    /** 边宽 */
+    lineWidth: number;
+    /** 边的填充色 */
+    stroke: string;
+    /** 透明度 */
+    opacity: number;
+    /** 虚线Dash */
+    lineDash: [number, number] | number;
+    /** 边的交互区域扩展 */
+    lineAppendWidth: number;
+    /** 鼠标样式 */
+    cursor: string;
+  }>;
+  /** 标签 */
+  label: Partial<{
+    /** 值 */
     value: string | number;
+    /** TODO：位置  */
     position: '' | 'T';
+    /** 默认自动旋转 */
     autoRote: boolean;
-  };
+  }>;
+  /** 光晕 */
+  halo: Partial<{
+    type: string;
+    lineWidth: number;
+    stroke: string;
+    opacity: number;
+    lineDash: [number, number] | number;
+    lineAppendWidth: number;
+    cursor: string;
+  }>;
+  /** 状态样式 */
+  status: Partial<{
+    selected: Partial<EdgeStyle>;
+    hover: Partial<EdgeStyle>;
+    disabled: Partial<EdgeStyle>;
+    [key: string]: any;
+  }>;
 }
 
 export interface IUserEdge extends BaseEdge, Partial<RestEdge>, UserProperties {}
@@ -257,6 +288,15 @@ export interface NodeStyle {
   badges: NodeStyleBadge[];
   /** 光环 */
   halo: NodeStyleHalo;
+  /** 状态样式 */
+  status?: Partial<{
+    keyshape: NodeStyleKeyShape;
+    label: NodeStyleLabel;
+    icon: NodeStyleIcon;
+    badges: NodeStyleBadge[];
+    halo: NodeStyleHalo;
+  }>;
+  [key: string]: any;
 }
 
 export type NodeStyleHalo = Partial<{
@@ -271,7 +311,10 @@ export type NodeStyleHalo = Partial<{
   /** 透明度 */
   opacity: number;
 }>;
-export interface ComboStyle {}
+export interface ComboStyle {
+  status?: any;
+  [key: string]: any;
+}
 
 export interface Layout {
   /** 布局名称，必选 */

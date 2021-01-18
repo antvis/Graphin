@@ -1,5 +1,5 @@
 import Tree from './Tree';
-import { NodeStyleLabel, NodeStyleIcon, NodeStyleBadge, IUserNode, IUserEdge, IGraphData } from '../typings/type';
+import { NodeStyleLabel, NodeStyleIcon, NodeStyleBadge, IUserNode, IUserEdge, GraphinData } from '../typings/type';
 
 const defaultOptions = {
   /** 节点 */
@@ -175,7 +175,7 @@ export class Mock {
     return this;
   };
 
-  graphin = (): IGraphData => {
+  graphin = (): GraphinData => {
     return {
       // @ts-ignore
       nodes: this.nodes.map(node => {
@@ -186,7 +186,7 @@ export class Mock {
           comboId: node.comboId,
           style: {
             label: {
-              value: `node-${node.id}`,
+              value: `${node.id}`,
             },
           },
         };
@@ -195,8 +195,8 @@ export class Mock {
         return {
           source: edge.source,
           target: edge.target,
-          label: edge.label,
-          data: edge,
+          // label: edge.label,
+          // data: edge,
         };
       }),
       combos: this.combosData,
