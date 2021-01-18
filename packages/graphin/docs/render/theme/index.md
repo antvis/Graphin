@@ -13,9 +13,13 @@ nav:
 
 Graphin 根据《图可视分析设计指引》，内置了 Theme，Theme
 
-### Light
+### 主题对比
 
-<code src='./light.tsx'>
+<code src='./index.tsx'>
+
+### 主题自定义
+
+<code src='./setting.tsx'>
 
 ### Dark
 
