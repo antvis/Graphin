@@ -1,7 +1,7 @@
 import Graphin from '../../Graphin';
 
 export default () => {
-  Graphin.registerLayout('render', {
+  Graphin.registerLayout('preset', {
     init() {},
     execute() {},
     destroy() {
