@@ -46,19 +46,23 @@ const parseAttr = (
     schema.fontSize = size;
     schema.text = value;
   }
-  if (type === 'image') {
-    const [width, height] = convertSizeToWH(size);
-    schema.x = -width / 2;
-    schema.y = -height / 2;
-    schema.img = value;
-    schema.width = width;
-    schema.height = height;
-  }
+
   if (itemShapeName === 'keyshape') {
     schema.r = getRadiusBySize(size);
   }
   if (itemShapeName === 'halo') {
     schema.r = getRadiusBySize(size);
+  }
+  if (itemShapeName === 'icon') {
+    if (type === 'image') {
+      const [width, height] = convertSizeToWH(size);
+      schema.x = -width / 2;
+      schema.y = -height / 2;
+      schema.img = value;
+      schema.width = width;
+      schema.height = height;
+      delete schema.fill; //如果是图片类型，需要删除fill
+    }
   }
 
   Object.keys(schema).forEach(key => {
@@ -272,6 +276,7 @@ export default () => {
               x: realX,
               y: realY,
               radius: (height + padding * 2) / 3,
+              name: 'badges',
             },
           });
         }
@@ -289,7 +294,7 @@ export default () => {
               fill: color,
             },
             capture: false,
-            name: 'circle-badge-content',
+            name: 'badges',
           });
         } else if (type === 'image') {
           group.addShape('image', {
@@ -301,7 +306,7 @@ export default () => {
               img: badgeValue,
             },
             capture: false,
-            name: 'circle-badge-content',
+            name: 'badges',
           });
         }
       });
@@ -315,6 +320,7 @@ export default () => {
       const initStateStyle = deepMix({}, model.style.status);
       const initialStyle = item.getModel()._initialStyle as any;
       const status = item._cfg?.states || [];
+
       try {
         Object.keys(initStateStyle).forEach(statusKey => {
           if (name === statusKey) {
@@ -344,13 +350,21 @@ export default () => {
       const { label, keyshape } = cfg;
 
       const { size } = keyshape;
-      const { position: labelPosition, offset = 0 } = label;
 
+      let offsetArray = [0, 0];
+      const { position: labelPosition, offset = offsetArray } = label;
+      if (typeof offset === 'number' || typeof offset === 'string') {
+        offsetArray = [Number(offset), Number(offset)];
+      }
+      if (offset.length > 0) {
+        offsetArray = offset;
+      }
+
+      const [offsetX, offsetY] = offsetArray;
       // 默认的位置（最可能的情形），所以放在最上面
       if (labelPosition === 'center') {
         return { x: 0, y: 0 };
       }
-
       const wh = convertSizeToWH(size);
 
       const width = wh[0];
@@ -360,29 +374,29 @@ export default () => {
       switch (labelPosition) {
         case 'top':
           style = {
-            x: 0,
-            y: 0 - height / 2 - offset,
+            x: 0 + offsetX,
+            y: -height / 2 - offsetY,
             textBaseline: 'bottom', // 文本在图形的上面
           };
           break;
         case 'bottom':
           style = {
-            x: 0,
-            y: height / 2 + offset,
+            x: 0 + offsetX,
+            y: height / 2 + offsetY,
             textBaseline: 'top',
           };
           break;
         case 'left':
           style = {
-            x: 0 - width / 2 - offset,
-            y: 0,
+            x: 0 - width - offsetX,
+            y: 0 + offsetY,
             textAlign: 'right',
           };
           break;
         default:
           style = {
-            x: width / 2 + offset,
-            y: 0,
+            x: width + offsetX,
+            y: 0 + offsetY,
             textAlign: 'left',
           };
           break;

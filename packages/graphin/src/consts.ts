@@ -127,6 +127,7 @@ export const genDefaultNodeStyle = ({
         stroke: Color.stroke,
         lineWidth: 1,
         opacity: 1,
+        type: 'circle',
       },
       label: {
         position: 'bottom',
@@ -140,6 +141,7 @@ export const genDefaultNodeStyle = ({
         value: '',
         size: nodeSize / 2,
         fill: Color.icon,
+        offset: [0, 0],
       },
       badges: [],
       halo: {},
@@ -259,7 +261,7 @@ export const genDefaultEdgeStyle = ({ edgeSize = 0.1, edgePrimaryColor = '#ddd',
   };
 };
 
-function genDefaultComboStyle(theme: ThemeType) {
+export function genDefaultComboStyle(theme: ThemeType) {
   const defaultStyle = {
     type: 'circle',
     style: {
