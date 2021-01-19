@@ -18,7 +18,7 @@ nav:
 
 ### 树图渲染
 
-<!-- <code src='./CompactBox.tsx'> -->
+<code src='./CompactBox.tsx'>
 
 ### 网图渲染
 
