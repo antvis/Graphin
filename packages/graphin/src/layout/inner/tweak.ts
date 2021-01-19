@@ -1,4 +1,4 @@
-import { IGraphData, IUserNode, IUserEdge } from '../../typings/type';
+import { GraphinData, IUserNode, IUserEdge } from '../../typings/type';
 
 /* eslint-disable no-param-reassign */
 const getRandomPosition = () => {
@@ -12,7 +12,7 @@ const getRandomPosition = () => {
 
 const width = 500;
 const height = 300;
-const tweak = (currentData: IGraphData, prevData: IGraphData) => {
+const tweak = (currentData: GraphinData, prevData: GraphinData) => {
   const { nodes: currNodes, edges: currEdges } = currentData;
   const { nodes: preNodes } = prevData;
 

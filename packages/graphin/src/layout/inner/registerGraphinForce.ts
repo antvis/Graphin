@@ -1,6 +1,6 @@
 import Force from '../force';
 import Graphin from '../../Graphin';
-import { IGraphData } from '../../typings/type';
+import { GraphinData } from '../../typings/type';
 
 export default () => {
   Graphin.registerLayout('graphin-force', {
@@ -40,7 +40,7 @@ export default () => {
      * 初始化
      * @param {Object} data 数据
      */
-    init(data: IGraphData) {
+    init(data: GraphinData) {
       const self = this;
       self.nodes = data.nodes;
       self.edges = data.edges;
@@ -67,7 +67,7 @@ export default () => {
       self.simulation.setData(data);
 
       // 3. Custom rendering function
-      self.simulation.register('render', (forceData: IGraphData) => {
+      self.simulation.register('render', (forceData: GraphinData) => {
         if (!animation && data && data.nodes && data.nodes.length > 0) {
           // 如果不需要动画
           const { nodes } = forceData;
@@ -124,7 +124,7 @@ export default () => {
      * 根据传入的数据进行布局
      * @param {Object} data 数据
      */
-    layout(data: IGraphData) {
+    layout(data: GraphinData) {
       const self = this;
       self.init(data);
       self.execute();

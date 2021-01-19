@@ -1,6 +1,6 @@
+import G6, { INode } from '@antv/g6';
 import { IGroup } from '@antv/g-base';
 
-import G6, { INode } from '@antv/g6';
 import { deepMix, isArray, isNumber } from '@antv/util';
 
 import { IUserNode, NodeStyle } from '../typings/type';

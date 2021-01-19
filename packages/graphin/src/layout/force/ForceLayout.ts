@@ -3,7 +3,7 @@ import Point from './Point';
 import { Node, Edge } from './Elements';
 import Spring from './Spring';
 import { getDegree } from '../utils/graph';
-import { IGraphData as Data, IUserNode as NodeType } from '../../typings/type';
+import { GraphinData as Data, IUserNode as NodeType } from '../../typings/type';
 import { Item, Graph } from '@antv/g6/';
 
 type ForceNodeType = Node;
