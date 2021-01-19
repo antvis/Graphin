@@ -196,6 +196,10 @@ export interface EdgeStyle {
     position: '' | 'T';
     /** 默认自动旋转 */
     autoRote: boolean;
+    /** 字体填充色 */
+    fill: string;
+    /** 其他配置 */
+    [key: string]: any;
   }>;
   /** 光晕 */
   halo: Partial<{
