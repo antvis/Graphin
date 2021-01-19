@@ -78,7 +78,7 @@ export enum NodeShape {
 export interface GraphinData {
   nodes: IUserNode[] | [];
   edges: IUserEdge[] | [];
-  combos: Combo[] | [] | undefined | null;
+  combos?: Combo[] | [] | undefined | null;
   children?: any;
 }
 export interface GraphinTreeData {
@@ -224,19 +224,19 @@ export interface Combo {}
 export type NodeStyleLabel = Partial<{
   /** label的名称 */
   value: string;
-  /** 展示位置 */
-  position: 'top' | 'bottom' | 'left' | 'right' | 'center';
+  /** 展示位置  'top' | 'bottom' | 'left' | 'right' | 'center' | */
+  position: 'top' | 'bottom' | 'left' | 'right' | 'center' | string;
   /** 文本填充色 */
   fill: string;
   /** 文本大小 */
   fontSize: number;
-  /** 文本在各自方向上的偏移量，主要为了便于调整文本位置 */
-  offset: number;
+  /** 文本在各自方向上的偏移量，主要为了便于调整文本位置,[offsetX,offsetY] */
+  offset: [number, number];
 }>;
 
 export type NodeStyleIcon = Partial<{
-  /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
-  type: 'font' | 'image' | 'text';
+  /** 类型可以为字体图标，可以为网络图片，可以为纯文本 'font' | 'image' | 'text'*/
+  type: 'font' | 'image' | 'text' | string;
   /** 根据类型，填写对应的值 */
   value: string;
   /** 图标大小 */
@@ -248,9 +248,9 @@ export type NodeStyleIcon = Partial<{
 
 export type NodeStyleBadge = Partial<{
   /** 放置的位置，ef：LT（left top）左上角 */
-  position: 'LT' | 'RT' | 'RB' | 'LB';
+  position: 'LT' | 'RT' | 'RB' | 'LB' | string;
   /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
-  type: 'font' | 'image' | 'text';
+  type: 'font' | 'image' | 'text' | string;
   value: number | string;
   // type = image 时生效，表示图片的宽度和高度
   size: [number, number] | [number];

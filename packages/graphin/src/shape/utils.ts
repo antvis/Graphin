@@ -7,6 +7,9 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const setStatusStyle = (shapes: any, statusStyle: any, parseAttr: (style: any, shapeName: string) => any) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if (!statusStyle) {
+    return;
+  }
   try {
     shapes.forEach((shapeItem: any) => {
       const itemShapeName = shapeItem.cfg.name;
