@@ -6,7 +6,7 @@ Graphin's font icons
 
 ## Usage
 
-```tsx
+```jsx | pure
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
@@ -21,22 +21,23 @@ import fontLoader from '@antv/graphin-icons';
 import '@antv/graphin-icons/dist/index.css';
 
 /** 加载 font icons **/
-Graphin.registerIcon('graphin', fontLoader);
+const icons = Graphin.registerFontFamily(iconLoader);
 const data = Utils.mock(10).graphin();
 
 data.nodes.forEach((node) => {
-  node.style.icon = {
-    fontFamilay: 'graphin',
-    value: 'eye',
+  node.style = {
+    icon: {
+      type: 'font',
+      fontFamilay: 'graphin',
+      value: icons.plus,
+    },
   };
 });
 
 const App = () => {
   return (
     <div className="App">
-      <Graphin data={data}>
-        <Toolbar />
-      </Graphin>
+      <Graphin data={data}></Graphin>
     </div>
   );
 };

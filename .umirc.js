@@ -10,7 +10,7 @@ export default {
     includes: [
       'packages/graphin/docs/',
       'packages/graphin-components/src/',
-
+      'packages/graphin-icons/src',
       /** local develop */
       // 'packages/graphin/docs/geamaker/',
     ],
