@@ -323,7 +323,7 @@ const GraphScope: React.FC<IGraphProps> = ({
 
   return (
     <div>
-      <Graphin graphDOM={graphDOM} data={state.data} layout={layout} width={width} height={height}>
+      <Graphin graphDOM={graphDOM} data={state.data as any} layout={layout} width={width} height={height}>
         <ZoomCanvas enableOptimize />
         <DragNode />
         {hasMinimap && <MiniMap visible={true} options={{ padding: 20, size: [140, 70] }} />}
