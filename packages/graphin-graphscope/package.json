@@ -1,8 +1,8 @@
 {
   "name": "@antv/graphin-graphscope",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "description": "An Example for GraphScope",
-  "main": "es/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "start": " node --max_old_space_size=8192 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --env.NODE_ENV=development",
     "build": "npm run clean && father build",
@@ -11,8 +11,10 @@
     "deploy": "npm run build && gh-pages -d ./dist -r https://github.com/antvis/graphin-studio-site.git"
   },
   "dependencies": {
-    "@antv/graphin": "*",
-    "@antv/graphin-components": "*",
+    "@antv/graphin": "^2.0.0-beta.4",
+    "@antv/graphin-components": "^2.0.0-beta.1",
+    "@antv/graphin-icons": "^1.0.0",
+    "antd": "^4.10.3",
     "react": "^16.9.0",
     "react-color": "^2.17.3",
     "react-dom": "^16.9.0"

@@ -15,7 +15,8 @@
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "sourceMap": true,
-    "isolatedModules": true,
+    "skipLibCheck": true,
+    "isolatedModules": false,
     "downlevelIteration": true
   },
   "include": ["src"]
