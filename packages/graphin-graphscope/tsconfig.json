@@ -1,31 +1,22 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "strictNullChecks": false,
-        "forceConsistentCasingInFileNames": true,
-        "module": "esnext",
-        "sourceMap": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "downlevelIteration": true,
-        "noImplicitAny": false,
-        "jsx": "react",
-        "baseUrl": "./",
-        "paths": {
-            "@types": ["src/types.ts"],
-            "@service": ["src/Service/index.ts"],
-            "@service/*": ["src/Service/*"],
-            "@utils/*": ["src/Utils/*"],
-            "@com": ["src/Components/index.ts"],
-            "@com/*": ["src/Components/*"]
-        }
-    },
-    "include": ["src"]
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "allowJs": false,
+    "target": "es2015",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "lib": ["dom", "esnext"],
+    "declaration": true,
+    "esModuleInterop": true,
+    "strictNullChecks": false,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "sourceMap": true,
+    "isolatedModules": true,
+    "downlevelIteration": true
+  },
+  "include": ["src"]
 }

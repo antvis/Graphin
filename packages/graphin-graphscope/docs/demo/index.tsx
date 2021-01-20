@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import GraphScopeComponent from '@antv/graphin-graphscope';
+import { GraphScopeComponent } from '@antv/graphin-graphscope';
 import { Utils } from '@antv/graphin';
 
 const originData = Utils.mock(5)
@@ -17,7 +17,6 @@ export default () => {
   const domRef = React.useRef(null);
 
   const queryNeighbors = (nodeId: string, degree: number) => {
-    debugger;
     const model = data.nodes.filter(node => node.id === nodeId);
     const newData = Utils.mock(3)
       .expand(model)

@@ -1,5 +1,5 @@
 export default {
-  entry: './src/index.tsx',
+  entry: './src/index.ts',
   esm: 'babel',
   cjs: 'babel',
 };

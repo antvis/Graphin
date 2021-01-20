@@ -22,7 +22,7 @@ const defaultLayout = {
     type: 'concentric',
   },
   animation: true,
-  defSpringLen: (_edge, source, target) => {
+  defSpringLen: (_edge: any, source: any, target: any) => {
     /** 默认返回的是 200 的弹簧长度 */
     /** 如果你要想要产生聚类的效果，可以考虑 根据边两边节点的度数来动态设置边的初始化长度：度数越小，则边越短 */
 
@@ -90,7 +90,7 @@ const layouts = [
     alpha: 0.9, // 可选
     alphaDecay: 0.3, // 可选
     alphaMin: 0.01, // 可选
-    forceSimulation: null, // 可选
+    // forceSimulation: null, // 可选
     onTick: () => {
       // 可选
       console.log('ticking');
@@ -175,7 +175,7 @@ interface IGraphProps {
   nodeLabel?: string;
 }
 
-let refreshData = null;
+let refreshData: any = null;
 
 const GraphScope: React.FC<IGraphProps> = ({
   data,
@@ -192,8 +192,8 @@ const GraphScope: React.FC<IGraphProps> = ({
     data: {},
   });
 
-  const transGraphData = data => {
-    const nodes = data.nodes.map((node, index) => {
+  const transGraphData = (data: any) => {
+    const nodes = data.nodes.map((node: any, index: number) => {
       const primaryColor = colorSets[index > 10 ? 0 : index].mainFill;
       // clusterColorMap.set(node.id, primaryColor);
 
@@ -241,12 +241,11 @@ const GraphScope: React.FC<IGraphProps> = ({
       return nodes;
     });
 
-    const edges = data.edges.map(edge => {
-      const size = Math.log(edge.count) || 0.5;
+    const edges = data.edges.map((edge: any) => {
       return {
         ...edge,
         label: '',
-        size: size > 0.5 ? size : 0.5,
+        size: 0.5,
         color: '#AAB7C4', // '#545872',
         style: {
           endArrow: {
@@ -312,7 +311,7 @@ const GraphScope: React.FC<IGraphProps> = ({
     neighbors(nodeId, degree);
   };
 
-  const handleChangeLayout = value => {
+  const handleChangeLayout = (value: string) => {
     const currentLayout = layouts.find(item => item.type === value);
     setState(preState => {
       return {
