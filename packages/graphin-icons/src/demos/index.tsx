@@ -59,6 +59,7 @@ const Search = (props) => {
     let isKeyController = false;
     let isKeyF = false;
     graph.on('keydown', (e) => {
+      console.log('e', e);
       if (e.key === 'Control') {
         isKeyController = true;
       }
@@ -70,6 +71,16 @@ const Search = (props) => {
           return {
             ...preState,
             visible: true,
+          };
+        });
+      }
+      if (e.key === 'Escape') {
+        isKeyF = false;
+        isKeyController = false;
+        setState((preState) => {
+          return {
+            ...preState,
+            visible: false,
           };
         });
       }
@@ -87,32 +98,34 @@ const Search = (props) => {
   const styles = {
     position: 'absolute',
     width: '80%',
-    top: '50%',
-    left: '50%',
-    transform: ' translate(-50%, -50%)',
-    zIndex: 1000,
-    ...style,
-  };
-  const maskStyle = {
-    position: 'absolute',
-    width: '100%',
     top: '0px',
-    right: '0px',
-    left: '0px',
-    bottom: '0px',
-    zIndex: 999,
-    background: 'rgba(0,0,0,0.4)',
+    left: '50%',
+    transform: ' translate(-50%, 0)',
+    zIndex: 1000,
+    boxShadow: `0px 8px 10px -5px rgba(0,0,0,0.2), 0px 16px 24px 2px rgba(0,0,0,0.14), 0px 6px 30px 5px rgba(0,0,0,0.12)`,
+    ...style,
     display: visible ? 'block' : 'none',
   };
+  // const maskStyle = {
+  //   position: 'absolute',
+  //   width: '100%',
+  //   top: '0px',
+  //   right: '0px',
+  //   left: '0px',
+  //   bottom: '0px',
+  //   zIndex: 999,
+  //   background: 'rgba(0,0,0,0.4)',
+
+  // };
   const handleClose = () => {
     setState({ visible: false });
   };
   return (
-    <div style={maskStyle} onClick={handleClose}>
-      <div style={styles}>
-        <Input placeholder="Basic usage" />
-      </div>
+    // <div style={maskStyle} onClick={handleClose}>
+    <div style={styles}>
+      <Input placeholder="搜索图标" bordered={false} style={{ height: '80px' }} />
     </div>
+    // </div>
   );
 };
 const Demo = () => {
