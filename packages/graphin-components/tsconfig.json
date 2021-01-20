@@ -11,7 +11,10 @@
     "noImplicitAny": false,
     "lib": ["dom", "esnext"],
     "module": "esnext",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": false
   },
-  "include": ["src","src/**/demo/*.tsx"]
+  "include": ["src"],
+  "exclude": ["src/**/demos/*.tsx"]
 }

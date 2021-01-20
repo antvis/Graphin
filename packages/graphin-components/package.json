@@ -6,7 +6,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "start": "father build --watch",
-    "build": "father build && npm run  build:umd",
+    "build": "father build",
     "build:umd": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --env.NODE_ENV=production  -c ./webpack.config.js ",
     "test": "jest"
   },

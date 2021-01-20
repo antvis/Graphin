@@ -21,7 +21,11 @@ const Demo = () => {
   ];
   return (
     <div className="App">
-      <Graphin data={Utils.mock(10).circle().graphin()}>
+      <Graphin
+        data={Utils.mock(10)
+          .circle()
+          .graphin()}
+      >
         <Hull options={hullOptions} />
       </Graphin>
     </div>
