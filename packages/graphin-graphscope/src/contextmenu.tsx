@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraphinContext, Utils } from '@antv/graphin';
+import { GraphinContext } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 
 const { Menu } = ContextMenu;
