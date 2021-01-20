@@ -20,9 +20,12 @@ registerGraphinCircle();
 /** 注册 Graphin line Edge */
 registerGraphinLine();
 
+/** 解构静态方法 */
+const { registerFontFamily } = Graphin;
+
 /** export */
 export default Graphin;
-export { Utils, Layout, GraphinContext, Behaviors };
+export { Utils, Layout, GraphinContext, Behaviors, registerFontFamily };
 
 export { GraphinContextType, NodeStyle, EdgeStyle };
 export {
