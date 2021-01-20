@@ -351,13 +351,13 @@ export default () => {
 
       const { size } = keyshape;
 
-      let offsetArray = [0, 0];
+      let offsetArray: [number, number] = [0, 0];
       const { position: labelPosition, offset = offsetArray } = label;
       if (typeof offset === 'number' || typeof offset === 'string') {
         offsetArray = [Number(offset), Number(offset)];
       }
-      if (offset.length > 0) {
-        offsetArray = offset;
+      if ((offset as [number, number]).length > 0) {
+        offsetArray = offset as [number, number];
       }
 
       const [offsetX, offsetY] = offsetArray;

@@ -172,45 +172,51 @@ export interface EdgeStyle {
   /** 边的类型 */
   type?: 'graphin-line';
   /** keyshape */
-  keyshape: Partial<{
-    /** 边的类型：目前是line 直线，未来可以扩展 */
-    type: string;
-    /** 边宽 */
-    lineWidth: number;
-    /** 边的填充色 */
-    stroke: string;
-    /** 透明度 */
-    opacity: number;
-    /** 虚线Dash */
-    lineDash: [number, number] | number;
-    /** 边的交互区域扩展 */
-    lineAppendWidth: number;
-    /** 鼠标样式 */
-    cursor: string;
-  }>;
+  keyshape: Partial<
+    {
+      /** 边的类型：目前是line 直线，未来可以扩展 */
+      type: string;
+      /** 边宽 */
+      lineWidth: number;
+      /** 边的填充色 */
+      stroke: string;
+      /** 透明度 */
+      opacity: number;
+      /** 虚线Dash */
+      lineDash: [number, number] | number;
+      /** 边的交互区域扩展 */
+      lineAppendWidth: number;
+      /** 鼠标样式 */
+      cursor: string;
+    } & CommondAttrsStyle
+  >;
   /** 标签 */
-  label: Partial<{
-    /** 值 */
-    value: string | number;
-    /** TODO：位置  */
-    position: '' | 'T';
-    /** 默认自动旋转 */
-    autoRote: boolean;
-    /** 字体填充色 */
-    fill: string;
-    /** 其他配置 */
-    [key: string]: any;
-  }>;
+  label: Partial<
+    {
+      /** 值 */
+      value: string | number;
+      /** TODO：位置  */
+      position: '' | 'T';
+      /** 默认自动旋转 */
+      autoRote: boolean;
+      /** 字体填充色 */
+      fill: string;
+      /** 其他配置 */
+      [key: string]: any;
+    } & CommondAttrsStyle
+  >;
   /** 光晕 */
-  halo: Partial<{
-    type: string;
-    lineWidth: number;
-    stroke: string;
-    opacity: number;
-    lineDash: [number, number] | number;
-    lineAppendWidth: number;
-    cursor: string;
-  }>;
+  halo: Partial<
+    {
+      type: string;
+      lineWidth: number;
+      stroke: string;
+      opacity: number;
+      lineDash: [number, number] | number;
+      lineAppendWidth: number;
+      cursor: string;
+    } & CommondAttrsStyle
+  >;
   /** 状态样式 */
   status: Partial<{
     selected: Partial<EdgeStyle>;
@@ -225,62 +231,93 @@ export interface GraphinEdge extends BaseEdge, RestEdge, UserProperties {}
 
 export interface Combo {}
 
-export type NodeStyleLabel = Partial<{
-  /** label的名称 */
-  value: string;
-  /** 展示位置  'top' | 'bottom' | 'left' | 'right' | 'center' | */
-  position: 'top' | 'bottom' | 'left' | 'right' | 'center' | string;
-  /** 文本填充色 */
-  fill: string;
-  /** 文本大小 */
-  fontSize: number;
-  /** 文本在各自方向上的偏移量，主要为了便于调整文本位置,[offsetX,offsetY] */
-  offset: [number, number];
-}>;
-
-export type NodeStyleIcon = Partial<{
-  /** 类型可以为字体图标，可以为网络图片，可以为纯文本 'font' | 'image' | 'text'*/
-  type: 'font' | 'image' | 'text' | string;
-  /** 根据类型，填写对应的值 */
-  value: string;
-  /** 图标大小 */
-  size: number | number[];
-  /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
-  fill: string;
-  fontFamily: string;
-}>;
-
-export type NodeStyleBadge = Partial<{
-  /** 放置的位置，ef：LT（left top）左上角 */
-  position: 'LT' | 'RT' | 'RB' | 'LB' | string;
-  /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
-  type: 'font' | 'image' | 'text' | string;
-  value: number | string;
-  // type = image 时生效，表示图片的宽度和高度
-  size: [number, number] | [number];
-  /** 徽标填充色 */
-  fill: string;
-  /** 徽标描边色 */
+// https://g.antv.vision/zh/docs/api/shape/attrs
+export interface CommondAttrsStyle {
+  // 填充色、渐变或 纹理，默认值为空；
+  fill: string | undefined;
+  //描边色、渐变或 纹理，默认值为空；
   stroke: string;
-  /** 徽标内文本的颜色 */
-  color: string;
-  fontSize: number;
-  fontFamily: string;
-  // badge 中文本距离四周的偏移量
-  padding: number;
-  // badge 在 x 和 y 方向上的偏移量
-  offset: [number, number];
-}>;
-export type NodeStyleKeyShape = Partial<{
-  /** 节点的大小 */
-  size: number | [number] | [number, number];
-  /** 填充色 */
-  fill: string;
-  /** 包围边颜色 */
-  stroke: string;
-  /** 边框的宽度 */
-  lineWidth: number;
-}>;
+  // 透明度，默认值为 1；
+  opacity: number;
+  // 填充色的不透明度，默认值为 1；
+  fillOpacity: number;
+  // 描边色的不透明度，默认值为 1；
+  strokeOpacity: number;
+  // 阴影的颜色；
+  shadowColor: string;
+  // 阴影的模糊级别；
+  shadowBlur: number;
+  // 阴影距形状的水平距离；
+  shadowOffsetX: number;
+  // 阴影距形状的垂直距离；
+  shadowOffsetY: number;
+  // 新图像如何绘制到已有的图像上；
+  globalCompositeOperation: string;
+}
+export type NodeStyleLabel = Partial<
+  {
+    /** label的名称 */
+    value: string;
+    /** 展示位置  'top' | 'bottom' | 'left' | 'right' | 'center' | */
+    position: 'top' | 'bottom' | 'left' | 'right' | 'center' | string;
+    /** 文本填充色 */
+    fill: string;
+    /** 文本大小 */
+    fontSize: number;
+    /** 文本在各自方向上的偏移量，主要为了便于调整文本位置,[offsetX,offsetY] */
+    offset: [number, number] | number | number[];
+  } & CommondAttrsStyle
+>;
+
+export type NodeStyleIcon = Partial<
+  {
+    /** 类型可以为字体图标，可以为网络图片，可以为纯文本 'font' | 'image' | 'text'*/
+    type: 'font' | 'image' | 'text' | string;
+    /** 根据类型，填写对应的值 */
+    value: string;
+    /** 图标大小 */
+    size: number | number[];
+    /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
+    fill: string;
+    fontFamily: string;
+  } & CommondAttrsStyle
+>;
+
+export type NodeStyleBadge = Partial<
+  {
+    /** 放置的位置，ef：LT（left top）左上角 */
+    position: 'LT' | 'RT' | 'RB' | 'LB' | string;
+    /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
+    type: 'font' | 'image' | 'text' | string;
+    value: number | string;
+    // type = image 时生效，表示图片的宽度和高度
+    size: number[] | [number, number] | [number];
+    /** 徽标填充色 */
+    fill: string;
+    /** 徽标描边色 */
+    stroke: string;
+    /** 徽标内文本的颜色 */
+    color: string;
+    fontSize: number;
+    fontFamily: string;
+    // badge 中文本距离四周的偏移量
+    padding: number;
+    // badge 在 x 和 y 方向上的偏移量
+    offset: number[] | [number, number];
+  } & CommondAttrsStyle
+>;
+export type NodeStyleKeyShape = Partial<
+  {
+    /** 节点的大小 */
+    size: number | [number] | [number, number];
+    /** 填充色 */
+    fill: string;
+    /** 包围边颜色 */
+    stroke: string;
+    /** 边框的宽度 */
+    lineWidth: number;
+  } & CommondAttrsStyle
+>;
 export interface NodeStyle {
   /** 节点的主要容器 */
   keyshape: NodeStyleKeyShape;
@@ -303,18 +340,20 @@ export interface NodeStyle {
   [key: string]: any;
 }
 
-export type NodeStyleHalo = Partial<{
-  /** 大小 */
-  size: number | [number] | [number, number];
-  /** 填充色 */
-  fill: string;
-  /** 包围边颜色 */
-  stroke: string;
-  /** 边框的宽度 */
-  lineWidth: number;
-  /** 透明度 */
-  opacity: number;
-}>;
+export type NodeStyleHalo = Partial<
+  {
+    /** 大小 */
+    size: number | [number] | [number, number];
+    /** 填充色 */
+    fill: string;
+    /** 包围边颜色 */
+    stroke: string;
+    /** 边框的宽度 */
+    lineWidth: number;
+    /** 透明度 */
+    opacity: number;
+  } & CommondAttrsStyle
+>;
 export interface ComboStyle {
   status?: any;
   [key: string]: any;
