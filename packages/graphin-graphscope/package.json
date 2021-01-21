@@ -5,11 +5,10 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "start": " node --max_old_space_size=8192 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --env.NODE_ENV=development",
+    "start": "father build --watch",
     "build": "npm run clean && father build",
     "build:umd": "rimraf dist && node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --env.NODE_ENV=production  -c ./webpack.config.js ",
-    "clean": "rimraf es esm lib dist",
-    "deploy": "npm run build && gh-pages -d ./dist -r https://github.com/antvis/graphin-studio-site.git"
+    "clean": "rimraf es esm lib dist"
   },
   "dependencies": {
     "@antv/graphin": "^2.0.0-beta.4",
