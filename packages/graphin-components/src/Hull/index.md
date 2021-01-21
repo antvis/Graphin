@@ -16,7 +16,7 @@ Hull 轮廓包裹，是常见的一种图分析组件，可以将所属在一组
 
 ## Demo
 
-<code src='./demo/Simple.tsx'></code>
+<code src='./demos/Simple.tsx'></code>
 
 <API src='./index.tsx'></API>
 
