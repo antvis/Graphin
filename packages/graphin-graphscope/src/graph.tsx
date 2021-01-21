@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Graphin, { Behaviors, Utils } from '@antv/graphin';
 import { ContextMenu, FishEye, MiniMap } from '@antv/graphin-components';
-import { colorSets } from './color';
 import { message } from 'antd';
+import iconLoader from '@antv/graphin-icons';
+import { colorSets } from './color';
 import LayoutSelector from './layoutSelector';
-
-const { hexToRgbaToHex } = Utils;
 
 import CustomMenu from './contextmenu';
 
-import iconLoader from '@antv/graphin-icons';
 import '@antv/graphin-icons/dist/index.css';
+
+const { hexToRgbaToHex } = Utils;
 
 const icons = Graphin.registerFontFamily(iconLoader);
 
@@ -248,9 +248,11 @@ const GraphScope: React.FC<IGraphProps> = ({
         size: 0.5,
         color: '#AAB7C4', // '#545872',
         style: {
-          endArrow: {
-            path: 'M 0,0 L 8,4 L 8,-4 Z',
-            fill: '#545872',
+          keyshape: {
+            endArrow: {
+              path: 'M 0,0 L 8,4 L 8,-4 Z',
+              fill: '#545872',
+            },
           },
         },
       };
@@ -269,7 +271,7 @@ const GraphScope: React.FC<IGraphProps> = ({
 
   useEffect(() => {
     const transData = transGraphData(data);
-    setState(preState => {
+    setState((preState) => {
       return {
         ...preState,
         data: transData,
@@ -279,7 +281,7 @@ const GraphScope: React.FC<IGraphProps> = ({
 
   const { visible, layout } = state;
   const handleClose = () => {
-    setState(preState => {
+    setState((preState) => {
       return {
         ...preState,
         visible: false,
@@ -287,7 +289,7 @@ const GraphScope: React.FC<IGraphProps> = ({
     });
   };
   const handleOpen = () => {
-    setState(preState => {
+    setState((preState) => {
       return {
         ...preState,
         visible: true,
@@ -295,7 +297,7 @@ const GraphScope: React.FC<IGraphProps> = ({
     });
   };
   const handleRefresh = () => {
-    setState(preState => {
+    setState((preState) => {
       return {
         ...preState,
         data: refreshData,
@@ -312,8 +314,8 @@ const GraphScope: React.FC<IGraphProps> = ({
   };
 
   const handleChangeLayout = (value: string) => {
-    const currentLayout = layouts.find(item => item.type === value);
-    setState(preState => {
+    const currentLayout = layouts.find((item) => item.type === value);
+    setState((preState) => {
       return {
         ...preState,
         layout: currentLayout as any,
@@ -326,7 +328,7 @@ const GraphScope: React.FC<IGraphProps> = ({
       <Graphin graphDOM={graphDOM} data={state.data as any} layout={layout} width={width} height={height}>
         <ZoomCanvas enableOptimize />
         <DragNode />
-        {hasMinimap && <MiniMap visible={true} options={{ padding: 20, size: [140, 70] }} />}
+        {hasMinimap && <MiniMap visible options={{ padding: 20, size: [140, 70] }} />}
         <LayoutSelector onChange={handleChangeLayout} value={state.layout.type} options={layouts} />
         <ContextMenu style={{ width: 90 }}>
           <CustomMenu expandNeighbors={expandNeighbors} />
