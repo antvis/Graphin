@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraphinContext, NodeConfig, NodeStyle } from '@antv/graphin';
+import { GraphinContext, NodeStyle } from '@antv/graphin';
 import AntdPanel from './demos/AntdPanel';
 
 interface VisSettingPanelPropsType {
@@ -10,7 +10,6 @@ const PrimaryColor = '#205fc2';
 const FontColor = '#ddd';
 const FontSize = 16;
 const FontFamily = 'graphin';
-const PrimaryFillColor = '#fff';
 
 const defaultNodeStyleSchema: NodeStyle = {
   keyshape: {
@@ -90,13 +89,13 @@ const defaultStyle: React.CSSProperties = {
 const VisSettingPanel: React.FunctionComponent<VisSettingPanelPropsType> = (props) => {
   const { graph } = React.useContext(GraphinContext);
   const { style } = props;
-  const node = graph.findAllByState('node', 'selected')[0] || graph.getNodes()[0];
-  const nodeSchema = (node.getModel().style || defaultNodeStyleSchema) as NodeStyle;
+  const item = graph.findAllByState('node', 'selected')[0] || graph.getNodes()[0];
+  const nodeSchema = (item.getModel().style || defaultNodeStyleSchema) as NodeStyle;
   const handleNodeStyleChange = (schema) => {
     const selectedNodes = graph.findAllByState('node', 'selected');
     if (selectedNodes.length === 0) {
       // 则认为是全局样式改变
-      graph.getNodes().forEach((node: any) => {
+      graph.getNodes().forEach((node) => {
         /** 状态有优先级 */
         graph.clearItemStates(node);
         graph.updateItem(node, {
@@ -114,6 +113,7 @@ const VisSettingPanel: React.FunctionComponent<VisSettingPanelPropsType> = (prop
         },
       });
       graph.setItemState(node, 'selected', false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (node as any).getEdges().forEach((edge) => {
         graph.setItemState(edge, 'selected', false);
       });
