@@ -5,13 +5,23 @@ import { deepMix, isArray, isNumber } from '@antv/util';
 
 import { IUserNode, NodeStyle } from '../typings/type';
 import { setStatusStyle } from './utils';
+
+function getRadiusBySize(size: number | [number] | [number, number] | undefined) {
+  let r;
+  if (isNumber(size)) {
+    r = size / 2;
+  } else if (isArray(size)) {
+    r = size[0] / 2;
+  }
+  return r;
+}
+
 /**
  * 将 size 转换为宽度和高度
  * @param size
  */
 const convertSizeToWH = (size: number | number[] | undefined) => {
   if (!size) return [0, 0];
-
   let width = 0;
   let height = 0;
   if (isNumber(size)) {
@@ -19,11 +29,13 @@ const convertSizeToWH = (size: number | number[] | undefined) => {
     height = size;
   } else if (isArray(size)) {
     if (size.length === 1) {
-      width = size[0];
-      height = size[0];
+      const [w] = size;
+      width = w;
+      height = w;
     } else if (size.length === 2) {
-      width = size[0];
-      height = size[1];
+      const [w, h] = size;
+      width = w;
+      height = h;
     }
   }
   return [width, height];
@@ -74,15 +86,6 @@ const parseAttr = (
   return schema;
 };
 
-function getRadiusBySize(size: number | [number] | [number, number] | undefined) {
-  let r;
-  if (isNumber(size)) {
-    r = size / 2;
-  } else if (isArray(size)) {
-    r = size[0] / 2;
-  }
-  return r;
-}
 const getStyles = (defaultStyleCfg: any, cfgStyle: any) => {
   const { halo, keyshape } = { ...defaultStyleCfg, ...cfgStyle } as any;
   const nodeSize = convertSizeToWH(keyshape.size);
