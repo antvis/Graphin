@@ -1,32 +1,33 @@
 {
   "name": "@antv/graphin-components",
-  "version": "1.2.0",
+  "version": "2.0.0-beta.5",
   "description": "Components for graphin",
-  "main": "./dist/index",
-  "types": "./dist/graphin-components/src/index.d",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "start": "father build --watch",
-    "build": "father build",
+    "start": "npm run clean && father build --watch",
+    "build": "npm run clean && father build & npm run  build:umd",
     "build:umd": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --env.NODE_ENV=production  -c ./webpack.config.js ",
-    "test": "jest"
+    "test": "jest",
+    "clean": "rimraf es esm lib dist"
   },
   "author": "",
   "license": "MIT",
-  "sideEffects": false,
-  "peerDependencies": {
-    "antd": "^3.23.5",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
-  },
+  "sideEffects": [
+    "*.css"
+  ],
   "devDependencies": {
+    "@ant-design/icons": "^4.3.0",
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "@testing-library/jest-dom": "^4.2.0",
-    "@testing-library/react": "^9.3.0",
+    "@testing-library/react": "^9.5.0",
     "@types/react-router-dom": "^5.1.0",
+    "@types/styled-components": "^5.1.7",
     "babel-jest": "^25.4.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.12.2",
@@ -35,14 +36,18 @@
     "deepmerge": "^4.1.1",
     "eventemitter3": "^4.0.0",
     "father": "^2.23.1",
-    "file-loader": "^4.2.0",
+    "file-loader": "^6.0.0",
     "jest": "^25.4.0",
     "jest-canvas-mock": "^2.1.2",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "react-color": "^2.19.3",
+    "react-pie-menu": "^0.2.5",
+    "rimraf": "^3.0.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
+    "styled-components": "^5.2.1",
     "ts-jest": "^25.4.0",
     "typescript": "^3.6.4",
     "webpack": "^4.41.5",
@@ -50,8 +55,15 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@antv/g6": "~3.2.0",
-    "@antv/graphin": "^1.1.0-beta.1"
+    "@antv/graphin": "*",
+    "react-color": "^2.19.3"
+  },
+  "peerDependencies": {
+    "antd": "^4.x",
+    "@ant-design/compatible": "^1.0.2",
+    "@ant-design/icons": "^4.0.6",
+    "react": "^16.x",
+    "react-dom": "^16.x"
   },
   "publishConfig": {
     "access": "public"

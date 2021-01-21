@@ -37,7 +37,7 @@ const colors = legend.map(c => c.color);
 const App = () => {
   const [data, setData] = React.useState({ nodes: [], edges: [] });
   React.useEffect(() => {
-    fetch('../../data/web.json')
+    fetch('../../examples/data/web.json')
       .then(res => res.json())
       .then(res => {
         const nodes = res.nodes.map((node, index) => {
@@ -82,6 +82,7 @@ const App = () => {
             tickInterval: 0.02,
             maxSpeed: 1000,
             damping: 0.8,
+            /** 启用 webworker 计算 */
             enableWorker: true,
             animation: true,
             defSpringLen: (_edge, source, target) => {

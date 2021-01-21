@@ -53,3 +53,6 @@ jest.config.js
 __mock__
 public
 tsconfig.json
+
+
+docs

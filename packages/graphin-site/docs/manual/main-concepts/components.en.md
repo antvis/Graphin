@@ -21,6 +21,9 @@ We provide the ability to undo and redo, which makes the entire analysis process
 
 During the analysis process, when the number of nodes or the layout changes, some nodes may not be in the current window. At this time, we need the zoom function to help us adjust the scope of the window. With the drag and drop of the canvas, we will not lose the global (zoomOut) and detail (zoomIn).
 
+-   fishEye
+
+In some large image scenes, fisheye can enlarge the local details
 
 -   fullscreen
 

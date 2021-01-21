@@ -1,9 +1,16 @@
 {
   "name": "graphin",
   "scripts": {
-    "start": "lerna run start --parallel  --ignore @antv/graphin-studio --ignore graphin-site",
+    "graphin": "cd packages/graphin && npm run start ",
+    "components": "cd packages/graphin-components && npm run start",
+    "icons": "cd packages/graphin-icons && npm run start",
     "site": "cd ./packages/graphin-site && npm run start",
     "studio": "cd ./packages/graphin-studio && npm run start",
+    "graphscope": "cd ./packages/graphin-graphscope && npm run start",
+    "docs": "dumi dev",
+    "docs:build": "dumi build",
+    "docs:deploy": "npm run docs:build && gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
+    "docs:gh-pages": "gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
     "bootstrap": "lerna bootstrap",
     "bootstrap:ci": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site",
     "build": "lerna run build",
@@ -29,19 +36,21 @@
     "@typescript-eslint/parser": "^2.3.1",
     "conventional-changelog": "^3.1.18",
     "conventional-changelog-cli": "^2.0.31",
+    "dumi": "^1.1.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-react-hooks": "^4.1.0",
     "generate-changelog": "^1.8.0",
     "husky": "^4.2.5",
+    "gh-pages": "^3.1.0",
     "lerna": "^3.15.0",
-    "lint-staged": "^8.1.0",
-    "prettier": "~1.18.2",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5",
     "typescript": "^3.6.4"
   },
   "husky": {
@@ -51,8 +60,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --ext .js,.jsx,.ts,.tsx",
       "prettier --write",
+      "eslint --ext .js,.jsx,.ts,.tsx",
       "git add"
     ]
   },
@@ -63,5 +72,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/antvis/graphin"
-  }
+  },
+  "sideEffects": [
+    "*.css"
+  ]
 }

@@ -6,7 +6,7 @@ import getNodeProperties from '../../Service/getNodeProperties';
 import { NodeData, EdgeData, GrapheneState } from '../../types';
 
 const diffuseReducer = (state: GrapheneState, startNodes: NodeData[]) => {
-  const count = Math.round((Math.random() + 1) * 5);
+  const count = 500; //Math.round((Math.random() + 1) * 5);
 
   const { nodes, edges } = Utils.mock(count)
     .expand(startNodes)

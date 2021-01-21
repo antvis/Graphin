@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import { GrapheneState } from '../../types';
 
 interface ClearProps {
@@ -9,7 +9,7 @@ interface ClearProps {
 const Clear: React.FC<ClearProps> = () => {
     return (
         <div>
-            <Icon type="info-circle" /> 清空当前画布
+            <InfoCircleOutlined /> 清空当前画布
         </div>
     );
 };

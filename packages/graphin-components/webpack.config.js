@@ -3,10 +3,10 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-module.exports = env => {
+module.exports = (env) => {
   return {
     entry: {
-      bundle: './src/index.ts',
+      index: './src/index.ts',
     },
     mode: env.NODE_ENV,
     module: {
