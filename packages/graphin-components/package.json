@@ -36,7 +36,7 @@
     "deepmerge": "^4.1.1",
     "eventemitter3": "^4.0.0",
     "father": "^2.23.1",
-    "file-loader": "^4.2.0",
+    "file-loader": "^6.0.0",
     "jest": "^25.4.0",
     "jest-canvas-mock": "^2.1.2",
     "less": "^3.10.3",
