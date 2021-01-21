@@ -35,7 +35,7 @@ interface State {
   item?: {};
 }
 
-let containerRef: HTMLDivElement | null;
+// let containerRef: HTMLDivElement | null;
 
 const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & { Edge: typeof Edge } = (props) => {
   const { children, bindType = 'node', style } = props;
@@ -139,8 +139,8 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
   return (
     <>
       <div
-        ref={(node) => {
-          containerRef = node;
+        ref={() => {
+          // containerRef = node;
         }}
         className="graphin-components-tooltip"
         style={{ ...defaultStyle, ...style, ...positionStyle }}

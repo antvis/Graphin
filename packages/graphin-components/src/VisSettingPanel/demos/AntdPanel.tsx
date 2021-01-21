@@ -11,12 +11,13 @@ const { TabPane } = Tabs;
 
 interface AntdPanelProps {
   nodeStyleSchema: NodeStyle;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleNodeStyleChange: (value: any) => void;
 }
 
 const AntdPanel: React.FunctionComponent<AntdPanelProps> = (props) => {
   const { nodeStyleSchema, handleNodeStyleChange } = props;
-  const { label, badges, icon, keyshape, halo } = nodeStyleSchema;
+  const { label, icon, keyshape } = nodeStyleSchema;
   const handleChange = (shema) => {
     console.log('shema', shema);
     handleNodeStyleChange(shema);
@@ -40,10 +41,10 @@ const AntdPanel: React.FunctionComponent<AntdPanelProps> = (props) => {
               <Panel header="图标" key="icon">
                 <IconSetting handleChange={handleChange} {...icon} />
               </Panel>
-              <Panel header="徽标" key="badges"></Panel>
+              <Panel header="徽标" key="badges" />
             </Collapse>
           </TabPane>
-          <TabPane tab="Edge" key="edge"></TabPane>
+          <TabPane tab="Edge" key="edge" />
         </Tabs>
       </Card>
     </div>

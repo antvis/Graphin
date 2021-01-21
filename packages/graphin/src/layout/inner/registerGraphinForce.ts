@@ -130,6 +130,7 @@ export default () => {
      * 更新布局配置，但不执行布局
      * @param {Object} cfg 需要更新的配置项
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updateCfg(cfg: any) {
       this.cfg = {
         ...this.cfg,

@@ -23,7 +23,7 @@ interface KeyShapeSettingProps extends KeyShapeStyle {
 const KeyShapeSetting: React.FunctionComponent<KeyShapeSettingProps> = (props) => {
   const { size = 26, fill, stroke, handleChange } = props;
   return (
-    <React.Fragment>
+    <>
       <Item title="大小">
         <Slider
           defaultValue={size[0] as number}
@@ -48,7 +48,7 @@ const KeyShapeSetting: React.FunctionComponent<KeyShapeSettingProps> = (props) =
           }}
         />
       </Item>
-    </React.Fragment>
+    </>
   );
 };
 

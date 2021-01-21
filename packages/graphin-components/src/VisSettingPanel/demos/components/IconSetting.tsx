@@ -52,7 +52,7 @@ const IconSetting = (props: IconSettingProps) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Item title="类型">
         <Radio.Group defaultValue={type} size="small" style={{ width: '100%' }} onChange={handleChangeType}>
           {types.map((item) => {
@@ -114,7 +114,7 @@ const IconSetting = (props: IconSettingProps) => {
           }}
         />
       </Item>
-    </React.Fragment>
+    </>
   );
 };
 

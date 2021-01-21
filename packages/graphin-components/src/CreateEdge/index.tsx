@@ -19,12 +19,13 @@ const CreateEdge: React.FunctionComponent<Props> = (props) => {
     const graphin = React.useContext(GraphinContext);
     // @ts-ignore
     const { graph } = graphin;
-    graph.on('aftercreateedge', (e) => {
+    graph.on('aftercreateedge', () => {
       const { edges } = graph.save();
       // TODO:边的处理，等G6拆包之后
       // G6.Util.processParallelEdges(edges);
       const newEdges = graph.getEdges();
       newEdges.forEach((edge, i) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         graph.updateItem(edge, (edges as any)[i]);
       });
       if (props.onChange) {
