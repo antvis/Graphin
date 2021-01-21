@@ -19,15 +19,21 @@ const App = () => {
   const graphRef = React.createRef(null);
   React.useEffect(() => {
     const { graph } = graphRef.current;
-    const onNodeClick = e => {
+    // 按住Shift框选,按住Option键 多选，进行关系扩散
+    const onNodeSelectChange = e => {
+      console.log('nodeselectchange', e);
+      const nodes = e.selectedItems.nodes.map(node => {
+        return node.get('model');
+      });
       setState({
         ...state,
-        selected: [e.item.get('model')],
+        selected: nodes,
       });
     };
-    graph.on('node:click', onNodeClick);
+
+    graph.on('nodeselectchange', onNodeSelectChange);
     return () => {
-      graph.off('node:click', onNodeClick);
+      graph.off('nodeselectchange', onNodeSelectChange);
     };
   }, [state]);
 

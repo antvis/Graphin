@@ -7,18 +7,18 @@ order: 0
 
 > 图的数据结构比较固定。一般用 nodes 表示节点的集合，用 edges 表示边的集合。
 
--   1. 用 TypeScript 的类型来定义数据 data 如下：
+- 1. 用 TypeScript 的类型来定义数据 data 如下：
 
 ```tsx
 export interface Data {
-    /** 节点 */
-    nodes: Node[];
-    /** 边 */
-    edges: Edge[];
+  /** 节点 */
+  nodes: Node[];
+  /** 边 */
+  edges: Edge[];
 }
 ```
 
--   2. Node 最重要的三个概念
+- 2. Node 最重要的三个概念
 
 |   属性 | 说明                                                                                                             |
 | ------ | ---------------------------------------------------------------------------------------------------------------- |
@@ -26,7 +26,7 @@ export interface Data {
 | shape  | shape 是告诉 Graphin，渲染什么样的节点，默认设置为内置的 `CircleNode` 类型 。shape 和 G6 中的 shape 是同一个概念 |
 | data   | data 保存了后端返回的节点数据。单独用 data 字段来存储是为了避免和 Graphin 的节点数据混在一起                     |
 
--   3. Edge 最重要的三个概念
+- 3. Edge 最重要的三个概念
 
 |   属性 | 说明                                                                                       |
 | ------ | ------------------------------------------------------------------------------------------ |
@@ -40,8 +40,8 @@ export interface Data {
 
 Graphin 数据全量渲染和增量添加：
 
--   增量数据添加：Graphin 会根据前置布局，动态完成增量数据添加，达到节点扩散，关系发现等效果。
--   全量数据渲染：Graphin 支持全量数据渲染，满足保存，导入，导出等需求。
+- 增量数据添加：Graphin 会根据前置布局，动态完成增量数据添加，达到节点扩散，关系发现等效果。
+- 全量数据渲染：Graphin 支持全量数据渲染，满足保存，导入，导出等需求。
 
 不管是何种方式，我们在使用 Graphin 的时候，只需要传入要渲染的 data 就可以。
 
@@ -70,8 +70,7 @@ Graphin 的内置 icon 请查阅[内置图标](/zh/docs/manual/icons)
 综上，我们可以编写 transform 函数来对 Data 进行转换：
 
 ```tsx
-const transform = (data: { nodes: NodeData[]; edges: EdgeData[] }) => {
-    const nodes = (nodes: NodeData[]) => {
+const transNodes = (nodes: NodeData[]) => {
         return nodes.map(node => {
             return {
                 id: node.id,
@@ -85,12 +84,15 @@ const transform = (data: { nodes: NodeData[]; edges: EdgeData[] }) => {
             };
         });
     };
-    const edges = (edges: EdgeData[]) => {
-        return edges;
-    };
+const transEdges = (edges: EdgeData[]) => {
+    return edges;
+};
+
+const transform = (data: { nodes: NodeData[]; edges: EdgeData[] }) => {
+
     return {
-        nodes: transform.nodes(data.nodes),
-        edges: transform.edges(data.edges),
+        nodes: transNodes(data.nodes),
+        edges: transEdges(data.edges),
     };
 };
 
@@ -101,18 +103,18 @@ const transform = (data: { nodes: NodeData[]; edges: EdgeData[] }) => {
 
 通过数据的定义，我们知道 Graphin 的 data 是必选项，我们把几种特殊的情况列举在下面：
 
--   如何渲染一个空画布
+- 如何渲染一个空画布
 
 ```tsx
 <Graphin data={{ nodes: [], edges: [] }} />
 ```
 
--   数据 data 和布局 layout 组合起来是如何渲染的？
+- 数据 data 和布局 layout 组合起来是如何渲染的？
 
 渲染包含两个关键点
 
--   1. 节点的形状：它由 shape 和 id 共同决定的
--   2. 节点的位置：它由 Node 的 x 和 y 值决定的
+- 1. 节点的形状：它由 shape 和 id 共同决定的
+- 2. 节点的位置：它由 Node 的 x 和 y 值决定的
 
 |   x、y 坐标 | Layout 布局   | 渲染结果                                                    | 使用场景     |
 | ----------- | ------------- | ----------------------------------------------------------- | ------------ |
