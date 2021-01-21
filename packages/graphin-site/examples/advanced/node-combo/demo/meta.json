@@ -1,0 +1,18 @@
+{
+  "title": {
+    "zh": "中文分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "Simple.jsx",
+      "title": "节点分组",
+      "screenshot": ""
+    },
+    {
+      "filename": "Force.jsx",
+      "title": "力导节点分组",
+      "screenshot": ""
+    }
+  ]
+}

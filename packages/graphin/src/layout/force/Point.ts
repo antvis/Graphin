@@ -1,5 +1,5 @@
 import Vector from './Vector';
-import { Node } from '../../types';
+import { IUserNode as Node } from '../../typings/type';
 
 class Point {
   /** 点的位置，用[x,y]向量来表示 */

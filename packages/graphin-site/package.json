@@ -1,6 +1,6 @@
 {
   "name": "graphin-site",
-  "version": "1.1.0-beta.1",
+  "version": "2.0.0",
   "description": "antv graphin site",
   "directories": {
     "doc": "docs"
@@ -19,14 +19,16 @@
     "url": "https://github.com/antvis/graphin"
   },
   "devDependencies": {
-    "@antv/gatsby-theme-antv": "^0.10.62",
-    "@antv/graphin": "^1.0.2",
+    "@antv/gatsby-theme-antv": "^1.0.7",
     "gatsby": "^2.17.7",
     "gh-pages": "^2.1.1"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.0.6",
     "@antv/graphin": "*",
     "@antv/graphin-components": "*",
+    "@antv/graphin-icons": "*",
+    "antd": "^4.8.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-i18next": "^11.0.1"

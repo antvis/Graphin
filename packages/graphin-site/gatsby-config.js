@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { repository } = require('./package.json');
+const { repository, version } = require('./package.json');
 
 module.exports = {
   plugins: [
@@ -16,6 +16,12 @@ module.exports = {
     description: 'the react toolkit for graph analysis based on g6',
     siteUrl: 'https://graphin.antv.vision',
     githubUrl: repository.url,
+    showAPIDoc: true,
+    isAntVSite: false,
+    versions: {
+      [version]: 'https://graphin.antv.vision',
+      '1.x': 'https://graphin-v1.antv.vision',
+    },
     navs: [
       {
         slug: 'docs/manual/introduction',

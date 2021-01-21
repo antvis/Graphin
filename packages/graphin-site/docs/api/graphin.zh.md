@@ -120,7 +120,7 @@ G6 自定义节点/边/行为注册配置，详见[Register](/zh/docs/api/regist
 
 |   属性         | 类型     | 是否必选 | 说明                         |
 | -------------- | -------- | -------- | ---------------------------- |
-| zoom           | number     | 否 | 默认缩放比例               |
+| zoom           | number     | 否 | 默认缩放比例, 缩放范围为0.2-10               |
 | pixelRatio     | number | 否 | 像素比率，默认值 1.0         |
 | pan         | { x: number; y: number } | 否 | 默认画布平移位置       |
 | disablePan      | boolean | 否       |  是否禁止画布平移 |

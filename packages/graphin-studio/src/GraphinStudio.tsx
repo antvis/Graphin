@@ -18,56 +18,56 @@ import reducer from './Redux/reducer';
 import Graph from './Graph';
 
 const OnlyGraphinReady = props => {
-    const { children, graphRef } = props;
+  const { children, graphRef } = props;
 
-    if (graphRef && graphRef.current && graphRef.current.graph) {
-        const { graph, apis } = graphRef.current;
-        const graphProps = {
-            graph,
-            apis,
-        };
+  if (graphRef && graphRef.current && graphRef.current.graph) {
+    const { graph, apis } = graphRef.current;
+    const graphProps = {
+      graph,
+      apis,
+    };
 
-        return (
-            <div>
-                {React.Children.map(children, child => {
-                    // 如果传入的是 DOM 元素或不是合法的 Element，不传入 props
-                    if (!React.isValidElement(child) || typeof child.type === 'string') {
-                        return child;
-                    }
-                    return React.cloneElement(child, {
-                        ...graphProps,
-                    });
-                })}
-            </div>
-        );
-    }
-    return null;
+    return (
+      <div>
+        {React.Children.map(children, child => {
+          // 如果传入的是 DOM 元素或不是合法的 Element，不传入 props
+          if (!React.isValidElement(child) || typeof child.type === 'string') {
+            return child;
+          }
+          return React.cloneElement(child, {
+            ...graphProps,
+          });
+        })}
+      </div>
+    );
+  }
+  return null;
 };
 
 const Graphene = () => {
-    // const graphRef = useRef(null) as any; // eslint-disable-line
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const { data, layout, toolbar, graphRef } = state as GrapheneState;
+  // const graphRef = useRef(null) as any; // eslint-disable-line
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { data, layout, toolbar, graphRef } = state as GrapheneState;
 
-    return (
-        <Layout>
-            <Header>Header</Header>
-            <Side>
-                <OnlyGraphinReady graphRef={graphRef}>
-                    <OperatorBar dispatch={dispatch} state={state} graphRef={graphRef} />
-                </OnlyGraphinReady>
-            </Side>
-            <Main>
-                <Graph data={data} layout={layout} toolbar={toolbar} dispatch={dispatch} store={state} />
-                <OnlyGraphinReady graphRef={graphRef}>
-                    <GraphDrawer dispatch={dispatch} state={state} />
-                    <GraphModal dispatch={dispatch} state={state} />
-                    <SearchBar dispatch={dispatch} state={state} />
-                </OnlyGraphinReady>
-            </Main>
-            <Footer>Footer</Footer>
-        </Layout>
-    );
+  return (
+    <Layout>
+      <Header>Header</Header>
+      <Side>
+        <OnlyGraphinReady graphRef={graphRef}>
+          <OperatorBar dispatch={dispatch} state={state} graphRef={graphRef} />
+        </OnlyGraphinReady>
+      </Side>
+      <Main>
+        <Graph data={data} layout={layout} toolbar={toolbar} dispatch={dispatch} store={state} />
+        <OnlyGraphinReady graphRef={graphRef}>
+          <GraphDrawer dispatch={dispatch} state={state} />
+          <GraphModal dispatch={dispatch} state={state} />
+          <SearchBar dispatch={dispatch} state={state} />
+        </OnlyGraphinReady>
+      </Main>
+      <Footer>Footer</Footer>
+    </Layout>
+  );
 };
 
 export default Graphene;

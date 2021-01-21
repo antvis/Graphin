@@ -20,33 +20,20 @@ const App = () => {
   React.useEffect(() => {
     const { graph } = graphRef.current;
 
-    const onNodeClick = e => {
-      setState({
-        ...state,
-        selected: [e.item.get('model')],
-      });
-    };
-
-    graph.on('node:click', onNodeClick);
-    // TODO:框选进行关系扩散，暂时不支持多选
+    // 按住Shift框选,按住Option键 多选，进行关系扩散
     const onNodeSelectChange = e => {
-      if (e.target) {
-        console.info('圈选是targets参数');
-        return;
-      }
-      const nodes = e.targets.nodes.map(node => {
+      console.log('nodeselectchange', e);
+      const nodes = e.selectedItems.nodes.map(node => {
         return node.get('model');
       });
-
       setState({
         ...state,
         selected: nodes,
       });
     };
-    graph.on('nodeselectchange', onNodeSelectChange);
 
+    graph.on('nodeselectchange', onNodeSelectChange);
     return () => {
-      graph.off('node:click', onNodeClick);
       graph.off('nodeselectchange', onNodeSelectChange);
     };
   }, [state]);
