@@ -1,19 +1,22 @@
-import { Graph, NodeConfig } from '@antv/g6';
 import Vector from './Vector';
 import Point from './Point';
 import { Node, Edge } from './Elements';
 import Spring from './Spring';
 import { getDegree } from '../utils/graph';
-import { Data, Node as NodeType } from '../../types';
+import { GraphinData as Data, IUserNode as NodeType } from '../../typings/type';
+import { Item, Graph } from '@antv/g6/';
 
 type ForceNodeType = Node;
 
 type ForceEdgeType = Edge;
 
-interface ForceData {
-  nodes: Node[];
-  edges: Edge[];
-}
+// const getBaseLog = (x: number, y: number) => {
+//   return Math.log(y) / Math.log(x);
+// };
+// interface ForceData {
+//   nodes: Node[];
+//   edges: Edge[];
+// }
 
 interface Map<K, V> {
   clear(): void;
@@ -78,7 +81,7 @@ export interface ForceProps {
   /**  力导结束后的回调函数 */
   done?: () => void;
   /** 忽略节点，不参加力导计算 */
-  ignore?: (node: NodeType) => void;
+  ignore?: (node: NodeType) => boolean;
 }
 
 interface IndexableProp extends ForceProps {
@@ -152,6 +155,7 @@ class ForceLayout {
     this.sourceData = {
       nodes: [],
       edges: [],
+      combos: [],
     };
     this.nodes = [];
     this.edges = [];
@@ -273,27 +277,17 @@ class ForceLayout {
   };
 
   slienceForce = () => {
-    const firstTickInterval = 0.22;
-    for (let i = 0; i < this.props.MaxIterations; i++) {
-      const tickInterval = Math.max(0.02, firstTickInterval - i * 0.002);
-      this.tick(tickInterval);
-      const energy = this.calTotalEnergy();
-      /** 如果需要监控信息，则提供给用户 */
-      const monitor = this.registers.get('monitor');
-      if (monitor) {
-        monitor(this.reportMointor(energy));
-      }
-      if (
-        energy <= this.props.minEnergyThreshold ||
-        i === this.props.MaxIterations - 1 // 1000000次/(1000/60) = 60000s = 1min
-      ) {
-        this.render();
-        if (this.props.done) {
-          this.props.done();
-        }
-        break;
-      }
+    const { done } = this.props;
+    console.time('force time without animate'); // eslint-disable-line
+
+    for (let i = 0; this.averageDistance > 0.5 || i < 1; i++) {
+      this.tick(this.props.tickInterval);
+      this.iterations++;
     }
+
+    console.timeEnd('force time without animate'); // eslint-disable-line
+    this.render();
+    done && done(); // eslint-disable-line
   };
 
   /** polyfill: support webworker requestAnimationFrame */
@@ -351,7 +345,7 @@ class ForceLayout {
       return;
     }
     const step = () => {
-      const { done, tickInterval, minEnergyThreshold, MaxIterations } = this.props;
+      const { done, tickInterval } = this.props;
 
       this.tick(tickInterval);
 
@@ -479,7 +473,7 @@ class ForceLayout {
         leaf: 2,
         single: 2,
         others: 1,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line
         center: (_node: any) => {
           return {
             x: this.props.width / 2,
@@ -616,7 +610,7 @@ class ForceLayout {
   restart = (dragNode: ForceNodeType[], graph: Graph) => {
     /** 将位置更新到nodePoint中 */
     const { ignore } = this.props;
-    graph.getNodes().forEach((nodeItem: NodeConfig) => {
+    graph.getNodes().forEach((nodeItem: Item) => {
       const node = nodeItem.get('model');
 
       if (ignore && ignore(node)) {

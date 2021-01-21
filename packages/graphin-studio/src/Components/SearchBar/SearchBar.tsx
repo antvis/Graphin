@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
-import { Input, Icon } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
 import SearchPanel from './Panel';
 import { SearchValue, ContentProps } from './interface';
 import './SearchBar.less';
@@ -195,7 +196,7 @@ const SearchBar: React.SFC<SearchBarProps> = props => {
                 // allowClear
                 value={searchWords}
                 placeholder={placeholder}
-                prefix={<Icon type="search" style={{ color: 'rgba(0, 0, 0, .25)' }} />}
+                prefix={<SearchOutlined style={{ color: 'rgba(0, 0, 0, .25)' }} />}
                 onFocus={onFocus}
                 onPressEnter={onEnter}
                 onChange={(e): void => onChange(e)}

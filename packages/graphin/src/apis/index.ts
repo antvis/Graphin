@@ -1,29 +1,25 @@
-import highlight from './highlight';
-import getInfo from './getInfo';
-import search from './search';
-import GraphCtor from '../Graphin';
+import { Graph } from '@antv/g6';
+// import { handleAutoZoom, handleRealZoom, handleChangeZoom, handleZoomIn, handleZoomOut } from './zoom';
+// import { focusNodeById, highlightNodeById } from './element';
+import * as zoomApis from './zoom';
+import * as elementApis from './element';
 
-const apis = (context: GraphCtor) => {
-  const { graph, clear, handleRedo, handleUndo, handleSaveHistory, getHistoryInfo, getLayoutInfo } = context;
-  return {
-    highlight: (nodeIds: string[]) => {
-      return highlight(graph!)(nodeIds);
-    },
-    getInfo: () => {
-      return {
-        ...getInfo(graph!)(),
-        layouts: getLayoutInfo(),
-      };
-    },
-    search: (words: string) => search(graph!)(words),
-    history: {
-      redo: handleRedo,
-      undo: handleUndo,
-      save: handleSaveHistory,
-      getInfo: getHistoryInfo,
-    },
-    clear,
-  };
+import { ApisType } from './types';
+
+const apis = {
+  ...zoomApis,
+  ...elementApis,
 };
 
-export default apis;
+const ApiController = (graph: Graph) => {
+  const apiKeys = Object.keys(apis);
+  return apiKeys.reduce((acc, curr) => {
+    return {
+      ...acc,
+      // @ts-ignore
+      [curr]: apis[curr](graph),
+    };
+  }, {}) as ApisType;
+};
+
+export default ApiController;
