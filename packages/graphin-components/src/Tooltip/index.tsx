@@ -137,7 +137,7 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
     },
   };
   return (
-    <React.Fragment>
+    <>
       <div
         ref={(node) => {
           containerRef = node;
@@ -147,7 +147,7 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
       >
         {visible && children}
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

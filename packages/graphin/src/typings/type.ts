@@ -362,6 +362,7 @@ export interface ComboStyle {
 export interface Layout {
   /** 布局名称，必选 */
   type: string;
+  reset?: Layout;
   /** 布局配置，可选 */
   [key: string]: any; // eslint-disable-line
 }

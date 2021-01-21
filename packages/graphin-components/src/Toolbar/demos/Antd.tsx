@@ -4,8 +4,6 @@ import Graphin, { GraphinContext, Utils } from '@antv/graphin';
 import { ZoomOutOutlined, ZoomInOutlined } from '@ant-design/icons';
 import { Tooltip, Button } from 'antd';
 
-interface AntdDemoProps {}
-
 const CustomContent = () => {
   const { apis } = React.useContext(GraphinContext);
   const { handleZoomIn, handleZoomOut } = apis;
@@ -39,7 +37,7 @@ const CustomContent = () => {
     </div>
   );
 };
-const AntdDemo: React.FunctionComponent<AntdDemoProps> = (props) => {
+const AntdDemo = () => {
   return (
     <Graphin data={Utils.mock(5).circle().graphin()}>
       <Toolbar>

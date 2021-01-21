@@ -140,7 +140,7 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
   const id = (item && !item.destroyed && item.getModel && item.getModel().id) || '';
 
   return (
-    <React.Fragment>
+    <>
       <div
         ref={(node) => {
           containerRef = node;
@@ -151,7 +151,7 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
       >
         {visible && children}
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

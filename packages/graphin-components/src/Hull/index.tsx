@@ -95,6 +95,6 @@ const Hull: React.FunctionComponent<IHullProps> = (props) => {
     };
   }, []);
 
-  return <div className="graphin-hull-container"></div>;
+  return <div className="graphin-hull-container" />;
 };
 export default Hull;

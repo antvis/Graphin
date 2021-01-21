@@ -81,7 +81,7 @@ const MiniMap: React.FunctionComponent<MiniMapProps> = (props) => {
         containerRef = node;
       }}
       style={mergedStyle}
-    ></div>
+    />
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Graphin, { Utils, GraphinContext } from '@antv/graphin';
+import Graphin, { Utils } from '@antv/graphin';
 import Hull, { HullCfg } from '../index';
 // Do not forget to import CSS
 import '@antv/graphin/dist/index.css';
@@ -21,11 +21,7 @@ const Demo = () => {
   ];
   return (
     <div className="App">
-      <Graphin
-        data={Utils.mock(10)
-          .circle()
-          .graphin()}
-      >
+      <Graphin data={Utils.mock(10).circle().graphin()}>
         <Hull options={hullOptions} />
       </Graphin>
     </div>

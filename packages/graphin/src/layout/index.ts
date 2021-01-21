@@ -89,7 +89,7 @@ class LayoutController {
       type: 'concentric',
     };
     const { width, height, props } = this.graphin;
-    const { data, layout = DEFAULT_LAYOUT } = props;
+    const { layout = DEFAULT_LAYOUT } = props;
     /** 如果数据为空，不进行布局 */
 
     const { type = 'concentric', preset } = layout;

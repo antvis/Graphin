@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Radio, Input, InputNumber } from 'antd';
+import { Radio, InputNumber } from 'antd';
 import Item from './Item';
 import GraphinColorPick from './ColorPicker';
 import { NodeStyle } from '@antv/graphin';
@@ -16,7 +16,7 @@ const LabelSetting: React.FunctionComponent<LabelSettingProps> = (props) => {
   const { handleChange, fill, fontSize, position } = props;
 
   return (
-    <React.Fragment>
+    <>
       <Item title="位置">
         <Radio.Group
           defaultValue={position}
@@ -82,7 +82,7 @@ const LabelSetting: React.FunctionComponent<LabelSettingProps> = (props) => {
           }}
         />
       </Item>
-    </React.Fragment>
+    </>
   );
 };
 
