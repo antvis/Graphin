@@ -1,5 +1,5 @@
-import { NodeData, EdgeData, Data } from '../types';
 import Tree from './Tree';
+import { NodeStyleLabel, NodeStyleIcon, NodeStyleBadge, IUserNode, IUserEdge, GraphinData } from '../typings/type';
 
 const defaultOptions = {
   /** 节点 */
@@ -16,13 +16,15 @@ type OptionType = typeof defaultOptions;
  * 4.
  */
 export class Mock {
-  nodes: NodeData[];
+  nodes: IUserNode[];
 
-  edges: EdgeData[];
+  edges: IUserEdge[];
 
   options: OptionType;
 
   nodeIds: string[];
+
+  combosData: any; // eslint-disable-line  @typescript-eslint/no-explicit-any
 
   constructor(count: number) {
     this.options = defaultOptions;
@@ -55,13 +57,13 @@ export class Mock {
         });
       }
     }
-    this.nodeIds = this.nodes.map((node) => node.id);
+    this.nodeIds = this.nodes.map(node => node.id);
   };
 
-  expand = (snodes: NodeData[]) => {
+  expand = (snodes: IUserNode[]) => {
     this.edges = [];
     this.nodes = [];
-    snodes.forEach((node) => {
+    snodes.forEach(node => {
       for (let i = 0; i < this.options.nodeCount; i += 1) {
         this.nodes.push({
           id: `${node.id}-${i}`,
@@ -81,7 +83,7 @@ export class Mock {
   };
 
   type = (nodeType: string) => {
-    this.nodes = this.nodes.map((node) => {
+    this.nodes = this.nodes.map(node => {
       return {
         ...node,
         type: nodeType,
@@ -95,7 +97,7 @@ export class Mock {
     if (this.nodeIds.indexOf(id) === -1) {
       id = 'node-0';
     }
-    this.edges = this.edges.filter((edge: EdgeData) => {
+    this.edges = this.edges.filter((edge: IUserEdge) => {
       return edge.source === id || edge.target === id;
     });
     return this;
@@ -110,7 +112,7 @@ export class Mock {
     /**  随机ID */
     const randomArray: string[] = this.nodeIds.sort(() => Math.random() - 0.5).slice(0, length);
 
-    this.edges = this.edges.filter((edge: EdgeData) => {
+    this.edges = this.edges.filter((edge: IUserEdge) => {
       return randomArray.indexOf(edge.target) !== -1;
     });
 
@@ -124,17 +126,18 @@ export class Mock {
     const tree = new Tree();
     const rootId = this.nodeIds[0];
 
-    this.nodeIds.forEach((id) => {
+    this.nodeIds.forEach(id => {
       tree.addNode({
         id,
       });
     });
 
-    tree.bfs((node) => {
+    tree.bfs(node => {
       if (node.id !== rootId) {
         this.edges.push({
-          source: node.parent && node.parent.id,
+          source: (node.parent && node.parent.id) as string,
           target: node.id,
+          label: `edge-${node.parent && node.parent.id}_${node.id}`,
           properties: [],
         });
       }
@@ -151,27 +154,88 @@ export class Mock {
     };
   };
 
-  graphin = (): Data => {
+  combos = (chunkSize: number) => {
+    const comboIds = new Set();
+    this.nodes = this.nodes.map((node, index) => {
+      const comboIndex = Math.ceil((index + 1) / chunkSize);
+      const comboId = `combo-${comboIndex}`;
+      comboIds.add(comboId);
+      return {
+        ...node,
+        comboId,
+      };
+    });
+    this.combosData = [...comboIds].map(c => {
+      return {
+        id: c,
+        label: c,
+      };
+    });
+
+    return this;
+  };
+
+  graphin = (): GraphinData => {
     return {
-      nodes: this.nodes.map((node) => {
+      // @ts-ignore
+      nodes: this.nodes.map(node => {
         return {
           id: node.id,
-          label: `node-${node.id}`,
           data: node,
-          shape: 'CircleNode',
+          type: 'graphin-circle',
+          comboId: node.comboId,
           style: {
-            nodeSize: 24,
+            label: {
+              value: `${node.id}`,
+            },
           },
         };
       }),
-      edges: this.edges.map((edge) => {
+      edges: this.edges.map(edge => {
+        return {
+          source: edge.source,
+          target: edge.target,
+          // label: edge.label,
+          // data: edge,
+        };
+      }),
+      combos: this.combosData,
+    };
+  };
+
+  graphinMock = (label?: NodeStyleLabel, icon?: NodeStyleIcon, badges?: NodeStyleBadge[]) => {
+    return {
+      nodes: this.nodes.map(node => {
+        return {
+          id: node.id,
+          data: node,
+          type: 'graphin-circle',
+          comboId: node.comboId,
+          style: {
+            keyshape: {
+              size: 48,
+            },
+            label: label || {
+              position: 'bottom',
+              value: `node-${node.id}`,
+              fill: 'red',
+              fontSize: 14,
+            },
+            icon,
+            badges,
+          },
+        };
+      }),
+      edges: this.edges.map(edge => {
         return {
           source: edge.source,
           target: edge.target,
           label: edge.label,
           data: edge,
+          type: 'graphin-line',
         };
       }),
+      combos: this.combosData,
     };
   };
 }
@@ -180,13 +244,3 @@ const mock = (count: number) => {
   return new Mock(count);
 };
 export default mock;
-
-/**
- * mock(10).type('company').value()
- * mock(10).type('company').circle('node-1').value()
- * mock(10).type('company').random('node-1').value()
- * mock(10).type('company').random('node-1').value()
- *
- *
- * graphin()
- */

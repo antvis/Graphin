@@ -1,0 +1,262 @@
+{
+  "nodes":[
+    {
+      "id": "node1",
+      "label": "node1",
+      "type": "rect",
+      "size": [96,36],
+      "style": {
+        "radius": 6,
+        "fill": "#F5F6FA",
+        "stroke": "#C7CFDE"
+      },
+      "comboId": "combo1",
+      "stateStyles": {
+        "selected": {
+          "fill": "rgba(72,128,255,0.10)",
+          "stroke": "red"
+        }
+      },
+      "anchorPoints": [
+        [0, 0.5],
+        [1, 0.5],
+        [0.5, 0],
+        [0.5, 1]
+      ]
+    },
+    {
+      "id": "node2",
+      "label": "node2",
+      "type": "rect",
+      "size": [96,36],
+      "style": {
+        "radius": 6,
+        "fill": "#F5F6FA",
+        "stroke": "#C7CFDE"
+      },
+      "comboId": "combo1",
+      "anchorPoints": [
+        [0, 0.5],
+        [1, 0.5],
+        [0.5, 0],
+        [0.5, 1]
+      ]
+    },
+    {
+      "id": "node3",
+      "label": "node3",
+      "type": "rect",
+      "size": [96,36],
+      "style": {
+        "radius": 6,
+        "fill": "#F5F6FA",
+        "stroke": "#C7CFDE"
+      },
+      "anchorPoints": [
+        [0, 0.5],
+        [1, 0.5],
+        [0.5, 0],
+        [0.5, 1]
+      ]
+    },
+    {
+      "id": "node4",
+      "label": "node4",
+      "type": "circle",
+      "size": [40],
+      "comboId": "combo1",
+      "style": {
+        "fill": "#F5F6FA",
+        "stroke": "#C7CFDE"
+      },
+      "labelCfg": {
+        "position": "bottom"
+      },
+      "icon": {
+        "show": true,
+        "img": "https://gw.alipayobjects.com/zos/basement_prod/012bcf4f-423b-4922-8c24-32a89f8c41ce.svg"
+      }
+    },
+    {
+      "id": "node5",
+      "label": "node5",
+      "type": "rect",
+      "size": [68,52],
+      "style": {
+        "fill": "#F6493F",
+        "stroke": "#F6493F"
+      },
+      "labelCfg": {
+        "style": {
+            "fill": "#ffffff",
+            "stroke": "#ffffff"
+        }
+      },
+      "stateStyles": {
+        "selected": {
+          "fill": "#F6493F"
+        }
+      },
+      "anchorPoints": [
+        [0, 0.5],
+        [1, 0.5],
+        [0.5, 0],
+        [0.5, 1]
+      ]
+    },
+    {
+      "id": "node6",
+      "label": "node6",
+      "type": "rect",
+      "size": [68,52],
+      "comboId": "combo2",
+      "style": {
+        "fill": "#F5F6FA",
+        "stroke": "#C7CFDE"
+      },
+      "anchorPoints": [
+        [0, 0.5],
+        [1, 0.5],
+        [0.5, 0],
+        [0.5, 1]
+      ]
+    }
+  ],
+  "edges":[
+    {
+      "id": "edge1",
+      "source": "node2",
+      "target": "node4",
+      "label": "edge1",
+      "style": {
+        "offset": 10,
+        "endArrow": {
+          "path": "M 0,0 L 6,3 L 6,-3 Z",
+          "fill": "#FA908A",
+          "className": "cs-arrow"
+        },
+        "stroke": "#FA908A"
+      },
+      "labelCfg": {
+        "style": {
+          "background": {
+            "padding": [2, 4, 3, 1],
+            "fill": "#ffffff",
+            "stroke": "#FA908A"
+          }
+        }
+      }
+    },
+    {
+      "id": "edge2",
+      "source": "node1",
+      "target": "node5",
+      "label": "edge2",
+      "style": {
+        "lineDash": [5,3],
+        "offset": 10,
+        "endArrow": {
+          "path": "M 0,0 L 6,3 L 6,-3 Z",
+          "fill": "#FA908A",
+          "className": "cs-arrow"
+        },
+        "stroke": "#FA908A"
+      },
+      "labelCfg": {
+        "style": {
+          "background": {
+            "padding": [2, 4, 3, 1],
+            "fill": "#ffffff",
+            "stroke": "#FA908A"
+          }
+        }
+      }
+    },
+    {
+      "id": "edge3",
+      "source": "node1",
+      "target": "node4",
+      "label": "edge2",
+      "style": {
+        "offset": 10,
+        "endArrow": {
+          "path": "M 0,0 L 6,3 L 6,-3 Z",
+          "fill": "#89DB96",
+          "className": "cs-arrow"
+        },
+        "stroke": "#89DB96"
+      },
+      "labelCfg": {
+        "style": {
+          "background": {
+            "padding": [2, 4, 3, 1],
+            "fill": "#ffffff",
+            "stroke": "#89DB96"
+          }
+        }
+      }
+    },
+    {
+      "id": "edge4",
+      "source": "node3",
+      "target": "node2",
+      "style": {
+        "offset": 10,
+        "endArrow": {
+          "path": "M 0,0 L 6,3 L 6,-3 Z",
+          "fill": "#C7CFDE",
+          "className": "cs-arrow"
+        },
+        "stroke": "#C7CFDE"
+      }
+    },
+    {
+      "id": "edge5",
+      "source": "node6",
+      "target": "node3",
+      "style": {
+        "offset": 10,
+        "endArrow": {
+          "path": "M 0,0 L 6,3 L 6,-3 Z",
+          "fill": "#C7CFDE",
+          "className": "cs-arrow"
+        },
+        "stroke": "#C7CFDE"
+      }
+    }
+  ],
+  "combos": [
+    {
+      "id": "combo1",
+      "label": "Combo1",
+      "labelCfg": {
+        "refY": -28
+      },
+      "style": {
+        "fill": "rgba(72,128,255,0.10)",
+        "stroke": "#4880FF"
+      },
+      "stateStyles": {
+        "selected": {
+          "fill": "rgba(72,128,255,0.10)"
+        }
+      }
+    },
+    {
+      "id": "combo2",
+      "label": "Combo2",
+      "labelCfg": {
+        "refY": -28
+      },
+      "style": {
+        "fill": "rgba(72,128,255,0.10)",
+        "stroke": "#4880FF"
+      },
+      "stateStyles": {
+        "selected": {
+          "fill": "rgba(72,128,255,0.10)"
+        }
+      }
+    }
+  ]
+}

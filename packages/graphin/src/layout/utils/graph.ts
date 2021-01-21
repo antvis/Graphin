@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { Edge } from '../../layout/force/Elements';
-import { Node } from '../../types';
+import { IUserNode as Node } from '../../typings/type';
 
 export const getDegree = (node: Node, edges: Edge[]) => {
   const nodeId = node.data.id;

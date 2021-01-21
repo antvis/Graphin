@@ -71,4 +71,28 @@ const hexToRgba = (hex: string, a?: string) => {
   return formatRgb(decimalObject, a);
 };
 
+/**
+ *
+ * @param hex
+ * @param a 透明度，默认是1
+ * @returns hex string
+ */
+export const hexToRgbaToHex = (hex: string, a: string | number = 1): string => {
+  const hashlessHex = removeHash(hex);
+  const hexObject = parseHex(hashlessHex);
+  const decimalObject = hexesToDecimals(hexObject);
+  const { r, g, b } = decimalObject;
+  let R = r.toString(16);
+  let G = g.toString(16);
+  let B = b.toString(16);
+  let A = Math.round(Number(a) * 255).toString(16);
+
+  if (R.length === 1) R = `0${R}`;
+  if (G.length === 1) G = `0${G}`;
+  if (B.length === 1) B = `0${B}`;
+  if (A.length === 1) A = `0${A}`;
+
+  return `#${R}${G}${B}${A}`;
+};
+
 export default hexToRgba;

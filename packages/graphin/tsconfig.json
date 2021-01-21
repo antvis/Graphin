@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "declaration": true,
     "module": "esnext",
     "target": "es2015",
@@ -9,7 +10,10 @@
     "jsx": "react",
     "strict": true,
     "lib": ["dom", "esnext"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types/", "./typings/index.d.ts"],
+    "skipLibCheck": true,
+    "isolatedModules": false
   },
   "include": ["src"]
 }

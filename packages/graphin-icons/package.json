@@ -1,0 +1,22 @@
+{
+  "name": "@antv/graphin-icons",
+  "version": "1.0.0",
+  "description": "graphin icon fonts",
+  "main": "./dist/index",
+  "scripts": {
+    "start": "father build --watch",
+    "build": "father build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "author": "",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "father": "^2.30.0"
+  }
+}

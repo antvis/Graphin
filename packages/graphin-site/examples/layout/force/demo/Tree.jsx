@@ -14,6 +14,7 @@ const App = () => (
     layout={{
       name: 'force',
       options: {
+        preset: { name: 'concentric' },
         defSpringLen: (_edge, source, target) => {
           const nodeSize = 30;
           const Sdegree = source.data.layout?.degree;

@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "中文分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "Highlight.jsx",
+      "title": ""
+    },
+    {
+      "filename": "Filter.jsx",
+      "title": ""
+    }
+  ]
+}
