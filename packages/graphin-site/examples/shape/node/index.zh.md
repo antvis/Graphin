@@ -1,6 +1,6 @@
 ---
 title: 内置节点
-order: 2
+order: 1
 ---
 
 目前 Graphin 内置了 6 种节点

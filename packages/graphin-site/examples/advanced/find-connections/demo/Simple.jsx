@@ -13,24 +13,19 @@ const chunk = (arr, size) =>
 const App = () => {
   const [state, setState] = React.useState({
     selected: [],
-    data: Utils.mock(20).random().graphin(),
+    data: Utils.mock(20)
+      .random()
+      .graphin(),
   });
 
   const { data, selected } = state;
   const graphRef = React.createRef(null);
   React.useEffect(() => {
     const { graph } = graphRef.current;
-
-    // TODO:框选进行关系扩散，暂时不支持多选
-    const onNodeSelectChange = (e) => {
-      if (e.target) {
-        console.info('圈选是targets参数'); //eslint-disable-line
-        return;
-      }
-      const nodes = e.targets.nodes.map((node) => {
+    const onNodeSelectChange = e => {
+      const nodes = e.selectedItems.nodes.map(node => {
         return node.get('model');
       });
-
       setState({
         ...state,
         selected: nodes,
@@ -52,7 +47,7 @@ const App = () => {
     const findConnectionData = { nodes: [], edges: [] };
     // 1度扩散，中间经历一个节点
     const sortArray = chunk(selected, 2);
-    sortArray.forEach((arr) => {
+    sortArray.forEach(arr => {
       const [source, target = selected[0]] = arr;
 
       const relativeNode = {
