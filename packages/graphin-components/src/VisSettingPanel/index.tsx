@@ -1,6 +1,6 @@
 import React from 'react';
 import { GraphinContext, NodeConfig, NodeStyle } from '@antv/graphin';
-import AntdPanel from './AntdPanel';
+import AntdPanel from './demos/AntdPanel';
 
 interface VisSettingPanelPropsType {
   style?: React.CSSProperties;
