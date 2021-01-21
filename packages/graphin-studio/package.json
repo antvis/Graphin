@@ -15,7 +15,7 @@
     "@antv/graphin": "*",
     "@antv/graphin-components": "*",
     "@types/classnames": "^2.2.9",
-    "antd": "^4.1.4",
+    "antd": "^4.2.4",
     "chinese-random-name": "^1.0.0",
     "classnames": "^2.2.6",
     "copy-to-clipboard": "^3.2.0",
