@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin-graphscope",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "An Example for GraphScope",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -12,8 +12,8 @@
     "clean": "rimraf es esm lib dist"
   },
   "dependencies": {
-    "@antv/graphin": "^2.0.0-beta.4",
-    "@antv/graphin-components": "^2.0.0-beta.4",
+    "@antv/graphin": "^2.0.0-beta.5",
+    "@antv/graphin-components": "^2.0.0-beta.5",
     "@antv/graphin-icons": "^1.0.0",
     "antd": "^4.10.3",
     "react": "^16.9.0",
