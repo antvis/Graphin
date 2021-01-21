@@ -1,15 +1,16 @@
 {
   "name": "@antv/graphin-components",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "description": "Components for graphin",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "start": "father build --watch",
-    "build": "father build & npm run  build:umd",
+    "start": "npm run clean && father build --watch",
+    "build": "npm run clean && father build & npm run  build:umd",
     "build:umd": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --env.NODE_ENV=production  -c ./webpack.config.js ",
-    "test": "jest"
+    "test": "jest",
+    "clean": "rimraf es esm lib dist"
   },
   "author": "",
   "license": "MIT",
@@ -43,6 +44,7 @@
     "mini-css-extract-plugin": "^0.8.0",
     "react-color": "^2.19.3",
     "react-pie-menu": "^0.2.5",
+    "rimraf": "^3.0.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
     "styled-components": "^5.2.1",
