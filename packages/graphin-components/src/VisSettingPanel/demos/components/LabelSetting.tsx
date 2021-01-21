@@ -3,23 +3,13 @@ import { Radio, Input, InputNumber } from 'antd';
 import Item from './Item';
 import { FontSizeOutlined } from '@ant-design/icons';
 import GraphinColorPick from './ColorPicker';
+import { NodeStyle } from '@antv/graphin';
 
 interface LabelSettingProps extends NodeStyleLabel {
   handleChange: (schena: { label: NodeStyleLabel }) => void;
 }
 
-export type NodeStyleLabel = Partial<{
-  /** label的名称 */
-  value: string;
-  /** 展示位置 */
-  position: 'top' | 'bottom' | 'left' | 'right' | 'center';
-  /** 文本填充色 */
-  fill: string;
-  /** 文本大小 */
-  fontSize: number;
-  /** 文本在各自方向上的偏移量，主要为了便于调整文本位置 */
-  offset: number;
-}>;
+export type NodeStyleLabel = Partial<NodeStyle['label']>;
 
 const positions = ['top', 'bottom', 'left', 'right', 'center'];
 

@@ -12,4 +12,4 @@ nav:
 
 # VisSettingPanel 可视化配置面板
 
-<code src='./demos/index.tsx'>
+<!-- <code src='./demos/index.tsx'> -->

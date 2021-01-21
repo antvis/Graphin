@@ -1,13 +1,14 @@
+// @ts-nocheck
 import React from 'react';
 
 import { GraphinContext } from '@antv/graphin';
 
 interface Props {
   onChange: {
-    (value: Graphin.Props['data']['edges']): void;
+    (value: any): void;
   };
 }
-const CreateEdge: React.FunctionComponent<Props> = (props) => {
+const CreateEdge: React.FunctionComponent<Props> = props => {
   const { children } = props;
   const [state, setState] = React.useState({
     active: false,
@@ -18,13 +19,13 @@ const CreateEdge: React.FunctionComponent<Props> = (props) => {
     const graphin = React.useContext(GraphinContext);
     // @ts-ignore
     const { graph } = graphin;
-    graph.on('aftercreateedge', (e) => {
+    graph.on('aftercreateedge', e => {
       const { edges } = graph.save();
       // TODO:边的处理，等G6拆包之后
       // G6.Util.processParallelEdges(edges);
       const newEdges = graph.getEdges();
       newEdges.forEach((edge, i) => {
-        graph.updateItem(edge, edges[i]);
+        graph.updateItem(edge, (edges as any)[i]);
       });
       props.onChange && props.onChange(newEdges);
     });

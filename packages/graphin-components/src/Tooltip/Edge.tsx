@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { GraphinContext } from '@antv/graphin/dist';
+import { GraphinContext } from '@antv/graphin';
 import * as React from 'react';
 import './index.less';
 
