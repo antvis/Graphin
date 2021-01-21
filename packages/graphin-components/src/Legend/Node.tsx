@@ -1,4 +1,4 @@
-import { GraphinContext } from '@antv/graphin/dist';
+import { GraphinContext } from '@antv/graphin';
 import React, { useEffect } from 'react';
 import './index.less';
 
