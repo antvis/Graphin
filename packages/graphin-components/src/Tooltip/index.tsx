@@ -52,10 +52,10 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
     e.preventDefault();
     e.stopPropagation();
 
-    const width: number = graph.get('width');
-    const height: number = graph.get('height');
+    // const width: number = graph.get('width');
+    // const height: number = graph.get('height');
 
-    const bbox = (containerRef as HTMLDivElement).getBoundingClientRect();
+    // const bbox = (containerRef as HTMLDivElement).getBoundingClientRect();
 
     const point = graph.getPointByClient(e.clientX, e.clientY);
     let { x, y } = graph.getCanvasByPoint(point.x, point.y);

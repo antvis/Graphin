@@ -11,6 +11,7 @@ export const setStatusStyle = (shapes: any, statusStyle: any, parseAttr: (style:
     return;
   }
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     shapes.forEach((shapeItem: any) => {
       const itemShapeName = shapeItem.cfg.name;
       const style = statusStyle[itemShapeName];

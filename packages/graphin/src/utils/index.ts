@@ -4,6 +4,7 @@ import debug from './debug';
 import shallowEqual from './shallowEqual';
 import { genDefaultComboStyle, genDefaultEdgeStyle, genDefaultNodeStyle } from '../consts';
 import { deepMix } from '@antv/util';
+import uuid from './uuid';
 
 export default {
   hexToRgba,
@@ -15,4 +16,5 @@ export default {
   genDefaultEdgeStyle,
   genDefaultNodeStyle,
   deepMerge: deepMix,
+  uuid,
 };

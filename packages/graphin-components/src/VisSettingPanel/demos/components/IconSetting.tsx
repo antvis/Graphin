@@ -12,7 +12,7 @@ interface IconSettingProps extends NodeStyleIcon {
 export type NodeStyleIcon = Partial<NodeStyle['icon']>;
 
 const IconSetting = (props: IconSettingProps) => {
-  const { handleChange, fill, size, value, type: IconType } = props;
+  const { handleChange, fill, size, type: IconType } = props;
 
   const [state, setState] = React.useState({
     type: IconType,

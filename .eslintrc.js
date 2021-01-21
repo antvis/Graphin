@@ -16,6 +16,7 @@ module.exports = {
     },
   },
   rules: {
+    '@typescript-eslint/ban-ts-ignore': 0,
     'no-underscore-dangle': 0,
     '@typescript-eslint/interface-name-prefix': 0,
     'import/no-extraneous-dependencies': 0,

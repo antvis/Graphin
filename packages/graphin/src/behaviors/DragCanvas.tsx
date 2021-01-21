@@ -1,5 +1,6 @@
 import * as React from 'react';
 import useBehaviorHook from './useBehaviorHook';
+
 const defaultConfig = {
   /** 允许拖拽方向，支持'x'，'y'，'both'，默认方向为 'both'； */
   direction: 'both',

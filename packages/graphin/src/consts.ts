@@ -189,7 +189,7 @@ export const genDefaultNodeStyle = ({
   };
 };
 
-export const genDefaultEdgeStyle = ({ edgeSize = 0.1, edgePrimaryColor = '#ddd', mode = 'light' }: ThemeType) => {
+export const genDefaultEdgeStyle = ({ edgeSize = 1, edgePrimaryColor = '#ddd', mode = 'light' }: ThemeType) => {
   const Colors = {
     light: {
       stroke: edgePrimaryColor,
@@ -209,7 +209,7 @@ export const genDefaultEdgeStyle = ({ edgeSize = 0.1, edgePrimaryColor = '#ddd',
     style: {
       keyshape: {
         type: 'line',
-        lineWidth: 1,
+        lineWidth: edgeSize,
         stroke: Color.stroke,
         opacity: 1,
         lineAppendWidth: 9,
@@ -261,7 +261,7 @@ export const genDefaultEdgeStyle = ({ edgeSize = 0.1, edgePrimaryColor = '#ddd',
   };
 };
 
-export function genDefaultComboStyle(theme: ThemeType) {
+export function genDefaultComboStyle() {
   const defaultStyle = {
     type: 'circle',
     style: {

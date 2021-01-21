@@ -1,5 +1,6 @@
 import * as React from 'react';
 import useBehaviorHook from './useBehaviorHook';
+
 const DEFAULT_TRIGGER = 'shift';
 
 const defaultConfig = {
@@ -14,7 +15,7 @@ const defaultConfig = {
   },
   /** 选中节点时的回调，参数 nodes 表示选中的节点； */
   onSelect: () => {},
-  /**取消选中节点时的回调，参数 nodes 表示取消选中的节点； */
+  /** 取消选中节点时的回调，参数 nodes 表示取消选中的节点； */
   onDeselect: () => {},
   /** 选中的状态，默认值为 'selected' */
   selectedState: 'selected',
