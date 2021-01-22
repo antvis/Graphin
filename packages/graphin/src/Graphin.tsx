@@ -377,7 +377,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   }
 
   clear = () => {
-    if (this.layout && this.layout.destroyed) {
+    if (this.layout && this.layout.destroy) {
       this.layout.destroy(); // tree graph
     }
     this.layout = {} as LayoutController;

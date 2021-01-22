@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import G6, { Graph } from '@antv/g6';
 import defaultOptions from './utils/options';
 
@@ -25,8 +27,6 @@ class LayoutController {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options: any;
-
-  type: string;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   instance: any;

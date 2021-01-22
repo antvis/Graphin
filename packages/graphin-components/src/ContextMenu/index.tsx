@@ -1,7 +1,15 @@
 import React, { useEffect } from 'react';
-import { GraphinContext, IG6GraphEvent } from '@antv/graphin';
+import * as Graphin from '@antv/graphin';
 import Menu from './Menu';
 
+const { GraphinContext } = Graphin;
+
+interface IG6GraphEvent {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  item: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}
 const defaultStyle: React.CSSProperties = {
   width: 200,
   background: '#fff',

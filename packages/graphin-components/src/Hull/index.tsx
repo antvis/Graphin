@@ -1,10 +1,10 @@
 import React from 'react';
 
 // @ts-ignore
-import { GraphinContext, Utils } from '@antv/graphin';
+import { GraphinContext } from '@antv/graphin';
 
 const defaultHullCfg = {
-  id: Utils.uuid(),
+  id: `${Math.random()}`, // Utils.uuid(),
   members: [],
   type: 'round-convex',
   nonMembers: [],

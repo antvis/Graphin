@@ -294,6 +294,6 @@ export const getDefaultStyleByTheme = (inputTheme: ThemeType | undefined) => {
     background: isLight ? '#fff' : '#000',
     ...genDefaultNodeStyle(theme),
     ...genDefaultEdgeStyle(theme),
-    ...genDefaultComboStyle(theme),
+    ...genDefaultComboStyle(),
   };
 };
