@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraphinContext } from '@antv/graphin';
+import * as Graphin from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 
 const { Menu } = ContextMenu;
@@ -10,7 +10,7 @@ interface CustomMenuProps {
 
 const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
   const { expandNeighbors } = props;
-  const graphin = React.useContext(GraphinContext);
+  const graphin = React.useContext(Graphin.GraphinContext);
 
   const { contextmenu } = graphin;
   const model = contextmenu.node.item.getModel();

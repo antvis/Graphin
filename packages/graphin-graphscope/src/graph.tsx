@@ -171,6 +171,8 @@ interface IGraphProps {
   height: number;
   neighbors?: (nodeId: string, degree: number) => void;
   hasMinimap?: boolean;
+  hasContextMenu?: boolean;
+  hasFishEye?: boolean;
   // 节点 label 上显示的字段属性名称
   nodeLabel?: string;
 }
@@ -184,6 +186,8 @@ const GraphScope: React.FC<IGraphProps> = ({
   height,
   graphDOM,
   hasMinimap = true,
+  hasContextMenu = true,
+  hasFishEye = true,
   nodeLabel = 'id',
 }) => {
   const [state, setState] = useState({
@@ -271,7 +275,7 @@ const GraphScope: React.FC<IGraphProps> = ({
 
   useEffect(() => {
     const transData = transGraphData(data);
-    setState((preState) => {
+    setState(preState => {
       return {
         ...preState,
         data: transData,
@@ -281,7 +285,7 @@ const GraphScope: React.FC<IGraphProps> = ({
 
   const { visible, layout } = state;
   const handleClose = () => {
-    setState((preState) => {
+    setState(preState => {
       return {
         ...preState,
         visible: false,
@@ -289,7 +293,7 @@ const GraphScope: React.FC<IGraphProps> = ({
     });
   };
   const handleOpen = () => {
-    setState((preState) => {
+    setState(preState => {
       return {
         ...preState,
         visible: true,
@@ -297,7 +301,7 @@ const GraphScope: React.FC<IGraphProps> = ({
     });
   };
   const handleRefresh = () => {
-    setState((preState) => {
+    setState(preState => {
       return {
         ...preState,
         data: refreshData,
@@ -314,8 +318,8 @@ const GraphScope: React.FC<IGraphProps> = ({
   };
 
   const handleChangeLayout = (value: string) => {
-    const currentLayout = layouts.find((item) => item.type === value);
-    setState((preState) => {
+    const currentLayout = layouts.find(item => item.type === value);
+    setState(preState => {
       return {
         ...preState,
         layout: currentLayout as any,
@@ -330,16 +334,20 @@ const GraphScope: React.FC<IGraphProps> = ({
         <DragNode />
         {hasMinimap && <MiniMap visible options={{ padding: 20, size: [140, 70] }} />}
         <LayoutSelector onChange={handleChangeLayout} value={state.layout.type} options={layouts} />
-        <ContextMenu style={{ width: 90 }}>
-          <CustomMenu expandNeighbors={expandNeighbors} />
-        </ContextMenu>
-        <ContextMenu bindType="canvas">
-          <Menu bindType="canvas">
-            <Menu.Item onClick={handleOpen}>开启鱼眼</Menu.Item>
-            <Menu.Item onClick={handleRefresh}>重置画布</Menu.Item>
-          </Menu>
-        </ContextMenu>
-        <FishEye options={{ showLabel: false }} visible={visible} handleEscListener={handleClose} />
+        {hasContextMenu && (
+          <>
+            <ContextMenu style={{ width: 90 }}>
+              <CustomMenu expandNeighbors={expandNeighbors} />
+            </ContextMenu>
+            <ContextMenu bindType="canvas">
+              <Menu bindType="canvas">
+                <Menu.Item onClick={handleOpen}>开启鱼眼</Menu.Item>
+                <Menu.Item onClick={handleRefresh}>重置画布</Menu.Item>
+              </Menu>
+            </ContextMenu>
+          </>
+        )}
+        {hasContextMenu && <FishEye options={{ showLabel: false }} visible={visible} handleEscListener={handleClose} />}
       </Graphin>
     </div>
   );
