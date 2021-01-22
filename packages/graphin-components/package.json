@@ -40,7 +40,7 @@
     "jest": "^25.4.0",
     "jest-canvas-mock": "^2.1.2",
     "less": "^3.10.3",
-    "less-loader": "^5.0.0",
+    "less-loader": "^6.1.0",
     "mini-css-extract-plugin": "^0.8.0",
     "react-color": "^2.19.3",
     "react-pie-menu": "^0.2.5",

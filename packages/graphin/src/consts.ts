@@ -2,38 +2,38 @@ import { NodeStyle } from '.';
 import { ComboStyle, EdgeStyle } from './typings/type';
 import hexToRgba from './utils/hexToRgba';
 
-interface ColorSetType {
-  activeFill: string;
-  activeStroke: string;
-  comboActiveFill: string;
-  comboActiveStroke: string;
-  comboDisableFill: string;
-  comboDisableStroke: string;
-  comboHighlightFill: string;
-  comboHighlightStroke: string;
-  comboInactiveFill: string;
-  comboInactiveStroke: string;
-  comboMainFill: string;
-  comboMainStroke: string;
-  comboSelectedFill: string;
-  comboSelectedStroke: string;
-  disableFill: string;
-  disableStroke: string;
-  edgeActiveStroke: string;
-  edgeDisableStroke: string;
-  edgeHighlightStroke: string;
-  edgeInactiveStroke: string;
-  edgeMainStroke: string;
-  edgeSelectedStroke: string;
-  highlightFill: string;
-  highlightStroke: string;
-  inactiveFill: string;
-  inactiveStroke: string;
-  mainFill: string;
-  mainStroke: string;
-  selectedFill: string;
-  selectedStroke: string;
-}
+// interface ColorSetType {
+//   activeFill: string;
+//   activeStroke: string;
+//   comboActiveFill: string;
+//   comboActiveStroke: string;
+//   comboDisableFill: string;
+//   comboDisableStroke: string;
+//   comboHighlightFill: string;
+//   comboHighlightStroke: string;
+//   comboInactiveFill: string;
+//   comboInactiveStroke: string;
+//   comboMainFill: string;
+//   comboMainStroke: string;
+//   comboSelectedFill: string;
+//   comboSelectedStroke: string;
+//   disableFill: string;
+//   disableStroke: string;
+//   edgeActiveStroke: string;
+//   edgeDisableStroke: string;
+//   edgeHighlightStroke: string;
+//   edgeInactiveStroke: string;
+//   edgeMainStroke: string;
+//   edgeSelectedStroke: string;
+//   highlightFill: string;
+//   highlightStroke: string;
+//   inactiveFill: string;
+//   inactiveStroke: string;
+//   mainFill: string;
+//   mainStroke: string;
+//   selectedFill: string;
+//   selectedStroke: string;
+// }
 
 export const TREE_LAYOUTS = ['dendrogram', 'compactBox', 'mindmap', 'indented'];
 

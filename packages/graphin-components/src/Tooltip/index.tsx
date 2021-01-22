@@ -32,7 +32,7 @@ interface State {
   x: number;
   y: number;
   /** 触发的元素 */
-  item?: {};
+  item?: Record<string, unknown>;
 }
 
 // let containerRef: HTMLDivElement | null;
