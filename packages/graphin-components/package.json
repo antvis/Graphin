@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin-components",
-  "version": "2.0.0-beta.5",
+  "version": "2.0.0-beta.6",
   "description": "Components for graphin",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -55,7 +55,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@antv/graphin": "*",
+    "@antv/graphin": "2.0.0-beta.5",
     "react-color": "^2.19.3"
   },
   "peerDependencies": {

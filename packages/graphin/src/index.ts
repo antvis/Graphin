@@ -28,6 +28,7 @@ export default Graphin;
 export { Utils, Layout, GraphinContext, Behaviors, registerFontFamily };
 
 export { GraphinContextType, NodeStyle, EdgeStyle };
+
 export {
   /** export G6 */
   default as G6,

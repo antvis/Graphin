@@ -66,7 +66,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     /**  注册 font icon */
     const iconFont = iconLoader();
     const { glyphs, fontFamily } = iconFont;
-    const icons = glyphs.map((item) => {
+    const icons = glyphs.map(item => {
       return {
         name: item.name,
         unicode: String.fromCodePoint(item.unicode_decimal),
@@ -75,7 +75,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     return new Proxy(icons, {
       get: (target, propKey: string) => {
-        const matchIcon = target.find((icon) => {
+        const matchIcon = target.find(icon => {
           return icon.name === propKey;
         });
         if (!matchIcon) {
@@ -270,7 +270,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
    * @param prevProps
    */
   updateOptions = () => {
-    const { layout, data, ...options } = this.props;
+    const { ...options } = this.props;
     return options;
   };
 
@@ -279,18 +279,18 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     if (!this.isTree) {
       const { data } = this.props;
       const { nodes = [], edges = [] } = data as GraphinData;
-      nodes.forEach((node) => {
+      nodes.forEach(node => {
         const { status } = node;
         if (status) {
-          Object.keys(status).forEach((k) => {
+          Object.keys(status).forEach(k => {
             this.graph.setItemState(node.id, k, Boolean(status[k]));
           });
         }
       });
-      edges.forEach((edge) => {
+      edges.forEach(edge => {
         const { status } = edge;
         if (status) {
-          Object.keys(status).forEach((k) => {
+          Object.keys(status).forEach(k => {
             this.graph.setItemState(edge.id, k, Boolean(status[k]));
           });
         }
@@ -331,7 +331,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       this.initStatus();
       this.apis = ApiController(this.graph);
       console.log('%c isDataChange', 'color:grey');
-      this.setState((preState) => {
+      this.setState(preState => {
         return {
           ...preState,
           context: {
@@ -377,7 +377,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   }
 
   clear = () => {
-    if (this.layout && this.layout.destroyed) {
+    if (this.layout && this.layout.destroy) {
       this.layout.destroy(); // tree graph
     }
     this.layout = {} as LayoutController;
@@ -405,7 +405,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           <div
             data-testid="custom-element"
             className="graphin-core"
-            ref={(node) => {
+            ref={node => {
               this.graphDOM = node;
             }}
             style={{ background: this.theme?.background, ...style }}
@@ -413,25 +413,23 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           <div className="graphin-components">
             {isReady && (
               <>
-                {
-                  /** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
-                  !modes && (
-                    <React.Fragment>
-                      {/* 拖拽画布 */}
-                      <DragCanvas />
-                      {/* 缩放画布 */}
-                      <ZoomCanvas />
-                      {/* 拖拽节点 */}
-                      <DragNode />
-                      {/* 点击节点 */}
-                      <DragCombo />
-                      {/* 点击节点 */}
-                      <ClickSelect />
-                      {/* 圈选节点 */}
-                      <BrushSelect />
-                    </React.Fragment>
-                  )
-                }
+                {/** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
+                !modes && (
+                  <>
+                    {/* 拖拽画布 */}
+                    <DragCanvas />
+                    {/* 缩放画布 */}
+                    <ZoomCanvas />
+                    {/* 拖拽节点 */}
+                    <DragNode />
+                    {/* 点击节点 */}
+                    <DragCombo />
+                    {/* 点击节点 */}
+                    <ClickSelect />
+                    {/* 圈选节点 */}
+                    <BrushSelect />
+                  </>
+                )}
 
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />

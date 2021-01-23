@@ -2,7 +2,6 @@ module.exports = {
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
     'airbnb',
-    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'prettier/react',
@@ -16,6 +15,14 @@ module.exports = {
     },
   },
   rules: {
+    'no-shadow': 0,
+    camelcase: 0,
+    '@typescript-eslint/ban-ts-ignore': 0,
+    'arrow-body-style': 0,
+    'no-use-before-define': 0,
+    '@typescript-eslint/ban-ts-comment': 0,
+    'react/jsx-filename-extension': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
     'no-underscore-dangle': 0,
     '@typescript-eslint/interface-name-prefix': 0,
     'import/no-extraneous-dependencies': 0,
@@ -27,7 +34,6 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     'react/display-name': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx', '.js', '.ts'] }],
     'react/jsx-props-no-spreading': 0,
     'operator-assignment': 0,
     'react/no-did-update-set-state': 0,

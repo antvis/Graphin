@@ -34,7 +34,6 @@ jspm_packages/
 .idea
 
 # build
-lib
 build
 
 # lock

@@ -32,10 +32,10 @@ interface State {
   x: number;
   y: number;
   /** 触发的元素 */
-  item?: {};
+  item?: Record<string, unknown>;
 }
 
-let containerRef: HTMLDivElement | null;
+// let containerRef: HTMLDivElement | null;
 
 const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & { Edge: typeof Edge } = (props) => {
   const { children, bindType = 'node', style } = props;
@@ -52,10 +52,10 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
     e.preventDefault();
     e.stopPropagation();
 
-    const width: number = graph.get('width');
-    const height: number = graph.get('height');
+    // const width: number = graph.get('width');
+    // const height: number = graph.get('height');
 
-    const bbox = (containerRef as HTMLDivElement).getBoundingClientRect();
+    // const bbox = (containerRef as HTMLDivElement).getBoundingClientRect();
 
     const point = graph.getPointByClient(e.clientX, e.clientY);
     let { x, y } = graph.getCanvasByPoint(point.x, point.y);
@@ -137,17 +137,17 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
     },
   };
   return (
-    <React.Fragment>
+    <>
       <div
-        ref={(node) => {
-          containerRef = node;
+        ref={() => {
+          // containerRef = node;
         }}
         className="graphin-components-tooltip"
         style={{ ...defaultStyle, ...style, ...positionStyle }}
       >
         {visible && children}
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

@@ -41,9 +41,8 @@ export default () => {
      * @param {Object} data 数据
      */
     init(data: GraphinData) {
-      const self = this;
-      self.nodes = data.nodes;
-      self.edges = data.edges;
+      this.nodes = data.nodes;
+      this.edges = data.edges;
       console.log(this, this.getDefaultCfg());
       const { graph, ...layoutConfig } = this;
 
@@ -52,7 +51,7 @@ export default () => {
       const { width, height, animation, done = () => {}, ...others } = options;
 
       /** 1. Create a force simulator */
-      self.simulation = new Force({
+      this.simulation = new Force({
         width,
         height,
         animation,
@@ -64,10 +63,10 @@ export default () => {
       });
 
       // 2. Mount Data
-      self.simulation.setData(data);
+      this.simulation.setData(data);
 
       // 3. Custom rendering function
-      self.simulation.register('render', (forceData: GraphinData) => {
+      this.simulation.register('render', (forceData: GraphinData) => {
         if (!animation && data && data.nodes && data.nodes.length > 0) {
           // 如果不需要动画
           const { nodes } = forceData;
@@ -115,28 +114,26 @@ export default () => {
      * 执行布局
      */
     execute() {
-      const self = this;
       // TODO
       /**  4. Start force  simulator */
-      self.simulation.start();
+      this.simulation.start();
     },
     /**
      * 根据传入的数据进行布局
      * @param {Object} data 数据
      */
     layout(data: GraphinData) {
-      const self = this;
-      self.init(data);
-      self.execute();
+      this.init(data);
+      this.execute();
     },
     /**
      * 更新布局配置，但不执行布局
      * @param {Object} cfg 需要更新的配置项
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updateCfg(cfg: any) {
-      const self = this;
-      self.cfg = {
-        ...self.cfg,
+      this.cfg = {
+        ...this.cfg,
         ...cfg,
       };
     },
@@ -144,10 +141,9 @@ export default () => {
      * 销毁
      */
     destroy() {
-      const self = this;
-      self.destroyed = true;
-      self.simulation.stop();
-      self.simulation = null;
+      this.destroyed = true;
+      this.simulation.stop();
+      this.simulation = null;
     },
   });
 };

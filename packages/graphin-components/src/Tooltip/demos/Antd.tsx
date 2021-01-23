@@ -24,7 +24,7 @@ const AntdTooltip = () => {
   const model = item && item.getModel();
   return (
     <Popover placement="topLeft" title={model.id} content={content}>
-      <div style={tooltipStyles}></div>
+      <div style={tooltipStyles} />
     </Popover>
   );
 };

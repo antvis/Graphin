@@ -3,13 +3,14 @@ import GraphinContext from '../GraphinContext';
 
 interface Props {
   type: string;
-  defaultConfig: {};
+  defaultConfig: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   userProps: any;
   mode?: string;
 }
 const useBehaviorHook = (params: Props) => {
   const { type, defaultConfig, userProps, mode = 'default' } = params;
-  const { graph } = React.useContext(GraphinContext) as any;
+  const { graph } = React.useContext(GraphinContext);
   const { disabled, ...otherConfig } = userProps;
 
   React.useEffect(() => {

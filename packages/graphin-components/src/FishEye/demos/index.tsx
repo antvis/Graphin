@@ -1,8 +1,7 @@
 import React from 'react';
-import Graphin, { GraphinContext, Utils } from '@antv/graphin';
+import Graphin, { Utils } from '@antv/graphin';
 import { ContextMenu, FishEye } from '@antv/graphin-components';
-import { message } from 'antd';
-import { TagFilled } from '@ant-design/icons';
+
 import '@antv/graphin/dist/index.css';
 // Do not forget to import CSS
 import '@antv/graphin-components/dist/index.css';

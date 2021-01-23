@@ -1,6 +1,7 @@
 /**
  * TODO 内置最佳的布局参数
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const options: { [key: string]: any } = {
   circular: {},
   concentric: {

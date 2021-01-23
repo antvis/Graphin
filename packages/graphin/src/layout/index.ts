@@ -1,4 +1,6 @@
-import G6 from '@antv/g6';
+// @ts-nocheck
+
+import G6, { Graph } from '@antv/g6';
 import defaultOptions from './utils/options';
 
 import Tweak from './inner/tweak';
@@ -13,7 +15,21 @@ const isEmpty = (data: any) => {
 };
 const FORCE_LAYOUTS = ['force', 'graphin-force', 'g6force', 'gForce', 'comboForce'];
 class LayoutController {
-  [x: string]: any;
+  graph: Graph;
+
+  graphin: Graphin;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  presetLayout: any;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  prevOptions: any;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  options: any;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  instance: any;
 
   constructor(context: Graphin) {
     this.graphin = context;
@@ -73,7 +89,7 @@ class LayoutController {
       type: 'concentric',
     };
     const { width, height, props } = this.graphin;
-    const { data, layout = DEFAULT_LAYOUT } = props;
+    const { layout = DEFAULT_LAYOUT } = props;
     /** 如果数据为空，不进行布局 */
 
     const { type = 'concentric', preset } = layout;
@@ -213,7 +229,7 @@ class LayoutController {
     }
 
     this.presetLayout = null;
-    this.instace = null;
+    this.instance = null;
   };
 
   /** restart */

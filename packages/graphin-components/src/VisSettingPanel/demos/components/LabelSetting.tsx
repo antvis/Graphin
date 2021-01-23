@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Radio, Input, InputNumber } from 'antd';
+import { Radio, InputNumber } from 'antd';
 import Item from './Item';
-import { FontSizeOutlined } from '@ant-design/icons';
 import GraphinColorPick from './ColorPicker';
 import { NodeStyle } from '@antv/graphin';
 
@@ -14,10 +13,10 @@ export type NodeStyleLabel = Partial<NodeStyle['label']>;
 const positions = ['top', 'bottom', 'left', 'right', 'center'];
 
 const LabelSetting: React.FunctionComponent<LabelSettingProps> = (props) => {
-  const { handleChange, fill, fontSize, value, position, offset } = props;
+  const { handleChange, fill, fontSize, position } = props;
 
   return (
-    <React.Fragment>
+    <>
       <Item title="位置">
         <Radio.Group
           defaultValue={position}
@@ -83,7 +82,7 @@ const LabelSetting: React.FunctionComponent<LabelSettingProps> = (props) => {
           }}
         />
       </Item>
-    </React.Fragment>
+    </>
   );
 };
 

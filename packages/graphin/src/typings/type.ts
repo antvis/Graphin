@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+// TODO : remove any type
 import { ThemeType } from '../consts';
 
 export interface UserProperties {
@@ -5,10 +8,10 @@ export interface UserProperties {
 }
 
 /** 基础节点类型 */
-type BaseNode = {
-  /** ID，必须为字符串*/
+interface BaseNode {
+  /** ID，必须为字符串 */
   id: string;
-};
+}
 
 export interface RestNode {
   /** 注册元素的名称 */
@@ -47,12 +50,12 @@ export interface ElementStatus {
 }
 
 /** 基础边类型 */
-type BaseEdge = {
+interface BaseEdge {
   /** 边的 Source */
   source: string;
   /** 边的 Target */
   target: string;
-};
+}
 
 export interface RestEdge {
   /** 边的类型 */
@@ -67,18 +70,10 @@ export interface RestEdge {
   };
 }
 
-/**
- * 节点的形状
- */
-export enum NodeShape {
-  CIRCLE = 'circle',
-  RECT = 'rect',
-}
-
 export interface GraphinData {
-  nodes: IUserNode[] | [];
-  edges: IUserEdge[] | [];
-  combos?: Combo[] | [] | undefined | null;
+  nodes: IUserNode[];
+  edges: IUserEdge[];
+  combos?: Combo[] | undefined | null;
   children?: any;
 }
 export interface GraphinTreeData {
@@ -103,7 +98,7 @@ export interface GraphinProps {
   /** 默认的边样式 */
   defaultEdge?: Partial<EdgeStyle>;
   /** 默认的Combo样式 */
-  defaultCombo?: Partial<ComboStyle> | any;
+  defaultCombo?: Partial<ComboStyle>;
 
   /** 默认的节点 状态样式 */
   nodeStateStyles?: {
@@ -183,7 +178,7 @@ export interface EdgeStyle {
       /** 透明度 */
       opacity: number;
       /** 虚线Dash */
-      lineDash: [number, number] | number;
+      lineDash: number | number[];
       /** 边的交互区域扩展 */
       lineAppendWidth: number;
       /** 鼠标样式 */
@@ -202,6 +197,7 @@ export interface EdgeStyle {
       /** 字体填充色 */
       fill: string;
       /** 其他配置 */
+
       [key: string]: any;
     } & CommondAttrsStyle
   >;
@@ -212,7 +208,7 @@ export interface EdgeStyle {
       lineWidth: number;
       stroke: string;
       opacity: number;
-      lineDash: [number, number] | number;
+      lineDash: number | number[];
       lineAppendWidth: number;
       cursor: string;
     } & CommondAttrsStyle
@@ -222,6 +218,7 @@ export interface EdgeStyle {
     selected: Partial<EdgeStyle>;
     hover: Partial<EdgeStyle>;
     disabled: Partial<EdgeStyle>;
+
     [key: string]: any;
   }>;
 }
@@ -229,13 +226,14 @@ export interface EdgeStyle {
 export interface IUserEdge extends BaseEdge, Partial<RestEdge>, UserProperties {}
 export interface GraphinEdge extends BaseEdge, RestEdge, UserProperties {}
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Combo {}
 
 // https://g.antv.vision/zh/docs/api/shape/attrs
 export interface CommondAttrsStyle {
   // 填充色、渐变或 纹理，默认值为空；
   fill: string | undefined;
-  //描边色、渐变或 纹理，默认值为空；
+  // 描边色、渐变或 纹理，默认值为空；
   stroke: string;
   // 透明度，默认值为 1；
   opacity: number;
@@ -265,13 +263,13 @@ export type NodeStyleLabel = Partial<
     /** 文本大小 */
     fontSize: number;
     /** 文本在各自方向上的偏移量，主要为了便于调整文本位置,[offsetX,offsetY] */
-    offset: [number, number] | number | number[];
+    offset: number | number[];
   } & CommondAttrsStyle
 >;
 
 export type NodeStyleIcon = Partial<
   {
-    /** 类型可以为字体图标，可以为网络图片，可以为纯文本 'font' | 'image' | 'text'*/
+    /** 类型可以为字体图标，可以为网络图片，可以为纯文本 'font' | 'image' | 'text' */
     type: 'font' | 'image' | 'text' | string;
     /** 根据类型，填写对应的值 */
     value: string;
@@ -291,7 +289,7 @@ export type NodeStyleBadge = Partial<
     type: 'font' | 'image' | 'text' | string;
     value: number | string;
     // type = image 时生效，表示图片的宽度和高度
-    size: number[] | [number, number] | [number];
+    size: number | number[];
     /** 徽标填充色 */
     fill: string;
     /** 徽标描边色 */
@@ -303,13 +301,13 @@ export type NodeStyleBadge = Partial<
     // badge 中文本距离四周的偏移量
     padding: number;
     // badge 在 x 和 y 方向上的偏移量
-    offset: number[] | [number, number];
+    offset: number | number[];
   } & CommondAttrsStyle
 >;
 export type NodeStyleKeyShape = Partial<
   {
     /** 节点的大小 */
-    size: number | [number] | [number, number];
+    size: number | number[];
     /** 填充色 */
     fill: string;
     /** 包围边颜色 */
@@ -343,7 +341,7 @@ export interface NodeStyle {
 export type NodeStyleHalo = Partial<
   {
     /** 大小 */
-    size: number | [number] | [number, number];
+    size: number | number[];
     /** 填充色 */
     fill: string;
     /** 包围边颜色 */
@@ -361,7 +359,8 @@ export interface ComboStyle {
 
 export interface Layout {
   /** 布局名称，必选 */
-  type: string;
+  type?: string;
+  preset?: Layout;
   /** 布局配置，可选 */
   [key: string]: any; // eslint-disable-line
 }

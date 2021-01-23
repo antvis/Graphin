@@ -10,7 +10,7 @@ const Demo = () => {
         data={GraphData}
         layout={{
           type: 'comboForce',
-          nodeSpacing: (d) => 120,
+          nodeSpacing: () => 120,
           preventOverlap: true,
           collideStrength: 1,
           comboSpacing: 160,

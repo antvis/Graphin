@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   GraphinContext,
   Graph,
@@ -40,7 +40,7 @@ export interface OptionType {
 
 const getEnumValue = (keyString: string, data) => {
   const keyArray = keyString.split('.');
-  const enumValue = keyArray.reduce((acc: {}, curr) => {
+  const enumValue = keyArray.reduce((acc, curr) => {
     return acc[curr] || {};
   }, data) as string;
   return enumValue;

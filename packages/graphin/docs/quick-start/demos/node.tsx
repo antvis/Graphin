@@ -64,9 +64,9 @@ const data = {
             type: 'text',
             value: '10',
             // type = image 时生效，表示图片的宽度和高度
-            // size: [25, 25],
+            size: [25, 25],
             /** 徽标填充色 */
-            fill: Utils.hexToRgbaToHex('#FF6A00', 1),
+            fill: '#FF6A00',
             /** 徽标描边色 */
             stroke: '',
             /** 徽标内文本的颜色 */

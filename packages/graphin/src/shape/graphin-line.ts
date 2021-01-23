@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Group } from '@antv/g-canvas';
-import G6, { EdgeConfig, EdgeConfig } from '@antv/g6';
+import G6, { EdgeConfig } from '@antv/g6';
 
 import { deepMix } from '@antv/util';
 import { EdgeStyle } from '../typings/type';

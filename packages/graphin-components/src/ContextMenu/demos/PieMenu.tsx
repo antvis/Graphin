@@ -9,10 +9,10 @@ import theme from './PieMenuTheme';
 
 const PieMenuDemo = () => {
   const graphin = React.useContext(GraphinContext);
-  const handleClick = () => {
-    console.log('click', graphin);
-    graphin.contextmenu.node.handleClose();
-  };
+  // const handleClick = () => {
+  //   console.log('click', graphin);
+  //   graphin.contextmenu.node.handleClose();
+  // };
 
   const nodeSize = 30;
   const radius = 60;

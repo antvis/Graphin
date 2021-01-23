@@ -1,7 +1,8 @@
 import * as React from 'react';
 import useBehaviorHook from './useBehaviorHook';
+
 const DEFAULT_TRIGGER = 'shift';
-const ALLOW_EVENTS = ['shift', 'ctrl', 'alt', 'control'];
+// const ALLOW_EVENTS = ['shift', 'ctrl', 'alt', 'control'];
 
 const defaultConfig = {
   /** 是否禁用该功能 */

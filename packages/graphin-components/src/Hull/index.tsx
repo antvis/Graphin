@@ -1,8 +1,20 @@
 import React from 'react';
 
-//@ts-ignore
+// @ts-ignore
 import { GraphinContext } from '@antv/graphin';
-import Utils from '../utils';
+
+const defaultHullCfg = {
+  id: `${Math.random()}`, // Utils.uuid(),
+  members: [],
+  type: 'round-convex',
+  nonMembers: [],
+  style: {
+    fill: 'lightblue',
+    stroke: 'blue',
+    opacity: 0.2,
+  },
+  padding: 10,
+};
 
 /**
  * deep merge hull config
@@ -20,19 +32,6 @@ const deepMergeCfg = (defaultCfg: typeof defaultHullCfg, cfg: HullCfg) => {
       ...style,
     },
   };
-};
-
-const defaultHullCfg = {
-  id: Utils.createUuid(),
-  members: [],
-  type: 'round-convex',
-  nonMembers: [],
-  style: {
-    fill: 'lightblue',
-    stroke: 'blue',
-    opacity: 0.2,
-  },
-  padding: 10,
 };
 
 export interface HullCfg {
@@ -69,13 +68,14 @@ export interface IHullProps {
   options: HullCfg[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let hullInstances: any[];
 
 const Hull: React.FunctionComponent<IHullProps> = (props) => {
   const graphin = React.useContext(GraphinContext);
 
   React.useEffect(() => {
-    //@ts-ignore
+    // @ts-ignore
     const { graph } = graphin;
     const { options } = props;
 
@@ -95,6 +95,6 @@ const Hull: React.FunctionComponent<IHullProps> = (props) => {
     };
   }, []);
 
-  return <div className="graphin-hull-container"></div>;
+  return <div className="graphin-hull-container" />;
 };
 export default Hull;

@@ -2,38 +2,38 @@ import { NodeStyle } from '.';
 import { ComboStyle, EdgeStyle } from './typings/type';
 import hexToRgba from './utils/hexToRgba';
 
-interface ColorSetType {
-  activeFill: string;
-  activeStroke: string;
-  comboActiveFill: string;
-  comboActiveStroke: string;
-  comboDisableFill: string;
-  comboDisableStroke: string;
-  comboHighlightFill: string;
-  comboHighlightStroke: string;
-  comboInactiveFill: string;
-  comboInactiveStroke: string;
-  comboMainFill: string;
-  comboMainStroke: string;
-  comboSelectedFill: string;
-  comboSelectedStroke: string;
-  disableFill: string;
-  disableStroke: string;
-  edgeActiveStroke: string;
-  edgeDisableStroke: string;
-  edgeHighlightStroke: string;
-  edgeInactiveStroke: string;
-  edgeMainStroke: string;
-  edgeSelectedStroke: string;
-  highlightFill: string;
-  highlightStroke: string;
-  inactiveFill: string;
-  inactiveStroke: string;
-  mainFill: string;
-  mainStroke: string;
-  selectedFill: string;
-  selectedStroke: string;
-}
+// interface ColorSetType {
+//   activeFill: string;
+//   activeStroke: string;
+//   comboActiveFill: string;
+//   comboActiveStroke: string;
+//   comboDisableFill: string;
+//   comboDisableStroke: string;
+//   comboHighlightFill: string;
+//   comboHighlightStroke: string;
+//   comboInactiveFill: string;
+//   comboInactiveStroke: string;
+//   comboMainFill: string;
+//   comboMainStroke: string;
+//   comboSelectedFill: string;
+//   comboSelectedStroke: string;
+//   disableFill: string;
+//   disableStroke: string;
+//   edgeActiveStroke: string;
+//   edgeDisableStroke: string;
+//   edgeHighlightStroke: string;
+//   edgeInactiveStroke: string;
+//   edgeMainStroke: string;
+//   edgeSelectedStroke: string;
+//   highlightFill: string;
+//   highlightStroke: string;
+//   inactiveFill: string;
+//   inactiveStroke: string;
+//   mainFill: string;
+//   mainStroke: string;
+//   selectedFill: string;
+//   selectedStroke: string;
+// }
 
 export const TREE_LAYOUTS = ['dendrogram', 'compactBox', 'mindmap', 'indented'];
 
@@ -189,7 +189,7 @@ export const genDefaultNodeStyle = ({
   };
 };
 
-export const genDefaultEdgeStyle = ({ edgeSize = 0.1, edgePrimaryColor = '#ddd', mode = 'light' }: ThemeType) => {
+export const genDefaultEdgeStyle = ({ edgeSize = 1, edgePrimaryColor = '#ddd', mode = 'light' }: ThemeType) => {
   const Colors = {
     light: {
       stroke: edgePrimaryColor,
@@ -209,7 +209,7 @@ export const genDefaultEdgeStyle = ({ edgeSize = 0.1, edgePrimaryColor = '#ddd',
     style: {
       keyshape: {
         type: 'line',
-        lineWidth: 1,
+        lineWidth: edgeSize,
         stroke: Color.stroke,
         opacity: 1,
         lineAppendWidth: 9,
@@ -261,7 +261,7 @@ export const genDefaultEdgeStyle = ({ edgeSize = 0.1, edgePrimaryColor = '#ddd',
   };
 };
 
-export function genDefaultComboStyle(theme: ThemeType) {
+export function genDefaultComboStyle() {
   const defaultStyle = {
     type: 'circle',
     style: {
@@ -294,6 +294,6 @@ export const getDefaultStyleByTheme = (inputTheme: ThemeType | undefined) => {
     background: isLight ? '#fff' : '#000',
     ...genDefaultNodeStyle(theme),
     ...genDefaultEdgeStyle(theme),
-    ...genDefaultComboStyle(theme),
+    ...genDefaultComboStyle(),
   };
 };

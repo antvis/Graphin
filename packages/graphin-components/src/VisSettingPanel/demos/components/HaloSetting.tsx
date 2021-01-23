@@ -14,7 +14,7 @@ const HaloSetting: React.FunctionComponent<HaloSettingProps> = (props) => {
   const { size = 26, fill, stroke, handleChange } = props;
 
   return (
-    <React.Fragment>
+    <>
       <Item title="大小">
         <Slider
           defaultValue={size[0]}
@@ -39,7 +39,7 @@ const HaloSetting: React.FunctionComponent<HaloSettingProps> = (props) => {
           }}
         />
       </Item>
-    </React.Fragment>
+    </>
   );
 };
 

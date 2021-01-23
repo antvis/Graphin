@@ -4,7 +4,6 @@ import React from 'react';
 import { GraphinContext } from '@antv/graphin';
 import './index.less';
 
-// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface MenuProps {
   /**
    * @description 绑定元素，必选

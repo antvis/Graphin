@@ -1,14 +1,14 @@
-// @ts-nocheck
 import React from 'react';
 
 import { GraphinContext } from '@antv/graphin';
 
 interface Props {
-  onChange: {
+  onChange?: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (value: any): void;
   };
 }
-const CreateEdge: React.FunctionComponent<Props> = props => {
+const CreateEdge: React.FunctionComponent<Props> = (props) => {
   const { children } = props;
   const [state, setState] = React.useState({
     active: false,
@@ -19,15 +19,18 @@ const CreateEdge: React.FunctionComponent<Props> = props => {
     const graphin = React.useContext(GraphinContext);
     // @ts-ignore
     const { graph } = graphin;
-    graph.on('aftercreateedge', e => {
+    graph.on('aftercreateedge', () => {
       const { edges } = graph.save();
       // TODO:边的处理，等G6拆包之后
       // G6.Util.processParallelEdges(edges);
       const newEdges = graph.getEdges();
       newEdges.forEach((edge, i) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         graph.updateItem(edge, (edges as any)[i]);
       });
-      props.onChange && props.onChange(newEdges);
+      if (props.onChange) {
+        props.onChange(newEdges);
+      }
     });
   }, []);
 
@@ -58,7 +61,8 @@ const CreateEdge: React.FunctionComponent<Props> = props => {
   };
 
   return (
-    <div className="graphin-create-edge-container" onClick={handleToggle}>
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <div className="graphin-create-edge-container" onClick={handleToggle} onKeyDown={handleToggle} aria-hidden="false">
       <div className="graphin-create-edge-icon">{children}</div>
     </div>
   );

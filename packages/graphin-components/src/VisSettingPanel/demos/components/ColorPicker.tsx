@@ -39,7 +39,7 @@ const ColorPicker = (props: ColorPickerProps) => {
 
   return (
     <div>
-      <Button style={{ background: value }} shape="circle" size="small" onClick={handleClick}></Button>
+      <Button style={{ background: value }} shape="circle" size="small" onClick={handleClick} />
       <div style={{ display: 'inline-block', paddingLeft: '15px' }}> {value}</div>
       {visible && <TwitterPicker width="100%" colors={colors} onChange={handleChange} color={color} />}
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import G6, { INode } from '@antv/g6';
 import { IGroup } from '@antv/g-base';
 
@@ -5,13 +6,23 @@ import { deepMix, isArray, isNumber } from '@antv/util';
 
 import { IUserNode, NodeStyle } from '../typings/type';
 import { setStatusStyle } from './utils';
+
+function getRadiusBySize(size: number | number[] | undefined) {
+  let r;
+  if (isNumber(size)) {
+    r = size / 2;
+  } else if (isArray(size)) {
+    r = size[0] / 2;
+  }
+  return r;
+}
+
 /**
  * 将 size 转换为宽度和高度
  * @param size
  */
 const convertSizeToWH = (size: number | number[] | undefined) => {
   if (!size) return [0, 0];
-
   let width = 0;
   let height = 0;
   if (isNumber(size)) {
@@ -19,11 +30,13 @@ const convertSizeToWH = (size: number | number[] | undefined) => {
     height = size;
   } else if (isArray(size)) {
     if (size.length === 1) {
-      width = size[0];
-      height = size[0];
+      const [w] = size;
+      width = w;
+      height = w;
     } else if (size.length === 2) {
-      width = size[0];
-      height = size[1];
+      const [w, h] = size;
+      width = w;
+      height = h;
     }
   }
   return [width, height];
@@ -34,7 +47,7 @@ const convertSizeToWH = (size: number | number[] | undefined) => {
 const parseAttr = (
   schema: {
     type?: string;
-    size?: number | [number, number];
+    size?: number | number[];
     value?: any;
     [key: string]: any;
   },
@@ -61,7 +74,7 @@ const parseAttr = (
       schema.img = value;
       schema.width = width;
       schema.height = height;
-      delete schema.fill; //如果是图片类型，需要删除fill
+      delete schema.fill; // 如果是图片类型，需要删除fill
     }
   }
 
@@ -74,19 +87,10 @@ const parseAttr = (
   return schema;
 };
 
-function getRadiusBySize(size: number | [number] | [number, number] | undefined) {
-  let r;
-  if (isNumber(size)) {
-    r = size / 2;
-  } else if (isArray(size)) {
-    r = size[0] / 2;
-  }
-  return r;
-}
 const getStyles = (defaultStyleCfg: any, cfgStyle: any) => {
   const { halo, keyshape } = { ...defaultStyleCfg, ...cfgStyle } as any;
   const nodeSize = convertSizeToWH(keyshape.size);
-  /*  halo 默认样式单独处理**/
+  /*  halo 默认样式单独处理* */
   const haloStyle = {
     halo: {
       x: 0,
@@ -212,10 +216,12 @@ export default () => {
           fontSize,
           fontFamily,
           padding = 0,
-          offset = [0, 0],
+          offset: inputOffset = [0, 0],
         } = badge;
         let badgeX = 0;
         let badgeY = 0;
+
+        const offset = convertSizeToWH(inputOffset);
 
         // left top
         if (position === 'LT') {
@@ -327,10 +333,10 @@ export default () => {
             if (value) {
               setStatusStyle(shapes, initStateStyle[statusKey], parseAttr); // 匹配到status就改变
             } else {
-              setStatusStyle(shapes, initialStyle, parseAttr); //没匹配到就重置
-              status.forEach(statusKey => {
+              setStatusStyle(shapes, initialStyle, parseAttr); // 没匹配到就重置
+              status.forEach(key => {
                 // 如果cfg.status中还有其他状态，那就重新设置回来
-                setStatusStyle(shapes, initStateStyle[statusKey], parseAttr);
+                setStatusStyle(shapes, initStateStyle[key], parseAttr);
               });
             }
           }
@@ -351,13 +357,13 @@ export default () => {
 
       const { size } = keyshape;
 
-      let offsetArray: [number, number] = [0, 0];
+      let offsetArray: number[] = [0, 0];
       const { position: labelPosition, offset = offsetArray } = label;
       if (typeof offset === 'number' || typeof offset === 'string') {
         offsetArray = [Number(offset), Number(offset)];
       }
-      if ((offset as [number, number]).length > 0) {
-        offsetArray = offset as [number, number];
+      if ((offset as number[]).length > 0) {
+        offsetArray = offset as number[];
       }
 
       const [offsetX, offsetY] = offsetArray;
