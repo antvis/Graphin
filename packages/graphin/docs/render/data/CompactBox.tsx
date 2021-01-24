@@ -1,31 +1,55 @@
-import * as React from 'react';
-import { useEffect } from 'react';
-import Grahpin from '@antv/graphin';
-import { Behaviors } from '@antv/graphin';
-interface ICompactBoxProps {}
+import React, { useEffect } from 'react';
+
+import Grahpin, { GraphinContext, Behaviors } from '@antv/graphin';
 
 const { TreeCollapse } = Behaviors;
+// let graphinRef = null;
+const FocusItem = () => {
+  const { graph } = React.useContext(GraphinContext);
+  useEffect(() => {
+    graph.focusItem('Modeling Methods', true);
+    graph.setItemState('Modeling Methods', 'selected', true);
+  }, []);
+  return null;
+};
 
-const CompactBox: React.FunctionComponent<ICompactBoxProps> = props => {
+// const FitView = () => {
+//   const { graph } = React.useContext(GraphinContext);
+//   useEffect(() => {
+//     setTimeout(() => {
+//       console.log('fitView');
+//       graph.fitView();
+//     }, 16);
+//   }, []);
+//   return null;
+// };
+
+const CompactBox = () => {
   const [state, setState] = React.useState({
     data: null,
   });
   useEffect(() => {
+    // eslint-disable-next-line no-undef
     fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/algorithm-category.json')
-      .then(res => res.json())
-      .then(res => {
+      .then((res) => res.json())
+      .then((res) => {
         console.log('data', res);
         setState({
           data: res,
         });
       });
   }, []);
+
   const { data } = state;
+
   return (
     <div>
       {data && (
         <Grahpin
           data={data}
+          // ref={node => {
+          //   graphinRef = node;
+          // }}
           layout={{
             type: 'compactBox',
             direction: 'TB',
@@ -46,7 +70,9 @@ const CompactBox: React.FunctionComponent<ICompactBoxProps> = props => {
             },
           }}
         >
+          {/* <FitView /> */}
           <TreeCollapse trigger="click" />
+          <FocusItem />
         </Grahpin>
       )}
     </div>
