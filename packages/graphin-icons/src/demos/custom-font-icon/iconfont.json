@@ -1,0 +1,30 @@
+{
+  "id": "2346373",
+  "name": "new-graphin-test",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "19464524",
+      "name": "ZEN 区块链",
+      "font_class": "ZEN",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "19464526",
+      "name": "XEM 区块链",
+      "font_class": "XEM",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "19464535",
+      "name": "SAN 区块链",
+      "font_class": "SAN",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    }
+  ]
+}
