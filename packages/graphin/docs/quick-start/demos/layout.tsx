@@ -1,14 +1,11 @@
 import React from 'react';
-import Graphin, { Behaviors, Utils } from '@antv/graphin';
+import Graphin, { Behaviors, Utils, GraphinContext } from '@antv/graphin';
 import { Row, Col, Card } from 'antd';
 
-const { ZoomCanvas } = Behaviors;
-const data1 = Utils.mock(8)
-  .circle()
-  .graphin();
-const data2 = Utils.mock(8)
-  .tree()
-  .graphin();
+const { ZoomCanvas, FitView } = Behaviors;
+const data1 = Utils.mock(8).circle().graphin();
+const data2 = Utils.mock(8).tree().graphin();
+
 export default () => {
   return (
     <div>
@@ -24,6 +21,8 @@ export default () => {
           <Card title="有向分层算法：Dagre">
             <Graphin data={data2} layout={{ type: 'dagre' }}>
               <ZoomCanvas disabled />
+              {/** 树图的FitView 有BUG，网图的可以 */}
+              <FitView />
             </Graphin>
           </Card>
         </Col>
