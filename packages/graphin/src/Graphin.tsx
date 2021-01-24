@@ -66,7 +66,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     /**  注册 font icon */
     const iconFont = iconLoader();
     const { glyphs, fontFamily } = iconFont;
-    const icons = glyphs.map(item => {
+    const icons = glyphs.map((item) => {
       return {
         name: item.name,
         unicode: String.fromCodePoint(item.unicode_decimal),
@@ -75,7 +75,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     return new Proxy(icons, {
       get: (target, propKey: string) => {
-        const matchIcon = target.find(icon => {
+        const matchIcon = target.find((icon) => {
           return icon.name === propKey;
         });
         if (!matchIcon) {
@@ -176,6 +176,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       comboStateStyles,
       modes = { default: [] },
       animate,
+      handleAfterLayout,
       ...otherOptions
     } = this.props;
     if (modes.default.length > 0) {
@@ -229,21 +230,37 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     if (this.isTree) {
       this.options.layout = { ...layout };
-
       this.graph = new G6.TreeGraph(this.options);
     } else {
       this.graph = new G6.Graph(this.options);
     }
 
+    /** 内置事件:AfterLayout 回调 */
+    this.graph.on('afterlayout', () => {
+      if (handleAfterLayout) {
+        handleAfterLayout(this.graph);
+      }
+    });
+
+    /** 装载数据 */
     this.graph.data(this.data as GraphData | TreeGraphData);
-    /** 初始化布局 */
+
+    /** 初始化布局：仅限网图 */
     if (!this.isTree) {
       this.layout = new LayoutController(this);
       this.layout.start();
     }
-    this.graph.get('canvas').set('localRefresh', false);
+
+    // this.graph.get('canvas').set('localRefresh', true);
+
+    /** 渲染 */
     this.graph.render();
+    /** FitView 变为组件可选 */
+    // this.graph.fitView();
+
+    /** 初始化状态 */
     this.initStatus();
+    /** 生成API */
     this.apis = ApiController(this.graph);
   };
 
@@ -252,9 +269,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   };
 
   componentDidMount() {
-    console.log('did mount...');
-
     this.initGraphInstance();
+
     this.setState({
       isReady: true,
       context: {
@@ -279,18 +295,18 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     if (!this.isTree) {
       const { data } = this.props;
       const { nodes = [], edges = [] } = data as GraphinData;
-      nodes.forEach(node => {
+      nodes.forEach((node) => {
         const { status } = node;
         if (status) {
-          Object.keys(status).forEach(k => {
+          Object.keys(status).forEach((k) => {
             this.graph.setItemState(node.id, k, Boolean(status[k]));
           });
         }
       });
-      edges.forEach(edge => {
+      edges.forEach((edge) => {
         const { status } = edge;
         if (status) {
-          Object.keys(status).forEach(k => {
+          Object.keys(status).forEach((k) => {
             this.graph.setItemState(edge.id, k, Boolean(status[k]));
           });
         }
@@ -331,16 +347,21 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       this.initStatus();
       this.apis = ApiController(this.graph);
       console.log('%c isDataChange', 'color:grey');
-      this.setState(preState => {
-        return {
-          ...preState,
-          context: {
-            graph: this.graph,
-            apis: this.apis,
-            theme: this.theme,
-          },
-        };
-      });
+      this.setState(
+        (preState) => {
+          return {
+            ...preState,
+            context: {
+              graph: this.graph,
+              apis: this.apis,
+              theme: this.theme,
+            },
+          };
+        },
+        () => {
+          this.graph.emit('graphin:datachange');
+        },
+      );
       return;
     }
     /** 布局变化 */
@@ -357,6 +378,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       /** 走G6的layoutController */
       // this.graph.updateLayout();
       console.log('%c isLayoutChange', 'color:grey');
+      this.graph.emit('graphin:layoutchange');
     }
   }
 
@@ -405,7 +427,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           <div
             data-testid="custom-element"
             className="graphin-core"
-            ref={node => {
+            ref={(node) => {
               this.graphDOM = node;
             }}
             style={{ background: this.theme?.background, ...style }}
@@ -413,23 +435,25 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           <div className="graphin-components">
             {isReady && (
               <>
-                {/** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
-                !modes && (
-                  <>
-                    {/* 拖拽画布 */}
-                    <DragCanvas />
-                    {/* 缩放画布 */}
-                    <ZoomCanvas />
-                    {/* 拖拽节点 */}
-                    <DragNode />
-                    {/* 点击节点 */}
-                    <DragCombo />
-                    {/* 点击节点 */}
-                    <ClickSelect />
-                    {/* 圈选节点 */}
-                    <BrushSelect />
-                  </>
-                )}
+                {
+                  /** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
+                  !modes && (
+                    <>
+                      {/* 拖拽画布 */}
+                      <DragCanvas />
+                      {/* 缩放画布 */}
+                      <ZoomCanvas />
+                      {/* 拖拽节点 */}
+                      <DragNode />
+                      {/* 点击节点 */}
+                      <DragCombo />
+                      {/* 点击节点 */}
+                      <ClickSelect />
+                      {/* 圈选节点 */}
+                      <BrushSelect />
+                    </>
+                  )
+                }
 
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
