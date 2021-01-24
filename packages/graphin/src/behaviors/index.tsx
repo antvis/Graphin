@@ -9,6 +9,7 @@ import LassoSelect from './LassoSelect';
 import DragCombo from './DragCombo';
 import ActivateRelations from './ActivateRelations';
 import Hoverable from './Hoverable';
+import FitView from './FitView';
 
 export default {
   TreeCollapse,
@@ -22,4 +23,5 @@ export default {
   DragCombo,
   ActivateRelations,
   Hoverable,
+  FitView,
 };
