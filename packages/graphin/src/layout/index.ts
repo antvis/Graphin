@@ -65,6 +65,7 @@ class LayoutController {
   /** 启动布局 */
   start() {
     this.instance.execute();
+    this.graph.emit('afterlayout');
   }
 
   /** 重新布局 */
