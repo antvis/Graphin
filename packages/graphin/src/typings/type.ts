@@ -2,6 +2,7 @@
 
 // TODO : remove any type
 import { ThemeType } from '../consts';
+import { Graph } from '@antv/g6';
 
 export interface UserProperties {
   [key: string]: any;
@@ -92,6 +93,9 @@ export interface GraphinProps {
   layout?: Layout;
   /** 模式 G6的options.modes,建议使用 behaviors components 代替 */
   modes?: any;
+
+  /** 布局后的回调函数 */
+  handleAfterLayout?: (graph: Graph) => void;
 
   /** 默认的节点样式 */
   defaultNode?: Partial<NodeStyle>;
