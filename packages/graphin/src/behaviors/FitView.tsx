@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { GraphinContext } from '@antv/graphin';
+import GraphinContext from '../GraphinContext';
 
 export type FitViewProps = Partial<{
   /**
