@@ -1,8 +1,8 @@
 import { join } from 'path';
 const isProduction = process.env.NODE_ENV === 'production';
-console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+
 export default {
-  title: 'graphin docs',
+  title: 'Graphin 2.X Docs',
   mode: 'site',
   base: '/graphin-docs/',
   publicPath: '/graphin-docs/',
@@ -11,7 +11,8 @@ export default {
       'packages/graphin/docs/',
       'packages/graphin-components/src/',
       'packages/graphin-icons/src',
-      'packages/graphin-graphscope/docs/',
+
+      // 'packages/graphin-graphscope/docs/',
       /** local develop */
       // 'packages/graphin/docs/geamaker/',
     ],
@@ -35,7 +36,7 @@ export default {
   metas: [
     {
       name: 'keywords',
-      content: 'graphin,g6,graph',
+      content: 'graphin,g6,graph,Graphin,AntV Graph',
     },
   ],
 
@@ -43,10 +44,10 @@ export default {
     null,
     {
       title: 'GitHub',
-      path: 'https://github.com',
+      path: 'https://github.com/antvis/Graphin',
     },
   ],
-  analytics: isProduction ? { ga: '' } : false,
+  analytics: isProduction ? { ga: 'UA-148148901-8' } : false,
   hash: true,
   ssr: {
     devServerRender: false,
@@ -68,7 +69,10 @@ export default {
   theme: {
     '@s-site-menu-width': '280px',
   },
-  locales: [['zh-CN', '中文'], ['en-US', 'English']],
+  locales: [
+    ['zh-CN', '中文'],
+    ['en-US', 'English'],
+  ],
   links: ['https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd.css'],
   scripts: [
     'https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js',
