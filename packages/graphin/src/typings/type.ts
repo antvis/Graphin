@@ -222,7 +222,6 @@ export interface EdgeStyle {
     selected: Partial<EdgeStyle>;
     hover: Partial<EdgeStyle>;
     disabled: Partial<EdgeStyle>;
-
     [key: string]: any;
   }>;
 }
@@ -268,6 +267,8 @@ export type NodeStyleLabel = Partial<
     fontSize: number;
     /** 文本在各自方向上的偏移量，主要为了便于调整文本位置,[offsetX,offsetY] */
     offset: number | number[];
+    // graphin新增的，是否显示和隐藏
+    visible: boolean;
   } & CommondAttrsStyle
 >;
 
@@ -282,6 +283,8 @@ export type NodeStyleIcon = Partial<
     /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
     fill: string;
     fontFamily: string;
+    // graphin新增的，是否显示和隐藏
+    visible: boolean;
   } & CommondAttrsStyle
 >;
 
@@ -306,6 +309,8 @@ export type NodeStyleBadge = Partial<
     padding: number;
     // badge 在 x 和 y 方向上的偏移量
     offset: number | number[];
+    // graphin新增的，是否显示和隐藏
+    visible: boolean;
   } & CommondAttrsStyle
 >;
 export type NodeStyleKeyShape = Partial<
@@ -318,29 +323,10 @@ export type NodeStyleKeyShape = Partial<
     stroke: string;
     /** 边框的宽度 */
     lineWidth: number;
+    // graphin新增的，是否显示和隐藏
+    visible: boolean;
   } & CommondAttrsStyle
 >;
-export interface NodeStyle {
-  /** 节点的主要容器 */
-  keyshape: NodeStyleKeyShape;
-  /** 节点的文本 */
-  label: NodeStyleLabel;
-  /** 节点的中间位置图标区域 */
-  icon: NodeStyleIcon;
-  /** 节点的徽标 */
-  badges: NodeStyleBadge[];
-  /** 光环 */
-  halo: NodeStyleHalo;
-  /** 状态样式 */
-  status?: Partial<{
-    keyshape: NodeStyleKeyShape;
-    label: NodeStyleLabel;
-    icon: NodeStyleIcon;
-    badges: NodeStyleBadge[];
-    halo: NodeStyleHalo;
-  }>;
-  [key: string]: any;
-}
 
 export type NodeStyleHalo = Partial<
   {
@@ -354,8 +340,41 @@ export type NodeStyleHalo = Partial<
     lineWidth: number;
     /** 透明度 */
     opacity: number;
+    // graphin新增的，是否显示和隐藏
+    visible: boolean;
   } & CommondAttrsStyle
 >;
+
+export interface NodeShapeStyle {
+  /** 节点的主要容器 */
+  keyshape: NodeStyleKeyShape;
+  /** 节点的文本 */
+  label: NodeStyleLabel;
+  /** 节点的中间位置图标区域 */
+  icon: NodeStyleIcon;
+  /** 节点的徽标 */
+  badges: NodeStyleBadge[];
+  /** 光环 */
+  halo: NodeStyleHalo;
+}
+
+enum StatusEnum {
+  HOVER = 'hover',
+  SELECTED = 'selected',
+  NORMAL = 'normal',
+  DISABLE = 'disable',
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+}
+
+export interface NodeStyle extends NodeShapeStyle {
+  /** 状态样式 */
+  status?: {
+    [key in StatusEnum]?: Partial<NodeShapeStyle>;
+  };
+  [key: string]: any;
+}
+
 export interface ComboStyle {
   status?: any;
   [key: string]: any;
