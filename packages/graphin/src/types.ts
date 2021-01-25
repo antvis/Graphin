@@ -328,8 +328,11 @@ export interface ShapeComponent {
     id: string;
     // eslint-disable-next-line
     [key: string]: any;
+    visible?: boolean;
   };
   isKeyShape?: boolean;
+  /** 是否显示该Shape */
+  visible?: boolean;
   noReset?: boolean;
 }
 

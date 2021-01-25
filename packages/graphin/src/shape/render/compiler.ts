@@ -1,7 +1,7 @@
 import G6 from '@antv/g6';
 import { Shape } from '@antv/g-canvas';
-import { Item, ModelConfig } from '@antv/g6/lib/types';
-import { ExtendNodeShape, ShapeComponent, Node } from '../../types';
+import { Item } from '@antv/g6/lib/types';
+import { ExtendNodeShape, ShapeComponent } from '../../types';
 
 const reset = (shapes: Shape.Base[], shapeComponents: ShapeComponent[]) => {
   shapes.forEach((shape, index: number) => {
@@ -34,11 +34,15 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
 
       let keyshapeIndex = 0;
       const g6Shapes = shapeComponents.map((component, index: number) => {
-        if (component.isKeyShape) keyshapeIndex = index;
-        return group.addShape(component.type || component.shape, {
+        const { isKeyShape, type, shape, visible, ...otherAttrs } = component;
+        if (isKeyShape) {
+          keyshapeIndex = index;
+        }
+        return group.addShape(type || shape, {
           attrs: {
-            ...component.attrs,
+            ...otherAttrs,
           },
+          visible: visible !== false,
           draggable: true,
           name: component.attrs?.id,
         });
@@ -62,15 +66,16 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
       // 如果为为selected状态，则不作高亮
       // if (node.hasState('selected') && name === 'highlight.light' && value) return;
 
-      Object.keys(initState).forEach((key) => {
+      Object.keys(initState).forEach(key => {
         // state 的 key 和 behavior 里触发的 name 匹配
         if (name === key) {
           shapes.forEach((g6Shape: Shape.Base) => {
             const originAttrs = g6Shape.attr();
             const customAttrs = initState[key][originAttrs.id];
             if (customAttrs) {
-              const { animate, ...otherAttrs } = customAttrs;
+              const { animate, visible, ...otherAttrs } = customAttrs;
               g6Shape.attr(otherAttrs);
+              g6Shape.cfg.visible = visible !== false;
               if (animate) {
                 const { attrs, duration, easing, callback, delay } = animate;
                 g6Shape.animate(attrs, duration, easing, callback, delay);
@@ -79,11 +84,6 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
           });
         }
       });
-    },
-    update(cfg: ModelConfig, node: Item) {
-      // @ts-ignore
-      const { update = () => {} } = renderNodeShape(cfg as Node);
-      update(cfg, node);
     },
   });
 };
