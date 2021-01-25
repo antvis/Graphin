@@ -162,10 +162,26 @@ export const genDefaultNodeStyle = ({
       },
       active: {
         halo: {
-          visible: true,
+          visible: false,
         },
       },
       inactive: {
+        halo: {
+          visible: false,
+        },
+        keyshape: {
+          lineWidth: 0,
+          fill: Color.disabled,
+          stroke: Color.disabled,
+        },
+        icon: {
+          fill: Color.disabled,
+        },
+        label: {
+          fill: Color.disabled,
+        },
+      },
+      disabled: {
         halo: {
           visible: false,
         },
