@@ -3,7 +3,7 @@ import Graphin, { GraphinContext, Utils } from '@antv/graphin';
 import { ContextMenu, FishEye } from '@antv/graphin-components';
 import { message, Row, Col, Card } from 'antd';
 import { TagFilled, DeleteFilled, ExpandAltOutlined } from '@ant-design/icons';
-import '@antv/graphin/dist/index.css';
+// import '@antv/graphin/dist/index.css';
 // Do not forget to import CSS
 import '@antv/graphin-components/dist/index.css';
 

@@ -4,15 +4,13 @@ import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar } from '@antv/graphin-components';
 import { message } from 'antd';
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import '@antv/graphin-components/dist/index.css'; // 引入Graphin CSS
 
 const App = () => {
   const [state, setState] = React.useState({
     selected: [],
-    data: Utils.mock(5)
-      .circle()
-      .graphin(),
+    data: Utils.mock(5).circle().graphin(),
   });
 
   const { data, selected } = state;
@@ -21,9 +19,9 @@ const App = () => {
     const { graph } = graphRef.current;
 
     // 按住Shift框选,按住Option键 多选，进行关系扩散
-    const onNodeSelectChange = e => {
+    const onNodeSelectChange = (e) => {
       console.log('nodeselectchange', e);
-      const nodes = e.selectedItems.nodes.map(node => {
+      const nodes = e.selectedItems.nodes.map((node) => {
         return node.get('model');
       });
       setState({
@@ -45,10 +43,7 @@ const App = () => {
     }
     const count = Math.round(Math.random() * 6);
 
-    const expandData = Utils.mock(count)
-      .expand(selected)
-      .type('company')
-      .graphin();
+    const expandData = Utils.mock(count).expand(selected).type('company').graphin();
 
     setState({
       ...state,

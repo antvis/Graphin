@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { LayoutOutlined } from '@ant-design/icons';
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import { Toolbar } from '@antv/graphin-components';
 import '@antv/graphin-components/dist/index.css'; // Graphin 组件 CSS
 

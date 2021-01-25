@@ -3,7 +3,7 @@ import Graphin, { Utils, G6 } from '@antv/graphin';
 import { EdgeBundling } from '@antv/graphin-components';
 
 // Do not forget to import CSS
-import '@antv/graphin/dist/index.css';
+// import '@antv/graphin/dist/index.css';
 
 const data = Utils.mock(5).graphin();
 const { edges } = data;

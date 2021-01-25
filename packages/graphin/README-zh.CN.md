@@ -12,7 +12,6 @@
 
 这是 Graphin 的核心 React 组件。Graphin 是基于 [G6 3.x](https://github.com/antvis/g6) 的图分析解决方案。
 
-
 ## 安装
 
 ```bash
@@ -23,22 +22,21 @@ npm install @antv/graphin --save
 
 UMD 格式的文件可以在 [releases](https://github.com/antvis/Graphin/releases) 中下载。外部依赖：lodash，react，react-dom，@antv/g6。
 
-
 ## 使用
 
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
-import '@antv/graphin/dist/index.css';
+// import '@antv/graphin/dist/index.css';
 
 const App = () => {
-    const data = Utils.mock(10).graphin();
-    return (
-        <div className="App">
-            <Graphin data={data} />
-        </div>
-    );
+  const data = Utils.mock(10).graphin();
+  return (
+    <div className="App">
+      <Graphin data={data} />
+    </div>
+  );
 };
 
 const rootElement = document.getElementById('root');
@@ -48,7 +46,6 @@ ReactDOM.render(<App />, rootElement);
 ## 文档
 
 请参考 [Graphin 文档](https://graphin.antv.vision/zh/)
-
 
 ## APIs
 

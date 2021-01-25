@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Graphin, { Utils } from '@antv/graphin';
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import { Toolbar } from '@antv/graphin-components';
 import '@antv/graphin-components/dist/index.css'; // Graphin 组件 CSS
 
@@ -42,7 +42,7 @@ const styles = {
     borderTop: '1px solid #ddd',
   },
 };
-const Timebar = props => {
+const Timebar = (props) => {
   const {
     data = [
       { time: '2020-3-21', nodeCount: 10 },
@@ -57,14 +57,14 @@ const Timebar = props => {
     return Math.max(acc, curr.nodeCount);
   }, 0);
 
-  const handleClick = timeStamp => {
+  const handleClick = (timeStamp) => {
     onChange(timeStamp);
   };
 
   return (
     <div>
       <ul style={{ ...styles.root, style }}>
-        {data.map(c => {
+        {data.map((c) => {
           return (
             <li
               key={c.time}
@@ -86,16 +86,10 @@ const Timebar = props => {
 };
 
 const App = () => {
-  const [data, setData] = React.useState(
-    Utils.mock(5)
-      .circle()
-      .graphin(),
-  );
+  const [data, setData] = React.useState(Utils.mock(5).circle().graphin());
 
-  const handleChange = time => {
-    const mockData = Utils.mock(time.nodeCount)
-      .random()
-      .graphin();
+  const handleChange = (time) => {
+    const mockData = Utils.mock(time.nodeCount).random().graphin();
     setData(mockData);
   };
   const timebar = [

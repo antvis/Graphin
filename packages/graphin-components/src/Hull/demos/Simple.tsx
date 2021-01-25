@@ -2,7 +2,7 @@ import React from 'react';
 import Graphin, { Utils } from '@antv/graphin';
 import Hull, { HullCfg } from '../index';
 // Do not forget to import CSS
-import '@antv/graphin/dist/index.css';
+// import '@antv/graphin/dist/index.css';
 
 const Demo = () => {
   const hullOptions: HullCfg[] = [

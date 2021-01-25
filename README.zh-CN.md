@@ -53,7 +53,7 @@ import ReactDOM from 'react-dom';
 
 import Graphin, { Utils } from '@antv/graphin';
 
-import '@antv/graphin/dist/index.css'; // 别忘了引入Graphin CSS
+// import '@antv/graphin/dist/index.css'; // 别忘了引入Graphin CSS
 import './styles.css';
 
 const App = () => {

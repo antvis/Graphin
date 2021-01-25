@@ -3,7 +3,7 @@ import Graphin, { Behaviors, GraphinContext } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 import { message, Input } from 'antd';
 import iconLoader from '@antv/graphin-icons';
-import '@antv/graphin/dist/index.css';
+// import '@antv/graphin/dist/index.css';
 import '@antv/graphin-components/dist/index.css';
 import '@antv/graphin-icons/dist/index.css';
 

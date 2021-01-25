@@ -4,13 +4,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { message } from 'antd';
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import { ContextMenu } from '@antv/graphin-components';
 import '@antv/graphin-components/dist/index.css'; // Graphin 组件 CSS
 
-const data = Utils.mock(6)
-  .circle()
-  .graphin();
+const data = Utils.mock(6).circle().graphin();
 const styles = {
   list: {
     width: '100px',
@@ -25,9 +23,9 @@ const styles = {
 };
 
 const App = () => {
-  const handleDelete = e => {
+  const handleDelete = (e) => {
     const nodes = e.graph.findAllByState('node', 'selected');
-    const nodeIds = nodes.map(node => node.get('id'));
+    const nodeIds = nodes.map((node) => node.get('id'));
     if (nodeIds.length === 0) {
       message.info(`oh,你好像没有选中节点...`);
     } else {
@@ -38,7 +36,7 @@ const App = () => {
     <div>
       <Graphin data={data} layout={{ name: 'concentric' }}>
         <ContextMenu
-          render={props => {
+          render={(props) => {
             return (
               <div style={styles.list}>
                 <div

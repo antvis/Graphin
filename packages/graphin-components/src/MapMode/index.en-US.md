@@ -29,7 +29,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { MapMode } from '@antv/graphin-components';
-import '@antv/graphin/dist/index.css';
+// import '@antv/graphin/dist/index.css';
 import '@antv/graphin-components/dist/index.css';
 
 const App = () => {

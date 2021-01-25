@@ -21,7 +21,7 @@ Components list:
 | RedoUndo        | Interactive Component         | Help users manage graph history                                             |
 | FishEye         | Interactive Component         | Help users to enlarge cluttered graph details                               |
 | CreateEdge      | Interactive Component         | Help users draw connections between nodes                                   |
-| Legend          | Labeling Component            | Displays categorical information about nodes and/or edges                    |
+| Legend          | Labeling Component            | Displays categorical information about nodes and/or edges                   |
 | Hull            | Labeling Component            | Help users group similar nodes together                                     |
 | Statistic       | Labeling Component            | Help users monitor canvas information                                       |
 | SnapshotGallery | Analytical Component          | Provide snapshot saving and replaying function as part of an image carousel |
@@ -31,6 +31,7 @@ Components list:
 | FindPathPanel   | Algorithm Based Component     | Help users calculate the shortest path and possible paths between two nodes |
 | MapMode         | Advanced Analytical Component | Help users analyze geospatial relational data                               |
 | Timebar         | Advanced Analytical Component | Help users analyze time series relational data                              |
+
 ## Install
 
 ```bash
@@ -50,7 +51,7 @@ import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar } from '@antv/graphin-components';
 
 // Do not forget to import required CSS
-import '@antv/graphin/dist/index.css';
+// import '@antv/graphin/dist/index.css';
 import '@antv/graphin-components/dist/index.css';
 
 const App = () => {

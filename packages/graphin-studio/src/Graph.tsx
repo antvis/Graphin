@@ -15,7 +15,7 @@ import useGraphEvents from './Events/useGraphEvents';
 /** components */
 import NodeEdgeCount from './Core/NodeEdgeCount';
 
-import '@antv/graphin/dist/index.css';
+// import '@antv/graphin/dist/index.css';
 import '@antv/graphin-components/dist/index.css';
 
 console.log('out', Graphin.instance);

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar } from '@antv/graphin-components';
 import { message } from 'antd';
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import '@antv/graphin-components/dist/index.css'; // 引入Graphin CSS
 
 const chunk = (arr, size) =>
@@ -13,17 +13,15 @@ const chunk = (arr, size) =>
 const App = () => {
   const [state, setState] = React.useState({
     selected: [],
-    data: Utils.mock(20)
-      .random()
-      .graphin(),
+    data: Utils.mock(20).random().graphin(),
   });
 
   const { data, selected } = state;
   const graphRef = React.createRef(null);
   React.useEffect(() => {
     const { graph } = graphRef.current;
-    const onNodeSelectChange = e => {
-      const nodes = e.selectedItems.nodes.map(node => {
+    const onNodeSelectChange = (e) => {
+      const nodes = e.selectedItems.nodes.map((node) => {
         return node.get('model');
       });
       setState({
@@ -47,7 +45,7 @@ const App = () => {
     const findConnectionData = { nodes: [], edges: [] };
     // 1度扩散，中间经历一个节点
     const sortArray = chunk(selected, 2);
-    sortArray.forEach(arr => {
+    sortArray.forEach((arr) => {
       const [source, target = selected[0]] = arr;
 
       const relativeNode = {

@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Layout } from '@antv/graphin';
 
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import '@antv/graphin-components/dist/index.css'; // 引入Graphin CSS
 
 /** 构造数据 */
@@ -61,7 +61,7 @@ const source = {
 
 const walk = (schema, func) => {
   if (schema.children && schema.children.length) {
-    schema.children.forEach(child => {
+    schema.children.forEach((child) => {
       func(child, schema.id);
       walk(child, func);
     });
@@ -69,7 +69,7 @@ const walk = (schema, func) => {
 };
 
 /** 1. 将树形结构转变为Graphin可以识别的数据结构 */
-const transTree2Graphin = sourceData => {
+const transTree2Graphin = (sourceData) => {
   const nodes = [];
   const combos = [];
   walk(sourceData, (node, comboId) => {
@@ -97,11 +97,11 @@ const transTree2Graphin = sourceData => {
 };
 /** 2.布局 */
 
-const layout = data => {
+const layout = (data) => {
   const { nodes, combos, edges } = data;
 
   const nodeMap = new Map();
-  nodes.forEach(node => {
+  nodes.forEach((node) => {
     const NodeMapNodes = nodeMap.get(node.comboId);
     if (!NodeMapNodes) {
       nodeMap.set(node.comboId, [node]);

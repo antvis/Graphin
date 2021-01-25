@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { message } from 'antd';
 import { DeleteOutlined, SelectOutlined } from '@ant-design/icons';
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import { ContextMenu } from '@antv/graphin-components';
 import '@antv/graphin-components/dist/index.css'; // Graphin 组件 CSS
 

@@ -6,7 +6,7 @@ import { Toolbar } from '@antv/graphin-components';
 import { Select, Icon } from 'antd';
 
 // import 'antd/dist/antd.css'; 避免与全局样式污染
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 import '@antv/graphin-components/dist/index.css'; // 引入Graphin CSS
 
 import {
@@ -30,19 +30,17 @@ const iconMap = {
   radial: <ShareAltOutlined />,
 };
 
-const data = Utils.mock(15)
-  .tree()
-  .graphin();
+const data = Utils.mock(15).tree().graphin();
 
 const SelectOption = Select.Option;
-const LayoutSelector = props => {
+const LayoutSelector = (props) => {
   const { apis, value, onChange } = props;
   // 包裹在graphin内部的组件，将获得graphin提供的额外props
   const { layouts } = apis.getInfo();
   return (
     <div style={{ position: 'absolute', top: 10, left: 10 }}>
       <Select style={{ width: '120px' }} value={value} onChange={onChange}>
-        {layouts.map(item => {
+        {layouts.map((item) => {
           const { name, disabled, desc } = item;
           const iconComponent = iconMap[name] || <CustomerServiceOutlined />;
           return (
@@ -63,7 +61,7 @@ const App = () => {
       <Graphin data={data} layout={layout}>
         <LayoutSelector
           value={layout.name}
-          onChange={value => {
+          onChange={(value) => {
             changeLayout({
               ...layout,
               name: value,

@@ -3,7 +3,7 @@ import Graphin, { Utils, GraphinContext } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 import PieMenu, { Slice } from 'react-pie-menu';
 // Do not forget to import CSS
-import '@antv/graphin/dist/index.css';
+// import '@antv/graphin/dist/index.css';
 import { ThemeProvider } from 'styled-components';
 import theme from './PieMenuTheme';
 

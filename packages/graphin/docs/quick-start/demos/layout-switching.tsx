@@ -6,7 +6,7 @@ import Graphin, { Utils } from '@antv/graphin';
 import { Select, Row, Col, Card } from 'antd';
 
 // import 'antd/dist/antd.css'; 避免与全局样式污染
-import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
 
 import {
   TrademarkCircleFilled,
