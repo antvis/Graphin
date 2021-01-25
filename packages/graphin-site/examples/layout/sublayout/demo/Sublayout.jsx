@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Layout } from '@antv/graphin';
 import { Button } from 'antd';
-// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// 引入Graphin CSS
 
 const getSub = (data) => {
   const { nodes, edges } = data;

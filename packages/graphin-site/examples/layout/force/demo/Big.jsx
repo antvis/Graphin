@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin from '@antv/graphin';
-// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// 引入Graphin CSS
 // import data from '../../data'
 
 const legend = [

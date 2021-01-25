@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Layout } from '@antv/graphin';
 
-// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
-import '@antv/graphin-components/dist/index.css'; // 引入Graphin CSS
+// 引入Graphin CSS
+// 引入Graphin CSS
 
 /** 构造数据 */
 

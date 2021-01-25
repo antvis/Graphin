@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar } from '@antv/graphin-components';
 import { message } from 'antd';
-// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
-import '@antv/graphin-components/dist/index.css'; // 引入Graphin CSS
+// 引入Graphin CSS
+// 引入Graphin CSS
 
 const chunk = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size));

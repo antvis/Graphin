@@ -3,7 +3,7 @@ import Graphin, { Utils, GraphinContext } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 import { Menu } from 'antd';
 // Do not forget to import CSS
-// import '@antv/graphin/dist/index.css';
+
 // import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;

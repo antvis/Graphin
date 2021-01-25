@@ -118,8 +118,6 @@ import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar } from '@antv/graphin-components';
 
 // 别忘了引入 CSS
-// import '@antv/graphin/dist/index.css';
-import '@antv/graphin-components/dist/index.css';
 
 const App = () => {
   const data = Utils.mock(10).graphin();

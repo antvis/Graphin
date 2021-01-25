@@ -80,8 +80,8 @@ import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar } from '@antv/graphin-components';
 
-// import '@antv/graphin/dist/index.css'; // Graphin CSS
-import '@antv/graphin-components/dist/index.css'; // Graphin 组件 CSS
+// Graphin CSS
+// Graphin 组件 CSS
 import './styles.css';
 
 const App = () => {

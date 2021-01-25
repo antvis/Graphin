@@ -28,7 +28,6 @@ UMD 格式的文件可以在 [releases](https://github.com/antvis/Graphin/releas
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
-// import '@antv/graphin/dist/index.css';
 
 const App = () => {
   const data = Utils.mock(10).graphin();

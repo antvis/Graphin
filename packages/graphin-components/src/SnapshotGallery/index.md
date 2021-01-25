@@ -32,8 +32,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { SnapshotGallery, Toolbar } from '@antv/graphin-components';
-// import '@antv/graphin/dist/index.css';
-import '@antv/graphin-components/dist/index.css';
 
 /** 以下为受控模式，伪代码。Graphin 封装的 SnapshotGallery 应该将 save 和 redo 全部内置 **/
 const App = () => {

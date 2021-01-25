@@ -32,8 +32,7 @@ import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 // Do not forget to import CSS
-// import '@antv/graphin/dist/index.css';
-import '@antv/graphin-components/dist/index.css';
+
 const { Menu, Donut } = ContextMenu;
 
 const App = () => {

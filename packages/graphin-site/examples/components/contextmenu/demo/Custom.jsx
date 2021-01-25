@@ -4,9 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { message } from 'antd';
-// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// 引入Graphin CSS
 import { ContextMenu } from '@antv/graphin-components';
-import '@antv/graphin-components/dist/index.css'; // Graphin 组件 CSS
+// Graphin 组件 CSS
 
 const data = Utils.mock(6).circle().graphin();
 const styles = {

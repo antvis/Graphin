@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar } from '@antv/graphin-components';
 import { message } from 'antd';
-// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
-import '@antv/graphin-components/dist/index.css'; // 引入Graphin CSS
+// 引入Graphin CSS
+// 引入Graphin CSS
 
 const App = () => {
   const data = Utils.mock(15).tree().combos(5).graphin();

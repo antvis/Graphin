@@ -5,8 +5,6 @@ import Home from './Home';
 import GraphinStudio from '../GraphinStudio';
 
 import './index.css';
-// import '@antv/graphin/dist/index.css';
-import '@antv/graphin-components/dist/index.css';
 
 const propTypes = {};
 

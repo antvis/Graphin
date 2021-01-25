@@ -4,8 +4,6 @@ import Graphin, { Utils } from '@antv/graphin';
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
 
-// import '@antv/graphin/dist/index.css';
-
 const App = () => {
   const [state, setState] = React.useState({
     selected: [],

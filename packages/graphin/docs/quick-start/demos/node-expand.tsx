@@ -5,8 +5,7 @@ import Graphin, { Utils } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 import { TagFilled, DeleteFilled, ExpandAltOutlined } from '@ant-design/icons';
 
-// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
-import '@antv/graphin-components/dist/index.css';
+// 引入Graphin CSS
 
 const { Menu } = ContextMenu;
 const defSpreingLen = (_edge, source, target) => {

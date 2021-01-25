@@ -3,7 +3,7 @@ import React from 'react';
 
 import Graphin, { Utils, GraphinContext } from '@antv/graphin';
 import { message } from 'antd';
-// import '@antv/graphin/dist/index.css'; // 引入Graphin CSS
+// 引入Graphin CSS
 
 const CustomComponent = () => {
   const graphin = React.useContext(GraphinContext);

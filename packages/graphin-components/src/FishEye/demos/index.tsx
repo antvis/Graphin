@@ -2,9 +2,7 @@ import React from 'react';
 import Graphin, { Utils } from '@antv/graphin';
 import { ContextMenu, FishEye } from '@antv/graphin-components';
 
-// import '@antv/graphin/dist/index.css';
 // Do not forget to import CSS
-import '@antv/graphin-components/dist/index.css';
 
 const { Menu } = ContextMenu;
 const App = () => {

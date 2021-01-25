@@ -28,7 +28,6 @@ UMD bundle is available in [releases](https://github.com/antvis/Graphin/releases
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graphin, { Utils } from '@antv/graphin';
-// import '@antv/graphin/dist/index.css';
 
 const App = () => {
   const data = Utils.mock(10).graphin();
