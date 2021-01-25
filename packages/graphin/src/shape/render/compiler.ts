@@ -34,13 +34,13 @@ const compiler = (extendNodeShape: ExtendNodeShape) => {
 
       let keyshapeIndex = 0;
       const g6Shapes = shapeComponents.map((component, index: number) => {
-        const { isKeyShape, type, shape, visible, ...otherAttrs } = component;
+        const { isKeyShape, type, shape, visible, attrs } = component;
         if (isKeyShape) {
           keyshapeIndex = index;
         }
         return group.addShape(type || shape, {
           attrs: {
-            ...otherAttrs,
+            ...attrs,
           },
           visible: visible !== false,
           draggable: true,
