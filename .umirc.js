@@ -43,6 +43,10 @@ export default {
   navs: [
     null,
     {
+      title: 'v1.x',
+      path: 'https://antv.vision/graphin-1.x-site/',
+    },
+    {
       title: 'GitHub',
       path: 'https://github.com/antvis/Graphin',
     },
