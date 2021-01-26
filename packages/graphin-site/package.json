@@ -10,7 +10,8 @@
     "site:develop": "gatsby develop --open",
     "site:build": "npm run site:clean && gatsby build --prefix-paths",
     "site:clean": "gatsby clean",
-    "site:deploy": "npm run site:build && gh-pages -d public"
+    "site:gh-page": "gh-pages -d ./public -r https://github.com/antvis/graphin-1.x-site.git",
+    "site:deploy": "npm run site:build && gh-pages -d ./public -r https://github.com/antvis/graphin-1.x-site.git"
   },
   "author": "",
   "license": "ISC",

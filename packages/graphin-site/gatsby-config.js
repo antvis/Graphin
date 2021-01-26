@@ -6,7 +6,9 @@ module.exports = {
     {
       resolve: '@antv/gatsby-theme-antv',
       options: {
+        pathPrefix: '/graphin-1.x-site',
         GATrackingId: `UA-148148901-8`,
+        cname: false, // 是否自动从 siteUrl 中提取 CNAME 文件
       },
     },
   ],
