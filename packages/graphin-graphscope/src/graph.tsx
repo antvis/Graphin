@@ -173,6 +173,8 @@ interface IGraphProps {
   hasMinimap?: boolean;
   hasContextMenu?: boolean;
   hasFishEye?: boolean;
+  hasLayoutSelector?: boolean;
+  zoomCanvas?: boolean;
   // 节点 label 上显示的字段属性名称
   nodeLabel?: string;
 }
@@ -188,6 +190,8 @@ const GraphScope: React.FC<IGraphProps> = ({
   hasMinimap = true,
   hasContextMenu = true,
   hasFishEye = true,
+  hasLayoutSelector = true,
+  zoomCanvas = true,
   nodeLabel = 'id',
 }) => {
   const [state, setState] = useState({
@@ -330,10 +334,12 @@ const GraphScope: React.FC<IGraphProps> = ({
   return (
     <div>
       <Graphin graphDOM={graphDOM} data={state.data as any} layout={layout} width={width} height={height}>
-        <ZoomCanvas enableOptimize />
+        <ZoomCanvas disabled={zoomCanvas} enableOptimize />
         <DragNode />
         {hasMinimap && <MiniMap visible options={{ padding: 20, size: [140, 70] }} />}
-        <LayoutSelector onChange={handleChangeLayout} value={state.layout.type} options={layouts} />
+        {hasLayoutSelector && (
+          <LayoutSelector onChange={handleChangeLayout} value={state.layout.type} options={layouts} />
+        )}
         {hasContextMenu && (
           <>
             <ContextMenu style={{ width: 90 }}>
@@ -347,7 +353,7 @@ const GraphScope: React.FC<IGraphProps> = ({
             </ContextMenu>
           </>
         )}
-        {hasContextMenu && <FishEye options={{ showLabel: false }} visible={visible} handleEscListener={handleClose} />}
+        {hasFishEye && <FishEye options={{ showLabel: false }} visible={visible} handleEscListener={handleClose} />}
       </Graphin>
     </div>
   );
