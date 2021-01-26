@@ -22,9 +22,12 @@ const LegendNode: React.FunctionComponent<LegendProps> = (props) => {
     legend,
     // apis,
     graph,
+    theme,
   } = React.useContext(GraphinContext);
   // 依然存在两个legend，graphin.context只是一个全局对象
   const { onChange = () => {}, style } = props;
+
+  const { mode } = theme;
 
   const { options: defaultOptions, dataMap } = legend.node;
   const [state, setState] = React.useState({
@@ -71,6 +74,28 @@ const LegendNode: React.FunctionComponent<LegendProps> = (props) => {
     <ul className="graphin-components-legend-content" style={style}>
       {options.map((option: LegendOption) => {
         const { label, checked, color } = option;
+        const dotColors = {
+          light: {
+            active: color,
+            inactive: '#ddd',
+          },
+          dark: {
+            active: color,
+            inactive: '#2f2f2f',
+          },
+        };
+        const labelColor = {
+          light: {
+            active: '#000',
+            inactive: '#ddd',
+          },
+          dark: {
+            active: '#fff',
+            inactive: '#2f2f2f',
+          },
+        };
+        const status = checked ? 'active' : 'inactive';
+
         return (
           <li // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
             key={option.value}
@@ -82,8 +107,8 @@ const LegendNode: React.FunctionComponent<LegendProps> = (props) => {
               handleClick(option);
             }}
           >
-            <span className="dot" style={{ background: checked ? color : '#ddd' }} />
-            <span className="label" style={{ color: checked ? '#000000d9' : '#ddd' }}>
+            <span className="dot" style={{ background: dotColors[mode][status] }} />
+            <span className="label" style={{ color: labelColor[mode][status] }}>
               {label}
             </span>
           </li>
