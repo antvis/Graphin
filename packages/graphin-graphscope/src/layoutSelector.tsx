@@ -11,6 +11,7 @@ import {
   CustomerServiceFilled,
   ShareAltOutlined,
 } from '@ant-design/icons';
+import 'antd/dist/antd.css';
 
 const iconMap = {
   'graphin-force': <ShareAltOutlined />,

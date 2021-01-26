@@ -32,7 +32,15 @@ export default () => {
   return (
     <div>
       <div ref={domRef}></div>
-      <GraphScopeComponent graphDOM={domRef.current} data={data} width={1000} height={400} neighbors={queryNeighbors} />
+      <GraphScopeComponent
+        graphDOM={domRef.current}
+        data={data}
+        width={1000}
+        height={400}
+        neighbors={queryNeighbors}
+        hasContextMenu={true}
+        hasMinimap={false}
+      />
     </div>
   );
 };
