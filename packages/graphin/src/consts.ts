@@ -35,6 +35,26 @@ import hexToRgba from './utils/hexToRgba';
 //   selectedStroke: string;
 // }
 
+export const DEFAULT_TREE_LATOUT_OPTIONS = {
+  type: 'compactBox',
+  direction: 'LR',
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getId: function getId(d: any) {
+    return d.id;
+  },
+  getHeight: function getHeight() {
+    return 16;
+  },
+  getWidth: function getWidth() {
+    return 16;
+  },
+  getVGap: function getVGap() {
+    return 80;
+  },
+  getHGap: function getHGap() {
+    return 20;
+  },
+};
 export const TREE_LAYOUTS = ['dendrogram', 'compactBox', 'mindmap', 'indented'];
 
 export const DEFAULT_THEME = {
@@ -302,7 +322,7 @@ export interface ThemeData extends ThemeType {
   defaultComboStatusStyle: ComboStyle['status'];
 }
 
-export const getDefaultStyleByTheme = (inputTheme: ThemeType | undefined) => {
+export const getDefaultStyleByTheme = (inputTheme: Partial<ThemeType> | undefined) => {
   const theme = { ...DEFAULT_THEME, ...inputTheme } as ThemeType;
   const isLight = theme.mode === 'light';
   return {

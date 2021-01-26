@@ -86,7 +86,7 @@ export interface GraphinProps {
   /** user custom styles */
   style?: React.CSSProperties;
   /** 主题 */
-  theme?: ThemeType;
+  theme?: Partial<ThemeType>;
   /** 数据 */
   data: GraphinTreeData | GraphinData;
   /** 布局 */

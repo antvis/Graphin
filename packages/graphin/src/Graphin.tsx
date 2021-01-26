@@ -22,7 +22,7 @@ import { ApisType } from './apis/types';
 
 /** types  */
 import { GraphinProps, IconLoader, GraphinData, GraphinTreeData } from './typings/type';
-import { TREE_LAYOUTS, getDefaultStyleByTheme, ThemeData } from './consts';
+import { TREE_LAYOUTS, getDefaultStyleByTheme, ThemeData, DEFAULT_TREE_LATOUT_OPTIONS } from './consts';
 
 const { DragCanvas, ZoomCanvas, DragNode, DragCombo, ClickSelect, BrushSelect, ResizeCanvas, Hoverable } = Behaviors;
 
@@ -229,7 +229,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     } as GraphOptions;
 
     if (this.isTree) {
-      this.options.layout = { ...layout };
+      this.options.layout = layout || DEFAULT_TREE_LATOUT_OPTIONS;
       this.graph = new G6.TreeGraph(this.options);
     } else {
       this.graph = new G6.Graph(this.options);
@@ -256,7 +256,6 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     /** 渲染 */
     this.graph.render();
     /** FitView 变为组件可选 */
-    // this.graph.fitView();
 
     /** 初始化状态 */
     this.initStatus();
