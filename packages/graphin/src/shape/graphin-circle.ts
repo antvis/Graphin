@@ -77,8 +77,11 @@ const parseAttr = (
       delete schema.fill; // 如果是图片类型，需要删除fill
     }
   }
+  if (itemShapeName === 'label') {
+    schema.text = value;
+  }
 
-  Object.keys(schema).forEach(key => {
+  Object.keys(schema).forEach((key) => {
     if (schema[key] === undefined) {
       delete schema[key];
     }
@@ -204,7 +207,7 @@ export default () => {
       }
 
       // badges 会存在多个的情况
-      badges.forEach(badge => {
+      badges.forEach((badge) => {
         const {
           type,
           position,
@@ -328,13 +331,13 @@ export default () => {
       const status = item._cfg?.states || [];
 
       try {
-        Object.keys(initStateStyle).forEach(statusKey => {
+        Object.keys(initStateStyle).forEach((statusKey) => {
           if (name === statusKey) {
             if (value) {
               setStatusStyle(shapes, initStateStyle[statusKey], parseAttr); // 匹配到status就改变
             } else {
               setStatusStyle(shapes, initialStyle, parseAttr); // 没匹配到就重置
-              status.forEach(key => {
+              status.forEach((key) => {
                 // 如果cfg.status中还有其他状态，那就重新设置回来
                 setStatusStyle(shapes, initStateStyle[key], parseAttr);
               });

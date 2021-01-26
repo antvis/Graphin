@@ -11,3 +11,7 @@ nav:
 ## 基本介绍
 
 <code src='./demos/node.tsx'>
+
+## DefaultNode
+
+<code src='./demos/defaultNode.tsx'>
