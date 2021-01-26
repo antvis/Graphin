@@ -2,15 +2,16 @@ import { join } from 'path';
 const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
-  title: 'Graphin 2.X Docs',
+  title: 'Graphin 2.X',
   mode: 'site',
   base: '/graphin-docs/',
   publicPath: '/graphin-docs/',
+  logo: 'https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png',
   resolve: {
     includes: [
       'packages/graphin/docs/',
-      'packages/graphin-components/src/',
-      'packages/graphin-icons/src',
+      // 'packages/graphin-components/src/',
+      // 'packages/graphin-icons/src',
 
       // 'packages/graphin-graphscope/docs/',
       /** local develop */
