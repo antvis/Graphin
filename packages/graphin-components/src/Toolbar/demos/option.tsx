@@ -44,6 +44,7 @@ const OptionToolbar = () => {
   ];
 
   const handleClick = (graph, config) => {
+    console.log(graph, config);
     const { handleZoomIn, handleZoomOut } = graphinRef.current.apis;
     if (config.key === 'zoomIn') {
       handleZoomIn();

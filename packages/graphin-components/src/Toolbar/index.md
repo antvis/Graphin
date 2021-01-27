@@ -19,11 +19,11 @@ Toolbar 是提供常见分析操作的工具栏。在 Graphin1.x 版本，我们
 
 ### Option
 
-<code src='./demos/option'>
+<!-- <code src='./demos/option'> -->
 
 ### Item
 
-<code src='./demos/item'>
+<!-- <code src='./demos/item'> -->
 
 ### Custom
 

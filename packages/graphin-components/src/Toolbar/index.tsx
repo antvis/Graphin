@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import * as Graphin from '@antv/graphin';
+import { isArray } from '@antv/util';
 import './index.less';
 
 const { GraphinContext } = Graphin;
@@ -58,9 +59,6 @@ let containerRef: HTMLDivElement | null;
 const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarItem } = props => {
   const { children, style = {}, direction = 'horizontal', x = 0, y = 0, options, onChange } = props;
   const graphin = React.useContext(GraphinContext);
-  const { graph } = graphin;
-
-  const { width } = style;
 
   const positionStyle: React.CSSProperties = {
     position: 'absolute',
@@ -138,9 +136,16 @@ const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarIte
       key="graphin-components-toolbar"
       className="graphin-components-toolbar"
     >
-      <ul className="graphin-components-toolbar-content" style={{ display: direction === 'horizontal' ? 'flex' : '' }}>
-        {children}
-      </ul>
+      {isArray(children) || (children && (children as JSX.Element).type === ToolBarItem) ? (
+        <ul
+          className="graphin-components-toolbar-content"
+          style={{ display: direction === 'horizontal' ? 'flex' : '' }}
+        >
+          {children}
+        </ul>
+      ) : (
+        children
+      )}
     </div>
   );
 };
