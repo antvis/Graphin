@@ -234,25 +234,45 @@ export interface Combo {}
 
 // https://g.antv.vision/zh/docs/api/shape/attrs
 export interface CommondAttrsStyle {
-  // 填充色、渐变或 纹理，默认值为空；
+  /**
+   * @description 填充色、渐变或 纹理，默认值为空；
+   */
   fill: string | undefined;
-  // 描边色、渐变或 纹理，默认值为空；
+  /**
+   * @description 描边色、渐变或 纹理，默认值为空；
+   */
   stroke: string;
-  // 透明度，默认值为 1；
+  /**
+   *  @description 透明度，默认值为 1；
+   */
   opacity: number;
-  // 填充色的不透明度，默认值为 1；
+  /**
+   * @description 填充色的不透明度，默认值为 1；
+   */
   fillOpacity: number;
-  // 描边色的不透明度，默认值为 1；
+  /**
+   * @description  描边色的不透明度，默认值为 1；
+   */
   strokeOpacity: number;
-  // 阴影的颜色；
+  /**
+   * @description 阴影的颜色；
+   */
   shadowColor: string;
-  // 阴影的模糊级别；
+  /**
+   * @description 阴影的模糊级别；
+   */
   shadowBlur: number;
-  // 阴影距形状的水平距离；
+  /**
+   * @description 阴影距形状的水平距离；
+   */
   shadowOffsetX: number;
-  // 阴影距形状的垂直距离；
+  /**
+   * @description 阴影距形状的垂直距离；
+   */
   shadowOffsetY: number;
-  // 新图像如何绘制到已有的图像上；
+  /**
+   * @description 新图像如何绘制到已有的图像上
+   */
   globalCompositeOperation: string;
 }
 export type NodeStyleLabel = Partial<
@@ -267,15 +287,13 @@ export type NodeStyleLabel = Partial<
     fontSize: number;
     /** 文本在各自方向上的偏移量，主要为了便于调整文本位置,[offsetX,offsetY] */
     offset: number | number[];
-    // graphin新增的，是否显示和隐藏
-    visible: boolean;
   } & CommondAttrsStyle
 >;
 
 export type NodeStyleIcon = Partial<
   {
     /** 类型可以为字体图标，可以为网络图片，可以为纯文本 'font' | 'image' | 'text' */
-    type: 'font' | 'image' | 'text' | string;
+    type: 'font' | 'image' | 'text';
     /** 根据类型，填写对应的值 */
     value: string;
     /** 图标大小 */
@@ -283,7 +301,10 @@ export type NodeStyleIcon = Partial<
     /** 图标填充颜色 / 文本填充色 / 图片此属性无效 */
     fill: string;
     fontFamily: string;
-    // graphin新增的，是否显示和隐藏
+    /**
+     * @description 是否显示和隐藏
+     * @default true
+     */
     visible: boolean;
   } & CommondAttrsStyle
 >;
@@ -309,7 +330,10 @@ export type NodeStyleBadge = Partial<
     padding: number;
     // badge 在 x 和 y 方向上的偏移量
     offset: number | number[];
-    // graphin新增的，是否显示和隐藏
+    /**
+     * @description 是否显示和隐藏
+     * @default true
+     */
     visible: boolean;
   } & CommondAttrsStyle
 >;
@@ -323,7 +347,10 @@ export type NodeStyleKeyShape = Partial<
     stroke: string;
     /** 边框的宽度 */
     lineWidth: number;
-    // graphin新增的，是否显示和隐藏
+    /**
+     * @description 是否显示和隐藏
+     * @default true
+     */
     visible: boolean;
   } & CommondAttrsStyle
 >;
@@ -340,7 +367,10 @@ export type NodeStyleHalo = Partial<
     lineWidth: number;
     /** 透明度 */
     opacity: number;
-    // graphin新增的，是否显示和隐藏
+    /**
+     * @description 是否显示和隐藏
+     * @default false
+     */
     visible: boolean;
   } & CommondAttrsStyle
 >;
