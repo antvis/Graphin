@@ -10,6 +10,7 @@ import DragCombo from './DragCombo';
 import ActivateRelations from './ActivateRelations';
 import Hoverable from './Hoverable';
 import FitView from './FitView';
+import FontPaint from './FontPaint';
 
 export default {
   TreeCollapse,
@@ -24,4 +25,5 @@ export default {
   ActivateRelations,
   Hoverable,
   FitView,
+  FontPaint,
 };
