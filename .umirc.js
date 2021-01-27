@@ -10,8 +10,8 @@ export default {
   resolve: {
     includes: [
       'packages/graphin/docs/',
-      // 'packages/graphin-components/src/',
-      // 'packages/graphin-icons/src',
+      'packages/graphin-components/src/',
+      'packages/graphin-icons/src',
 
       // 'packages/graphin-graphscope/docs/',
       /** local develop */
@@ -52,6 +52,7 @@ export default {
       path: 'https://github.com/antvis/Graphin',
     },
   ],
+
   analytics: isProduction ? { ga: 'UA-148148901-8' } : false,
   hash: true,
   ssr: {
