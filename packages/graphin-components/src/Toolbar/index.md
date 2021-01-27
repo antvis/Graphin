@@ -15,7 +15,19 @@ nav:
 
 Toolbar 是提供常见分析操作的工具栏。在 Graphin1.x 版本，我们内置了撤销与重做（操作历史）、鱼眼放大镜、画布缩放、全屏、节点聚焦、画布快照下载等功能。但是在一些深度使用的业务中，我们得到的反馈是更希望 Graphin 暴露这些功能的 API，业务要重新设置样式和界面布局。因此在 Graphin2.x 中 Toolbar 将重新设计，定位为工具栏的容器，功能原子化，支持自由组合
 
-<code src='./demos/Antd.tsx'>
+## 案例
+
+### Option
+
+<code src='./demos/option'>
+
+### Item
+
+<code src='./demos/item'>
+
+### Custom
+
+<code src='./demos/custom'>
 
 ## 功能特性
 

@@ -9,7 +9,7 @@ const CustomContent = () => {
   const { handleZoomIn, handleZoomOut } = apis;
   const options = [
     {
-      id: 'zoomIn',
+      key: 'zoomIn',
       name: '放大',
       icon: <ZoomInOutlined />,
       action: () => {
@@ -17,7 +17,7 @@ const CustomContent = () => {
       },
     },
     {
-      id: 'zoomOut',
+      key: 'zoomOut',
       name: '缩小',
       icon: <ZoomOutOutlined />,
       action: () => {
@@ -27,9 +27,9 @@ const CustomContent = () => {
   ];
   return (
     <div>
-      {options.map((item) => {
+      {options.map(item => {
         return (
-          <Tooltip title={item.name} key={item.id}>
+          <Tooltip title={item.name} key={item.key}>
             <Button onClick={item.action}>{item.icon}</Button>
           </Tooltip>
         );
@@ -37,9 +37,14 @@ const CustomContent = () => {
     </div>
   );
 };
+
 const AntdDemo = () => {
   return (
-    <Graphin data={Utils.mock(5).circle().graphin()}>
+    <Graphin
+      data={Utils.mock(5)
+        .circle()
+        .graphin()}
+    >
       <Toolbar>
         <CustomContent />
       </Toolbar>
