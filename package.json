@@ -12,7 +12,7 @@
     "docs:deploy": "npm run docs:build && gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
     "docs:gh-pages": "gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
     "bootstrap": "lerna bootstrap",
-    "bootstrap:ci": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site",
+    "bootstrap:ci": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site --ignore @antv/graphin-graphscope",
     "build": "lerna run build",
     "contributor": "git-contributor",
     "clean": "lerna clean && npm run rm-package-lock",
