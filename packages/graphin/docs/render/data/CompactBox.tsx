@@ -3,15 +3,7 @@ import React, { useEffect } from 'react';
 import Grahpin, { GraphinContext, Behaviors } from '@antv/graphin';
 
 const { TreeCollapse } = Behaviors;
-// let graphinRef = null;
-const FocusItem = () => {
-  const { graph } = React.useContext(GraphinContext);
-  useEffect(() => {
-    graph.focusItem('Modeling Methods', true);
-    graph.setItemState('Modeling Methods', 'selected', true);
-  }, []);
-  return null;
-};
+let graphinRef = null;
 
 // const FitView = () => {
 //   const { graph } = React.useContext(GraphinContext);
@@ -24,6 +16,14 @@ const FocusItem = () => {
 //   return null;
 // };
 
+const walk = (node, callback) => {
+  callback(node);
+  if (node.children && node.children.length !== 0) {
+    node.children.forEach((n) => {
+      walk(n, callback);
+    });
+  }
+};
 const CompactBox = () => {
   const [state, setState] = React.useState({
     data: null,
@@ -34,11 +34,26 @@ const CompactBox = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log('data', res);
+        walk(res, (node) => {
+          node.style = {
+            label: {
+              value: node.id, // add label
+            },
+          };
+        });
         setState({
           data: res,
         });
       });
   }, []);
+
+  useEffect(() => {
+    if (graphinRef) {
+      graphinRef.graph.on('afterlayout', () => {
+        graphinRef.graph.fitView();
+      });
+    }
+  }, [graphinRef, state.data]);
 
   const { data } = state;
 
@@ -47,9 +62,10 @@ const CompactBox = () => {
       {data && (
         <Grahpin
           data={data}
-          // ref={node => {
-          //   graphinRef = node;
-          // }}
+          // handleAfterLayout={handleAfterLayout}
+          ref={(node) => {
+            graphinRef = node;
+          }}
           layout={{
             type: 'compactBox',
             direction: 'TB',
@@ -72,7 +88,7 @@ const CompactBox = () => {
         >
           {/* <FitView /> */}
           <TreeCollapse trigger="click" />
-          <FocusItem />
+          {/* <FocusItem /> */}
         </Grahpin>
       )}
     </div>
