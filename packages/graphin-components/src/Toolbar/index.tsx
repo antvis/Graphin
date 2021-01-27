@@ -23,7 +23,7 @@ export interface IToolBarItem {
   [key: string]: any;
 }
 
-interface ToolBarProps {
+export interface ToolBarProps {
   children?: React.ReactChildren | JSX.Element | JSX.Element[];
   /**
    * @description toolbar 的配置选项

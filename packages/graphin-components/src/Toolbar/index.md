@@ -13,17 +13,27 @@ nav:
 
 # Toolbar
 
-Toolbar 是提供常见分析操作的工具栏。在 Graphin1.x 版本，我们内置了撤销与重做（操作历史）、鱼眼放大镜、画布缩放、全屏、节点聚焦、画布快照下载等功能。但是在一些深度使用的业务中，我们得到的反馈是更希望 Graphin 暴露这些功能的 API，业务要重新设置样式和界面布局。因此在 Graphin2.x 中 Toolbar 将重新设计，定位为工具栏的容器，功能原子化，支持自由组合
+Toolbar 是提供常见分析操作的工具栏。在 Graphin1.x 版本，我们内置了撤销与重做（操作历史）、鱼眼放大镜、画布缩放、全屏、节点聚焦、画布快照下载等功能。但是在一些深度使用的业务中，我们得到的反馈是更希望 Graphin 暴露这些功能的 API，业务要重新设置样式和界面布局。因此在 Graphin2.x 中 Toolbar 将重新设计，定位为工具栏的容器，功能原子化，支持自由组合。
+
+Graphin 2.0 中，我们在使用 ToolBar 时，有三种方式：
+
+- 配置 options
+- 使用 <ToolBar.Item> 子组件
+- 完全自定义
+
+## 接口
+
+<API src='./interface.ts' >
 
 ## 案例
 
 ### Option
 
-<!-- <code src='./demos/option'> -->
+<code src='./demos/option'>
 
 ### Item
 
-<!-- <code src='./demos/item'> -->
+<code src='./demos/item'>
 
 ### Custom
 
