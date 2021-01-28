@@ -58,6 +58,7 @@ const ElementDetailPanel: React.FC<DetailProps> = ({ close, type, itemId, data =
       <Resizable
         defaultSize={{
           width: 331,
+          height: 'auto',
         }}
         className={styles.draggablePanel}
         style={{ top: 40, right: 0 }}

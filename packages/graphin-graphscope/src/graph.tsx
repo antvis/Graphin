@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useState, useEffect } from 'react';
 import Graphin, { Behaviors, Utils, NodeConfig } from '@antv/graphin';
 import { ContextMenu, FishEye, MiniMap } from '@antv/graphin-components';
@@ -30,7 +31,7 @@ export interface NodeData extends NodeConfig {
   parentId?: string;
   degree?: number;
   nodeType?: string;
-  properties: {
+  properties?: {
     [key: string]: string | number;
   };
 }
@@ -237,7 +238,7 @@ const GraphScope: React.FC<GraphProps> = ({
     data: {},
   });
 
-  const transGraphData = (originData: GraphData) => {
+  const transGraphData = (originData: GraphData): any => {
     let labelCount = 0;
     const nodes = originData.nodes.map((node: NodeData) => {
       if (!colorLabelMap[node.label]) {
@@ -377,9 +378,9 @@ const GraphScope: React.FC<GraphProps> = ({
     data: null,
     type: null,
   });
-  const handleClickElement = (model: NodeData, type: string) => {
+  const handleClickElement = (model: NodeConfig, type: string) => {
     if (nodeClick) {
-      nodeClick(model, type);
+      nodeClick(model as NodeData, type);
       setDetailInfo({
         visible: true,
         data: model,
