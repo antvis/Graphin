@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Toolbar, Type } from '@antv/graphin-components';
+import React from 'react';
+import { Toolbar } from '@antv/graphin-components';
 import Graphin, { GraphinContext, Utils } from '@antv/graphin';
-
+import { Tooltip, Button } from 'antd';
 import {
   ZoomOutOutlined,
   ZoomInOutlined,
@@ -9,7 +9,6 @@ import {
   DeleteOutlined,
   VideoCameraAddOutlined,
 } from '@ant-design/icons';
-import { Tooltip, Button } from 'antd';
 
 const CustomContent = () => {
   const { apis } = React.useContext(GraphinContext);
@@ -51,12 +50,10 @@ const CustomContent = () => {
 
   return (
     <div>
-      {options.map((item, index) => {
+      {options.map((item) => {
         return (
           <Tooltip title={item.description} key={item.key}>
-            <span onClick={item.action} onKeyDown={item.action} role="menuitem" tabIndex={index}>
-              {item.name}
-            </span>
+            <Button onClick={item.action}>{item.name}</Button>
           </Tooltip>
         );
       })}
@@ -65,23 +62,9 @@ const CustomContent = () => {
 };
 
 const AntdDemo = () => {
-  const [direction, setDirection] = useState<Type.ToolbarDirectionType>('horizontal');
-
-  const handleToggle = () => {
-    if (direction === 'horizontal') {
-      setDirection('vertical');
-    } else if (direction === 'vertical') {
-      setDirection('horizontal');
-    }
-  };
-
   return (
     <Graphin data={Utils.mock(5).circle().graphin()}>
-      <Button onClick={handleToggle} style={{ position: 'absolute', top: 0 }}>
-        切换 ToolBar 排布
-      </Button>
-
-      <Toolbar direction={direction}>
+      <Toolbar direction="horizontal" style={{ position: 'absolute', right: '250px' }}>
         <CustomContent />
       </Toolbar>
     </Graphin>
