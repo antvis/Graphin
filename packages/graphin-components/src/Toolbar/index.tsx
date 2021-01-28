@@ -6,11 +6,10 @@ import './index.less';
 const { GraphinContext } = Graphin;
 
 const defaultStyle: React.CSSProperties = {
-  // width: 200,
   background: '#fff',
 };
 
-export interface IToolBarItem {
+export interface ToolBarItemType {
   name: string | JSX.Element;
   key?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,23 +19,34 @@ export interface IToolBarItem {
 export type ToolbarDirectionType = 'vertical' | 'horizontal';
 
 export interface ToolBarProps {
+  /**
+   * @description 可以放置自定义组件
+   */
   children?: React.ReactChildren | JSX.Element | JSX.Element[];
   /**
    * @description toolbar 的配置选项
    */
-  options?: IToolBarItem[];
+  options?: ToolBarItemType[];
   /**
    * @description 点击 toolbar 的回调函数
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange?: (context: Graphin.GraphinContextType, data: any) => void;
-  style?: React.CSSProperties;
+  /**
+   * @description 回调函数，仅当options存在的时候才有效
+   */
+  onChange?: (context: Graphin.GraphinContextType, option: ToolBarItemType) => void;
+  /**
+   * @description ToolbarItem的布局位置：'vertical' | 'horizontal'
+   * @default horizontal
+   */
   direction?: ToolbarDirectionType;
-  x?: number;
-  y?: number;
+  /**
+   * @description Toolbar的样式，可以指定位置
+   * @default {position:"absolute",background:"#fff"} 当 direction 水平方向 {right:0,top:0} ,当 direction 垂直方向，默认放置{left:0,bottom:0}
+   */
+  style?: React.CSSProperties;
 }
 
-const ToolBarItem = (props) => {
+const ToolbarItem = (props) => {
   const { children, onClick = () => {} } = props;
 
   return (
@@ -47,32 +57,27 @@ const ToolBarItem = (props) => {
   );
 };
 
-const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarItem } = (props) => {
-  const { children, style = {}, direction = 'horizontal', x = 0, y = 0, options, onChange } = props;
+const Toolbar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolbarItem } = (props) => {
+  const { children, style = {}, direction = 'horizontal', options, onChange } = props;
   const graphin = React.useContext(GraphinContext);
-
+  const isHorizontal = direction === 'horizontal';
   const positionStyle: React.CSSProperties = {
     position: 'absolute',
   };
-
   // 水平方向，默认在右上角
-  // right = 0  top = 0
-  if (direction === 'horizontal') {
-    positionStyle.right = x;
-    positionStyle.top = y;
-    // positionStyle['width'] = width || 200;
-  } else if (direction === 'vertical') {
+  if (isHorizontal) {
+    positionStyle.right = 0;
+    positionStyle.top = 0;
+  } else {
     // 垂直方向，默认在左下角
-    // left = 0  bottom = 0
-    positionStyle.left = x;
-    positionStyle.bottom = y;
-    // positionStyle['width'] = width || 50;
+    positionStyle.left = 0;
+    positionStyle.bottom = 0;
   }
 
-  const handleClick = (config) => {
+  const handleClick = (option) => {
     try {
       if (onChange) {
-        onChange(graphin, config);
+        onChange(graphin, option);
       }
     } catch (error) {
       console.log(error);
@@ -81,26 +86,19 @@ const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarIte
 
   if (options) {
     return (
-      <div
-        className="graphin-components-toolbar"
-        style={{ ...defaultStyle, ...style, ...positionStyle }}
-        key="graphin-components-toolbar"
-      >
-        <ul
-          className="graphin-components-toolbar-content"
-          style={{ display: direction === 'horizontal' ? 'flex' : '' }}
-        >
+      <div className="graphin-components-toolbar" style={{ ...defaultStyle, ...positionStyle, ...style }}>
+        <ul className="graphin-components-toolbar-content" style={{ display: isHorizontal ? 'flex' : '' }}>
           {options.map((option) => {
             const { key, name } = option;
             return (
-              <ToolBarItem
+              <ToolbarItem
                 key={key || name}
                 onClick={() => {
                   handleClick(option);
                 }}
               >
                 {name}
-              </ToolBarItem>
+              </ToolbarItem>
             );
           })}
         </ul>
@@ -109,16 +107,9 @@ const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarIte
   }
 
   return (
-    <div
-      style={{ ...defaultStyle, ...style, ...positionStyle }}
-      key="graphin-components-toolbar"
-      className="graphin-components-toolbar"
-    >
-      {isArray(children) || (children && (children as JSX.Element).type === ToolBarItem) ? (
-        <ul
-          className="graphin-components-toolbar-content"
-          style={{ display: direction === 'horizontal' ? 'flex' : '' }}
-        >
+    <div style={{ ...defaultStyle, ...positionStyle, ...style }} className="graphin-components-toolbar">
+      {isArray(children) || (children && (children as JSX.Element).type === ToolbarItem) ? (
+        <ul className="graphin-components-toolbar-content" style={{ display: isHorizontal ? 'flex' : '' }}>
           {children}
         </ul>
       ) : (
@@ -128,6 +119,6 @@ const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarIte
   );
 };
 
-ToolBar.Item = ToolBarItem;
+Toolbar.Item = ToolbarItem;
 
-export default ToolBar;
+export default Toolbar;
