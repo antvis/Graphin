@@ -75,14 +75,6 @@ const AntdDemo = () => {
     }
   };
 
-  const handleTest = () => {
-    console.log('点击 Test');
-  };
-
-  const handleAdd = () => {
-    console.log('点击增加');
-  };
-
   return (
     <Graphin data={Utils.mock(5).circle().graphin()}>
       <Button onClick={handleToggle} style={{ position: 'absolute', top: 0 }}>
@@ -91,12 +83,6 @@ const AntdDemo = () => {
 
       <Toolbar direction={direction}>
         <CustomContent />
-      </Toolbar>
-
-      <Toolbar direction={direction} y={100} style={{ position: 'fixed', left: '0px', top: '60px' }}>
-        <Toolbar.Item onClick={handleTest}>tesst</Toolbar.Item>
-        <Toolbar.Item>删除</Toolbar.Item>
-        <Toolbar.Item onClick={handleAdd}>增加</Toolbar.Item>
       </Toolbar>
     </Graphin>
   );

@@ -1,56 +1,20 @@
 import React, { useState } from 'react';
 import { Toolbar, Type } from '@antv/graphin-components';
 import Graphin, { Utils } from '@antv/graphin';
-import {
-  ZoomOutOutlined,
-  ZoomInOutlined,
-  PieChartOutlined,
-  DeleteOutlined,
-  VideoCameraAddOutlined,
-} from '@ant-design/icons';
-import { Tooltip, Button } from 'antd';
+
+import { Button, message } from 'antd';
+
+const handleTest = () => {
+  message.info('点击 Test');
+};
+
+const handleAdd = () => {
+  message.info('点击增加');
+};
 
 const ItemDemo = () => {
   const graphinRef = React.useRef(null);
   const [direction, setDirection] = useState<Type.ToolbarDirectionType>('horizontal');
-
-  const options = [
-    {
-      key: 'zoomOut',
-      name: <ZoomInOutlined />,
-      description: '放大',
-      action: () => {
-        const { apis } = graphinRef.current;
-        const { handleZoomOut } = apis;
-        handleZoomOut();
-      },
-    },
-    {
-      key: 'zoomIn',
-      name: <ZoomOutOutlined />,
-      description: '缩小',
-      action: () => {
-        const { apis } = graphinRef.current;
-        const { handleZoomIn } = apis;
-        handleZoomIn();
-      },
-    },
-    {
-      key: 'visSetting',
-      name: <PieChartOutlined />,
-      description: '可视化设置',
-    },
-    {
-      key: 'clearCanvas',
-      name: <DeleteOutlined />,
-      description: '清空画布',
-    },
-    {
-      key: 'showHideElement',
-      name: <VideoCameraAddOutlined />,
-      description: '显示隐藏元素',
-    },
-  ];
 
   const handleToggle = () => {
     if (direction === 'horizontal') {
@@ -66,15 +30,9 @@ const ItemDemo = () => {
         切换 ToolBar 排布
       </Button>
       <Toolbar direction={direction}>
-        {options.map((item) => {
-          return (
-            <Toolbar.Item>
-              <Tooltip title={item.description} key={item.key}>
-                <Button onClick={item.action}>{item.name}</Button>
-              </Tooltip>
-            </Toolbar.Item>
-          );
-        })}
+        <Toolbar.Item onClick={handleTest}>tesst</Toolbar.Item>
+        <Toolbar.Item>删除</Toolbar.Item>
+        <Toolbar.Item onClick={handleAdd}>增加</Toolbar.Item>
       </Toolbar>
     </Graphin>
   );

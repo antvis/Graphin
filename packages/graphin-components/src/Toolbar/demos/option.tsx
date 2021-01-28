@@ -1,6 +1,6 @@
 // @ts-ignore
 import React, { useState } from 'react';
-import Toolbar from '../index';
+import { Toolbar, Type } from '@antv/graphin-components';
 import Graphin, { Utils } from '@antv/graphin';
 import {
   ZoomOutOutlined,
@@ -11,47 +11,46 @@ import {
 } from '@ant-design/icons';
 import { Button } from 'antd';
 
+const handleClick = (graphinContext, config) => {
+  const { apis } = graphinContext;
+  const { handleZoomIn, handleZoomOut } = apis;
+  if (config.key === 'zoomIn') {
+    handleZoomIn();
+  } else if (config.key === 'zoomOut') {
+    handleZoomOut();
+  }
+};
+
+const options = [
+  {
+    key: 'zoomOut',
+    name: (
+      <span>
+        放大 <ZoomInOutlined />
+      </span>
+    ),
+    icon: <ZoomInOutlined />,
+  },
+  {
+    key: 'zoomIn',
+    name: <ZoomOutOutlined />,
+  },
+  {
+    key: 'visSetting',
+    name: <PieChartOutlined />,
+  },
+  {
+    key: 'clearCanvas',
+    name: <DeleteOutlined />,
+  },
+  {
+    key: 'showHideElement',
+    name: <VideoCameraAddOutlined />,
+  },
+];
+
 const OptionToolbar = () => {
-  const graphinRef = React.useRef(null);
-
-  const [direction, setDirection] = useState('horizontal');
-  const options = [
-    {
-      key: 'zoomOut',
-      name: (
-        <span>
-          放大 <ZoomInOutlined />
-        </span>
-      ),
-      icon: <ZoomInOutlined />,
-    },
-    {
-      key: 'zoomIn',
-      name: <ZoomOutOutlined />,
-    },
-    {
-      key: 'visSetting',
-      name: <PieChartOutlined />,
-    },
-    {
-      key: 'clearCanvas',
-      name: <DeleteOutlined />,
-    },
-    {
-      key: 'showHideElement',
-      name: <VideoCameraAddOutlined />,
-    },
-  ];
-
-  const handleClick = (graph, config) => {
-    console.log(graph, config);
-    const { handleZoomIn, handleZoomOut } = graphinRef.current.apis;
-    if (config.key === 'zoomIn') {
-      handleZoomIn();
-    } else if (config.key === 'zoomOut') {
-      handleZoomOut();
-    }
-  };
+  const [direction, setDirection] = useState<Type.ToolbarDirectionType>('horizontal');
 
   const handleToggle = () => {
     if (direction === 'horizontal') {
@@ -61,7 +60,7 @@ const OptionToolbar = () => {
     }
   };
   return (
-    <Graphin ref={graphinRef} data={Utils.mock(5).circle().graphin()}>
+    <Graphin data={Utils.mock(5).circle().graphin()}>
       <Button onClick={handleToggle} style={{ position: 'absolute', top: 0 }}>
         切换 ToolBar 排布
       </Button>

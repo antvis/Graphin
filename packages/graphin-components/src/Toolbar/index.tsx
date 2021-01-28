@@ -29,7 +29,7 @@ export interface ToolBarProps {
    * @description 点击 toolbar 的回调函数
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange?: (graph: Graphin.Graph, data: any) => void;
+  onChange?: (context: Graphin.GraphinContextType, data: any) => void;
   style?: React.CSSProperties;
   direction?: ToolbarDirectionType;
   x?: number;
@@ -69,17 +69,10 @@ const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarIte
     // positionStyle['width'] = width || 50;
   }
 
-  /** 将一些方法和数据传递给子组件 */
-  graphin.toolbar = {
-    ...graphin.toolbar,
-  };
-
   const handleClick = (config) => {
     try {
-      const { graph } = graphin;
-
       if (onChange) {
-        onChange(graph, config);
+        onChange(graphin, config);
       }
     } catch (error) {
       console.log(error);
