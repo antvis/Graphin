@@ -14,7 +14,7 @@ export enum EnumNodeAndEdgeStatus {
 }
 
 export function removeDumpAttrs(attrs) {
-  Object.keys(attrs).forEach(key => {
+  Object.keys(attrs).forEach((key) => {
     if (attrs[key] === undefined) {
       delete attrs[key];
     }
@@ -52,16 +52,17 @@ export function parseHalo(json) {
 }
 
 const parseAttr = (style, itemShapeName: string) => {
+  const itemStyle = style[itemShapeName] || {};
   if (itemShapeName === 'keyshape') {
-    return parseKeyShape(style);
+    return parseKeyShape(itemStyle);
   }
   if (itemShapeName === 'halo') {
-    return parseKeyShape(style);
+    return parseHalo(itemStyle);
   }
   if (itemShapeName === 'label') {
-    return parseLabel(style);
+    return parseLabel(itemStyle);
   }
-  return style;
+  return itemStyle;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -153,13 +154,13 @@ export default () => {
       const status = item._cfg?.states || [];
 
       try {
-        Object.keys(initStateStyle).forEach(statusKey => {
+        Object.keys(initStateStyle).forEach((statusKey) => {
           if (name === statusKey) {
             if (value) {
               setStatusStyle(shapes, initStateStyle[statusKey], parseAttr); // 匹配到status就改变
             } else {
               setStatusStyle(shapes, initialStyle, parseAttr); // 没匹配到就重置
-              status.forEach(key => {
+              status.forEach((key) => {
                 // 如果cfg.status中还有其他状态，那就重新设置回来
                 setStatusStyle(shapes, initStateStyle[key], parseAttr);
               });

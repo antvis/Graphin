@@ -287,6 +287,11 @@ export type NodeStyleLabel = Partial<
     fontSize: number;
     /** 文本在各自方向上的偏移量，主要为了便于调整文本位置,[offsetX,offsetY] */
     offset: number | number[];
+    /**
+     * @description 是否显示和隐藏
+     * @default true
+     */
+    visible: boolean;
   } & CommondAttrsStyle
 >;
 

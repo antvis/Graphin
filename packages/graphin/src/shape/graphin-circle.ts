@@ -5,7 +5,7 @@ import { IGroup } from '@antv/g-base';
 import { deepMix, isArray, isNumber } from '@antv/util';
 
 import { IUserNode, NodeStyle } from '../typings/type';
-import { setStatusStyle } from './utils';
+import { setStatusStyle, removeDumpAttrs, convertSizeToWH, getLabelXYByPosition } from './utils';
 
 function getRadiusBySize(size: number | number[] | undefined) {
   let r;
@@ -16,79 +16,6 @@ function getRadiusBySize(size: number | number[] | undefined) {
   }
   return r;
 }
-
-/**
- * 将 size 转换为宽度和高度
- * @param size
- */
-const convertSizeToWH = (size: number | number[] | undefined) => {
-  if (!size) return [0, 0];
-  let width = 0;
-  let height = 0;
-  if (isNumber(size)) {
-    width = size;
-    height = size;
-  } else if (isArray(size)) {
-    if (size.length === 1) {
-      const [w] = size;
-      width = w;
-      height = w;
-    } else if (size.length === 2) {
-      const [w, h] = size;
-      width = w;
-      height = h;
-    }
-  }
-  return [width, height];
-};
-
-/** 根据用户输入的json，解析成attr */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const parseAttr = (
-  schema: {
-    type?: string;
-    size?: number | number[];
-    value?: any;
-    [key: string]: any;
-  },
-  itemShapeName: string,
-) => {
-  const { type, size, value } = { ...schema };
-
-  if (type === 'font') {
-    schema.fontSize = size;
-    schema.text = value;
-  }
-
-  if (itemShapeName === 'keyshape') {
-    schema.r = getRadiusBySize(size);
-  }
-  if (itemShapeName === 'halo') {
-    schema.r = getRadiusBySize(size);
-  }
-  if (itemShapeName === 'icon') {
-    if (type === 'image') {
-      const [width, height] = convertSizeToWH(size);
-      schema.x = -width / 2;
-      schema.y = -height / 2;
-      schema.img = value;
-      schema.width = width;
-      schema.height = height;
-      delete schema.fill; // 如果是图片类型，需要删除fill
-    }
-  }
-  if (itemShapeName === 'label') {
-    schema.text = value;
-  }
-
-  Object.keys(schema).forEach((key) => {
-    if (schema[key] === undefined) {
-      delete schema[key];
-    }
-  });
-
-  return schema;
-};
 
 const getStyles = (defaultStyleCfg: any, cfgStyle: any) => {
   const { halo, keyshape } = { ...defaultStyleCfg, ...cfgStyle } as any;
@@ -108,6 +35,159 @@ const getStyles = (defaultStyleCfg: any, cfgStyle: any) => {
   return deepMix({}, defaultStyleCfg, haloStyle, cfgStyle) as NodeStyle;
 };
 
+/**
+ * @description 解析Halo
+ * @param config 用户输入的数据
+ */
+const parseHalo = (style: NodeStyle) => {
+  const { halo, keyshape } = style;
+
+  const { size, visible, fill, ...otherAttrs } = halo;
+
+  const haloR = getRadiusBySize(size);
+
+  let keyshapeR: undefined | number;
+  let keyshapeFill: undefined | string;
+
+  if (keyshape && keyshape.size) {
+    const calculateR = getRadiusBySize(keyshape.size) as number;
+    keyshapeR = calculateR + 15;
+  }
+  if (keyshape && keyshape.fill) {
+    keyshapeFill = keyshape.fill;
+  }
+
+  const attrs = {
+    x: 0,
+    y: 0,
+    r: haloR || keyshapeR, // 默认 halo的样式和keyshape相关
+    fill: fill || keyshapeFill,
+    visible: visible !== false,
+    ...otherAttrs,
+  };
+  return {
+    name: 'halo',
+    visible: visible !== false,
+    attrs: removeDumpAttrs(attrs),
+  };
+};
+
+const parseKeyshape = (style: NodeStyle) => {
+  const { keyshape } = style;
+  const { size, visible, ...otherAttrs } = keyshape;
+  const r = getRadiusBySize(size);
+  const attrs = {
+    x: 0,
+    y: 0,
+    r,
+    cursor: 'pointer',
+    visible: visible !== false,
+    ...otherAttrs,
+  };
+  return {
+    name: 'keyshape',
+    visible: visible !== false,
+    attrs: removeDumpAttrs(attrs),
+  };
+};
+
+export type TextAlignType = 'center';
+const parseLabel = (style: NodeStyle) => {
+  const { label } = style;
+
+  const { value, fill, fontSize, visible, ...otherAttrs } = label;
+  const labelPos = getLabelXYByPosition(style);
+
+  const attrs = {
+    x: labelPos.x,
+    y: labelPos.y,
+    fontSize,
+    text: value,
+    textAlign: 'center' as TextAlignType,
+    fill,
+    textBaseline: labelPos.textBaseline,
+    ...otherAttrs,
+  };
+  return {
+    name: 'label',
+    visible: visible !== false,
+    attrs: removeDumpAttrs(attrs),
+  };
+};
+
+const parseIcon = (style: NodeStyle) => {
+  const { icon } = style;
+
+  const {
+    value = '',
+    type,
+    fontFamily,
+    // @ts-ignore
+    textAlign = 'center',
+    // @ts-ignore
+    textBaseline = 'middle',
+    fill,
+    size,
+    visible,
+    ...otherAttrs
+  } = icon;
+
+  const [width, height] = convertSizeToWH(size);
+
+  const params = {
+    name: 'icon',
+    visible: visible !== false,
+    capture: false,
+  };
+
+  if (type === 'text' || type === 'font') {
+    return {
+      ...params,
+      attrs: {
+        x: 0,
+        y: 0,
+        textAlign,
+        textBaseline,
+        text: value,
+        fontSize: width,
+        fontFamily,
+        fill,
+        ...otherAttrs,
+      },
+    };
+  }
+  // image
+  return {
+    ...params,
+    attrs: {
+      x: -width / 2,
+      y: -height / 2,
+      img: value,
+      width,
+      height,
+      ...otherAttrs,
+    },
+  };
+};
+
+/** 根据用户输入的json，解析成attr */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const parseAttr = (style: NodeStyle, itemShapeName: string) => {
+  if (itemShapeName === 'keyshape') {
+    return parseKeyshape(style).attrs;
+  }
+  if (itemShapeName === 'halo') {
+    return parseHalo(style).attrs;
+  }
+  if (itemShapeName === 'label') {
+    return parseLabel(style).attrs;
+  }
+  if (itemShapeName === 'icon') {
+    return parseIcon(style).attrs;
+  }
+  return style[itemShapeName] || {};
+};
+
 export default () => {
   G6.registerNode('graphin-circle', {
     options: {
@@ -118,91 +198,29 @@ export default () => {
       const style = getStyles({}, cfg.style) as NodeStyle;
       /** 将初始化样式存储在model中 */
       cfg._initialStyle = { ...style };
-      const { label, icon, badges = [], halo, keyshape: keyShapeStyle } = style;
+      const { label, icon, badges = [], keyshape: keyShapeStyle } = style;
 
       const r = getRadiusBySize(keyShapeStyle.size) as number;
 
-      // halo for hover
-      group.addShape('circle', {
-        attrs: {
-          x: 0,
-          y: 0,
-          ...halo,
-        },
-        name: 'halo',
-        visible: false,
-      });
+      // halo 光晕
+      group.addShape('circle', parseHalo(style));
 
-      // keyshape
-      const keyShape = group.addShape('circle', {
-        attrs: {
-          x: 0,
-          y: 0,
-          r,
-          cursor: 'pointer',
-          ...keyShapeStyle,
-        },
-        name: 'keyshape',
-        draggable: true,
-      });
+      // keyshape 主容器
+      const keyShape = group.addShape('circle', parseKeyshape(style));
 
       // 文本
-      if (label) {
-        const { value, fill, fontSize } = label;
-        if (value) {
-          const labelPos = this.getLabelXYByPosition(style);
-          group.addShape('text', {
-            attrs: {
-              x: labelPos.x,
-              y: labelPos.y,
-              fontSize,
-              text: value,
-              textAlign: 'center',
-              fill,
-              textBaseline: labelPos.textBaseline,
-            },
-            draggable: true,
-            name: 'label',
-          });
-        }
+      if (label && label.value) {
+        group.addShape('text', parseLabel(style));
       }
 
       // keyShape 中间的 icon
-      if (icon) {
+      if (icon && icon.type) {
         const { type } = icon;
         if (type === 'text' || type === 'font') {
-          const { value = '', fontFamily, fill, size } = icon;
-
-          group.addShape('text', {
-            attrs: {
-              x: 0,
-              y: 0,
-              text: value,
-              // @ts-ignore
-              fontSize: size,
-              textAlign: 'center',
-              textBaseline: 'middle',
-              fontFamily,
-              fill,
-            },
-            capture: false,
-            name: 'icon',
-          });
-        } else if (type === 'image') {
-          const { size: iconSize, value } = icon;
-          const [width, height] = convertSizeToWH(iconSize);
-
-          group.addShape('image', {
-            attrs: {
-              x: -width / 2,
-              y: -height / 2,
-              img: value,
-              width,
-              height,
-            },
-            capture: false,
-            name: 'icon',
-          });
+          group.addShape('text', parseIcon(style));
+        }
+        if (type === 'image') {
+          group.addShape('image', parseIcon(style));
         }
       }
 
@@ -349,69 +367,6 @@ export default () => {
       }
     },
 
-    getLabelXYByPosition(
-      cfg: NodeStyle,
-    ): {
-      x: number;
-      y: number;
-      textBaseline?: string;
-    } {
-      const { label, keyshape } = cfg;
-
-      const { size } = keyshape;
-
-      let offsetArray: number[] = [0, 0];
-      const { position: labelPosition, offset = offsetArray } = label;
-      if (typeof offset === 'number' || typeof offset === 'string') {
-        offsetArray = [Number(offset), Number(offset)];
-      }
-      if ((offset as number[]).length > 0) {
-        offsetArray = offset as number[];
-      }
-
-      const [offsetX, offsetY] = offsetArray;
-      // 默认的位置（最可能的情形），所以放在最上面
-      if (labelPosition === 'center') {
-        return { x: 0, y: 0 };
-      }
-      const wh = convertSizeToWH(size);
-
-      const width = wh[0];
-      const height = wh[1];
-
-      let style: any;
-      switch (labelPosition) {
-        case 'top':
-          style = {
-            x: 0 + offsetX,
-            y: -height / 2 - offsetY,
-            textBaseline: 'bottom', // 文本在图形的上面
-          };
-          break;
-        case 'bottom':
-          style = {
-            x: 0 + offsetX,
-            y: height / 2 + offsetY,
-            textBaseline: 'top',
-          };
-          break;
-        case 'left':
-          style = {
-            x: 0 - width - offsetX,
-            y: 0 + offsetY,
-            textAlign: 'right',
-          };
-          break;
-        default:
-          style = {
-            x: width + offsetX,
-            y: 0 + offsetY,
-            textAlign: 'left',
-          };
-          break;
-      }
-      return style;
-    },
     update(cfg: IUserNode, item: INode) {
       if (!cfg.style) return;
       try {
