@@ -12,13 +12,17 @@
     "clean": "rimraf es esm lib dist"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.4.0",
     "@antv/graphin": "^2.0.0-beta.5",
     "@antv/graphin-components": "^2.0.0-beta.6",
     "@antv/graphin-icons": "^1.0.0",
     "antd": "^4.10.3",
+    "classnames": "^2.2.6",
+    "re-resizable": "^6.9.0",
     "react": "^16.9.0",
     "react-color": "^2.17.3",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "react-draggable": "^4.4.3"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.3.0",

@@ -28,8 +28,8 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
     <Menu bindType="node">
       <Menu.Item onClick={() => handleFind(1)}>一度关系</Menu.Item>
       <Menu.Item onClick={() => handleFind(2)}>二度关系</Menu.Item>
-      <Menu.Item onClick={() => handleFind(3)}>三度关系</Menu.Item>
-      <Menu.Item onClick={() => handleFind(4)}>四度关系</Menu.Item>
+      {/* <Menu.Item onClick={() => handleFind(3)}>三度关系</Menu.Item>
+      <Menu.Item onClick={() => handleFind(4)}>四度关系</Menu.Item> */}
     </Menu>
   );
 };

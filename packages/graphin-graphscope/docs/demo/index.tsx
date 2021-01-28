@@ -28,6 +28,10 @@ export default () => {
     } as any);
   };
 
+  const nodeClick = model => {
+    console.log('click node', model);
+  };
+
   console.log('------原始shuju', data);
   return (
     <div>
@@ -40,6 +44,7 @@ export default () => {
         neighbors={queryNeighbors}
         hasContextMenu={true}
         hasMinimap={false}
+        nodeClick={nodeClick}
       />
     </div>
   );
