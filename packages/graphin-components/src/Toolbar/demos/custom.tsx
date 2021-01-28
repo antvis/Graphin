@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Toolbar from '../index';
+import { Toolbar, Type } from '@antv/graphin-components';
 import Graphin, { GraphinContext, Utils } from '@antv/graphin';
+
 import {
   ZoomOutOutlined,
   ZoomInOutlined,
@@ -50,10 +51,12 @@ const CustomContent = () => {
 
   return (
     <div>
-      {options.map(item => {
+      {options.map((item, index) => {
         return (
           <Tooltip title={item.description} key={item.key}>
-            <span onClick={item.action}>{item.name}</span>
+            <span onClick={item.action} onKeyDown={item.action} role="menuitem" tabIndex={index}>
+              {item.name}
+            </span>
           </Tooltip>
         );
       })}
@@ -62,7 +65,7 @@ const CustomContent = () => {
 };
 
 const AntdDemo = () => {
-  const [direction, setDirection] = useState('horizontal');
+  const [direction, setDirection] = useState<Type.ToolbarDirectionType>('horizontal');
 
   const handleToggle = () => {
     if (direction === 'horizontal') {
@@ -81,20 +84,16 @@ const AntdDemo = () => {
   };
 
   return (
-    <Graphin
-      data={Utils.mock(5)
-        .circle()
-        .graphin()}
-    >
+    <Graphin data={Utils.mock(5).circle().graphin()}>
       <Button onClick={handleToggle} style={{ position: 'absolute', top: 0 }}>
         切换 ToolBar 排布
       </Button>
 
-      <Toolbar direction={direction as any}>
+      <Toolbar direction={direction}>
         <CustomContent />
       </Toolbar>
 
-      <Toolbar direction={direction as any} y={100}>
+      <Toolbar direction={direction} y={100} style={{ position: 'fixed', left: '0px', top: '60px' }}>
         <Toolbar.Item onClick={handleTest}>tesst</Toolbar.Item>
         <Toolbar.Item>删除</Toolbar.Item>
         <Toolbar.Item onClick={handleAdd}>增加</Toolbar.Item>

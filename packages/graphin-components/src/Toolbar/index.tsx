@@ -1,16 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import * as Graphin from '@antv/graphin';
 import { isArray } from '@antv/util';
 import './index.less';
 
 const { GraphinContext } = Graphin;
 
-interface IG6GraphEvent {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  item: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}
 const defaultStyle: React.CSSProperties = {
   // width: 200,
   background: '#fff',
@@ -23,6 +17,8 @@ export interface IToolBarItem {
   [key: string]: any;
 }
 
+export type ToolbarDirectionType = 'vertical' | 'horizontal';
+
 export interface ToolBarProps {
   children?: React.ReactChildren | JSX.Element | JSX.Element[];
   /**
@@ -32,31 +28,26 @@ export interface ToolBarProps {
   /**
    * @description 点击 toolbar 的回调函数
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange?: (graph: Graphin.Graph, data: any) => void;
   style?: React.CSSProperties;
-  direction?: 'vertical' | 'horizontal';
+  direction?: ToolbarDirectionType;
   x?: number;
   y?: number;
 }
 
-interface State {
-  /** 当前状态 */
-  direction?: 'vertical' | 'horizontal';
-  x: number;
-  y: number;
-}
-
-const ToolBarItem = props => {
+const ToolBarItem = (props) => {
   const { children, onClick = () => {} } = props;
 
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-  // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-  return <li onClick={onClick}>{children}</li>;
+  return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    <li onClick={onClick} onKeyDown={onClick}>
+      {children}
+    </li>
+  );
 };
 
-let containerRef: HTMLDivElement | null;
-
-const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarItem } = props => {
+const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarItem } = (props) => {
   const { children, style = {}, direction = 'horizontal', x = 0, y = 0, options, onChange } = props;
   const graphin = React.useContext(GraphinContext);
 
@@ -67,14 +58,14 @@ const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarIte
   // 水平方向，默认在右上角
   // right = 0  top = 0
   if (direction === 'horizontal') {
-    positionStyle['right'] = x;
-    positionStyle['top'] = y;
+    positionStyle.right = x;
+    positionStyle.top = y;
     // positionStyle['width'] = width || 200;
   } else if (direction === 'vertical') {
     // 垂直方向，默认在左下角
     // left = 0  bottom = 0
-    positionStyle['left'] = x;
-    positionStyle['bottom'] = y;
+    positionStyle.left = x;
+    positionStyle.bottom = y;
     // positionStyle['width'] = width || 50;
   }
 
@@ -83,7 +74,7 @@ const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarIte
     ...graphin.toolbar,
   };
 
-  const handleClick = config => {
+  const handleClick = (config) => {
     try {
       const { graph } = graphin;
 
@@ -98,9 +89,6 @@ const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarIte
   if (options) {
     return (
       <div
-        ref={node => {
-          containerRef = node;
-        }}
         className="graphin-components-toolbar"
         style={{ ...defaultStyle, ...style, ...positionStyle }}
         key="graphin-components-toolbar"
@@ -109,7 +97,7 @@ const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarIte
           className="graphin-components-toolbar-content"
           style={{ display: direction === 'horizontal' ? 'flex' : '' }}
         >
-          {options.map(option => {
+          {options.map((option) => {
             const { key, name } = option;
             return (
               <ToolBarItem
@@ -129,9 +117,6 @@ const ToolBar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolBarIte
 
   return (
     <div
-      ref={node => {
-        containerRef = node;
-      }}
       style={{ ...defaultStyle, ...style, ...positionStyle }}
       key="graphin-components-toolbar"
       className="graphin-components-toolbar"

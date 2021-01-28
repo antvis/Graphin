@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Toolbar from '../index';
+import { Toolbar, Type } from '@antv/graphin-components';
 import Graphin, { Utils } from '@antv/graphin';
 import {
   ZoomOutOutlined,
@@ -12,7 +12,7 @@ import { Tooltip, Button } from 'antd';
 
 const ItemDemo = () => {
   const graphinRef = React.useRef(null);
-  const [direction, setDirection] = useState('horizontal');
+  const [direction, setDirection] = useState<Type.ToolbarDirectionType>('horizontal');
 
   const options = [
     {
@@ -61,17 +61,12 @@ const ItemDemo = () => {
   };
 
   return (
-    <Graphin
-      ref={graphinRef}
-      data={Utils.mock(5)
-        .circle()
-        .graphin()}
-    >
+    <Graphin ref={graphinRef} data={Utils.mock(5).circle().graphin()}>
       <Button onClick={handleToggle} style={{ position: 'absolute', top: 0 }}>
         切换 ToolBar 排布
       </Button>
-      <Toolbar direction={direction as any}>
-        {options.map(item => {
+      <Toolbar direction={direction}>
+        {options.map((item) => {
           return (
             <Toolbar.Item>
               <Tooltip title={item.description} key={item.key}>

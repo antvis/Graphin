@@ -61,16 +61,11 @@ const OptionToolbar = () => {
     }
   };
   return (
-    <Graphin
-      ref={graphinRef}
-      data={Utils.mock(5)
-        .circle()
-        .graphin()}
-    >
+    <Graphin ref={graphinRef} data={Utils.mock(5).circle().graphin()}>
       <Button onClick={handleToggle} style={{ position: 'absolute', top: 0 }}>
         切换 ToolBar 排布
       </Button>
-      <Toolbar options={options} onChange={handleClick} direction={direction as any} />
+      <Toolbar options={options} onChange={handleClick} direction={direction} />
     </Graphin>
   );
 };
