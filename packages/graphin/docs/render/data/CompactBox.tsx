@@ -19,7 +19,7 @@ let graphinRef = null;
 const walk = (node, callback) => {
   callback(node);
   if (node.children && node.children.length !== 0) {
-    node.children.forEach((n) => {
+    node.children.forEach(n => {
       walk(n, callback);
     });
   }
@@ -31,10 +31,10 @@ const CompactBox = () => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/algorithm-category.json')
-      .then((res) => res.json())
-      .then((res) => {
+      .then(res => res.json())
+      .then(res => {
         console.log('data', res);
-        walk(res, (node) => {
+        walk(res, node => {
           node.style = {
             label: {
               value: node.id, // add label
@@ -47,13 +47,13 @@ const CompactBox = () => {
       });
   }, []);
 
-  useEffect(() => {
-    if (graphinRef) {
-      graphinRef.graph.on('afterlayout', () => {
-        graphinRef.graph.fitView();
-      });
-    }
-  }, [graphinRef, state.data]);
+  // useEffect(() => {
+  //   if (graphinRef) {
+  //     graphinRef.graph.on('afterlayout', () => {
+  //       graphinRef.graph.fitView();
+  //     });
+  //   }
+  // }, [graphinRef, state.data]);
 
   const { data } = state;
 
@@ -63,9 +63,10 @@ const CompactBox = () => {
         <Grahpin
           data={data}
           // handleAfterLayout={handleAfterLayout}
-          ref={(node) => {
+          ref={node => {
             graphinRef = node;
           }}
+          fitView
           layout={{
             type: 'compactBox',
             direction: 'TB',
