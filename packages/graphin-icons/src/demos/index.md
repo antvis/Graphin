@@ -2,11 +2,10 @@
 title: 官方图标
 order: 0
 group:
-  path: /
-  title:
-nav:
-  title: icons
   path: /icons
+  title: 字体图标
+nav:
+  path: /graphin
   order: 3
 ---
 

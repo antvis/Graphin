@@ -3,7 +3,7 @@ import Graphin, { Utils, Behaviors, GraphinContext } from '@antv/graphin';
 
 const { FitView } = Behaviors;
 
-const data = Utils.mock(50).circle().graphin();
+const data = Utils.mock(10).circle().graphin();
 const layout = {
   type: 'concentric',
   minNodeSpacing: 50,
@@ -12,8 +12,8 @@ const layout = {
 const FocusItem = () => {
   const { graph } = React.useContext(GraphinContext);
   useEffect(() => {
-    graph.focusItem('node-5', true);
-    graph.setItemState('node-5', 'selected', true);
+    graph.focusItem('node-3', true);
+    graph.setItemState('node-3', 'selected', true);
   }, []);
   return null;
 };
