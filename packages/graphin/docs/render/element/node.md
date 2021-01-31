@@ -40,4 +40,4 @@ Graphin 采用`Graphin.registerFontFamily`的方式注册加载字体文件，�
 
 ## 05.`graphin-circle` 样式接口文档
 
-<API  src='../../interface/style.ts' >
+<API  src='../../interface/node-style.ts' >
