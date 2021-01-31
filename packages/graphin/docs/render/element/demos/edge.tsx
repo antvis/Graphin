@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
-import Graphin, { Utils, Behaviors, GraphinContext } from '@antv/graphin';
+import React from 'react';
+import Graphin, { Utils } from '@antv/graphin';
 
-const { ZoomCanvas } = Behaviors;
-
-const data = Utils.mock(6)
-  .circle()
-  .graphin();
+const data = Utils.mock(7).circle().graphin();
 const layout = {
-  type: 'circular',
+  type: 'concentric',
+  nodeSize: 250,
 };
 
 data.edges = [
@@ -58,6 +55,8 @@ data.edges = [
       label: {
         value: '设置 label 标签',
         fill: 'red',
+        fontSize: 26,
+        offset: [0, 0],
       },
     },
   },
@@ -74,13 +73,32 @@ data.edges = [
       },
     },
   },
+  {
+    source: 'node-0',
+    target: 'node-6',
+    style: {
+      label: {
+        value: '设置 label 的 background ',
+        fill: '#fff',
+        fontSize: 12,
+        background: {
+          // 设置背景的填充色
+          fill: 'lightgreen',
+          // 设置圆角
+          radius: 8,
+          // 设置border，即 stroke
+          stroke: '#000',
+        },
+      },
+    },
+  },
 ];
 
 console.log('%c data', 'color:red', data);
 export default () => {
   return (
     <div>
-      <Graphin data={data} layout={layout}></Graphin>
+      <Graphin data={data} layout={layout} />
     </div>
   );
 };
