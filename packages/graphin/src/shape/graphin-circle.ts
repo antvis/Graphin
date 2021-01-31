@@ -18,21 +18,21 @@ function getRadiusBySize(size: number | number[] | undefined) {
 }
 
 const getStyles = (defaultStyleCfg: any, cfgStyle: any) => {
-  const { halo, keyshape } = { ...defaultStyleCfg, ...cfgStyle } as any;
-  const nodeSize = convertSizeToWH(keyshape.size);
-  /*  halo 默认样式单独处理* */
-  const haloStyle = {
-    halo: {
-      x: 0,
-      y: 0,
-      r: nodeSize[0] / 2 + 17, // 默认 halo的样式和keyshape相关
-      fill: keyshape.fill,
-      visible: false,
-      ...halo,
-    },
-  };
+  // const { halo, keyshape } = { ...defaultStyleCfg, ...cfgStyle } as any;
+  // const nodeSize = convertSizeToWH(keyshape.size);
+  // /*  halo 默认样式单独处理* */
+  // const haloStyle = {
+  //   halo: {
+  //     x: 0,
+  //     y: 0,
+  //     r: nodeSize[0] / 2 + 17, // 默认 halo的样式和keyshape相关
+  //     fill: keyshape.fill,
+  //     visible: false,
+  //     ...halo,
+  //   },
+  // };
 
-  return deepMix({}, defaultStyleCfg, haloStyle, cfgStyle) as NodeStyle;
+  return deepMix({}, defaultStyleCfg, cfgStyle) as NodeStyle;
 };
 
 /**
@@ -42,12 +42,13 @@ const getStyles = (defaultStyleCfg: any, cfgStyle: any) => {
 const parseHalo = (style: NodeStyle) => {
   const { halo, keyshape } = style;
 
-  const { size, visible, fill, ...otherAttrs } = halo;
+  const { size, visible, fill, fillOpacity, ...otherAttrs } = halo;
 
   const haloR = getRadiusBySize(size);
 
   let keyshapeR: undefined | number;
   let keyshapeFill: undefined | string;
+  let keyshapeStroke: undefined | string;
 
   if (keyshape && keyshape.size) {
     const calculateR = getRadiusBySize(keyshape.size) as number;
@@ -56,12 +57,16 @@ const parseHalo = (style: NodeStyle) => {
   if (keyshape && keyshape.fill) {
     keyshapeFill = keyshape.fill;
   }
+  if (keyshape && keyshape.stroke) {
+    keyshapeStroke = keyshape.stroke;
+  }
 
   const attrs = {
     x: 0,
     y: 0,
     r: haloR || keyshapeR, // 默认 halo的样式和keyshape相关
-    fill: fill || keyshapeFill,
+    fill: fill || keyshapeFill || keyshapeStroke,
+    fillOpacity: fillOpacity || 0.2,
     visible: visible !== false,
     ...otherAttrs,
   };
@@ -74,7 +79,8 @@ const parseHalo = (style: NodeStyle) => {
 
 const parseKeyshape = (style: NodeStyle) => {
   const { keyshape } = style;
-  const { size, visible, ...otherAttrs } = keyshape;
+  const { size, visible, stroke, fill, fillOpacity, strokeOpacity, ...otherAttrs } = keyshape;
+
   const r = getRadiusBySize(size);
   const attrs = {
     x: 0,
@@ -82,6 +88,10 @@ const parseKeyshape = (style: NodeStyle) => {
     r,
     cursor: 'pointer',
     visible: visible !== false,
+    stroke,
+    strokeOpacity: strokeOpacity || 1,
+    fill: fill || stroke,
+    fillOpacity: fillOpacity || 0.2,
     ...otherAttrs,
   };
   return {
