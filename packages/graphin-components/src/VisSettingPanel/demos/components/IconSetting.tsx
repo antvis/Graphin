@@ -34,7 +34,7 @@ const IconSetting = (props: IconSettingProps) => {
 
   const { type, types } = state;
 
-  const handleChangeType = (v) => {
+  const handleChangeType = v => {
     console.log('v', v);
     setState({
       ...state,
@@ -42,7 +42,7 @@ const IconSetting = (props: IconSettingProps) => {
     });
   };
 
-  const handleChangeValue = (e) => {
+  const handleChangeValue = e => {
     handleChange({
       icon: {
         type,
@@ -55,7 +55,7 @@ const IconSetting = (props: IconSettingProps) => {
     <>
       <Item title="类型">
         <Radio.Group defaultValue={type} size="small" style={{ width: '100%' }} onChange={handleChangeType}>
-          {types.map((item) => {
+          {types.map(item => {
             return (
               <Radio.Button value={item.id} key={item.id}>
                 {item.name}
@@ -93,10 +93,10 @@ const IconSetting = (props: IconSettingProps) => {
           min={1}
           max={100000}
           defaultValue={size as number}
-          onChange={(e) => {
+          onChange={e => {
             handleChange({
               icon: {
-                size: e,
+                size: Number(e),
               },
             });
           }}
@@ -105,7 +105,7 @@ const IconSetting = (props: IconSettingProps) => {
       <Item title="填充色">
         <GraphinColorPick
           color={fill as string}
-          onChange={(val) => {
+          onChange={val => {
             handleChange({
               icon: {
                 fill: val,

@@ -12,7 +12,7 @@ export type NodeStyleLabel = Partial<NodeStyle['label']>;
 
 const positions = ['top', 'bottom', 'left', 'right', 'center'];
 
-const LabelSetting: React.FunctionComponent<LabelSettingProps> = (props) => {
+const LabelSetting: React.FunctionComponent<LabelSettingProps> = props => {
   const { handleChange, fill, fontSize, position } = props;
 
   return (
@@ -22,7 +22,7 @@ const LabelSetting: React.FunctionComponent<LabelSettingProps> = (props) => {
           defaultValue={position}
           size="small"
           style={{ width: '100%' }}
-          onChange={(e) => {
+          onChange={e => {
             handleChange({
               label: {
                 position: e.target.value,
@@ -30,7 +30,7 @@ const LabelSetting: React.FunctionComponent<LabelSettingProps> = (props) => {
             });
           }}
         >
-          {positions.map((item) => {
+          {positions.map(item => {
             return (
               <Radio.Button value={item} key={item}>
                 {item}
@@ -61,10 +61,10 @@ const LabelSetting: React.FunctionComponent<LabelSettingProps> = (props) => {
           min={1}
           max={100000}
           defaultValue={fontSize}
-          onChange={(e) => {
+          onChange={e => {
             handleChange({
               label: {
-                fontSize: e,
+                fontSize: Number(e),
               },
             });
           }}
@@ -73,7 +73,7 @@ const LabelSetting: React.FunctionComponent<LabelSettingProps> = (props) => {
       <Item title="颜色">
         <GraphinColorPick
           color={fill as string}
-          onChange={(val) => {
+          onChange={val => {
             handleChange({
               label: {
                 fill: val,

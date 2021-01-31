@@ -1,6 +1,6 @@
 ---
 title: 自定义图标
-order: 0
+order: 1
 group:
   path: /icons
   title: 字体图标
