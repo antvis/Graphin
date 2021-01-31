@@ -233,6 +233,45 @@ class LayoutController {
     this.instance = null;
   };
 
+  setDataFromGraph = () => {
+    const nodes = [];
+    const edges = [];
+    const combos = [];
+    const nodeItems = this.graph.getNodes();
+    const edgeItems = this.graph.getEdges();
+    const comboItems = this.graph.getCombos();
+    const nodeLength = nodeItems.length;
+
+    for (let i = 0; i < nodeLength; i++) {
+      const nodeItem = nodeItems[i];
+      if (nodeItem.isVisible()) {
+        const model = nodeItem.getModel();
+        nodes.push(model);
+      }
+    }
+
+    const edgeLength = edgeItems.length;
+    for (let i = 0; i < edgeLength; i++) {
+      const edgeItem = edgeItems[i];
+      if (!edgeItem || edgeItem.destroyed || !edgeItem.isVisible()) {
+        const model = edgeItem.getModel();
+        if (!model.isComboEdge) {
+          edges.push(model);
+        }
+      }
+    }
+
+    const comboLength = comboItems.length;
+    for (let i = 0; i < comboLength; i++) {
+      const comboItem = comboItems[i];
+      if (comboItem.destroyed || !comboItem.isVisible()) {
+        const model = comboItem.getModel();
+        combos.push(model);
+      }
+    }
+    return { nodes, edges, combos };
+  };
+
   /** restart */
 }
 

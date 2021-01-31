@@ -371,6 +371,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
        * 2. enablework 问题
        * 3. G6 LayoutController 里的逻辑
        */
+      /** 数据需要从画布中来 */
+      this.data = this.layout.setDataFromGraph();
       this.layout.changeLayout();
       this.layout.refreshPosition();
 
