@@ -182,11 +182,18 @@ export interface EdgeStyle {
       /** 透明度 */
       opacity: number;
       /** 虚线Dash */
-      lineDash: number | number[];
+      lineDash: number[];
       /** 边的交互区域扩展 */
       lineAppendWidth: number;
       /** 鼠标样式 */
       cursor: string;
+      /** 末尾箭头 */
+      endArrow: {
+        path?: string;
+        fill?: string;
+        stroke?: string;
+        [key: string]: any;
+      };
     } & CommondAttrsStyle
   >;
   /** 标签 */
@@ -194,15 +201,43 @@ export interface EdgeStyle {
     {
       /** 值 */
       value: string | number;
-      /** TODO：位置  */
-      position: '' | 'T';
-      /** 默认自动旋转 */
-      autoRote: boolean;
       /** 字体填充色 */
       fill: string;
+      /** 字体大小 */
+      fontSize: number;
+      /**
+       * @description 偏移位置
+       * @default [0,0]
+       */
+      offset: number[];
       /** 其他配置 */
-
-      [key: string]: any;
+      /** 字体的背景色 */
+      background: {
+        /**
+         * @description 背景的宽度
+         * @default 根据fontSize动态计算
+         */
+        width?: number;
+        /**
+         * @description 背景的高度
+         * @default 根据fontSize动态计算
+         */
+        height?: number;
+        /**
+         * @description 背景的边框色
+         * @default 默认是label.stroke
+         */
+        stroke?: string;
+        /**
+         * @description 背景填充色
+         */
+        fill?: string;
+        /**
+         * @description 背景的圆角度
+         * @description 6
+         */
+        radius?: number;
+      };
     } & CommondAttrsStyle
   >;
   /** 光晕 */
@@ -212,9 +247,14 @@ export interface EdgeStyle {
       lineWidth: number;
       stroke: string;
       opacity: number;
-      lineDash: number | number[];
+      lineDash: number[];
       lineAppendWidth: number;
       cursor: string;
+      /**
+       * @description 是否展示
+       * @default false
+       */
+      visible: boolean;
     } & CommondAttrsStyle
   >;
   /** 状态样式 */
