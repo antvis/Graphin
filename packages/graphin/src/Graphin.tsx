@@ -66,7 +66,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     /**  注册 font icon */
     const iconFont = iconLoader();
     const { glyphs, fontFamily } = iconFont;
-    const icons = glyphs.map((item) => {
+    const icons = glyphs.map(item => {
       return {
         name: item.name,
         unicode: String.fromCodePoint(item.unicode_decimal),
@@ -75,7 +75,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     return new Proxy(icons, {
       get: (target, propKey: string) => {
-        const matchIcon = target.find((icon) => {
+        const matchIcon = target.find(icon => {
           return icon.name === propKey;
         });
         if (!matchIcon) {
@@ -294,18 +294,18 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     if (!this.isTree) {
       const { data } = this.props;
       const { nodes = [], edges = [] } = data as GraphinData;
-      nodes.forEach((node) => {
+      nodes.forEach(node => {
         const { status } = node;
         if (status) {
-          Object.keys(status).forEach((k) => {
+          Object.keys(status).forEach(k => {
             this.graph.setItemState(node.id, k, Boolean(status[k]));
           });
         }
       });
-      edges.forEach((edge) => {
+      edges.forEach(edge => {
         const { status } = edge;
         if (status) {
-          Object.keys(status).forEach((k) => {
+          Object.keys(status).forEach(k => {
             this.graph.setItemState(edge.id, k, Boolean(status[k]));
           });
         }
@@ -347,7 +347,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       this.apis = ApiController(this.graph);
       console.log('%c isDataChange', 'color:grey');
       this.setState(
-        (preState) => {
+        preState => {
           return {
             ...preState,
             context: {
@@ -372,6 +372,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
        * 3. G6 LayoutController 里的逻辑
        */
       /** 数据需要从画布中来 */
+      // @ts-ignore
       this.data = this.layout.setDataFromGraph();
       this.layout.changeLayout();
       this.layout.refreshPosition();
@@ -428,7 +429,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           <div
             data-testid="custom-element"
             className="graphin-core"
-            ref={(node) => {
+            ref={node => {
               this.graphDOM = node;
             }}
             style={{ background: this.theme?.background, ...style }}
@@ -459,7 +460,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
                 <Hoverable bindType="node" />
-                {/* <Hoverable bindType="edge" /> */}
+                <Hoverable bindType="edge" />
                 {this.props.children}
               </>
             )}
