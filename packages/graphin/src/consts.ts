@@ -1,6 +1,5 @@
 import { NodeStyle } from '.';
 import { ComboStyle, EdgeStyle } from './typings/type';
-import hexToRgba from './utils/hexToRgba';
 
 // interface ColorSetType {
 //   activeFill: string;
@@ -62,7 +61,7 @@ export const DEFAULT_THEME = {
   primaryColor: '#269a99', // '#3D76DD',
   nodeSize: 26,
   edgeSize: 1,
-  edgePrimaryColor: '#ddd',
+  edgePrimaryColor: '#AAB7C4',
   background: '#fff',
 };
 
@@ -111,8 +110,11 @@ export const genDefaultNodeStyle = ({
 }) => {
   const Colors = {
     light: {
-      fill: hexToRgba(primaryColor, '0.1'),
+      fill: primaryColor,
+      fillOpacity: 0.1,
       stroke: primaryColor,
+      strokeOpacity: 1,
+
       icon: primaryColor,
       badge: {
         fill: primaryColor,
@@ -123,8 +125,10 @@ export const genDefaultNodeStyle = ({
       disabled: '#ddd',
     },
     dark: {
-      fill: hexToRgba(primaryColor, '0.3'),
+      fill: primaryColor,
+      fillOpacity: 0.3,
       stroke: primaryColor,
+      strokeOpacity: 1,
       icon: '#fff',
       badge: {
         fill: primaryColor,
@@ -144,17 +148,20 @@ export const genDefaultNodeStyle = ({
       keyshape: {
         size: [nodeSize, nodeSize],
         fill: Color.fill,
-        stroke: Color.stroke,
+        fillOpacity: Color.fillOpacity,
+        stroke: Color.stroke, // storke is primaryColor
+        strokeOpacity: Color.strokeOpacity,
         lineWidth: 1,
         opacity: 1,
         type: 'circle',
       },
       label: {
         position: 'bottom',
-        value: '',
+        value: 12,
         fill: Color.label,
         fontSize: labelSize,
         offset: 0,
+        background: undefined,
       },
       icon: {
         type: 'text',
@@ -164,7 +171,9 @@ export const genDefaultNodeStyle = ({
         offset: [0, 0],
       },
       badges: [],
-      halo: {},
+      halo: {
+        visible: false,
+      },
     },
     status: {
       selected: {
@@ -247,22 +256,21 @@ export const genDefaultEdgeStyle = ({ edgeSize = 1, edgePrimaryColor = '#ddd', m
         type: 'line',
         lineWidth: edgeSize,
         stroke: Color.stroke,
-        opacity: 1,
+        strokeOpacity: 1,
         lineAppendWidth: 9,
         cursor: 'pointer',
       },
       halo: {
-        stroke: Color.stroke,
-        opacity: 0.4,
+        // stroke: Color.stroke,
         visible: false,
         cursor: 'pointer',
+        strokeOpacity: 0.4,
       },
       label: {
         value: '',
         position: 'top',
         fill: Color.label,
-        fontSize: '',
-        fontFamily: '',
+        fontSize: 12,
         textAlign: 'center',
       },
     },
@@ -327,7 +335,7 @@ export const getDefaultStyleByTheme = (inputTheme: Partial<ThemeType> | undefine
   const isLight = theme.mode === 'light';
   return {
     ...theme,
-    background: isLight ? '#fff' : '#000',
+    background: isLight ? '#fff' : '#1f1f1f',
     ...genDefaultNodeStyle(theme),
     ...genDefaultEdgeStyle(theme),
     ...genDefaultComboStyle(),
