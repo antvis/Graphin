@@ -14,7 +14,9 @@ const defaultConfig = {
    */
   scalableRange: 0,
   /**  是否允许触发该操作； */
-  shouldBegin: () => {},
+  shouldBegin: () => {
+    return true;
+  },
   /** 是否禁用该功能 */
   disabled: false,
 };
