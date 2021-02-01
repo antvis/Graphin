@@ -13,4 +13,5 @@ export { default as Toolbar } from './Toolbar';
 export { default as MiniMap } from './MiniMap';
 export { default as Legend } from './Legend';
 
-export * as Type from './typing';
+// @ts-ignore
+// export * as Type from './typing';
