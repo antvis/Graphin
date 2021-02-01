@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { context, Link, NavLink } from 'dumi/theme';
 import { useMedia } from 'react-use';
 import LocaleSelect from './LocaleSelect';
+
 import Products from '@antv/gatsby-theme-antv/site/components/Products';
 import Logo from './Header/Logo';
 import './Navbar.less';
@@ -83,7 +84,7 @@ const Navbar: FC<INavbarProps> = ({ onMobileMenuClick, navPrefix, location }) =>
             display: ' inline-block',
             margin: '0 20px',
           }}
-        ></span>
+        />
         <span style={{ fontSize: '16px', color: '#0d1a26', display: 'inline-block', verticalAlign: 'top' }}>
           {title}
         </span>
@@ -92,10 +93,10 @@ const Navbar: FC<INavbarProps> = ({ onMobileMenuClick, navPrefix, location }) =>
       <nav>
         {navPrefix}
         {/* nav */}
-        {navItems.map((nav) => {
+        {navItems.map(nav => {
           const child = Boolean(nav.children?.length) && (
             <ul>
-              {nav.children.map((item) => (
+              {nav.children.map(item => (
                 <li key={item.path}>
                   <NavLink to={item.path}>{item.title}</NavLink>
                 </li>

@@ -11,7 +11,7 @@
     "docs:build": "dumi build",
     "docs:deploy": "npm run docs:build && gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
     "docs:gh-pages": "gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site",
     "bootstrap:ci": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site --ignore @antv/graphin-graphscope",
     "build": "lerna run build",
     "contributor": "git-contributor",
@@ -29,7 +29,7 @@
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags"
   },
   "devDependencies": {
-    "dumi-theme-graphin": "1.0.0",
+    "dumi-theme-graphin": "0.1.0",
     "@types/jest": "^25.2.3",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",
@@ -67,6 +67,7 @@
     ]
   },
   "dependencies": {
+    "dumi-theme-graphin": "^0.1.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   },
