@@ -14,8 +14,10 @@ export default {
       'packages/graphin-icons/src',
 
       // 'packages/graphin-graphscope/docs/',
+
       /** local develop */
-      // 'packages/graphin/docs/geamaker/',
+      // 'packages/graphin/docs/case/graph-database',
+      // 'packages/graphin/docs/index.md',
     ],
   },
   alias: {
