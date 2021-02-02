@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // TODO : remove any type
-import { ThemeType } from '../consts';
+import { ThemeType } from '../theme';
 import { Graph } from '@antv/g6';
 
 export interface UserProperties {

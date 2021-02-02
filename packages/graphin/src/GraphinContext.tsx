@@ -1,7 +1,7 @@
 import React from 'react';
 import { Graph as IGraph } from '@antv/g6';
 import { ApisType } from './apis/types';
-import { ThemeType } from './consts';
+import { ThemeType } from './theme/index';
 
 const defaultContext = {
   graph: {} as IGraph,
