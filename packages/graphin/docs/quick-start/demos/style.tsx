@@ -1,8 +1,7 @@
 import React from 'react';
-import Graphin, { Behaviors, Utils } from '@antv/graphin';
+import Graphin, { Behaviors, GraphinData } from '@antv/graphin';
 import { Row, Col, Card } from 'antd';
 import iconLoader from '@antv/graphin-icons';
-import { GraphinData } from '../../../dist/typings/type';
 
 const icons = Graphin.registerFontFamily(iconLoader);
 const Color = {
@@ -70,7 +69,9 @@ data.nodes.forEach(node => {
     keyshape: {
       size: count ? (count / 10) * 2 : 30,
       stroke: Color[type],
-      fill: Utils.hexToRgbaToHex(Color[type], 0.2),
+      fill: Color[type],
+      fillOpacity: 0.2,
+      strokeOpacity: 1,
     },
     icon: {
       type: 'font',

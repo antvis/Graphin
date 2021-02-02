@@ -19,22 +19,27 @@ export interface ThemeType {
   mode: 'light' | 'dark';
   /**
    * @description 画布背景色
+   * @default #fff
    */
   background: string;
   /**
    * @description 节点大小
+   * @default 26
    */
   nodeSize: number;
   /**
    * @description 节点主要颜色
+   * @default #269a99
    */
   primaryColor: string;
   /**
    * @description 边的大小
+   * @default 1
    */
   edgeSize: number;
   /**
    * @description 边的主要颜色
+   * @default #ddd
    */
   primaryEdgeColor: string;
 }

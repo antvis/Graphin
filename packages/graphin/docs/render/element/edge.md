@@ -1,5 +1,5 @@
 ---
-title: 边 Edge
+title: 边的样式
 group:
   path: /render
 nav:

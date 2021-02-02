@@ -2,7 +2,7 @@
 title: 快速开始
 order: 0
 group:
-  path: /a/quick-start
+  path: /quick-start
   title: 快速开始
   order: 0
 nav:

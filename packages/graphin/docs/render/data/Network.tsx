@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Graphin, { Utils, Behaviors, GraphinContext } from '@antv/graphin';
 
-const { FitView } = Behaviors;
+const { FitView, DragCanvas } = Behaviors;
 
 const data = Utils.mock(10).circle().graphin();
 const layout = {
@@ -19,7 +19,9 @@ const FocusItem = () => {
 };
 
 console.log('network', data);
-
+const shouldBegin = () => {
+  return true;
+};
 export default () => {
   return (
     <div>
@@ -27,6 +29,7 @@ export default () => {
         <FitView />
         {/* <ZoomCanvas disabled /> */}
         <FocusItem />
+        <DragCanvas shouldBegin={shouldBegin} />
       </Graphin>
     </div>
   );

@@ -4,7 +4,7 @@ import iconLoader from '@antv/graphin-icons';
 import { Row, Col, Card } from 'antd';
 
 const icons = Graphin.registerFontFamily(iconLoader);
-
+const parimaryColor = '#ff6a00';
 const data = {
   nodes: [
     {
@@ -19,9 +19,11 @@ const data = {
           /** 节点的大小 */
           size: 80,
           /** 包围边颜色 */
-          stroke: '#FF6A00',
+          stroke: parimaryColor,
           /** 填充色 */
-          fill: Utils.hexToRgbaToHex('#FF6A00', 0.2),
+          fill: parimaryColor,
+          /** 填充色的透明度 */
+          fillOpacity: 0.2,
           /** 透明度 */
           opacity: 1,
           /** 鼠标样式 */
@@ -51,7 +53,7 @@ const data = {
           /** 图标大小 */
           size: 40,
           /** 字体图标的填充色 */
-          fill: '#FF6A00',
+          fill: parimaryColor,
           /** 字体Family */
           fontFamily: 'graphin',
         },
@@ -66,7 +68,7 @@ const data = {
             // type = image 时生效，表示图片的宽度和高度
             size: [25, 25],
             /** 徽标填充色 */
-            fill: '#FF6A00',
+            fill: parimaryColor,
             /** 徽标描边色 */
             stroke: '',
             /** 徽标内文本的颜色 */
@@ -87,7 +89,7 @@ const data = {
             // type = image 时生效，表示图片的宽度和高度
             size: [25, 25],
             /** 徽标填充色 */
-            fill: Utils.hexToRgbaToHex('#FF6A00', 1),
+            fill: Utils.hexToRgbaToHex(parimaryColor, 1),
             /** 徽标描边色 */
             stroke: '',
             /** 徽标内文本的颜色 */
@@ -103,7 +105,7 @@ const data = {
         // // 节点的光环，在节点交互过程中（hover，selected，disabled，active）等，可以打开光环，默认是隐藏的，也可以自定义
         halo: {
           /** 光晕 */
-          fill: Utils.hexToRgbaToHex('#FF6A00', 0.2),
+          fill: Utils.hexToRgbaToHex(parimaryColor, 0.2),
           /** 透明度 */
           opacity: 1,
           /** 是否展示 */
@@ -157,9 +159,9 @@ export default () => {
           /** 节点的大小 */
           size: 80,
           /** 包围边颜色 */
-          stroke: '#FF6A00',
+          stroke: parimaryColor,
           /** 填充色 */
-          fill: Utils.hexToRgbaToHex('#FF6A00', 0.2),
+          fill: Utils.hexToRgbaToHex(parimaryColor, 0.2),
           /** 透明度 */
           opacity: 1,
           /** 鼠标样式 */
@@ -189,7 +191,7 @@ export default () => {
           /** 图标大小 */
           size: 40,
           /** 字体图标的填充色 */
-          fill: '#FF6A00',
+          fill: parimaryColor,
           /** 字体Family */
           fontFamily: 'graphin',
         },
@@ -204,7 +206,7 @@ export default () => {
             // type = image 时生效，表示图片的宽度和高度
             size: [25, 25],
             /** 徽标填充色 */
-            fill: Utils.hexToRgbaToHex('#FF6A00', 1),
+            fill: Utils.hexToRgbaToHex(parimaryColor, 1),
             /** 徽标描边色 */
             stroke: '',
             /** 徽标内文本的颜色 */
@@ -225,7 +227,7 @@ export default () => {
             // type = image 时生效，表示图片的宽度和高度
             size: [25, 25],
             /** 徽标填充色 */
-            fill: Utils.hexToRgbaToHex('#FF6A00', 1),
+            fill: Utils.hexToRgbaToHex(parimaryColor, 1),
             /** 徽标描边色 */
             stroke: '',
             /** 徽标内文本的颜色 */
@@ -241,7 +243,7 @@ export default () => {
         // 节点的光环，在节点交互过程中（hover，selected，disabled，active）等，可以打开光环，默认是隐藏的，也可以自定义
         halo: {
           /** 光晕 */
-          fill: Utils.hexToRgbaToHex('#FF6A00', 0.2),
+          fill: Utils.hexToRgbaToHex(parimaryColor, 0.2),
           /** 透明度 */
           opacity: 1,
           /** 是否展示 */

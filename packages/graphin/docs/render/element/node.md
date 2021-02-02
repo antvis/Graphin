@@ -1,5 +1,5 @@
 ---
-title: 节点 Node
+title: 节点样式
 group:
   path: /render
 nav:

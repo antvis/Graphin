@@ -1,5 +1,5 @@
 ---
-title: 更新元素
+title: 更新样式
 group:
   path: /render
 nav:
