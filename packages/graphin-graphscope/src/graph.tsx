@@ -56,7 +56,7 @@ export interface GraphData {
 interface GraphProps {
   graphDOM: HTMLDivElement;
   data: GraphData;
-  width: number;
+  width?: number;
   height: number;
   neighbors?: (nodeId: string, degree: number) => void;
   hasMinimap?: boolean;
@@ -379,13 +379,13 @@ const GraphScope: React.FC<GraphProps> = ({
     type: null,
   });
   const handleClickElement = (model: NodeConfig, type: string) => {
+    setDetailInfo({
+      visible: true,
+      data: model,
+      type,
+    });
     if (nodeClick) {
       nodeClick(model as NodeData, type);
-      setDetailInfo({
-        visible: true,
-        data: model,
-        type,
-      });
     }
   };
 
@@ -414,12 +414,14 @@ const GraphScope: React.FC<GraphProps> = ({
         )}
         {hasFishEye && <FishEye options={{ showLabel: false }} visible={visible} handleEscListener={handleClose} />}
         {detailInfo.visible && (
-          <ElementDetailPanel
-            type={detailInfo.type}
-            data={detailInfo.data}
-            close={() => setDetailInfo({ visible: false, data: null, type: '' })}
-            itemId={detailInfo.data.id}
-          />
+          <div style={{ position: 'absolute', top: 40, right: 0 }}>
+            <ElementDetailPanel
+              type={detailInfo.type}
+              data={detailInfo.data}
+              close={() => setDetailInfo({ visible: false, data: null, type: '' })}
+              itemId={detailInfo.data.id}
+            />
+          </div>
         )}
       </Graphin>
     </div>

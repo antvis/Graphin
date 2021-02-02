@@ -58,10 +58,10 @@ const ElementDetailPanel: React.FC<DetailProps> = ({ close, type, itemId, data =
       <Resizable
         defaultSize={{
           width: 331,
-          height: 'auto',
+          height: 350,
         }}
         className={styles.draggablePanel}
-        style={{ top: 40, right: 0 }}
+        style={{ overflow: 'auto' }}
       >
         <div style={{ height: '100%' }}>
           <Row className={classNames(styles.header, 'handle')}>
