@@ -7,7 +7,8 @@ import registerGraphinForce from './layout/inner/registerGraphinForce';
 import registerPresetLayout from './layout/inner/registerPresetLayout';
 import { registerGraphinCircle, registerGraphinLine } from './shape';
 /** export type */
-import { NodeStyle, EdgeStyle } from './typings/type';
+export { NodeStyle, EdgeStyle, GraphinData, GraphinTreeData } from './typings/type';
+export { GraphinContextType };
 
 /** 注册 Graphin force 布局 */
 registerGraphinForce();
@@ -26,8 +27,6 @@ const { registerFontFamily } = Graphin;
 /** export */
 export default Graphin;
 export { Utils, Layout, GraphinContext, Behaviors, registerFontFamily };
-
-export { GraphinContextType, NodeStyle, EdgeStyle };
 
 export {
   /** export G6 */

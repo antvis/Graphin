@@ -22,7 +22,9 @@ import { ApisType } from './apis/types';
 
 /** types  */
 import { GraphinProps, IconLoader, GraphinData, GraphinTreeData } from './typings/type';
-import { TREE_LAYOUTS, getDefaultStyleByTheme, ThemeData, DEFAULT_TREE_LATOUT_OPTIONS } from './consts';
+import { TREE_LAYOUTS, DEFAULT_TREE_LATOUT_OPTIONS } from './consts';
+
+import { getDefaultStyleByTheme, ThemeData } from './theme/index';
 
 const { DragCanvas, ZoomCanvas, DragNode, DragCombo, ClickSelect, BrushSelect, ResizeCanvas, Hoverable } = Behaviors;
 
