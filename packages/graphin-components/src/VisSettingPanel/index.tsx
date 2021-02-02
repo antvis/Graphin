@@ -1,6 +1,6 @@
 import React from 'react';
 import { GraphinContext, NodeStyle } from '@antv/graphin';
-import AntdPanel from './demos/AntdPanel';
+// import AntdPanel from './demos/AntdPanel';
 
 interface VisSettingPanelPropsType {
   style?: React.CSSProperties;
@@ -86,16 +86,16 @@ const defaultStyle: React.CSSProperties = {
   overflowY: 'scroll',
 };
 
-const VisSettingPanel: React.FunctionComponent<VisSettingPanelPropsType> = (props) => {
+const VisSettingPanel: React.FunctionComponent<VisSettingPanelPropsType> = props => {
   const { graph } = React.useContext(GraphinContext);
   const { style } = props;
   const item = graph.findAllByState('node', 'selected')[0] || graph.getNodes()[0];
   const nodeSchema = (item.getModel().style || defaultNodeStyleSchema) as NodeStyle;
-  const handleNodeStyleChange = (schema) => {
+  const handleNodeStyleChange = schema => {
     const selectedNodes = graph.findAllByState('node', 'selected');
     if (selectedNodes.length === 0) {
       // 则认为是全局样式改变
-      graph.getNodes().forEach((node) => {
+      graph.getNodes().forEach(node => {
         /** 状态有优先级 */
         graph.clearItemStates(node);
         graph.updateItem(node, {
@@ -106,7 +106,7 @@ const VisSettingPanel: React.FunctionComponent<VisSettingPanelPropsType> = (prop
       });
     }
 
-    selectedNodes.forEach((node) => {
+    selectedNodes.forEach(node => {
       graph.updateItem(node, {
         style: {
           ...schema,
@@ -114,7 +114,7 @@ const VisSettingPanel: React.FunctionComponent<VisSettingPanelPropsType> = (prop
       });
       graph.setItemState(node, 'selected', false);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (node as any).getEdges().forEach((edge) => {
+      (node as any).getEdges().forEach(edge => {
         graph.setItemState(edge, 'selected', false);
       });
     });
@@ -124,7 +124,7 @@ const VisSettingPanel: React.FunctionComponent<VisSettingPanelPropsType> = (prop
   console.log('schema', nodeSchema);
   return (
     <div style={{ ...defaultStyle, ...style }}>
-      <AntdPanel nodeStyleSchema={nodeSchema} handleNodeStyleChange={handleNodeStyleChange} />
+      {/* <AntdPanel nodeStyleSchema={nodeSchema} handleNodeStyleChange={handleNodeStyleChange} /> */}
     </div>
   );
 };

@@ -3,7 +3,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-module.exports = (env) => {
+module.exports = env => {
   return {
     entry: {
       index: './src/index.ts',
@@ -91,6 +91,7 @@ module.exports = (env) => {
       {
         lodash: '_',
         react: 'window.React',
+        '@antv/graphin': 'window.Graphin',
         '@antv/g6': 'G6',
         antd: 'antd',
       },

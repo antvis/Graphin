@@ -18,7 +18,7 @@
     "*.css"
   ],
   "devDependencies": {
-    "@ant-design/icons": "^4.3.0",
+    "@ant-design/icons": "^4.4.0",
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -28,12 +28,12 @@
     "@testing-library/react": "^9.5.0",
     "@types/react-router-dom": "^5.1.0",
     "@types/styled-components": "^5.1.7",
+    "antd": "^4.11.2",
     "babel-jest": "^25.4.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.12.2",
     "babel-plugin-transform-default-import": "^1.0.0",
     "css-loader": "^3.2.0",
-    "deepmerge": "^4.1.1",
     "eventemitter3": "^4.0.0",
     "father": "^2.23.1",
     "file-loader": "^6.0.0",
@@ -55,15 +55,12 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@antv/graphin": "2.0.0-beta.9",
-    "react-color": "^2.19.3"
+    "@antv/util": "^2.0.10"
   },
   "peerDependencies": {
-    "antd": "^4.x",
-    "@ant-design/compatible": "^1.0.2",
-    "@ant-design/icons": "^4.0.6",
     "react": "^16.x",
-    "react-dom": "^16.x"
+    "react-dom": "^16.x",
+    "@antv/graphin": "2.0.0-beta.9"
   },
   "publishConfig": {
     "access": "public"
