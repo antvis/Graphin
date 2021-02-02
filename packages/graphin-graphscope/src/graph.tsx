@@ -11,6 +11,7 @@ import ElementDetailPanel from './detail';
 import CustomMenu from './contextmenu';
 
 import '@antv/graphin-icons/dist/index.css';
+
 import ClickElement from './events/click';
 
 const { hexToRgbaToHex } = Utils;
@@ -414,14 +415,12 @@ const GraphScope: React.FC<GraphProps> = ({
         )}
         {hasFishEye && <FishEye options={{ showLabel: false }} visible={visible} handleEscListener={handleClose} />}
         {detailInfo.visible && (
-          <div style={{ position: 'absolute', top: 40, right: 0 }}>
-            <ElementDetailPanel
-              type={detailInfo.type}
-              data={detailInfo.data}
-              close={() => setDetailInfo({ visible: false, data: null, type: '' })}
-              itemId={detailInfo.data.id}
-            />
-          </div>
+          <ElementDetailPanel
+            type={detailInfo.type}
+            data={detailInfo.data}
+            close={() => setDetailInfo({ visible: false, data: null, type: '' })}
+            itemId={detailInfo.data.id}
+          />
         )}
       </Graphin>
     </div>

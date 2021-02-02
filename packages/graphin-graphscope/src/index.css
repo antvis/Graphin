@@ -353,9 +353,3 @@ template {
 .graph-core {
   height: 100%;
 }
-
-.elementDetailPanel {
-  position: absolute;
-  top: 40;
-  right: 0;
-}
