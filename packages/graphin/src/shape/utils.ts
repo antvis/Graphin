@@ -35,7 +35,7 @@ export const setStatusStyle = (shapes: any, statusStyle: any, parseAttr: (style:
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
 export function removeDumpAttrs<T>(attrs: T): T {
-  Object.keys(attrs).forEach((key) => {
+  Object.keys(attrs).forEach(key => {
     // @ts-ignore
     if (attrs[key] === undefined) {
       // @ts-ignore
@@ -77,7 +77,11 @@ export const getLabelXYByPosition = (
   y: number;
   textBaseline?: 'top' | 'bottom';
 } => {
-  const { label, keyshape } = cfg;
+  const {
+    label,
+    // 临时方案，label的动态计算需要keyshape的size
+    keyshape = { size: 26 },
+  } = cfg;
   const { size } = keyshape;
 
   let offsetArray: number[] = [0, 0];
