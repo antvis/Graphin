@@ -81,18 +81,19 @@ const getPolyEdgeControlPoint = (p1: Position, p2: Position, d: number) => {
 };
 
 const processKeyshape = (cfg: EdgeConfig) => {
-  const { startPoint = { x: 0, y: 0 }, endPoint = { x: 0, y: 0 }, style: STYLE, sourceNode } = cfg;
+  const { startPoint = { x: 0, y: 0 }, endPoint = { x: 0, y: 0 }, style: STYLE, sourceNode, targetNode } = cfg;
   const style = STYLE as EdgeStyle;
-  const target = (sourceNode as INode).get('model');
-  const nodeSize = target.style?.keyshape?.size || 28;
-  const PADDING = 2;
-  const RADIO = 0.75;
-  const size = nodeSize * RADIO;
   const { keyshape } = style;
 
   const { type = 'line', poly = { distance: 0 } } = keyshape;
+  const source = (sourceNode as INode).get('model');
+  const target = (targetNode as INode).get('model');
 
-  if (type === 'loop') {
+  if (type === 'loop' || source.id === target.id) {
+    const nodeSize = source.style?.keyshape?.size || 28;
+    const PADDING = 2;
+    const RADIO = 0.75;
+    const size = nodeSize * RADIO;
     return [
       ['M', startPoint.x - size / 2 - PADDING, startPoint.y - (Math.sqrt(3) / 2) * size - PADDING],
       /**
@@ -133,8 +134,8 @@ export default () => {
 
       const { label, halo, keyshape: keyShapeStyle } = style;
       /** 计算目标节点的大小 */
-      const target = (sourceNode as INode).get('model');
-      const nodeSize = target.style?.keyshape?.size || 28;
+      const source = (sourceNode as INode).get('model');
+      const nodeSize = source.style?.keyshape?.size || 28;
       /** 计算是否为loop */
       const isLoop = keyShapeStyle?.type === 'loop';
       const hasLabel = label.value;
