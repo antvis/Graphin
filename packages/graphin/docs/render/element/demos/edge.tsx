@@ -1,13 +1,27 @@
 import React from 'react';
 import Graphin, { Utils } from '@antv/graphin';
 
-const data = Utils.mock(7).circle().graphin();
+const data = Utils.mock(8).circle().graphin();
 const layout = {
   type: 'concentric',
   nodeSize: 250,
 };
 
 data.edges = [
+  {
+    source: 'node-0',
+    target: 'node-0',
+    style: {
+      label: {
+        value: '自环边',
+        offset: [0, 0],
+      },
+      keyshape: {
+        type: 'loop',
+      },
+    },
+  },
+
   {
     source: 'node-0',
     target: 'node-1',
@@ -17,7 +31,7 @@ data.edges = [
       },
       keyshape: {
         stroke: 'red',
-        lineWidth: 4,
+        // lineWidth: 4,
       },
     },
   },
@@ -89,6 +103,39 @@ data.edges = [
           // 设置border，即 stroke
           stroke: '#000',
         },
+      },
+    },
+  },
+  {
+    source: 'node-0',
+    target: 'node-7',
+    style: {
+      label: {
+        value: 'poly:40',
+        offset: [0, 0],
+      },
+      keyshape: {
+        type: 'poly',
+        poly: {
+          distance: 40,
+        },
+      },
+    },
+  },
+  {
+    source: 'node-0',
+    target: 'node-7',
+    style: {
+      label: {
+        value: 'poly:-40',
+        offset: [0, 0],
+      },
+      keyshape: {
+        type: 'poly',
+        poly: {
+          distance: -40,
+        },
+        lineDash: [2, 2],
       },
     },
   },

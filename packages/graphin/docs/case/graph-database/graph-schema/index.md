@@ -6,7 +6,7 @@ group:
 nav:
   title: 领域方案
   path: /case
-  order: 2
+  order: 4
 ---
 
 ## 数据建模

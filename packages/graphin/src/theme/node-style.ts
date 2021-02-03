@@ -49,7 +49,7 @@ const getNodeStyleByTheme = (inputNodeTheme: NodeTheme) => {
     type: 'graphin-circle',
     style: {
       keyshape: {
-        size: [nodeSize, nodeSize],
+        size: nodeSize,
         fill: Color.fill,
         fillOpacity: Color.fillOpacity,
         stroke: Color.stroke, // storke is primaryColor

@@ -6,7 +6,7 @@ group:
 nav:
   title: 领域方案
   path: /case
-  order: 2
+  order: 4
 ---
 
 ## 《图可视分析解决方案：图数据库》

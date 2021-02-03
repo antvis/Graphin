@@ -20,6 +20,6 @@ Graphin 官网内置了 边类型`graphin-line`.作为默认的边类型，你�
 
 <code src='./demos/edge.tsx'>
 
-## 05.`graphin-line` 样式接口文档
+## 02.`graphin-line` 样式接口文档
 
 <API   src='../../interface/edge-style.ts'>
