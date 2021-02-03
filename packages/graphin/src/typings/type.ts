@@ -194,6 +194,10 @@ export interface EdgeStyle {
         stroke?: string;
         [key: string]: any;
       };
+      /** 多边的设置，仅当keyshape.type 为poly时有效 */
+      poly: {
+        distance?: number;
+      };
     } & CommondAttrsStyle
   >;
   /** 标签 */

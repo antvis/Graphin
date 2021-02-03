@@ -14,7 +14,7 @@ export enum EnumNodeAndEdgeStatus {
 }
 
 export function removeDumpAttrs(attrs: any) {
-  Object.keys(attrs).forEach((key) => {
+  Object.keys(attrs).forEach(key => {
     if (attrs[key] === undefined) {
       delete attrs[key];
     }
@@ -62,6 +62,62 @@ const parseAttr = (style: EdgeStyle, itemShapeName: string) => {
   return {};
 };
 
+// @ts-ignore
+
+const getPolyEdgeControlPoint = (p1: Position, p2: Position, d: number) => {
+  const pm = {
+    x: (p2.x + p1.x) / 2,
+    y: (p2.y + p1.y) / 2,
+  };
+  const dx = p2.x - p1.x;
+  const dy = p2.y - p1.y;
+  const c = Math.sqrt(dx ** 2 + dy ** 2);
+  const y = pm.y - (dx * d) / c || 0;
+  const x = pm.x + (dy * d) / c || 0;
+  return {
+    x,
+    y,
+  };
+};
+
+const processKeyshape = (cfg: EdgeConfig) => {
+  const { startPoint = { x: 0, y: 0 }, endPoint = { x: 0, y: 0 }, style: STYLE, sourceNode } = cfg;
+  const style = STYLE as EdgeStyle;
+  const target = (sourceNode as INode).get('model');
+  const nodeSize = target.style?.keyshape?.size || 28;
+  const PADDING = 2;
+  const RADIO = 0.75;
+  const size = nodeSize * RADIO;
+  const { keyshape } = style;
+
+  const { type = 'line', poly = { distance: 0 } } = keyshape;
+
+  if (type === 'loop') {
+    return [
+      ['M', startPoint.x - size / 2 - PADDING, startPoint.y - (Math.sqrt(3) / 2) * size - PADDING],
+      /**
+       * A rx ry x-axis-rotation large-arc-flag sweep-flag x y
+       * https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths
+       */
+      ['A', size, size, 0, 1, 1, startPoint.x + size / 2 + PADDING, startPoint.y - (Math.sqrt(3) / 2) * size - PADDING],
+    ];
+  }
+  if (type === 'poly') {
+    const controlPoints = getPolyEdgeControlPoint(startPoint, endPoint, poly?.distance || 0);
+    return [
+      ['M', startPoint.x, startPoint.y],
+      /**
+       * 二阶贝塞尔曲线
+       */
+      ['Q', controlPoints.x, controlPoints.y, endPoint.x, endPoint.y],
+    ];
+  }
+  // 默认是line
+  return [
+    ['M', startPoint.x, startPoint.y],
+    ['L', endPoint.x, endPoint.y],
+  ];
+};
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default () => {
   G6.registerEdge('graphin-line', {
@@ -73,20 +129,29 @@ export default () => {
         cfg._initialStyle = { ...style };
       }
 
-      const { startPoint = { x: 0, y: 0 }, endPoint = { x: 0, y: 0 } } = cfg as EdgeConfig;
+      const { startPoint = { x: 0, y: 0 }, endPoint = { x: 0, y: 0 }, sourceNode } = cfg as EdgeConfig;
 
       const { label, halo, keyshape: keyShapeStyle } = style;
-
+      /** 计算目标节点的大小 */
+      const target = (sourceNode as INode).get('model');
+      const nodeSize = target.style?.keyshape?.size || 28;
+      /** 计算是否为loop */
+      const isLoop = keyShapeStyle?.type === 'loop';
       const hasLabel = label.value;
+      /** 计算poly控制点 */
+      const isPoly = keyShapeStyle?.type === 'poly';
+      const controlPoints = getPolyEdgeControlPoint(startPoint, endPoint, keyShapeStyle?.poly?.distance || 0);
 
       const lineWidth = keyShapeStyle?.lineWidth || 1;
       const d = lineWidth + 5;
 
+      const path = processKeyshape(cfg as EdgeConfig);
+
       // TODO:支持多边
-      const path = [
-        ['M', startPoint.x, startPoint.y],
-        ['L', endPoint.x, endPoint.y],
-      ];
+      // const path = [
+      //   ['M', startPoint.x, startPoint.y],
+      //   ['L', endPoint.x, endPoint.y],
+      // ];
 
       /** 光环 */
       (group as IGroup).addShape('path', {
@@ -124,6 +189,22 @@ export default () => {
         const { value, fontSize = 8, offset = [0, 0], background, ...others } = label;
         const hasBackground = Boolean(background);
         const [offsetX, offsetY] = offset;
+        /** 计算标签和标签背景的旋转角度 */
+        let degree = Math.atan((endPoint.y - startPoint.y) / (endPoint.x - startPoint.x));
+        /** 计算标签和标签背景的位移位置 */
+        let midPosition = [(startPoint.x + endPoint.x) / 2, (startPoint.y + endPoint.y) / 2];
+        if (isPoly) {
+          // TODO: 这里label坐标计算有问题，需要调整算法, 今天搞不动了，明天再处理
+          midPosition = [(controlPoints.x + midPosition[0]) / 2, (controlPoints.y + midPosition[1]) / 2];
+        }
+
+        if (endPoint.x - startPoint.x === 0) {
+          degree = Math.PI / 2;
+        }
+        if (isLoop) {
+          degree = 2 * Math.PI;
+        }
+
         /** 设置标签的背景 */
         if (hasBackground) {
           const calcWidth = String(value).length * fontSize * 0.6;
@@ -154,19 +235,23 @@ export default () => {
           });
 
           /** 处理标签自动旋转问题 */
-          labelBackgroundShape.rotate(
-            endPoint.x - startPoint.x === 0
-              ? Math.PI / 2
-              : Math.atan((endPoint.y - startPoint.y) / (endPoint.x - startPoint.x)),
-          );
-          labelBackgroundShape.translate((startPoint.x + endPoint.x) / 2, (startPoint.y + endPoint.y) / 2);
+          labelBackgroundShape.rotate(degree);
+          labelBackgroundShape.translate(midPosition[0], midPosition[1]);
         }
+
         /** 设置标签的文本 */
+        let y = offsetY - fontSize / 2;
+        if (isLoop) {
+          y = offsetY - nodeSize * 2;
+        }
+        if (hasBackground) {
+          y = offsetY + fontSize / 2;
+        }
         const labelShape = (group as IGroup).addShape('text', {
           attrs: {
             id: 'label',
             x: offsetX,
-            y: hasBackground ? offsetY + fontSize / 2 : offsetY - fontSize / 2,
+            y,
             text: value,
             fontSize,
             ...others,
@@ -175,12 +260,8 @@ export default () => {
           name: 'label',
         });
         /** 处理标签自动旋转问题 */
-        labelShape.rotate(
-          endPoint.x - startPoint.x === 0
-            ? Math.PI / 2
-            : Math.atan((endPoint.y - startPoint.y) / (endPoint.x - startPoint.x)),
-        );
-        labelShape.translate((startPoint.x + endPoint.x) / 2, (startPoint.y + endPoint.y) / 2);
+        labelShape.rotate(degree);
+        labelShape.translate(midPosition[0], midPosition[1]);
       }
       return key;
     },
@@ -199,13 +280,13 @@ export default () => {
       const status = (item as IEdge)._cfg?.states || [];
 
       try {
-        Object.keys(initStateStyle).forEach((statusKey) => {
+        Object.keys(initStateStyle).forEach(statusKey => {
           if (name === statusKey) {
             if (value) {
               setStatusStyle(shapes, initStateStyle[statusKey], parseAttr); // 匹配到status就改变
             } else {
               setStatusStyle(shapes, initialStyle, parseAttr); // 没匹配到就重置
-              status.forEach((key) => {
+              status.forEach(key => {
                 // 如果cfg.status中还有其他状态，那就重新设置回来
                 setStatusStyle(shapes, initStateStyle[key], parseAttr);
               });
