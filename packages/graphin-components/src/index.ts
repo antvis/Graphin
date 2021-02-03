@@ -12,7 +12,6 @@ export { default as FishEye } from './FishEye';
 export { default as Toolbar } from './Toolbar';
 export { default as MiniMap } from './MiniMap';
 export { default as Legend } from './Legend';
-export { default as legend } from './LayoutSelector'
+export { default as LayoutSelector } from './LayoutSelector';
 
-// @ts-ignore
-// export * as Type from './typing';
+export * from './typing';

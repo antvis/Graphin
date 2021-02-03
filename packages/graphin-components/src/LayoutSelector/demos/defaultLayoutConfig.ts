@@ -12,12 +12,12 @@ import {
   MediumOutlined,
 } from '@ant-design/icons';
 import TwoInput from './twoInput';
-import { LayoutConfig } from './index';
+import { LayoutConfig } from '..';
 
 const graphLayoutConfig: {
   [key: string]: LayoutConfig[];
 } = {
-  graphLayoutForce: [
+  graphLayout_force: [
     {
       title: '经典力导向布局',
       type: 'force',
@@ -141,7 +141,7 @@ const graphLayoutConfig: {
       ],
     },
   ],
-  graphLayoutConcentric: [
+  graphLayout_concentric: [
     {
       title: '同心圆布局',
       type: 'concentric',
@@ -240,7 +240,7 @@ const graphLayoutConfig: {
       ],
     },
   ],
-  graphLayoutRadial: [
+  graphLayout_radial: [
     {
       title: '辐射布局',
       type: 'radial',
@@ -370,7 +370,7 @@ const graphLayoutConfig: {
     },
   ],
 
-  graphLayoutCircular: [
+  graphLayout_circular: [
     {
       title: '圆形布局',
       type: 'circular',
@@ -473,7 +473,7 @@ const graphLayoutConfig: {
       ],
     },
   ],
-  graphLayoutDagre: [
+  graphLayout_dagre: [
     {
       title: 'Dagre布局',
       type: 'dagre',
@@ -558,7 +558,7 @@ const graphLayoutConfig: {
       ],
     },
   ],
-  graphLayoutGrid: [
+  graphLayout_grid: [
     {
       title: '网格布局',
       type: 'grid',
@@ -663,7 +663,7 @@ const graphLayoutConfig: {
       ],
     },
   ],
-  graphLayoutFruchterman: [
+  graphLayout_fruchterman: [
     {
       title: 'Fruchterman布局',
       type: 'fructherman',
@@ -751,7 +751,7 @@ const graphLayoutConfig: {
       ],
     },
   ],
-  graphLayoutMds: [
+  graphLayout_mds: [
     {
       title: 'MDS 布局',
       type: 'mds',
@@ -778,7 +778,7 @@ const graphLayoutConfig: {
       ],
     },
   ],
-  graphLayoutRandom: [
+  graphLayout_random: [
     {
       title: '随机布局',
       type: 'random',
