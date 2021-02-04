@@ -263,15 +263,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     this.initStatus();
     /** 生成API */
     this.apis = ApiController(this.graph);
-  };
-
-  updateLayout = () => {
-    this.layout.changeLayout();
-  };
-
-  componentDidMount() {
-    this.initGraphInstance();
-
+    /** 设置Context */
     this.setState({
       isReady: true,
       context: {
@@ -280,6 +272,14 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         theme: this.theme,
       },
     });
+  };
+
+  updateLayout = () => {
+    this.layout.changeLayout();
+  };
+
+  componentDidMount() {
+    this.initGraphInstance();
   }
 
   /**
@@ -332,8 +332,10 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     /** 图类型变化 */
     if (isGraphTypeChange) {
-      this.initGraphInstance();
-      console.log('%c isGraphTypeChange', 'color:grey');
+      console.error(
+        'The data types of pervProps.data and props.data are inconsistent,Graphin does not support the dynamic switching of TreeGraph and NetworkGraph',
+      );
+      return;
     }
     /** 配置变化 */
     if (isOptionsChange) {
