@@ -77,11 +77,22 @@ export const getLabelXYByPosition = (
   y: number;
   textBaseline?: 'top' | 'bottom';
 } => {
-  const {
-    label,
-    // 临时方案，label的动态计算需要keyshape的size
-    keyshape = { size: 26 },
-  } = cfg;
+  const { label, keyshape } = cfg;
+  if (!keyshape?.size && !label?.offset) {
+    return {
+      // @ts-ignore
+      x: undefined,
+      // @ts-ignore
+      y: undefined,
+      // @ts-ignore
+      textBaseline: label?.textBaseline,
+    };
+  }
+  if (!keyshape?.size && label?.offset) {
+    keyshape.size = 26; // 临时方案
+    console.info('you should set keyshape.size when you update label position,the default keyshape size value is  26');
+  }
+
   const { size } = keyshape;
 
   let offsetArray: number[] = [0, 0];
@@ -129,9 +140,9 @@ export const getLabelXYByPosition = (
       break;
     default:
       positionAttrs = {
-        x: width + offsetX,
-        y: 0 + offsetY,
-        textAlign: 'left',
+        x: 0 + offsetX,
+        y: height / 2 + offsetY,
+        textBaseline: 'top',
       };
       break;
   }

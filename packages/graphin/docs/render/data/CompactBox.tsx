@@ -1,20 +1,8 @@
 import React, { useEffect } from 'react';
 
-import Grahpin, { GraphinContext, Behaviors } from '@antv/graphin';
+import Grahpin, { Behaviors } from '@antv/graphin';
 
 const { TreeCollapse } = Behaviors;
-let graphinRef = null;
-
-// const FitView = () => {
-//   const { graph } = React.useContext(GraphinContext);
-//   useEffect(() => {
-//     setTimeout(() => {
-//       console.log('fitView');
-//       graph.fitView();
-//     }, 16);
-//   }, []);
-//   return null;
-// };
 
 const walk = (node, callback) => {
   callback(node);
@@ -47,14 +35,6 @@ const CompactBox = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   if (graphinRef) {
-  //     graphinRef.graph.on('afterlayout', () => {
-  //       graphinRef.graph.fitView();
-  //     });
-  //   }
-  // }, [graphinRef, state.data]);
-
   const { data } = state;
 
   return (
@@ -62,10 +42,6 @@ const CompactBox = () => {
       {data && (
         <Grahpin
           data={data}
-          // handleAfterLayout={handleAfterLayout}
-          ref={node => {
-            graphinRef = node;
-          }}
           fitView
           layout={{
             type: 'compactBox',
@@ -89,7 +65,6 @@ const CompactBox = () => {
         >
           {/* <FitView /> */}
           <TreeCollapse trigger="click" />
-          {/* <FocusItem /> */}
         </Grahpin>
       )}
     </div>
