@@ -27,6 +27,12 @@ Tooltip 提示框是一种快速浏览信息的交互组件，常用于图的节
 
 <code src='./demos/Antd.tsx' />
 
+## ⚠️：集成 Antd 的 Popover 组件，监听不到 ContextMenu 事件
+
+因为我们集成 Antd 的 Popover 组件，需要一个触发的 DOM，而触发的 DOM 恰好覆盖了节点，因此，我们再引入 Graphin 的 ContextMenu 组件，则没办法监听'node:contextmenu'事件。临时方案如下：在 AntdTooltip 的组件中，监听触发 DOM 的`onContexmenu`事件，自定义 ContextMenu
+
+<code src='./demos/AntdWithContextMenu.tsx' />
+
 ## 功能特性
 
 - Tooltip 作为容器组件，给内部的组件提供事件唤起和坐标定位功能,提供 Node 和 Edge 两种容器
