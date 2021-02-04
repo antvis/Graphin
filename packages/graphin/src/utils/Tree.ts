@@ -3,6 +3,8 @@ export interface Node {
   parent?: Node;
   data?: any; // eslint-disable-line
   children: Node[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 export default class Tree {
@@ -53,7 +55,6 @@ export default class Tree {
       data,
       children: [],
     };
-    this.root.parent = this.root;
     this.nodeIds.push(id);
   };
 
@@ -84,7 +85,6 @@ export default class Tree {
     parent.children.push({
       id,
       data,
-      parent,
       children: [],
     });
   };

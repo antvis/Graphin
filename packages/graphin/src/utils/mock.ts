@@ -1,5 +1,5 @@
 import Tree from './Tree';
-import { NodeStyleLabel, NodeStyleIcon, NodeStyleBadge, IUserNode, IUserEdge, GraphinData } from '../typings/type';
+import { IUserNode, IUserEdge, GraphinData } from '../typings/type';
 
 const defaultOptions = {
   /** 节点 */
@@ -24,7 +24,11 @@ export class Mock {
 
   nodeIds: string[];
 
-  combosData: any; // eslint-disable-line  @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  combosData: any;
+
+  // eslint-disable-line  @typescript-eslint/no-explicit-any
+  treeData: Tree;
 
   constructor(count: number) {
     this.options = defaultOptions;
@@ -32,6 +36,7 @@ export class Mock {
     this.nodes = [];
     this.edges = [];
     this.nodeIds = [];
+    this.treeData = new Tree();
     this.initNodes();
   }
 
@@ -123,16 +128,22 @@ export class Mock {
 
   tree = () => {
     this.edges = [];
-    const tree = new Tree();
+    this.treeData = new Tree();
     const rootId = this.nodeIds[0];
 
     this.nodeIds.forEach(id => {
-      tree.addNode({
+      this.treeData.addNode({
         id,
+        // @ts-ignore
+        style: {
+          label: {
+            value: id,
+          },
+        },
       });
     });
 
-    tree.bfs(node => {
+    this.treeData.bfs(node => {
       if (node.id !== rootId) {
         this.edges.push({
           source: (node.parent && node.parent.id) as string,
@@ -195,48 +206,15 @@ export class Mock {
         return {
           source: edge.source,
           target: edge.target,
-          // label: edge.label,
-          // data: edge,
         };
       }),
       combos: this.combosData,
     };
   };
 
-  graphinMock = (label?: NodeStyleLabel, icon?: NodeStyleIcon, badges?: NodeStyleBadge[]) => {
-    return {
-      nodes: this.nodes.map(node => {
-        return {
-          id: node.id,
-          data: node,
-          type: 'graphin-circle',
-          comboId: node.comboId,
-          style: {
-            keyshape: {
-              size: 48,
-            },
-            label: label || {
-              position: 'bottom',
-              value: `node-${node.id}`,
-              fill: 'red',
-              fontSize: 14,
-            },
-            icon,
-            badges,
-          },
-        };
-      }),
-      edges: this.edges.map(edge => {
-        return {
-          source: edge.source,
-          target: edge.target,
-          label: edge.label,
-          data: edge,
-          type: 'graphin-line',
-        };
-      }),
-      combos: this.combosData,
-    };
+  graphinTree = (): GraphinData => {
+    // @ts-ignore
+    return this.treeData.getRoot();
   };
 }
 
