@@ -55,6 +55,7 @@ const LayoutConfigPanel = ({ updateLayout, layoutConfig = graphLayoutConfig }) =
           default:
             break;
         }
+        return item;
       });
     });
   }, []);
@@ -78,6 +79,7 @@ const LayoutConfigPanel = ({ updateLayout, layoutConfig = graphLayoutConfig }) =
     let type = '';
     const previousType = currentLayoutType;
     if (value) {
+      // eslint-disable-next-line prefer-destructuring
       type = value.split('_')[1];
       setCurrentLayoutType(type);
     }
@@ -130,7 +132,7 @@ const LayoutConfigPanel = ({ updateLayout, layoutConfig = graphLayoutConfig }) =
 
   // 更新布局参数
   const updateLayoutConfig = (changedField, allFields, layoutType) => {
-    const currentFileds = Object.assign({}, allFields, changedField);
+    const currentFileds = { ...allFields, ...changedField };
     Object.keys(currentFileds).forEach(key => {
       defaultValue[key] = currentFileds[key];
     });
@@ -174,10 +176,13 @@ const LayoutConfigPanel = ({ updateLayout, layoutConfig = graphLayoutConfig }) =
         const { component: Component, isSwitch, defaultValue: value, labelZh, ...otherProps } = item;
         const key = `${config.title}-${index}`;
         defaultValue[item.label] = item.defaultValue;
+
         if (item.label === 'center' || item.label === 'begin') {
           if (item.defaultValue) {
-            defaultValue.x = item.defaultValue[0];
-            defaultValue.y = item.defaultValue[1];
+            const { defaultValue } = item;
+            const [defaultValueX, defaultValueY] = defaultValue;
+            defaultValue.x = defaultValueX;
+            defaultValue.y = defaultValueY;
           }
         }
 

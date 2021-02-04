@@ -1,4 +1,4 @@
-//@ts-nocheck
+// @ts-nocheck
 import * as React from 'react';
 import { Radio, Input, InputNumber } from 'antd';
 import Item from './Item';
