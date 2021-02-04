@@ -317,6 +317,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
   componentDidUpdate(prevProps: GraphinProps) {
     console.time('did-update');
+
     const isDataChange = this.shouldUpdate(prevProps, 'data');
     const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
     const isOptionsChange = this.shouldUpdate(prevProps, 'options');
@@ -375,7 +376,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
        */
       /** 数据需要从画布中来 */
       // @ts-ignore
-      this.data = this.layout.setDataFromGraph();
+      this.data = this.layout.getDataFromGraph();
       this.layout.changeLayout();
       this.layout.refreshPosition();
 

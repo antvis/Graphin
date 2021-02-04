@@ -178,6 +178,7 @@ class LayoutController {
     if (isEmpty(graphin.data)) {
       return;
     }
+
     if (isForceLayout.current && !isSameLayoutType) {
       /**
        * 当前布局为force，且两次布局类型不一致
@@ -233,7 +234,7 @@ class LayoutController {
     this.instance = null;
   };
 
-  setDataFromGraph = () => {
+  getDataFromGraph = () => {
     const nodes = [];
     const edges = [];
     const combos = [];
@@ -244,7 +245,7 @@ class LayoutController {
 
     for (let i = 0; i < nodeLength; i++) {
       const nodeItem = nodeItems[i];
-      if (nodeItem.isVisible()) {
+      if (nodeItem && nodeItem.isVisible()) {
         const model = nodeItem.getModel();
         nodes.push(model);
       }
@@ -253,7 +254,7 @@ class LayoutController {
     const edgeLength = edgeItems.length;
     for (let i = 0; i < edgeLength; i++) {
       const edgeItem = edgeItems[i];
-      if (!edgeItem || edgeItem.destroyed || !edgeItem.isVisible()) {
+      if (edgeItem && edgeItem.isVisible()) {
         const model = edgeItem.getModel();
         if (!model.isComboEdge) {
           edges.push(model);
@@ -264,7 +265,7 @@ class LayoutController {
     const comboLength = comboItems.length;
     for (let i = 0; i < comboLength; i++) {
       const comboItem = comboItems[i];
-      if (comboItem.destroyed || !comboItem.isVisible()) {
+      if (comboItem && comboItem.isVisible()) {
         const model = comboItem.getModel();
         combos.push(model);
       }
