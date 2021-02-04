@@ -66,7 +66,7 @@ const parseHalo = (style: NodeStyle) => {
     y: 0,
     r: haloR || keyshapeR, // 默认 halo的样式和keyshape相关
     fill: fill || keyshapeFill || keyshapeStroke,
-    fillOpacity: fillOpacity || 0.2,
+    fillOpacity: fillOpacity || 0.1,
     visible: visible !== false,
     ...otherAttrs,
   };
@@ -106,6 +106,7 @@ const parseLabel = (style: NodeStyle) => {
   const { label } = style;
 
   const { value, fill, fontSize, visible, ...otherAttrs } = label;
+  // @ts-ignore
   const labelPos = getLabelXYByPosition(style);
 
   const attrs = {
@@ -235,7 +236,7 @@ export default () => {
       }
 
       // badges 会存在多个的情况
-      badges.forEach((badge) => {
+      badges.forEach(badge => {
         const {
           type,
           position,
@@ -359,13 +360,13 @@ export default () => {
       const status = item._cfg?.states || [];
 
       try {
-        Object.keys(initStateStyle).forEach((statusKey) => {
+        Object.keys(initStateStyle).forEach(statusKey => {
           if (name === statusKey) {
             if (value) {
               setStatusStyle(shapes, initStateStyle[statusKey], parseAttr); // 匹配到status就改变
             } else {
               setStatusStyle(shapes, initialStyle, parseAttr); // 没匹配到就重置
-              status.forEach((key) => {
+              status.forEach(key => {
                 // 如果cfg.status中还有其他状态，那就重新设置回来
                 setStatusStyle(shapes, initStateStyle[key], parseAttr);
               });

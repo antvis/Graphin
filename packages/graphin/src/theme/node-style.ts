@@ -65,20 +65,24 @@ const getNodeStyleByTheme = (inputNodeTheme: NodeTheme) => {
         fontSize: labelSize,
         offset: 0,
         background: undefined,
+        fillOpacity: 1,
       },
       icon: {
         type: 'text',
         value: '',
         size: nodeSize / 2,
         fill: Color.icon,
+        fillOpacity: 1,
         offset: [0, 0],
       },
       badges: [],
       halo: {
         visible: false,
+        fillOpacity: 0.1,
       },
     },
     status: {
+      normal: {},
       selected: {
         halo: {
           visible: true,
@@ -92,25 +96,17 @@ const getNodeStyleByTheme = (inputNodeTheme: NodeTheme) => {
           visible: true,
         },
       },
-      active: {
-        halo: {
-          visible: false,
-        },
-      },
+      active: {},
       inactive: {
-        halo: {
-          visible: false,
-        },
         keyshape: {
-          lineWidth: 0,
-          fill: Color.disabled,
-          stroke: Color.disabled,
+          fillOpacity: 0.2,
+          strokeOpacity: 0.2,
         },
         icon: {
-          fill: Color.disabled,
+          fillOpacity: 0.2,
         },
         label: {
-          fill: Color.disabled,
+          fillOpacity: 0.2,
         },
       },
       disabled: {
@@ -118,7 +114,6 @@ const getNodeStyleByTheme = (inputNodeTheme: NodeTheme) => {
           visible: false,
         },
         keyshape: {
-          lineWidth: 0,
           fill: Color.disabled,
           stroke: Color.disabled,
         },
