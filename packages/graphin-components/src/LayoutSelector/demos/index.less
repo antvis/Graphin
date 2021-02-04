@@ -1,0 +1,85 @@
+.draggablePanel {
+  position: absolute;
+  z-index: 1;
+  width: 350px;
+  padding: 16px 24px;
+  border-radius: 6px;
+  box-shadow: 0 5px 18px 0 rgba(0, 0, 0, 0.6);
+  transition: height 0.3s ease;
+  .header {
+    display: inline-flex;
+    width: 100%;
+    margin: 0;
+    cursor: grab;
+    .title {
+      font-weight: 500;
+      cursor: grab;
+    }
+    .collapseIcon {
+      right: 0;
+      cursor: pointer;
+    }
+  }
+  :global {
+    .ant-divider-horizontal {
+      margin: 8px 0 16px 0;
+      border-top: 1px solid #1f1f1f;
+    }
+  }
+  .contentContainer {
+    height: 58%;
+    margin-top: 16px;
+    overflow-y: scroll;
+    .blockContainer {
+      margin-bottom: 24px;
+      .algorithmSelector {
+        margin-top: 16px;
+        width: 280px;
+      }
+      .advancedSettingContainer {
+        margin-top: 8px;
+        padding: 10px 16px 16px 16px;
+        background-color: #2e3339;
+        .seedsInput {
+          margin-top: 8px;
+        }
+        .limitContainer {
+          margin-top: 24px;
+          .limitInput {
+            margin-top: 8px;
+          }
+        }
+      }
+      .advancedSettingSwitch {
+        margin-left: 16px;
+      }
+      .description {
+        display: inline-block;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.65);
+      }
+      :global {
+        .ant-form-item {
+          margin-bottom: 8px;
+        }
+      }
+    }
+    .paramInputsContainer {
+      margin-top: 16px;
+      .paramInputContainer {
+        margin-bottom: 8px;
+      }
+    }
+  }
+  .buttonContainer {
+    .queryButton {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+    }
+  }
+  .description {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.45);
+  }
+}

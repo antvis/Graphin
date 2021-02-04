@@ -11,6 +11,7 @@ import ElementDetailPanel from './detail';
 import CustomMenu from './contextmenu';
 
 import '@antv/graphin-icons/dist/index.css';
+
 import ClickElement from './events/click';
 
 const { hexToRgbaToHex } = Utils;
@@ -56,7 +57,7 @@ export interface GraphData {
 interface GraphProps {
   graphDOM: HTMLDivElement;
   data: GraphData;
-  width: number;
+  width?: number;
   height: number;
   neighbors?: (nodeId: string, degree: number) => void;
   hasMinimap?: boolean;
@@ -379,13 +380,13 @@ const GraphScope: React.FC<GraphProps> = ({
     type: null,
   });
   const handleClickElement = (model: NodeConfig, type: string) => {
+    setDetailInfo({
+      visible: true,
+      data: model,
+      type,
+    });
     if (nodeClick) {
       nodeClick(model as NodeData, type);
-      setDetailInfo({
-        visible: true,
-        data: model,
-        type,
-      });
     }
   };
 
