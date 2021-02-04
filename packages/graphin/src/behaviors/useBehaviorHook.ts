@@ -14,7 +14,6 @@ const useBehaviorHook = (params: Props) => {
   const { disabled, ...otherConfig } = userProps;
 
   React.useEffect(() => {
-    console.log('%c build-in behaviors:', 'color:lightblue', type);
     /** 保持单例 */
     graph.removeBehaviors(type, mode);
 

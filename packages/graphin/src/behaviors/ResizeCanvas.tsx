@@ -10,7 +10,6 @@ const ResizeCanvas: React.FunctionComponent<ResizeCanvasProps> = props => {
   const { graphDOM } = props;
   const graphin = React.useContext(GraphinContext);
   React.useEffect(() => {
-    console.log('%c build-in events', 'color:lightgreen');
     const { graph } = graphin;
 
     /** 内置 resize */

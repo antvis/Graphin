@@ -11,7 +11,6 @@ const hoverable: React.FunctionComponent<HoverableProps> = props => {
   const graphin = React.useContext(GraphinContext);
   const { bindType = 'node' } = props;
   React.useEffect(() => {
-    console.log('%c build-in events', 'color:lightgreen');
     const { graph } = graphin;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleNodeMouseEnter = (evt: IG6GraphEvent & any) => {

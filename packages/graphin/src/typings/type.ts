@@ -437,11 +437,12 @@ export interface NodeShapeStyle {
   halo: NodeStyleHalo;
 }
 
-enum StatusEnum {
+export enum StatusEnum {
+  /** 悬停状态 */
   HOVER = 'hover',
   SELECTED = 'selected',
   NORMAL = 'normal',
-  DISABLE = 'disable',
+  DISABLED = 'disabled',
   ACTIVE = 'active',
   INACTIVE = 'inactive',
 }
