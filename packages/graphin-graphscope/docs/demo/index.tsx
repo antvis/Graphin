@@ -39,7 +39,6 @@ export default () => {
       <GraphScopeComponent
         graphDOM={domRef.current}
         data={data}
-        width={1000}
         height={400}
         neighbors={queryNeighbors}
         hasContextMenu={true}

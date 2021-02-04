@@ -10,6 +10,7 @@ const ClickElement: React.FC<ClickElementProps> = ({ nodeClick }) => {
   useEffect(() => {
     graph.on('node:click', evt => {
       const { item } = evt;
+      console.log('click node', item);
       const model = item.getModel() as Graphin.NodeConfig;
 
       if (nodeClick) {

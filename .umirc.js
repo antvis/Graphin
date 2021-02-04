@@ -77,10 +77,7 @@ export default {
   theme: {
     '@s-site-menu-width': '280px',
   },
-  locales: [
-    ['zh-CN', '中文'],
-    ['en-US', 'English'],
-  ],
+  locales: [['zh-CN', '中文'], ['en-US', 'English']],
   links: ['https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd.css'],
   scripts: [
     'https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js',

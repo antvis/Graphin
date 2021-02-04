@@ -58,12 +58,21 @@ const ElementDetailPanel: React.FC<DetailProps> = ({ close, type, itemId, data =
       <Resizable
         defaultSize={{
           width: 331,
-          height: 'auto',
+          height: 350,
         }}
-        className={styles.draggablePanel}
-        style={{ top: 40, right: 0 }}
+        style={{
+          padding: 16,
+          position: 'absolute',
+          top: 40,
+          right: 0,
+          zIndex: 3,
+          backgroundColor: '#f0f0f0',
+          borderRadius: 6,
+          boxShadow: '0 5px 18px 0 rgba(255, 255, 255, 0.6)',
+          transition: 'height 0.3s ease',
+        }}
       >
-        <div style={{ height: '100%' }}>
+        <div style={{ height: '100%', overflow: 'hidden' }}>
           <Row className={classNames(styles.header, 'handle')}>
             <Col span={22} className={styles.title}>
               {`${itemTypeZH}详情`}
