@@ -150,14 +150,15 @@ export default () => {
         cfg._initialStyle = { ...style };
       }
 
-      const { startPoint = { x: 0, y: 0 }, endPoint = { x: 0, y: 0 }, sourceNode } = cfg as EdgeConfig;
+      const { startPoint = { x: 0, y: 0 }, endPoint = { x: 0, y: 0 }, sourceNode, targetNode } = cfg as EdgeConfig;
 
       const { label, halo, keyshape: keyShapeStyle } = style;
       /** 计算目标节点的大小 */
       const source = (sourceNode as INode).get('model');
+      const target = (targetNode as INode).get('model');
       const nodeSize = source.style?.keyshape?.size || 28;
       /** 计算是否为loop */
-      const isLoop = keyShapeStyle?.type === 'loop';
+      const isLoop = keyShapeStyle?.type === 'loop' || source.id === target.id;
       const hasLabel = label.value;
       /** 计算poly控制点 */
       const isPoly = keyShapeStyle?.type === 'poly';
