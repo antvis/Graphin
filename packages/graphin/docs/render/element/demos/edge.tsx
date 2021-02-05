@@ -13,11 +13,30 @@ data.edges = [
     target: 'node-0',
     style: {
       label: {
-        value: '自环边',
+        value: '自环边-1',
         offset: [0, 0],
       },
       keyshape: {
         type: 'loop',
+        loop: {
+          distance: 0,
+        },
+      },
+    },
+  },
+  {
+    source: 'node-0',
+    target: 'node-0',
+    style: {
+      label: {
+        value: '自环边-2',
+        offset: [0, 0],
+      },
+      keyshape: {
+        type: 'loop',
+        loop: {
+          distance: 10,
+        },
       },
     },
   },

@@ -85,22 +85,42 @@ const processKeyshape = (cfg: EdgeConfig) => {
   const style = STYLE as EdgeStyle;
   const { keyshape } = style;
 
-  const { type = 'line', poly = { distance: 0 } } = keyshape;
+  const { type = 'line', poly = { distance: 0 }, loop = {} } = keyshape;
   const source = (sourceNode as INode).get('model');
   const target = (targetNode as INode).get('model');
 
   if (type === 'loop' || source.id === target.id) {
-    const nodeSize = source.style?.keyshape?.size || 28;
-    const PADDING = 2;
-    const RADIO = 0.75;
-    const size = nodeSize * RADIO;
+    const nodeSize = source.style?.keyshape?.size || 26;
+    const { distance, dx, rx, ry } = {
+      // 默认是是节点的高度
+      distance: 0,
+      // x的偏移量
+      dx: 8,
+      rx: undefined,
+      ry: undefined,
+      ...loop,
+    };
+    const R = nodeSize / 2;
+    const dy = Math.sqrt(R ** 2 - dx ** 2);
+
+    const RX = rx || R * 2 * 0.5;
+    const RY = ry || R * 2 * 0.6;
     return [
-      ['M', startPoint.x - size / 2 - PADDING, startPoint.y - (Math.sqrt(3) / 2) * size - PADDING],
+      ['M', startPoint.x - dx, startPoint.y - dy],
       /**
        * A rx ry x-axis-rotation large-arc-flag sweep-flag x y
        * https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths
        */
-      ['A', size, size, 0, 1, 1, startPoint.x + size / 2 + PADDING, startPoint.y - (Math.sqrt(3) / 2) * size - PADDING],
+      [
+        'A',
+        RX + distance, // rx
+        RY + distance, // ry
+        0, // x-axis-rotation
+        1, // large-arc-flag
+        1, // sweep-flag
+        startPoint.x + dx, // endPoint.x
+        startPoint.y - dy, // endPoint.y
+      ],
     ];
   }
   if (type === 'poly') {
@@ -174,11 +194,13 @@ export default () => {
         attrs: {
           id: 'keyshape',
           path,
-          endArrow: {
-            d: 0,
-            path: `M 0,0 L ${d},${d / 2} L ${d},-${d / 2} Z`,
-            fill: keyShapeStyle.stroke,
-          },
+          endArrow: isLoop
+            ? undefined
+            : {
+                d: 0,
+                path: `M 0,0 L ${d},${d / 2} L ${d},-${d / 2} Z`,
+                fill: keyShapeStyle.stroke,
+              },
           ...keyShapeStyle,
         },
         draggable: true,
@@ -243,7 +265,7 @@ export default () => {
         /** 设置标签的文本 */
         let y = offsetY - fontSize / 2;
         if (isLoop) {
-          y = offsetY - nodeSize * 2;
+          y = offsetY - nodeSize * 1.6 - (keyShapeStyle?.loop?.distance || 0) * 2;
         }
         if (hasBackground) {
           y = offsetY + fontSize / 2;

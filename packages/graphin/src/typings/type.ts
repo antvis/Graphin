@@ -196,7 +196,14 @@ export interface EdgeStyle {
       };
       /** 多边的设置，仅当keyshape.type 为poly时有效 */
       poly: {
+        // 多边时候距离中心线的距离，比如40代表距离中心线40px，-40代表距离中心线反向40px
         distance?: number;
+      };
+      /** 自环边的设置 */
+      loop: {
+        /** 多边时候距离中心线的距离，比如 40 代表距离环图起始点高度40px，80 代表距离起始点高度 80px  */
+        distance?: number;
+        dx?: number;
       };
     } & CommondAttrsStyle
   >;
