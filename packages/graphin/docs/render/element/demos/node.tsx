@@ -17,7 +17,8 @@ data.nodes[0].style = {
   keyshape: {
     size: [80, 80],
     stroke: 'red',
-    fill: 'lightyellow',
+    fill: 'red',
+    fillOpacity: 0.2,
   },
   label: {
     value: '设置 keyshape',

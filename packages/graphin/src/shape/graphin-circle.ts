@@ -117,6 +117,7 @@ const parseLabel = (style: NodeStyle) => {
     textAlign: 'center' as TextAlignType,
     fill,
     textBaseline: labelPos.textBaseline,
+    visible: visible !== false,
     ...otherAttrs,
   };
   return {
@@ -140,6 +141,7 @@ const parseIcon = (style: NodeStyle) => {
     fill,
     size,
     visible,
+
     ...otherAttrs
   } = icon;
 
@@ -163,6 +165,7 @@ const parseIcon = (style: NodeStyle) => {
         fontSize: width,
         fontFamily,
         fill,
+        visible: visible !== false,
         ...otherAttrs,
       },
     };
@@ -176,6 +179,7 @@ const parseIcon = (style: NodeStyle) => {
       img: value,
       width,
       height,
+      visible: visible !== false,
       ...otherAttrs,
     },
   };
