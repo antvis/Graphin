@@ -1,5 +1,7 @@
 import Tree from './Tree';
-import { IUserNode, IUserEdge, GraphinData } from '../typings/type';
+import walk from './walk';
+
+import { IUserNode, IUserEdge, GraphinData, GraphinTreeData } from '../typings/type';
 
 const defaultOptions = {
   /** 节点 */
@@ -146,9 +148,8 @@ export class Mock {
     this.treeData.bfs(node => {
       if (node.id !== rootId) {
         this.edges.push({
-          source: (node.parent && node.parent.id) as string,
+          source: node?.parent?.id as string,
           target: node.id,
-          label: `edge-${node.parent && node.parent.id}_${node.id}`,
           properties: [],
         });
       }
@@ -212,9 +213,16 @@ export class Mock {
     };
   };
 
-  graphinTree = (): GraphinData => {
+  graphinTree = (): GraphinTreeData => {
+    const tree = this.treeData.getRoot();
     // @ts-ignore
-    return this.treeData.getRoot();
+    walk(tree, node => {
+      // @ts-ignore
+      delete node.parent;
+    });
+    // @ts-ignore
+    console.log(tree);
+    return tree as GraphinTreeData;
   };
 }
 

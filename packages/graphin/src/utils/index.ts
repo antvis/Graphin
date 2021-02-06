@@ -8,6 +8,7 @@ import getComboStyleByTheme from '../theme/combo-style';
 
 import { deepMix } from '@antv/util';
 import uuid from './uuid';
+import walk from './walk';
 
 export default {
   hexToRgba,
@@ -20,4 +21,5 @@ export default {
   getComboStyleByTheme,
   deepMerge: deepMix,
   uuid,
+  walk,
 };

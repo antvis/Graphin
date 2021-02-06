@@ -1,10 +1,16 @@
-export interface Node {
-  id: string;
+import { GraphinTreeData } from '../typings/type';
+
+// export interface Node {
+//   id: string;
+//   parent?: Node;
+//   data?: any; // eslint-disable-line
+//   children: Node[];
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   [key: string]: any;
+// }
+
+export interface Node extends GraphinTreeData {
   parent?: Node;
-  data?: any; // eslint-disable-line
-  children: Node[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
 }
 
 export default class Tree {
@@ -30,7 +36,7 @@ export default class Tree {
       if (cb(node)) {
         return node;
       }
-      if (node.children.length) {
+      if (node?.children?.length) {
         queue.push(...node.children);
       }
     }
@@ -52,7 +58,6 @@ export default class Tree {
   private addRoot = (id: string, data?: any) => {
     this.root = {
       id,
-      data,
       children: [],
     };
     this.nodeIds.push(id);
@@ -66,7 +71,7 @@ export default class Tree {
       return;
     }
 
-    let parent;
+    let parent: Node | undefined;
 
     if (!parentId) {
       // If parentId was not given, pick a random node as parent
@@ -82,9 +87,11 @@ export default class Tree {
     }
 
     this.nodeIds.push(id);
-    parent.children.push({
+    // @ts-ignore
+    (parent as Node).children.push({
       id,
-      data,
+      // @ts-ignore
+      parent,
       children: [],
     });
   };
