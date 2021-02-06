@@ -75,11 +75,18 @@ export interface GraphinData {
   nodes: IUserNode[];
   edges: IUserEdge[];
   combos?: Combo[] | undefined | null;
-  children?: any;
 }
 export interface GraphinTreeData {
   id: string;
-  children: Partial<GraphinTreeData>[];
+  children?: GraphinTreeData[];
+  /** 坐标X */
+  x?: number;
+  /** 坐标Y */
+  y?: number;
+  /** 节点的样式 */
+  style?: Partial<NodeStyle>;
+  /**  节点当前的状态 */
+  status?: Partial<ElementStatus>;
 }
 
 export interface GraphinProps {
