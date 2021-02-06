@@ -138,6 +138,13 @@ export const getLabelXYByPosition = (
         textAlign: 'right',
       };
       break;
+    case 'right':
+      positionAttrs = {
+        x: 0 + width + offsetX,
+        y: 0 + offsetY,
+        textAlign: 'left',
+      };
+      break;
     default:
       positionAttrs = {
         x: 0 + offsetX,
