@@ -133,7 +133,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     this.data = data;
     this.isTree =
-      Boolean(props.data && props.data.children) || TREE_LAYOUTS.indexOf(String(layout && layout.type)) !== -1;
+      Boolean(props.data && (props.data as GraphinTreeData).children) ||
+      TREE_LAYOUTS.indexOf(String(layout && layout.type)) !== -1;
     this.graph = {} as IGraph;
     this.height = Number(height);
     this.width = Number(width);
@@ -155,7 +156,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   }
 
   initData = (data: GraphinProps['data']) => {
-    if (data.children) {
+    if ((data as GraphinTreeData).children) {
       this.isTree = true;
     }
     console.time('clone data');
@@ -207,7 +208,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     // @ts-ignore
     this.theme = themeResult as ThemeData;
     /** graph type */
-    this.isTree = Boolean(data.children) || TREE_LAYOUTS.indexOf(String(layout && layout.type)) !== -1;
+    this.isTree =
+      Boolean((data as GraphinTreeData).children) || TREE_LAYOUTS.indexOf(String(layout && layout.type)) !== -1;
     const isGraphinNodeType = defaultNode?.type === undefined || defaultNode?.type === defaultNodeStyle.type;
     const isGraphinEdgeType = defaultEdge?.type === undefined || defaultEdge?.type === defaultEdgeStyle.type;
 
@@ -324,7 +326,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     const isThemeChange = this.shouldUpdate(prevProps, 'theme');
     console.timeEnd('did-update');
     const { data } = this.props;
-    const isGraphTypeChange = prevProps.data.children !== data.children;
+    const isGraphTypeChange = (prevProps.data as GraphinTreeData).children !== (data as GraphinTreeData).children;
 
     if (isThemeChange) {
       // TODO :Node/Edge/Combo 批量调用 updateItem 来改变
