@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin-graphscope",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "An Example for GraphScope",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.4.0",
-    "@antv/graphin": "^2.0.0-beta.5",
-    "@antv/graphin-components": "^2.0.0-beta.6",
+    "@antv/graphin": "^2.0.0-beta.12",
+    "@antv/graphin-components": "^2.0.0-beta.12",
     "@antv/graphin-icons": "^1.0.0",
     "antd": "^4.10.3",
     "classnames": "^2.2.6",
