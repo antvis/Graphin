@@ -13,8 +13,7 @@ coverage
 # Dependency directories
 node_modules
 **/node_modules
-**/lib
-**/es
+
 jspm_packages/
 
 # Optional npm cache directory
