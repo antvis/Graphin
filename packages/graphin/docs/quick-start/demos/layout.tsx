@@ -1,5 +1,5 @@
 import React from 'react';
-import Graphin, { Behaviors, Utils, GraphinContext } from '@antv/graphin';
+import Graphin, { Behaviors, Utils } from '@antv/graphin';
 import { Row, Col, Card } from 'antd';
 
 const { ZoomCanvas, FitView } = Behaviors;

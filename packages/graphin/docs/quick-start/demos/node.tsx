@@ -105,9 +105,9 @@ const data = {
         // // 节点的光环，在节点交互过程中（hover，selected，disabled，active）等，可以打开光环，默认是隐藏的，也可以自定义
         halo: {
           /** 光晕 */
-          fill: Utils.hexToRgbaToHex(parimaryColor, 0.2),
+          fill: parimaryColor,
           /** 透明度 */
-          opacity: 1,
+          fillOpacity: 0.1,
           /** 是否展示 */
           visible: false,
           /** 鼠标Hover上去样式 */

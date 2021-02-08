@@ -3,15 +3,14 @@ import Graphin, { Behaviors, Utils } from '@antv/graphin';
 import { Row, Col, Card } from 'antd';
 
 const { ZoomCanvas, ActivateRelations, TreeCollapse } = Behaviors;
-const data1 = Utils.mock(8)
-  .circle()
-  .graphin();
+const data1 = Utils.mock(8).circle().graphin();
 
 export default () => {
   const [state, setState] = React.useState({
     data2: null,
   });
   React.useEffect(() => {
+    // eslint-disable-next-line no-undef
     fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/algorithm-category.json')
       .then(res => res.json())
       .then(res => {
