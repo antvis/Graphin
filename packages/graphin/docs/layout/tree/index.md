@@ -1,5 +1,6 @@
 ---
 title: 树图布局
+order: 2
 group:
   path: /layout
   title: 布局方案

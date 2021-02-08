@@ -2,7 +2,7 @@ import React from 'react';
 import Graphin, { Utils, Behaviors, GraphinTreeData } from '@antv/graphin';
 import { Row, Col, Card } from 'antd';
 
-const { ZoomCanvas, TreeCollapse } = Behaviors;
+const { TreeCollapse } = Behaviors;
 const data = Utils.mock(20).tree().graphinTree();
 
 const walk = (node: GraphinTreeData, callback: (node: GraphinTreeData) => void) => {
@@ -108,7 +108,7 @@ export default () => {
           return (
             <Col span={24} key={type}>
               <Card title={title} extra={desc}>
-                <Graphin data={data} layout={{ type, ...options }}>
+                <Graphin data={data} layout={{ type, ...options }} fitView>
                   <TreeCollapse />
                 </Graphin>
               </Card>
