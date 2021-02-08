@@ -1,9 +1,10 @@
 ---
 title: 网图布局
+order: 2
 group:
   path: /layout
   title: 布局方案
-  order: 1
+  order: 2
 nav:
   title: Graphin
   path: /graphin
