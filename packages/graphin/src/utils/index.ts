@@ -10,6 +10,8 @@ import processEdges from './processEdges';
 import { deepMix } from '@antv/util';
 import uuid from './uuid';
 import walk from './walk';
+import subLayout from './subLayout';
+import { layouts } from '../layout/utils/options';
 
 export default {
   hexToRgba,
@@ -24,4 +26,6 @@ export default {
   uuid,
   walk,
   processEdges,
+  subLayout,
+  layouts,
 };
