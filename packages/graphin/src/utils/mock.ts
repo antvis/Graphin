@@ -50,7 +50,6 @@ export class Mock {
         id: `node-${index}`,
         label: `node-${index}`,
         type: nodeType,
-        properties: [],
       };
     });
 
@@ -59,8 +58,6 @@ export class Mock {
         this.edges.push({
           source: `node-${i}`,
           target: `node-${j}`,
-          label: `edge-${i}_${j}`,
-          properties: [],
         });
       }
     }
@@ -75,14 +72,10 @@ export class Mock {
         this.nodes.push({
           id: `${node.id}-${i}`,
           type: node.type,
-          label: `${node.id}-${i}`,
-          properties: [],
         });
         this.edges.push({
           source: `${node.id}-${i}`,
           target: node.id,
-          label: `edge-${i}_${node.id}`,
-          properties: [],
         });
       }
     });
@@ -192,8 +185,8 @@ export class Mock {
       // @ts-ignore
       nodes: this.nodes.map(node => {
         return {
+          ...node,
           id: node.id,
-          data: node,
           type: 'graphin-circle',
           comboId: node.comboId,
           style: {
