@@ -4,7 +4,7 @@ order: 0
 group:
   path: /layout
   title: 布局方案
-  order: 0
+  order: 2
 nav:
   title: Graphin
   path: /graphin
