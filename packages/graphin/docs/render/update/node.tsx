@@ -63,6 +63,31 @@ const UpdateNode = () => {
         },
       });
     }
+    if (item.id === 'node-3') {
+      graph.updateItem(item.id, {
+        style: {
+          // @ts-ignore
+          label: {
+            value: 'update halo hidden',
+          },
+          halo: {
+            visible: false,
+          },
+          status: {
+            hover: {
+              halo: {
+                visible: false,
+              },
+            },
+            selected: {
+              halo: {
+                visible: false,
+              },
+            },
+          },
+        },
+      });
+    }
   };
   return (
     <ContextMenu bindType="node">
