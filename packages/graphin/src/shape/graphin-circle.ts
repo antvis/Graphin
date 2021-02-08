@@ -224,19 +224,17 @@ export default () => {
       const keyShape = group.addShape('circle', parseKeyshape(style));
 
       // 文本
-      if (label && label.value) {
-        group.addShape('text', parseLabel(style));
-      }
+
+      group.addShape('text', parseLabel(style));
 
       // keyShape 中间的 icon
-      if (icon && icon.type) {
-        const { type } = icon;
-        if (type === 'text' || type === 'font') {
-          group.addShape('text', parseIcon(style));
-        }
-        if (type === 'image') {
-          group.addShape('image', parseIcon(style));
-        }
+
+      const { type } = icon;
+      if (type === 'text' || type === 'font') {
+        group.addShape('text', parseIcon(style));
+      }
+      if (type === 'image') {
+        group.addShape('image', parseIcon(style));
       }
 
       // badges 会存在多个的情况
