@@ -1,5 +1,6 @@
 ---
 title: 边的样式
+order: 3
 group:
   path: /render
 nav:
@@ -20,6 +21,19 @@ Graphin 官网内置了 边类型`graphin-line`.作为默认的边类型，你�
 
 <code src='./demos/edge.tsx'>
 
-## 02.`graphin-line` 样式接口文档
+## 02.使用工具快速处理多边
+
+Graphin 内置了 `Utils.processEdges` 方法，专门处理多边的情况，无论是同方向还是反方向边，亦或是自环边，通过该工具函数都能快速处理
+
+<code src='./demos/edge-default.tsx'>
+
+### API: Graphin.Utils.processEdges(params1,params2)
+
+| 函数参数 | 说明       | 类型                        | 默认值              |
+| -------- | ---------- | --------------------------- | ------------------- |
+| params1  | 边的集合   | `GraphinData['edges']`      | -                   |
+| params2  | 多边配置项 | `{poly:number,loop:number}` | `{poly:50,loop:10}` |
+
+## 03.`graphin-line` 样式接口文档
 
 <API   src='../../interface/edge-style.ts'>

@@ -1,97 +1,64 @@
-import React, { useEffect } from 'react';
-import Graphin, { Utils, Behaviors, GraphinContext } from '@antv/graphin';
+import React from 'react';
+import Graphin, { Utils } from '@antv/graphin';
 
-const { ZoomCanvas } = Behaviors;
+const nodes = [
+  {
+    id: 'node-0',
+    x: 100,
+    y: 200,
+  },
+  {
+    id: 'node-1',
+    x: 600,
+    y: 200,
+  },
+];
 
-const EventCenter = () => {
-  const { graph } = React.useContext(GraphinContext);
-  useEffect(() => {
-    // graph.on('edge:mouseenter', evt => {
-    //   graph.setItemState(evt.item, 'selected', true);
-    // });
-
-    // graph.on('edge:mouseleave', evt => {
-    //   graph.setItemState(evt.item, 'selected', false);
-    // });
-
-    graph.on('edge:click', evt => {
-      graph.setItemState(evt.item, 'selected', true);
-      graph.updateItem(evt.item, {
-        keyshape: {
-          lineWidth: 15,
-          stroke: 'red',
-        },
-      });
-    });
-  }, []);
-
-  return null;
-};
-
-const data = Utils.mock(10)
-  .circle()
-  .graphin();
 const layout = {
-  type: 'circular',
+  type: 'preset',
 };
 
-// const edgeStateStyles = {
-//   status: {
-//     selected: {
-//       stroke: 'red',
-//       animation: {
-//         repeat: true,
-//       },
-//     },
-//   },
-// };
-
-// const defaultEdge = {
-//   type: 'graphin-edge',
-//   style: {
-//     keyshape: {
-//       stroke: '#000',
-//       lineWidth: 2,
-//     },
-//     status: {
-//       selected: {
-//         halo: {
-//           visible: true,
-//         },
-//         keyshape: {
-//           stroke: '#1890ff',
-//           opacity: 1,
-//         },
-//       },
-//       hover: {
-//         halo: {
-//           visible: true,
-//         },
-//       },
-//     },
-//   },
-// };
-
-data.edges.forEach(edge => {
-  edge.type = 'graphin-edge';
-  edge.style = {
-    label: {
-      value: `${edge.source} - ${edge.target} `,
-    },
+const edges1 = Array.from({ length: 5 }).map(() => {
+  return {
+    source: 'node-0',
+    target: 'node-1',
   };
 });
+
+const edges2 = Array.from({ length: 6 }).map(() => {
+  return {
+    source: 'node-1',
+    target: 'node-0',
+  };
+});
+
+const edgesLoop1 = Array.from({ length: 2 }).map(() => {
+  return {
+    source: 'node-0',
+    target: 'node-0',
+  };
+});
+const edgesLoop2 = Array.from({ length: 3 }).map(() => {
+  return {
+    source: 'node-1',
+    target: 'node-1',
+  };
+});
+
+const edges = Utils.processEdges([...edges1, ...edges2, ...edgesLoop1, ...edgesLoop2], { poly: 50, loop: 10 });
+edges.forEach((edge, index) => {
+  const { source, target } = edge;
+  edge.style.label = {
+    value: `${index}th:${source}-${target}`,
+  };
+});
+
+const data = { nodes, edges };
+
 export default () => {
   return (
     <div>
-      <Graphin
-        data={data}
-        layout={layout}
-        // defaultEdge={defaultEdge}
-        // edgeStateStyles={edgeStateStyles}
-      >
-        <ZoomCanvas />
-        <EventCenter />
-      </Graphin>
+      <Graphin data={data} layout={layout} fitView />
     </div>
   );
 };

@@ -1,7 +1,9 @@
 ---
 title: 节点样式
+order: 2
 group:
   path: /render
+
 nav:
   title: Graphin
   path: /graphin
