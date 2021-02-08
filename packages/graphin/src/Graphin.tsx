@@ -372,6 +372,12 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     }
     /** 布局变化 */
     if (isLayoutChange) {
+      if (this.isTree) {
+        // @ts-ignore
+        // eslint-disable-next-line react/destructuring-assignment
+        this.graph.updateLayout(this.props.layout);
+        return;
+      }
       /**
        * TODO
        * 1. preset 前置布局判断问题

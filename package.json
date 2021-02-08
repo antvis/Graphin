@@ -7,7 +7,7 @@
     "site": "cd ./packages/graphin-site && npm run start",
     "studio": "cd ./packages/graphin-studio && npm run start",
     "graphscope": "cd ./packages/graphin-graphscope && npm run start",
-    "docs": "dumi dev",
+    "docs": "NODE_OPTIONS=--max_old_space_size=4098 && dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "npm run docs:build && gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
     "docs:gh-pages": "gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
