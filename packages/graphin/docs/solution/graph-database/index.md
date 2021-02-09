@@ -1,13 +1,12 @@
 ---
 title: 解决方案
-order: 0
 group:
-  path: /knowledge-graph
-  title: 知识图谱
-  order: 1
+  path: /database
+  title: 图数据库
+  order: 0
 nav:
   title: 领域方案
-  path: /case
+  path: /solution
   order: 4
 ---
 
@@ -15,7 +14,6 @@ nav:
 /**
  * inline: true
  */
-
 import React from 'react';
 
 export default () => {
@@ -25,7 +23,7 @@ export default () => {
         title="visualization for graph database"
         height="100%"
         width="100%"
-        src="https://gw.alipayobjects.com/os/bmw-prod/b6686d7a-2860-43a4-a75e-880490d5a414.pdf"
+        src="https://gw.alipayobjects.com/os/bmw-prod/a381a006-85e8-4c55-83b3-278a02f83535.pdf"
         type="application/pdf"
       />
     </div>

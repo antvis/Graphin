@@ -6,7 +6,7 @@ group:
   order: 0
 nav:
   title: 领域方案
-  path: /case
+  path: /solution
   order: 4
 ---
 
