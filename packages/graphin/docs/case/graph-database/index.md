@@ -1,5 +1,5 @@
 ---
-title: 白皮书介绍
+title: 解决方案
 group:
   path: /database
   title: 图数据库
@@ -9,4 +9,4 @@ nav:
   order: 4
 ---
 
-## 《图可视分析解决方案：图数据库》
+<code src='./index.tsx'>

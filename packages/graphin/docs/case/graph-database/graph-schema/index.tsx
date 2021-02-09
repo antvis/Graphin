@@ -1,46 +1,11 @@
 import React from 'react';
-import Graphin from '@antv/graphin';
+import Graphin, { Utils } from '@antv/graphin';
 import { Toolbar, ContextMenu } from '@antv/graphin-components';
 import { PlusOutlined, SwapOutlined } from '@ant-design/icons';
 import AntdMenu from './AntdMenu';
 
-const source = {
-  nodes: [
-    {
-      id: 'node-A',
-      style: {
-        label: {
-          value: '节点A',
-        },
-      },
-    },
-    {
-      id: 'node-B',
-      style: {
-        label: {
-          value: '节点B',
-        },
-      },
-    },
-    {
-      id: 'node-C',
-      style: {
-        label: {
-          value: '节点C',
-        },
-      },
-    },
-    {
-      id: 'node-D',
-      style: {
-        label: {
-          value: '节点D',
-        },
-      },
-    },
-  ],
-  edges: [],
-};
+const source = Utils.mock(6).circle().graphin();
+source.edges = [];
 
 const options = [
   {
@@ -64,7 +29,7 @@ const options = [
 const SchemaBuilder = () => {
   const [state, setState] = React.useState({
     data: source,
-    layout: 'grid',
+    layout: 'circular',
   });
   const handleChange = (graphin, option) => {
     console.log('option', option);
