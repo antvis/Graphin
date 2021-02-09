@@ -22,7 +22,7 @@ export const getMixedGraph = (aggregatedData, originData, nodeMap, aggregatedNod
     collapseMap[collapseModel.id] = true;
   });
 
-  aggregatedData.clusters.forEach((cluster, i) => {
+  aggregatedData.clusters.forEach(cluster => {
     if (expandMap[cluster.id]) {
       nodes = nodes.concat(cluster.nodes);
       aggregatedNodeMap[cluster.id].expanded = true;

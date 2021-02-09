@@ -3,7 +3,6 @@ import Graphin, { Behaviors } from '@antv/graphin';
 import { ContextMenu, FishEye, MiniMap, Legend } from '@antv/graphin-components';
 import G6 from '@antv/g6';
 import { colorSets, clusterColorMap } from './color';
-import hexToRgba, { hexToRgbaToHex } from '../../../src/utils/hexToRgba';
 import { Switch } from 'antd';
 
 import CustomMenu from './CustomMenu';
@@ -54,17 +53,20 @@ const transClusterData = (data, sourceData) => {
       type: 'graphin-circle',
       style: {
         keyshape: {
-          fill: hexToRgbaToHex(primaryColor, 0.1), // '#fff',
+          fill: primaryColor, // '#fff',
+          fillOpacity: 0.1,
           strokeWidth: 1.2,
           stroke: primaryColor,
           size: [nodeSize, nodeSize],
         },
         label: {
           value: `cluster-${node.id}(${node.nodes.length})`,
-          fill: hexToRgbaToHex('#000', 0.85),
+          fill: '#000',
+          fillOpacity: 0.85,
         },
         halo: {
-          fill: hexToRgbaToHex(primaryColor, 0.1), // '#fff',
+          fill: primaryColor, // '#fff',
+          fillOpacity: 0.1,
           strokeWidth: 1.2,
           stroke: primaryColor,
         },
@@ -133,6 +135,7 @@ const App = () => {
     layout: { ...defaultLayout, animation: true },
   });
   React.useEffect(() => {
+    // eslint-disable-next-line no-undef
     fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/relations.json')
       .then(res => res.json())
       .then(res => {
@@ -176,9 +179,6 @@ const App = () => {
       };
     });
   };
-  // if (!data) {
-  //   return null;
-  // }
   const handleChangeAnimate = checked => {
     console.log('checked', checked);
     setState(preState => {
@@ -206,7 +206,7 @@ const App = () => {
         </div>
         <ZoomCanvas enableOptimize />
         <DragNode />
-        <MiniMap />
+        <MiniMap visible />
         <ContextMenu>
           <CustomMenu state={state} updateState={setState} nodeMap={nodeMap} aggregatedNodeMap={aggregatedNodeMap} />
         </ContextMenu>

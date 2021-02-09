@@ -1,16 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import { GraphinContext, Utils } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
 import { manageExpandCollapseArray, getMixedGraph, icons } from './utils';
 import { clusterColorMap } from './color';
-import { hexToRgbaToHex } from '../../../src/utils/hexToRgba';
 
 const { Menu } = ContextMenu;
 
 interface CustomMenuProps {
   updateState: any;
-  aggregatedNodeMap: {};
-  nodeMap: {};
+  aggregatedNodeMap: unknown;
+  nodeMap: unknown;
   state: any;
 }
 let collapseArray = [];
@@ -47,7 +47,8 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
         node.type = 'graphin-circle';
         node.style = {
           keyshape: {
-            fill: hexToRgbaToHex(primaryColor, 0.1),
+            fill: primaryColor,
+            fillOpacity: 0.1,
             strokeWidth: 0.5,
             stroke: primaryColor,
             size: [NODE_SIZE, NODE_SIZE],
@@ -96,9 +97,7 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
     handleClose();
   };
   const handleFind = () => {
-    const newData = Utils.mock(3)
-      .expand([model])
-      .graphin();
+    const newData = Utils.mock(3).expand([model]).graphin();
     updateState({
       ...state,
       data: {

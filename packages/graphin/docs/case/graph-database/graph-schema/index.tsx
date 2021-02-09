@@ -38,10 +38,11 @@ const SchemaBuilder = () => {
   const { data, layout } = state;
 
   const handleAddEdge = newEdge => {
+    const edges = Utils.processEdges([...data.edges, newEdge]);
     setState({
       data: {
         ...data,
-        edges: [...data.edges, newEdge],
+        edges,
       },
       layout: 'preset',
     });

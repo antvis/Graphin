@@ -1,23 +1,3 @@
-import G6 from '@antv/g6';
-
-const darkBackColor = '#5F95FF';
-const disableColor = '#777';
-const theme = 'light';
-const subjectColors = [
-  '#5F95FF', // blue
-  '#61DDAA',
-  '#65789B',
-  '#F6BD16',
-  '#7262FD',
-  '#78D3F8',
-  '#9661BC',
-  '#F6903D',
-  '#008685',
-  '#F08BB4',
-];
-
-// const colorSets = G6.Util.getColorSetsBySubjectColors(subjectColors, darkBackColor, theme, disableColor);
-
 const colorSets = [
   {
     mainFill: '#5b8ff9',
