@@ -1,10 +1,9 @@
 import React from 'react';
 import Graphin, { IG6GraphEvent, Utils, GraphinData } from '@antv/graphin';
+import { message } from 'antd';
 import { INode, NodeConfig } from '@antv/g6';
 
-const data: GraphinData = Utils.mock(8)
-  .circle()
-  .graphin();
+const data: GraphinData = Utils.mock(8).circle().graphin();
 
 Graphin.registerBehavior('sampleBehavior', {
   getEvents() {
@@ -15,7 +14,7 @@ Graphin.registerBehavior('sampleBehavior', {
   onClick(evt: IG6GraphEvent) {
     const node = evt.item as INode;
     const model = node.getModel() as NodeConfig;
-    console.log(model);
+    message.info(model.id);
     // TODO
   },
 });

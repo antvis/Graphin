@@ -1,11 +1,10 @@
 ---
-title: 注册默认样式
+title: 自定义布局
 order: 0
 group:
   path: /register
-  title: 注册机制
+  title: 自定义机制
 nav:
-  title: Graphin
   path: /graphin
   order: 5
 ---
