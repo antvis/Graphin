@@ -2,8 +2,8 @@
 title: 自定义图标
 order: 1
 group:
-  path: /icons
-  title: 字体图标
+  path: /register
+  title: 自定义机制
 nav:
   path: /graphin
   order: 3
@@ -47,7 +47,7 @@ const icons = Graphin.registerFontFamily(iconLoader);
 
 // 使用图标
 const data = {
-  nodes: glyphs.map((glyph) => {
+  nodes: glyphs.map(glyph => {
     return {
       id: `node-${glyph.name}`,
       style: {

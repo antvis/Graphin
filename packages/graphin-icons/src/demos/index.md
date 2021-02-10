@@ -1,9 +1,9 @@
 ---
-title: 官方图标
-order: 0
+title: 字体图标
+order: 3
 group:
-  path: /icons
-  title: 字体图标
+  path: /render
+  title: 元素渲染
 nav:
   path: /graphin
   order: 3
