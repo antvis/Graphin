@@ -68,15 +68,31 @@ const getEdgeStyleByTheme = (inputTheme: EdgeTheme) => {
         halo: {
           visible: true,
         },
-        keyShape: {
+        keyshape: {
           lineWidth: 2,
+        },
+      },
+      active: {
+        halo: {
+          visible: true,
+        },
+        keyshape: {
+          lineWidth: 2,
+        },
+      },
+      inactive: {
+        halo: {
+          visible: false,
+        },
+        keyshape: {
+          strokeOpacity: 0.1,
         },
       },
       disabled: {
         halo: {
           visible: false,
         },
-        keyShape: {
+        keyshape: {
           lineWidth: 0.5,
           stroke: Color.disabled,
         },

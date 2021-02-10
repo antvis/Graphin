@@ -99,14 +99,14 @@ const getNodeStyleByTheme = (inputNodeTheme: NodeTheme) => {
       active: {},
       inactive: {
         keyshape: {
-          fillOpacity: 0.2,
-          strokeOpacity: 0.2,
+          fillOpacity: 0.04,
+          strokeOpacity: 0.04,
         },
         icon: {
-          fillOpacity: 0.2,
+          fillOpacity: 0.04,
         },
         label: {
-          fillOpacity: 0.2,
+          fillOpacity: 0.04,
         },
       },
       disabled: {
