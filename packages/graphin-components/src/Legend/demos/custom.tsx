@@ -10,31 +10,33 @@ const data = Utils.mock(5).circle().graphin();
 const Color = {
   company: {
     primaryColor: '#ffc107',
-    secondaryColor: Utils.hexToRgba('#ffc107', '0.2'),
   },
   person: {
     primaryColor: '#28a52d',
-    secondaryColor: Utils.hexToRgba('#28a52d', '0.2'),
   },
 };
 data.nodes.forEach((node, index) => {
   const isCompany = index % 3 === 0;
-  node.data.type = isCompany ? 'company' : 'person';
-  const iconType = node.data.type;
+  const iconType = isCompany ? 'company' : 'person';
+  node.data = {
+    type: iconType,
+  };
   node.type = 'graphin-circle';
-
+  const { primaryColor } = Color[iconType];
   node.style = {
     keyshape: {
-      stroke: Color[iconType].primaryColor,
-      size: [30],
-      fill: Color[iconType].secondaryColor,
+      size: 30,
+      stroke: primaryColor,
+      strokeOpacity: 1,
+      fill: primaryColor,
+      fillOpacity: 0.2,
     },
     icon: {
       type: 'font',
       fontFamily: 'graphin',
       value: isCompany ? icons.company : icons.user,
       size: 14,
-      fill: Color[iconType].primaryColor,
+      fill: primaryColor,
     },
     status: {
       active: {
