@@ -114,10 +114,7 @@ const transTree2Graphin = sourceData => {
 };
 
 const pack = data =>
-  d3
-    .pack()
-    .size([1000, 500])
-    .padding(3)(
+  d3.pack().size([1000, 500]).padding(3)(
     d3
       .hierarchy(data)
 

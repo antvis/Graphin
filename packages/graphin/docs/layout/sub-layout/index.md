@@ -5,7 +5,6 @@ group:
   title: 布局方案
   order: 9
 nav:
-  title: Graphin
   path: /graphin
   order: 1
 ---
