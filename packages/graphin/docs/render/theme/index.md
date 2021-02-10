@@ -6,7 +6,6 @@ group:
   title: 元素渲染
   order: 0
 nav:
-  title: Graphin
   path: /graphin
   order: 0
 ---

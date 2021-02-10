@@ -3,9 +3,7 @@ import Graphin, { Utils, Behaviors } from '@antv/graphin';
 
 const { ZoomCanvas } = Behaviors;
 
-const data = Utils.mock(10)
-  .circle()
-  .graphin();
+const data = Utils.mock(10).circle().graphin();
 const layout = {
   type: 'concentric',
 };
@@ -14,8 +12,9 @@ const defaultNode = {
   type: 'graphin-circle',
   style: {
     keyshape: {
-      fill: '#ddd',
-      stroke: '#000',
+      fill: 'red',
+      stroke: 'red',
+      fillOpacity: 0.1,
       size: 26,
     },
   },
@@ -24,10 +23,6 @@ const defaultNode = {
 const defaultNodeStatusStyle = {
   status: {
     hover: {
-      keyshape: {
-        stroke: '#ff0303a6',
-        size: 30,
-      },
       halo: {
         animate: {
           attrs: ratio => {
