@@ -6,7 +6,6 @@ group:
   title: 交互行为
   order: 3
 nav:
-  title: Graphin
   path: /graphin
   order: 1
 ---
@@ -21,12 +20,29 @@ Graphin 中的交互行为都是可组合的，例如内置了 DragCavans,ZoomCa
 
 ![](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*xpoaRpOGme4AAAAAAAAAAAAAARQnAQ)
 
-## 在线示例
+## 内置交互行为
 
-### 通过组件的 Props，修改原先的交互设置
+> Graphin 内置了 9 个交互行为，这些交互行为，我们认为是图分析产品基本的交互需求，因此选择内置
+
+```jsx | pure
+<>
+  {/* 拖拽画布 */}<DragCanvas />
+  {/* 缩放画布 */}<ZoomCanvas />
+  {/* 拖拽节点 */}<DragNode />
+  {/* 点击节点 */}<DragCombo />
+  {/* 点击节点 */}<ClickSelect />
+  {/* 圈选节点 */}<BrushSelect />
+  {/** resize 画布 */}<ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
+  {/** 节点悬停 **/}<Hoverable bindType="node" />
+</>
+```
 
 <code src='./demo.tsx'>
 
+## 可选交互行为
+
+> Graphin 还提供了
+
 ### 通过 disabled 来禁用该交互行为
 
-<code src='../render/data/Network.tsx'>
+<!-- <code src='../render/data/Network.tsx'> -->

@@ -1,22 +1,23 @@
 import React from 'react';
-import Graphin, { Utils, Behaviors } from '@antv/graphin';
+import Graphin, { Utils, Behaviors, GraphinContext } from '@antv/graphin';
 
-const data = Utils.mock(10)
-  .circle()
-  .graphin();
+const data = Utils.mock(100).random().graphin();
 const layout = {
-  type: 'concentric',
+  type: 'graphin-force',
+  preset: {
+    type: 'concentric',
+  },
 };
 
 const { DragCanvas, ZoomCanvas, DragNode, ActivateRelations } = Behaviors;
+
 export default () => {
   return (
     <div>
       <Graphin data={data} layout={layout}>
-        <DragCanvas direction="x" />
         <ZoomCanvas enableOptimize />
         <DragNode />
-        <ActivateRelations />
+        <ActivateRelations trigger="click" />
       </Graphin>
     </div>
   );

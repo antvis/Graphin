@@ -6,7 +6,6 @@ group:
   title: 交互行为
   order: 3
 nav:
-  title: Graphin
   path: /graphin
   order: 1
 ---
