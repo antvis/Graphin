@@ -36,6 +36,6 @@ export const focusNodeById = (graph: Graph) => (nodeId: string) => {
     easing: 'easeCubic',
   });
 
-  graph.setItemState(node, 'focus', true);
+  graph.setItemState(node, 'selected', true);
   node.toFront();
 };
