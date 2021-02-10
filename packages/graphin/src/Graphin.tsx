@@ -204,14 +204,26 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       defaultNodeStatusStyle,
       defaultEdgeStatusStyle,
       defaultComboStatusStyle,
+      ...otherTheme
     } = themeResult;
-    // @ts-ignore
-    this.theme = themeResult as ThemeData;
+
     /** graph type */
     this.isTree =
       Boolean((data as GraphinTreeData).children) || TREE_LAYOUTS.indexOf(String(layout && layout.type)) !== -1;
     const isGraphinNodeType = defaultNode?.type === undefined || defaultNode?.type === defaultNodeStyle.type;
     const isGraphinEdgeType = defaultEdge?.type === undefined || defaultEdge?.type === defaultEdgeStyle.type;
+
+    const finalStyle = {
+      defaultNode: isGraphinNodeType ? deepMix({}, defaultNodeStyle, defaultNode) : defaultNode,
+      defaultEdge: isGraphinEdgeType ? deepMix({}, defaultEdgeStyle, defaultEdge) : defaultEdge,
+      defaultCombo: deepMix({}, defaultComboStyle, defaultCombo), // TODO:COMBO的样式需要内部自定义
+      /** status 样式 */
+      nodeStateStyles: isGraphinNodeType ? deepMix({}, defaultNodeStatusStyle, nodeStateStyles) : nodeStateStyles,
+      edgeStateStyles: isGraphinEdgeType ? deepMix({}, defaultEdgeStatusStyle, edgeStateStyles) : edgeStateStyles,
+      comboStateStyles: deepMix({}, defaultComboStatusStyle, comboStateStyles),
+    };
+    // @ts-ignore
+    this.theme = { ...finalStyle, ...otherTheme } as ThemeData;
 
     this.options = {
       container: this.graphDOM,
@@ -219,14 +231,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       width: this.width,
       height: this.height,
       animate: animate !== false,
-      /** 默认样式 */
-      defaultNode: isGraphinNodeType ? deepMix({}, defaultNodeStyle, defaultNode) : defaultNode,
-      defaultEdge: isGraphinEdgeType ? deepMix({}, defaultEdgeStyle, defaultEdge) : defaultEdge,
-      defaultCombo: deepMix({}, defaultComboStyle, defaultCombo),
-      /** status 样式 */
-      nodeStateStyles: deepMix({}, defaultNodeStatusStyle, nodeStateStyles),
-      edgeStateStyles: deepMix({}, defaultEdgeStatusStyle, edgeStateStyles),
-      comboStateStyles: deepMix({}, defaultComboStatusStyle, comboStateStyles),
+      ...finalStyle,
 
       modes,
       ...otherOptions,
