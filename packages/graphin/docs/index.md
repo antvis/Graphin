@@ -27,10 +27,6 @@ cases:
     title: Graph Studio
     description: Graph Studio 是阿里云Dataworks团队围绕Graph Compute引擎打造的一站式图开发平台。其中基于Graphin开发的图分析平台提供了数据检索、关系扩散、布局切换、节点筛选、关联高亮、分享等常用图分析能力，能够帮助用户快速完成相关分析工作
     image: https://img.alicdn.com/tfs/TB1laWQyVT7gK0jSZFpXXaTkpXa-600-600.gif
-  - logo: 'https://img.alicdn.com/tfs/TB1rh1xy7T2gK0jSZFkXXcIQFXa-128-128.svg'
-    title: Graph Studio
-    description: Graph Studio 是阿里云Dataworks团队围绕Graph Compute引擎打造的一站式图开发平台。其中基于Graphin开发的图分析平台提供了数据检索、关系扩散、布局切换、节点筛选、关联高亮、分享等常用图分析能力，能够帮助用户快速完成相关分析工作
-    image: https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*6MMpR60-2VoAAAAAAAAAAAAAARQnAQ
 
 footer: Open-source MIT Licensed | Copyright © 2019-present
 ---
