@@ -1,7 +1,8 @@
 ---
 title: Contribution Guide
 group:
-  path: /
+  path: /quick-start
+  order: 0
 nav:
   path: /graphin
 ---

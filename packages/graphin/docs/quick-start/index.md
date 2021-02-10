@@ -1,6 +1,6 @@
 ---
 title: 快速开始
-order: 0
+order: 1
 group:
   path: /quick-start
   title: 快速开始

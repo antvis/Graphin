@@ -1,7 +1,8 @@
 ---
 title: 贡献指南
 group:
-  path: /
+  path: /quick-start
+  order: 0
 nav:
   path: /graphin
 ---

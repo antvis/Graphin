@@ -1,7 +1,9 @@
 ---
 title: FAQ
+order: 2
 group:
-  path: /
+  path: /quick-start
+  order: 0
 nav:
   path: /graphin
 ---

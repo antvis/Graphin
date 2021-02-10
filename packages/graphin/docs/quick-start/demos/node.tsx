@@ -42,7 +42,7 @@ const data = {
           fontFamily: 'normal',
           textAlign: 'center',
           /** 文本在各自方向上的偏移量，主要为了便于调整文本位置 */
-          offset: 0,
+          offset: [0, 10],
         },
         // // 是节点的中心 ICON 区域，icon 可以是图片，可以是文本，也可以是字体图标。
         icon: {

@@ -1,7 +1,9 @@
 ---
 title: 更新日志
+order: 2
 group:
-  path: /
+  path: /quick-start
+  order: 0
 nav:
   path: /graphin
 ---
