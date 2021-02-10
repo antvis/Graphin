@@ -7,7 +7,7 @@ export interface HoverableProps {
   bindType: 'node' | 'edge';
 }
 
-const hoverable: React.FunctionComponent<HoverableProps> = props => {
+const Hoverable: React.FunctionComponent<HoverableProps> = props => {
   const graphin = React.useContext(GraphinContext);
   const { bindType = 'node' } = props;
   React.useEffect(() => {
@@ -53,4 +53,4 @@ const hoverable: React.FunctionComponent<HoverableProps> = props => {
   return null;
 };
 
-export default hoverable;
+export default Hoverable;

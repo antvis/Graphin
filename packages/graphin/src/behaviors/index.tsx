@@ -13,7 +13,7 @@ import FitView from './FitView';
 import FontPaint from './FontPaint';
 
 export default {
-  TreeCollapse,
+  /** 内置 */
   DragCanvas,
   ZoomCanvas,
   ClickSelect,
@@ -22,8 +22,11 @@ export default {
   ResizeCanvas,
   LassoSelect,
   DragCombo,
-  ActivateRelations,
   Hoverable,
+
+  /** 可选 */
+  ActivateRelations,
+  TreeCollapse,
   FitView,
   FontPaint,
 };
