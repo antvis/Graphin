@@ -6,77 +6,45 @@ import SideMenu from './components/SideMenu';
 import SlugList from './components/SlugList';
 import SearchBar from './components/SearchBar';
 import Cases from './components/Cases/Cases';
-import Banner from './components/Banner/index';
-import Ideas from './components/Features';
+import Banner from './components/Banner';
 
 import './style/layout.less';
 
 const Hero = hero => (
-  <div className="__dumi-default-layout-hero">
-    {hero.image && <img src={hero.image} />}
-    <h1>{hero.title}</h1>
-    <div dangerouslySetInnerHTML={{ __html: hero.desc }} />
-    {hero.actions &&
-      hero.actions.map(action => (
-        <Link to={action.link} key={action.text}>
-          <button type="button">{action.text}</button>
-        </Link>
-      ))}
-  </div>
+  <>
+    <div className="__dumi-default-layout-hero">
+      {hero.image && <img src={hero.image} />}
+      <h1>{hero.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: hero.desc }} />
+      {hero.actions &&
+        hero.actions.map(action => (
+          <Link to={action.link} key={action.text}>
+            <button type="button">{action.text}</button>
+          </Link>
+        ))}
+    </div>
+    <Banner />
+  </>
 );
 
-const BannerPanel = banner => {
-  const { image, title, desc, actions } = banner;
-  const description = <div dangerouslySetInnerHTML={{ __html: desc }} />;
-  const coverImage = <img alt="graphin" style={{ width: '100%', marginTop: '20%' }} src={image} />;
-
-  const notifications = [
-    {
-      type: '重磅推出',
-      title: 'AntV图可视分析解决方案，来啦～',
-      date: '2020.11.22',
-      link: 'https://www.yuque.com/antv/g6/solution',
-    },
-    {
-      type: '小试牛刀',
-      title: 'Graphin 1.0.0 全新发布！',
-      date: '2019.11.22',
-      link: 'https://github.com/antvis/graphin',
-    },
-  ];
+const Features = features => {
   return (
-    <Banner
-      coverImage={coverImage}
-      title={title}
-      // @ts-ignore
-      description={description}
-      notifications={notifications}
-      buttons={actions}
-      className="banner"
-    />
+    <div className="__dumi-default-layout-features">
+      {features.map(feat => (
+        <dl key={feat.title} style={{ backgroundImage: feat.icon ? `url(${feat.icon})` : undefined }}>
+          {feat.link ? (
+            <Link to={feat.link}>
+              <dt>{feat.title}</dt>
+            </Link>
+          ) : (
+            <dt>{feat.title}</dt>
+          )}
+          <dd dangerouslySetInnerHTML={{ __html: feat.desc }} />
+        </dl>
+      ))}
+    </div>
   );
 };
-
-const FeaturePanel = meta => {
-  return <Ideas features={meta.features} style={{ width: '100%' }} />;
-};
-
-const Features = features => (
-  <div className="__dumi-default-layout-features">
-    {features.map(feat => (
-      <dl key={feat.title} style={{ backgroundImage: feat.icon ? `url(${feat.icon})` : undefined }}>
-        {feat.link ? (
-          <Link to={feat.link}>
-            <dt>{feat.title}</dt>
-          </Link>
-        ) : (
-          <dt>{feat.title}</dt>
-        )}
-        <dd dangerouslySetInnerHTML={{ __html: feat.desc }} />
-      </dl>
-    ))}
-  </div>
-);
 
 const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
   const {
@@ -84,19 +52,15 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
     meta,
     locale,
   } = useContext(context);
-  console.log('meta', meta);
   const { url: repoUrl, branch, platform } = repository;
   const [menuCollapsed, setMenuCollapsed] = useState<boolean>(true);
   const isSiteMode = mode === 'site';
   const showHero = isSiteMode && meta.hero;
-  const showBanner = isSiteMode && meta.banner;
-  const showCases = isSiteMode && meta.cases;
   const showFeatures = isSiteMode && meta.features;
-  const showIdeas = isSiteMode && meta.ideas;
-  const showSideMenu = meta.sidemenu !== false && !showHero && !showBanner && !showFeatures && !meta.gapless;
+  const showCases = isSiteMode && meta.cases;
+  const showSideMenu = meta.sidemenu !== false && !showHero && !showFeatures && !meta.gapless;
   const showSlugs =
     !showHero &&
-    !showBanner &&
     !showFeatures &&
     Boolean(meta.slugs?.length) &&
     (meta.toc === 'content' || meta.toc === undefined) &&
@@ -108,7 +72,7 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
 
   return (
     <div
-      className={`__dumi-default-layout ${showBanner ? 'home' : ''}`}
+      className="__dumi-default-layout"
       data-route={location.pathname}
       data-show-sidemenu={String(showSideMenu)}
       data-show-slugs={String(showSlugs)}
@@ -127,13 +91,12 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
           ev.stopPropagation();
         }}
       />
-      {showSideMenu && <SideMenu mobileMenuCollapsed={menuCollapsed} location={location} />}
+      <SideMenu mobileMenuCollapsed={menuCollapsed} location={location} />
       {showSlugs && <SlugList slugs={meta.slugs} className="__dumi-default-layout-toc" />}
-      {showBanner && BannerPanel(meta.banner)}
       {showHero && Hero(meta.hero)}
       {showFeatures && Features(meta.features)}
-      {showIdeas && <Ideas features={meta.ideas} style={{ width: '100%' }} />}
-      {showCases && <Cases cases={meta.cases} className="graph-cases" />}
+      {showCases && Cases(meta.cases)}
+
       <div className="__dumi-default-layout-content">
         {children}
         {!showHero && !showFeatures && meta.filePath && !meta.gapless && (
