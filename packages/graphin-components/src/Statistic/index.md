@@ -5,7 +5,7 @@ group:
   title: 标示组件
   order: 1
 nav:
-  title: Components
+  title: 分析组件
   path: /components
   order: 1
 ---

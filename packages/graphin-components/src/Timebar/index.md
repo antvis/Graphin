@@ -4,7 +4,7 @@ group:
   path: /special
   title: 特殊分析
 nav:
-  title: Components
+  title: 分析组件
   path: /components
   order: 1
 ---

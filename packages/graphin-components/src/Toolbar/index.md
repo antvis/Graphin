@@ -6,7 +6,7 @@ group:
   title: 交互组件
   order: 0
 nav:
-  title: Components
+  title: 分析组件
   path: /components
   order: 1
 ---

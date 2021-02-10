@@ -4,7 +4,7 @@ group:
   path: /useCase
   title: 用户案例
 nav:
-  title: Components
+  title: 分析组件
   path: /components
   order: 1
 ---
