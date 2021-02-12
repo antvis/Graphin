@@ -18,7 +18,6 @@
     "*.css"
   ],
   "devDependencies": {
-    "@ant-design/icons": "^4.4.0",
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -27,8 +26,6 @@
     "@testing-library/jest-dom": "^5.7.0",
     "@testing-library/react": "^9.5.0",
     "@types/react-router-dom": "^5.1.0",
-    "@types/styled-components": "^5.1.7",
-    "antd": "^4.11.2",
     "babel-jest": "^25.4.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.12.2",
@@ -42,12 +39,9 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
-    "react-color": "^2.19.3",
-    "react-pie-menu": "^0.2.5",
     "rimraf": "^3.0.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
-    "styled-components": "^5.2.1",
     "ts-jest": "^25.4.0",
     "typescript": "^3.6.4",
     "webpack": "^4.41.5",
@@ -55,7 +49,8 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@antv/util": "^2.0.10"
+    "@antv/util": "^2.0.10",
+    "@antv/graphin": "2.0.0-beta.13"
   },
   "peerDependencies": {
     "react": "^16.x",
