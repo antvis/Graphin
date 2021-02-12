@@ -16,26 +16,6 @@ For more infomation, please check the [Graphin Website](https://graphin.antv.vis
 
 ![graphin](https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*N-5PT6UO9LAAAAAAAAAAAABkARQnAQ)
 
-Graphin use lerna to manage this repo. This repo contains the following packages:
-
-```bash
-/packages
-    graphin
-    graphin-components
-    graphin-studio
-    graphin-site
-```
-
-Please checkout the specific package：
-
-| Package Name                                                                                          | Description                                                       |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| [@antv/graphin](https://github.com/antvis/graphin/tree/master/packages/graphin)                       | Core React component of Graphin                                   |
-| [@antv/graphin-components](https://github.com/antvis/graphin/tree/master/packages/graphin-components) | Graphin components                                                |
-| [@antv/graphin-icons](https://github.com/antvis/graphin/tree/master/packages/graphin-icons)           | Graphin official icons                                            |
-| [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)             | Graphin documentation website                                     |
-| [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)               | A Graphin demo: generic graph analysis workbench based on Graphin |
-
 ## Graphin Quick Start
 
 > Graphin 2.0 组件文档：https://antv.vision/graphin-docs/
@@ -184,6 +164,26 @@ Graphin.registerBehavior();
 ```
 
 ## Develop Graphin
+
+Graphin use lerna to manage this repo. This repo contains the following packages:
+
+```bash
+/packages
+    graphin
+    graphin-components
+    graphin-studio
+    graphin-site
+```
+
+Please checkout the specific package：
+
+| Package Name                                                                                          | Description                                                       |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| [@antv/graphin](https://github.com/antvis/graphin/tree/master/packages/graphin)                       | Core React component of Graphin                                   |
+| [@antv/graphin-components](https://github.com/antvis/graphin/tree/master/packages/graphin-components) | Graphin components                                                |
+| [@antv/graphin-icons](https://github.com/antvis/graphin/tree/master/packages/graphin-icons)           | Graphin official icons                                            |
+| [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)             | Graphin documentation website                                     |
+| [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)               | A Graphin demo: generic graph analysis workbench based on Graphin |
 
 - Set up npmClient
 
