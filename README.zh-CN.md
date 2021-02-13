@@ -14,27 +14,6 @@ Graphin 取名意为 Graph Insight（图的分析洞察），是一个基于 [G6
 
 ![graphin](https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*N-5PT6UO9LAAAAAAAAAAAABkARQnAQ)
 
-Graphin 采用 lerna 管理仓库，packages 中包含以下 5 个 package：
-
-```bash
-/packages
-    graphin
-    graphin-components
-    graphin-icons
-    graphin-studio
-    graphin-site
-```
-
-他们依次对应的包名与解释如下：
-
-| 包名                                                                                                  | 说明                                                   |
-| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| [@antv/graphin](https://github.com/antvis/graphin/tree/master/packages/graphin)                       | Graphin 中的图分析内核，基于 G6 封装 的 React 组件     |
-| [@antv/graphin-components](https://github.com/antvis/graphin/tree/master/packages/graphin-components) | Graphin 中的图分析组件                                 |
-| [@antv/graphin-icons](https://github.com/antvis/graphin/tree/master/packages/graphin-icons)           | Graphin 内置图标                                       |
-| [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)             | Graphin 文档官网                                       |
-| [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)               | Graphin 演示 DEMO：基于 Graphin 实现的通用关系分析平台 |
-
 ## Graphin 快速开始
 
 > Graphin 2.0 组件文档：https://antv.vision/graphin-docs/
@@ -42,7 +21,7 @@ Graphin 采用 lerna 管理仓库，packages 中包含以下 5 个 package：
 ### 安装
 
 ```bash
-npm run --save @antv/graphin
+npm run --save @antv/graphin@latest
 ```
 
 ### Usage
@@ -176,6 +155,27 @@ Graphin.registerBehavior();
 ```
 
 ## 开发 Graphin
+
+Graphin 采用 lerna 管理仓库，packages 中包含以下 5 个 package：
+
+```bash
+/packages
+    graphin
+    graphin-components
+    graphin-icons
+    graphin-studio
+    graphin-site
+```
+
+他们依次对应的包名与解释如下：
+
+| 包名                                                                                                  | 说明                                                   |
+| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [@antv/graphin](https://github.com/antvis/graphin/tree/master/packages/graphin)                       | Graphin 中的图分析内核，基于 G6 封装 的 React 组件     |
+| [@antv/graphin-components](https://github.com/antvis/graphin/tree/master/packages/graphin-components) | Graphin 中的图分析组件                                 |
+| [@antv/graphin-icons](https://github.com/antvis/graphin/tree/master/packages/graphin-icons)           | Graphin 内置图标                                       |
+| [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)             | Graphin 文档官网                                       |
+| [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)               | Graphin 演示 DEMO：基于 Graphin 实现的通用关系分析平台 |
 
 - 设置 npmClient
 

@@ -9,9 +9,9 @@
     "graphscope": "cd ./packages/graphin-graphscope && npm run start",
     "docs": "NODE_OPTIONS=--max_old_space_size=4098 && dumi dev",
     "docs:build": "dumi build",
-    "docs:deploy": "npm run docs:build && gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
-    "docs:gh-pages": "gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
-    "bootstrap": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site",
+    "docs:deploy": "gh-pages -d dist",
+    "docs:deploy-2": "gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
+    "bootstrap": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site --ignore dumi-theme-graphin",
     "bootstrap:ci": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site --ignore @antv/graphin-graphscope",
     "build": "lerna run build",
     "contributor": "git-contributor",
@@ -29,15 +29,18 @@
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags"
   },
   "devDependencies": {
-    "dumi-theme-graphin": "0.1.0",
     "@types/jest": "^25.2.3",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",
+    "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
     "conventional-changelog": "^3.1.18",
     "conventional-changelog-cli": "^2.0.31",
+    "d3": "^6.3.1",
+    "d3-selection": "^2.0.0",
     "dumi": "^1.1.0",
+    "dumi-theme-graphin": "0.1.1",
     "eslint": "^7.18.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.2.0",
@@ -52,6 +55,9 @@
     "lerna": "^3.15.0",
     "lint-staged": "^10.2.2",
     "prettier": "^2.2.1",
+    "react-color": "^2.19.3",
+    "react-pie-menu": "^0.2.5",
+    "styled-components": "^5.2.1",
     "typescript": "^4.1.3"
   },
   "husky": {
@@ -67,7 +73,9 @@
     ]
   },
   "dependencies": {
-    "dumi-theme-graphin": "^0.1.0",
+    "@ant-design/icons": "^4.5.0",
+    "@antv/gatsby-theme-antv": "^1.0.8",
+    "antd": "^4.12.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   },
