@@ -1,9 +1,11 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { useContext } from 'react';
 
 import GitHubButton from 'react-github-button';
 import gh from 'parse-github-url';
 import classNames from 'classnames';
+import { context } from 'dumi/theme';
 
 import 'video-react/dist/video-react.css';
 // @ts-ignore
@@ -46,7 +48,11 @@ const Banner: React.FC<BannerProps> = ({
   showGithubStars = true,
   buttons = [],
 }) => {
-  const githubUrl = '';
+  const {
+    config: { repository },
+  } = useContext(context);
+
+  const githubUrl = repository.url;
 
   const notificationsNode = notifications
     .slice(0, 2)
@@ -86,6 +92,7 @@ const Banner: React.FC<BannerProps> = ({
 
   if (showGithubStars) {
     const githubObj = gh(githubUrl);
+
     if (githubObj && githubObj.owner && githubObj.name) {
       renderButtons.push(
         <div key="github" className={styles.githubWrapper}>

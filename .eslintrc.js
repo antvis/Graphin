@@ -16,6 +16,8 @@ module.exports = {
   },
   rules: {
     'no-shadow': 0,
+    'react/button-has-type': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
     camelcase: 0,
     '@typescript-eslint/ban-ts-ignore': 0,
     'arrow-body-style': 0,

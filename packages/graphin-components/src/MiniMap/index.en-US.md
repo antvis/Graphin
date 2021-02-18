@@ -14,6 +14,8 @@ nav:
 
 MiniMap is a common interactive component that allows users to see where the content of the current canvas is located globally. Allows for quick preview and exploration on large graphs.
 
+<code src='./demos/index.tsx'>
+
 ## Features
 
 - MiniMap should be based on G6.MiniMap which can be injected through the component internal didmount during addPlugins

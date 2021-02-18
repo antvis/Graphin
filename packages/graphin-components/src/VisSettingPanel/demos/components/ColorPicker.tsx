@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
-import { Button } from 'antd';
-import { TwitterPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 
 interface ColorPickerProps {
   onChange: (color: string) => void;
@@ -11,6 +11,21 @@ interface ColorPickerState {
   visible: boolean;
   value: string;
 }
+const styles = {
+  color: {
+    width: '36px',
+    height: '14px',
+    borderRadius: '2px',
+    padding: '5px',
+    border: '5px solid #ddd',
+    display: 'inline-block',
+    textAlign: 'top',
+  },
+  popover: {
+    position: 'absolute',
+    zIndex: '2',
+  },
+};
 const ColorPicker = (props: ColorPickerProps) => {
   const { onChange, color } = props;
 
@@ -24,7 +39,7 @@ const ColorPicker = (props: ColorPickerProps) => {
     onChange(value.hex);
     setState({
       ...state,
-      visible: false,
+      // visible: false,
       value: value.hex,
     });
   };
@@ -34,14 +49,22 @@ const ColorPicker = (props: ColorPickerProps) => {
       visible: !state.visible,
     });
   };
+  const handleClose = () => {
+    setState({
+      ...state,
+      visible: false,
+    });
+  };
 
-  const { visible, colors, value } = state;
+  const { visible, value } = state;
 
   return (
     <div>
-      <Button style={{ background: value }} shape="circle" size="small" onClick={handleClick} />
+      <div style={{ ...styles.color, background: value }} onClick={handleClick} />
       <div style={{ display: 'inline-block', paddingLeft: '15px' }}> {value}</div>
-      {visible && <TwitterPicker width="100%" colors={colors} onChange={handleChange} color={color} />}
+      <div style={styles.popover} onClick={handleClose}>
+        {visible && <ChromePicker onChange={handleChange} color={color} />}
+      </div>
     </div>
   );
 };

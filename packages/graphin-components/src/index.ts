@@ -6,7 +6,7 @@
 export { default as Hull, HullCfg } from './Hull';
 export { default as ContextMenu } from './ContextMenu';
 export { default as EdgeBundling } from './EdgeBundling';
-// export { default as VisSettingPanel } from './VisSettingPanel';
+export { default as VisSettingPanel } from './VisSettingPanel';
 export { default as Tooltip } from './Tooltip';
 export { default as FishEye } from './FishEye';
 export { default as Toolbar } from './Toolbar';

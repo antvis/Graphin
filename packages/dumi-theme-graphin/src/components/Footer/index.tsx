@@ -1,8 +1,9 @@
 import React from 'react';
+// eslint-disable-next-line import/no-named-default
 import { default as RCFooter, FooterProps as RcFooterProps } from 'rc-footer';
 import { useTranslation } from 'react-i18next';
 import { GithubOutlined, WeiboOutlined, ZhihuOutlined } from '@ant-design/icons';
-import { getProducts } from './getProducts';
+import { getProducts } from '../Products/getProducts';
 // @ts-ignore
 import styles from './Footer.module.less';
 import 'rc-footer/assets/index.less';
@@ -13,7 +14,7 @@ interface FooterProps extends RcFooterProps {
   rootDomain?: string;
   language?: string;
   githubUrl?: string;
-  footerProps?: object;
+  footerProps?: unknown;
 }
 
 const Footer: React.FC<FooterProps> = ({ columns, bottom, theme = 'dark', language, rootDomain = '', footerProps }) => {

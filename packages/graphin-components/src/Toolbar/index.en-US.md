@@ -14,6 +14,20 @@ nav:
 
 Toolbar makes common analysis operations easily accessible. In Graphin version 1.x, we built in undo and redo, fisheye magnifier, canvas zoom, full screen, node focus, canvas snapshot download, etc. However we got feedback from some businesses that they would prefer Graphin to expose the API for these features and allow the business to customize the style and interface layout. Therefore, in Graphin 2.x, Toolbar will be redesigned and positioned as a container for various toolbar operations.
 
+## 01. Set Toolbar via Option
+
+<code src='./demos/option'>
+
+## 02. Use <Toolbar.Item> sub-component
+
+<code src='./demos/item'>
+
+## 03. Fully customizable: use Antd components together
+
+<code src='./demos/custom'>
+
+<API src='./interface.ts'>
+
 ## Features
 
 - Toolbar takes the form of a container which supports a variety of functions and operations

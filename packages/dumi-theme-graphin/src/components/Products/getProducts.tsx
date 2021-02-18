@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 
 import {
@@ -31,12 +30,12 @@ export interface ProductItem {
 
 const ANTV_DOMAIN = 'antv.vision';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ValuesOf<T extends any[]> = T[number];
 
 export const getProducts = ({
   t,
   language,
-  isChinaMirrorHost = false,
 }: {
   t: (key: string) => string;
   language: string;

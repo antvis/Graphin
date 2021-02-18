@@ -1,4 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/no-danger */
+import React, { useContext, useState } from 'react';
 import type { IRouteComponentProps } from '@umijs/types';
 import { context, Link } from 'dumi/theme';
 import Navbar from './components/Navbar';
@@ -10,10 +12,11 @@ import Banner from './components/Banner/index';
 import Ideas from './components/Features';
 
 import './style/layout.less';
+import Footer from './components/Footer';
 
 const Hero = hero => (
   <div className="__dumi-default-layout-hero">
-    {hero.image && <img src={hero.image} />}
+    {hero.image && <img src={hero.image} alt="banner" />}
     <h1>{hero.title}</h1>
     <div dangerouslySetInnerHTML={{ __html: hero.desc }} />
     {hero.actions &&
@@ -26,24 +29,10 @@ const Hero = hero => (
 );
 
 const BannerPanel = banner => {
-  const { image, title, desc, actions } = banner;
+  const { image, title, desc, actions, notifications } = banner;
   const description = <div dangerouslySetInnerHTML={{ __html: desc }} />;
   const coverImage = <img alt="graphin" style={{ width: '100%', marginTop: '20%' }} src={image} />;
 
-  const notifications = [
-    {
-      type: '重磅推出',
-      title: 'AntV图可视分析解决方案，来啦～',
-      date: '2020.11.22',
-      link: 'https://www.yuque.com/antv/g6/solution',
-    },
-    {
-      type: '小试牛刀',
-      title: 'Graphin 1.0.0 全新发布！',
-      date: '2019.11.22',
-      link: 'https://github.com/antvis/graphin',
-    },
-  ];
   return (
     <Banner
       coverImage={coverImage}
@@ -55,10 +44,6 @@ const BannerPanel = banner => {
       className="banner"
     />
   );
-};
-
-const FeaturePanel = meta => {
-  return <Ideas features={meta.features} style={{ width: '100%' }} />;
 };
 
 const Features = features => (
@@ -102,6 +87,7 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
     (meta.toc === 'content' || meta.toc === undefined) &&
     !meta.gapless;
   const isCN = /^zh|cn$/i.test(locale);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updatedTime: any = new Date(meta.updatedTime).toLocaleString([], { hour12: false });
   const repoPlatform =
     { github: 'GitHub', gitlab: 'GitLab' }[(repoUrl || '').match(/(github|gitlab)/)?.[1] || 'nothing'] || platform;
@@ -136,7 +122,7 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
       {showCases && <Cases cases={meta.cases} className="graph-cases" />}
       <div className="__dumi-default-layout-content">
         {children}
-        {!showHero && !showFeatures && meta.filePath && !meta.gapless && (
+        {showSideMenu && (
           <div className="__dumi-default-layout-footer-meta">
             {repoPlatform && (
               <Link to={`${repoUrl}/edit/${branch}/${meta.filePath}`}>
@@ -146,9 +132,7 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
             <span data-updated-text={isCN ? '最后更新时间：' : 'Last update: '}>{updatedTime}</span>
           </div>
         )}
-        {(showHero || showFeatures) && meta.footer && (
-          <div className="__dumi-default-layout-footer" dangerouslySetInnerHTML={{ __html: meta.footer }} />
-        )}
+        {!showSideMenu && <Footer githubUrl={repoUrl} rootDomain="https://antv.vision" />}
       </div>
     </div>
   );
