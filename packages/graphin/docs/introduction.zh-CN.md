@@ -1,6 +1,6 @@
 ---
 title: 背景介绍
-order: 1
+order: -1
 group:
   path: /quick-start
   order: 0
@@ -55,3 +55,8 @@ export default () => {
   );
 };
 ```
+
+## 🎬 其他资源
+
+- [【分享】图释万物 - AntV 图可视分析解决方案](https://www.bilibili.com/video/BV15h411y7AT)
+- [【专栏】图可视化知多少](https://www.yuque.com/antv/g6-blog)

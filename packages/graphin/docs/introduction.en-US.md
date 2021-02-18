@@ -1,6 +1,6 @@
 ---
 title: Introduction
-order: 1
+order: -1
 group:
   path: /quick-start
   order: 0
@@ -56,3 +56,8 @@ export default () => {
   );
 };
 ```
+
+## 🎬 Other resources
+
+- [[Share] Graph Insight: AntV graph visual analysis solution](https://www.bilibili.com/video/BV15h411y7AT)
+- [[Article] How much do you know about graph visualization](https://www.yuque.com/antv/g6-blog)
