@@ -20,8 +20,7 @@ export default {
       // 'packages/graphin-graphscope/docs/',
 
       /** local develop */
-      // 'packages/graphin/docs/case/graph-database',
-      // 'packages/graphin/docs/index.md',
+      // 'packages/graphin-components/src/VisSettingPanel',
     ],
   },
   alias: {
@@ -53,10 +52,10 @@ export default {
       title: 'v1.6.4',
       path: 'https://antv.vision/graphin-1.x-site/',
     },
-    {
-      title: 'GitHub',
-      path: 'https://github.com/antvis/Graphin',
-    },
+    // {
+    //   title: 'GitHub',
+    //   path: 'https://github.com/antvis/Graphin',
+    // },
   ],
 
   analytics: isProduction ? { ga: 'UA-148148901-8' } : false,
