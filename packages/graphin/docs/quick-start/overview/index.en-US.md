@@ -6,7 +6,7 @@ group:
   title: Quick start
   order: 0
 nav:
-  title: manual
+  title: Manual
   path: /graphin
   order: 1
 ---
