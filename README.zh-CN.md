@@ -1,18 +1,21 @@
-<img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> 简体中文 | [English](./README.md)
-
-<div  style='display:flex;justify-content: center;'> 
-  <span style='width:30px;height:30px;margin:8px;background:url(https://gw.alipayobjects.com/zos/antfincdn/0b4HzOcEJY/Graphin.svg) no-repeat' ></span>
-  <span style='font-weight:500;font-size: 2em;'>Graphin</span>
-</div>
+<p align="center">
+  <a href="https://ant.design">
+    <img width="150" src="https://gw.alipayobjects.com/zos/antfincdn/0b4HzOcEJY/Graphin.svg">
+  </a>
+</p>
+<h1 align="center">Graphin</h1>
 
 <div align="center">
+
+A React toolkit for graph analysis based on G6
 
 [![Version](https://badgen.net/npm/v/@antv/graphin)](https://www.npmjs.com/@antv/graphin)
 [![NPM downloads](http://img.shields.io/npm/dm/@antv/graphin.svg)](http://npmjs.com/@antv/graphin)
 ![Latest commit](https://badgen.net/github/last-commit/antvis/graphin)
 
 </div>
-Graphin 取名意为 Graph Insight（图的分析洞察），是一个基于 [G6](https://github.com/antvis/g6) 封装的 [React](https://reactjs.org/) 组件库。简单，高效，开箱即用。
+
+<img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> 简体中文 | [English](./README.md)
 
 ## ✨ 功能特性
 
@@ -32,11 +35,12 @@ Graphin 内置 10 款网图布局，4 款树图布局，满足你对于不同数
 
 ### 📝 细腻的交互，轻松自定义
 
-Graphin 提供了 13 种交互组件。包括画布的缩放，平移，圈选，拉索，自动 Resize，也包括元素的拖拽，选中，悬停，高亮，展开收起等，满足你对于不同分析场景的交互需求
+Graphin 提供了 13 种交互组件。包括画布的缩放，平移，圈选，拉索，自动 Resize，也包括元素的拖拽，选中，悬停，高亮，展开收起等，满足你对于不同分析场景的交互需求。[在线体验](https://graphin.antv.vision/graphin/behaviors/behaviros)
 
 ### 🚀 丰富的组件，源于业务沉淀
 
-目前 Graphin 提供了 7 种分析组件：分别为右键菜单，提示框，小地图，工具栏，鱼眼放大镜，轮廓，图例。未来将提供 17+ 的分析组件
+目前 Graphin 提供了 7 种分析组件：分别为右键菜单，提示框，小地图，工具栏，鱼眼放大镜，轮廓，图例。未来将提供 17+ 的分析组件。[在线体验](https://graphin.antv.vision/components/interaction/context-menu)
+
 ![components](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*XebMSIakucgAAAAAAAAAAAAAARQnAQ)
 
 ### ⚙️ 舒心的开发体验，符合 React 用户心智

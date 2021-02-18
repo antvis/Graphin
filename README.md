@@ -1,11 +1,13 @@
-<img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> English | [简体中文](./README.zh-CN.md)
-
-<div  style='display:flex;justify-content: center;'> 
-  <span style='width:30px;height:30px;margin:8px;background:url(https://gw.alipayobjects.com/zos/antfincdn/0b4HzOcEJY/Graphin.svg) no-repeat' ></span>
-  <span style='font-weight:500;font-size: 2em;'>Graphin</span>
-</div>
+<p align="center">
+  <a href="https://ant.design">
+    <img width="150" src="https://gw.alipayobjects.com/zos/antfincdn/0b4HzOcEJY/Graphin.svg">
+  </a>
+</p>
+<h1 align="center">Graphin</h1>
 
 <div align="center">
+
+A React toolkit for graph analysis based on G6
 
 [![Version](https://badgen.net/npm/v/@antv/graphin)](https://www.npmjs.com/@antv/graphin)
 [![NPM downloads](http://img.shields.io/npm/dm/@antv/graphin.svg)](http://npmjs.com/@antv/graphin)
@@ -13,9 +15,7 @@
 
 </div>
 
-Graphin means Graph Insight (analysis of graphs). It is a library based on [G6](https://github.com/antvis/g6) and [React](https://reactjs.org/) and offers graph analysis ability out of the box.
-
-For more infomation, please check the [Graphin Website](https://graphin.antv.vision/zh).
+<img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> English | [简体中文](./README.zh-CN.md)
 
 ## ✨ Features
 
@@ -35,11 +35,11 @@ Graphin has 10 built-in network graph layouts and 4 tree graph layouts to meet y
 
 ### 📝 Delicate interaction, easy to customize
 
-Graphin provides 13 interactive components. Including `canvas zooming`, `panning`, `brush selection`, `lasso select` , `automatic Resize`, and element dragging, selection, hovering, highlighting, expanding and retracting, etc., to meet your interactive needs for different analysis scenarios
+Graphin provides 13 interactive components. Including `canvas zooming`, `panning`, `brush selection`, `lasso select` , `automatic Resize`, and element dragging, selection, hovering, highlighting, expanding and retracting, etc., to meet your interactive needs for different analysis scenarios. [Online Experience](https://graphin.antv.vision/graphin/behaviors/behaviros)
 
 ### 🚀 Rich components, derived from business precipitation
 
-Currently Graphin provides 7 analysis components: `ContextMenu`, `Tooltip`, `MiniMap`, `Toolbar`, `FishEye`, `Hull`, and `Legend`. 17+ analysis components will be provided in the future
+Currently Graphin provides 7 analysis components: `ContextMenu`, `Tooltip`, `MiniMap`, `Toolbar`, `FishEye`, `Hull`, and `Legend`. 17+ analysis components will be provided in the future [Online Experience](https://graphin.antv.vision/components/interaction/context-menu)
 ![components](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*XebMSIakucgAAAAAAAAAAAAAARQnAQ)
 
 ### ⚙️ Comfortable development experience, in line with React users' minds
@@ -51,9 +51,9 @@ Currently Graphin provides 7 analysis components: `ContextMenu`, `Tooltip`, `Min
 - Graphin icon uses [Proxy](https://caniuse.com/?search=Proxy), the font icon may not be displayed correctly on some browsers that do not support Proxy syntax
 - The Graphin drawing engine is G6, which relies on the browser API and does not support SSR
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/ master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" /> ](http://godban.github.io/browsers-support-badges/)<br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/ safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Safari |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| IE11, Edge                                                                                                                                                                                                     | last 2 versions                                                                                                                                                                                                   | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                               |
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Safari |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| IE11, Edge                                                                                                                                                                                                     | last 2 versions                                                                                                                                                                                                  | last 2 versions                                                                                                                                                                                              | last 2 versions                                                                                                                                                                                              |
 
 ## 📦 Installation
 
