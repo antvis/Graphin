@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import type { FC, MouseEvent } from 'react';
 import React, { useContext } from 'react';
 import { context, Link, NavLink } from 'dumi/theme';
 import { useMedia } from 'react-use';
 import LocaleSelect from './LocaleSelect';
 
-import Products from '@antv/gatsby-theme-antv/site/components/Products';
+import Products from './Products';
 import Logo from './Header/Logo';
+
 import './Navbar.less';
 
 interface INavbarProps {
@@ -14,13 +17,13 @@ interface INavbarProps {
   onMobileMenuClick: (ev: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const timer = null;
 const Navbar: FC<INavbarProps> = ({ onMobileMenuClick, navPrefix, location }) => {
   const {
     base,
     config: { mode, title, logo },
     nav: navItems,
   } = useContext(context);
+
   const isWide = useMedia('(min-width: 767.99px)', true);
 
   const [productMenuVisible, setProductMenuVisible] = React.useState(false);
