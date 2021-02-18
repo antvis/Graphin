@@ -2,7 +2,7 @@
 title: MapMode
 group:
   path: /special
-  title: Advanced Analytical Component
+  title: Advanced Analytical
 nav:
   title: Components
   path: /components

@@ -3,6 +3,7 @@ title: Legend
 group:
   path: /mark
   title: Labeling Component
+  order: 1
 nav:
   title: Components
   path: /components
@@ -12,6 +13,29 @@ nav:
 # Legend
 
 Legend is a common graph analysis companion component, which usually colors nodes and edges after categorizing them to facilitate interactive analysis by users. Clicking on a legend results in two behaviors: highlighting, which highlights the node corresponding to the selected legend; and filtering, which hides the unselected nodes.
+
+<code src='./demos/index.tsx'>
+
+## Usage
+
+`<Legend />` has a built-in `<Legend.Node />` component to process the display style and interactive style of the legend.
+
+```tsx | pure
+<Graphin data={data}>
+  <Legend bindType="node" sortKey="data.type" colorKey="style.keyshape.stroke">
+    <Legend.Node />
+  </Legend>
+</Graphin>
+```
+
+<API src='./demos/index.tsx'>
+<API src='./Node.tsx'>
+
+## customize
+
+Legend has a built-in `<Legend.Node />` component to handle the display style and interactive style of the legend. Users can completely define their own `<Legend.Node />` component to achieve the purpose of customization. You can customize the style or the interaction name.
+
+<code src='./demos/custom.tsx'>
 
 ## Features
 

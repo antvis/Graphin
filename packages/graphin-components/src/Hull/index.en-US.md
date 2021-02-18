@@ -13,6 +13,12 @@ nav:
 
 Hull, a common graph analysis component, which allows contour wrapping of nodes belonging to a group, so as to visually distinguish the grouping, while preserving the original node layout. It is an efficient and simple analysis component.
 
+## Demo
+
+<code src='./demos/Simple.tsx'></code>
+
+<API src='./index.tsx'></API>
+
 ## Features
 
 - Consistent with G6 Hull technical implementation.
