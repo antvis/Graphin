@@ -10,6 +10,15 @@ banner:
     - text: 快速开始 →
       link: /graphin/quick-start/overview
       type: primary
+  notifications:
+    - type: 重磅推出
+      title: AntV图可视分析解决方案，来啦～
+      date: 2020.11.22
+      link: https://www.yuque.com/antv/g6/solution
+    - type: 小试牛刀
+      title: Graphin 1.0.0 全新发布！
+      date: 2019.11.22
+      link: https://github.com/antvis/graphin
 ideas:
   - icon: https://gw.alipayobjects.com/os/q/cms/images/k9ziitmp/13668549-b393-42a2-97c3-a6365ba87ac2_w96_h96.png
     title: 开箱即用
@@ -23,10 +32,15 @@ ideas:
     description: G6 + TypeScript + React，提供完整的类型定义文件，符合你的React开发体验
 
 cases:
+  - logo: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*gOfZTJLVLwwAAAAAAAAAAAAAARQnAQ'
+    title: Motif Graph
+    description: Motif Graph 是新加坡 Cylynx 公司，基于 Graphin 图可视分析能力 与 AI 图智能技术构建的一款在线图分析平台,支持的风险监控来打击财务欺诈，通过跨链分析了解虚拟资产链上的活动。
+    image: https://user-images.githubusercontent.com/28362229/108028838-6b5afe80-7067-11eb-9889-f67ab5e54ea0.png
+    link: https://www.cylynx.io/motif
+
   - logo: 'https://img.alicdn.com/tfs/TB1rh1xy7T2gK0jSZFkXXcIQFXa-128-128.svg'
     title: Graph Studio
     description: Graph Studio 是阿里云Dataworks团队围绕Graph Compute引擎打造的一站式图开发平台。其中基于Graphin开发的图分析平台提供了数据检索、关系扩散、布局切换、节点筛选、关联高亮、分享等常用图分析能力，能够帮助用户快速完成相关分析工作
     image: https://img.alicdn.com/tfs/TB1laWQyVT7gK0jSZFpXXaTkpXa-600-600.gif
-
-footer: Open-source MIT Licensed | Copyright © 2019-present
+    link: https://gs-share-cn-shanghai.aliyuncs.com/index8b5ab67a3e754e02a77aae7871465031.html#/?mock=true&source=graphin'
 ---

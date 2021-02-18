@@ -1,25 +1,46 @@
 ---
-title: Graphin 2.0 - Graph Vis
+title: Graphin -- Graph Insight
 order: 10
 sidebar: false
-hero:
-  title: Graphin 图的分析洞察
-  desc: Graphin 取名意为 Graph Insight（图的分析洞察），是一个基于 G6 封装的 React 组件库，专注在关系可视分析领域，简单高效，开箱即用。
+banner:
+  title: Graphin -- Graph Insight
+  desc: Graphin stands for Graph Insight. It's a toolkit based on G6 and React, that focuses on relational visual analysis. It's simple, efficient, out of the box.
+  image: https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*Gix7Rry3-5wAAAAAAAAAAABkARQnAQ
   actions:
-    - text: 快速开始 →
-      link: /graphin/quick-start
-
-features:
+    - text: Quick Start →
+      link: /graphin/quick-start/overview
+      type: primary
+  notifications:
+    - type: Heavy released
+      title: AntV graph visual analysis solution is coming～
+      date: 2020.11.22
+      link: https://www.yuque.com/antv/g6/solution
+    - type: Fitst Try
+      title: Graphin 1.0.0 has been published!
+      date: 2019.11.22
+      link: https://github.com/antvis/graphin
+ideas:
   - icon: https://gw.alipayobjects.com/os/q/cms/images/k9ziitmp/13668549-b393-42a2-97c3-a6365ba87ac2_w96_h96.png
-    title: 开箱即用
-    desc: 内置图元素，交互，布局，组件，你要的基础图可视分析能力都在这里！
+    title: Out of the box
+    description: Built-in graph elements, interaction, layout, components, the basic graph visual analysis capabilities you need are all here!
   - icon: https://gw.alipayobjects.com/os/q/cms/images/k9ziik0f/487a2685-8f68-4c34-824f-e34c171d0dfd_w96_h96.png
-    title: 业务沉淀
-    desc: 关系扩散，子图布局，算法分析，优化策略，你所遇到的图产品需求都在这里！
+    title: Business precipitation
+    description: node expand, sub-graph layout, algorithm analysis, optimization strategy, the demand for graph products you meet are all here!
 
   - icon: https://gw.alipayobjects.com/os/q/cms/images/k9zij2bh/67f75d56-0d62-47d6-a8a5-dbd0cb79a401_w96_h96.png
-    title: 开发福音
-    desc: G6 + TypeScript + React，提供完整的类型定义文件，符合你的React开发体验
+    title: Good development experience
+    description: G6 + TypeScript + React, provide a complete type definition file, in line with your React development experience
 
-footer: Open-source MIT Licensed | Copyright © 2019-present
+cases:
+  - logo: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*gOfZTJLVLwwAAAAAAAAAAAAAARQnAQ'
+    title: Motif Graph
+    description: Motif Graph is an online graph analysis platform built by Singapore Cylynx company based on Graphin graph visual analysis capabilities and AI graph intelligence technology. It supports risk monitoring to combat financial fraud and understands activities on the virtual asset chain through cross-chain analysis.
+    image: https://user-images.githubusercontent.com/28362229/108028838-6b5afe80-7067-11eb-9889-f67ab5e54ea0.png
+    link: https://www.cylynx.io/motif
+
+  - logo: 'https://img.alicdn.com/tfs/TB1rh1xy7T2gK0jSZFkXXcIQFXa-128-128.svg'
+    title: Graph Studio
+    description: Graph Studio is a one-stop graph development platform built by the Alibaba Cloud Dataworks Team based on Graph Compute. The graph analysis which is based on Graphin in this platform provides common graph analysis capabilities such as data retrieval, relationship diffusion, layout switching, node selection, association highlighting, and sharing, which can help users quickly complete related analysis work.
+    image: https://img.alicdn.com/tfs/TB1laWQyVT7gK0jSZFpXXaTkpXa-600-600.gif
+    link: https://gs-share-cn-shanghai.aliyuncs.com/index8b5ab67a3e754e02a77aae7871465031.html#/?mock=true&source=graphin'
 ---
