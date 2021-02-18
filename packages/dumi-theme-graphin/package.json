@@ -1,6 +1,6 @@
 {
   "name": "dumi-theme-graphin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The official graphin theme of dumi",
   "files": [
     "es",
@@ -19,8 +19,7 @@
     "prism-react-renderer": "^1.1.1",
     "prismjs": "^1.21.0",
     "rc-tabs": "^11.7.1",
-    "react-use": "^17.1.1",
-    "@antv/gatsby-theme-antv": "^1.0.7"
+    "react-use": "^17.1.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.3",

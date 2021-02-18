@@ -1,5 +1,6 @@
 ---
 title: Contribution Guide
+order: 2
 group:
   path: /quick-start
   order: 0

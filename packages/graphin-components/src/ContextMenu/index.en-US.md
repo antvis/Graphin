@@ -14,6 +14,22 @@ nav:
 
 ContextMenu is a right-click menu, usually for further operations on nodes. For example - node copy, delete, reverse selection, etc. More advanced operations can be supported such as marking a node, data analysis, diffusion of relationship, or sending a data request based on the selected node information. The right-click menu for a graph analysis tool is similar to the right-click menu of the browser webpage in interaction and display form, but it can also display other special designs such as a dashboard-shaped menu.
 
+## Built-in components
+
+Graphin has built-in basic Menu components,
+
+<code src='./demos/index'>
+<!-- <API src='./Menu.tsx'> -->
+<API src='./Menu.tsx'>
+
+## Custom: Antd Menu
+
+<code src='./demos/AntdMenu'>
+
+## Custom: Pie Menu
+
+<code src='./demos/PieMenu'>
+
 ## Features
 
 - As a container component, ContextMenu controls the positioning and event handling of internal components

@@ -3,37 +3,37 @@ title: Overview
 order: 0
 group:
   path: /quick-start
-  title: 快速开始
+  title: Quick start
   order: 0
 nav:
-  title: 使用文档
+  title: Manual
   path: /graphin
   order: 1
 ---
 
-## 功能概览
+## Feature Overview
 
 <code src='./index.tsx'>
 
-## 组件看板
+## Components
 
-| 组件            | 分类         | 名称          | 说明                                                 |
-| --------------- | ------------ | ------------- | ---------------------------------------------------- |
-| Graphin         | 核心组件     | @antv/graphin | 负责数据驱动整个画布：配置，布局，渲染，交互         |
-| ContextMenu     | 交互组件     | 右键菜单      | 帮助用户进行节点或边操作：打标，扩散，发现           |
-| Tooltip         | 交互组件     | 提示框        | 帮助用户快速浏览节点或边的信息                       |
-| MiniMap         | 交互组件     | 小地图        | 帮助用户进行全局导航                                 |
-| Toolbar         | 交互组件     | 工具栏        | 帮助用户进行画布操作：缩小，放大，全屏               |
-| RedoUndo        | 交互组件     | 撤销回退      | 帮助用户进行全局导航                                 |
-| FishEye         | 交互组件     | 鱼眼放大镜    | 帮助用户进行查看细节                                 |
-| CreateEdge      | 交互组件     | 边建联组件    | 帮助用户进行关系建联                                 |
-| Legend          | 标示组件     | 图例          | 帮助用户进行节点和边的类型标示：颜色，大小，属性     |
-| Hull            | 标示组件     | 轮廓          | 帮助用户进行节点归类示                               |
-| Statistic       | 标示组件     | 统计面板      | 帮助用户进行画布状态的监控标示                       |
-| SnapshotGallery | 分析配套组件 | 快照画廊      | 提供快照保存复现功能，帮助用户分析过程不中断         |
-| LayoutSelector  | 分析配套组件 | 布局切换器    | 帮助用户切换布局，自主调节参数，从而达到最佳布局效果 |
-| Sheetbar        | 分析配套组件 | 多画布组件    | 帮助用户二次分析，多画布管理                         |
-| TableMode       | 分析配套组件 | 表格模式      | 帮助通过表格查看关系源数据                           |
-| FindPathPanel   | 算法分析组件 | 寻找路径      | 帮助用户计算两个节点间的最短路径和可能路径列表       |
-| MapMode         | 高级分析组件 | 地图模式      | 帮助用户分析地理关系数据                             |
-| Timebar         | 高级分析组件 | 时间轴        | 帮助用户分析时序关系数据                             |
+| Components      | Classification                    | Name                    | Description                                                                                     | Progress / Schedule                      |
+| --------------- | --------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Graphin         | Core Components                   | @antv/graphin           | Responsible for data-driven entire canvas: configuration, layout, rendering, interaction        | <Badge type='success'>done</Badge>       |
+| ContextMenu     | Interactive components            | Right-click menu        | Help users perform node or edge operations: marking, spreading, and discovering                 | <Badge type='success'>done</Badge>       |
+| Tooltip         | Interactive components            | Tooltip                 | Help users quickly browse the information of nodes or edges                                     | <Badge type='success'>done</Badge>       |
+| MiniMap         | Interactive components            | Mini map                | Help users to navigate globally                                                                 | <Badge type='success'>done</Badge>       |
+| Toolbar         | Interactive components            | Toolbar                 | Help users perform canvas operations: zoom out, zoom in, full screen                            | <Badge type='success'>done</Badge>       |
+| RedoUndo        | Interactive components            | Undo rollback           | Help users to navigate globally                                                                 | <Badge type='info'>version 2.1.0</Badge> |
+| FishEye         | Interactive components            | Fisheye magnifier       | Help users to view details                                                                      | <Badge type='success'>done</Badge>       |
+| CreateEdge      | Interactive Components            | Edge-Building Component | Helping users to build relationships                                                            | <Badge type='info'>version 2.2.0</Badge> |
+| Legend          | Labeling components               | Legend                  | Help users to label the types of nodes and edges: color, size, attributes                       | <Badge type='success'>done</Badge>       |
+| Hull            | Labeling components               | Outline                 | Help users to classify nodes                                                                    | <Badge type='success'>done</Badge>       |
+| Statistic       | Labeling component                | Statistics panel        | Help users to monitor the status of the canvas                                                  | <Badge type='info'>version 2.1.0</Badge> |
+| SnapshotGallery | Analysis of supporting components | Snapshot gallery        | Provide snapshot saving and recurring function to help users uninterrupted analysis process     | <Badge type='info'>version 2.3.0</Badge> |
+| LayoutSelector  | Analysis of supporting components | Layout switcher         | Help users switch layouts and adjust parameters independently to achieve the best layout effect | <Badge type='info'>version 2.1.0</Badge> |
+| Sheetbar        | Analysis supporting components    | Multi-canvas component  | Help users to analyze and manage multiple canvases                                              | <Badge type='info'>version 2.4.0</Badge> |
+| TableMode       | Analysis Supporting Components    | Table Mode              | Help to view relational source data through tables                                              | <Badge type='info'>version 2.5.0</Badge> |
+| FindPathPanel   | Algorithm analysis component      | Find path               | Help users calculate the shortest path and possible path list between two nodes                 | <Badge type='info'>version 2.5.0</Badge> |
+| MapMode         | Advanced Analysis Components      | Map Mode                | Help users analyze geographic relational data                                                   | <Badge type='info'>version 2.6.0</Badge> |
+| Timebar         | Advanced Analysis Components      | Timeline                | Help users analyze time series relational data                                                  | <Badge type='info'>version 2.7.0</Badge> |

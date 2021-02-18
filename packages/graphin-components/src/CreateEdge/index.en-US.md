@@ -1,5 +1,5 @@
 ---
-title: ContextMenu
+title: CreateEdge
 group:
   path: /interaction
   title: Interactive Component
