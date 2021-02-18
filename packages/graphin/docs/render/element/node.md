@@ -39,6 +39,10 @@ Graphin 采用`Graphin.registerFontFamily`的方式注册加载字体文件，�
 如果我们追求更细腻的交互体验，比如在 hover 的时候，让 halo 光晕又一个动画效果，如下图所示
 <code src='./demos/node-animate.tsx'>
 
-## 05.`graphin-circle` 样式接口文档
+## 05.高颜值节点
+
+<code src='./demos/node-beauty.tsx'>
+
+## 06.`graphin-circle` 样式接口文档
 
 <API  src='../../interface/node-style.ts' >

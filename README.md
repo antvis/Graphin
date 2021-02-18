@@ -1,6 +1,9 @@
 <img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> English | [简体中文](./README.zh-CN.md)
 
-<h1 align="center">Graphin</h1>
+<div  style='display:flex;justify-content: center;'> 
+  <span style='width:30px;height:30px;margin:8px;background:url(https://gw.alipayobjects.com/zos/antfincdn/0b4HzOcEJY/Graphin.svg) no-repeat' ></span>
+  <span style='font-weight:500;font-size: 2em;'>Graphin</span>
+</div>
 
 <div align="center">
 
@@ -10,246 +13,140 @@
 
 </div>
 
-Graphin means Graph Insight (analysis of graphs). It is a library based on [G6](https://github.com/antvis/g6) and React and offers graph analysis ability out of the box. Graphin's logo is graphene, which means the potential of the future.
+Graphin means Graph Insight (analysis of graphs). It is a library based on [G6](https://github.com/antvis/g6) and [React](https://reactjs.org/) and offers graph analysis ability out of the box.
 
 For more infomation, please check the [Graphin Website](https://graphin.antv.vision/zh).
 
-![graphin](https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*N-5PT6UO9LAAAAAAAAAAAABkARQnAQ)
+## ✨ Features
 
-## Graphin Quick Start
+### 🎨 High-value elements, standard style configuration.
 
-> Graphin 2.0 组件文档：https://antv.vision/graphin-docs/
+Graphin standardizes the visual mapping of graph elements. A Graphin built-in node contains 5 parts: `keyshape`, `label`, `halo`, `icon`, and `badges`, each part can be driven by data. The built-in edges include three parts: `keyshape`, `label`, and `halo`. At the same time, there are also corresponding data style configurations for `label backgrounds` commonly used in business, such as `self-loops`, `polygons`, and `dashed lines`. [Online Experience](https://graphin.antv.vision/graphin/render/node)
 
-### Install
+![node-style](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*eGi_S5NXE3cAAAAAAAAAAAAAARQnAQ)
+![edge-style](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*voNsS4vtKlsAAAAAAAAAAAAAARQnAQ)
+
+### 📦 Automatic layout, easy to deal with complex scenes
+
+Graphin has 10 built-in network graph layouts and 4 tree graph layouts to meet your layout needs for different data types and different analysis scenarios. For `layout switching` in complex business scenarios, `dynamic layouts`, `sub-graph layouts`, etc., can be easily implemented through data-driven layout. [Online Experience](https://graphin.antv.vision/graphin/layout/dynamic-layout)
+
+![node-expand](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*tdcwQYD_FLoAAAAAAAAAAAAAARQnAQ)
+![layout-switch](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*ZhBqT4ZONrcAAAAAAAAAAAAAARQnAQ)
+
+### 📝 Delicate interaction, easy to customize
+
+Graphin provides 13 interactive components. Including `canvas zooming`, `panning`, `brush selection`, `lasso select` , `automatic Resize`, and element dragging, selection, hovering, highlighting, expanding and retracting, etc., to meet your interactive needs for different analysis scenarios
+
+### 🚀 Rich components, derived from business precipitation
+
+Currently Graphin provides 7 analysis components: `ContextMenu`, `Tooltip`, `MiniMap`, `Toolbar`, `FishEye`, `Hull`, and `Legend`. 17+ analysis components will be provided in the future
+![components](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*XebMSIakucgAAAAAAAAAAAAAARQnAQ)
+
+### ⚙️ Comfortable development experience, in line with React users' minds
+
+![typescript](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*xpoaRpOGme4AAAAAAAAAAAAAARQnAQ)
+
+## 🖥 Browser support
+
+- Graphin icon uses [Proxy](https://caniuse.com/?search=Proxy), the font icon may not be displayed correctly on some browsers that do not support Proxy syntax
+- The Graphin drawing engine is G6, which relies on the browser API and does not support SSR
+
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/ master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" /> ](http://godban.github.io/browsers-support-badges/)<br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/ safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Safari |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| IE11, Edge                                                                                                                                                                                                     | last 2 versions                                                                                                                                                                                                   | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                               |
+
+## 📦 Installation
+
+If you are a web developer using React, then you can use Graphin as a normal React component.
+
+This article uses yarn to install dependencies, and npm is also fine. The following install Graphin's core components `@antv/graphin` and analysis components `@antv/graphin-components`, and Graphin's official icon library `@antv/graphin-icons`
 
 ```bash
-npm install --save @antv/graphin
+yarn add @antv/graphin@latest --save
+yarn add @antv/graphin-components@latest --save
+yarn add @antv/graphin-icons --save
 ```
 
-### Usage
+## 🔨 Usage
 
-```jsx | pure
+### Use Graphin Core Component
+
+```tsx | pure
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Graphin, { Utils } from '@antv/graphin';
+import Graphin from '@antv/graphin';
+// mock data
+const data = Utils.mock(10).circle().graphin();
+export default () => {
+  return <Graphin data={data} />;
+};
+```
 
-import './styles.css';
+### Use Graphin Analysis Components
 
-const App = () => {
-  const data = Utils.mock(10).graphin();
+```tsx | pure
+import React from 'react';
+import Graphin from '@antv/graphin';
+import { MiniMap } from '@antv/graphin-components';
+// mock data
+const data = Utils.mock(10).circle().graphin();
+export default () => {
   return (
-    <div className="App">
-      <Graphin data={data} />
-    </div>
+    <Graphin data={data}>
+      <MiniMap />
+    </Graphin>
   );
 };
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
 ```
 
-### Graphin and G6 compatible table
+### Use Graphin font icon
 
-| Graphin Version | G6 Version | graphin-components antd Version |
-| --------------- | ---------- | ------------------------------- |
-| before 1.0.1    | 3.1.9      | 3.24.3                          |
-| ^1.0.2          | ^3.2.0     | 3.24.3                          |
-| ^1.0.5          | ^3.3.0     | 3.24.3                          |
-| ^1.1.0          | ^3.4.0     | 4.0.3                           |
-
-## Upgrade Guidelines
-
-From V1 to V2
-
-Compared with version 1.0, 2.0 has fully supported and upgraded the capabilities of G6: registration mechanism, layout mechanism, element styles, etc. are consistent with G6, support tree diagrams, and better componentization solutions
-
-### layout layout
-
--The configuration is consistent with the G6 layout, so you can use [G6 Layout Configuration](https://g6.antv.vision/zh/docs/api/graphLayout/guide)
--Usage is consistent with G6 layout, layout.options needs to be deconstructed
-
-```jsx | pure
-//v1
-<Graphin data={data} layout={{ name:'grid', options: options }} />
-//v2
-<Graphin data={data} layout={{ name:'grid', ...options }} />
-```
-
-### data data
-
-- Network graph data: The data structure of Graphin2.0 remains unchanged, but the data content has undergone some changes. New status fields and style fields are added to facilitate business processing. For details, see:
-- Tree graph data: Graphin2.0 supports tree graphs. If the data structure is tree, TreeGraph will be rendered internally
-
-```tsx
-const data = {
-  nodes: [
-    {
-      id: 'node-1',
-      // style field
-      style: {
-        label: {
-          value: 'node-1-label',
-        },
-      },
-      // status field
-      status: {
-        selected: true,
-      },
+```tsx | pure
+import React from 'react';
+import Graphin from '@antv/graphin';
+import { MiniMap } from '@antv/graphin-components';
+// Import icon resource files
+import iconLoader from '@antv/graphin-icons';
+// mock data
+const data = Utils.mock(10).circle().graphin();
+// Register in Graphin
+const { fontFamily, glyphs } = iconLoader();
+const icons = Graphin.registerFontFamily(iconLoader);
+// Use icons
+data.nodes.forEach(node => {
+  node.style = {
+    icon: {
+      type: 'font', // Specify the icon to be Font type
+      fontFamily: fontFamily, // Specify FontFamily
+      value: icons.home, // Specify the value of the icon
     },
-  ],
+  };
+});
+export default () => {
+  return (
+    <Graphin data={data}>
+      <MiniMap />
+    </Graphin>
+  );
 };
-
-<Graphin data={data} />;
 ```
 
-### behavior
+## 👨‍💻 Upgrade Guide
 
-Interactive behaviors, previously needed to be introduced in G6 through modes, support componentized introduction in Graphin, and support component attribute configuration to complete data drive. When upgrading the V2 version, there is no need to perceive this
+If you are a user from Graphin1.x, this [Upgrade Guide](https://graphin.antv.vision/graphin/quick-start/migration) may help you. If you encounter upgrade problems, you can also go to github Mention issue
 
-### extend
+## ⌨️ Development Guide
 
-The extend interface is completely removed from Graphin. Previously, nodeShape, icon, layout can be implemented through the `Graphin.register` interface. `extend.marker` completely removed
+If you want to start Graphin locally, you may wish to read this [Contribution Guide](https://graphin.antv.vision/graphin/quick-start/contributing). We hope that more partners will participate in the open source construction of Graphin
 
-- Expand node
+## More Info
 
-```tsx
-// v1
-<Graphin extend={{ nodeShape: renderNodeShape }} />;
+- [Graphin Introduction](https://graphin.antv.vision/graphin/quick-start/introduction)
+- [Quick Start](https://graphin.antv.vision/graphin/quick-start/quick-start)
+- [Graphin visual analysis solution](https://graphin.antv.vision/solution/database/graph-database)
 
-// v2
-Graphin.registerNode(renderNodeShape);
-```
-
-- Extend layout
-
-```tsx
-// layout
-<Graphin extend={{ nodeShape: customLayout }} />;
-
-// v2
-Graphin.registerLayout(customLayout);
-```
-
-- Extend icon
-
-```tsx
-// layout
-<Graphin extend={{ icon: customIconFunction }} />;
-
-// v2
-Graphin.reigsterFontFamily(iconloader); // View details Custom icon
-```
-
-- Extend marker (completely removed)
-
-### register
-
-Fully consistent with G6 registration mechanism
-
-```tsx
-// Register the node, refer to https://g6.antv.vision/zh/docs/api/registerItem#g6registernodenodename-options-extendednodename for details
-Graphin.registerNode();
-
-// Register edge, refer to https://g6.antv.vision/zh/docs/api/registerItem#g6registeredgeedgename-options-extendededgename for details
-Graphin.registerEdge();
-
-// Register Combo, refer to https://g6.antv.vision/zh/docs/api/registerItem#g6registercombocomboname-options-extendedcomboname for details
-Graphin.registerCombo();
-
-// Register layout, please refer to https://g6.antv.vision/zh/docs/api/registerLayout#g6registerlayoutlayoutname-layout
-Graphin.registerLayout();
-
-// Registration behavior, refer to https://g6.antv.vision/zh/docs/api/Behavior for details
-Graphin.registerBehavior();
-```
-
-## Develop Graphin
-
-Graphin use lerna to manage this repo. This repo contains the following packages:
-
-```bash
-/packages
-    graphin
-    graphin-components
-    graphin-studio
-    graphin-site
-```
-
-Please checkout the specific package：
-
-| Package Name                                                                                          | Description                                                       |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| [@antv/graphin](https://github.com/antvis/graphin/tree/master/packages/graphin)                       | Core React component of Graphin                                   |
-| [@antv/graphin-components](https://github.com/antvis/graphin/tree/master/packages/graphin-components) | Graphin components                                                |
-| [@antv/graphin-icons](https://github.com/antvis/graphin/tree/master/packages/graphin-icons)           | Graphin official icons                                            |
-| [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)             | Graphin documentation website                                     |
-| [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)               | A Graphin demo: generic graph analysis workbench based on Graphin |
-
-- Set up npmClient
-
-Set your npmClient in lerna.json, friends in China can set [cnpm](https://www.npmjs.com/package/cnpm)
-
-```json
-// ./lerna.json
-{
-  "packages": ["packages/*"],
-  "npmClient": "cnpm",
-  "version": "0.0.0"
-}
-```
-
-- Installation dependencies
-
-Install node_modules in `the project root directory`
-
-```bash
-cnpm i
-```
-
-- Install the dependencies of each package
-
-In the `root directory of the project`, start lerna's bootstrap, lerna automatically installs the dependencies of each package, after installation, you can find that each package has its own node_modules
-
-```bash
-npm run bootstrap
-```
-
-- Start local compilation of graphin, graphin-components, graphin-icons
-
-You can `cd` to graphin, graphin-components, graphin-icons in pacakges to start the script command `npm run start` in each package.json.
-
-Note ⚠️ Because each package in the packages has a dependency relationship, for example, graphin-components depends on the packaged product of graphin, and the speed of package startup is different, so we need to start the graphin package first, and then start packages/graphin-components. Startup is complete Later, you can also restart the ts compiler in vscode to ensure that each dependency ts can be inferred and found
-
-```bash
-npm run start
-```
-
-- Launch Graphin Dumi development document
-
-[dumi](https://d.umijs.org/) is a doc tool can assist you to develop libraries & write docs. very easy to use, so we can start dumi to view our development documents.
-
-Return to the `root directory of the project`, start `npm run docs`, you can see
-
-```bash
-npm run docs
-```
-
-- Launch Graphin official site
-
-```bash
-cd packages/graphin-site
-npm run site
-```
-
-### More Info
-
-- [Introduction to Graphin](https://graphin.antv.vision/zh/docs/manual/introduction)
-- [Getting started](https://graphin.antv.vision/zh/docs/manual/getting-started)
-- [API documentation](https://graphin.antv.vision/zh/docs/api/graphin)
-- [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)
-
-### DingTalk
+## DingTalk
 
 You can scan the QR code to join graphin's group chat
 
 <img src='https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*-qzoTpLg-1cAAAAAAAAAAAAAARQnAQ' alt='DingTalk' width= '300px'/>
+```

@@ -12,6 +12,94 @@ nav:
 
 这篇指南会指导你如何为 Graphin 贡献一份自己的力量，请在你要提 issue 或者 pull request 之前花几分钟来阅读一遍这篇指南。
 
+## 开发 Graphin
+
+Graphin 采用 lerna 管理仓库，packages 中包含以下 5 个 package：
+
+```bash
+/packages
+    graphin
+    graphin-components
+    graphin-icons
+    graphin-studio
+    graphin-site
+```
+
+他们依次对应的包名与解释如下：
+
+| 包名                                                                                                  | 说明                                                   |
+| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [@antv/graphin](https://github.com/antvis/graphin/tree/master/packages/graphin)                       | Graphin 中的图分析内核，基于 G6 封装 的 React 组件     |
+| [@antv/graphin-components](https://github.com/antvis/graphin/tree/master/packages/graphin-components) | Graphin 中的图分析组件                                 |
+| [@antv/graphin-icons](https://github.com/antvis/graphin/tree/master/packages/graphin-icons)           | Graphin 内置图标                                       |
+| [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)             | Graphin 文档官网                                       |
+| [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)               | Graphin 演示 DEMO：基于 Graphin 实现的通用关系分析平台 |
+
+- 设置 npmClient
+
+在 lerna.json 中设置你的 npmClient，中国地区的朋友可以设置 [cnpm](https://www.npmjs.com/package/cnpm)
+
+```json
+// ./lerna.json
+{
+  "packages": ["packages/*"],
+  "npmClient": "cnpm",
+  "version": "0.0.0"
+}
+```
+
+- 安装依赖
+
+在`该项目根目录`下安装 node_modules
+
+```bash
+cnpm i
+```
+
+- 安装各 packages 的依赖
+
+在`该项目根目录`下，启动 lerna 的 bootstrap，lerna 自动安装好各个 packages 的依赖，安装好后，可以发现各个 packages 中就存在自己的 node_modules 了
+
+```bash
+npm run bootstrap
+```
+
+- 启动 graphin ， graphin-components ，graphin-icons 的本地编译
+
+可以分别 cd 到 pacakges 中的 graphin，graphin-components，graphin-icons 中启动各个 package.json 中的 script 命令`npm run start`.
+
+注意 ⚠️ 因为 packages 中各个包 存在依赖关系，比如 graphin-components 就依赖 graphin 的打包产物，且 打包启动的速度不一样，因此需要我们先把 graphin 包启动后，再启动 packages/graphin-components .启动完毕后，也可以在 vscode 中重启 ts 编译器，从而确保各个依赖关系 ts 可以推断找到
+
+```bash
+npm run start
+```
+
+- 启动 Graphin Dumi 开发文档
+
+dumi 是一款针对组件开发场景而生的文档工具，非常好用，因此我们可以启动 dumi 来查看我们的开发文档。
+
+退回到`该项目根目录`，启动 `npm run docs` ,既可以看到
+
+```bash
+npm run docs
+```
+
+- 启动 Graphin 官方站点
+
+```bash
+cd packages/graphin-site
+npm run site
+```
+
+## Graphin 与 G6 兼容版本对照表
+
+| Graphin 版本 | G6 版本 |
+| ------------ | ------- |
+| before 1.0.1 | 3.1.9   |
+| ^1.0.2       | ^3.2.0  |
+| 1.4.6        | ^3.8.0  |
+| 2.0.0        | ^4.1.8  |
+
 ## 行为准则
 
 我们有一份[行为准则](https://github.com/antvis/graphin/blob/develop/CODE_OF_CONDUCT.md)，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。

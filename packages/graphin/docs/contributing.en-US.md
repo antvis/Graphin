@@ -12,6 +12,93 @@ nav:
 
 The following is a set of guidelines for contributing to Graphin. Please spend several minutes reading these guidelines before you create an issue or pull request.
 
+## Develop Graphin
+
+Graphin use lerna to manage this repo. This repo contains the following packages:
+
+```bash
+/packages
+    graphin
+    graphin-components
+    graphin-studio
+    graphin-site
+```
+
+Please checkout the specific package：
+
+| Package Name                                                                                          | Description                                                       |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| [@antv/graphin](https://github.com/antvis/graphin/tree/master/packages/graphin)                       | Core React component of Graphin                                   |
+| [@antv/graphin-components](https://github.com/antvis/graphin/tree/master/packages/graphin-components) | Graphin components                                                |
+| [@antv/graphin-icons](https://github.com/antvis/graphin/tree/master/packages/graphin-icons)           | Graphin official icons                                            |
+| [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)             | Graphin documentation website                                     |
+| [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)               | A Graphin demo: generic graph analysis workbench based on Graphin |
+
+- Set up npmClient
+
+Set your npmClient in lerna.json, friends in China can set [cnpm](https://www.npmjs.com/package/cnpm)
+
+```json
+// ./lerna.json
+{
+  "packages": ["packages/*"],
+  "npmClient": "cnpm",
+  "version": "0.0.0"
+}
+```
+
+- Installation dependencies
+
+Install node_modules in `the project root directory`
+
+```bash
+cnpm i
+```
+
+- Install the dependencies of each package
+
+In the `root directory of the project`, start lerna's bootstrap, lerna automatically installs the dependencies of each package, after installation, you can find that each package has its own node_modules
+
+```bash
+npm run bootstrap
+```
+
+- Start local compilation of graphin, graphin-components, graphin-icons
+
+You can `cd` to graphin, graphin-components, graphin-icons in pacakges to start the script command `npm run start` in each package.json.
+
+Note ⚠️ Because each package in the packages has a dependency relationship, for example, graphin-components depends on the packaged product of graphin, and the speed of package startup is different, so we need to start the graphin package first, and then start packages/graphin-components. Startup is complete Later, you can also restart the ts compiler in vscode to ensure that each dependency ts can be inferred and found
+
+```bash
+npm run start
+```
+
+- Launch Graphin Dumi development document
+
+[dumi](https://d.umijs.org/) is a doc tool can assist you to develop libraries & write docs. very easy to use, so we can start dumi to view our development documents.
+
+Return to the `root directory of the project`, start `npm run docs`, you can see
+
+```bash
+npm run docs
+```
+
+- Launch Graphin official site
+
+```bash
+cd packages/graphin-site
+npm run site
+```
+
+## Graphin and G6 compatible table
+
+| Graphin Version | G6 Version |
+| --------------- | ---------- |
+| before 1.0.1    | 3.1.9      |
+| ^1.0.2          | ^3.2.0     |
+| 1.4.6           | ^3.8.0     |
+| 2.0.0           | ^4.1.8     |
+
 ## Code of Conduct
 
 We have adopted a [Code of Conduct](https://github.com/antvis/graphin/blob/develop/CODE_OF_CONDUCT.md) that we expect project participants to adhere to. Please read the full text so that you can understand what actions will and will not be tolerated.

@@ -5,7 +5,7 @@ import { NodeStyle, EdgeStyle, ComboStyle } from '../typings/type';
 
 export const DEFAULT_THEME = {
   mode: 'light',
-  primaryColor: '#269a99', // '#3D76DD',
+  primaryColor: '#873bf4', // '#269a99', // '#6c2fc3',
   nodeSize: 26,
   edgeSize: 1,
   primaryEdgeColor: '#ddd',

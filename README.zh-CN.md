@@ -1,6 +1,9 @@
 <img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> 简体中文 | [English](./README.md)
 
-<h1 align="center">Graphin</h1>
+<div  style='display:flex;justify-content: center;'> 
+  <span style='width:30px;height:30px;margin:8px;background:url(https://gw.alipayobjects.com/zos/antfincdn/0b4HzOcEJY/Graphin.svg) no-repeat' ></span>
+  <span style='font-weight:500;font-size: 2em;'>Graphin</span>
+</div>
 
 <div align="center">
 
@@ -9,244 +12,135 @@
 ![Latest commit](https://badgen.net/github/last-commit/antvis/graphin)
 
 </div>
+Graphin 取名意为 Graph Insight（图的分析洞察），是一个基于 [G6](https://github.com/antvis/g6) 封装的 [React](https://reactjs.org/) 组件库。简单，高效，开箱即用。
 
-Graphin 取名意为 Graph Insight（图的分析洞察），是一个基于 [G6](https://github.com/antvis/g6) 封装的 React 组件库。简单，高效，开箱即用。它的 Logo 是一个石墨烯（Graphene），意为蕴藏未来的潜力。
+## ✨ 功能特性
 
-![graphin](https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*N-5PT6UO9LAAAAAAAAAAAABkARQnAQ)
+### 🎨 高颜值元素，规范的样式配置。
 
-## Graphin 快速开始
+Graphin 对于图元素的视觉映射做了规范化处理。一个 Graphin 内置节点包含：容器，标签，光晕，图标，徽标 5 部分，每一部分均可以通过数据驱动。内置的边包含：路径，标签，光晕 3 部分，同时针对业务中常用的标签背景，自环，多边，虚线等，也有响应的数据样式配置。[在线体验](https://graphin.antv.vision/graphin/render/node)
 
-> Graphin 2.0 组件文档：https://antv.vision/graphin-docs/
+![node-style](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*eGi_S5NXE3cAAAAAAAAAAAAAARQnAQ)
+![edge-style](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*voNsS4vtKlsAAAAAAAAAAAAAARQnAQ)
 
-### 安装
+### 📦 自动布局，轻松应对复杂场景
+
+Graphin 内置 10 款网图布局，4 款树图布局，满足你对于不同数据类型，不同分析场景的布局需求。针对复杂业务场景下的布局切换，动态布局，子图布局等，均能通过数据驱动布局，轻松实现。[在线体验](https://graphin.antv.vision/graphin/layout/dynamic-layout)
+
+![node-expand](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*tdcwQYD_FLoAAAAAAAAAAAAAARQnAQ)
+![layout-switch](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*ZhBqT4ZONrcAAAAAAAAAAAAAARQnAQ)
+
+### 📝 细腻的交互，轻松自定义
+
+Graphin 提供了 13 种交互组件。包括画布的缩放，平移，圈选，拉索，自动 Resize，也包括元素的拖拽，选中，悬停，高亮，展开收起等，满足你对于不同分析场景的交互需求
+
+### 🚀 丰富的组件，源于业务沉淀
+
+目前 Graphin 提供了 7 种分析组件：分别为右键菜单，提示框，小地图，工具栏，鱼眼放大镜，轮廓，图例。未来将提供 17+ 的分析组件
+![components](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*XebMSIakucgAAAAAAAAAAAAAARQnAQ)
+
+### ⚙️ 舒心的开发体验，符合 React 用户心智
+
+![typescript](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*xpoaRpOGme4AAAAAAAAAAAAAARQnAQ)
+
+## 🖥 浏览器支持
+
+- Graphin 图标 使用了 [Proxy](https://caniuse.com/?search=Proxy)，在一些不支持 Proxy 语法的浏览器上可能无法正确显示字体图标
+- Graphin 绘制引擎为 G6，依赖浏览器 API，暂不支持 SSR。
+
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Safari |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| IE11, Edge                                                                                                                                                                                                     | last 2 versions                                                                                                                                                                                                  | last 2 versions                                                                                                                                                                                              | last 2 versions                                                                                                                                                                                              |
+
+## 📦 安装
+
+如果你是使用 React 的 Web 开发者，那么你大可将 Graphin 当作一个普通的 React 组件来使用。
+
+本文采用 yarn 安装依赖，使用 npm 也可以。以下分别安装 Graphin 的核心组件`@antv/graphin` 和 分析组件`@antv/graphin-components`，以及 Graphin 官方提供的图标库`@antv/graphin-icons`
 
 ```bash
-npm run --save @antv/graphin@latest
+yarn add @antv/graphin@latest --save
+yarn add @antv/graphin-components@latest --save
+yarn add @antv/graphin-icons --save
 ```
 
-### Usage
+## 🔨 使用
 
-```jsx | pure
+### 使用 Graphin 画布组件
+
+```tsx | pure
 import React from 'react';
-import ReactDOM from 'react-dom';
+import Graphin from '@antv/graphin';
+// mock数据
+const data = Utils.mock(10).circle().graphin();
+export default () => {
+  return <Graphin data={data} />;
+};
+```
 
-import Graphin, { Utils } from '@antv/graphin';
+### 使用 Graphin 分析组件
 
-// 别忘了引入Graphin CSS
-import './styles.css';
-
-const App = () => {
-  const data = Utils.mock(10).graphin();
+```tsx | pure
+import React from 'react';
+import Graphin from '@antv/graphin';
+import { MiniMap } from '@antv/graphin-components';
+// mock数据
+const data = Utils.mock(10).circle().graphin();
+export default () => {
   return (
-    <div className="App">
-      <Graphin data={data} />
-    </div>
+    <Graphin data={data}>
+      <MiniMap />
+    </Graphin>
   );
 };
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
 ```
 
-## 升级指引
+### 使用 Graphin 字体图标
 
-从 V1 到 V2
-
-2.0 相比 1.0 版本，对 G6 的能力进行了全面的支持与升级：注册机制，布局机制，元素样式等和 G6 保持一致，支持树图，以及更好的组件化方案
-
-### layout 布局
-
-- 配置 和 G6 的 layout 保持一致，因此你可以使用[G6 的 Layout 配置](https://g6.antv.vision/zh/docs/api/graphLayout/guide)
-- 用法 和 G6 的 layout 保持一致 , layout.options 需要解构
-
-```jsx | pure
-//v1
-<Graphin data={data} layout={{ name: 'grid', options: options }} />
-//v2
-<Graphin data={data} layout={{ name: 'grid', ...options }} />
-```
-
-### data 数据
-
-- 网图数据：Graphin2.0 的数据结构不变，但是数据内容发生了一些变化，新增状态字段和样式字段，方便业务处理，具体详见：
-- 树图数据：Graphin2.0 支持树图，如果数据结构为 tree，则在内部渲染 TreeGraph
-
-```tsx
-const data = {
-  nodes: [
-    {
-      id: 'node-1',
-      // 样式字段
-      style: {
-        label: {
-          value: 'node-1-label',
-        },
-      },
-      // 状态字段
-      status: {
-        selected: true,
-      },
+```tsx | pure
+import React from 'react';
+import Graphin from '@antv/graphin';
+import { MiniMap } from '@antv/graphin-components';
+// 引入图标资源文件
+import iconLoader from '@antv/graphin-icons';
+// mock数据
+const data = Utils.mock(10).circle().graphin();
+// 注册到 Graphin 中
+const { fontFamily, glyphs } = iconLoader();
+const icons = Graphin.registerFontFamily(iconLoader);
+// 使用图标
+data.nodes.forEach(node => {
+  node.style = {
+    icon: {
+      type: 'font', // 指定图标为Font类型
+      fontFamily: fontFamily, // 指定FontFamily
+      value: icons.home, // 指定图标的值
     },
-  ],
+  };
+});
+export default () => {
+  return (
+    <Graphin data={data}>
+      <MiniMap />
+    </Graphin>
+  );
 };
-
-<Graphin data={data} />;
 ```
 
-### behavior
+## 👨‍💻 升级指南
 
-交互行为，之前在 G6 中需要通过 modes 引入，在 Graphin 中支持组件化引入，同时支持组件属性配置，从而完成数据驱动。在升级 V2 版本，这块不用感知
+如果你是从 Graphin1.x 的用户，这份[升级指南](https://graphin.antv.vision/graphin/quick-start/migration)可能会帮助你，遇到升级问题，也可以在 github 上提 issue
 
-### extend
+## ⌨️ 开发指南
 
-Graphin 中全面移除 extend 接口，之前 nodeShape，icon，layout 可以通过注册接口实现。extend.marker 彻底移除
+如果你想在本地启动 Graphin，不妨看这份[贡献指南](https://graphin.antv.vision/graphin/quick-start/contributing)。我们希望有更多的小伙伴一起参与 Graphin 的开源建设
 
-- 扩展节点
+## 更多信息
 
-```tsx
-// v1
-<Graphin extend={{ nodeShape: renderNodeShape }} />;
+- [Graphin 简介](https://graphin.antv.vision/graphin/quick-start/introduction)
+- [快速上手](https://graphin.antv.vision/graphin/quick-start/quick-start)
+- [图可视分析解决方案](https://graphin.antv.vision/solution/database/graph-database)
 
-// v2
-Graphin.registerNode(renderNodeShape);
-```
-
-- 扩展布局
-
-```tsx
-// layout
-<Graphin extend={{ nodeShape: customLayout }} />;
-
-// v2
-Graphin.registerLayout(customLayout);
-```
-
-- 扩展 icon
-
-```tsx
-// layout
-<Graphin extend={{ icon: customIconFunction }} />;
-
-// v2
-Graphin.reigsterFontFamily(iconloader); // 详情查看 自定义 icon
-```
-
-- 扩展 marker （彻底移除）
-
-### register
-
-和 G6 的注册机制完全保持一致
-
-```tsx
-// 注册节点，详情参考 https://g6.antv.vision/zh/docs/api/registerItem#g6registernodenodename-options-extendednodename
-Graphin.registerNode();
-
-// 注册边，详情参考 https://g6.antv.vision/zh/docs/api/registerItem#g6registeredgeedgename-options-extendededgename
-Graphin.registerEdge();
-
-// 注册Combo，详情参考 https://g6.antv.vision/zh/docs/api/registerItem#g6registercombocomboname-options-extendedcomboname
-Graphin.registerCombo();
-
-// 注册布局，详情参考 https://g6.antv.vision/zh/docs/api/registerLayout#g6registerlayoutlayoutname-layout
-Graphin.registerLayout();
-
-// 注册行为，详情参考 https://g6.antv.vision/zh/docs/api/Behavior
-Graphin.registerBehavior();
-```
-
-## 开发 Graphin
-
-Graphin 采用 lerna 管理仓库，packages 中包含以下 5 个 package：
-
-```bash
-/packages
-    graphin
-    graphin-components
-    graphin-icons
-    graphin-studio
-    graphin-site
-```
-
-他们依次对应的包名与解释如下：
-
-| 包名                                                                                                  | 说明                                                   |
-| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| [@antv/graphin](https://github.com/antvis/graphin/tree/master/packages/graphin)                       | Graphin 中的图分析内核，基于 G6 封装 的 React 组件     |
-| [@antv/graphin-components](https://github.com/antvis/graphin/tree/master/packages/graphin-components) | Graphin 中的图分析组件                                 |
-| [@antv/graphin-icons](https://github.com/antvis/graphin/tree/master/packages/graphin-icons)           | Graphin 内置图标                                       |
-| [@antv/graphin-site](https://github.com/antvis/graphin/tree/master/packages/graphin-site)             | Graphin 文档官网                                       |
-| [graphin-studio](https://github.com/antvis/graphin/tree/master/packages/graphin-studio)               | Graphin 演示 DEMO：基于 Graphin 实现的通用关系分析平台 |
-
-- 设置 npmClient
-
-在 lerna.json 中设置你的 npmClient，中国地区的朋友可以设置 [cnpm](https://www.npmjs.com/package/cnpm)
-
-```json
-// ./lerna.json
-{
-  "packages": ["packages/*"],
-  "npmClient": "cnpm",
-  "version": "0.0.0"
-}
-```
-
-- 安装依赖
-
-在`该项目根目录`下安装 node_modules
-
-```bash
-cnpm i
-```
-
-- 安装各 packages 的依赖
-
-在`该项目根目录`下，启动 lerna 的 bootstrap，lerna 自动安装好各个 packages 的依赖，安装好后，可以发现各个 packages 中就存在自己的 node_modules 了
-
-```bash
-npm run bootstrap
-```
-
-- 启动 graphin ， graphin-components ，graphin-icons 的本地编译
-
-可以分别 cd 到 pacakges 中的 graphin，graphin-components，graphin-icons 中启动各个 package.json 中的 script 命令`npm run start`.
-
-注意 ⚠️ 因为 packages 中各个包 存在依赖关系，比如 graphin-components 就依赖 graphin 的打包产物，且 打包启动的速度不一样，因此需要我们先把 graphin 包启动后，再启动 packages/graphin-components .启动完毕后，也可以在 vscode 中重启 ts 编译器，从而确保各个依赖关系 ts 可以推断找到
-
-```bash
-npm run start
-```
-
-- 启动 Graphin Dumi 开发文档
-
-dumi 是一款针对组件开发场景而生的文档工具，非常好用，因此我们可以启动 dumi 来查看我们的开发文档。
-
-退回到`该项目根目录`，启动 `npm run docs` ,既可以看到
-
-```bash
-npm run docs
-```
-
-- 启动 Graphin 官方站点
-
-```bash
-cd packages/graphin-site
-npm run site
-```
-
-### Graphin 与 G6 兼容版本对照表
-
-| Graphin 版本 | G6 版本 |
-| ------------ | ------- |
-| before 1.0.1 | 3.1.9   |
-| ^1.0.2       | ^3.2.0  |
-
-### 更多信息
-
-- [Graphin 简介](https://graphin.antv.vision/zh/docs/manual/introduction)
-- [快速上手](https://graphin.antv.vision/zh/docs/manual/getting-started)
-- [API 文档](https://graphin.antv.vision/zh/docs/api/graphin)
-- [GraphinStudio](https://graphin.antv.vision/zh/GraphinStudio)
-
-### 钉钉群
+## 钉钉群
 
 <img src='https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*-qzoTpLg-1cAAAAAAAAAAAAAARQnAQ' alt='钉钉群' width= '300px'/>
