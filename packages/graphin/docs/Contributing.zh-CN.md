@@ -1,5 +1,6 @@
 ---
 title: 贡献指南
+order: 2
 group:
   path: /quick-start
   order: 0

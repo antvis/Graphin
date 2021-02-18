@@ -8,9 +8,9 @@ export default {
   publicPath: '/',
   logo: 'https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png',
   favicon: 'https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png',
-  sitemap: {
-    hostname: 'graphin.antv.vision',
-  },
+  // sitemap: {
+  //   hostname: 'graphin.antv.vision',
+  // },
   resolve: {
     includes: [
       'packages/graphin/docs/',
