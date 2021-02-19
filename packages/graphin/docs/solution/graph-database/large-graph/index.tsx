@@ -1,5 +1,5 @@
 import React from 'react';
-import Graphin, { Behaviors } from '@antv/graphin';
+import Graphin, { Behaviors, GraphinData, Utils } from '@antv/graphin';
 import { ContextMenu, FishEye, MiniMap, Legend } from '@antv/graphin-components';
 import G6 from '@antv/g6';
 import { colorSets, clusterColorMap } from './color';
@@ -53,11 +53,11 @@ const transClusterData = (data, sourceData) => {
       type: 'graphin-circle',
       style: {
         keyshape: {
-          fill: primaryColor, // '#fff',
+          fill: primaryColor,
           fillOpacity: 0.1,
           strokeWidth: 1.2,
           stroke: primaryColor,
-          size: [nodeSize, nodeSize],
+          size: nodeSize,
         },
         label: {
           value: `cluster-${node.id}(${node.nodes.length})`,
@@ -66,9 +66,9 @@ const transClusterData = (data, sourceData) => {
         },
         halo: {
           fill: primaryColor, // '#fff',
+          stroke: primaryColor,
           fillOpacity: 0.1,
           strokeWidth: 1.2,
-          stroke: primaryColor,
         },
         icon: {
           fontFamily: 'graphin',
@@ -104,14 +104,11 @@ const transClusterData = (data, sourceData) => {
     return {
       ...edge,
       id,
-      label: '',
-      size: size > 0.5 ? size : 0.5,
-      color: '#AAB7C4', // '#545872',
       style: {
-        // endArrow: {
-        //   path: 'M 0,0 L 8,4 L 8,-4 Z',
-        //   fill: '#545872',
-        // },
+        keyshape: {
+          size: size > 0.5 ? size : 0.5,
+          stroke: '#AAB7C4',
+        },
       },
     };
   });
@@ -128,7 +125,7 @@ const transClusterData = (data, sourceData) => {
 let refreshData;
 const App = () => {
   const [state, setState] = React.useState({
-    data: {},
+    data: {} as GraphinData,
     source: {},
     clusteredData: {},
     visible: false,
@@ -140,8 +137,8 @@ const App = () => {
       .then(res => res.json())
       .then(res => {
         const clusteredData = louvain(res, false, 'weight');
-
         const data = transClusterData(clusteredData, res);
+
         refreshData = data;
         setState(preState => {
           return {
@@ -180,7 +177,6 @@ const App = () => {
     });
   };
   const handleChangeAnimate = checked => {
-    console.log('checked', checked);
     setState(preState => {
       return {
         ...preState,
