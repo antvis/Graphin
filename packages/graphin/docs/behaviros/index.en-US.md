@@ -10,7 +10,7 @@ nav:
   order: 1
 ---
 
-## Basic usage
+## Basic Usage
 
 The interaction behaviors in Graphin are all composable, such as the built-in `DragCavans`, `ZoomCanvas`, and `SelectClick` components. Because the interactions are all asynchronous, the components implement the atomic operations of addBehaviors and removeBehaviros. The default interaction behavior is available out of the box and can be imported on demand via `import {Behaviors} from'@antv/graphin'`.
 
@@ -38,11 +38,11 @@ export default () => {
 };
 ```
 
-## typescript friendly
+## Typescript Friendly
 
 ![](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*xpoaRpOGme4AAAAAAAAAAAAAARQnAQ)
 
-## Built-in interactive behavior
+## Built-in Interactive Behavior
 
 > Not all interactive behaviors need to be manually introduced by the user. Therefore, Graphin has 9 built-in interactive behaviors. We consider these interactive behaviors to be the basic interaction requirements of graph analysis products, so we choose to build them.
 
@@ -61,13 +61,13 @@ export default () => {
 
 <code src='./demos/index.tsx'>
 
-## Disable the default interactive behavior
+## Disable The default interactive behavior
 
 The built-in interactive component is a singleton mode. Therefore, we only need to import the interactive components that need again, and then manually set it to `disabled`. As in the example below, turn off the default `canvas zoom` and `node dragging` behaviors
 
 <code src='./demos/disabled.tsx'>
 
-## Optional interactive behavior
+## The optional interactive behavior
 
 > For non-high-frequency interactive behaviors, Graphin encapsulates these for users to introduce on demand. Tips 💡: Click to jump to the corresponding document to see more
 

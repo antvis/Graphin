@@ -19,24 +19,24 @@ For graph analysis applications, icons can distinguish the types of nodes, which
 import React from 'react';
 import Graphin from '@antv/graphin';
 
-// 引入资源文件
+// Import resource file
 import iconLoader from '@antv/graphin-icons';
 import '@antv/graphin-icons/dist/index.css';
 
-// 注册到 Graphin 中
+// Register in Graphin
 const { fontFamily, glyphs } = iconLoader();
 const icons = Graphin.registerFontFamily(iconLoader);
 
-// 使用图标
+// Use the icons
 const data = {
   nodes: [
     {
       id: 'node-1',
       style: {
         icon: {
-          type: 'font', // 指定图标为Font类型
-          fontFamily: fontFamily, // 指定FontFamily
-          value: icons.home, // 指定图标的值
+          type: 'font', // Assign the icon as a 'font' type
+          fontFamily: fontFamily, // Assign 'fontFamily' value
+          value: icons.home, // Assign the value of the icon
         },
       },
     },

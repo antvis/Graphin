@@ -10,7 +10,7 @@ nav:
   order: 0
 ---
 
-## Quick to use
+## Quick To Use
 
 The usage of the tree graph layout is very simple, just specify `<Graphin layout={{type:"xxx"}} />`. At the same time, you must ensure that the data of `props.data` is `Tree`
 
@@ -18,7 +18,7 @@ The usage of the tree graph layout is very simple, just specify `<Graphin layout
 import React from 'react';
 import Graphin, { Utils } from '@antv/graphin';
 
-//Mock树图数据
+// Mock tree graph data
 const data = Utils.mock(10)
   .tree()
   .graphinTree();
