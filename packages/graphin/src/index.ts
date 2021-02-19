@@ -1,13 +1,13 @@
 import Graphin from './Graphin';
 import GraphinContext, { GraphinContextType } from './GraphinContext';
 import Utils from './utils';
-import Layout from './layout';
 import Behaviors from './behaviors';
 import registerGraphinForce from './layout/inner/registerGraphinForce';
 import registerPresetLayout from './layout/inner/registerPresetLayout';
 import { registerGraphinCircle, registerGraphinLine } from './shape';
 /** export type */
-export { NodeStyle, EdgeStyle, GraphinData, GraphinTreeData } from './typings/type';
+export { NodeStyle, EdgeStyle, GraphinData, GraphinTreeData, IUserEdge, IUserNode, Layout } from './typings/type';
+export { ThemeType } from './theme';
 export { GraphinContextType };
 
 /** 注册 Graphin force 布局 */
@@ -26,7 +26,7 @@ const { registerFontFamily } = Graphin;
 
 /** export */
 export default Graphin;
-export { Utils, Layout, GraphinContext, Behaviors, registerFontFamily };
+export { Utils, GraphinContext, Behaviors, registerFontFamily };
 
 export {
   /** export G6 */
