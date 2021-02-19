@@ -213,7 +213,7 @@ export default () => {
       const style = getStyles({}, cfg.style) as NodeStyle;
       /** 将初始化样式存储在model中 */
       cfg._initialStyle = { ...style };
-      const { label, icon, badges = [], keyshape: keyShapeStyle } = style;
+      const { icon, badges = [], keyshape: keyShapeStyle } = style;
 
       const r = getRadiusBySize(keyShapeStyle.size) as number;
 

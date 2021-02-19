@@ -60,20 +60,6 @@ const LayoutConfigPanel = ({ updateLayout, layoutConfig = graphLayoutConfig }) =
     });
   }, []);
 
-  const [state, setState] = useState({
-    layout: { ...layoutConfig.graphLayout_force, animation: false },
-    data: {},
-  });
-
-  useEffect(() => {
-    setState(preState => {
-      return {
-        ...preState,
-        data: graph.save(),
-      };
-    });
-  }, []);
-
   // 切换布局
   const handleToggleLayout = value => {
     let type = '';
