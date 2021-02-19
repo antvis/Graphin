@@ -403,7 +403,7 @@ export type NodeStyleBadge = Partial<
 export type NodeStyleKeyShape = Partial<
   {
     /** 节点的大小 */
-    size: number | number[];
+    size: number;
     /** 填充色 */
     fill: string;
     /** 包围边颜色 */

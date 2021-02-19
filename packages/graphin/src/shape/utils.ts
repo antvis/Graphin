@@ -1,4 +1,4 @@
-import { deepMix, isArray, isNumber } from '@antv/util';
+import { isArray, isNumber } from '@antv/util';
 import { NodeStyle } from '../typings/type';
 /**
  *
