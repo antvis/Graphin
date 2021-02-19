@@ -60,9 +60,9 @@ const ColorPicker = (props: ColorPickerProps) => {
 
   return (
     <div>
-      <div style={{ ...styles.color, background: value }} onClick={handleClick} />
+      <div style={{ ...styles.color, background: value } as React.CSSProperties} onClick={handleClick} />
       <div style={{ display: 'inline-block', paddingLeft: '15px' }}> {value}</div>
-      <div style={styles.popover} onClick={handleClose}>
+      <div style={styles.popover as React.CSSProperties} onClick={handleClose}>
         {visible && <ChromePicker onChange={handleChange} color={color} />}
       </div>
     </div>

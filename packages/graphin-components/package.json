@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin-components",
-  "version": "2.0.0-beta.13",
+  "version": "2.0.0-beta.14",
   "description": "Components for graphin",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -49,13 +49,12 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@antv/util": "^2.0.10",
-    "@antv/graphin": "2.0.0-beta.13"
+    "@antv/util": "^2.0.10"
   },
   "peerDependencies": {
     "react": "^16.x",
     "react-dom": "^16.x",
-    "@antv/graphin": "2.0.0-beta.13"
+    "@antv/graphin": "2.0.0-beta.14"
   },
   "publishConfig": {
     "access": "public"
