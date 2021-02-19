@@ -19,37 +19,37 @@ A React toolkit for graph analysis based on G6
 
 ## ✨ Features
 
-### 🎨 High-value elements, standard style configuration.
+### 🎨 Good-looking elements, standardized style configuration
 
-Graphin standardizes the visual mapping of graph elements. A Graphin built-in node contains 5 parts: `keyshape`, `label`, `halo`, `icon`, and `badges`, each part can be driven by data. The built-in edges include three parts: `keyshape`, `label`, and `halo`. At the same time, there are also corresponding data style configurations for `label backgrounds` commonly used in business, such as `self-loops`, `polygons`, and `dashed lines`. [Online Experience](https://graphin.antv.vision/graphin/render/node)
+Graphin standardizes the visual mapping of graph elements. A Graphin's built-in node contains 5 parts: `keyshape, label, halo, icon, and badges`, each part can be driven by data. The built-in edges include three parts:` keyshape, label, and halo`. There are also corresponding style configurations for commonly used features, such as `label backgrounds`, `self-loops`, `polygons`, and `dashed lines`, etc. [Try it online](https://graphin.antv.vision/graphin/render/node)
 
 ![node-style](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*eGi_S5NXE3cAAAAAAAAAAAAAARQnAQ)
 ![edge-style](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*voNsS4vtKlsAAAAAAAAAAAAAARQnAQ)
 
-### 📦 Automatic layout, easy to deal with complex scenes
+### 📦 Automatic layout, easy to handle complex scenarios
 
-Graphin has 10 built-in network graph layouts and 4 tree graph layouts to meet your layout needs for different data types and different analysis scenarios. For `layout switching` in complex business scenarios, `dynamic layouts`, `sub-graph layouts`, etc., can be easily implemented through data-driven layout. [Online Experience](https://graphin.antv.vision/graphin/layout/dynamic-layout)
+Graphin has 10 built-in network graph layouts and 4 tree graph layouts to meet your needs of layout for different data types and different analysis scenarios. For features in complex business scenarios, such as `layout switching`, `dynamic layouts`, `sub-graph layouts`, etc., can be easily realized through data-driven layout. [Try it online](https://graphin.antv.vision/graphin/layout/dynamic-layout)
 
 ![node-expand](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*tdcwQYD_FLoAAAAAAAAAAAAAARQnAQ)
 ![layout-switch](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*ZhBqT4ZONrcAAAAAAAAAAAAAARQnAQ)
 
-### 📝 Delicate interaction, easy to customize
+### 📝 Thoughtful interactions, easy to customize
 
-Graphin provides 13 interactive components. Including `canvas zooming`, `panning`, `brush selection`, `lasso select` , `automatic Resize`, and element dragging, selection, hovering, highlighting, expanding and retracting, etc., to meet your interactive needs for different analysis scenarios. [Online Experience](https://graphin.antv.vision/graphin/behaviors/behaviros)
+Graphin provides 13 interactive components, including canvas zooming, panning, brush selection, lasso select , automatic resize, and also element dragging, selection, hovering, highlighting, expanding and collapsing, etc., to meet your interactive needs for different analysis scenarios [Try it online](https://graphin.antv.vision/graphin/behaviors/behaviros)
 
-### 🚀 Rich components, derived from business precipitation
+### 🚀 Rich components, derived from precipitation of business development
 
-Currently Graphin provides 7 analysis components: `ContextMenu`, `Tooltip`, `MiniMap`, `Toolbar`, `FishEye`, `Hull`, and `Legend`. 17+ analysis components will be provided in the future [Online Experience](https://graphin.antv.vision/components/interaction/context-menu)
+Currently Graphin provides 7 analysis components: `ContextMenu`, `Tooltip`, `MiniMap`, `Toolbar`, `FishEye`, `Hull`, and `Legend`. 17+ analysis components will be provided in the future. [Try it online](https://graphin.antv.vision/components/interaction/context-menu)
 ![components](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*XebMSIakucgAAAAAAAAAAAAAARQnAQ)
 
-### ⚙️ Comfortable development experience, in line with React users' minds
+### ⚙️ Comfortable development experience, in line with React users' cognition
 
 ![typescript](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*xpoaRpOGme4AAAAAAAAAAAAAARQnAQ)
 
 ## 🖥 Browser support
 
-- Graphin icon uses [Proxy](https://caniuse.com/?search=Proxy), the font icon may not be displayed correctly on some browsers that do not support Proxy syntax
-- The Graphin drawing engine is G6, which relies on the browser API and does not support SSR
+- Graphin icons use [Proxy](https://caniuse.com/?search=Proxy), the font icon may not be displayed correctly on some browsers that do not support Proxy syntax
+- The Graphin rendering engine of Graphin is G6, which relies on the browser API and does not support SSR
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Safari |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -57,9 +57,9 @@ Currently Graphin provides 7 analysis components: `ContextMenu`, `Tooltip`, `Min
 
 ## 📦 Installation
 
-If you are a web developer using React, then you can use Graphin as a normal React component.
+If you are using React, then you can use Graphin as a normal React component.
 
-This article uses yarn to install dependencies, and npm is also fine. The following install Graphin's core components `@antv/graphin` and analysis components `@antv/graphin-components`, and Graphin's official icon library `@antv/graphin-icons`
+It uses yarn to install dependencies in this article, while npm is also fine. The following commands install Graphin's core components `@antv/graphin` and analysis components `@antv/graphin-components`, and Graphin's official icon library `@antv/graphin-icons`
 
 ```bash
 yarn add @antv/graphin@latest --save
@@ -132,11 +132,11 @@ export default () => {
 
 ## 👨‍💻 Upgrade Guide
 
-If you are a user from Graphin1.x, this [Upgrade Guide](https://graphin.antv.vision/graphin/quick-start/migration) may help you. If you encounter upgrade problems, you can also go to github Mention issue
+If you are a user from Graphin1.x, this [Upgrade Guide](https://graphin.antv.vision/graphin/quick-start/migration) may help you. If you encounter upgrade problems, you can go to github issue section, and feel free to create issues if it's not already there.
 
 ## ⌨️ Development Guide
 
-If you want to start Graphin locally, you may wish to read this [Contribution Guide](https://graphin.antv.vision/graphin/quick-start/contributing). We hope that more partners will participate in the open source construction of Graphin
+If you want to run Graphin locally, you may wish to read this [Contribution Guide](https://graphin.antv.vision/graphin/quick-start/contributing). We hope more contributors can join our team to make Graphin better together.
 
 ## More Info
 
