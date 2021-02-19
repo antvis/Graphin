@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Graphin from '@antv/graphin';
-import { isArray } from '@antv/util';
+import isArray from '@antv/util/lib/is-array';
 import './index.less';
 
 const { GraphinContext } = Graphin;
@@ -46,7 +46,7 @@ export interface ToolBarProps {
   style?: React.CSSProperties;
 }
 
-const ToolbarItem = (props) => {
+const ToolbarItem = props => {
   const { children, onClick = () => {} } = props;
 
   return (
@@ -57,7 +57,7 @@ const ToolbarItem = (props) => {
   );
 };
 
-const Toolbar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolbarItem } = (props) => {
+const Toolbar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolbarItem } = props => {
   const { children, style = {}, direction = 'horizontal', options, onChange } = props;
   const graphin = React.useContext(GraphinContext);
   const isHorizontal = direction === 'horizontal';
@@ -74,7 +74,7 @@ const Toolbar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolbarIte
     positionStyle.bottom = 0;
   }
 
-  const handleClick = (option) => {
+  const handleClick = option => {
     try {
       if (onChange) {
         onChange(graphin, option);
@@ -88,7 +88,7 @@ const Toolbar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolbarIte
     return (
       <div className="graphin-components-toolbar" style={{ ...defaultStyle, ...positionStyle, ...style }}>
         <ul className="graphin-components-toolbar-content" style={{ display: isHorizontal ? 'flex' : '' }}>
-          {options.map((option) => {
+          {options.map(option => {
             const { key, name } = option;
             return (
               <ToolbarItem
