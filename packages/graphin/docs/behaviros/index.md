@@ -10,11 +10,33 @@ nav:
   order: 1
 ---
 
-## 基本介绍
+## 基本用法
 
-Graphin 中的交互行为都是可组合的，例如内置了 DragCavans,ZoomCanvas,SelectClick 组件，因为交互都是异步的，因此其组件内部实现了 addBehaviors 和 RemoveBehaviros 的原子操作。默认交互行为开箱即用，如果功能还不够满足，可以选择两种方式，一种是通过 options.xx 来配置（一般用户主要交互行为的配置，不会完全枚举）。如果希望更加灵活的配置方式，可以通过 `import {Behaviors} from '@antv/graphin'` 来按需引入,如下面示例子
+Graphin 中的交互行为都是可组合的，例如内置了 DragCavans,ZoomCanvas,SelectClick 组件，因为交互都是异步的，因此其组件内部实现了 addBehaviors 和 RemoveBehaviros 的原子操作。默认交互行为开箱即用，可以通过 `import {Behaviors} from '@antv/graphin'` 来按需引入。
 
-> Props API 和 G6 的 defaultBehaviros 完全保持一致:https://g6.antv.vision/zh/docs/manual/middle/states/defaultBehavior
+每个交互组件 Props API 和 [G6 的 defaultBehaviros](https://g6.antv.vision/zh/docs/manual/middle/states/defaultBehavior) 完全保持一致。可以在[节点交互](/graphin/behaviors/node) 和 [画布交互](/graphin/behaviors/canvas) 的文档中查看
+
+```tsx | pure
+import React from 'react';
+import Graphin, { Utils, Behaviors } from '@antv/graphin';
+
+const data = Utils.mock(10)
+  .random()
+  .graphin();
+
+const { DragCanvas, ZoomCanvas, DragNode, ActivateRelations } = Behaviors;
+
+export default () => {
+  return (
+    <div>
+      <Graphin data={data}>
+        <ZoomCanvas enableOptimize />
+        <DragNode disabled />
+      </Graphin>
+    </div>
+  );
+};
+```
 
 ## typescript 友好
 
@@ -22,7 +44,7 @@ Graphin 中的交互行为都是可组合的，例如内置了 DragCavans,ZoomCa
 
 ## 内置交互行为
 
-> Graphin 内置了 9 个交互行为，这些交互行为，我们认为是图分析产品基本的交互需求，因此选择内置
+> 并不是所有的交互行为都需要用户手动引入，因此 Graphin 内置了 9 个交互行为，这些交互行为，我们认为是图分析产品基本的交互需求，因此选择内置。
 
 ```jsx | pure
 <>
@@ -37,12 +59,19 @@ Graphin 中的交互行为都是可组合的，例如内置了 DragCavans,ZoomCa
 </>
 ```
 
-<code src='./demo.tsx'>
+<code src='./demos/index.tsx'>
+
+## 禁用默认的交互行为
+
+内置的交互组件，是单例模式。因此，我们只需要再次引入需要关闭的交互组件，然后手动设置为`disabled`即可。如下面示例，关闭默认的 `画布缩放` 和 `节点拖拽` 行为
+
+<code src='./demos/disabled.tsx'>
 
 ## 可选交互行为
 
-> Graphin 还提供了
+> 针对不是高频的交互行为，Graphin 将这些封装起来，供用户自己按需引入。小提示 💡 ： 点击跳转到对应的文档查看更多
 
-### 通过 disabled 来禁用该交互行为
-
-<!-- <code src='../render/data/Network.tsx'> -->
+- 关联高亮交互：[`<ActivateRelations />`](/graphin/behaviors/node#activaterelations)
+- 自适应视窗交互：[`<FitView />`](/graphin/behaviors/canvas#fitview)
+- 字体加载渲染：[`<FontPaint />`](/graphin/behaviors/node#fontpaint)
+- 树图展开收起：[`<TreeCollapse />`](/graphin/behaviors/node#treecollapse)

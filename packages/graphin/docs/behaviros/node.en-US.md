@@ -1,9 +1,9 @@
 ---
-title: 节点交互
+title: Node interaction
 order: 1
 group:
   path: /behaviors
-  title: 交互行为
+  title: Interactive behavior
   order: 3
 nav:
   path: /graphin
@@ -24,7 +24,7 @@ nav:
 
 ## TreeCollapse
 
-仅数据结构为树，内部渲染为 TreeGraph 的时候，该交互引入才可生效
+This interactive introduction can only take effect when the data structure is a tree and the internal rendering is a TreeGraph
 
 <API src='../../src/behaviors/TreeCollapse.tsx'>
 
