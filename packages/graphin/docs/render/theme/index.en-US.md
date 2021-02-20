@@ -22,7 +22,7 @@ In different business scenarios, we may be faced with setting themes on the canv
 
 ### 🔧 Tool Functions
 
-We also provide the Utils function, which users can configure through themes to generate element styles. In Graphin's official default style, these tool functions are also used to deepen the default style.
+We also provide the `Utils` function, which users can configure through themes to generate element styles. In Graphin's official default style, these tool functions are also used to deepen the default style.
 
 ```jsx | pure
 import { Utils } from '@antv/graphin';

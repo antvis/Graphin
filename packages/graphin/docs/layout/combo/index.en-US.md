@@ -16,4 +16,4 @@ When the data has obvious clustering characteristics, even if the grouping layou
 - [`CirclePacking Layout`](https://observablehq.com/@d3/zoomable-circle-packing) @d3-circle-packing
 - [`Group Clustering Layout`](https://doc.linkurio.us/ogma/latest/examples/visual-grouping.html) @linkurio
 
-> Note ⚠️: Graphin is currently under research on this function, if you are interested, please feel free to communicate with us on github~
+> Note ⚠️: Graphin is currently developing this function, if you are interested, please feel free to join us on github~
