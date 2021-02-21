@@ -15,7 +15,7 @@ When Graphin's built-in node `graphin-circle` and built-in edge `graphin-line` d
 
 ## [Compatible] Register node through G6.registerNode
 
-Friends who are familiar with G6 should guide that the entire graph elements are completed by G6's [register](https://g6.antv.vision/zh/docs/manual/middle/elements/nodes/custom-node). Of course Graphin also supports custom nodes. Users can directly complete the registration through `Graphin.reigsterNode()`. The internal source code is as follows:
+Friends who are familiar with G6 should guide that the entire graph elements are completed by G6's [register](https://g6.antv.vision/en/docs/manual/middle/elements/nodes/custom-node). Of course Graphin also supports custom nodes. Users can directly complete the registration through `Graphin.reigsterNode()`. The internal source code is as follows:
 
 ```jsx | pure
   static registerNode: RegisterFunction = (nodeName, options, extendedNodeName) => {
@@ -33,4 +33,4 @@ In fact, there are not many scenarios for registering edges, and compared to nod
 
 ## [Compatible] Register Combo through G6.registerCombo
 
-Like the above custom nodes and edges, you can still refer to the G6 document [custom-combo](https://g6.antv.vision/zh/docs/manual/middle/elements/combos/custom-combo) to easily implement customization Combo
+Like the above custom nodes and edges, you can still refer to the G6 document [custom-combo](https://g6.antv.vision/en/docs/manual/middle/elements/combos/custom-combo) to easily implement customization Combo

@@ -13,7 +13,7 @@ Compared with version 1.0, 2.0 has fully supported and upgraded the capabilities
 
 ### layout layout
 
--The configuration is consistent with the G6 layout, so you can use [G6 Layout Configuration](https://g6.antv.vision/zh/docs/api/graphLayout/guide)
+-The configuration is consistent with the G6 layout, so you can use [G6 Layout Configuration](https://g6.antv.vision/en/docs/api/graphLayout/guide)
 -Usage is consistent with G6 layout, layout.options needs to be deconstructed
 
 ```jsx | pure
@@ -95,18 +95,18 @@ Graphin.reigsterFontFamily(iconloader); // View details Custom icon
 Fully consistent with G6 registration mechanism
 
 ```tsx | pure
-// Register the node, refer to https://g6.antv.vision/zh/docs/api/registerItem#g6registernodenodename-options-extendednodename for details
+// Register the node, refer to https://g6.antv.vision/en/docs/api/registerItem#g6registernodenodename-options-extendednodename for details
 Graphin.registerNode();
 
-// Register edge, refer to https://g6.antv.vision/zh/docs/api/registerItem#g6registeredgeedgename-options-extendededgename for details
+// Register edge, refer to https://g6.antv.vision/en/docs/api/registerItem#g6registeredgeedgename-options-extendededgename for details
 Graphin.registerEdge();
 
-// Register Combo, refer to https://g6.antv.vision/zh/docs/api/registerItem#g6registercombocomboname-options-extendedcomboname for details
+// Register Combo, refer to https://g6.antv.vision/en/docs/api/registerItem#g6registercombocomboname-options-extendedcomboname for details
 Graphin.registerCombo();
 
-// Register layout, please refer to https://g6.antv.vision/zh/docs/api/registerLayout#g6registerlayoutlayoutname-layout
+// Register layout, please refer to https://g6.antv.vision/en/docs/api/registerLayout#g6registerlayoutlayoutname-layout
 Graphin.registerLayout();
 
-// Registration behavior, refer to https://g6.antv.vision/zh/docs/api/Behavior for details
+// Registration behavior, refer to https://g6.antv.vision/en/docs/api/Behavior for details
 Graphin.registerBehavior();
 ```

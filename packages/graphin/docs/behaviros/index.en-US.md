@@ -14,7 +14,7 @@ nav:
 
 The interaction behaviors in Graphin are all composable, such as the built-in `DragCavans`, `ZoomCanvas`, and `SelectClick` components. Because the interactions are all asynchronous, the components implement the atomic operations of addBehaviors and removeBehaviros. The default interaction behavior is available out of the box and can be imported on demand via `import {Behaviors} from'@antv/graphin'`.
 
-The Props API of each interactive component is completely consistent with [G6's defaultBehaviros](https://g6.antv.vision/zh/docs/manual/middle/states/defaultBehavior). You can view it in the documents of [Node Interaction](/graphin/behaviors/node) and [Canvas Interaction](/graphin/behaviors/canvas)
+The Props API of each interactive component is completely consistent with [G6's defaultBehaviros](https://g6.antv.vision/en/docs/manual/middle/states/defaultBehavior). You can view it in the documents of [Node Interaction](/en-US/graphin/behaviors/node) and [Canvas Interaction](/en-US/graphin/behaviors/canvas)
 
 ```tsx | pure
 import React from 'react';
@@ -71,7 +71,7 @@ The built-in interactive component is a singleton mode. Therefore, we only need 
 
 > For non-high-frequency interactive behaviors, Graphin encapsulates these for users to introduce on demand. Tips 💡: Click to jump to the corresponding document to see more
 
-- Association highlighting interaction: [`<ActivateRelations />`](/graphin/behaviors/node#activaterelations)
-- Fitview viewpoint interaction: [`<FitView />`](/graphin/behaviors/canvas#fitview)
-- Font loading rendering: [`<FontPaint />`](/graphin/behaviors/node#fontpaint)
-- Tree graph expand and collapse: [`<TreeCollapse />`](/graphin/behaviors/node#treecollapse)
+- Association highlighting interaction: [`<ActivateRelations />`](/en-US/graphin/behaviors/node#activaterelations)
+- Fitview viewpoint interaction: [`<FitView />`](/en-US/graphin/behaviors/canvas#fitview)
+- Font loading rendering: [`<FontPaint />`](/en-US/graphin/behaviors/node#fontpaint)
+- Tree graph expand and collapse: [`<TreeCollapse />`](/en-US/graphin/behaviors/node#treecollapse)
