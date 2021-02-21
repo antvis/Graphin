@@ -8,7 +8,7 @@ interface Props {
     (value: any): void;
   };
 }
-const CreateEdge: React.FunctionComponent<Props> = (props) => {
+const CreateEdge: React.FunctionComponent<Props> = props => {
   const { children } = props;
   const [state, setState] = React.useState({
     active: false,
@@ -49,7 +49,7 @@ const CreateEdge: React.FunctionComponent<Props> = (props) => {
         'default',
       );
     } else {
-      // 非边建联，即可删除behaviros
+      // 非边建联，即可删除behaviors
       graph.removeBehaviors('create-edge', 'default');
     }
   }, [active]);

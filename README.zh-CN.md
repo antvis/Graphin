@@ -35,7 +35,7 @@ Graphin 内置 10 款网图布局，4 款树图布局，满足你对于不同数
 
 ### 📝 细腻的交互，轻松自定义
 
-Graphin 提供了 13 种交互组件。包括画布的缩放，平移，圈选，拉索，自动 Resize，也包括元素的拖拽，选中，悬停，高亮，展开收起等，满足你对于不同分析场景的交互需求。[在线体验](https://graphin.antv.vision/graphin/behaviors/behaviros)
+Graphin 提供了 13 种交互组件。包括画布的缩放，平移，圈选，拉索，自动 Resize，也包括元素的拖拽，选中，悬停，高亮，展开收起等，满足你对于不同分析场景的交互需求。[在线体验](https://graphin.antv.vision/graphin/behaviors/behaviors)
 
 ### 🚀 丰富的组件，源于业务沉淀
 

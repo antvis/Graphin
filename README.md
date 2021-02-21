@@ -35,7 +35,7 @@ Graphin has 10 built-in network graph layouts and 4 tree graph layouts to meet y
 
 ### 📝 Thoughtful interactions, easy to customize
 
-Graphin provides 13 interactive components, including canvas zooming, panning, brush selection, lasso select , automatic resize, and also element dragging, selection, hovering, highlighting, expanding and collapsing, etc., to meet your interactive needs for different analysis scenarios [Try it online](https://graphin.antv.vision/en-US/graphin/behaviors/behaviros)
+Graphin provides 13 interactive components, including canvas zooming, panning, brush selection, lasso select , automatic resize, and also element dragging, selection, hovering, highlighting, expanding and collapsing, etc., to meet your interactive needs for different analysis scenarios [Try it online](https://graphin.antv.vision/en-US/graphin/behaviors/behaviors)
 
 ### 🚀 Rich components, derived from precipitation of business development
 

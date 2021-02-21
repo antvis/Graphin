@@ -17,7 +17,7 @@ As shown in the figure below: suppose we need to automatically focus on the `nod
 
 ## [Compatible] How to write G6 registration behavior
 
-If you are an old user of G6, for the definition of interactive behavior, you may use the wording of `registerBehavior`, which of course Graphin also supports. But for the sake of logical unification, when you use this method, Graphin will remove all default interactions internally. The internal source code implementation is shown in the figure below. So you have to rewrite `drag-canvas` and other behaviros with `<Graphin modes={{ default: ['sampleBehavior','drag-canvas'] }}/>`.
+If you are an old user of G6, for the definition of interactive behavior, you may use the wording of `registerBehavior`, which of course Graphin also supports. But for the sake of logical unification, when you use this method, Graphin will remove all default interactions internally. The internal source code implementation is shown in the figure below. So you have to rewrite `drag-canvas` and other behaviors with `<Graphin modes={{ default: ['sampleBehavior','drag-canvas'] }}/>`.
 
 ```jsx | pure
 <>
