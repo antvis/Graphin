@@ -105,30 +105,30 @@ const {
 
 ## 06. Good analysis components can improve user analysis efficiency
 
-With the deepening of business, users have more and more analysis demands. Simple canvas and graphic element operations can no longer satisfy users' analysis demands:
+As the business deepen, users possess more analysis demands. The simple canvas and graphic element operations no longer satisfy users' analysis demands, for example:
 
-- For example, the operation of nodes is not limited to clicking nodes. It is also necessary to mark nodes, drill down data, delete, and reverse selection. At this time, you need a right-click menu component.
-- For example, data classification needs to be marked with contour components or legends
+- The operation of nodes is not limited to clicking nodes. It is also necessary to mark nodes, drill down data, delete, and reverse selection. At this time, you need a right-click menu component.
+- Data classification needs to be marked with contour components or legends
 
 Graphin summarized 26 analysis components according to the guidance in the white paper "AntV Graph Visual Analysis Solution".
 
 <code src='./demos/components.tsx'>
 
-## 07. Precipitating these product solutions, maybe you can use them
+## 07. Precipitating these product solutions, maybe you could use them
 
-If you have the patience to see here, then we can talk about business together. The application of graph visual analysis in different business fields actually has some points in common. For example, in the knowledge graph and financial risk control, there is a core product function, the former is `knowledge reasoning`, the latter is `risk detection`, because in these scenarios, the main use is the data analysis method of drilling down. The special point of drilling down graph data is that it is not only a dynamic process of data, but also a dynamic process of layout. The exploration problem of dynamic graphs is the first business pain point problem solved by the Graphin team. Now we abstract this problem as a combination of two technical solutions of `data-driven + progressive layout`, hoping to help everyone's business.
+If you have read up to this point, we will discuss more about business application in this section. There are several similarities found in the application of graph visual analysis in different business fields. As an example, in the knowledge graph and financial risk control, there is a core product function, the former is `knowledge reasoning`, the latter is `risk detection`. In these scenarios, the drill-down analysis i used. It required dynamic process of both data and layout. The exploration challenges of dynamic graphs are the first business problem solved by the Graphin team. We abstract this problem as a combination of two technical solutions of `data-driven + progressive layout` and hope to provide assistance in everyone's business.
 
 <code src='./demos/node-expand.tsx'>
 
-In addition to dynamic map layout, large map exploration is also a common requirement in business. Adopting louvain algorithm aggregation, using Combo capability or node aggregation display mode, combined with MiniMap small map navigation, fish-eye magnifying glass, can initially meet the exploration needs of large maps. This piece of [DEMO can refer to](https://antv.vision/graphin-docs/graphin/case/geamaker)
+In addition to dynamic map layout, large map exploration is a common requirement in business. By adopting louvain algorithm aggregation, using Combo capability or node aggregation display mode, combined with MiniMap small map navigation, fish-eye magnifying glass, can initially meet the exploration needs of large maps. Refer this [DEMO](https://antv.vision/graphin-docs/graphin/case/geamaker) for more information.
 
-The above is all the content of our quick start: through the fragmentary small DEMO, we have basically seen a basic capability of Graphin:
+The above sections are all the contents for our quick start: through the fragmentary small DEMO, we have demonstrated a basic capability of Graphin:
 
 - Support the rendering of two different data structures: tree map and net map.
 - Built-in multiple layouts, support sub-map layout, incremental layout, layout switching.
-- There are combination specifications for nodes and edges, and style customization is supported.
-- Support the introduction of interactive behavior combinations: Currently, 9 common interaction behaviors have been completed to meet our daily interaction needs.
-- Built-in rich analysis components, currently 6 commonly used components have been completed: right-click menu ContexMenu, tooltip, minimap navigation MiniMap, legend component Legend, fisheye magnifier FishEye, contour component Hull. There are 26 components in total.
+- Combination specifications for nodes and edges, and style customization are supported.
+- Support the imports of interactive behavior combinations: Currently, 9 common interaction behaviors have been completed to meet our daily interaction needs.
+- Built-in rich analysis components, currently 6 commonly used components have been completed: right-click menu, tooltip, minimap navigation, legend component, fisheye magnifier, contour component. There are 26 components in total.
 - Accumulate product functions from business types, such as dynamic map exploration and big map exploration.
 
 If you are still interested, you can continue to read the in-depth exploration part, which will introduce you to Graphin's extension mechanism and component customization mechanism, as well as GraphinStudio that we will focus on next.
