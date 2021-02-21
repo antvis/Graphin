@@ -4,7 +4,7 @@ order: 10
 sidebar: false
 banner:
   title: Graphin - Graph Insight
-  desc: Graphin stands for Graph Insight. It's a toolkit based on G6 and React, that focuses on relational visual analysis. It's simple, efficient, out of the box.
+  desc: Graphin stands for Graph Insight. It's a React toolkit based on G6, focuses on relational visual analysis. It's simple, efficient, out of the box.
   image: https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*Gix7Rry3-5wAAAAAAAAAAABkARQnAQ
   actions:
     - text: Quick Start →
