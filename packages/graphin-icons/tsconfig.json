@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "allowJs": true,
+    "allowJs": false,
     "declaration": true,
     "target": "es2015",
     "moduleResolution": "node",

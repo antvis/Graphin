@@ -1,9 +1,9 @@
 ---
-title: Graphin -- Graph Insight
+title: Graphin - Graph Insight
 order: 10
 sidebar: false
 banner:
-  title: Graphin -- Graph Insight
+  title: Graphin - Graph Insight
   desc: Graphin stands for Graph Insight. It's a toolkit based on G6 and React, that focuses on relational visual analysis. It's simple, efficient, out of the box.
   image: https://gw.alipayobjects.com/mdn/rms_00edcb/afts/img/A*Gix7Rry3-5wAAAAAAAAAAABkARQnAQ
   actions:
@@ -11,24 +11,24 @@ banner:
       link: /graphin/quick-start/overview
       type: primary
   notifications:
-    - type: Heavy released
+    - type: Heavy Released
       title: AntV graph visual analysis solution is coming～
       date: 2020.11.22
       link: https://www.yuque.com/antv/g6/solution
-    - type: Fitst Try
+    - type: First Try
       title: Graphin 1.0.0 has been published!
       date: 2019.11.22
       link: https://github.com/antvis/graphin
 ideas:
   - icon: https://gw.alipayobjects.com/os/q/cms/images/k9ziitmp/13668549-b393-42a2-97c3-a6365ba87ac2_w96_h96.png
-    title: Out of the box
-    description: Built-in graph elements, interaction, layout, components, the basic graph visual analysis capabilities you need are all here!
+    title: Out-of-the-box Feature
+    description: Built-in graph elements, interaction, layout, components, the basic graph visual analysis capabilities you need are ready!
   - icon: https://gw.alipayobjects.com/os/q/cms/images/k9ziik0f/487a2685-8f68-4c34-824f-e34c171d0dfd_w96_h96.png
-    title: Business precipitation
-    description: node expand, sub-graph layout, algorithm analysis, optimization strategy, the demand for graph products you meet are all here!
+    title: Business Precipitation
+    description: node expand, sub-graph layout, algorithm analysis, optimization strategy, the demand for graph products you meet are ready!
 
   - icon: https://gw.alipayobjects.com/os/q/cms/images/k9zij2bh/67f75d56-0d62-47d6-a8a5-dbd0cb79a401_w96_h96.png
-    title: Good development experience
+    title: Good Development Experience
     description: G6 + TypeScript + React, provide a complete type definition file, in line with your React development experience
 
 cases:
