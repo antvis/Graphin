@@ -21,7 +21,7 @@ banner:
       link: https://github.com/antvis/graphin
 ideas:
   - icon: https://gw.alipayobjects.com/os/q/cms/images/k9ziitmp/13668549-b393-42a2-97c3-a6365ba87ac2_w96_h96.png
-    title: Out-of-the-box Feature
+    title: Out-Of-The-Box Features
     description: Built-in graph elements, interaction, layout, components, the basic graph visual analysis capabilities you need are ready!
   - icon: https://gw.alipayobjects.com/os/q/cms/images/k9ziik0f/487a2685-8f68-4c34-824f-e34c171d0dfd_w96_h96.png
     title: Business Precipitation
