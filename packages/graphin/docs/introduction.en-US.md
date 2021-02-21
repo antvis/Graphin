@@ -14,7 +14,7 @@ With the advent of the era of big data, data analysis is becoming more important
 
 Therefore, the way to process these relational data and analyze the data topology network becomes a challenge. The process of this analysis is also known as Graph Analysis.
 
-At present, graph analysis has been widely used in the fields of financial anti-fraud, public safety, infrastructure monitoring, and smart medical care. In this process, we need a powerful graph calculation engine to solve the problem of data compliance and collection. The corresponding graph algorithm is also needed to solve the graph construction and analysis. Finally, at front end, we need a graph visualization engine that provides us with visual analysis capabilities to discover potential value. Graphin was born in this context, it serve a purpose to visualize these relational data and analyze it.
+At present, graph analysis has been widely used in the fields of financial anti-fraud, public safety, infrastructure monitoring, and smart medical care. In this process, we need a powerful graph calculation engine to solve the problem of data compliance and collection. The corresponding graph algorithm is also needed to solve the graph construction and analysis. Ultimately, we need a graph visualization engine that provides us with visual analysis capabilities to discover potential value. Graphin was born in this context, it serve a purpose to visualize these relational data and analyze it.
 
 ## 💡 Naming Origin
 

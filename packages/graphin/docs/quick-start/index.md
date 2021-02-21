@@ -34,7 +34,7 @@ yarn add @antv/graphin-icons --save
 
 ## 02.把关系数据可视化出来
 
-完成一个图分析产品的第一步，就是将关系数据可视化出来。关系数据是非常典型的图结构，由节点 Node 和边 Edge 组成。Node 中只有 id 是必须参数，Edge 中只有 source 和 target 是必须按参数，它分别代表边的开始节点和结束节点的 ID
+完成一个图分析产品的第一步，就是将关系数据可视化出来。关系数据是非常典型的图结构，由节点 Node 和边 Edge 组成。Node 中只有 `id` 是必须参数，Edge 中只有 `source` 和 `target` 是必须按参数，它分别代表边的开始节点和结束节点的 `id`
 
 <code src='./demos/index.tsx'>
 
@@ -46,7 +46,7 @@ yarn add @antv/graphin-icons --save
 
 <code src='./demos/node.tsx'>
 
-让我们继续我们的案例，现在 `node-0` 是一个用户，`node-1` 是一家企业，`node-3` 是另一家企业。通过上述 Graphin 内置的节点，重新整理，我们可以用节点的大小来代表企业的规模，节点的 ICON 来展示不同的属性，颜色加以区分。
+让我们继续我们的案例，现在 `node-0` 是一个用户，`node-1` 是一家企业，`node-3` 是另一家企业。通过上述 Graphin 内置的节点，重新整理，我们可以用节点的大小来代表企业的规模，节点的 `icon` 来展示不同的属性，颜色加以区分。
 
 - 1.先给每个节点加上标签
 - 2.将企业的规模`data.count`映射为节点的大小
