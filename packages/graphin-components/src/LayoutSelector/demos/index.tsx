@@ -12,17 +12,14 @@ const defaultLayout = {
 };
 
 const LayoutSelectorDemo = () => {
-  const data = Utils.mock(5)
-    .circle()
-    .graphin();
+  const data = Utils.mock(5).circle().graphin();
 
   const [state, setState] = useState({
     layout: { ...defaultLayout, animation: false },
     data,
   });
 
-  const updateLayout = (previousType, type, defaultLayoutConfigs) => {
-    console.log(previousType, type, defaultLayoutConfigs);
+  const updateLayout = (previousType, type) => {
     setState({
       layout: { ...defaultLayout, type },
       data,

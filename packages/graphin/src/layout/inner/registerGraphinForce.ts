@@ -43,7 +43,6 @@ export default () => {
     init(data: GraphinData) {
       this.nodes = data.nodes;
       this.edges = data.edges;
-      console.log(this, this.getDefaultCfg());
       const { graph, ...layoutConfig } = this;
 
       const options = { ...this.getDefaultCfg(), ...layoutConfig };

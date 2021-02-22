@@ -22,7 +22,6 @@ interface FeaturesProps {
 }
 
 const Features: React.FC<FeaturesProps> = ({ title, features = [], className, style, id }) => {
-  console.log('title, features = [], className, style, id', title, features, className, style, id);
   const getCards = () => {
     const children = features.map(card => (
       <Col className={styles.cardWrapper} key={card.title} md={8} xs={24}>

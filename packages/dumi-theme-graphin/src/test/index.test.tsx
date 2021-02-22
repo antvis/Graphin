@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+// @ts-nocheck
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render, queryByAttribute, fireEvent } from '@testing-library/react';
-import type { MemoryHistory} from '@umijs/runtime';
+import type { MemoryHistory } from '@umijs/runtime';
 import { createMemoryHistory, Router } from '@umijs/runtime';
 import { context as Context } from 'dumi/theme';
 import SourceCode from '../builtins/SourceCode';
@@ -191,7 +193,7 @@ describe('default theme', () => {
       </Context.Provider>
     );
 
-    const { getByText, getByTitle, getAllByTitle, container } = render(
+    const { getByText, getAllByTitle, container } = render(
       <Router history={history}>
         <Layout {...baseProps}>
           <>
@@ -305,9 +307,7 @@ describe('default theme', () => {
     (container.querySelector('[data-iframe] button[role=refresh]') as HTMLElement).click();
     expect(container.querySelector('[data-iframe]').innerHTML).not.toContain('demo-3 Content');
     expect(container.querySelector('[data-iframe] iframe')).not.toBeNull();
-    expect((container.querySelector('[data-iframe] iframe') as HTMLElement).style.height).toEqual(
-      '100px',
-    );
+    expect((container.querySelector('[data-iframe] iframe') as HTMLElement).style.height).toEqual('100px');
 
     // expect render API property
     expect(getByText('other', { selector: 'table td' })).not.toBeNull();

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import type { IApiComponentProps } from 'dumi/theme';
-import { context, useApiData, AnchorLink } from 'dumi/theme';
+import { context, useApiData } from 'dumi/theme';
 
 const LOCALE_TEXTS = {
   'zh-CN': {
@@ -21,7 +21,7 @@ const LOCALE_TEXTS = {
 
 export default ({ identifier, export: expt }: IApiComponentProps) => {
   const data = useApiData(identifier);
-  console.log('apis data', data);
+
   const { locale } = useContext(context);
   const texts = /^zh|cn$/i.test(locale) ? LOCALE_TEXTS['zh-CN'] : LOCALE_TEXTS['en-US'];
 
@@ -38,7 +38,7 @@ export default ({ identifier, export: expt }: IApiComponentProps) => {
             </tr>
           </thead>
           <tbody>
-            {(data[expt] || []).map((row) => (
+            {(data[expt] || []).map(row => (
               <tr key={row.identifier}>
                 <td>{row.identifier}</td>
                 <td>{row.description || '--'}</td>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import type { FC } from 'react';
 import React, { useContext } from 'react';
 import { context, Link, NavLink } from 'dumi/theme';
@@ -7,6 +8,7 @@ import './SideMenu.less';
 
 interface INavbarProps {
   mobileMenuCollapsed: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   location: any;
 }
 
@@ -24,7 +26,7 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location }) => {
     base,
     meta,
   } = useContext(context);
-  console.log(menu, navItems, base, meta);
+
   const isHiddenMenus =
     Boolean((meta.hero || meta.features || meta.gapless) && mode === 'site') || meta.sidemenu === false || undefined;
 
@@ -51,6 +53,7 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location }) => {
             <p>
               <object
                 type="image/svg+xml"
+                // eslint-disable-next-line no-useless-escape
                 data={`https://img.shields.io/github/stars${repoUrl.match(/((\/[^\/]+){2})$/)[1]}?style=social`}
               />
             </p>
@@ -60,10 +63,10 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location }) => {
         {navItems.length ? (
           <div className="__dumi-default-menu-mobile-area">
             <ul className="__dumi-default-menu-nav-list">
-              {navItems.map((nav) => {
+              {navItems.map(nav => {
                 const child = Boolean(nav.children?.length) && (
                   <ul>
-                    {nav.children.map((item) => (
+                    {nav.children.map(item => (
                       <li key={item.path || item.title}>
                         <NavLink to={item.path}>{item.title}</NavLink>
                       </li>
@@ -91,7 +94,7 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location }) => {
         {/* menu list */}
         <ul className="__dumi-default-menu-list">
           {!isHiddenMenus &&
-            menu.map((item) => {
+            menu.map(item => {
               // always use meta from routes to reduce menu data size
               const hasSlugs = Boolean(meta.slugs?.length);
               const hasChildren = item.children && Boolean(item.children.length);
@@ -106,7 +109,7 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location }) => {
                   {/* group children */}
                   {Boolean(item.children && item.children.length) && (
                     <ul>
-                      {item.children.map((child) => (
+                      {item.children.map(child => (
                         <li key={child.path}>
                           <NavLink to={child.path} exact>
                             <span>{child.title}</span>

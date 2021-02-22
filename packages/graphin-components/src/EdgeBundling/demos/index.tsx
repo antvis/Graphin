@@ -7,25 +7,25 @@ import { EdgeBundling } from '@antv/graphin-components';
 const data = Utils.mock(5).graphin();
 const { edges } = data;
 data.edges = [
-  ...edges.map((edge) => {
+  ...edges.map(edge => {
     return {
       ...edge,
       // label: Math.random(),
     };
   }),
-  ...edges.map((edge) => {
+  ...edges.map(edge => {
     return {
       ...edge,
       // label: Math.random() * 2,
     };
   }),
-  ...edges.map((edge) => {
+  ...edges.map(edge => {
     return {
       ...edge,
       // label: Math.random() * 5,
     };
   }),
-  ...edges.map((edge) => {
+  ...edges.map(edge => {
     return {
       ...edge,
       // label: Math.random() * 10,
@@ -35,7 +35,6 @@ data.edges = [
 
 G6.Util.processParallelEdges(data.edges);
 
-console.log('edge', data.edges);
 const App = () => {
   return (
     <div className="App">
