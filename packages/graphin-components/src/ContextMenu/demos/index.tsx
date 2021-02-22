@@ -55,7 +55,6 @@ const CanvasMenu = () => {
 const App = () => {
   const data = Utils.mock(5).circle().graphin();
   const handleChange = (menuItem, menuData) => {
-    console.log(menuItem, menuData);
     message.info(`元素：${menuData.id}，动作：${menuItem.name}`);
   };
 
@@ -70,7 +69,7 @@ const App = () => {
         </ContextMenu>
         <ContextMenu style={{ width: '120px' }} bindType="edge">
           <Menu
-            options={options.map((item) => {
+            options={options.map(item => {
               return { ...item, name: `${item.name}-EDGE` };
             })}
             onChange={handleChange}

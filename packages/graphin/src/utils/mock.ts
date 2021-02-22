@@ -214,7 +214,6 @@ export class Mock {
       delete node.parent;
     });
     // @ts-ignore
-    console.log(tree);
     return tree as GraphinTreeData;
   };
 }
