@@ -1,7 +1,6 @@
 import React, { ErrorInfo } from 'react';
 // todo ,G6@unpack版本将规范类型的输出
 import G6, { Graph as IGraph, GraphOptions, GraphData, TreeGraphData } from '@antv/g6';
-import { cloneDeep } from 'lodash';
 import { deepMix } from '@antv/util';
 
 /** utils */
@@ -160,7 +159,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       this.isTree = true;
     }
     console.time('clone data');
-    this.data = cloneDeep(data);
+    this.data = deepMix({}, data);
     console.timeEnd('clone data');
   };
 
