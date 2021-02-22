@@ -9,12 +9,12 @@ nav:
 
 From V1 to V2
 
-Compared with version 1.0, 2.0 has fully supported and upgraded the capabilities of G6: registration mechanism, layout mechanism, element styles, etc. are consistent with G6, support tree diagrams, and better componentization solutions
+Compared with version 1.0, 2.0 has fully supported and upgraded the capabilities of G6: registration mechanism, layout mechanism, element styles, etc... and develop consistently with G6 in order to support tree diagrams, and construct better componentization solutions.
 
-### layout layout
+### Layout
 
--The configuration is consistent with the G6 layout, so you can use [G6 Layout Configuration](https://g6.antv.vision/zh/docs/api/graphLayout/guide)
--Usage is consistent with G6 layout, layout.options needs to be deconstructed
+- The configuration is consistent with the G6 layout, you can use [G6 Layout Configuration](https://g6.antv.vision/zh/docs/api/graphLayout/guide)
+- The usage is consistent with G6 layout, layout.options needs to be deconstructed
 
 ```jsx | pure
 //v1
@@ -23,10 +23,10 @@ Compared with version 1.0, 2.0 has fully supported and upgraded the capabilities
 <Graphin data={data} layout={{ name:'grid', ...options }} />
 ```
 
-### data data
+### Data
 
 - Network graph data: The data structure of Graphin2.0 remains unchanged, but the data content has undergone some changes. New status fields and style fields are added to facilitate business processing. For details, see:
-- Tree graph data: Graphin2.0 supports tree graphs. If the data structure is tree, TreeGraph will be rendered internally
+- Tree graph data: Graphin2.0 supports tree graphs. If the data structure is tree, TreeGraph will be rendered internally.
 
 ```jsx | pure
 const data = {
@@ -50,13 +50,13 @@ const data = {
 <Graphin data={data} />;
 ```
 
-### behavior
+### Behaviours
 
-Interactive behaviors, previously needed to be introduced in G6 through modes, support componentized introduction in Graphin, and support component attribute configuration to complete data drive. When upgrading the V2 version, there is no need to perceive this
+The interactive behavours and component's attribute configuration requires to be introduced in G6 through modes in the previous version in order to drive the data. After upgrades to the version 2.0, there is no need to import these configurations with modes.
 
-### extend
+### Extend
 
-The extend interface is completely removed from Graphin. Previously, nodeShape, icon, layout can be implemented through the `Graphin.register` interface. `extend.marker` completely removed
+The extend interface is completely removed from Graphin. Previously, nodeShape, icon, layout can be implemented through the `Graphin.register` interface. The `extend` props had completely removed in the version 2.0.
 
 - Expand node
 
@@ -85,12 +85,12 @@ Graphin.registerLayout(customLayout);
 <Graphin extend={{ icon: customIconFunction }} />;
 
 // v2
-Graphin.reigsterFontFamily(iconloader); // View details Custom icon
+Graphin.registerFontFamily(iconloader); // View Custom Icon for more information
 ```
 
 - Extend marker (completely removed)
 
-### register
+### Register
 
 Fully consistent with G6 registration mechanism
 
