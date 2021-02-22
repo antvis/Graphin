@@ -1,6 +1,5 @@
 ---
-title: Graphin 2.0 - 图可视分析解决方案
-order: 10
+title: Graphin | 图可视分析解决方案
 sidebar: false
 banner:
   title: Graphin 图的分析洞察
