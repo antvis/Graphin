@@ -51,10 +51,7 @@ const VisSettingPanel: React.FunctionComponent<VisSettingPanelPropsType> = props
         graph.setItemState(edge, 'selected', false);
       });
     });
-
-    console.log(graph);
   };
-  console.log('schema', nodeSchema);
 
   graphin.visSettingPanel = {
     nodeStyleSchema: nodeSchema,

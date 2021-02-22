@@ -150,7 +150,6 @@ const LayoutConfigPanel = ({ updateLayout, layoutConfig = graphLayoutConfig }) =
    * @param allFields 所有字段
    */
   const handleFieldValueChange = (changedField, allFields) => {
-    console.log(changedField, allFields);
     // 限流，防止频繁重新布局
     debounceChange(changedField, allFields, currentLayoutType);
   };
