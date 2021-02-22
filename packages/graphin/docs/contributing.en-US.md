@@ -65,9 +65,15 @@ npm run bootstrap
 
 - Start local compilation of graphin, graphin-components, graphin-icons
 
-You can `cd` to graphin, graphin-components, graphin-icons in pacakges to start the script command `npm run start` in each package.json.
+You can perform local compilation for graphin, graphin-components and graphin-icons in the `root directory of the project`.
 
-Note ⚠️ Because each package in the packages has a dependency relationship, for example, graphin-components depends on the packaged product of graphin, and the speed of package startup is different, so we need to start the graphin package first, and then start packages/graphin-components. Startup is complete Later, you can also restart the ts compiler in vscode to ensure that each dependency ts can be inferred and found
+```bash
+npm run graphin
+npm run components
+npm run icons
+```
+
+Note ⚠️ Each package in the packages has a dependency relationship. As an example, graphin-components depends on the compilation of graphin. Thus, we need to start the packages/graphin first, and then start packages/graphin-components. After all the local compilation are complete, it is recommended to restart Typescript compiler in Visual Studio Code to ensure that Typescript dependencies can be inferred and index successfully by the editor.
 
 ```bash
 npm run start
@@ -75,7 +81,7 @@ npm run start
 
 - Launch Graphin Dumi development document
 
-[dumi](https://d.umijs.org/) is a doc tool can assist you to develop libraries & write docs. very easy to use, so we can start dumi to view our development documents.
+[dumi](https://d.umijs.org/) is a documentation tool to develop libraries & write docs. It is very convenient, we can start dumi to view our development documents.
 
 Return to the `root directory of the project`, start `npm run docs`, you can see
 
@@ -101,25 +107,25 @@ npm run site
 
 ## Code of Conduct
 
-We have adopted a [Code of Conduct](https://github.com/antvis/graphin/blob/develop/CODE_OF_CONDUCT.md) that we expect project participants to adhere to. Please read the full text so that you can understand what actions will and will not be tolerated.
+We have adopted a [Code of Conduct](https://github.com/antvis/graphin/blob/develop/CODE_OF_CONDUCT.md) that we expect project participants to adhere to. Please read the full document to understand the adoption and standards of our project.
 
 ## Open Development
 
-All work on Graphin happens directly on GitHub. Both core team members and external contributors send pull requests which go through the same review process.
+All work on Graphin are develop directly on GitHub. Both core team members and external contributors requires to create pull requests and undergo the our review process.
 
 ## Branch Organization
 
-According to our release schedule, we maintain two branches, master and feature. If you send a bugfix pull request, please do it against the master branch, if it's a feature pull request, please do it against the feature branch.
+According to our release schedule, we maintain two branches, master and feature. If you send a bugfix pull request, please set the target branch to the master, if it's a feature pull request, please create a feature branch.
 
 ## Bugs
 
-We are using GitHub Issues for bug tracking. The best way to get your bug fixed is using our [issue helper](https://github.com/antvis/graphin/issues/new?assignees=&labels=&template=bug_report.md&title=) and provide reproduction steps with this Code Sanbox [template](https://codesandbox.io/s/data-driven-3o71b).
+We are using GitHub Issues for bug tracking. The fastest way to get your bug fixed is using our [issue helper](https://github.com/antvis/graphin/issues/new?assignees=&labels=&template=bug_report.md&title=) and provide reproduction steps with the Codesandbox [template](https://codesandbox.io/s/data-driven-3o71b).
 
-Before you report a bug, please make sure you've searched exists issues, and read our FAQ.
+Before you report a bug, please make sure you've searched exists issues, and read through our FAQ.
 
 ## Proposing a Change
 
-If you intend to change the public API or introduce new feature, we also recommend you use our [issue template](https://github.com/antvis/graphin/issues/new?assignees=&labels=&template=feature_request.md&title=) to create a feature request issue.
+If you intend to change the public API or introduce new feature, we recommend to use our [issue template](https://github.com/antvis/graphin/issues/new?assignees=&labels=&template=feature_request.md&title=) to create a feature request issue.
 
 ## Your First Pull Request
 
@@ -127,11 +133,11 @@ Working on your first Pull Request? You can learn how from this free video serie
 
 [How to Contribute to an Open Source Project on GitHub](https://segmentfault.com/a/1190000000736629)
 
-To help you get your feet wet and get you familiar with our contribution process, we have a list of [good first issues](https://github.com/antvis/graphin/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that contain bugs or small features that have a relatively limited scope. This is a great place to get started.
+In order to help you familiar with our contribution process, we have a list of [good first issues](https://github.com/antvis/graphin/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that contain bugs or small features that have a relatively limited scope. This is a great place to get started.
 
-If you decide to fix an issue, please be sure to check the comment thread in case somebody is already working on a fix. If nobody is working on it at the moment, please leave a comment stating that you intend to work on it so other people don't accidentally duplicate your effort.
+If you decide to fix an issue, please be sure to check the comment thread in case somebody is already working on a fix. If no one is working on the issue, please leave a comment stating that you intend to work on it so other people don't accidentally duplicate your effort.
 
-If somebody claims an issue but doesn't follow up for more than two weeks, it's fine to take over it but you should still leave a comment.
+If someone had create an issue but doesn't follow up for more than two weeks, it's fine to take over it but you should still leave a comment.
 
 ## Pull Request
 
