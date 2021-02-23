@@ -74,12 +74,23 @@
       58="s"
       59="s"
     />
-    <link rel="stylesheet" href="/umi.c0de371b.css" />
+    <link rel="stylesheet" href="/umi.f1e9deea.css" />
     <script>
       window.routerBase = "/";
     </script>
     <script>
       //! umi version: 3.3.7
+    </script>
+    <script>
+      !(function () {
+        var e = localStorage.getItem("dumi:prefers-color"),
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches,
+          r = ["light", "dark", "auto"];
+        document.documentElement.setAttribute(
+          "data-prefers-color",
+          e === r[2] ? (t ? r[1] : r[0]) : r.includes(e) ? e : r[0]
+        );
+      })();
     </script>
     <title>Data Structure</title>
   </head>
@@ -119,6 +130,6 @@
         }
       })();
     </script>
-    <script src="/umi.79d0058a.js"></script>
+    <script src="/umi.30e4f07a.js"></script>
   </body>
 </html>
