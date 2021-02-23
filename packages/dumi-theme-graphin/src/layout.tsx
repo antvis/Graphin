@@ -107,8 +107,8 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
     locale,
   } = Context;
 
-  const { meta } = processRedirect(Context, location);
-
+  const { meta, isDirect } = processRedirect(Context, location);
+  console.log('Context', Context, 'calculate meta', meta);
   const { url: repoUrl, branch, platform } = repository;
   const [menuCollapsed, setMenuCollapsed] = useState<boolean>(true);
   const isSiteMode = mode === 'site';
@@ -130,8 +130,8 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
   const updatedTime: any = new Date(meta.updatedTime).toLocaleString([], { hour12: false });
   const repoPlatform =
     { github: 'GitHub', gitlab: 'GitLab' }[(repoUrl || '').match(/(github|gitlab)/)?.[1] || 'nothing'] || platform;
-
-  if (isEmpty(meta)) {
+  // 等dumi最新版发布后解决路由匹配问题
+  if (isEmpty(meta) && !isDirect) {
     return (
       <div>
         <div
