@@ -85,7 +85,7 @@ Graphin.registerLayout(customLayout);
 <Graphin extend={{ icon: customIconFunction }} />;
 
 // v2
-Graphin.reigsterFontFamily(iconloader); // 详情查看 自定义 icon
+Graphin.registerFontFamily(iconloader); // 详情查看 自定义 icon
 ```
 
 - 扩展 marker （彻底移除）

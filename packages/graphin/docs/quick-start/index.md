@@ -34,7 +34,7 @@ yarn add @antv/graphin-icons --save
 
 ## 02.把关系数据可视化出来
 
-完成一个图分析产品的第一步，就是将关系数据可视化出来。关系数据是非常典型的图结构，由节点 Node 和边 Edge 组成。Node 中只有 id 是必须参数，Edge 中只有 source 和 target 是必须按参数，它分别代表边的开始节点和结束节点的 ID
+完成一个图分析产品的第一步，就是将关系数据可视化出来。关系数据是非常典型的图结构，由节点 Node 和边 Edge 组成。Node 中只有 `id` 是必须参数，Edge 中只有 `source` 和 `target` 是必须按参数，它分别代表边的开始节点和结束节点的 `id`
 
 <code src='./demos/index.tsx'>
 
@@ -46,7 +46,7 @@ yarn add @antv/graphin-icons --save
 
 <code src='./demos/node.tsx'>
 
-让我们继续我们的案例，现在 `node-0` 是一个用户，`node-1` 是一家企业，`node-3` 是另一家企业。通过上述 Graphin 内置的节点，重新整理，我们可以用节点的大小来代表企业的规模，节点的 ICON 来展示不同的属性，颜色加以区分。
+让我们继续我们的案例，现在 `node-0` 是一个用户，`node-1` 是一家企业，`node-2` 是另一家企业。通过上述 Graphin 内置的节点，重新整理，我们可以用节点的大小来代表企业的规模，节点的 `icon` 来展示不同的属性，颜色加以区分。
 
 - 1.先给每个节点加上标签
 - 2.将企业的规模`data.count`映射为节点的大小
@@ -119,7 +119,7 @@ Graphin 根据`《AntV 图可视分析解决方案》`白皮书里的指导，�
 
 <code src='./demos/node-expand.tsx'>
 
-除了动态图布局，大图探索也是业务中常见的需求。采用 louvain 算法聚合 ，利用 Combo 能力或者节点聚合展示方式，再结合 MiniMap 小地图导航，鱼眼放大镜，可以初步满足大图的探索需求。这块[DEMO 可以参考](https://antv.vision/graphin-docs/graphin/case/geamaker)
+除了动态图布局，大图探索也是业务中常见的需求。采用 louvain 算法聚合 ，利用 Combo 能力或者节点聚合展示方式，再结合 MiniMap 小地图导航，鱼眼放大镜，可以初步满足大图的探索需求。这块[DEMO](https://antv.vision/graphin-docs/graphin/case/geamaker) 可以参考
 
 以上便是我们的快速开始的全部内容：通过零碎的小 DEMO，我们基本上已经看到了 Graphin 的一个基本能力面貌：
 
@@ -127,7 +127,7 @@ Graphin 根据`《AntV 图可视分析解决方案》`白皮书里的指导，�
 - 内置多种布局，支持子图布局，增量布局，布局切换。
 - 节点和边 存在组合规范，支持样式自定义。
 - 支持交互行为组合引入：目前已经完成常见的 9 种交互行为，满足日常我们交互需求。
-- 内置丰富的分析组件，目前已经完成用户常用的 6 种组件：右键菜单 ContexMenu，提示框 Tooltip，小地图导航 MiniMap，图例组件 Legend，鱼眼放大镜 FishEye，轮廓组件 Hull。全部有 26 个组件。
+- 内置丰富的分析组件，目前已经完成用户常用的 6 种组件：右键菜单 ContextMenu，提示框 Tooltip，小地图导航 MiniMap，图例组件 Legend，鱼眼放大镜 FishEye，轮廓组件 Hull。全部有 26 个组件。
 - 从业务种沉淀产品功能，例如动态图探索， 大图探索。
 
 如果你还感兴趣，可以继续阅读深入探索部分，将为大家介绍 Graphin 的扩展机制 和 组件的自定义机制，以及我们接下来重点要做的 GraphinStudio。
