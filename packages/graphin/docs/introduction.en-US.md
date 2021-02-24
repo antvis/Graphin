@@ -10,9 +10,9 @@ nav:
 
 ## 📖 Background
 
-In the era of big data, data analysis is becoming more important for enterprises. Traditional OLAP analysis using charts has already emerged in the business world to help companies make business decisions. This is known as "BI" (Business Intelligence). In recent years, the growth of 5G + IoT technology has produced a new kind of data - connected data. For example, in a house, the refrigerator, air conditioner, washing machine, mobile phone and computer, and even your social media accounts are all connected with WiFi or 5G technology. The future is a connected world.
+In the era of big data, data analysis is becoming more important for enterprises. Traditional OLAP analysis using charts is heavily used in the business world to help companies make business decisions. This is known as "BI" (Business Intelligence). In recent years, the growth of 5G + IoT technology has produced a new kind of data - connected data. For example, in a house, the refrigerator, air conditioner, washing machine, mobile phone and computer, and even your social media accounts are all connected with WiFi or 5G technology. The future is a connected world.
 
-The way to process connected data and analyze a network’s topology is a challenge. This is known as Graph Analysis.
+The way to process connected data and analyze a network’s topology is a challenge. Graph Analysis is the analysis of relationships and connections.
 
 At present, graph analysis has been widely used in the fields of financial fraud prevention, public safety, infrastructure monitoring, and smart medical care. In these use cases, we need a powerful graph calculation engine to solve the problem of data calculation and collection. The correct graph algorithm is also needed for analysis. Finally, we need a graph visualization engine that provides us with visual analysis capabilities for data exploration. Graphin was born in this context and it helps to visualize and analyze connected data.
 
