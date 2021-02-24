@@ -12,9 +12,9 @@ nav:
 
 ## 基本用法
 
-Graphin 中的交互行为都是可组合的，例如内置了 DragCavans,ZoomCanvas,SelectClick 组件，因为交互都是异步的，因此其组件内部实现了 addBehaviors 和 RemoveBehaviros 的原子操作。默认交互行为开箱即用，可以通过 `import {Behaviors} from '@antv/graphin'` 来按需引入。
+Graphin 中的交互行为都是可组合的，例如内置了 DragCavans,ZoomCanvas,SelectClick 组件，因为交互都是异步的，因此其组件内部实现了 addBehaviors 和 RemoveBehaviors 的原子操作。默认交互行为开箱即用，可以通过 `import {Behaviors} from '@antv/graphin'` 来按需引入。
 
-每个交互组件 Props API 和 [G6 的 defaultBehaviros](https://g6.antv.vision/zh/docs/manual/middle/states/defaultBehavior) 完全保持一致。可以在[节点交互](/graphin/behaviors/node) 和 [画布交互](/graphin/behaviors/canvas) 的文档中查看
+每个交互组件 Props API 和 [G6 的 defaultBehaviors](https://g6.antv.vision/zh/docs/manual/middle/states/defaultBehavior) 完全保持一致。可以在[节点交互](/graphin/behaviors/node) 和 [画布交互](/graphin/behaviors/canvas) 的文档中查看
 
 ```tsx | pure
 import React from 'react';

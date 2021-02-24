@@ -1,5 +1,5 @@
 ---
-title: ChangeLog
+title: Change Log
 order: 2
 group:
   path: /quick-start

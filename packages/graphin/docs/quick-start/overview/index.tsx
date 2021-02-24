@@ -32,7 +32,7 @@ const demos = [
     desc:
       'Graphin 提供了 13 种交互组件。包括画布的缩放，平移，圈选，拉索，自动Resize，也包括元素的拖拽，选中，悬停，高亮，展开收起等，满足你对于不同分析场景的交互需求',
     image: 'https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*L-htTIT2powAAAAAAAAAAAAAARQnAQ',
-    link: '/graphin/behaviors/behaviros',
+    link: '/graphin/behaviors/behaviors',
   },
   {
     title: '【05】完备的分析组件',

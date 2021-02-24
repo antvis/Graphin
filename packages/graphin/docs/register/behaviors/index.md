@@ -17,11 +17,11 @@ nav:
 
 ## 【兼容】 G6 注册 Behavior 的写法
 
-如果你是 G6 的老用户了，对于交互行为的定义，你可能会采用`registerBehavior`的写法,Graphin 当然也支持。不过为了逻辑的统一，当你使用这种方式的时候，Graphin 内部会移除所有的默认交互，`内部源码实现`如下图所示。因此你不得不再将`drag-canvas`等 behaviros，用`<Graphin modes={{ default: ['sampleBehavior','drag-canvas'] }}/>`的方式重新写入。
+如果你是 G6 的老用户了，对于交互行为的定义，你可能会采用`registerBehavior`的写法,Graphin 当然也支持。不过为了逻辑的统一，当你使用这种方式的时候，Graphin 内部会移除所有的默认交互，`内部源码实现`如下图所示。因此你不得不再将`drag-canvas`等 behaviors，用`<Graphin modes={{ default: ['sampleBehavior','drag-canvas'] }}/>`的方式重新写入。
 
 ```jsx | pure
 <>
-  {/** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
+  {/** modes 不存在的时候，才启动默认的behaviors，否则会覆盖用户自己传入的 */
   !modes && (
     <>
       {/* 拖拽画布 */} <DragCanvas />

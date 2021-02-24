@@ -38,6 +38,10 @@ The font icon of the above setting node, in addition to covering the style in th
 If we pursue a more delicate interactive experience, such as in hover, let halo another animation effect, as shown in the figure below
 <code src='./demos/node-animate.tsx'>
 
-## 05.`graphin-circle` Style Interface Document
+## 05.High-value Nodes
+
+<code src='./demos/node-beauty.tsx'>
+
+## 06.`graphin-circle` Style Interface Document
 
 <API  src='../../interface/node-style.ts' >

@@ -66,9 +66,15 @@ npm run bootstrap
 
 - 启动 graphin ， graphin-components ，graphin-icons 的本地编译
 
-可以分别 cd 到 pacakges 中的 graphin，graphin-components，graphin-icons 中启动各个 package.json 中的 script 命令`npm run start`.
+在`该项目根目录`启动 graphin， graphin-components 和 graphin-icons 的本地编译.
 
-注意 ⚠️ 因为 packages 中各个包 存在依赖关系，比如 graphin-components 就依赖 graphin 的打包产物，且 打包启动的速度不一样，因此需要我们先把 graphin 包启动后，再启动 packages/graphin-components .启动完毕后，也可以在 vscode 中重启 ts 编译器，从而确保各个依赖关系 ts 可以推断找到
+```bash
+npm run graphin
+npm run components
+npm run icons
+```
+
+注意 ⚠️ 因为 packages 中各个包 存在依赖关系，比如 graphin-components 就依赖 graphin 的打包产物，且 打包启动的速度不一样，因此需要我们先把 packages/graphin 包启动后，再启动 packages/graphin-components .启动完毕后，也可以在 vscode 中重启 ts 编译器，从而确保各个依赖关系 ts 可以推断找到
 
 ```bash
 npm run start

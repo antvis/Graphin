@@ -21,8 +21,8 @@ Graphin 2.0 的布局全面拥抱 G6，详情请[参考](https://g6.antv.vision/
 
 > 注意 ⚠️ ：Graphin@2.0.0 版本暂不支持 webworker 和 ggpu 布局，这两种针对大数据量节点的布局计算优化方案，graphin 会在后续的版本中加入。
 
-- [Random Layout](/https://g6.antv.vision/zh/docs/api/graphLayout/random)：随机布局；
-- [GForce Layout](/https://g6.antv.vision/zh/docs/api/graphLayout/gforce)：G6 4.0 支持的经典力导向布局，支持 GPU 并行计算
+- [Random Layout](https://g6.antv.vision/zh/docs/api/graphLayout/random)：随机布局；
+- [GForce Layout](https://g6.antv.vision/zh/docs/api/graphLayout/gforce)：G6 4.0 支持的经典力导向布局，支持 GPU 并行计算
 - [Force Layout](https://g6.antv.vision/zh/docs/api/graphLayout/force)：引用 d3 的经典力导向布局；
 - [Circular Layout](https://g6.antv.vision/zh/docs/api/graphLayout/circular)：环形布局；
 - [Radial Layout](https://g6.antv.vision/zh/docs/api/graphLayout/radial)：辐射状布局；

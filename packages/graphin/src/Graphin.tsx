@@ -12,7 +12,7 @@ import './index.less';
 
 /** Context */
 import GraphinContext from './GraphinContext';
-/** 内置 Behaviros */
+/** 内置 Behaviors */
 import Behaviors from './behaviors';
 /** 内置布局 */
 import LayoutController from './layout';
@@ -181,8 +181,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       ...otherOptions
     } = this.props;
     if (modes.default.length > 0) {
-      // TODO :给用户正确的引导，推荐使用Graphin的Bheaviors组件
-      console.info('%c suggestion: you can use @antv/graphin Behaviros components', 'color:lightgreen');
+      // TODO :给用户正确的引导，推荐使用Graphin的Behaviors组件
+      console.info('%c suggestion: you can use @antv/graphin Behaviors components', 'color:lightgreen');
     }
     /**  width and height */
     const { clientWidth, clientHeight } = this.graphDOM as HTMLDivElement;
@@ -451,7 +451,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
             {isReady && (
               <>
                 {
-                  /** modes 不存在的时候，才启动默认的behaviros，否则会覆盖用户自己传入的 */
+                  /** modes 不存在的时候，才启动默认的behaviors，否则会覆盖用户自己传入的 */
                   !modes && (
                     <>
                       {/* 拖拽画布 */}
