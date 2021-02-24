@@ -6,8 +6,6 @@ import GitHubButton from 'react-github-button';
 import gh from 'parse-github-url';
 import classNames from 'classnames';
 import { context } from 'dumi/theme';
-
-import 'video-react/dist/video-react.css';
 // @ts-ignore
 import styles from './Banner.module.less';
 import Notification, { NotificationProps } from './Notification';
@@ -107,7 +105,7 @@ const Banner: React.FC<BannerProps> = ({
       <div className={styles.content}>
         <div className={styles.text}>
           <div className={classNames(styles.title, 'banner-title')}>{title}</div>
-          <p className={classNames(styles.description, 'banner-description')}>{description}</p>
+          <div className={classNames(styles.description, 'banner-description')}>{description}</div>
           <div className={classNames(styles.buttons, 'banner-buttons')}>{renderButtons}</div>
         </div>
         <div className={classNames(styles.notifications, 'notifications')}>{notificationsNode}</div>

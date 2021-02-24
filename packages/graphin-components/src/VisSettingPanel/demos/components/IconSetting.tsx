@@ -36,7 +36,6 @@ const IconSetting = (props: IconSettingProps) => {
   const { type, types } = state;
 
   const handleChangeType = v => {
-    console.log('v', v);
     setState({
       ...state,
       type: v.target.value,

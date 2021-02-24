@@ -11,7 +11,6 @@ const { Panel } = Collapse;
 const { TabPane } = Tabs;
 
 const handleChangeTheme = checked => {
-  console.log(checked);
   // dom 是一个 style 样式文件的链接
   // eslint-disable-next-line no-undef
   const dom = window.document.getElementById('theme-style') as HTMLLinkElement;
@@ -48,7 +47,6 @@ const AntdPanel = () => {
   const { nodeStyleSchema, handleNodeStyleChange } = graphin.visSettingPanel;
   const { label, icon, keyshape } = nodeStyleSchema;
   const handleChange = shema => {
-    console.log('shema', shema);
     handleNodeStyleChange(shema);
   };
 

@@ -10,7 +10,6 @@ const { SubMenu } = Menu;
 const AntdMenu = () => {
   const graphin = React.useContext(GraphinContext);
   const handleClick = () => {
-    console.log('click', graphin);
     graphin.contextmenu.node.handleClose();
   };
   return (

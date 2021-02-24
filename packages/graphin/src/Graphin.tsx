@@ -2,10 +2,11 @@ import React, { ErrorInfo } from 'react';
 // todo ,G6@unpack版本将规范类型的输出
 import G6, { Graph as IGraph, GraphOptions, GraphData, TreeGraphData } from '@antv/g6';
 import { deepMix } from '@antv/util';
-
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
+
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import './index.less';
 
@@ -158,9 +159,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     if ((data as GraphinTreeData).children) {
       this.isTree = true;
     }
-    console.time('clone data');
-    this.data = deepMix({}, data);
-    console.timeEnd('clone data');
+    this.data = cloneDeep(data);
   };
 
   initGraphInstance = () => {
@@ -322,13 +321,12 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   };
 
   componentDidUpdate(prevProps: GraphinProps) {
-    console.time('did-update');
-
+    // console.time('did-update');
     const isDataChange = this.shouldUpdate(prevProps, 'data');
     const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
     const isOptionsChange = this.shouldUpdate(prevProps, 'options');
     const isThemeChange = this.shouldUpdate(prevProps, 'theme');
-    console.timeEnd('did-update');
+    // console.timeEnd('did-update');
     const { data } = this.props;
     const isGraphTypeChange = (prevProps.data as GraphinTreeData).children !== (data as GraphinTreeData).children;
 
@@ -345,8 +343,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     }
     /** 配置变化 */
     if (isOptionsChange) {
-      this.updateOptions();
-      console.log('isOptionsChange');
+      // this.updateOptions();
     }
     /** 数据变化 */
     if (isDataChange) {
@@ -356,7 +353,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       this.graph.changeData(this.data as GraphData | TreeGraphData);
       this.initStatus();
       this.apis = ApiController(this.graph);
-      console.log('%c isDataChange', 'color:grey');
+      // console.log('%c isDataChange', 'color:grey');
       this.setState(
         preState => {
           return {
@@ -396,7 +393,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
       /** 走G6的layoutController */
       // this.graph.updateLayout();
-      console.log('%c isLayoutChange', 'color:grey');
+      // console.log('%c isLayoutChange', 'color:grey');
       this.graph.emit('graphin:layoutchange');
     }
   }
@@ -436,10 +433,9 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   }
 
   render() {
-    console.log('%c graphin render...', 'color:lightblue', this);
     const { isReady } = this.state;
     const { modes, style } = this.props;
-    console.log('theme', this.theme);
+
     return (
       <GraphinContext.Provider value={this.state.context}>
         <div id="graphin-container">

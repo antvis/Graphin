@@ -10,9 +10,46 @@ import SearchBar from './components/SearchBar';
 import Cases from './components/Cases/Cases';
 import Banner from './components/Banner/index';
 import Ideas from './components/Features';
+import NotFoundPage from './components/404';
 
 import './style/layout.less';
 import Footer from './components/Footer';
+
+const isEmpty = obj => {
+  return Object.keys(obj).length === 0;
+};
+
+const processRedirect = (context, location) => {
+  const { pathname } = location;
+  const { meta, routes } = context;
+
+  const isEmptyMeta = isEmpty(meta);
+  let matchRoute = { meta: {} };
+  const needRedirectPath = ['/zh', '/zh/', '/zh-CN', '/zh-CN/', '/en', '/en/', '/en-US', '/en-US/'];
+  const isInclude = needRedirectPath.some(item => item === pathname);
+  if (isEmptyMeta) {
+    if (isInclude) {
+      // 存在重定向需求
+      const isZh = pathname.slice(1, 3) === 'zh';
+      const isEn = pathname.slice(1, 3) === 'en';
+      if (isZh) {
+        matchRoute = routes.find(item => {
+          return item.path === '/';
+        });
+      }
+      if (isEn) {
+        matchRoute = routes.find(item => {
+          return item.path === '/en-US';
+        });
+      }
+    }
+  }
+
+  return {
+    meta: isEmptyMeta ? matchRoute.meta : meta,
+    isDirect: isInclude,
+  };
+};
 
 const Hero = hero => (
   <div className="__dumi-default-layout-hero">
@@ -64,12 +101,14 @@ const Features = features => (
 );
 
 const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
+  const Context = useContext(context);
   const {
     config: { mode, repository },
-    meta,
     locale,
-  } = useContext(context);
-  console.log('meta', meta);
+  } = Context;
+
+  const { meta, isDirect } = processRedirect(Context, location);
+  console.log('Context', Context, 'calculate meta', meta);
   const { url: repoUrl, branch, platform } = repository;
   const [menuCollapsed, setMenuCollapsed] = useState<boolean>(true);
   const isSiteMode = mode === 'site';
@@ -91,6 +130,38 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
   const updatedTime: any = new Date(meta.updatedTime).toLocaleString([], { hour12: false });
   const repoPlatform =
     { github: 'GitHub', gitlab: 'GitLab' }[(repoUrl || '').match(/(github|gitlab)/)?.[1] || 'nothing'] || platform;
+  // 等dumi最新版发布后解决路由匹配问题
+  if (isEmpty(meta) && !isDirect) {
+    return (
+      <div>
+        <div
+          style={{ marginBottom: '60px' }}
+          className="__dumi-default-layout home"
+          data-route={location.pathname}
+          data-show-sidemenu={false}
+          data-show-slugs={false}
+          data-site-mode="site"
+          data-gapless={String(!!meta.gapless)}
+          onClick={() => {
+            if (menuCollapsed) return;
+            setMenuCollapsed(true);
+          }}
+        >
+          <div style={{ height: '60px' }} />
+          <Navbar
+            location={location}
+            navPrefix={<SearchBar />}
+            onMobileMenuClick={ev => {
+              setMenuCollapsed(val => !val);
+              ev.stopPropagation();
+            }}
+          />
+          <NotFoundPage />
+          <Footer githubUrl={repoUrl} rootDomain="https://antv.vision" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div

@@ -43,12 +43,11 @@ const styles: {
 };
 let containerRef: null | HTMLDivElement = null;
 const containerHeight = 120;
-const MiniMap: React.FunctionComponent<MiniMapProps> = (props) => {
+const MiniMap: React.FunctionComponent<MiniMapProps> = props => {
   const { graph } = React.useContext(GraphinContext);
   const { options, style = {} } = props;
 
   React.useEffect(() => {
-    console.log('graph', graph);
     const width = graph.getWidth();
     const height = graph.getHeight();
     const padding = graph.get('fitViewPadding');
@@ -77,7 +76,7 @@ const MiniMap: React.FunctionComponent<MiniMapProps> = (props) => {
   };
   return (
     <div
-      ref={(node) => {
+      ref={node => {
         containerRef = node;
       }}
       style={mergedStyle}

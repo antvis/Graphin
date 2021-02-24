@@ -75,7 +75,7 @@ const calculate = ({
   const { nodes = [], edges = [] } = graphData;
 
   if (bindType === 'node') {
-    nodes.forEach((node) => {
+    nodes.forEach(node => {
       /** 得到枚举值 */
       const enumValue = getEnumValue(sortKey, node);
       /** 按照枚举值重新将节点存放 */
@@ -88,7 +88,7 @@ const calculate = ({
     });
     /** 计算legend.content 的 options */
     const keys = [...nodeMapByMapKey.keys()];
-    const options = keys.map((key) => {
+    const options = keys.map(key => {
       const node = (nodeMapByMapKey.get(key) || [{}])[0];
       const color = getEnumValue(colorKey, node);
       return {
@@ -108,7 +108,7 @@ const calculate = ({
     };
   }
   // if (bindType === 'edge') {
-  edges.forEach((edge) => {
+  edges.forEach(edge => {
     /** 得到枚举值 */
     const enumValue = getEnumValue(sortKey, edge);
 
@@ -121,7 +121,7 @@ const calculate = ({
   });
   /** 计算legend.content 的 options */
   const keys = [...edgeMapByMapKey.keys()];
-  const options = keys.map((key) => {
+  const options = keys.map(key => {
     const edge = (edgeMapByMapKey.get(key) || [{}])[0];
     const color = getEnumValue(colorKey, edge);
     return {
@@ -161,7 +161,7 @@ const defaultStyle: React.CSSProperties = {
   top: '0px',
   right: '0px',
 };
-const Legend: React.FunctionComponent<LegendProps> & { Node: typeof Node } = (props) => {
+const Legend: React.FunctionComponent<LegendProps> & { Node: typeof Node } = props => {
   const graphin = React.useContext<GraphinContextType>(GraphinContext);
   const { graph } = graphin;
   const { bindType, sortKey, children, colorKey = 'style.stroke', style } = props;
@@ -178,7 +178,7 @@ const Legend: React.FunctionComponent<LegendProps> & { Node: typeof Node } = (pr
       options,
     },
   };
-  console.log('%c legend Container', 'color:red');
+
   return (
     <div className="graphin-components-legend" style={{ ...defaultStyle, ...style }}>
       {children}

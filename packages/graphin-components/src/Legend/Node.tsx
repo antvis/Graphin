@@ -17,7 +17,7 @@ export interface LegendProps {
   onChange?: (checked: LegendOption, newOptions: LegendOption[], props: any) => any; // eslint-disable-line
 }
 
-const LegendNode: React.FunctionComponent<LegendProps> = (props) => {
+const LegendNode: React.FunctionComponent<LegendProps> = props => {
   const {
     legend,
     // apis,
@@ -43,11 +43,9 @@ const LegendNode: React.FunctionComponent<LegendProps> = (props) => {
 
   const { options } = state;
 
-  console.log('options', options);
-
   const handleClick = (option: LegendOption) => {
     const checkedValue = { ...option, checked: !option.checked };
-    const result = options.map((c) => {
+    const result = options.map(c => {
       const matched = c.value === option.value;
       return matched ? checkedValue : c;
     });
@@ -60,7 +58,7 @@ const LegendNode: React.FunctionComponent<LegendProps> = (props) => {
     // const nodesId = nodes.map((c) => c.id);
     // apis.highlightNodeById(nodesId);
 
-    nodes.forEach((node) => {
+    nodes.forEach(node => {
       graph.setItemState(node.id, 'active', checkedValue.checked);
       graph.setItemState(node.id, 'inactive', !checkedValue.checked);
     });
@@ -68,7 +66,6 @@ const LegendNode: React.FunctionComponent<LegendProps> = (props) => {
     /** 给用户的回调函数 */
     onChange(checkedValue, result, props);
   };
-  console.log('%c legend Content', 'color:red');
 
   return (
     <ul className="graphin-components-legend-content" style={style}>

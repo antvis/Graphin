@@ -278,14 +278,10 @@ class ForceLayout {
 
   slienceForce = () => {
     const { done } = this.props;
-    console.time('force time without animate'); // eslint-disable-line
-
     for (let i = 0; this.averageDistance > 0.5 || i < 1; i++) {
       this.tick(this.props.tickInterval);
       this.iterations++;
     }
-
-    console.timeEnd('force time without animate'); // eslint-disable-line
     this.render();
     done && done(); // eslint-disable-line
   };
