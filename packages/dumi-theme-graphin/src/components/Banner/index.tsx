@@ -6,8 +6,6 @@ import GitHubButton from 'react-github-button';
 import gh from 'parse-github-url';
 import classNames from 'classnames';
 import { context } from 'dumi/theme';
-
-import 'video-react/dist/video-react.css';
 // @ts-ignore
 import styles from './Banner.module.less';
 import Notification, { NotificationProps } from './Notification';

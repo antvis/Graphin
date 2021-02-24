@@ -54,7 +54,7 @@
   "peerDependencies": {
     "react": "^16.x",
     "react-dom": "^16.x",
-    "@antv/graphin": "2.0.0"
+    "@antv/graphin": "^2.0.0"
   },
   "publishConfig": {
     "access": "public"

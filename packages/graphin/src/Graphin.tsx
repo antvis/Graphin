@@ -2,10 +2,11 @@ import React, { ErrorInfo } from 'react';
 // todo ,G6@unpack版本将规范类型的输出
 import G6, { Graph as IGraph, GraphOptions, GraphData, TreeGraphData } from '@antv/g6';
 import { deepMix } from '@antv/util';
-
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
+
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import './index.less';
 
@@ -158,7 +159,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     if ((data as GraphinTreeData).children) {
       this.isTree = true;
     }
-    this.data = deepMix({}, data);
+    this.data = cloneDeep(data);
   };
 
   initGraphInstance = () => {
