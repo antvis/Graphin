@@ -37,6 +37,8 @@ Graphin has 10 built-in network graph layouts and 4 tree graph layouts to meet y
 
 Graphin provides 13 interactive components, including canvas zooming, panning, brush selection, lasso select , automatic resize, and also element dragging, selection, hovering, highlighting, expanding and collapsing, etc., to meet your interactive needs for different analysis scenarios [Try it online](https://graphin.antv.vision/en-US/graphin/behaviors/behaviors)
 
+![behaviors](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*cGzHQK4MGToAAAAAAAAAAAAAARQnAQ)
+
 ### 🚀 Rich components, derived from precipitation of business development
 
 Currently Graphin provides 7 analysis components: `ContextMenu`, `Tooltip`, `MiniMap`, `Toolbar`, `FishEye`, `Hull`, and `Legend`. 17+ analysis components will be provided in the future. [Try it online](https://graphin.antv.vision/en-US/components/interaction/context-menu)
@@ -106,6 +108,7 @@ import Graphin from '@antv/graphin';
 import { MiniMap } from '@antv/graphin-components';
 // Import icon resource files
 import iconLoader from '@antv/graphin-icons';
+import '@antv/graphin-icons/dist/index.css';
 // mock data
 const data = Utils.mock(10).circle().graphin();
 // Register in Graphin
