@@ -155,3 +155,28 @@ export const getLabelXYByPosition = (
   }
   return positionAttrs;
 };
+
+export const getBadgePosition = (position = 'RT', r: number) => {
+  let badgeX = 0;
+  let badgeY = 0;
+  if (position === 'LT') {
+    badgeX = r * Math.cos((Math.PI * 3) / 4);
+    badgeY = -r * Math.sin((Math.PI * 3) / 4);
+  } else if (position === 'LB') {
+    // left bottom
+    badgeX = r * Math.cos((Math.PI * 5) / 4);
+    badgeY = -r * Math.sin((Math.PI * 5) / 4);
+  } else if (position === 'RT') {
+    // right top
+    badgeX = r * Math.cos((Math.PI * 1) / 4);
+    badgeY = -r * Math.sin((Math.PI * 1) / 4);
+  } else if (position === 'RB') {
+    // right bottom
+    badgeX = r * Math.cos((Math.PI * 7) / 4);
+    badgeY = -r * Math.sin((Math.PI * 7) / 4);
+  }
+  return {
+    x: badgeX,
+    y: badgeY,
+  };
+};

@@ -6,6 +6,7 @@ import getNodeStyleByTheme from '../theme/node-style';
 import getEdgeStyleByTheme from '../theme/edge-style';
 import getComboStyleByTheme from '../theme/combo-style';
 import processEdges from './processEdges';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { deepMix } from '@antv/util';
 import uuid from './uuid';
@@ -22,7 +23,8 @@ export default {
   getNodeStyleByTheme,
   getEdgeStyleByTheme,
   getComboStyleByTheme,
-  deepMerge: deepMix,
+  deepMix,
+  cloneDeep,
   uuid,
   walk,
   processEdges,
