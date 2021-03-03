@@ -7,7 +7,7 @@ const icons = Graphin.registerFontFamily(iconLoader);
 
 const { Menu } = ContextMenu;
 
-const data = Utils.mock(4).circle().graphin();
+const data = Utils.mock(5).circle().graphin();
 const layout = {
   type: 'graphin-force',
   preset: {
@@ -85,6 +85,26 @@ const UpdateNode = () => {
               },
             },
           },
+        },
+      });
+    }
+    if (item.id === 'node-4') {
+      graph.updateItem(item.id, {
+        style: {
+          // @ts-ignore
+          label: {
+            value: 'update badges',
+          },
+          badges: [
+            {
+              position: 'RT',
+              type: 'text',
+              value: Math.round(Math.random() * 100),
+              size: [20, 20],
+              color: '#fff',
+              fill: 'red',
+            },
+          ],
         },
       });
     }
