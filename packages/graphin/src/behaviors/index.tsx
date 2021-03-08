@@ -11,6 +11,7 @@ import ActivateRelations from './ActivateRelations';
 import Hoverable from './Hoverable';
 import FitView from './FitView';
 import FontPaint from './FontPaint';
+import DragNodeWithForce from './DragNodeWithForce';
 
 export default {
   /** 内置 */
@@ -29,4 +30,5 @@ export default {
   TreeCollapse,
   FitView,
   FontPaint,
+  DragNodeWithForce,
 };

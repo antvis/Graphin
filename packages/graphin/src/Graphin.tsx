@@ -37,6 +37,7 @@ export interface GraphinState {
     graph: IGraph;
     apis: ApisType;
     theme: ThemeData;
+    layout: LayoutController;
   };
 }
 
@@ -141,6 +142,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     this.theme = {} as ThemeData;
     this.apis = {} as ApisType;
+    this.layout = {} as LayoutController;
+    this.options = { ...otherOptions } as GraphOptions;
 
     this.state = {
       isReady: false,
@@ -148,11 +151,9 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         graph: this.graph,
         apis: this.apis,
         theme: this.theme,
+        layout: this.layout,
       },
     };
-
-    this.options = { ...otherOptions } as GraphOptions;
-    this.layout = {} as LayoutController;
   }
 
   initData = (data: GraphinProps['data']) => {
@@ -275,6 +276,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         graph: this.graph,
         apis: this.apis,
         theme: this.theme,
+        layout: this.layout,
       },
     });
   };
@@ -362,6 +364,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
               graph: this.graph,
               apis: this.apis,
               theme: this.theme,
+              layout: this.layout,
             },
           };
         },

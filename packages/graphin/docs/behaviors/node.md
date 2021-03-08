@@ -10,6 +10,13 @@ nav:
   order: 1
 ---
 
+## DragNodeWithForce
+
+> 力导布局状态下，拖拽节点是否自动固定，目前仅支持`graphin-force` 布局
+
+<code src='./demos/drag-force-node.tsx'>
+<API src='../../src/behaviors/DragNodeWithForce.tsx'>
+
 ## DragNode
 
 <API src='../../src/behaviors/DragNode.tsx'>

@@ -10,6 +10,13 @@ nav:
   order: 1
 ---
 
+## DragNodeWithForce
+
+> Under force layout, drag nodes are automatically fixed, currently only supports `graphin-force` layout
+
+<code src='./demos/drag-force-node.tsx'>
+<API src='../../src/behaviors/DragNodeWithForce.tsx'>
+
 ## DragNode
 
 <API src='../../src/behaviors/DragNode.tsx'>
