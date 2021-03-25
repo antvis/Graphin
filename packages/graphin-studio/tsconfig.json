@@ -1,31 +1,20 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "strictNullChecks": false,
-        "forceConsistentCasingInFileNames": true,
-        "module": "esnext",
-        "sourceMap": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "downlevelIteration": true,
-        "noImplicitAny": false,
-        "jsx": "react",
-        "baseUrl": "./",
-        "paths": {
-            "@types": ["src/types.ts"],
-            "@service": ["src/Service/index.ts"],
-            "@service/*": ["src/Service/*"],
-            "@utils/*": ["src/Utils/*"],
-            "@com": ["src/Components/index.ts"],
-            "@com/*": ["src/Components/*"]
-        }
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@@/*": ["src/.umi/*"]
     },
-    "include": ["src"]
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["mock/**/*", "src/**/*", "config/**/*", ".umirc.ts", "typings.d.ts"],
+  "exclude": ["node_modules", "lib", "es", "dist", "typings", "**/__test__", "test", "docs", "tests"]
 }

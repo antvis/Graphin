@@ -4,17 +4,23 @@
   "description": "An Example for Graphin",
   "main": "dist/app.js",
   "scripts": {
-    "start": " node --max_old_space_size=8192 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --env.NODE_ENV=development",
+    "start": "umi dev",
     "build": "rimraf dist && node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --env.NODE_ENV=production  -c ./webpack.config.js ",
     "deploy": "npm run build && gh-pages -d ./dist -r https://github.com/antvis/graphin-studio-site.git"
   },
   "dependencies": {
+    "@ant-design/charts": "^1.0.21",
     "@ant-design/compatible": "^1.0.2",
     "@ant-design/icons": "^4.0.6",
-    "@antv/g6": "^3.8.1",
+    "@antv/g2plot": "^2.3.16",
     "@antv/graphin": "*",
     "@antv/graphin-components": "*",
+    "@antv/util": "^2.0.13",
     "@types/classnames": "^2.2.9",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@types/react-redux": "^7.1.16",
+    "@umijs/plugin-antd": "^0.9.1",
     "antd": "^4.2.4",
     "chinese-random-name": "^1.0.0",
     "classnames": "^2.2.6",
@@ -25,7 +31,10 @@
     "react-color": "^2.17.3",
     "react-dom": "^16.9.0",
     "react-hot-loader": "^4.12.14",
-    "react-router-dom": "^5.1.1"
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.1.1",
+    "redux": "^4.0.5",
+    "umi": "^3.4.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
