@@ -1,50 +1,25 @@
-import { GrapheneState } from '../types';
-import Storage from '../Service/Storage';
+import { createStore } from 'redux';
 
-const storage = new Storage('graphin-studio');
-
-if (!storage.get('config')) {
-  storage.set('config', {
-    toolbar: {
-      direction: 'vertical',
-    },
-    theme: 'light',
-  });
+interface Action {
+  type: string;
+  text: string;
+}
+function todos(state = [], action: Action) {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return state.concat([action.text as never]);
+    default:
+      return state;
+  }
 }
 
-const initialState: GrapheneState = {
-  data: {
-    nodes: [],
-    edges: [],
-  },
-  layout: {
-    name: 'force',
-    options: {
-      preset: {
-        name: 'concentric',
-      },
-    },
-  },
+const store = createStore(todos, ['Use Redux' as never]);
 
-  selectedNodes: [],
-  drawer: {
-    visible: false,
-    type: '',
-  },
-  modal: {
-    visible: false,
-  },
-  searchBar: {
-    visible: false,
-  },
-  toolbar: {
-    direction: storage.get('config').toolbar.direction,
-  },
-  theme: storage.get('config').theme,
+// store.dispatch({
+//   type: 'ADD_TODO',
+//   text: 'Read the docs',
+// });
 
-  graphRef: {
-    current: null,
-  },
-};
-
-export default initialState;
+export default store;
+console.log(store.getState());
+// [ 'Use Redux', 'Read the docs' ]
