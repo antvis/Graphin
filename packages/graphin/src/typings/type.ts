@@ -104,12 +104,24 @@ export interface GraphinProps {
   /** 布局后的回调函数 */
   handleAfterLayout?: (graph: Graph) => void;
 
-  /** 默认的节点样式 */
-  defaultNode?: Partial<NodeStyle>;
-  /** 默认的边样式 */
-  defaultEdge?: Partial<EdgeStyle>;
-  /** 默认的Combo样式 */
-  defaultCombo?: Partial<ComboStyle>;
+  /** 节点的默认样式配置 */
+  defaultNode?: Partial<{
+    type?: string;
+    style: NodeStyle;
+    [key: string]: any;
+  }>;
+  /** 边的默认样式配置 */
+  defaultEdge?: Partial<{
+    type?: 'graphin-line';
+    style: EdgeStyle;
+    [key: string]: any;
+  }>;
+  /** Combo 的默认样式配置  */
+  defaultCombo?: Partial<{
+    type?: string;
+    style: ComboStyle;
+    [key: string]: any;
+  }>;
 
   /** 默认的节点 状态样式 */
   nodeStateStyles?: {
