@@ -15,23 +15,22 @@ nav:
 
 Tooltip 提示框是一种快速浏览信息的交互组件，常用于图的节点和边上。通过鼠标悬停在节点或边上时，出现一个提示框，鼠标移出节点则取消提示框。这在快速查询元素详细信息时非常有帮助。
 
-## 内置组件：<Tooltip.Node /> <Tooltip.Edge />
+## 内置组件：<Tooltip.Node />
+
+`<Tooltip/>`是提示框的容器，提供位置，触发元素，回调函数等信息，这些信息可以用户通过`context`获取。具体如何渲染，完全交给用户，官方也提供了`<Tooltip.Node />`组件，用来快速使用，用户完全可以自定义展示的内容
 
 <code src='./demos/index.tsx'>
-
 <API src='./index.tsx'>
-<API src='./Node.tsx'>
-<API src='./Edge.tsx'>
 
-## 开放组件：集成 Antd 的 Popover 组件
+## 开放组件：自定义组件
 
-<code src='./demos/Antd.tsx' />
+<code src='./demos/Custom.tsx'>
 
-## ⚠️：集成 Antd 的 Popover 组件，监听不到 ContextMenu 事件
+## ⚠️：集成 Antd 的 Popover 组件
 
-因为我们集成 Antd 的 Popover 组件，需要一个触发的 DOM，而触发的 DOM 恰好覆盖了节点，因此，我们再引入 Graphin 的 ContextMenu 组件，则没办法监听'node:contextmenu'事件。临时方案如下：在 AntdTooltip 的组件中，监听触发 DOM 的`onContexmenu`事件，自定义 ContextMenu
+集成 Antd 的 Popover 组件，需要一个触发的 DOM，而触发的 DOM 恰好覆盖了节点，因此，我们的组件`ContextMenu`,`<DragNode />`等无法触发节点事件，从而带来失效，推荐官方内置的`<Tooltip pleacement='top' hasArrow/>`来使用
 
-<code src='./demos/AntdWithContextMenu.tsx' />
+<code src='./demos/Antd.tsx' >
 
 ## 功能特性
 
@@ -41,24 +40,3 @@ Tooltip 提示框是一种快速浏览信息的交互组件，常用于图的节
 ## 参考资料
 
 > 欢迎 github 的伙伴 讨论设计和组件方案，开源共建。
-
-## 用法
-
-```tsx | pure
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Graphin, { Utils } from '@antv/graphin';
-import { Tooltip } from '@antv/graphin-components';
-// Do not forget to import CSS
-
-const App = () => {
-  return (
-    <div className="App">
-      <Graphin data={Utils.mock(10).graphin()}></Graphin>
-    </div>
-  );
-};
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
-```
