@@ -16,21 +16,20 @@ Tooltip is an interactive component for quickly accessing nodes or edges informa
 
 ## Built-in Components
 
-<code src='./demos/index.tsx'>
+`<Tooltip/>` is a tooltip container, providing information such as position, trigger element, callback function, etc., which can be obtained by the user through `context`. How to render is completely handed over to the user, and the official `<Tooltip.Node />` component is also provided for quick use. The user can customize the content of the display.
 
+<code src='./demos/index.tsx'>
 <API src='./index.tsx'>
-<API src='./Node.tsx'>
-<API src='./Edge.tsx'>
 
 ## Custom Component: Popover component integrated with Antd
 
-<code src='./demos/Antd.tsx' />
+<code src='./demos/Custom.tsx' />
 
 ## ⚠️: Popover component integrated with Antd, unable to listen to ContextMenu event
 
-Because we integrate Antd's Popover component, we need a triggered DOM, and the triggered DOM happens to cover the node. Therefore, when we introduce Graphin's ContextMenu component, there is no way to listen to the'node:contextmenu' event. The temporary solution is as follows: in the AntdTooltip component, listen to the `onContexmenu` event that triggers the DOM, and customize the ContextMenu
+Integrating the Popover component of Antd requires a triggered DOM, and the triggered DOM happens to cover the node. Therefore, our components `<ContextMenu />`, `<DragNode />`, etc. cannot trigger node events, which will lead to failure. The official built-in is recommended `<Tooltip pleacement='top' hasArrow/>` to use
 
-<code src='./demos/AntdWithContextMenu.tsx' />
+<code src='./demos/Antd.tsx' />
 
 ## Features
 
@@ -40,36 +39,3 @@ Because we integrate Antd's Popover component, we need a triggered DOM, and the 
 ## Reference
 
 > We welcome the Github community to discuss the component design and implementation, and build an open-source solution together.
-
-## Usage
-
-```tsx | pure
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Graphin, { Utils } from '@antv/graphin';
-import { Tooltip } from '@antv/graphin-components';
-// Do not forget to import CSS
-
-const App = () => {
-  return (
-    <div className="App">
-      <Graphin data={Utils.mock(10).graphin()}>
-        <Tooltip.Node>
-          {e => {
-            return <CustomContent>{e.item.getModel().name}</CustomContent>;
-          }}
-        </Tooltip.Node>
-
-        <Tooltip.Edge>
-          {e => {
-            return <CustomContent>{e.item.getModel().name}</CustomContent>;
-          }}
-        </Tooltip.Edge>
-      </Graphin>
-    </div>
-  );
-};
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
-```
