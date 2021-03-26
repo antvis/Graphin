@@ -1,7 +1,7 @@
-import * as React from 'react';
-import Graphin, { Utils, GraphinContext } from '@antv/graphin';
+import Graphin, { GraphinContext, Utils } from '@antv/graphin';
 import { Tooltip } from '@antv/graphin-components';
 import { Popover } from 'antd';
+import * as React from 'react';
 
 const content = (
   <div>
@@ -38,8 +38,9 @@ const TooltipDemo: React.FunctionComponent = () => {
           style={{
             ...tooltipStyles,
             transform: `translate(-${nodeSize / 2}px,-${nodeSize / 2}px)`,
-            // background: 'red',
+            background: 'red',
           }}
+          placement="center"
         >
           <AntdTooltip />
         </Tooltip>

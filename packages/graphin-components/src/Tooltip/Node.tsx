@@ -11,7 +11,7 @@ export interface NodeProps {
   children: (model: any) => JSX.Element | JSX.Element[];
 }
 
-const Node: React.FunctionComponent<NodeProps> = (props) => {
+const Node: React.FunctionComponent<NodeProps> = props => {
   const { children } = props;
   const { tooltip } = React.useContext(GraphinContext);
   const context = tooltip.node;
