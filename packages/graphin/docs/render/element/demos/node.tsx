@@ -1,27 +1,24 @@
-import React, { useEffect } from 'react';
-import Graphin, { Utils, Behaviors, GraphinContext, NodeStyle } from '@antv/graphin';
+import Graphin, { Behaviors, Utils } from '@antv/graphin';
 import IconLoader from '@antv/graphin-icons';
-import { Row, Col, Card } from 'antd';
+import React from 'react';
 
 const icons = Graphin.registerFontFamily(IconLoader);
 
 const { ZoomCanvas, Hoverable } = Behaviors;
 
-const data = Utils.mock(5)
-  .circle()
-  .graphin();
+const data = Utils.mock(5).circle().graphin();
 
 data.edges = [];
 
 data.nodes[0].style = {
   keyshape: {
-    size: [80, 80],
+    size: 80,
     stroke: 'red',
     fill: 'red',
     fillOpacity: 0.2,
   },
   label: {
-    value: '设置 keyshape',
+    value: '设置 \n keyshape',
   },
 };
 

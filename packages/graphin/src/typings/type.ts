@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // TODO : remove any type
-import { ThemeType } from '../theme';
 import { Graph } from '@antv/g6';
+import { ThemeType } from '../theme';
 
 export interface UserProperties {
   [key: string]: any;
@@ -335,7 +335,10 @@ export interface CommondAttrsStyle {
 }
 export type NodeStyleLabel = Partial<
   {
-    /** label的名称 */
+    /**
+     * @description  标签名称，\n 可换行
+     * @description.en-US label name
+     */
     value: string;
     /** 展示位置  'top' | 'bottom' | 'left' | 'right' | 'center' | */
     position: 'top' | 'bottom' | 'left' | 'right' | 'center' | string;
