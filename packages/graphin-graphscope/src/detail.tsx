@@ -1,13 +1,11 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { Resizable } from 're-resizable';
 import { Table, Row, Col } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
-// @ts-ignore
 import classNames from 'classnames';
-import { NodeData } from './graph';
-
-// @ts-ignore
+import { NodeData } from './graph.tsx';
 import styles from './detail.less';
 
 interface DetailProps {
@@ -20,17 +18,17 @@ interface DetailProps {
 const ElementDetailPanel: React.FC<DetailProps> = ({ close, type, itemId, data = {} }) => {
   const columns = [
     {
-      title: '字段名',
+      title: 'Name',
       key: 'name',
       dataIndex: 'name',
     },
     {
-      title: '类型',
+      title: 'Type',
       key: 'type',
       dataIndex: 'type',
     },
     {
-      title: '值',
+      title: 'Value',
       key: 'value',
       dataIndex: 'value',
     },
@@ -40,7 +38,7 @@ const ElementDetailPanel: React.FC<DetailProps> = ({ close, type, itemId, data =
   useEffect(() => {
     if (data.properties) {
       const tmpData = [];
-      for (let key in data.properties) {
+      for (const key in data.properties) {
         tmpData.push({
           key,
           name: key,
@@ -52,7 +50,7 @@ const ElementDetailPanel: React.FC<DetailProps> = ({ close, type, itemId, data =
       setPropertiesData(tmpData);
     }
   }, [data.id]);
-  const itemTypeZH = type === 'NODE' ? '节点' : '边';
+  const itemTypeZH = type === 'NODE' ? 'Node' : 'Edge';
   return (
     <Draggable handle=".handle" position={null} scale={1}>
       <Resizable
@@ -72,10 +70,10 @@ const ElementDetailPanel: React.FC<DetailProps> = ({ close, type, itemId, data =
           transition: 'height 0.3s ease',
         }}
       >
-        <div style={{ height: '100%', overflow: 'hidden' }}>
+        <div style={{ height: '100%', overflow: 'auto' }}>
           <Row className={classNames(styles.header, 'handle')}>
             <Col span={22} className={styles.title}>
-              {`${itemTypeZH}详情`}
+              {`${itemTypeZH} Detail Information`}
             </Col>
             <Col span={2}>
               <span className={styles.collapseIcon} onClick={() => close()}>
@@ -88,7 +86,7 @@ const ElementDetailPanel: React.FC<DetailProps> = ({ close, type, itemId, data =
               {itemTypeZH} ID：{itemId}
             </p>
             <p>
-              {itemTypeZH}类型：{data.label}
+              {itemTypeZH} Type：{data.label}
             </p>
             <Table
               columns={columns}

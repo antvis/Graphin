@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin-graphscope",
-  "version": "0.0.22",
+  "version": "1.0.0",
   "description": "An Example for GraphScope",
   "main": "lib/index.js",
   "module": "es/index.js",

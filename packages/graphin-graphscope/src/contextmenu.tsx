@@ -8,7 +8,7 @@ interface CustomMenuProps {
   expandNeighbors: (nodeId: string, degree: number) => void;
 }
 
-const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
+const CustomMenu: React.FunctionComponent<CustomMenuProps> = (props) => {
   const { expandNeighbors } = props;
   const graphin = React.useContext(Graphin.GraphinContext);
 
@@ -26,8 +26,8 @@ const CustomMenu: React.FunctionComponent<CustomMenuProps> = props => {
 
   return (
     <Menu bindType="node">
-      <Menu.Item onClick={() => handleFind(1)}>一度关系</Menu.Item>
-      <Menu.Item onClick={() => handleFind(2)}>二度关系</Menu.Item>
+      <Menu.Item onClick={() => handleFind(1)}>Expand 1 hop</Menu.Item>
+      <Menu.Item onClick={() => handleFind(2)}>Expand 2 hops</Menu.Item>
       {/* <Menu.Item onClick={() => handleFind(3)}>三度关系</Menu.Item>
       <Menu.Item onClick={() => handleFind(4)}>四度关系</Menu.Item> */}
     </Menu>
