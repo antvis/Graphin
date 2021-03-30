@@ -1,6 +1,6 @@
-// @ts-ignore
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import Graphin, { Behaviors, Utils, NodeConfig } from '@antv/graphin';
+import Graphin, { Behaviors, NodeConfig } from '@antv/graphin';
 import { ContextMenu, FishEye, MiniMap } from '@antv/graphin-components';
 import { message } from 'antd';
 // import iconLoader from '@antv/graphin-icons';
@@ -13,8 +13,6 @@ import CustomMenu from './contextmenu';
 import '@antv/graphin-icons/dist/index.css';
 
 import ClickElement from './events/click';
-
-const { hexToRgbaToHex } = Utils;
 
 // const icons = Graphin.registerFontFamily(iconLoader);
 
@@ -253,16 +251,19 @@ const GraphScope: React.FC<GraphProps> = ({
         type: 'graphin-circle',
         style: {
           keyshape: {
-            fill: hexToRgbaToHex(colorLabelMap[node.label], 0.3),
+            fill: colorLabelMap[node.label],
+            fillOpacity: 0.3,
             stroke: colorLabelMap[node.label],
-            size: [nodeSize, nodeSize],
+            size: nodeSize,
           },
           label: {
-            value: node.label,
-            fill: hexToRgbaToHex('#000', 0.85),
+            value: node.oid,
+            fill: '#000',
+            fillOpacity: 0.85,
           },
           halo: {
-            fill: hexToRgbaToHex(colorLabelMap[node.label], 0.1),
+            fill: colorLabelMap[node.label],
+            fillOpacity: 0.1,
             stroke: colorLabelMap[node.label],
           },
           // icon: {
@@ -295,15 +296,9 @@ const GraphScope: React.FC<GraphProps> = ({
     const edges = originData.edges.map((edge: EdgeData) => {
       return {
         ...edge,
-        label: '',
-        size: 0.5,
-        color: '#AAB7C4', // '#545872',
         style: {
           keyshape: {
-            endArrow: {
-              path: 'M 0,0 L 8,4 L 8,-4 Z',
-              fill: '#545872',
-            },
+            stroke: '#bfbfbf',
           },
         },
       };
@@ -322,7 +317,7 @@ const GraphScope: React.FC<GraphProps> = ({
 
   useEffect(() => {
     const transData = transGraphData(data);
-    setState(preState => {
+    setState((preState) => {
       return {
         ...preState,
         data: transData,
@@ -332,7 +327,7 @@ const GraphScope: React.FC<GraphProps> = ({
 
   const { visible, layout } = state;
   const handleClose = () => {
-    setState(preState => {
+    setState((preState) => {
       return {
         ...preState,
         visible: false,
@@ -340,7 +335,7 @@ const GraphScope: React.FC<GraphProps> = ({
     });
   };
   const handleOpen = () => {
-    setState(preState => {
+    setState((preState) => {
       return {
         ...preState,
         visible: true,
@@ -348,7 +343,7 @@ const GraphScope: React.FC<GraphProps> = ({
     });
   };
   const handleRefresh = () => {
-    setState(preState => {
+    setState((preState) => {
       return {
         ...preState,
         data: refreshData,
@@ -365,8 +360,8 @@ const GraphScope: React.FC<GraphProps> = ({
   };
 
   const handleChangeLayout = (value: string) => {
-    const currentLayout = layouts.find(item => item.type === value);
-    setState(preState => {
+    const currentLayout = layouts.find((item) => item.type === value);
+    setState((preState) => {
       return {
         ...preState,
         layout: currentLayout as any,
@@ -402,7 +397,7 @@ const GraphScope: React.FC<GraphProps> = ({
         )}
         {hasContextMenu && (
           <>
-            <ContextMenu style={{ width: 90 }}>
+            <ContextMenu style={{ width: 120 }}>
               <CustomMenu expandNeighbors={expandNeighbors} />
             </ContextMenu>
             <ContextMenu bindType="canvas">
@@ -419,7 +414,7 @@ const GraphScope: React.FC<GraphProps> = ({
             type={detailInfo.type}
             data={detailInfo.data}
             close={() => setDetailInfo({ visible: false, data: null, type: '' })}
-            itemId={detailInfo.data.id}
+            itemId={detailInfo.data.oid}
           />
         )}
       </Graphin>

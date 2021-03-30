@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// @ts-nocheck
 import { IGroup } from '@antv/g-canvas';
 import G6, { EdgeConfig, IEdge, INode, ModelConfig } from '@antv/g6';
 
