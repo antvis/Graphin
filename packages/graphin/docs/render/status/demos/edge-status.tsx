@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import Graphin, { Utils, Behaviors, GraphinContext } from '@antv/graphin';
+
 const ShowPaths = ({ paths = [] }) => {
     const { graph, } = useContext(GraphinContext);
     const nodes = graph.getNodes();
