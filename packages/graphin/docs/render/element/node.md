@@ -23,7 +23,7 @@ Graphin 内置唯一一款节点类型`graphin-circle`.作为默认的节点类�
 
 ## 02.设置字体图标
 
-上述的 icon 有 3 种类型，从实际业务出发，将 icon 设置为字体图标是最常见的做法，这样不仅减少网络贷款请求，也很方便高效。
+上述的 icon 有 3 种类型，从实际业务出发，将 icon 设置为字体图标是最常见的做法，这样不仅减少网络带宽请求，也很方便高效。
 Graphin 采用`Graphin.registerFontFamily`的方式注册加载字体文件，让我们来看看吧
 
 <code src='./demos/node-icon.tsx'>
