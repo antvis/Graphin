@@ -1,5 +1,6 @@
 import Algorithm from '@/components/Panel/Algorithm';
 import Component from '@/components/Panel/Component';
+import DataSource from '@/components/Panel/DataSource';
 import Filter from '@/components/Panel/Filter';
 import LayoutPanel from '@/components/Panel/Layout';
 import Statistics from '@/components/Panel/Statistics';
@@ -9,11 +10,11 @@ import { DatabaseOutlined } from '@ant-design/icons';
 import React from 'react';
 
 export const navbarOptions = [
-  // {
-  //   id: 'source',
-  //   name: '数据',
-  //   icon: <DatabaseOutlined />,
-  // },
+  {
+    id: 'data',
+    name: '数据',
+    icon: <DatabaseOutlined />,
+  },
   {
     id: 'statistics',
     name: '统计',
@@ -52,6 +53,12 @@ export const navbarOptions = [
 ];
 
 export const configSchema = [
+  {
+    id: 'data',
+    name: '数据',
+    icon: <DatabaseOutlined />,
+    components: DataSource,
+  },
   {
     id: 'statistics',
     name: '统计',

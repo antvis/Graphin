@@ -300,11 +300,11 @@ const layouts: Layouts = [
     options: undefined,
     title: '环形布局',
   },
-  {
-    type: 'gForce',
-    options: undefined,
-    title: 'G6力导',
-  },
+  // {
+  //   type: 'gForce',
+  //   options: undefined,
+  //   title: 'G6力导',
+  // },
   {
     type: 'mds',
     options: undefined,

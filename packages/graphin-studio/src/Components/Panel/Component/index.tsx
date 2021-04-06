@@ -2,6 +2,7 @@ import { CaretRightOutlined } from '@ant-design/icons';
 import { Collapse, Tabs } from 'antd';
 import * as React from 'react';
 import './index.less';
+import Tooltip from './Tooltip';
 
 const { TabPane } = Tabs;
 
@@ -21,7 +22,7 @@ const classification = [
       {
         id: 'tooltip',
         name: '提示框',
-        components: MockComponents,
+        components: Tooltip,
       },
       {
         id: 'contextmenu',

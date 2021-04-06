@@ -1,6 +1,7 @@
 import { CaretRightOutlined } from '@ant-design/icons';
 import { Collapse, Tabs } from 'antd';
 import * as React from 'react';
+import Basic from './Basic';
 import './index.less';
 
 const { TabPane } = Tabs;
@@ -15,8 +16,13 @@ const MockComponents = ({ content }) => {
 
 const nodes = [
   {
-    id: 'keyshape',
-    name: '形状',
+    id: 'color',
+    name: '颜色',
+    components: Basic,
+  },
+  {
+    id: 'size',
+    name: '大小',
     components: MockComponents,
   },
   {
