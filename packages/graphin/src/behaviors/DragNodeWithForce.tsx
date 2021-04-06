@@ -1,7 +1,6 @@
+import { IG6GraphEvent } from '@antv/g6';
 import React, { useEffect } from 'react';
 import GraphinContext from '../GraphinContext';
-
-import { IG6GraphEvent } from '@antv/g6';
 
 export interface DragNodeWithForceProps {
   /**
@@ -13,13 +12,15 @@ export interface DragNodeWithForceProps {
 }
 const DragNodeWithForce = (props: DragNodeWithForceProps) => {
   const { graph, layout } = React.useContext(GraphinContext);
+
   const { autoPin } = props;
+  const { instance } = layout;
 
   useEffect(() => {
-    const { instance } = layout;
     const { simulation, type } = instance;
-    console.log(instance, layout);
+
     const handleNodeDragStart = () => {
+      console.log('drag-start', instance);
       if (simulation) {
         simulation.stop();
       }
@@ -30,7 +31,6 @@ const DragNodeWithForce = (props: DragNodeWithForceProps) => {
       }
 
       if (e.item) {
-        console.log('e.item', instance);
         const nodeModel = e.item.get('model');
         nodeModel.x = e.x;
         nodeModel.y = e.y;
@@ -52,7 +52,7 @@ const DragNodeWithForce = (props: DragNodeWithForceProps) => {
       graph.off('node:dragstart', handleNodeDragStart);
       graph.off('node:dragend', handleNodeDragEnd);
     };
-  }, [graph, autoPin]);
+  }, [graph, autoPin, instance]);
   return null;
 };
 
