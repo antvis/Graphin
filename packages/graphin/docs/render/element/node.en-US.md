@@ -22,7 +22,7 @@ The style information of the node is all stored in the `style` field, and we can
 
 ## 02.Set Font Icons
 
-There are three types of icons mentioned above. Starting from the actual business, setting the icon as a font icon is the most common practice. This not only reduces network loan requests, but is also very convenient and efficient.
+There are three types of icons mentioned above. Starting from the actual business, setting the icon as a font icon is the most common practice. This not only reduces network load requests, but is also very convenient and efficient.
 Graphin uses `Graphin.registerFontFamily` to register and load font files, let's take a look
 
 <code src='./demos/node-icon.tsx'>
