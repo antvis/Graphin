@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
 import { GraphinContext } from '@antv/graphin';
+import React from 'react';
 import './index.less';
 
 export interface MenuProps {
@@ -32,7 +32,7 @@ export interface Item {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
-const Item = (props) => {
+const Item = props => {
   const { children, onClick = () => {} } = props;
   const graphin = React.useContext(GraphinContext);
   const handleClose = () => {
@@ -56,13 +56,13 @@ const Item = (props) => {
 
 const Menu: React.FunctionComponent<MenuProps> & {
   Item: typeof Item;
-} = (props) => {
+} = props => {
   const { bindType = 'node' } = props;
   const graphin = React.useContext(GraphinContext);
-  console.log(graphin.contextmenu);
+
   const { options, onChange } = props;
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     try {
       const { contextmenu } = graphin;
 
@@ -89,7 +89,7 @@ const Menu: React.FunctionComponent<MenuProps> & {
   if (options) {
     return (
       <ul className="graphin-components-contextmenu-content">
-        {options.map((c) => {
+        {options.map(c => {
           const { key, icon, name } = c;
           return (
             <Item
