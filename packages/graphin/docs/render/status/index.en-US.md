@@ -28,4 +28,4 @@ Graphin-circle has 5 built-in interactive states. The most common interactions a
 
 ### Method 2: Interface Call
 
-## Edge State
+<code src='./demos/edge-status.tsx'>

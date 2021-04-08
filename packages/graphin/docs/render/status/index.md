@@ -28,5 +28,4 @@ graphin-circle 内置了 5 种交互状态。最常见的交互是 `悬停`和`�
 
 ### 方法二：接口调用
 
-## 边的状态
 <code src='./demos/edge-status.tsx'>
