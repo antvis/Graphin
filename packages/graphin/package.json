@@ -20,6 +20,7 @@
     "@testing-library/jest-dom": "^5.7.0",
     "@testing-library/react": "^9.5.0",
     "@types/jest": "^25.2.3",
+    "@types/lodash-es": "^4.17.4",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "eventemitter3": "^4.0.0",
@@ -50,6 +51,7 @@
     "@antv/g-canvas": "^0.5.1",
     "@antv/g6": "4.1.13",
     "@antv/util": "^2.0.10",
+    "@types/lodash-es": "^4.17.4",
     "lodash-es": "^4.17.21"
   },
   "peerDependencies": {
