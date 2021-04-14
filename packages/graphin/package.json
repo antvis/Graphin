@@ -1,5 +1,5 @@
 {
-  "name": "@antv/graphin",
+  "name": "@cylynx/graphin",
   "version": "2.0.6",
   "description": "the react toolkit for graph analysis based on g6",
   "main": "lib/index.js",
@@ -44,7 +44,7 @@
   "sideEffects": [
     "*.css"
   ],
-  "author": "AntV",
+  "author": "Cylynx",
   "license": "MIT",
   "dependencies": {
     "@antv/g-canvas": "^0.5.1",
@@ -57,6 +57,6 @@
     "react-dom": "^16.x"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "restricted"
   }
 }
