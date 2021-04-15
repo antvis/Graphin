@@ -1,16 +1,16 @@
 {
   "name": "@cylynx/graphin",
-  "version": "2.0.10",
+  "version": "2.0.13",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "@cylynx/graphin",
-      "version": "2.0.10",
+      "version": "2.0.13",
       "license": "MIT",
       "dependencies": {
         "@antv/g-canvas": "^0.5.1",
-        "@antv/g6": "4.1.11",
+        "@antv/g6": "4.1.13",
         "@antv/util": "^2.0.10",
         "@types/lodash-es": "^4.17.4",
         "lodash-es": "^4.17.21"
@@ -107,9 +107,12 @@
       }
     },
     "node_modules/@antv/algorithm": {
-      "version": "0.1.3",
-      "resolved": "https://registry.npmjs.org/@antv/algorithm/-/algorithm-0.1.3.tgz",
-      "integrity": "sha512-kSyFNjsBa88nkpawr6ZTdzf2YWrJ59ywuJ80Ny6y7Sf+ITcsRLZA2CdBf4oYpiozVu8LmHPhXTzElUxI+niL8Q=="
+      "version": "0.1.7",
+      "resolved": "https://registry.npmjs.org/@antv/algorithm/-/algorithm-0.1.7.tgz",
+      "integrity": "sha512-gA8Hd/+4MiOwijZ4xtssZFdkRooNU2cBofpUIMqlsY6jR2tBC1re/6tT+LlvbjVU7JT8tTxZyYWP2daOVpWCmw==",
+      "dependencies": {
+        "@antv/util": "^2.0.13"
+      }
     },
     "node_modules/@antv/dom-util": {
       "version": "2.0.3",
@@ -227,19 +230,19 @@
       }
     },
     "node_modules/@antv/g6": {
-      "version": "4.1.11",
-      "resolved": "https://registry.npmjs.org/@antv/g6/-/g6-4.1.11.tgz",
-      "integrity": "sha512-/35Fbvmexh9FELOkcULhxsd7xDZO2GBvzdFMB9zJ7AXVPZ9x+ZLgWlxEJu/et70W64svHgZOdbOYTTOhe82saA==",
+      "version": "4.1.13",
+      "resolved": "https://registry.npmjs.org/@antv/g6/-/g6-4.1.13.tgz",
+      "integrity": "sha512-mz2Zd9ZVDBLF7ERYHax0zfp8Y6yz2jTw8bTx3laoTzuHtXJQTOaVEtUFzEPLYmidVdAeniao+1Nt8bAMEfd0bw==",
       "dependencies": {
-        "@antv/g6-pc": "^0.0.18"
+        "@antv/g6-pc": "^0.1.0"
       }
     },
     "node_modules/@antv/g6-core": {
-      "version": "0.0.11",
-      "resolved": "https://registry.npmjs.org/@antv/g6-core/-/g6-core-0.0.11.tgz",
-      "integrity": "sha512-FOhFoGbaln/Af8bh0NkRmblvFUp16P9a8D2YjARylvcHtmcToTRKpmSyklQaH60j8lgoc8+OuEtSbI5IGeXOpw==",
+      "version": "0.0.16",
+      "resolved": "https://registry.npmjs.org/@antv/g6-core/-/g6-core-0.0.16.tgz",
+      "integrity": "sha512-yRHvH4GEir5JdEHGF6yw+ukbOotaVOtjenUK1AybFvvR9IlCbVQQN4hdkP6/NFzTCWFL7mMloOyly/ypEcbslg==",
       "dependencies": {
-        "@antv/algorithm": "^0.1.2",
+        "@antv/algorithm": "^0.1.3",
         "@antv/dom-util": "^2.0.1",
         "@antv/event-emitter": "~0.1.0",
         "@antv/g-base": "^0.5.1",
@@ -248,37 +251,38 @@
         "@antv/path-util": "^2.0.3",
         "@antv/scale": "^0.3.1",
         "@antv/util": "~2.0.5",
-        "ml-matrix": "^6.5.0"
+        "ml-matrix": "^6.5.0",
+        "tslib": "^2.1.0"
       }
     },
     "node_modules/@antv/g6-element": {
-      "version": "0.0.10",
-      "resolved": "https://registry.npmjs.org/@antv/g6-element/-/g6-element-0.0.10.tgz",
-      "integrity": "sha512-ufuMJTnqruf4GdfpwprvV4W8Mgil32z1y7+5yvjcu8fCATeaLWL7rLXTmcztu/IVCL3jTsiWh64FKskRB3Z86g==",
+      "version": "0.0.16",
+      "resolved": "https://registry.npmjs.org/@antv/g6-element/-/g6-element-0.0.16.tgz",
+      "integrity": "sha512-3SxvLpZr7FxAOfuTQdmErBugT7UiuWFuNlOEtLRqjKU5J2oUIOH28CACC8a4+kaLxgqaFsmdGu+MhMdiSHJBEA==",
       "dependencies": {
         "@antv/g-base": "^0.5.1",
-        "@antv/g6-core": "^0.0.11",
+        "@antv/g6-core": "^0.0.16",
         "@antv/util": "~2.0.5"
       }
     },
     "node_modules/@antv/g6-pc": {
-      "version": "0.0.18",
-      "resolved": "https://registry.npmjs.org/@antv/g6-pc/-/g6-pc-0.0.18.tgz",
-      "integrity": "sha512-Yd7gg/PlXbt6mqcGUGIRKn/lc5S/7Z61GA+/+aQCUd99kSoBdF6/cNCkPV2RZlOmpgdSji0mswgWbUMIgn9J7A==",
+      "version": "0.1.3",
+      "resolved": "https://registry.npmjs.org/@antv/g6-pc/-/g6-pc-0.1.3.tgz",
+      "integrity": "sha512-fo9N7Yj6DMPx8W3bEa6ffs96/wV26C/d19HJ8WvSpNar31QJ85Kv3Ep0iEpv/7DE6igR0M1+KOTr7LDAGHfCcg==",
       "dependencies": {
         "@ant-design/colors": "^4.0.5",
-        "@antv/algorithm": "^0.1.2",
+        "@antv/algorithm": "^0.1.3",
         "@antv/dom-util": "^2.0.1",
         "@antv/event-emitter": "~0.1.0",
         "@antv/g-base": "^0.5.1",
         "@antv/g-canvas": "^0.5.2",
         "@antv/g-math": "^0.1.1",
         "@antv/g-svg": "^0.5.1",
-        "@antv/g6-core": "^0.0.11",
-        "@antv/g6-element": "^0.0.10",
-        "@antv/g6-plugin": "^0.0.10",
+        "@antv/g6-core": "^0.0.16",
+        "@antv/g6-element": "^0.0.16",
+        "@antv/g6-plugin": "^0.0.16",
         "@antv/hierarchy": "^0.6.2",
-        "@antv/layout": "^0.1.5",
+        "@antv/layout": "^0.1.9",
         "@antv/matrix-util": "^3.0.4",
         "@antv/path-util": "^2.0.3",
         "@antv/scale": "^0.3.1",
@@ -301,15 +305,15 @@
       }
     },
     "node_modules/@antv/g6-plugin": {
-      "version": "0.0.10",
-      "resolved": "https://registry.npmjs.org/@antv/g6-plugin/-/g6-plugin-0.0.10.tgz",
-      "integrity": "sha512-H2mzasrlQSFbxDTdsQ2cQP8H0yD/krqFxOE90SeFa6I6wKjtkfeUafzn3PxmhWzcOljg9fWWBvLZ7vWU7MGXCg==",
+      "version": "0.0.16",
+      "resolved": "https://registry.npmjs.org/@antv/g6-plugin/-/g6-plugin-0.0.16.tgz",
+      "integrity": "sha512-ahmgVUeHltWAKOhoN2hb6Fe8tm3HoP1B8/2ummykLN9HyqMaORfv5uyR0ZSvZ3j0WUlej3chFquWGz76tXlSrw==",
       "dependencies": {
         "@antv/dom-util": "^2.0.2",
         "@antv/g-base": "^0.5.1",
         "@antv/g-canvas": "^0.5.2",
         "@antv/g-svg": "^0.5.2",
-        "@antv/g6-core": "^0.0.11",
+        "@antv/g6-core": "^0.0.16",
         "@antv/matrix-util": "^3.0.4",
         "@antv/scale": "^0.3.4",
         "@antv/util": "^2.0.9",
@@ -48481,9 +48485,12 @@
       }
     },
     "@antv/algorithm": {
-      "version": "0.1.3",
-      "resolved": "https://registry.npmjs.org/@antv/algorithm/-/algorithm-0.1.3.tgz",
-      "integrity": "sha512-kSyFNjsBa88nkpawr6ZTdzf2YWrJ59ywuJ80Ny6y7Sf+ITcsRLZA2CdBf4oYpiozVu8LmHPhXTzElUxI+niL8Q=="
+      "version": "0.1.7",
+      "resolved": "https://registry.npmjs.org/@antv/algorithm/-/algorithm-0.1.7.tgz",
+      "integrity": "sha512-gA8Hd/+4MiOwijZ4xtssZFdkRooNU2cBofpUIMqlsY6jR2tBC1re/6tT+LlvbjVU7JT8tTxZyYWP2daOVpWCmw==",
+      "requires": {
+        "@antv/util": "^2.0.13"
+      }
     },
     "@antv/dom-util": {
       "version": "2.0.3",
@@ -48601,19 +48608,19 @@
       }
     },
     "@antv/g6": {
-      "version": "4.1.11",
-      "resolved": "https://registry.npmjs.org/@antv/g6/-/g6-4.1.11.tgz",
-      "integrity": "sha512-/35Fbvmexh9FELOkcULhxsd7xDZO2GBvzdFMB9zJ7AXVPZ9x+ZLgWlxEJu/et70W64svHgZOdbOYTTOhe82saA==",
+      "version": "4.1.13",
+      "resolved": "https://registry.npmjs.org/@antv/g6/-/g6-4.1.13.tgz",
+      "integrity": "sha512-mz2Zd9ZVDBLF7ERYHax0zfp8Y6yz2jTw8bTx3laoTzuHtXJQTOaVEtUFzEPLYmidVdAeniao+1Nt8bAMEfd0bw==",
       "requires": {
-        "@antv/g6-pc": "^0.0.18"
+        "@antv/g6-pc": "^0.1.0"
       }
     },
     "@antv/g6-core": {
-      "version": "0.0.11",
-      "resolved": "https://registry.npmjs.org/@antv/g6-core/-/g6-core-0.0.11.tgz",
-      "integrity": "sha512-FOhFoGbaln/Af8bh0NkRmblvFUp16P9a8D2YjARylvcHtmcToTRKpmSyklQaH60j8lgoc8+OuEtSbI5IGeXOpw==",
+      "version": "0.0.16",
+      "resolved": "https://registry.npmjs.org/@antv/g6-core/-/g6-core-0.0.16.tgz",
+      "integrity": "sha512-yRHvH4GEir5JdEHGF6yw+ukbOotaVOtjenUK1AybFvvR9IlCbVQQN4hdkP6/NFzTCWFL7mMloOyly/ypEcbslg==",
       "requires": {
-        "@antv/algorithm": "^0.1.2",
+        "@antv/algorithm": "^0.1.3",
         "@antv/dom-util": "^2.0.1",
         "@antv/event-emitter": "~0.1.0",
         "@antv/g-base": "^0.5.1",
@@ -48622,37 +48629,38 @@
         "@antv/path-util": "^2.0.3",
         "@antv/scale": "^0.3.1",
         "@antv/util": "~2.0.5",
-        "ml-matrix": "^6.5.0"
+        "ml-matrix": "^6.5.0",
+        "tslib": "^2.1.0"
       }
     },
     "@antv/g6-element": {
-      "version": "0.0.10",
-      "resolved": "https://registry.npmjs.org/@antv/g6-element/-/g6-element-0.0.10.tgz",
-      "integrity": "sha512-ufuMJTnqruf4GdfpwprvV4W8Mgil32z1y7+5yvjcu8fCATeaLWL7rLXTmcztu/IVCL3jTsiWh64FKskRB3Z86g==",
+      "version": "0.0.16",
+      "resolved": "https://registry.npmjs.org/@antv/g6-element/-/g6-element-0.0.16.tgz",
+      "integrity": "sha512-3SxvLpZr7FxAOfuTQdmErBugT7UiuWFuNlOEtLRqjKU5J2oUIOH28CACC8a4+kaLxgqaFsmdGu+MhMdiSHJBEA==",
       "requires": {
         "@antv/g-base": "^0.5.1",
-        "@antv/g6-core": "^0.0.11",
+        "@antv/g6-core": "^0.0.16",
         "@antv/util": "~2.0.5"
       }
     },
     "@antv/g6-pc": {
-      "version": "0.0.18",
-      "resolved": "https://registry.npmjs.org/@antv/g6-pc/-/g6-pc-0.0.18.tgz",
-      "integrity": "sha512-Yd7gg/PlXbt6mqcGUGIRKn/lc5S/7Z61GA+/+aQCUd99kSoBdF6/cNCkPV2RZlOmpgdSji0mswgWbUMIgn9J7A==",
+      "version": "0.1.3",
+      "resolved": "https://registry.npmjs.org/@antv/g6-pc/-/g6-pc-0.1.3.tgz",
+      "integrity": "sha512-fo9N7Yj6DMPx8W3bEa6ffs96/wV26C/d19HJ8WvSpNar31QJ85Kv3Ep0iEpv/7DE6igR0M1+KOTr7LDAGHfCcg==",
       "requires": {
         "@ant-design/colors": "^4.0.5",
-        "@antv/algorithm": "^0.1.2",
+        "@antv/algorithm": "^0.1.3",
         "@antv/dom-util": "^2.0.1",
         "@antv/event-emitter": "~0.1.0",
         "@antv/g-base": "^0.5.1",
         "@antv/g-canvas": "^0.5.2",
         "@antv/g-math": "^0.1.1",
         "@antv/g-svg": "^0.5.1",
-        "@antv/g6-core": "^0.0.11",
-        "@antv/g6-element": "^0.0.10",
-        "@antv/g6-plugin": "^0.0.10",
+        "@antv/g6-core": "^0.0.16",
+        "@antv/g6-element": "^0.0.16",
+        "@antv/g6-plugin": "^0.0.16",
         "@antv/hierarchy": "^0.6.2",
-        "@antv/layout": "^0.1.5",
+        "@antv/layout": "^0.1.9",
         "@antv/matrix-util": "^3.0.4",
         "@antv/path-util": "^2.0.3",
         "@antv/scale": "^0.3.1",
@@ -48677,15 +48685,15 @@
       }
     },
     "@antv/g6-plugin": {
-      "version": "0.0.10",
-      "resolved": "https://registry.npmjs.org/@antv/g6-plugin/-/g6-plugin-0.0.10.tgz",
-      "integrity": "sha512-H2mzasrlQSFbxDTdsQ2cQP8H0yD/krqFxOE90SeFa6I6wKjtkfeUafzn3PxmhWzcOljg9fWWBvLZ7vWU7MGXCg==",
+      "version": "0.0.16",
+      "resolved": "https://registry.npmjs.org/@antv/g6-plugin/-/g6-plugin-0.0.16.tgz",
+      "integrity": "sha512-ahmgVUeHltWAKOhoN2hb6Fe8tm3HoP1B8/2ummykLN9HyqMaORfv5uyR0ZSvZ3j0WUlej3chFquWGz76tXlSrw==",
       "requires": {
         "@antv/dom-util": "^2.0.2",
         "@antv/g-base": "^0.5.1",
         "@antv/g-canvas": "^0.5.2",
         "@antv/g-svg": "^0.5.2",
-        "@antv/g6-core": "^0.0.11",
+        "@antv/g6-core": "^0.0.16",
         "@antv/matrix-util": "^3.0.4",
         "@antv/scale": "^0.3.4",
         "@antv/util": "^2.0.9",
