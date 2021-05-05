@@ -1,14 +1,14 @@
 import Graphin from './Graphin';
-import GraphinContext, { GraphinContextType } from './GraphinContext';
+import GraphinContext from './GraphinContext';
 import Utils from './utils';
 import Behaviors from './behaviors';
 import registerGraphinForce from './layout/inner/registerGraphinForce';
 import registerPresetLayout from './layout/inner/registerPresetLayout';
 import { registerGraphinCircle, registerGraphinLine } from './shape';
 /** export type */
-export { NodeStyle, EdgeStyle, GraphinData, GraphinTreeData, IUserEdge, IUserNode, Layout } from './typings/type';
-export { ThemeType } from './theme';
-export { GraphinContextType };
+export type { GraphinContextType } from './GraphinContext';
+export type { NodeStyle, EdgeStyle, GraphinData, GraphinTreeData, IUserEdge, IUserNode, Layout } from './typings/type';
+export type { ThemeType } from './theme';
 
 /** 注册 Graphin force 布局 */
 registerGraphinForce();
@@ -28,17 +28,8 @@ const { registerFontFamily } = Graphin;
 export default Graphin;
 export { Utils, GraphinContext, Behaviors, registerFontFamily };
 
-export {
-  /** export G6 */
-  default as G6,
-  /** export G6 Type  */
-  Graph,
-  IG6GraphEvent,
-  GraphData,
-  TreeGraphData,
-  NodeConfig,
-  EdgeConfig,
-} from '@antv/g6';
+export { default as G6 } from '@antv/g6';
+export type { Graph, IG6GraphEvent, GraphData, TreeGraphData, NodeConfig, EdgeConfig } from '@antv/g6';
 
 export interface GraphEvent extends MouseEvent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
