@@ -347,12 +347,16 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     if (isOptionsChange) {
       // this.updateOptions();
     }
+
     /** 数据变化 */
     if (isDataChange) {
       this.initData(data);
       this.layout.changeLayout();
+
       this.graph.data(this.data as GraphData | TreeGraphData);
       this.graph.changeData(this.data as GraphData | TreeGraphData);
+
+      this.graph.render();
       this.initStatus();
       this.apis = ApiController(this.graph);
       // console.log('%c isDataChange', 'color:grey');
