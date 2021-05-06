@@ -1,12 +1,12 @@
 {
   "name": "@cylynx/graphin",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "@cylynx/graphin",
-      "version": "2.0.15",
+      "version": "2.0.16",
       "license": "MIT",
       "dependencies": {
         "@antv/g-canvas": "^0.5.1",
