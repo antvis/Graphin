@@ -29,11 +29,11 @@
     "dumi": "1.1.5-0",
     "father": "^2.30.1",
     "global-dirs": "^2.1.0",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.1"
   },
   "peerDependencies": {
     "@umijs/preset-dumi": "1.x",
-    "react": "^17.0.2"
+    "react": "^17.0.1"
   },
   "license": "MIT"
 }
