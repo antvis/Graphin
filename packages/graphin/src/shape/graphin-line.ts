@@ -2,7 +2,6 @@
 // @ts-nocheck
 import { IGroup } from '@antv/g-canvas';
 import G6, { EdgeConfig, IEdge, INode, ModelConfig } from '@antv/g6';
-
 import { deepMix } from '@antv/util';
 import { EdgeStyle } from '../typings/type';
 import { setStatusStyle } from './utils';
@@ -88,7 +87,7 @@ const processKeyshape = (cfg: EdgeConfig) => {
 
   const { type = 'line', poly = { distance: 0 }, loop = {} } = keyshape;
   const source = (sourceNode as INode).get('model');
-  const target = (targetNode as INode).get('model');
+  const target = (targetNode as INode)?.get('model') || { id: 'temp' };
 
   if (type === 'loop' || source.id === target.id) {
     const nodeSize = source.style?.keyshape?.size || 26;
@@ -156,7 +155,7 @@ export default () => {
       const { label, halo, keyshape: keyShapeStyle } = style;
       /** 计算目标节点的大小 */
       const source = (sourceNode as INode).get('model');
-      const target = (targetNode as INode).get('model');
+      const target = (targetNode as INode)?.get('model') || { id: 'temp' };
       const nodeSize = source.style?.keyshape?.size || 28;
       /** 计算是否为loop */
       const isLoop = keyShapeStyle?.type === 'loop' || source.id === target.id;
