@@ -23,7 +23,7 @@ The whole process can be seen in G6's create-edge implementation: https://g6.ant
 
 - CreateEdge is a container component, which takes `edit-icon` as a child. On click, it activates the edge building mode
 - Good UI/UX by default including mouse hover state, mouse indication style, global state hint, etc.
-- Takes a callback function: onChange which passes the latest canvas data and allows the user to synchronize it with Graphin.props.data
+- Takes a callback function: onChange which passes the latest canvas data.edges and allows the user to synchronize it with Graphin.props.data
 
 ## Reference
 
