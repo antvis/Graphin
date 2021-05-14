@@ -36,28 +36,43 @@ Please checkout the specific package：
 
 - Set up npmClient
 
-Set your npmClient in lerna.json, friends in China can set [cnpm](https://www.npmjs.com/package/cnpm)
+Set your npmClient to yarn in lerna.json
 
 ```json
 // ./lerna.json
 {
   "packages": ["packages/*"],
-  "npmClient": "cnpm",
+  "npmClient": "yarn",
   "version": "0.0.0"
 }
 ```
 
 - Installation dependencies
 
-Install node_modules in `the project root directory`
+Install node_modules in the `root directory of the project`
 
 ```bash
-cnpm i
+yarn
 ```
 
 - Install the dependencies of each package
 
-In the `root directory of the project`, start lerna's bootstrap, lerna automatically installs the dependencies of each package, after installation, you can find that each package has its own node_modules
+> ⚠️ Special attention
+
+Before installing the dependencies of each package, you need to do a special treatment in `graphin-components`, move the graphin dependencies in package.json from `peerDependencies` to `dependencies`, so that you can run bootstrap in `npm run bootstrap`, you can link to the dependency. The source code needs to be [such](https://github.com/antvis/Graphin/blob/master/packages/graphin-components/package.json#L57) in order to publish, it needs to be changed to the following (this operation is only in Used when installing dependencies for the first time)
+
+```json
+ "dependencies": {
+    "@antv/util": "^2.0.10",
+    "@antv/graphin": "^2.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.x",
+    "react-dom": "^16.x"
+  },
+```
+
+Then in the `root directory of the project`, start lerna's bootstrap, lerna automatically installs the dependencies of each package, after installation, you can find that each package has its own node_modules
 
 ```bash
 npm run bootstrap
@@ -65,35 +80,22 @@ npm run bootstrap
 
 - Start local compilation of graphin, graphin-components, graphin-icons
 
-You can perform local compilation for graphin, graphin-components and graphin-icons in the `root directory of the project`.
+Start the local compilation of graphin, graphin-components and graphin-icons in `the project root directory`.
+
+Note ⚠️ Because each package in the packages has a dependency relationship, for example, `graphin-components` depends on the packaged product of graphin, and the packaging startup speed is different, so we need to start the `packages/graphin` package first, and then start `packages/graphin-components`. After startup, you can also restart the ts compiler in vscode to ensure that each dependency ts can be inferred and found
 
 ```bash
-npm run graphin
-npm run components
-npm run icons
-```
-
-Note ⚠️ Each package in the packages has a dependency relationship. As an example, graphin-components depends on the compilation of graphin. Thus, we need to start the packages/graphin first, and then start packages/graphin-components. After all the local compilation are complete, it is recommended to restart Typescript compiler in Visual Studio Code to ensure that Typescript dependencies can be inferred and index successfully by the editor.
-
-```bash
-npm run start
-```
-
-- Launch Graphin Dumi development document
-
-[dumi](https://d.umijs.org/) is a documentation tool to develop libraries & write docs. It is very convenient, we can start dumi to view our development documents.
-
-Return to the `root directory of the project`, start `npm run docs`, you can see
-
-```bash
-npm run docs
+npm run graphin // Local compilation of the product of `@antv/graphin`
+npm run components // locally compile the product of `@antv/graphin-components`
+npm run icons // Locally compiled product of `@antv/graphin-icons`
 ```
 
 - Launch Graphin official site
 
+Graphin uses dumi to build the site, so we can start `npm run docs` in the `root directory of the project` to see the official site locally
+
 ```bash
-cd packages/graphin-site
-npm run site
+npm run docs
 ```
 
 ## Graphin and G6 compatible table
