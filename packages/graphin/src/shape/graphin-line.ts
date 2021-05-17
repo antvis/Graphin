@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // @ts-nocheck
-import { IGroup } from '@antv/g-canvas';
-import G6, { EdgeConfig, IEdge, INode, ModelConfig } from '@antv/g6';
+import G6, { EdgeConfig, IEdge, IGroup, INode, ModelConfig } from '@antv/g6';
 import { deepMix } from '@antv/util';
 import { EdgeStyle } from '../typings/type';
 import { setStatusStyle } from './utils';

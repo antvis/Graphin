@@ -1,6 +1,6 @@
-import React from 'react';
 import * as Graphin from '@antv/graphin';
-import isArray from '@antv/util/lib/is-array';
+import { isArray } from '@antv/util';
+import React from 'react';
 import './index.less';
 
 const { GraphinContext } = Graphin;
