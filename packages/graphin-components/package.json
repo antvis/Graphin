@@ -52,9 +52,9 @@
     "@antv/util": "^2.0.10"
   },
   "peerDependencies": {
-    "react": "^17.x",
-    "react-dom": "^17.x",
-    "@antv/graphin": "^2.0.0"
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0",
+    "@antv/graphin": "^2.*"
   },
   "publishConfig": {
     "access": "public"
