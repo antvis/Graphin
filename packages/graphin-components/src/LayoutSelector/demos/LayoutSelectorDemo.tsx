@@ -118,11 +118,11 @@ const LayoutConfigPanel = ({ updateLayout, layoutConfig = graphLayoutConfig }) =
 
   // 更新布局参数
   const updateLayoutConfig = (changedField, allFields, layoutType) => {
-    const currentFileds = { ...allFields, ...changedField };
-    Object.keys(currentFileds).forEach(key => {
-      defaultValue[key] = currentFileds[key];
+    const currentFields = { ...allFields, ...changedField };
+    Object.keys(currentFields).forEach(key => {
+      defaultValue[key] = currentFields[key];
     });
-    const { x, y, ...others } = currentFileds;
+    const { x, y, ...others } = currentFields;
     const config = others;
     if (layoutType === 'grid') {
       config.begin = [x, y];
@@ -146,7 +146,7 @@ const LayoutConfigPanel = ({ updateLayout, layoutConfig = graphLayoutConfig }) =
 
   /**
    * 当字段值改变后，自动更新布局
-   * @param changedFiled 改变了的字段
+   * @param changedField 改变了的字段
    * @param allFields 所有字段
    */
   const handleFieldValueChange = (changedField, allFields) => {
