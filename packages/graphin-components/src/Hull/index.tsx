@@ -1,9 +1,21 @@
 import React from 'react';
 
-// @ts-ignore
 import { GraphinContext } from '@antv/graphin';
 
-const defaultHullCfg = {
+interface hullCfgType {
+  id: string,
+  members: [],
+  type: string,
+  nonMembers: [],
+  style: {
+    fill: string,
+    stroke: string,
+    opacity: number,
+  },
+  padding: number,
+}
+
+const defaultHullCfg = (): hullCfgType => ({
   id: `${Math.random()}`, // Utils.uuid(),
   members: [],
   type: 'round-convex',
@@ -14,14 +26,14 @@ const defaultHullCfg = {
     opacity: 0.2,
   },
   padding: 10,
-};
+});
 
 /**
  * deep merge hull config
  * @param defaultCfg
  * @param cfg
  */
-const deepMergeCfg = (defaultCfg: typeof defaultHullCfg, cfg: HullCfg) => {
+const deepMergeCfg = (defaultCfg: hullCfgType, cfg: HullCfg) => {
   const { style: DefaultCfg = {}, ...defaultOtherCfg } = defaultCfg;
   const { style = {}, ...others } = cfg;
   return {
@@ -80,7 +92,7 @@ const Hull: React.FunctionComponent<IHullProps> = (props) => {
     const { options } = props;
 
     hullInstances = options.map((item) => {
-      return graph.createHull(deepMergeCfg(defaultHullCfg, item));
+      return graph.createHull(deepMergeCfg(defaultHullCfg(), item));
     });
 
     const handleAfterUpdateItem = () => {
