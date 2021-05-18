@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   AreaChartOutlined,
   DingdingOutlined,
@@ -8,8 +6,10 @@ import {
   HomeOutlined,
   PieChartOutlined,
   ReadOutlined,
-  YuqueOutlined,
+  YuqueOutlined
 } from '@ant-design/icons';
+import React from 'react';
+
 
 const tuple = <T extends string[]>(...args: T) => args;
 const Categories = tuple('basic', 'extension', 'ecology');
@@ -35,7 +35,7 @@ export type ValuesOf<T extends any[]> = T[number];
 
 export const getProducts = ({
   t,
-  language,
+  language = 'zh',
 }: {
   t: (key: string) => string;
   language: string;
