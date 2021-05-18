@@ -16,6 +16,7 @@
   "homepage": "http://github.com/antvis/graphin",
   "authors": [],
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "prism-react-renderer": "^1.1.1",
     "prismjs": "^1.21.0",
     "rc-tabs": "^11.7.1",
@@ -32,6 +33,7 @@
     "react-test-renderer": "^17.0.1"
   },
   "peerDependencies": {
+    "@antv/gatsby-theme-antv": "latest",
     "@umijs/preset-dumi": "1.x",
     "react": "^17.0.1"
   },

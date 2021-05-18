@@ -11,7 +11,8 @@
     "docs:build": "dumi build && node cname.js",
     "docs:deploy": "gh-pages -d dist",
     "docs:deploy-2": "gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
-    "bootstrap": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site --ignore dumi-theme-graphin",
+    "bootstrap": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site && npm run remove:deps",
+    "remove:deps": "rm -rf packages/graphin/node_modules/antd && rm -rf packages/graphin/node_modules/@ant-design && rm -rf packages/graphin-components/node_modules/antd && rm -rf packages/graphin-components/node_modules/@ant-design && rm -rf packages/graphin-icons/node_modules/@ant-design  && rm -rf packages/graphin-icons/node_modules/antd && rm -rf packages/dumi-theme-graphin/node_modules/@ant-design && rm -rf packages/dumi-theme-graphin/node_modules/antd",
     "bootstrap:ci": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site --ignore @antv/graphin-graphscope",
     "build": "lerna run build",
     "contributor": "git-contributor",
@@ -73,9 +74,12 @@
     ]
   },
   "dependencies": {
-    "@ant-design/icons": "^4.5.0",
-    "@antv/gatsby-theme-antv": "https://github.com/antvis/gatsby-theme-antv#upgrade-deps",
+    "@ant-design/create-react-context": "^0.2.5",
+    "@ant-design/icons": "^4.6.2",
+    "@ant-design/icons-react": "^2.0.1",
+    "@antv/gatsby-theme-antv": "latest",
     "antd": "^4.12.3",
+    "rc-footer": "^0.6.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
