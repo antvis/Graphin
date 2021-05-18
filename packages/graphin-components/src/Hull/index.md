@@ -18,44 +18,7 @@ Hull 轮廓包裹，是常见的一种图分析组件，可以将所属在一组
 
 <code src='./demos/Simple.tsx'></code>
 
-<API src='./index.tsx'></API>
-
-## 用法
-
-```tsx | pure
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Graphin, { Utils } from '@antv/graphin';
-import { Hull } from '@antv/graphin-components';
-// Do not forget to import CSS
-
-const App = () => {
-  const hullOptions = [
-    {
-      members: ['node-1', 'node-2', 'node-7'], // 必须参数
-    },
-    {
-      members: ['node-4', 'node-5'],
-      type: 'bubble',
-      padding: 10,
-      style: {
-        fill: 'lightgreen',
-        stroke: 'green',
-      },
-    },
-  ];
-  return (
-    <div className="App">
-      <Graphin data={Utils.mock(10).graphin()}>
-        <Hull options={hullOptions} />
-      </Graphin>
-    </div>
-  );
-};
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
-```
+<API src='./api-docs.ts'></API>
 
 ## 功能特性
 

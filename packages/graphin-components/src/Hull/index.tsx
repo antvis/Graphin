@@ -1,10 +1,7 @@
+import { GraphinContext, GraphinContextType } from '@antv/graphin';
 import React from 'react';
 
-// @ts-ignore
-import { GraphinContext } from '@antv/graphin';
-
 const defaultHullCfg = {
-  id: `${Math.random()}`, // Utils.uuid(),
   members: [],
   type: 'round-convex',
   nonMembers: [],
@@ -34,30 +31,51 @@ const deepMergeCfg = (defaultCfg: typeof defaultHullCfg, cfg: HullCfg) => {
   };
 };
 
+export interface HullCfgStyle {
+  /**
+   * @description 填充颜色
+   * @default 'lightblue'
+   */
+  fill: string;
+  /**
+   * @description 描边颜色
+   * @default 'blue'
+   */
+  stroke: string;
+  /**
+   *
+   * @description 透明度
+   * @default 0.2
+   */
+  opacity: number;
+}
 export interface HullCfg {
-  /** 在包裹内部的节点实例或节点 Id 数组 */
+  /**
+   * @description 在包裹内部的节点实例或节点 Id 数组
+   * @default []
+   *
+   */
   members: string[];
-  /** 包裹的 id */
+  /**
+   * 包裹的 id
+   */
   id?: string;
   /**
-   * 包裹的类型：
+   * @description 包裹的类型
    * round-convex: 生成圆角凸包轮廓，
    * smooth-convex: 生成平滑凸包轮廓
    * bubble: 产生一种可以避开 nonMembers 的平滑凹包轮廓（算法）。
-   * 默认值是 round-convex。 */
+   * @default round-convex
+   */
   type?: 'round-convex' | 'smooth-convex' | 'bubble';
   /** 不在轮廓内部的节点数组，只在 bubble 类型的包裹中生效 */
   nonMembers?: string[];
   /** 轮廓的样式属性 */
-  style?: Partial<{
-    /** 填充颜色 */
-    fill: string;
-    /** 描边颜色 */
-    stroke: string;
-    /**  透明度 */
-    opacity: number;
-  }>;
-  /** 轮廓边缘和内部成员的间距 */
+  style?: Partial<HullCfgStyle>;
+  /**
+   * @description 轮廓边缘和内部成员的间距
+   * @default 10
+   */
   padding?: number;
 }
 
@@ -71,20 +89,25 @@ export interface IHullProps {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let hullInstances: any[];
 
-const Hull: React.FunctionComponent<IHullProps> = (props) => {
-  const graphin = React.useContext(GraphinContext);
+const Hull: React.FunctionComponent<IHullProps> = props => {
+  const graphin = React.useContext<GraphinContextType>(GraphinContext);
+  const { graph } = graphin;
 
   React.useEffect(() => {
-    // @ts-ignore
-    const { graph } = graphin;
     const { options } = props;
 
-    hullInstances = options.map((item) => {
-      return graph.createHull(deepMergeCfg(defaultHullCfg, item));
+    hullInstances = options.map(item => {
+      return graph.createHull(
+        // @ts-ignore
+        deepMergeCfg(defaultHullCfg, {
+          id: `${Math.random()}`, // Utils.uuid(),
+          ...item,
+        }),
+      );
     });
 
     const handleAfterUpdateItem = () => {
-      hullInstances.forEach((item) => {
+      hullInstances.forEach(item => {
         item.updateData(item.members);
       });
     };
@@ -93,7 +116,7 @@ const Hull: React.FunctionComponent<IHullProps> = (props) => {
     return () => {
       graph.on('afterupdateitem', handleAfterUpdateItem);
     };
-  }, []);
+  }, [graph]);
 
   return <div className="graphin-hull-container" />;
 };

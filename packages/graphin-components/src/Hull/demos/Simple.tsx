@@ -1,15 +1,15 @@
-import React from 'react';
 import Graphin, { Utils } from '@antv/graphin';
+import React from 'react';
 import Hull, { HullCfg } from '../index';
 // Do not forget to import CSS
 
 const Demo = () => {
   const hullOptions: HullCfg[] = [
     {
-      members: ['node-1', 'node-2'], // 必须参数
+      members: ['node-1', 'node-2', 'node-9'], // 必须参数
     },
     {
-      members: ['node-node-3', 'node-4'],
+      members: ['node-3', 'node-4'],
       type: 'bubble',
       padding: 10,
       style: {
