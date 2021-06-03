@@ -113,7 +113,6 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
     graph.on(`${bindType}:contextmenu`, handleShow);
     graph.on('canvas:click', handleClose);
     graph.on('canvas:drag', handleClose);
-    graph.on('canvas:drag', handleClose);
     graph.on('wheelzoom', handleClose);
 
     return () => {
