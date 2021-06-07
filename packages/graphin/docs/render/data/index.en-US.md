@@ -10,7 +10,7 @@ nav:
 
 ## Basic Introduction
 
-Graphs are distinguished from the data structure, which can be divided into network graphs and tree graphs. Graphin automatically judges and renders different graphs according to the different data structures. In the source code implementation of `Graphin`, the network graph encapsulates `G6.TreeGraph` , The tree graph encapsulates `G6.Graph`
+Graphs are distinguished from the data structure, which can be divided into network graphs and tree graphs. Graphin automatically judges and renders different graphs according to the different data structures. In the source code implementation of `Graphin`, the network graph encapsulates `G6.Graph` , The tree graph encapsulates `G6.TreeGraph`
 
 Regardless of the data structure, the layout, interaction, rendering, and usage of the network graphs and tree graphs remain consistent on Graphin.
 
