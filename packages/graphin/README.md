@@ -6,7 +6,7 @@
 
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/antvis/graphin.svg)](http://isitmaintained.com/project/antvis/graphin 'Percentage of issues still open')
 
-[中文](./README-cn.ZH.md)
+[中文](./README-zh.CN.md)
 
 ## @antv/graphin
 
