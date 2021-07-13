@@ -17,6 +17,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "father": "^2.30.0"
+    "father": "2.30.0"
   }
 }
