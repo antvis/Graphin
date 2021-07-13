@@ -22,6 +22,7 @@ html {
 
 body {
   margin: 0;
+  background-color: var(--jp-layout-color3) !important;
 }
 
 /**
@@ -37,9 +38,13 @@ main {
  * `article` contexts in Chrome, Firefox, and Safari.
  */
 
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--jp-content-font-color1) !important;
 }
 
 /* Grouping content
