@@ -47,7 +47,7 @@
   "author": "AntV",
   "license": "MIT",
   "dependencies": {
-    "@antv/g6": "4.2.7",
+    "@antv/g6": "4.3.4",
     "@antv/util": "^2.0.10",
     "lodash-es": "^4.17.21"
   },
