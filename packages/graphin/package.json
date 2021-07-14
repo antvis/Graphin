@@ -20,6 +20,7 @@
     "@testing-library/jest-dom": "^5.7.0",
     "@testing-library/react": "^9.5.0",
     "@types/jest": "^25.2.3",
+    "@types/lodash-es":"latest",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "eventemitter3": "^4.0.0",
