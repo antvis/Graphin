@@ -1,13 +1,13 @@
-import React from 'react';
 import {
-  GraphinContext,
+  EdgeConfig,
   Graph,
   GraphData,
-  TreeGraphData,
-  NodeConfig,
-  EdgeConfig,
+  GraphinContext,
   GraphinContextType,
+  NodeConfig,
+  TreeGraphData,
 } from '@antv/graphin';
+import React from 'react';
 import Node from './Node';
 
 export interface LegendProps {
@@ -43,6 +43,9 @@ const getEnumValue = (keyString: string, data) => {
   const enumValue = keyArray.reduce((acc, curr) => {
     return acc[curr] || {};
   }, data) as string;
+  if (typeof enumValue === 'object') {
+    return 'others';
+  }
   return enumValue;
 };
 

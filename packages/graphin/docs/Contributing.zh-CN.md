@@ -37,13 +37,13 @@ Graphin 采用 lerna 管理仓库，packages 中包含以下 5 个 package：
 
 - 设置 npmClient
 
-在 lerna.json 中设置你的 npmClient，中国地区的朋友可以设置 [cnpm](https://www.npmjs.com/package/cnpm)
+在 lerna.json 中设置你的 npmClient 为 yarn
 
 ```json
 // ./lerna.json
 {
   "packages": ["packages/*"],
-  "npmClient": "cnpm",
+  "npmClient": "yarn",
   "version": "0.0.0"
 }
 ```
@@ -53,12 +53,27 @@ Graphin 采用 lerna 管理仓库，packages 中包含以下 5 个 package：
 在`该项目根目录`下安装 node_modules
 
 ```bash
-cnpm i
+yarn
 ```
 
 - 安装各 packages 的依赖
 
-在`该项目根目录`下，启动 lerna 的 bootstrap，lerna 自动安装好各个 packages 的依赖，安装好后，可以发现各个 packages 中就存在自己的 node_modules 了
+> ⚠️ 特别注意
+
+安装各个包的依赖之前，需要在`graphin-components`中，需要做一个特殊的处理，将 package.json 中的 graphin 依赖，从`peerDependencies`中移动到`dependencies`中，这样才能在`npm run bootstrap`的时候，可以链接上依赖。源代码为了发布需要是[这样的](https://github.com/antvis/Graphin/blob/master/packages/graphin-components/package.json#L57)，需要改为下面的（此操作仅在第一次安装依赖时候使用）
+
+```json
+ "dependencies": {
+    "@antv/util": "^2.0.10",
+    "@antv/graphin": "^2.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.x",
+    "react-dom": "^16.x"
+  },
+```
+
+然后在`该项目根目录`下，启动 lerna 的 bootstrap，lerna 自动安装好各个 packages 的依赖，安装好后，可以发现各个 packages 中就存在自己的 node_modules 了
 
 ```bash
 npm run bootstrap
@@ -68,33 +83,20 @@ npm run bootstrap
 
 在`该项目根目录`启动 graphin， graphin-components 和 graphin-icons 的本地编译.
 
-```bash
-npm run graphin
-npm run components
-npm run icons
-```
-
 注意 ⚠️ 因为 packages 中各个包 存在依赖关系，比如 graphin-components 就依赖 graphin 的打包产物，且 打包启动的速度不一样，因此需要我们先把 packages/graphin 包启动后，再启动 packages/graphin-components .启动完毕后，也可以在 vscode 中重启 ts 编译器，从而确保各个依赖关系 ts 可以推断找到
 
 ```bash
-npm run start
-```
-
-- 启动 Graphin Dumi 开发文档
-
-dumi 是一款针对组件开发场景而生的文档工具，非常好用，因此我们可以启动 dumi 来查看我们的开发文档。
-
-退回到`该项目根目录`，启动 `npm run docs` ,既可以看到
-
-```bash
-npm run docs
+npm run graphin //本地编译`@antv/graphin`的产物
+npm run components //本地编译`@antv/graphin-components`的产物
+npm run icons //本地编译`@antv/graphin-icons`的产物
 ```
 
 - 启动 Graphin 官方站点
 
+graphin 使用 dumi 进行站点构建，因此我们可以在`该项目根目录`，启动 `npm run docs` ,即可在本地看到官方站点
+
 ```bash
-cd packages/graphin-site
-npm run site
+npm run docs
 ```
 
 ## Graphin 与 G6 兼容版本对照表

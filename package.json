@@ -11,7 +11,8 @@
     "docs:build": "dumi build && node cname.js",
     "docs:deploy": "gh-pages -d dist",
     "docs:deploy-2": "gh-pages -d ./dist -r https://github.com/antvis/graphin-docs.git",
-    "bootstrap": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site --ignore dumi-theme-graphin",
+    "bootstrap": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site && npm run remove:deps",
+    "remove:deps": "rm -rf packages/graphin/node_modules/antd && rm -rf packages/graphin/node_modules/@ant-design/icons && rm -rf packages/graphin-components/node_modules/antd && rm -rf packages/graphin-components/node_modules/@ant-design/icons && rm -rf packages/graphin-icons/node_modules/@ant-design/icons  && rm -rf packages/graphin-icons/node_modules/antd && rm -rf packages/dumi-theme-graphin/node_modules/@ant-design/icons && rm -rf packages/dumi-theme-graphin/node_modules/antd",
     "bootstrap:ci": "lerna bootstrap --ignore @antv/graphin-studio --ignore graphin-site --ignore @antv/graphin-graphscope",
     "build": "lerna run build",
     "contributor": "git-contributor",
@@ -40,7 +41,7 @@
     "d3": "^6.3.1",
     "d3-selection": "^2.0.0",
     "dumi": "^1.1.0",
-    "dumi-theme-graphin": "0.1.3",
+    "dumi-theme-graphin": "file:packages/dumi-theme-graphin",
     "eslint": "^7.18.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.2.0",
@@ -56,7 +57,7 @@
     "lint-staged": "^10.2.2",
     "prettier": "^2.2.1",
     "react-color": "^2.19.3",
-    "react-pie-menu": "^0.2.5",
+    "react-pie-menu": "^0.3.0",
     "styled-components": "^5.2.1",
     "typescript": "^4.1.3"
   },
@@ -73,11 +74,14 @@
     ]
   },
   "dependencies": {
-    "@ant-design/icons": "^4.5.0",
-    "@antv/gatsby-theme-antv": "^1.0.8",
+    "@ant-design/create-react-context": "^0.2.5",
+    "@ant-design/icons": "^4.6.2",
+    "@ant-design/icons-react": "^2.0.1",
+    "@antv/gatsby-theme-antv": "latest",
     "antd": "^4.12.3",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "rc-footer": "^0.6.6",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "repository": {
     "type": "git",
