@@ -8,5 +8,6 @@ export { default as Legend } from './Legend';
 export { default as MiniMap } from './MiniMap';
 export { default as Toolbar } from './Toolbar';
 export { default as Tooltip } from './Tooltip';
+export { default as Grid } from './Grid';
 export * from './typing';
 export { default as VisSettingPanel } from './VisSettingPanel';
