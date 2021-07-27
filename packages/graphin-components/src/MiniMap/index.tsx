@@ -1,6 +1,5 @@
+import { G6, GraphinContext } from '@antv/graphin';
 import React from 'react';
-
-import { GraphinContext, G6 } from '@antv/graphin';
 
 const defaultOptions = {
   className: 'graphin-minimap',
@@ -66,7 +65,9 @@ const MiniMap: React.FunctionComponent<MiniMapProps> = props => {
     graph.addPlugin(miniMap);
 
     return () => {
-      graph.removePlugin(miniMap);
+      if (miniMap && !miniMap.destroy) {
+        graph.removePlugin(miniMap);
+      }
     };
   }, [options]);
 
