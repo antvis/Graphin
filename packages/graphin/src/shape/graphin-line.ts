@@ -2,8 +2,18 @@
 // @ts-nocheck
 import G6, { EdgeConfig, IEdge, IGroup, INode, ModelConfig } from '@antv/g6';
 import { deepMix } from '@antv/util';
+import { getDefaultStyleByTheme } from '../theme';
 import { EdgeStyle } from '../typings/type';
 import { setStatusStyle } from './utils';
+
+const getStyleByTheme = (theme = {}) => {
+  const themeResult = getDefaultStyleByTheme(theme);
+  const { defaultEdgeStyle, defaultEdgeStatusStyle } = themeResult;
+  return {
+    style: defaultEdgeStyle.style,
+    status: defaultEdgeStatusStyle.status,
+  };
+};
 
 export enum EnumNodeAndEdgeStatus {
   NORMAL = 'normal',
@@ -79,9 +89,9 @@ const getPolyEdgeControlPoint = (p1: Position, p2: Position, d: number) => {
   };
 };
 
-const processKeyshape = (cfg: EdgeConfig) => {
-  const { startPoint = { x: 0, y: 0 }, endPoint = { x: 0, y: 0 }, style: STYLE, sourceNode, targetNode } = cfg;
-  const style = STYLE as EdgeStyle;
+const processKeyshape = (cfg: EdgeConfig, style: EdgeStyle) => {
+  const { startPoint = { x: 0, y: 0 }, endPoint = { x: 0, y: 0 }, sourceNode, targetNode } = cfg;
+
   const { keyshape } = style;
 
   const { type = 'line', poly = { distance: 0 }, loop = {} } = keyshape;
@@ -142,7 +152,12 @@ const processKeyshape = (cfg: EdgeConfig) => {
 export default () => {
   G6.registerEdge('graphin-line', {
     draw(cfg: ModelConfig | undefined, group: IGroup | undefined) {
-      const style = deepMix({}, cfg && cfg.style) as EdgeStyle;
+      const { _theme } = cfg.style;
+
+      this.options = getStyleByTheme(_theme);
+
+      const style = deepMix({}, this.options.style, cfg.style) as EdgeStyle;
+
       /** 将初始化样式存储在model中 */
       if (cfg) {
         // eslint-disable-next-line no-underscore-dangle
@@ -166,7 +181,7 @@ export default () => {
       const lineWidth = keyShapeStyle?.lineWidth || 1;
       const d = lineWidth + 5;
 
-      const path = processKeyshape(cfg as EdgeConfig);
+      const path = processKeyshape(cfg as EdgeConfig, style);
 
       // TODO:支持多边
       // const path = [
@@ -296,7 +311,8 @@ export default () => {
       if (!name) return;
       const model = (item as IEdge).getModel() as EdgeConfig;
       const shapes = (item as IEdge).getContainer().get('children'); // 顺序根据 draw 时确定
-      const initStateStyle = deepMix({}, (model.style as EdgeStyle).status);
+
+      const initStateStyle = deepMix({}, this.options.status, model.style.status);
 
       const initialStyle = (item as IEdge).getModel()._initialStyle as EdgeStyle;
 
