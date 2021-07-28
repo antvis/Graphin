@@ -1,5 +1,5 @@
+import { G6, GraphinContext } from '@antv/graphin';
 import React from 'react';
-import { GraphinContext, G6 } from '@antv/graphin';
 import './index.less';
 
 export interface GridProps {
@@ -11,19 +11,18 @@ export interface GridProps {
 
 const Grid: React.FunctionComponent<GridProps> = ({ img }) => {
   const { graph } = React.useContext(GraphinContext);
-  let grid;
 
   React.useEffect(() => {
-    grid = new G6.Grid({ img });
-    graph?.addPlugin(grid);
+    const grid = new G6.Grid({ img });
+    graph.addPlugin(grid);
     return () => {
-      if (grid) {
-        graph?.removePlugin(grid);
+      if (graph && !graph.destroy) {
+        graph.removePlugin(grid);
       }
     };
   }, [img, graph]);
 
-  return <></>;
+  return null;
 };
 
 export default Grid;

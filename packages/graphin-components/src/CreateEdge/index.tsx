@@ -47,9 +47,11 @@ const CreateEdge: React.FunctionComponent<Props> = props => {
 
     graph.on('aftercreateedge', handleAftercreateedge);
     return () => {
-      graph.removeBehaviors('create-edge', 'default');
-      graph.get('canvas').setCursor('default');
-      graph.off('aftercreateedge', handleAftercreateedge);
+      if (graph && !graph.destroyed) {
+        graph.removeBehaviors('create-edge', 'default');
+        graph.get('canvas').setCursor('default');
+        graph.off('aftercreateedge', handleAftercreateedge);
+      }
     };
   }, [active, graph, onChange]);
 

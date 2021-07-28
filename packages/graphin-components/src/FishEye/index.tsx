@@ -1,6 +1,6 @@
+/* eslint-disable no-undef */
+import { G6, GraphinContext } from '@antv/graphin';
 import React from 'react';
-
-import { GraphinContext, G6 } from '@antv/graphin';
 
 const defaultOptions = {
   r: 249,
@@ -37,7 +37,7 @@ export interface FishEyeProps {
   handleEscListener?: () => void;
 }
 
-const FishEye: React.FunctionComponent<FishEyeProps> = (props) => {
+const FishEye: React.FunctionComponent<FishEyeProps> = props => {
   const { graph } = React.useContext(GraphinContext);
   const { options, visible, handleEscListener } = props;
 
@@ -50,17 +50,17 @@ const FishEye: React.FunctionComponent<FishEyeProps> = (props) => {
     if (FishEyeOptions.showLabel) {
       // 先将图上的label全部隐藏
 
-      graph.getNodes().forEach((node) => {
+      graph.getNodes().forEach(node => {
         node
           .getContainer()
           .getChildren()
-          .forEach((shape) => {
+          .forEach(shape => {
             if (shape.get('type') === 'text') shape.hide();
           });
       });
     }
     const fishEye = new G6.Fisheye(FishEyeOptions);
-    const escListener = (e) => {
+    const escListener = e => {
       if (e.keyCode === 27) {
         if (handleEscListener) {
           handleEscListener();
@@ -78,13 +78,15 @@ const FishEye: React.FunctionComponent<FishEyeProps> = (props) => {
       window.addEventListener('keydown', escListener);
     }
     return () => {
-      graph.get('canvas').setCursor('default');
-      graph.removePlugin(fishEye);
+      if (graph && !graph.destroyed) {
+        graph.get('canvas').setCursor('default');
+        graph.removePlugin(fishEye);
+      }
       if (handleEscListener) {
         window.removeEventListener('keydown', escListener);
       }
     };
-  }, [options, visible, handleEscListener]);
+  }, [graph, options, visible, handleEscListener]);
 
   return null;
 };

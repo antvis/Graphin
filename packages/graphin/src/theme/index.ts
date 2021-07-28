@@ -1,7 +1,7 @@
-import getNodeStyleByTheme from './node-style';
-import getEdgeStyleByTheme from './edge-style';
+import { ComboStyle, EdgeStyle, NodeStyle } from '../typings/type';
 import getComboStyleByTheme from './combo-style';
-import { NodeStyle, EdgeStyle, ComboStyle } from '../typings/type';
+import getEdgeStyleByTheme from './edge-style';
+import getNodeStyleByTheme from './node-style';
 
 export const DEFAULT_THEME = {
   mode: 'light',
