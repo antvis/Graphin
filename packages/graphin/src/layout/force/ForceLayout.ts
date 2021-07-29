@@ -10,14 +10,6 @@ type ForceNodeType = Node;
 
 type ForceEdgeType = Edge;
 
-// const getBaseLog = (x: number, y: number) => {
-//   return Math.log(y) / Math.log(x);
-// };
-// interface ForceData {
-//   nodes: Node[];
-//   edges: Edge[];
-// }
-
 interface Map<K, V> {
   clear(): void;
   delete(key: K): boolean;
@@ -33,14 +25,19 @@ export interface ForceProps {
   /** 向心力 */
   centripetalOptions: {
     /** 叶子节点的施加力的因子 */
-    leaf?: number;
+    leaf?: number | ((node: NodeType, nodes: NodeType[], edges: Edge[]) => number);
     /** 孤立节点的施加力的因子 */
-    single?: number;
+    single?: number | ((node: NodeType) => number);
     /** 其他节点的施加力的因子 */
-    others?: number;
+    others?: number | ((node: NodeType) => number);
     /** 向心力的中心点，默认为画布的中心 */
     center?: (
       node: NodeType,
+      degree: number,
+      nodes: NodeType[],
+      edges: Edge[],
+      width: number,
+      height: number,
     ) => {
       x: number;
       y: number;
@@ -130,7 +127,7 @@ class ForceLayout {
     this.props = {
       stiffness: 200.0,
       enableWorker: false,
-      defSpringLen: edge => {
+      defSpringLen: (edge) => {
         return edge.data.spring || 200;
       },
       repulsion: 200.0 * 5,
@@ -181,7 +178,7 @@ class ForceLayout {
     if (!options) {
       return;
     }
-    Object.keys(options).forEach(key => {
+    Object.keys(options).forEach((key) => {
       this.props[key] = options[key];
     });
   };
@@ -224,7 +221,7 @@ class ForceLayout {
     /** 初始化点和边的信息 */
     const { width, height } = this.props;
 
-    this.nodes.forEach(node => {
+    this.nodes.forEach((node) => {
       const x = node.data.x || width / 2;
       const y = node.data.y || height / 2;
       const vec = new Vector(x, y);
@@ -240,7 +237,7 @@ class ForceLayout {
       this.nodePoints.set(node.id, new Point(vec, String(node.id), node.data, mass));
     });
 
-    this.edges.forEach(edge => {
+    this.edges.forEach((edge) => {
       const source = this.nodePoints.get(edge.source.id) as Point;
       const target = this.nodePoints.get(edge.target.id) as Point;
       const length = this.props.defSpringLen(edge, source, target);
@@ -264,7 +261,7 @@ class ForceLayout {
   calTotalEnergy = () => {
     let energy = 0.0;
 
-    this.nodes.forEach(node => {
+    this.nodes.forEach((node) => {
       const point = this.nodePoints.get(node.id) as Point;
       const speed = point.v.magnitude();
 
@@ -377,7 +374,7 @@ class ForceLayout {
   render = () => {
     const render = this.registers.get('render');
     const nodes: NodeType[] = [];
-    this.nodePoints.forEach(node => {
+    this.nodePoints.forEach((node) => {
       nodes.push({
         ...(this.nodeSet[node.id] && this.nodeSet[node.id].data),
         x: node.p.x,
@@ -444,7 +441,7 @@ class ForceLayout {
   };
 
   updateHookesLaw = () => {
-    this.edges.forEach(edge => {
+    this.edges.forEach((edge) => {
       const spring = this.edgeSprings.get(edge.id);
       const v = spring.target.p.subtract(spring.source.p);
       const displacement = spring.length - v.magnitude();
@@ -462,7 +459,7 @@ class ForceLayout {
 
       point.updateAcc(direction.scalarMultip(-radio));
     };
-    this.nodes.forEach(node => {
+    this.nodes.forEach((node) => {
       // 默认的向心力指向画布中心
       const degree = (node.data && node.data.layout && node.data.layout.degree) as number;
       const leafNode = degree === 1;
@@ -473,7 +470,7 @@ class ForceLayout {
         single: 2,
         others: 1,
         // eslint-disable-next-line
-        center: (_node: any) => {
+        center: (_node: any, _degree: number) => {
           return {
             x: this.props.width / 2,
             y: this.props.height / 2,
@@ -481,8 +478,17 @@ class ForceLayout {
         },
       };
 
-      const { leaf, single, others, center } = { ...defaultRadio, ...this.props.centripetalOptions };
-      const { x, y } = center(node);
+      const {
+        leaf: propsLeaf,
+        single: propsSingle,
+        others: propsOthers,
+        center,
+      } = { ...defaultRadio, ...this.props.centripetalOptions };
+      const { width, height } = this.props;
+      const { x, y } = center(node, degree, this.nodes, this.edges, width, height);
+      const leaf = typeof propsLeaf === 'number' ? propsLeaf : propsLeaf(node, this.nodes, this.edges);
+      const single = typeof propsSingle === 'number' ? propsSingle : propsSingle(node);
+      const others = typeof propsOthers === 'number' ? propsOthers : propsOthers(node);
       const centerVector = new Vector(x, y);
 
       /** 如果radio为0，则认为忽略向心力 */
@@ -505,7 +511,7 @@ class ForceLayout {
   };
 
   updateVelocity = (interval: number) => {
-    this.nodes.forEach(node => {
+    this.nodes.forEach((node) => {
       const point = this.nodePoints.get(node.id);
       point.v = point.v
         .add(point.a.scalarMultip(interval)) // 根据加速度求速度公式 V_curr= a*@t + V_pre
@@ -520,7 +526,7 @@ class ForceLayout {
 
   updatePosition = (interval: number) => {
     let sum = 0;
-    this.nodes.forEach(node => {
+    this.nodes.forEach((node) => {
       const point = this.nodePoints.get(node.id);
       const distance = point.v.scalarMultip(interval);
       sum = sum + distance.magnitude();
@@ -549,7 +555,7 @@ class ForceLayout {
    * @param {[type]} data [description]
    */
   addNodes = (data: NodeType[]) => {
-    data.forEach(node => {
+    data.forEach((node) => {
       this.addNode(new Node(node));
     });
   };
@@ -629,7 +635,7 @@ class ForceLayout {
       const mass = this.getMass(node);
       this.nodePoints.set(node.id, new Point(vec, node.id, node.data, mass));
 
-      this.edges.forEach(edge => {
+      this.edges.forEach((edge) => {
         const source = this.nodePoints.get(edge.source.id);
         const target = this.nodePoints.get(edge.target.id);
         if (source.id === node.id || target.id === node.id) {
