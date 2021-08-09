@@ -5,6 +5,7 @@ import Spring from './Spring';
 import { getDegree } from '../utils/graph';
 import { GraphinData as Data, IUserNode as NodeType } from '../../typings/type';
 import { Item, Graph } from '@antv/g6/';
+import { forceNBody } from './ForceNBody';
 
 type ForceNodeType = Node;
 
@@ -39,9 +40,7 @@ export interface ForceProps {
     /** 其他节点的施加力的因子 */
     others?: number;
     /** 向心力的中心点，默认为画布的中心 */
-    center?: (
-      node: NodeType,
-    ) => {
+    center?: (node: NodeType) => {
       x: number;
       y: number;
     };
@@ -406,7 +405,8 @@ class ForceLayout {
   };
 
   tick = (interval: number) => {
-    this.updateCoulombsLaw();
+    // this.updateCoulombsLaw();
+    this.updateCoulombsLawOptimized();
     this.updateHookesLaw();
     this.attractToCentre();
     this.updateVelocity(interval);
@@ -414,6 +414,23 @@ class ForceLayout {
   };
 
   /** 布局算法 */
+  updateCoulombsLawOptimized = () => {
+    // 用force-n-body结合 Barnes-Hut approximation 优化的方法
+    const { coulombDisScale } = this.props;
+    const { repulsion } = this.props;
+    const nodes = this.nodes.map(n => {
+      const point = this.nodePoints.get(n.id).p;
+      return {
+        x: point.x,
+        y: point.y,
+      };
+    });
+    const forces = forceNBody(nodes, coulombDisScale, repulsion);
+    this.nodes.forEach((node, i) => {
+      this.nodePoints.get(node.id).updateAcc(new Vector(forces[i].vx, forces[i].vy));
+    });
+  };
+
   updateCoulombsLaw = () => {
     const len = this.nodes.length;
 

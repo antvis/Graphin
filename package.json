@@ -30,6 +30,7 @@
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags"
   },
   "devDependencies": {
+    "@types/d3-quadtree": "^3.0.2",
     "@types/jest": "^25.2.3",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",
@@ -79,6 +80,7 @@
     "@ant-design/icons-react": "^2.0.1",
     "@antv/gatsby-theme-antv": "latest",
     "antd": "^4.12.3",
+    "d3-quadtree": "^3.0.1",
     "rc-footer": "^0.6.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
