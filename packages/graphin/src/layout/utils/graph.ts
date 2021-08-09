@@ -7,7 +7,7 @@ export const getDegree = (node: Node, edges: Edge[]) => {
   let index = 0;
 
   edges.forEach(edge => {
-    if (edge.data.source === nodeId || edge.data.target === nodeId) {
+    if (edge.source.id === nodeId || edge.target.id === nodeId) {
       index = index + 1;
     }
   });
