@@ -1,6 +1,7 @@
 import { quadtree } from 'd3-quadtree';
 
 const theta2 = 0.81; // Barnes-Hut approximation threshold
+const epsilon = 0.1; // 为了防止出现除0的情况，加一个epsilon
 
 interface Node {
   x: number;
@@ -22,7 +23,7 @@ export function forceNBodyBruteForce(nodes: Node[], coulombDisScale: number, rep
       if (i === j) return;
       const dx = a.x - b.x;
       const dy = a.y - b.y;
-      const len = Math.sqrt(dx * dx + dy * dy);
+      const len = Math.sqrt(dx * dx + dy * dy) + epsilon;
       const dis = len * coulombDisScale;
       const force = repulsion / (dis * dis) || 0;
 
@@ -95,8 +96,8 @@ function computeForce(node: InternalNode, tree) {
     const dx = node.x - quad.x;
     const dy = node.y - quad.y;
     const width = x2 - x1;
-    const len2 = dx * dx + dy * dy;
-    const len = Math.sqrt(len2);
+    const len2 = dx * dx + dy * dy + epsilon;
+    const len = Math.sqrt(len2) + epsilon;
 
     // far node, apply Barnes-Hut approximation
     if ((width * width) / theta2 < len2) {

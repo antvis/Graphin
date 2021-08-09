@@ -9,6 +9,8 @@ import { TagFilled, DeleteFilled, ExpandAltOutlined } from '@ant-design/icons';
 
 const { Menu } = ContextMenu;
 const defSpreingLen = (_edge, source, target) => {
+  // NOTE: 固定200还是效果好
+  return 200;
   /** 默认返回的是 200 的弹簧长度 */
   /** 如果你要想要产生聚类的效果，可以考虑 根据边两边节点的度数来动态设置边的初始化长度：度数越小，则边越短 */
   const nodeSize = 30;
