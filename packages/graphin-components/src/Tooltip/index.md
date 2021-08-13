@@ -28,7 +28,7 @@ Tooltip 提示框是一种快速浏览信息的交互组件，常用于图的节
 
 ## ⚠️：集成 Antd 的 Popover 组件
 
-集成 Antd 的 Popover 组件，需要一个触发的 DOM，而触发的 DOM 恰好覆盖了节点，因此，我们的组件`ContextMenu`,`<DragNode />`等无法触发节点事件，从而带来失效，推荐官方内置的`<Tooltip pleacement='top' hasArrow/>`来使用
+集成 Antd 的 Popover 组件，需要一个触发的 DOM，而触发的 DOM 恰好覆盖了节点，因此，我们的组件`ContextMenu`,`<DragNode />`等无法触发节点事件，从而带来失效，推荐官方内置的`<Tooltip placement='top' hasArrow/>`来使用
 
 <code src='./demos/Antd.tsx' >
 
