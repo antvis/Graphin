@@ -1,17 +1,17 @@
-import TreeCollapse from './TreeCollapse';
-import DragCanvas from './DragCanvas';
-import ZoomCanvas from './ZoomCanvas';
-import DragNode from './DragNode';
-import ClickSelect from './ClickSelect';
-import BrushSelect from './BrushSelect';
-import ResizeCanvas from './ResizeCanvas';
-import LassoSelect from './LassoSelect';
-import DragCombo from './DragCombo';
 import ActivateRelations from './ActivateRelations';
-import Hoverable from './Hoverable';
+import BrushSelect from './BrushSelect';
+import ClickSelect from './ClickSelect';
+import DragCanvas from './DragCanvas';
+import DragCombo from './DragCombo';
+import DragNode from './DragNode';
+import DragNodeWithForce from './DragNodeWithForce';
 import FitView from './FitView';
 import FontPaint from './FontPaint';
-import DragNodeWithForce from './DragNodeWithForce';
+import Hoverable from './Hoverable';
+import LassoSelect from './LassoSelect';
+import ResizeCanvas from './ResizeCanvas';
+import TreeCollapse from './TreeCollapse';
+import ZoomCanvas from './ZoomCanvas';
 
 export default {
   /** 内置 */
