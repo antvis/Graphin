@@ -1,17 +1,20 @@
+import { IG6GraphEvent } from '@antv/g6';
 import * as React from 'react';
 import GraphinContext from '../GraphinContext';
 
-import { IG6GraphEvent } from '@antv/g6';
-
 export interface HoverableProps {
-  bindType: 'node' | 'edge';
+  bindType?: 'node' | 'edge';
+  disabled?: boolean;
 }
 
 const Hoverable: React.FunctionComponent<HoverableProps> = props => {
   const graphin = React.useContext(GraphinContext);
-  const { bindType = 'node' } = props;
+  const { bindType = 'node', disabled } = props;
+  const { graph } = graphin;
   React.useEffect(() => {
-    const { graph } = graphin;
+    if (disabled) {
+      return;
+    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleNodeMouseEnter = (evt: IG6GraphEvent & any) => {
       graph.setItemState(evt.item, 'hover', true);
@@ -20,7 +23,6 @@ const Hoverable: React.FunctionComponent<HoverableProps> = props => {
     const handleNodeMouseLeave = (evt: IG6GraphEvent & any) => {
       graph.setItemState(evt.item, 'hover', false);
     };
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleEdgeMouseEnter = (evt: IG6GraphEvent & any) => {
       graph.setItemState(evt.item, 'hover', true);
@@ -29,6 +31,7 @@ const Hoverable: React.FunctionComponent<HoverableProps> = props => {
     const handleEdgeMouseLeave = (evt: IG6GraphEvent & any) => {
       graph.setItemState(evt.item, 'hover', false);
     };
+
     if (bindType === 'node') {
       graph.on('node:mouseenter', handleNodeMouseEnter);
       graph.on('node:mouseleave', handleNodeMouseLeave);
@@ -48,7 +51,7 @@ const Hoverable: React.FunctionComponent<HoverableProps> = props => {
         graph.off('edge:mouseleave', handleEdgeMouseLeave);
       }
     };
-  }, []);
+  }, [graph, disabled]);
 
   return null;
 };

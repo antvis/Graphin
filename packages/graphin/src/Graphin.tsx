@@ -463,12 +463,11 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
                     </>
                   )
                 }
-
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
-                <Hoverable bindType="node" />
                 {/* <Hoverable bindType="edge" /> */}
                 {this.props.children}
+                {/* <Hoverable bindType="node" /> 2.3.3 版本移除 */}
               </>
             )}
           </div>

@@ -55,9 +55,11 @@ export default () => {
   {/* 点击节点 */}<ClickSelect />
   {/* 圈选节点 */}<BrushSelect />
   {/** resize 画布 */}<ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
-  {/** 节点悬停 **/}<Hoverable bindType="node" />
+
 </>
 ```
+
+注意 ⚠️： graphin@2.3.3 版本，移除内置的节点 Hover 交互，用户需要按需引入`{/** 节点悬停 **/}<Hoverable bindType="node" />`
 
 <code src='./demos/index.tsx'>
 
