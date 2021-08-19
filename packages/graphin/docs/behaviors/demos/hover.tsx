@@ -15,7 +15,8 @@ export default () => {
   return (
     <div>
       <Graphin data={data} layout={layout}>
-        <Hoverable bindType="node" disabled />
+        <Hoverable bindType="node" />
+        <Hoverable bindType="edge" />
       </Graphin>
     </div>
   );

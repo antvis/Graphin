@@ -23,7 +23,6 @@ export default {
   ResizeCanvas,
   LassoSelect,
   DragCombo,
-  Hoverable,
 
   /** 可选 */
   ActivateRelations,
@@ -31,4 +30,5 @@ export default {
   FitView,
   FontPaint,
   DragNodeWithForce,
+  Hoverable,
 };

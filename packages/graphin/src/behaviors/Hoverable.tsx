@@ -6,20 +6,15 @@ export interface HoverableProps {
   bindType?: 'node' | 'edge';
   disabled?: boolean;
 }
-let isSingle = true;
+
 const Hoverable: React.FunctionComponent<HoverableProps> = props => {
   const graphin = React.useContext(GraphinContext);
   const { bindType = 'node', disabled } = props;
   const { graph } = graphin;
   React.useEffect(() => {
-    if (!isSingle) {
-      return;
-    }
-    isSingle = false;
     if (disabled) {
       return;
     }
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleNodeMouseEnter = (evt: IG6GraphEvent & any) => {
       graph.setItemState(evt.item, 'hover', true);
@@ -55,7 +50,6 @@ const Hoverable: React.FunctionComponent<HoverableProps> = props => {
         graph.off('edge:mouseenter', handleEdgeMouseEnter);
         graph.off('edge:mouseleave', handleEdgeMouseLeave);
       }
-      isSingle = true;
     };
   }, [graph, disabled]);
 
