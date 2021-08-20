@@ -29,11 +29,11 @@ const TooltipDemo: React.FunctionComponent = () => {
     <div style={{ position: 'relative' }}>
       <Collapse
         style={{ width: '320px', position: 'absolute', top: '0px', left: '0px', zIndex: 999 }}
-        defaultActiveKey={['pleacement', 'arrow', 'style']}
+        defaultActiveKey={['placement', 'arrow', 'style']}
         expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
         className="site-collapse-custom-collapse"
       >
-        <Panel header="设置pleacement" key="pleacement">
+        <Panel header="设置placement" key="placement">
           <Radio.Group
             onChange={e => {
               setPlacement(e.target.value);

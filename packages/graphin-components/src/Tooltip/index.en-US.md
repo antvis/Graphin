@@ -27,7 +27,7 @@ Tooltip is an interactive component for quickly accessing nodes or edges informa
 
 ## ⚠️: Popover component integrated with Antd, unable to listen to ContextMenu event
 
-Integrating the Popover component of Antd requires a triggered DOM, and the triggered DOM happens to cover the node. Therefore, our components `<ContextMenu />`, `<DragNode />`, etc. cannot trigger node events, which will lead to failure. The official built-in is recommended `<Tooltip pleacement='top' hasArrow/>` to use
+Integrating the Popover component of Antd requires a triggered DOM, and the triggered DOM happens to cover the node. Therefore, our components `<ContextMenu />`, `<DragNode />`, etc. cannot trigger node events, which will lead to failure. The official built-in is recommended `<Tooltip placement='top' hasArrow/>` to use
 
 <code src='./demos/Antd.tsx' />
 
