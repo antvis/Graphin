@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "the react toolkit for graph analysis based on g6",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -49,7 +49,7 @@
   "author": "AntV",
   "license": "MIT",
   "dependencies": {
-    "@antv/g6": "4.3.4",
+    "@antv/g6": "^4.3.6",
     "@antv/util": "^2.0.10",
     "lodash-es": "^4.17.21",
     "d3-quadtree": "^3.0.1"
