@@ -65,7 +65,7 @@ const MiniMap: React.FunctionComponent<MiniMapProps> = props => {
     graph.addPlugin(miniMap);
 
     return () => {
-      if (miniMap && !miniMap.destroy) {
+      if (miniMap && !miniMap.destroyed) {
         graph.removePlugin(miniMap);
       }
     };
