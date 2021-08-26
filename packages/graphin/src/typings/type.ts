@@ -143,7 +143,7 @@ export interface GraphinProps {
   /**
    * 是否启用全局动画
    */
-  animate?: false;
+  animate?: boolean;
   /* 动画设置,仅在 animate 为 true 时有效 */
   animateCfg?: {
     /**
