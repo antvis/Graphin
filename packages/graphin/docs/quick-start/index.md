@@ -34,7 +34,7 @@ yarn add @antv/graphin-icons --save
 
 ## 02.把关系数据可视化出来
 
-完成一个图分析产品的第一步，就是将关系数据可视化出来。关系数据是非常典型的图结构，由节点 Node 和边 Edge 组成。Node 中只有 `id` 是必须参数，Edge 中只有 `source` 和 `target` 是必须按参数，它分别代表边的开始节点和结束节点的 `id`
+完成一个图分析产品的第一步，就是将关系数据可视化出来。关系数据是非常典型的图结构，由节点 Node 和边 Edge 组成。Node 中只有 `id` 是必须参数，Edge 中只有 `source` 和 `target` 是必须参数，它分别代表边的开始节点和结束节点的 `id`
 
 <code src='./demos/index.tsx'>
 
