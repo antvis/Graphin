@@ -91,7 +91,7 @@ module.exports = env => {
       {
         lodash: '_',
         react: 'window.React',
-        '@antv/g6': 'G6',
+        '@antv/g6': 'window.G6',
       },
     ],
   };

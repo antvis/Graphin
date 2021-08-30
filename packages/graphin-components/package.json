@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin-components",
-  "version": "2.3.0",
+  "version": "2.3.4",
   "description": "Components for graphin",
   "main": "lib/index.js",
   "module": "es/index.js",
