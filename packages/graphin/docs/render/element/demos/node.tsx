@@ -6,7 +6,7 @@ const icons = Graphin.registerFontFamily(IconLoader);
 
 const { ZoomCanvas, Hoverable } = Behaviors;
 
-const data = Utils.mock(5).circle().graphin();
+const data = Utils.mock(6).circle().graphin();
 
 data.edges = [];
 
@@ -65,6 +65,20 @@ data.nodes[4].style = {
   halo: {
     visible: true,
     stroke: 'red',
+  },
+};
+
+data.nodes[5].style = {
+  icon: {
+    type: 'image',
+    value: `https://avatars.githubusercontent.com/u/105033?v=4`,
+    size: [20, 20],
+    clip: {
+      r: 10,
+    },
+  },
+  label: {
+    value: '裁剪 icon',
   },
 };
 

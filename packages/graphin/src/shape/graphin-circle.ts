@@ -324,7 +324,22 @@ export default () => {
         group.addShape('text', parseIcon(style));
       }
       if (type === 'image') {
-        group.addShape('image', parseIcon(style));
+        const imageAttrs = parseIcon(style);
+        delete imageAttrs.attrs.clip; // clip字段是保留的，放入attrs中会引起报错
+        const imageShape = group.addShape('image', imageAttrs);
+        const { clip } = style.icon;
+        if (clip) {
+          const { r, ...clipStyle } = clip;
+          imageShape.setClip({
+            type: 'circle',
+            attrs: {
+              x: 0,
+              y: 0,
+              r,
+              ...clipStyle,
+            },
+          });
+        }
       }
 
       // badges 会存在多个的情况
