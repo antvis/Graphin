@@ -131,7 +131,8 @@ const parseIcon = (style: NodeStyle) => {
     fill,
     size,
     visible,
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    clip, // clip字段是保留的，放入attrs中会引起报错
     ...otherAttrs
   } = icon;
 
@@ -325,7 +326,6 @@ export default () => {
       }
       if (type === 'image') {
         const imageAttrs = parseIcon(style);
-        delete imageAttrs.attrs.clip; // clip字段是保留的，放入attrs中会引起报错
         const imageShape = group.addShape('image', imageAttrs);
         const { clip } = style.icon;
         if (clip) {
