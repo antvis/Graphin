@@ -5,10 +5,11 @@ import { ExtendNodeShape, ShapeComponent } from '../../types';
 
 const reset = (shapes: Shape.Base[], shapeComponents: ShapeComponent[]) => {
   shapes.forEach((shape, index: number) => {
-    if (!shapeComponents[index].noReset)
+    if (shapeComponents[index] && !shapeComponents[index].noReset) {
       shape.attr({
         ...shapeComponents[index].attrs,
       });
+    }
   });
 };
 
