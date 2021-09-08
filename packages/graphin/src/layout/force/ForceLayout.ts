@@ -34,13 +34,19 @@ export interface ForceProps {
   /** 向心力 */
   centripetalOptions: {
     /** 叶子节点的施加力的因子 */
-    leaf?: number;
+    leaf?: number | ((node: NodeType, nodes: NodeType[], edges: Edge[]) => number);
     /** 孤立节点的施加力的因子 */
-    single?: number;
+    single?: number | ((node: NodeType) => number);
     /** 其他节点的施加力的因子 */
-    others?: number;
+    others?: number | ((node: NodeType) => number);
     /** 向心力的中心点，默认为画布的中心 */
-    center?: (node: NodeType) => {
+    center?: (
+      node: NodeType,
+      nodes: NodeType[],
+      edges: Edge[],
+      width: number,
+      height: number,
+    ) => {
       x: number;
       y: number;
     };
@@ -207,7 +213,7 @@ class ForceLayout {
 
   getMass = (node: NodeType) => {
     const {
-      degree = getDegree(node, this.edges), // 节点度数
+      degree = getDegree(node, this.edges)?.degree, // 节点度数
       force,
     } = node.layout || {};
 
@@ -232,8 +238,11 @@ class ForceLayout {
       if (!node.data.layout) {
         node.data.layout = {};
       }
-      const degree = getDegree(node, this.edges);
-      node.data.layout.degree = degree;
+      const degreeInfo = getDegree(node, this.edges);
+      node.data.layout = {
+        ...node.data.layout,
+        ...degreeInfo,
+      };
 
       const mass = this.getMass(node.data);
 
@@ -478,9 +487,6 @@ class ForceLayout {
     };
     this.nodes.forEach(node => {
       // 默认的向心力指向画布中心
-      const degree = (node.data && node.data.layout && node.data.layout.degree) as number;
-      const leafNode = degree === 1;
-      const singleNode = degree === 0;
       /** 默认的向心力配置 */
       const defaultRadio = {
         leaf: 2,
@@ -495,15 +501,25 @@ class ForceLayout {
         },
       };
 
-      const { leaf, single, others, center } = { ...defaultRadio, ...this.props.centripetalOptions };
-      const { x, y } = center(node);
+      const degree = node.data?.layout?.degree as number;
+      const {
+        leaf: propsLeaf,
+        single: propsSingle,
+        others: propsOthers,
+        center,
+      } = { ...defaultRadio, ...this.props.centripetalOptions };
+      const { width, height } = this.props;
+      const { x, y } = center(node, this.nodes, this.edges, width, height);
+      const leaf = typeof propsLeaf === 'number' ? propsLeaf : propsLeaf(node, this.nodes, this.edges);
+      const single = typeof propsSingle === 'number' ? propsSingle : propsSingle(node);
+      const others = typeof propsOthers === 'number' ? propsOthers : propsOthers(node);
       const centerVector = new Vector(x, y);
-
+      const leafNode = degree === 1;
+      const singleNode = degree === 0;
       /** 如果radio为0，则认为忽略向心力 */
       if (leaf === 0 || single === 0 || others === 0) {
         return;
       }
-
       if (singleNode) {
         implementForce(node, centerVector, single);
         return;
