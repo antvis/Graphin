@@ -4,13 +4,24 @@ import { IUserNode as Node } from '../../typings/type';
 
 export const getDegree = (node: Node, edges: Edge[]) => {
   const nodeId = node.data.id;
-  let index = 0;
+  let degree = 0;
+  let sDegree = 0;
+  let tDegree = 0;
 
   edges.forEach(edge => {
-    if (edge.source.id === nodeId || edge.target.id === nodeId) {
-      index = index + 1;
+    if (edge.source.id === nodeId) {
+      sDegree += 1;
+      degree += 1;
+    }
+    if (edge.target.id === nodeId) {
+      tDegree += 1;
+      degree += 1;
     }
   });
 
-  return index;
+  return {
+    degree,
+    sDegree,
+    tDegree,
+  };
 };
