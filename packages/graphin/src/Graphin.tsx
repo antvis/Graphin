@@ -98,6 +98,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   /** layout */
   layout: LayoutController;
 
+  layoutCache: boolean;
+
   width: number;
 
   height: number;
@@ -117,15 +119,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   constructor(props: GraphinProps) {
     super(props);
 
-    const {
-      data,
-      layout,
-      width,
-      height,
-
-      ...otherOptions
-    } = props;
-
+    const { data, layout, width, height, layoutCache, ...otherOptions } = props;
     this.data = data;
     this.isTree =
       Boolean(props.data && (props.data as GraphinTreeData).children) ||
@@ -136,7 +130,9 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     this.theme = {} as ThemeData;
     this.apis = {} as ApisType;
+    this.layoutCache = layoutCache;
     this.layout = {} as LayoutController;
+
     this.options = { ...otherOptions } as GraphOptions;
 
     this.state = {
@@ -243,7 +239,6 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     /** 装载数据 */
     this.graph.data(this.data as GraphData | TreeGraphData);
-
     /** 初始化布局：仅限网图 */
     if (!this.isTree) {
       this.layout = new LayoutController(this);
@@ -320,7 +315,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     const isOptionsChange = this.shouldUpdate(prevProps, 'options');
     const isThemeChange = this.shouldUpdate(prevProps, 'theme');
     // console.timeEnd('did-update');
-    const { data } = this.props;
+    const { data, layoutCache, layout } = this.props;
+    this.layoutCache = layoutCache;
     const isGraphTypeChange = (prevProps.data as GraphinTreeData).children !== (data as GraphinTreeData).children;
 
     if (isThemeChange) {
@@ -338,6 +334,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     if (isOptionsChange) {
       // this.updateOptions();
     }
+
     /** 数据变化 */
     if (isDataChange) {
       this.initData(data);
@@ -361,6 +358,9 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         },
         () => {
           this.graph.emit('graphin:datachange');
+          if (isLayoutChange) {
+            this.graph.emit('graphin:layoutchange', { prevLayout: prevProps.layout, layout });
+          }
         },
       );
       return;
@@ -388,7 +388,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       /** 走G6的layoutController */
       // this.graph.updateLayout();
       // console.log('%c isLayoutChange', 'color:grey');
-      this.graph.emit('graphin:layoutchange');
+      this.graph.emit('graphin:layoutchange', { prevLayout: prevProps.layout, layout });
     }
   }
 
