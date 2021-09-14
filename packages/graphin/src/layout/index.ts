@@ -39,6 +39,13 @@ class LayoutController {
     this.init();
   }
 
+  // 是否每个节点都有位置信息
+  hasPosition() {
+    const { graphin } = this;
+    const { data = {} } = graphin;
+    return data?.nodes?.every(node => !window.isNaN(Number(node.x)) && !window.isNaN(Number(node.y)));
+  }
+
   /**
    * 初始化布局
    */
@@ -70,8 +77,16 @@ class LayoutController {
 
   /** 重新布局 */
   changeLayout() {
-    const { graph, data, isTree } = this.graphin;
-    if (!graph || graph.destroyed || !data || !data.nodes || !data.nodes.length || isTree) {
+    const { graph, data, isTree, layoutCache } = this.graphin;
+    if (
+      !graph ||
+      graph.destroyed ||
+      !data ||
+      !data.nodes ||
+      !data.nodes.length ||
+      (layoutCache && this.hasPosition()) ||
+      isTree
+    ) {
       return false;
     }
     if (FORCE_LAYOUTS.indexOf(this.options.type) !== -1) {
