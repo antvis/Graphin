@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = env => {
   return {
@@ -83,18 +83,18 @@ module.exports = env => {
       publicPath: './',
       filename: 'graphin-components.min.js',
     },
-    plugins: [
-      new MiniCssExtractPlugin(),
-      // new BundleAnalyzerPlugin()
-    ],
-    externals: [
-      {
-        lodash: '_',
-        react: 'window.React',
-        '@antv/graphin': 'window.Graphin',
-        '@antv/g6': 'G6',
-        antd: 'antd',
+    plugins: [new MiniCssExtractPlugin(), new BundleAnalyzerPlugin()],
+    externals: {
+      lodash: {
+        commonjs: 'lodash',
+        amd: 'lodash',
+        root: '_',
       },
-    ],
+      react: 'React',
+      'react-dom': 'ReactDOM',
+      '@antv/graphin': 'Graphin',
+      '@antv/g6': 'G6',
+      antd: 'antd',
+    },
   };
 };
