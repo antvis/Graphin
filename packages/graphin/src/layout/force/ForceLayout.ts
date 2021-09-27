@@ -2,9 +2,9 @@ import Vector from './Vector';
 import Point from './Point';
 import { Node, Edge } from './Elements';
 import Spring from './Spring';
-import { getDegree } from '../utils/graph';
+import Utils from '../utils/graph';
 import { GraphinData as Data, IUserNode as NodeType } from '../../typings/type';
-import { Item, Graph } from '@antv/g6/';
+import { Item, Graph } from '@antv/g6';
 import { forceNBody } from './ForceNBody';
 
 type ForceNodeType = Node;
@@ -47,10 +47,16 @@ export interface ForceProps {
       width: number,
       height: number,
     ) => {
-      x: number;
-      y: number;
+      x: number | undefined;
+      y: number | undefined;
     };
   };
+  /** 是否需要叶子节点聚类 */
+  leafCluster: boolean;
+  /** 节点聚类的映射字段 */
+  nodeClusterBy: string;
+  /** 节点聚类作用力系数 */
+  clusterNodeStrength: number;
   /** spring stiffness 弹簧劲度系数 */
   stiffness: number;
   /** 默认的弹簧长度 */
@@ -143,6 +149,9 @@ class ForceLayout {
         leaf: 2,
         single: 2,
       },
+      leafCluster: false,
+      nodeClusterBy: 'cluster',
+      clusterNodeStrength: 20,
       damping: 0.9,
       minEnergyThreshold: 0.1,
       maxSpeed: 1000,
@@ -213,7 +222,7 @@ class ForceLayout {
 
   getMass = (node: NodeType) => {
     const {
-      degree = getDegree(node, this.edges)?.degree, // 节点度数
+      degree = Utils.getDegree(node, this.edges)?.degree, // 节点度数
       force,
     } = node.layout || {};
 
@@ -238,7 +247,7 @@ class ForceLayout {
       if (!node.data.layout) {
         node.data.layout = {};
       }
-      const degreeInfo = getDegree(node, this.edges);
+      const degreeInfo = Utils.getDegree(node, this.edges);
       node.data.layout = {
         ...node.data.layout,
         ...degreeInfo,
@@ -502,17 +511,70 @@ class ForceLayout {
       };
 
       const degree = node.data?.layout?.degree as number;
+      let { centripetalOptions } = this.props;
+      const { leafCluster, nodeClusterBy, clusterNodeStrength } = this.props;
+      // 如果传入了需要叶子节点聚类
+      if (leafCluster) {
+        centripetalOptions = {
+          single: 100,
+          leaf: (node, nodes, edges) => {
+            const relativeNodesType = Utils.getRelativeNodesType(nodes, nodeClusterBy);
+            // 找出与它关联的边的起点或终点出发的所有一度节点中同类型的叶子节点
+            const { relativeLeafNodes, sameTypeLeafNodes } = Utils.getCoreNodeAndRelativeLeafNodes(
+              'leaf',
+              node,
+              edges,
+              nodeClusterBy,
+            );
+            // 如果都是同一类型或者每种类型只有1个，则施加默认向心力
+            if (sameTypeLeafNodes?.length === relativeLeafNodes?.length || relativeNodesType?.length === 1) {
+              return 1;
+            }
+            return clusterNodeStrength;
+          },
+          others: 1,
+          center: (node, nodes, edges) => {
+            const { degree } = node.data?.layout || {};
+            // 孤点默认给1个远离的中心点
+            if (!degree) {
+              return {
+                x: 100,
+                y: 100,
+              };
+            }
+            let centerNode;
+            if (degree === 1) {
+              // 如果为叶子节点
+              // 找出与它关联的边的起点出发的所有一度节点中同类型的叶子节点
+              const { sameTypeLeafNodes } = Utils.getCoreNodeAndRelativeLeafNodes('leaf', node, edges, nodeClusterBy);
+              if (sameTypeLeafNodes.length === 1) {
+                // 如果同类型的叶子节点只有1个，中心节点置为undefined
+                centerNode = undefined;
+              } else if (sameTypeLeafNodes.length > 1) {
+                // 找出同类型节点平均位置节点的距离最近的节点作为中心节点
+                centerNode = Utils.getMinDistanceNode(sameTypeLeafNodes);
+              }
+            } else {
+              centerNode = undefined;
+            }
+            return {
+              x: centerNode?.x,
+              y: centerNode?.y,
+            };
+          },
+        };
+      }
       const {
         leaf: propsLeaf,
         single: propsSingle,
         others: propsOthers,
         center,
-      } = { ...defaultRadio, ...this.props.centripetalOptions };
+      } = { ...defaultRadio, ...centripetalOptions };
       const { width, height } = this.props;
       const { x, y } = center(node, this.nodes, this.edges, width, height);
-      const leaf = typeof propsLeaf === 'number' ? propsLeaf : propsLeaf(node, this.nodes, this.edges);
-      const single = typeof propsSingle === 'number' ? propsSingle : propsSingle(node);
-      const others = typeof propsOthers === 'number' ? propsOthers : propsOthers(node);
+      const leaf = typeof propsLeaf === 'function' ? propsLeaf(node, this.nodes, this.edges) : propsLeaf;
+      const single = typeof propsSingle === 'function' ? propsSingle(node) : propsSingle;
+      const others = typeof propsOthers === 'function' ? propsOthers(node) : propsOthers;
       const centerVector = new Vector(x, y);
       const leafNode = degree === 1;
       const singleNode = degree === 0;
