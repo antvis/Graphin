@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = env => {
   return {
@@ -75,7 +75,7 @@ module.exports = env => {
     resolve: {
       extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
     },
-    devtool: 'cheap-module-eval-source-map',
+    // devtool: 'cheap-module-eval-source-map',
     output: {
       library: 'Graphin',
       libraryTarget: 'umd',
@@ -83,16 +83,24 @@ module.exports = env => {
       publicPath: './',
       filename: 'graphin.min.js',
     },
-    plugins: [
-      new MiniCssExtractPlugin(),
-      // new BundleAnalyzerPlugin()
-    ],
-    externals: [
-      {
-        lodash: '_',
-        react: 'window.React',
-        '@antv/g6': 'window.G6',
+    plugins: [new MiniCssExtractPlugin(), new BundleAnalyzerPlugin()],
+    externals: {
+      'lodash-es': {
+        commonjs: 'lodash',
+        amd: 'lodash',
+        root: '_',
       },
-    ],
+      lodash: {
+        commonjs: 'lodash',
+        amd: 'lodash',
+        root: '_',
+      },
+      react: 'React',
+      'react-dom': 'ReactDOM',
+      '@antv/g6': 'G6',
+    },
+    // optimization: {
+    //   minimize: false,
+    // },
   };
 };
