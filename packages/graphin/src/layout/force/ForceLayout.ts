@@ -558,8 +558,8 @@ class ForceLayout {
               centerNode = undefined;
             }
             return {
-              x: centerNode?.x || 0,
-              y: centerNode?.y || 0,
+              x: centerNode?.x as number,
+              y: centerNode?.y as number,
             };
           },
         };
