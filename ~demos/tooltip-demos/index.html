@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <meta name="keywords" content="graphin,g6,graph,Graphin,AntV Graph" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png"
+    />
+    <link
+      0="h"
+      1="t"
+      2="t"
+      3="p"
+      4="s"
+      5=":"
+      6="/"
+      7="/"
+      8="g"
+      9="w"
+      10="."
+      11="a"
+      12="l"
+      13="i"
+      14="p"
+      15="a"
+      16="y"
+      17="o"
+      18="b"
+      19="j"
+      20="e"
+      21="c"
+      22="t"
+      23="s"
+      24="."
+      25="c"
+      26="o"
+      27="m"
+      28="/"
+      29="o"
+      30="s"
+      31="/"
+      32="l"
+      33="i"
+      34="b"
+      35="/"
+      36="a"
+      37="n"
+      38="t"
+      39="d"
+      40="/"
+      41="4"
+      42="."
+      43="6"
+      44="."
+      45="6"
+      46="/"
+      47="d"
+      48="i"
+      49="s"
+      50="t"
+      51="/"
+      52="a"
+      53="n"
+      54="t"
+      55="d"
+      56="."
+      57="c"
+      58="s"
+      59="s"
+    />
+    <link rel="stylesheet" href="/umi.bf04d568.css" />
+    <script>
+      window.routerBase = "/";
+    </script>
+    <script>
+      //! umi version: 3.5.19
+    </script>
+    <script>
+      !(function () {
+        var e = localStorage.getItem("dumi:prefers-color"),
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches,
+          r = ["light", "dark", "auto"];
+        document.documentElement.setAttribute(
+          "data-prefers-color",
+          e === r[2] ? (t ? r[1] : r[0]) : r.indexOf(e) > -1 ? e : r[0]
+        );
+      })();
+    </script>
+    <title>Graphin</title>
+  </head>
+  <body>
+    <div id="root"><div><div style="position:relative"><div class="ant-collapse ant-collapse-icon-position-left site-collapse-custom-collapse" style="width:320px;position:absolute;top:0px;left:0px;z-index:999"><div class="ant-collapse-item ant-collapse-item-active"><div class="ant-collapse-header" role="button" tabindex="0" aria-expanded="true"><span role="img" aria-label="caret-right" class="anticon anticon-caret-right ant-collapse-arrow"><svg viewBox="0 0 1024 1024" focusable="false" style="-ms-transform:rotate(90deg);transform:rotate(90deg)" data-icon="caret-right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"></path></svg></span>设置placement</div><div class="ant-collapse-content ant-collapse-content-active"><div class="ant-collapse-content-box"><div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" checked="" value="top"/><span class="ant-radio-inner"></span></span><span>top</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="bottom"/><span class="ant-radio-inner"></span></span><span>bottom</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="left"/><span class="ant-radio-inner"></span></span><span>left</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"/><span class="ant-radio-inner"></span></span><span>right</span></label></div></div></div></div><div class="ant-collapse-item ant-collapse-item-active"><div class="ant-collapse-header" role="button" tabindex="0" aria-expanded="true"><span role="img" aria-label="caret-right" class="anticon anticon-caret-right ant-collapse-arrow"><svg viewBox="0 0 1024 1024" focusable="false" style="-ms-transform:rotate(90deg);transform:rotate(90deg)" data-icon="caret-right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"></path></svg></span>是否需要小箭头</div><div class="ant-collapse-content ant-collapse-content-active"><div class="ant-collapse-content-box"><button type="button" role="switch" aria-checked="true" class="ant-switch ant-switch-checked"><div class="ant-switch-handle"></div><span class="ant-switch-inner"></span></button></div></div></div><div class="ant-collapse-item ant-collapse-item-active"><div class="ant-collapse-header" role="button" tabindex="0" aria-expanded="true"><span role="img" aria-label="caret-right" class="anticon anticon-caret-right ant-collapse-arrow"><svg viewBox="0 0 1024 1024" focusable="false" style="-ms-transform:rotate(90deg);transform:rotate(90deg)" data-icon="caret-right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"></path></svg></span>设置样式 ( JSON 格式 ) </div><div class="ant-collapse-content ant-collapse-content-active"><div class="ant-collapse-content-box"><textarea class="ant-input">{
+    &quot;background&quot;:&quot;#fff&quot;,
+    &quot;width&quot;:&quot;200px&quot;
+  }</textarea></div></div></div></div><div id="graphin-container"><div data-testid="custom-element" class="graphin-core"></div><div class="graphin-components"></div></div></div></div></div>
+	<script>
+  window.g_useSSR = true;
+  window.g_initialProps = {};
+	</script>
+
+    <script src="https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd-with-locales.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/antv/g6/4.1.7/dist/g6.min.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/antv/g6/4.1.7/dist/g6.min.js.map"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/lodash/4.17.20/lodash.min.js"></script>
+    <script>
+      (function () {
+        if (!location.port) {
+          (function (i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+              i[r] ||
+              function () {
+                (i[r].q = i[r].q || []).push(arguments);
+              }),
+              (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+          })(
+            window,
+            document,
+            "script",
+            "//www.google-analytics.com/analytics.js",
+            "ga"
+          );
+          ga("create", "UA-148148901-8", "auto");
+          ga("send", "pageview");
+        }
+      })();
+    </script>
+    <script src="/umi.33f3772f.js"></script>
+  </body>
+</html>

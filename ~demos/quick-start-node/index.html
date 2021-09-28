@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <meta name="keywords" content="graphin,g6,graph,Graphin,AntV Graph" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png"
+    />
+    <link
+      0="h"
+      1="t"
+      2="t"
+      3="p"
+      4="s"
+      5=":"
+      6="/"
+      7="/"
+      8="g"
+      9="w"
+      10="."
+      11="a"
+      12="l"
+      13="i"
+      14="p"
+      15="a"
+      16="y"
+      17="o"
+      18="b"
+      19="j"
+      20="e"
+      21="c"
+      22="t"
+      23="s"
+      24="."
+      25="c"
+      26="o"
+      27="m"
+      28="/"
+      29="o"
+      30="s"
+      31="/"
+      32="l"
+      33="i"
+      34="b"
+      35="/"
+      36="a"
+      37="n"
+      38="t"
+      39="d"
+      40="/"
+      41="4"
+      42="."
+      43="6"
+      44="."
+      45="6"
+      46="/"
+      47="d"
+      48="i"
+      49="s"
+      50="t"
+      51="/"
+      52="a"
+      53="n"
+      54="t"
+      55="d"
+      56="."
+      57="c"
+      58="s"
+      59="s"
+    />
+    <link rel="stylesheet" href="/umi.bf04d568.css" />
+    <script>
+      window.routerBase = "/";
+    </script>
+    <script>
+      //! umi version: 3.5.19
+    </script>
+    <script>
+      !(function () {
+        var e = localStorage.getItem("dumi:prefers-color"),
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches,
+          r = ["light", "dark", "auto"];
+        document.documentElement.setAttribute(
+          "data-prefers-color",
+          e === r[2] ? (t ? r[1] : r[0]) : r.indexOf(e) > -1 ? e : r[0]
+        );
+      })();
+    </script>
+    <title>Graphin</title>
+  </head>
+  <body>
+    <div id="root"><div><div><div class="ant-row" style="margin-left:-8px;margin-right:-8px"><div style="padding-left:8px;padding-right:8px" class="ant-col ant-col-12"><div class="ant-card ant-card-bordered"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">关系数据</div></div></div><div class="ant-card-body" style="height:554px;overflow:scroll"><pre>
+
+{
+  nodes: [
+    {
+      id: &#x27;node-0&#x27;,
+      x: 200,
+      y: 240,
+      style: {
+        // 节点的主要形状，即圆形容器，可以在这里设置节点的大小，border，填充色
+        keyshape: {
+          /** 容器的宽度 */
+          lineWidth: 3,
+          /** 节点的大小 */
+          size: 80,
+          /** 包围边颜色 */
+          stroke: parimaryColor,
+          /** 填充色 */
+          fill: Utils.hexToRgbaToHex(parimaryColor, 0.2),
+          /** 透明度 */
+          opacity: 1,
+          /** 鼠标样式 */
+          cursor: &#x27;pointer&#x27;,
+        },
+        // 是节点的标签，可以设置标签的值 和样式：放置方位，大小，字体颜色，偏移位置
+        label: {
+          /** label的名称 */
+          value: &#x27;节点-0&#x27;,
+          /** 展示位置  &#x27;top&#x27; | &#x27;bottom&#x27; | &#x27;left&#x27; | &#x27;right&#x27; | &#x27;center&#x27;; */
+          position: &#x27;top&#x27;,
+          /** 文本填充色 */
+          fill: &#x27;#000&#x27;,
+          /** 文本大小 */
+          fontSize: 16,
+          fontFamily: &#x27;normal&#x27;,
+          textAlign: &#x27;center&#x27;,
+          /** 文本在各自方向上的偏移量，主要为了便于调整文本位置 */
+          offset: 0,
+        },
+        // 是节点的中心 ICON 区域，icon 可以是图片，可以是文本，也可以是字体图标。
+        icon: {
+          /** 类型可以为字体图标，可以为网络图片，可以为纯文本 &#x27;font&#x27; | &#x27;image&#x27; | &#x27;text&#x27; */
+          type: &#x27;font&#x27;,
+          /** 根据类型，填写对应的值 */
+          value: icons.user,
+          /** 图标大小 */
+          size: 40,
+          /** 字体图标的填充色 */
+          fill: parimaryColor,
+          /** 字体Family */
+          fontFamily: &#x27;graphin&#x27;,
+        },
+        // 节点的徽标区域，是一个数组，可以分别在不同方位放置，其内容区域可以是文本，数字，也可以是图标。
+        badges: [
+          {
+            /** 放置的位置，ef：LT（left top）左上角 */
+            position: &#x27;RT&#x27;,
+            /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
+            type: &#x27;text&#x27;,
+            value: &#x27;10&#x27;,
+            // type = image 时生效，表示图片的宽度和高度
+            size: [25, 25],
+            /** 徽标填充色 */
+            fill: Utils.hexToRgbaToHex(parimaryColor, 1),
+            /** 徽标描边色 */
+            stroke: &#x27;&#x27;,
+            /** 徽标内文本的颜色 */
+            color: &#x27;#fff&#x27;,
+            fontSize: 14,
+            fontFamily: &#x27;&#x27;,
+            // badge 中文本距离四周的偏移量
+            padding: 0,
+            // badge 在 x 和 y 方向上的偏移量
+            offset: [0, 0],
+          },
+          {
+            /** 放置的位置，ef：LT（left top）左上角 */
+            position: &#x27;LB&#x27;,
+            /** 类型可以为字体图标，可以为网络图片，可以为纯文本 */
+            type: &#x27;text&#x27;,
+            value: &#x27;Pin&#x27;,
+            // type = image 时生效，表示图片的宽度和高度
+            size: [25, 25],
+            /** 徽标填充色 */
+            fill: Utils.hexToRgbaToHex(parimaryColor, 1),
+            /** 徽标描边色 */
+            stroke: &#x27;&#x27;,
+            /** 徽标内文本的颜色 */
+            color: &#x27;#fff&#x27;,
+            fontSize: 12,
+            fontFamily: &#x27;&#x27;,
+            // badge 中文本距离四周的偏移量
+            padding: 0,
+            // badge 在 x 和 y 方向上的偏移量
+            offset: [0, 0],
+          },
+        ],
+        // 节点的光环，在节点交互过程中（hover，selected，disabled，active）等，可以打开光环，默认是隐藏的，也可以自定义
+        halo: {
+          /** 光晕 */
+          fill: Utils.hexToRgbaToHex(parimaryColor, 0.2),
+          /** 透明度 */
+          opacity: 1,
+          /** 是否展示 */
+          visible: false,
+          /** 鼠标Hover上去样式 */
+          cursor: &#x27;pointer&#x27;,
+        },
+        // 节点的交互样式，默认 Graphin 已经内置了交互样式（即将 halo 图形显示出来），也可以自定义
+        status: {
+          hover: {
+            halo: {
+              visible: true,
+            },
+          },
+          selected: {
+            halo: {
+              visible: true,
+            },
+            keyshape: {
+              lineWidth: 10,
+            },
+          },
+        },
+      },
+    },
+  ],
+  edges: [],
+}
+  
+  </pre></div></div></div><div style="padding-left:8px;padding-right:8px" class="ant-col ant-col-12"><div class="ant-card ant-card-bordered"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">可视化结果</div></div></div><div class="ant-card-body"><div id="graphin-container"><div data-testid="custom-element" class="graphin-core"></div><div class="graphin-components"></div></div></div></div></div></div></div></div></div>
+	<script>
+  window.g_useSSR = true;
+  window.g_initialProps = {};
+	</script>
+
+    <script src="https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd-with-locales.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/antv/g6/4.1.7/dist/g6.min.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/antv/g6/4.1.7/dist/g6.min.js.map"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/lodash/4.17.20/lodash.min.js"></script>
+    <script>
+      (function () {
+        if (!location.port) {
+          (function (i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+              i[r] ||
+              function () {
+                (i[r].q = i[r].q || []).push(arguments);
+              }),
+              (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+          })(
+            window,
+            document,
+            "script",
+            "//www.google-analytics.com/analytics.js",
+            "ga"
+          );
+          ga("create", "UA-148148901-8", "auto");
+          ga("send", "pageview");
+        }
+      })();
+    </script>
+    <script src="/umi.33f3772f.js"></script>
+  </body>
+</html>
