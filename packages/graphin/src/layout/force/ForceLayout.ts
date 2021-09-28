@@ -47,8 +47,8 @@ export interface ForceProps {
       width: number,
       height: number,
     ) => {
-      x: number | undefined;
-      y: number | undefined;
+      x: number;
+      y: number;
     };
   };
   /** 是否需要叶子节点聚类 */
@@ -558,8 +558,8 @@ class ForceLayout {
               centerNode = undefined;
             }
             return {
-              x: centerNode?.x,
-              y: centerNode?.y,
+              x: centerNode?.x || 0,
+              y: centerNode?.y || 0,
             };
           },
         };
