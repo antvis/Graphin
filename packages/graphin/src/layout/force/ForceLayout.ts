@@ -75,12 +75,12 @@ export interface ForceProps {
   /** default time, used in velocity, acceleration and position's updating */
   tickInterval: number;
   groupFactor: number;
-  /** 240, // 1000000次/(1000/60) = 60000s = 1min */
-  MaxIterations: number;
+  maxIterations: number;
+  /** 最小位移阈值，小于阈值则会停止迭代，默认0.5 */
+  minDistanceThreshold: number;
   /** 初始化时候是否需要动画 */
   animation: boolean;
   /** 是否启动webworker */
-
   enableWorker: boolean;
 
   /** 重启后是否需要动画 */
@@ -158,7 +158,9 @@ class ForceLayout {
       coulombDisScale: 0.005,
       tickInterval: 0.02,
       groupFactor: 4,
-      MaxIterations: 10000,
+      /** 浏览器16ms刷新一次，1min = 1 * 60s = 1 * 60 * 1000ms = 1 * 60 * (1000ms / 16ms)次 = 3750次 */
+      maxIterations: 3750,
+      minDistanceThreshold: 1,
       animation: true,
       restartAnimation: true,
       width: 200,
@@ -294,8 +296,8 @@ class ForceLayout {
   };
 
   slienceForce = () => {
-    const { done } = this.props;
-    for (let i = 0; this.averageDistance > 0.5 || i < 1; i++) {
+    const { done, maxIterations, minDistanceThreshold } = this.props;
+    for (let i = 0; (this.averageDistance > minDistanceThreshold || i < 1) && i < maxIterations; i++) {
       this.tick(this.props.tickInterval);
       this.iterations++;
     }
@@ -325,14 +327,15 @@ class ForceLayout {
   };
 
   animation = () => {
-    if (this.props.enableWorker) {
+    const { enableWorker, maxIterations, minDistanceThreshold, done, tickInterval } = this.props;
+    if (enableWorker) {
       let startTimer = new Date().valueOf();
       const firstTickInterval = 0.22;
       const interval = (step: number) => {
         // 目标：迭代10次，稳定在2s，函数选择需要后续考虑
         return step > 10 ? 2000 : 20 * step * step;
       };
-      for (let i = 0; i < this.props.MaxIterations; i++) {
+      for (let i = 0; i < maxIterations; i++) {
         const tickInterval = Math.max(0.02, firstTickInterval - i * 0.002);
         this.tick(tickInterval);
         const diff = new Date().valueOf() - startTimer;
@@ -346,11 +349,11 @@ class ForceLayout {
         if (monitor) {
           monitor(this.reportMointor(energy));
         }
-        // console.log('average', this.averageDistance);
-        if (this.averageDistance < 0.5) {
+
+        if (this.averageDistance < minDistanceThreshold) {
           this.render();
-          if (this.props.done) {
-            this.props.done();
+          if (done) {
+            done();
           }
           return;
         }
@@ -358,8 +361,6 @@ class ForceLayout {
       return;
     }
     const step = () => {
-      const { done, tickInterval } = this.props;
-
       this.tick(tickInterval);
 
       this.render();
@@ -374,7 +375,7 @@ class ForceLayout {
       }
 
       // console.log('average', this.averageDistance);
-      if (this.averageDistance < 0.5) {
+      if (this.averageDistance < minDistanceThreshold || this.iterations > this.props.maxIterations) {
         this.cancelAnimationFrame(this.timer);
         this.iterations = 0;
         this.done = true;
