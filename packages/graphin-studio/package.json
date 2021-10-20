@@ -27,6 +27,11 @@
     "react-hot-loader": "^4.12.14",
     "react-router-dom": "^5.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/Graphin.git",
+    "directory": "packages/graphin-studio"
+  },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
