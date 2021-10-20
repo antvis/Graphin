@@ -11,13 +11,17 @@ const Demo = () => {
     'node-type-4': '#D3C6EA',
     'node-type-5': '#C5A89C',
     'node-type-6': '#A3D8F0',
+    'node-type-7': '#EEE8E2',
+    'node-type-8': '#A5D6A0',
+    'node-type-9': '#D6C6EA',
+    'node-type-10': '#C1FFC1',
+    'node-type-11': '#EEE9BF',
+    'node-type-12': '#EEA2AD',
+    'node-type-13': '#EEAD0E',
   };
   const basicLayout = {
     type: 'graphin-force',
     animation: false,
-    preset: {
-      type: 'concentric', // 力导的前置布局
-    },
     preventOverlap: true,
     nodeSize: 40,
     defSpringLen: (_edge, source, target) => {
@@ -25,16 +29,17 @@ const Demo = () => {
       const Sdegree = source.data.layout?.degree;
       const Tdegree = target.data.layout?.degree;
       const minDegree = Math.min(Sdegree, Tdegree);
-      return minDegree === 1 ? nodeSize * 4 : Math.min(minDegree * nodeSize * 1.5, 600);
+      return minDegree === 1 ? nodeSize * 2 : Math.min(minDegree * nodeSize * 1.5, 200);
     },
   };
+
   const [data, setData] = useState({
     nodes: [],
     edges: [],
   });
 
   useEffect(() => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/2118e570-fa6f-4903-9768-7e8bca04edef.json')
+    fetch('https://gw.alipayobjects.com/os/bmw-prod/e43f523c-ffe7-445b-8b32-c968ae93fdb9.json')
       .then(res => res.json())
       .then(data => {
         setData({
@@ -75,7 +80,7 @@ const Demo = () => {
             ...basicLayout,
             leafCluster: true, // 是否需要叶子节点聚类
             nodeClusterBy: 'cluster', // 节点聚类的映射字段
-            clusterNodeStrength: 20, // 节点聚类作用力系数
+            clusterNodeStrength: 40, // 节点聚类作用力系数
           }}
         />
       </Card>
