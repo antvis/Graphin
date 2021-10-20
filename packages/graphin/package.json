@@ -13,6 +13,11 @@
     "prettier": "prettier --write ./src/**/**/**/*.js",
     "clean": "rimraf es esm lib dist"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/Graphin.git",
+    "directory": "packages/graphin"
+  },
   "devDependencies": {
     "@antv/g-base": "^0.5.5",
     "@antv/hierarchy": "^0.6.6",
