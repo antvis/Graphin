@@ -38,7 +38,7 @@ export default () => {
 ```
 
 ## Use example
-To facilitate the comparison of leaf node clustering effects, nodes of the same type are mapped into one color.The following comparative experiments are carried out from simple data scenarios and complex data scenarios:
+For the convenience of clustering effect comparison, nodes of the same type are mapped into one color.The following comparative experiments are carried out from simple data scenarios and complex data scenarios:
 - **Simple data Scene Effect Comparison**
 <code src='./demos/simple.tsx'>
 

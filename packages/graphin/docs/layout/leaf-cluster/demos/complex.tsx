@@ -21,6 +21,9 @@ const Demo = () => {
   };
   const basicLayout = {
     type: 'graphin-force',
+    preset: {
+      type: 'grid', // 力导的前置布局
+    },
     animation: false,
     preventOverlap: true,
     nodeSize: 40,
