@@ -260,8 +260,8 @@ export default () => {
           const labelBackgroundShape = (group as IGroup).addShape('rect', {
             attrs: {
               id: 'label-background',
-              x: -width / 2,
-              y: -height / 2,
+              x: -width / 2 + offsetX,
+              y: -height / 2 + offsetY,
               width,
               height,
               fill,
