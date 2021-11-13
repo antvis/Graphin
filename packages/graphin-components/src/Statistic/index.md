@@ -12,7 +12,7 @@ nav:
 
 # Statistic 画布统计
 
-类似 antd 的 [Statistic 统计数值] (https://ant.design/components/statistic-cn/),Graphin 中也需要一个实时统计画布节点信息的组件。
+类似 antd 的 [Statistic 统计数值](https://ant.design/components/statistic-cn/)，Graphin 中也需要一个实时统计画布节点信息的组件。
 
 ## 功能特性
 
