@@ -48,17 +48,16 @@ export default () => {
       const options = { ...this.getDefaultCfg(), ...layoutConfig };
 
       const { width, height, animation, done = () => {}, ...others } = options;
-
       /** 1. Create a force simulator */
       this.simulation = new Force({
         width,
         height,
         animation,
-        done: () => {
-          done(graph);
-        },
         ...others,
         ...layoutConfig,
+        done: nodes => {
+          done(graph, nodes);
+        },
       });
 
       // 2. Mount Data
