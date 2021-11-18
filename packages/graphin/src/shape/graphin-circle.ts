@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IGroup } from '@antv/g-base';
+import { IGroup, ShapeCfg } from '@antv/g-base';
 import G6, { INode } from '@antv/g6';
 import { deepMix, isArray, isNumber } from '@antv/util';
 import { getDefaultStyleByTheme } from '../theme';
@@ -208,6 +208,7 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
     fontFamily,
     padding = 0,
     offset: inputOffset = [0, 0],
+    id
   } = badge;
 
   const offset = convertSizeToWH(inputOffset);
@@ -222,7 +223,7 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
   if (width === height) {
     realX += offset[0];
     realY += offset[1];
-    group.addShape('circle', {
+    const shape: ShapeCfg = {
       attrs: {
         r: width / 2 + padding,
         fill,
@@ -231,7 +232,12 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
         y: realY,
       },
       name: 'badges-circle',
-    });
+    };
+    if (id) {
+      shape.id = id;
+    }
+
+    group.addShape('circle', shape);
   } else {
     realX = badgeX - width - padding * 2;
     realY = badgeY - height - padding * 2;
@@ -248,7 +254,7 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
 
     realX += offset[0];
     realY += offset[1];
-    group.addShape('rect', {
+    const shape: ShapeCfg = {
       attrs: {
         width: width + padding * 2,
         height: height + padding * 2,
@@ -259,7 +265,11 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
         radius: (height + padding * 2) / 3,
       },
       name: 'badges-rect',
-    });
+    };
+    if (id) {
+      shape.id = id;
+    }
+    group.addShape('rect', shape);
   }
 
   if (type === 'font' || type === 'text') {
