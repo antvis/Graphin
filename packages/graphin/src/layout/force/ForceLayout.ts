@@ -90,7 +90,7 @@ export interface ForceProps {
   /** 力导区域的高度 */
   height: number;
   /**  力导结束后的回调函数 */
-  done?: () => void;
+  done?: (nodes: NodeType[]) => void;
   /** 忽略节点，不参加力导计算 */
   ignore?: (node: NodeType) => boolean;
 }
@@ -302,7 +302,9 @@ class ForceLayout {
       this.iterations++;
     }
     this.render();
-    done && done(); // eslint-disable-line
+    if (done) {
+      done(this.nodes);
+    }
   };
 
   /** polyfill: support webworker requestAnimationFrame */
@@ -353,7 +355,7 @@ class ForceLayout {
         if (this.averageDistance < minDistanceThreshold) {
           this.render();
           if (done) {
-            done();
+            done(this.nodes);
           }
           return;
         }
@@ -380,7 +382,7 @@ class ForceLayout {
         this.iterations = 0;
         this.done = true;
         if (done) {
-          done();
+          done(this.nodes);
         }
       } else {
         this.timer = this.requestAnimationFrame(step);
