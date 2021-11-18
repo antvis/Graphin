@@ -116,6 +116,8 @@ class ForceLayout {
     [key: string]: Edge;
   };
 
+  renderNodes: NodeType[];
+
   nodePoints: Map<string, Point>;
 
   edgeSprings: Map<string, Spring>;
@@ -177,6 +179,7 @@ class ForceLayout {
     this.edges = [];
     this.nodeSet = {};
     this.edgeSet = {};
+    this.renderNodes = [];
     this.nodePoints = new Map();
     this.edgeSprings = new Map();
     this.registers = new Map();
@@ -303,7 +306,7 @@ class ForceLayout {
     }
     this.render();
     if (done) {
-      done(this.nodes);
+      done(this.renderNodes);
     }
   };
 
@@ -355,7 +358,7 @@ class ForceLayout {
         if (this.averageDistance < minDistanceThreshold) {
           this.render();
           if (done) {
-            done(this.nodes);
+            done(this.renderNodes);
           }
           return;
         }
@@ -382,7 +385,7 @@ class ForceLayout {
         this.iterations = 0;
         this.done = true;
         if (done) {
-          done(this.nodes);
+          done(this.renderNodes);
         }
       } else {
         this.timer = this.requestAnimationFrame(step);
@@ -393,9 +396,8 @@ class ForceLayout {
 
   render = () => {
     const render = this.registers.get('render');
-    const nodes: NodeType[] = [];
     this.nodePoints.forEach(node => {
-      nodes.push({
+      this.renderNodes.push({
         ...(this.nodeSet[node.id] && this.nodeSet[node.id].data),
         x: node.p.x,
         y: node.p.y,
@@ -404,7 +406,7 @@ class ForceLayout {
 
     if (render) {
       render({
-        nodes,
+        nodes: this.renderNodes,
         edges: this.sourceData.edges,
       });
     } else {
