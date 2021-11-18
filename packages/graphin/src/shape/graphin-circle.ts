@@ -220,13 +220,15 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
   // 绘制 badge 的外层容器，根据宽度和高度确定是 circle 还是 rect
 
   if (width === height) {
+    realX += offset[0];
+    realY += offset[1];
     group.addShape('circle', {
       attrs: {
         r: width / 2 + padding,
         fill,
         stroke,
-        x: realX + offset[0],
-        y: realY + offset[1],
+        x: realX,
+        y: realY,
       },
       name: 'badges-circle',
     });
