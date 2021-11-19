@@ -515,7 +515,8 @@ class ForceLayout {
         },
       };
 
-      const degree = node.data?.layout?.degree as number;
+      const { degree, sDegree, tDegree } = node.data?.layout as { [key: string]: number };
+
       let { centripetalOptions } = this.props;
       const { leafCluster, nodeClusterBy, clusterNodeStrength } = this.props;
       // 如果传入了需要叶子节点聚类
@@ -581,7 +582,8 @@ class ForceLayout {
       const single = typeof propsSingle === 'function' ? propsSingle(node) : propsSingle;
       const others = typeof propsOthers === 'function' ? propsOthers(node) : propsOthers;
       const centerVector = new Vector(x, y);
-      const leafNode = degree === 1;
+      // 没有出度或没有入度，都认为是叶子节点
+      const leafNode = tDegree === 0 || sDegree === 0;
       const singleNode = degree === 0;
       /** 如果radio为0，则认为忽略向心力 */
       if (leaf === 0 || single === 0 || others === 0) {

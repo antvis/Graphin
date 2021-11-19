@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { Edge } from '../../layout/force/Elements';
 import { IUserNode as Node } from '../../typings/type';
+import Utils from '../../utils/index';
 
 const getDegree = (node: Node, edges: Edge[]) => {
   const nodeId = node.data.id;
@@ -34,9 +35,9 @@ export const getRelativeNodesType = (nodes: Node[], nodeClusterBy: string) => {
 // 找出指定节点关联的边的起点或终点
 const getCoreNode = (type: 'source' | 'target', node: Node, edges: Edge[]) => {
   if (type === 'source') {
-    return edges?.find(edge => edge.target?.id === node.id)?.source as Node;
+    return edges?.find(edge => edge.target?.id === node.id)?.source || ({} as Node);
   }
-  return edges?.find(edge => edge.source?.id === node.id)?.target as Node;
+  return edges?.find(edge => edge.source?.id === node.id)?.target || ({} as Node);
 };
 
 // 找出同类型的节点
@@ -44,7 +45,7 @@ const getSameTypeNodes = (type: 'leaf' | 'all', nodeClusterBy: string, node: Nod
   const typeName = node?.data?.[nodeClusterBy] || '';
   let sameTypeNodes = relativeNodes?.filter(item => item?.data?.[nodeClusterBy] === typeName) || [];
   if (type === 'leaf') {
-    sameTypeNodes = sameTypeNodes.filter(node => node.data?.layout?.degree === 1);
+    sameTypeNodes = sameTypeNodes.filter(node => node.data?.layout?.sDegree === 0 || node.data?.layout?.tDegree === 0);
   }
   return sameTypeNodes;
 };
@@ -68,6 +69,10 @@ const getRelativeNodes = (type: 'source' | 'target' | 'both', coreNode: Node, ed
     default:
       break;
   }
+  // 去重
+  relativeNodes = Utils.uniqBy(relativeNodes, (a: Node, b: Node) => {
+    return a.id === b.id;
+  });
   return relativeNodes;
 };
 
@@ -76,16 +81,18 @@ const getCoreNodeAndRelativeLeafNodes = (type: 'leaf' | 'all', node: Node, edges
   const { sDegree, tDegree } = node?.data?.layout || {};
   let coreNode: Node = node;
   let relativeLeafNodes: Node[] = [];
-  if (tDegree === 1) {
-    // 如果为只有1条入边的叶子节点，则找出与它关联的边的起点出发的所有一度节点
+  if (sDegree === 0) {
+    // 如果为没有出边的叶子节点，则找出与它关联的边的起点出发的所有一度节点
     coreNode = getCoreNode('source', node, edges);
     relativeLeafNodes = getRelativeNodes('both', coreNode, edges);
-  } else if (sDegree === 1) {
-    // 如果为只有1条出边的叶子节点，则找出与它关联的边的起点出发的所有一度节点
+  } else if (tDegree === 0) {
+    // 如果为没有入边边的叶子节点，则找出与它关联的边的起点出发的所有一度节点
     coreNode = getCoreNode('target', node, edges);
     relativeLeafNodes = getRelativeNodes('both', coreNode, edges);
   }
-  relativeLeafNodes = relativeLeafNodes.filter(node => node.data?.layout.degree === 1);
+  relativeLeafNodes = relativeLeafNodes.filter(
+    node => node.data?.layout.sDegree === 0 || node.data?.layout.tDegree === 0,
+  );
   const sameTypeLeafNodes = getSameTypeNodes(type, nodeClusterBy, node, relativeLeafNodes);
   return { coreNode, relativeLeafNodes, sameTypeLeafNodes };
 };
