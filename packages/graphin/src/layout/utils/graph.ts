@@ -35,9 +35,9 @@ export const getRelativeNodesType = (nodes: Node[], nodeClusterBy: string) => {
 // 找出指定节点关联的边的起点或终点
 const getCoreNode = (type: 'source' | 'target', node: Node, edges: Edge[]) => {
   if (type === 'source') {
-    return edges?.find(edge => edge.target?.id === node.id)?.source || ({} as Node);
+    return (edges?.find(edge => edge.target?.id === node.id)?.source || {}) as Node;
   }
-  return edges?.find(edge => edge.source?.id === node.id)?.target || ({} as Node);
+  return (edges?.find(edge => edge.source?.id === node.id)?.target || {}) as Node;
 };
 
 // 找出同类型的节点
