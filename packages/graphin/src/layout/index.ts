@@ -207,10 +207,11 @@ class LayoutController {
       this.presetLayout.data = { ...graphin.data };
     }
 
-    if (isForceLayout.current && isForceLayout.prev) {
+    if (isForceLayout.current && isForceLayout.prev && !this.hasPosition()) {
       /**
        * 当前布局类型为force， 前一次布局也为force
        * 渐进布局
+       * 不满足每个节点都有位置信息时才计算初始位置
        */
       let prevData = this.graph.save(); // 必须从graph上取数据的原因是，用户可能拖拽改变数据
       const { preset } = this.options;
