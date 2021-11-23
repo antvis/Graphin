@@ -168,13 +168,16 @@ class LayoutController {
         if (onTick) {
           onTick();
         }
-
-        graph.refreshPositions();
       };
 
       this.options.tick = tick;
       const { onLayoutEnd } = this.options;
       this.options.onLayoutEnd = () => {
+        if (graph.get('animate')) {
+          graph.positionsAnimate();
+        } else {
+          graph.refreshPositions();
+        }
         if (onLayoutEnd) {
           onLayoutEnd();
         }
