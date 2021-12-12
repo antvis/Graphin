@@ -30,7 +30,7 @@
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags"
   },
   "devDependencies": {
-    "@types/jest": "^25.2.3",
+    "@types/jest": "^27.0.3",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",
     "@types/styled-components": "^5.1.7",
