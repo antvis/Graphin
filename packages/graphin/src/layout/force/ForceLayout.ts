@@ -1,11 +1,11 @@
-import Vector from './Vector';
-import Point from './Point';
-import { Node, Edge } from './Elements';
-import Spring from './Spring';
-import Utils from '../utils/graph';
+import { Graph, Item } from '@antv/g6';
 import { GraphinData as Data, IUserNode as NodeType } from '../../typings/type';
-import { Item, Graph } from '@antv/g6';
+import Utils from '../utils/graph';
+import { Edge, Node } from './Elements';
 import { forceNBody } from './ForceNBody';
+import Point from './Point';
+import Spring from './Spring';
+import Vector from './Vector';
 
 type ForceNodeType = Node;
 
@@ -161,8 +161,8 @@ class ForceLayout {
       tickInterval: 0.02,
       groupFactor: 4,
       /** 浏览器16ms刷新一次，1min = 1 * 60s = 1 * 60 * 1000ms = 1 * 60 * (1000ms / 16ms)次 = 3750次 */
-      maxIterations: 3750,
-      minDistanceThreshold: 1,
+      maxIterations: 7440, //3750,
+      minDistanceThreshold: 0.4,
       animation: true,
       restartAnimation: true,
       width: 200,
@@ -237,7 +237,7 @@ class ForceLayout {
       return force.mass;
     }
     /** 默认质量都是通过节点的度数自动计算的 */
-    return degree < 5 ? 1 : degree * 10;
+    return degree < 5 ? 1 : degree * 5;
   };
 
   init = () => {
@@ -570,12 +570,10 @@ class ForceLayout {
           },
         };
       }
-      const {
-        leaf: propsLeaf,
-        single: propsSingle,
-        others: propsOthers,
-        center,
-      } = { ...defaultRadio, ...centripetalOptions };
+      const { leaf: propsLeaf, single: propsSingle, others: propsOthers, center } = {
+        ...defaultRadio,
+        ...centripetalOptions,
+      };
       const { width, height } = this.props;
       const { x, y } = center(node, this.nodes, this.edges, width, height);
       const leaf = typeof propsLeaf === 'function' ? propsLeaf(node, this.nodes, this.edges) : propsLeaf;
