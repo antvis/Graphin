@@ -90,8 +90,8 @@ module.exports = (env, argv) => {
       'react-dom': 'ReactDOM',
       '@antv/g6': 'G6',
     },
-    optimization: {
-      minimize: false,
-    },
+    // optimization: {
+    //   minimize: false,
+    // },
   };
 };
