@@ -24,6 +24,11 @@
     "react-slick": "^0.28.0",
     "react-use": "^17.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/Graphin.git",
+    "directory": "packages/dumi-theme-graphin"
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.3",
     "@testing-library/react": "^10.4.8",

@@ -24,6 +24,11 @@
     "react-dom": "^17.0.1",
     "react-draggable": "^4.4.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/Graphin.git",
+    "directory": "packages/graphin-graphscope"
+  },
   "devDependencies": {
     "@ant-design/icons": "^4.3.0",
     "@babel/cli": "^7.6.2",

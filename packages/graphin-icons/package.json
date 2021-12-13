@@ -11,6 +11,11 @@
   "sideEffects": [
     "*.css"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/Graphin.git",
+    "directory": "packages/graphin-icons"
+  },
   "author": "",
   "license": "ISC",
   "publishConfig": {

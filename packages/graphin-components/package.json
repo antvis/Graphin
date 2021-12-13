@@ -12,6 +12,11 @@
     "test": "jest",
     "clean": "rimraf es esm lib dist"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/Graphin.git",
+    "directory": "packages/graphin-components"
+  },
   "author": "",
   "license": "MIT",
   "sideEffects": [
