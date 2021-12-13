@@ -84,6 +84,9 @@ module.exports = env => {
       filename: 'graphin-components.min.js',
     },
     plugins: [new MiniCssExtractPlugin(), new BundleAnalyzerPlugin()],
+    performance: {
+      hints: false,
+    },
     externals: {
       lodash: {
         commonjs: 'lodash',

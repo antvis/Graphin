@@ -3,12 +3,12 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-module.exports = env => {
+module.exports = (env, argv) => {
   return {
     entry: {
       index: './src/index.ts',
     },
-    mode: env.NODE_ENV,
+    mode: argv.mode,
     module: {
       rules: [
         {
@@ -85,19 +85,12 @@ module.exports = env => {
     },
     plugins: [new MiniCssExtractPlugin(), new BundleAnalyzerPlugin()],
     externals: {
-      'lodash-es': {
-        commonjs: 'lodash',
-        amd: 'lodash',
-        root: '_',
-      },
-      lodash: {
-        commonjs: 'lodash',
-        amd: 'lodash',
-        root: '_',
-      },
       react: 'React',
       'react-dom': 'ReactDOM',
       '@antv/g6': 'G6',
+    },
+    performance: {
+      hints: false,
     },
     // optimization: {
     //   minimize: false,

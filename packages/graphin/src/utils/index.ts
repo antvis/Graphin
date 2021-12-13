@@ -1,19 +1,19 @@
+import { deepMix } from '@antv/util';
+//@ts-ignore
+import cloneDeep from 'lodash.cloneDeep';
+import { layouts } from '../layout/utils/options';
+import getComboStyleByTheme from '../theme/combo-style';
+import getEdgeStyleByTheme from '../theme/edge-style';
+import getNodeStyleByTheme from '../theme/node-style';
+import { uniqBy } from './array';
+import debug from './debug';
 import hexToRgba, { hexToRgbaToHex } from './hexToRgba';
 import mock from './mock';
-import debug from './debug';
-import shallowEqual from './shallowEqual';
-import getNodeStyleByTheme from '../theme/node-style';
-import getEdgeStyleByTheme from '../theme/edge-style';
-import getComboStyleByTheme from '../theme/combo-style';
 import processEdges from './processEdges';
-import cloneDeep from 'lodash-es/cloneDeep';
-
-import { deepMix } from '@antv/util';
+import shallowEqual from './shallowEqual';
+import subLayout from './subLayout';
 import uuid from './uuid';
 import walk from './walk';
-import subLayout from './subLayout';
-import { layouts } from '../layout/utils/options';
-import { uniqBy } from './array';
 
 export default {
   hexToRgba,

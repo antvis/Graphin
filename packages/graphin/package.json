@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npm run clean && father build --watch",
     "build": "npm run clean && father build && npm run build:umd",
-    "build:umd": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --env.NODE_ENV=production  -c ./webpack.config.js ",
+    "build:umd": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --mode production  -c ./webpack.config.js ",
     "test": "jest",
     "prettier": "prettier --write ./src/**/**/**/*.js",
     "clean": "rimraf es esm lib dist"
@@ -19,17 +19,17 @@
     "directory": "packages/graphin"
   },
   "devDependencies": {
-    "@antv/g-base": "^0.5.5",
+    "@antv/g-base": "^0.5.9",
     "@antv/hierarchy": "^0.6.6",
     "@babel/core": "^7.16.0",
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^12.1.2",
+    "@types/d3-quadtree": "^3.0.2",
     "@types/jest": "^27.0.3",
-    "@types/lodash-es": "latest",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "eventemitter3": "^4.0.0",
-    "father": "^2.30.0",
+    "father": "^2.30.13",
     "jest": "^27.4.3",
     "jest-canvas-mock": "^2.3.1",
     "jsdom-worker": "^0.1.0",
@@ -42,11 +42,11 @@
     "svg-inline-loader": "^0.8.0",
     "svg-path-parser": "^1.1.0",
     "ts-jest": "^27.0.7",
+    "ts-loader": "^9.2.6",
     "typescript": "^4.5.2",
-    "webpack": "^4.41.5",
-    "webpack-bundle-analyzer": "^3.6.0",
-    "webpack-cli": "^3.3.10",
-    "@types/d3-quadtree": "^3.0.2"
+    "webpack": "^5.65.0",
+    "webpack-bundle-analyzer": "^3.9.0",
+    "webpack-cli": "^4.9.1"
   },
   "sideEffects": [
     "*.css"
@@ -54,10 +54,10 @@
   "author": "AntV",
   "license": "MIT",
   "dependencies": {
-    "@antv/g6": "^4.3.7",
+    "@antv/g6": "^4.5.0",
     "@antv/util": "^2.0.10",
-    "lodash-es": "^4.17.21",
-    "d3-quadtree": "^3.0.1"
+    "d3-quadtree": "^3.0.1",
+    "lodash.clonedeep": "^4.5.0"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
