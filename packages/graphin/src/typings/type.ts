@@ -267,6 +267,10 @@ export interface EdgeStyle {
          * @description 6
          */
         radius?: number;
+        /**
+         *  @description 透明度，默认值为 1；
+         */
+        opacity: number;
       };
     } & CommondAttrsStyle
   >;
