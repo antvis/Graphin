@@ -3,12 +3,12 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-module.exports = env => {
+module.exports = (env, argv) => {
   return {
     entry: {
       index: './src/index.ts',
     },
-    mode: env.NODE_ENV,
+    mode: argv.mode,
     module: {
       rules: [
         {
@@ -75,7 +75,6 @@ module.exports = env => {
     resolve: {
       extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
     },
-    devtool: 'cheap-module-eval-source-map',
     output: {
       library: 'GraphinComponents',
       libraryTarget: 'umd',
@@ -88,11 +87,7 @@ module.exports = env => {
       hints: false,
     },
     externals: {
-      lodash: {
-        commonjs: 'lodash',
-        amd: 'lodash',
-        root: '_',
-      },
+      lodash: '_',
       react: 'React',
       'react-dom': 'ReactDOM',
       '@antv/graphin': 'Graphin',
