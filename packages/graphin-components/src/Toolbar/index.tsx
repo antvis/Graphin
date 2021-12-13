@@ -1,5 +1,5 @@
 import * as Graphin from '@antv/graphin';
-import isArray from '@antv/util/esm/is-array';
+import { isArray } from '@antv/util';
 import React from 'react';
 import './index.less';
 

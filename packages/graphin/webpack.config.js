@@ -75,7 +75,6 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
     },
-    // devtool: 'cheap-module-eval-source-map',
     output: {
       library: 'Graphin',
       libraryTarget: 'umd',
@@ -85,15 +84,14 @@ module.exports = (env, argv) => {
     },
     plugins: [new MiniCssExtractPlugin(), new BundleAnalyzerPlugin()],
     externals: {
+      lodash: '_',
+      'lodash-es': '_',
       react: 'React',
       'react-dom': 'ReactDOM',
       '@antv/g6': 'G6',
     },
-    performance: {
-      hints: false,
+    optimization: {
+      minimize: false,
     },
-    // optimization: {
-    //   minimize: false,
-    // },
   };
 };

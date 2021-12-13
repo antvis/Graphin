@@ -1,6 +1,4 @@
 import G6, { Graph as IGraph, GraphData, GraphOptions, TreeGraphData } from '@antv/g6';
-//@ts-ignore
-import cloneDeep from 'lodash.cloneDeep';
 import React, { ErrorInfo } from 'react';
 /** 内置API */
 import ApiController from './apis';
@@ -16,6 +14,7 @@ import LayoutController from './layout';
 import { getDefaultStyleByTheme, ThemeData } from './theme/index';
 /** types  */
 import { GraphinData, GraphinProps, GraphinTreeData, IconLoader } from './typings/type';
+import cloneDeep from './utils/cloneDeep';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
