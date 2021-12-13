@@ -68,7 +68,11 @@ const LegendNode: React.FunctionComponent<LegendProps> = props => {
   };
 
   return (
-    <ul className="graphin-components-legend-content" style={style}>
+    <ul
+      className="graphin-components-legend-content"
+      // @ts-ignore
+      style={style}
+    >
       {options.map((option: LegendOption) => {
         const { label, checked, color } = option;
         const dotColors = {

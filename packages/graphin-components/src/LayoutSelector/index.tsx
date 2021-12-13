@@ -45,7 +45,11 @@ const LayoutConfigPanel: React.FC<LayoutSelectorProps> = ({ style, children }) =
   //   ...graphin.layoutSeletor
   // }
   return (
-    <div className="graphin-components-layoutselector" style={style}>
+    <div
+      className="graphin-components-layoutselector"
+      // @ts-ignore
+      style={style}
+    >
       {children}
     </div>
   );

@@ -80,6 +80,7 @@ const MiniMap: React.FunctionComponent<MiniMapProps> = props => {
       ref={node => {
         containerRef = node;
       }}
+      // @ts-ignore
       style={mergedStyle}
     />
   );

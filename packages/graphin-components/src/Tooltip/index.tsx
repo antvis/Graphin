@@ -299,6 +299,7 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
           // containerRef = node;
         }}
         className={`graphin-components-tooltip ${placement}`}
+        // @ts-ignore
         style={{ ...defaultStyle, ...style, ...positionStyle }}
       >
         {visible && (

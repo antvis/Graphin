@@ -183,7 +183,11 @@ const Legend: React.FunctionComponent<LegendProps> & { Node: typeof Node } = pro
   };
 
   return (
-    <div className="graphin-components-legend" style={{ ...defaultStyle, ...style }}>
+    <div
+      className="graphin-components-legend"
+      // @ts-ignore
+      style={{ ...defaultStyle, ...style }}
+    >
       {children}
     </div>
   );

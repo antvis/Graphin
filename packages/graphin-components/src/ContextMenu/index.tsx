@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import * as Graphin from '@antv/graphin';
+import React, { useEffect } from 'react';
 import Menu from './Menu';
 
 const { GraphinContext } = Graphin;
@@ -33,7 +33,7 @@ interface State {
 
 let containerRef: HTMLDivElement | null;
 
-const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Menu } = (props) => {
+const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Menu } = props => {
   const { children, bindType = 'node', style } = props;
   const graphin = React.useContext(GraphinContext);
   const { graph } = graphin;
@@ -84,7 +84,7 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
     }
 
     /** 设置变量 */
-    setState((preState) => {
+    setState(preState => {
       return {
         ...preState,
         visible: true,
@@ -95,7 +95,7 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
     });
   };
   const handleClose = () => {
-    setState((preState) => {
+    setState(preState => {
       if (preState.visible) {
         return {
           ...preState,
@@ -149,10 +149,11 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
   return (
     <>
       <div
-        ref={(node) => {
+        ref={node => {
           containerRef = node;
         }}
         className="graphin-components-contextmenu"
+        // @ts-ignore
         style={{ ...defaultStyle, ...style, ...positionStyle }}
         key={id}
       >

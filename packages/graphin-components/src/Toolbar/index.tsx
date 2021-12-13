@@ -86,7 +86,11 @@ const Toolbar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolbarIte
 
   if (options) {
     return (
-      <div className="graphin-components-toolbar" style={{ ...defaultStyle, ...positionStyle, ...style }}>
+      <div
+        className="graphin-components-toolbar"
+        // @ts-ignore
+        style={{ ...defaultStyle, ...positionStyle, ...style }}
+      >
         <ul className="graphin-components-toolbar-content" style={{ display: isHorizontal ? 'flex' : '' }}>
           {options.map(option => {
             const { key, name } = option;
@@ -107,7 +111,11 @@ const Toolbar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolbarIte
   }
 
   return (
-    <div style={{ ...defaultStyle, ...positionStyle, ...style }} className="graphin-components-toolbar">
+    <div
+      // @ts-ignore
+      style={{ ...defaultStyle, ...positionStyle, ...style }}
+      className="graphin-components-toolbar"
+    >
       {isArray(children) || (children && (children as JSX.Element).type === ToolbarItem) ? (
         <ul className="graphin-components-toolbar-content" style={{ display: isHorizontal ? 'flex' : '' }}>
           {children}

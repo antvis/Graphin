@@ -1,5 +1,5 @@
-import React from 'react';
 import { GraphinContext, NodeStyle } from '@antv/graphin';
+import React from 'react';
 
 interface VisSettingPanelPropsType {
   style?: React.CSSProperties;
@@ -58,7 +58,14 @@ const VisSettingPanel: React.FunctionComponent<VisSettingPanelPropsType> = props
     handleNodeStyleChange,
   };
 
-  return <div style={{ ...defaultStyle, ...style }}>{children}</div>;
+  return (
+    <div
+      // @ts-ignore
+      style={{ ...defaultStyle, ...style }}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default VisSettingPanel;
