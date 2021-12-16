@@ -270,7 +270,7 @@ export interface EdgeStyle {
         /**
          *  @description 透明度，默认值为 1；
          */
-        opacity: number;
+        opacity?: number;
       };
     } & CommondAttrsStyle
   >;
