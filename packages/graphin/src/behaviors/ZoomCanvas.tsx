@@ -25,6 +25,10 @@ const defaultConfig = {
   },
   /** 是否禁用该功能 */
   disabled: false,
+  animate: false,
+  animateCfg: {
+    duration: 500,
+  },
 };
 
 export type IDragCanvasProps = Partial<typeof defaultConfig>;
