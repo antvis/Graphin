@@ -55,7 +55,6 @@
   "author": "AntV",
   "license": "MIT",
   "dependencies": {
-    "@antv/g6": "^4.5.0",
     "@antv/util": "^2.0.10",
     "@types/lodash.clonedeep": "^4.5.6",
     "d3-quadtree": "^3.0.1",
@@ -63,6 +62,7 @@
   },
   "peerDependencies": {
     "react": ">=16.9.0",
+    "@antv/g6": "^4.5.3",
     "react-dom": ">=16.9.0"
   },
   "publishConfig": {
