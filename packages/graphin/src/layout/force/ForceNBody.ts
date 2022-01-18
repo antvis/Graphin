@@ -21,8 +21,8 @@ export function forceNBodyBruteForce(nodes: Node[], coulombDisScale: number, rep
 
     nodes.forEach((b, j) => {
       if (i === j) return;
-      const dx = a.x - b.x;
-      const dy = a.y - b.y;
+      const dx = a.x - b.x || 0.001;
+      const dy = a.y - b.y || 0.001;
       const len = Math.sqrt(dx * dx + dy * dy) + epsilon;
       const dis = len * coulombDisScale;
       const force = repulsion / (dis * dis) || 0;
@@ -93,8 +93,8 @@ function accumulate(quad) {
 function computeForce(node: InternalNode, tree) {
   // @ts-ignore
   const apply = (quad, x1: number, y1: number, x2: number, y2: number) => {
-    const dx = node.x - quad.x;
-    const dy = node.y - quad.y;
+    const dx = node.x - quad.x || 0.001;
+    const dy = node.y - quad.y || 0.001;
     const width = x2 - x1;
     const len2 = dx * dx + dy * dy + epsilon;
     const len = Math.sqrt(len2) + epsilon;
