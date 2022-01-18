@@ -53,10 +53,12 @@ export interface ForceProps {
   };
   /** 是否需要叶子节点聚类 */
   leafCluster: boolean;
+  /** 是否需要全部节点聚类 */
+  clustering: boolean;
   /** 节点聚类的映射字段 */
   nodeClusterBy: string;
   /** 节点聚类作用力系数 */
-  clusterNodeStrength: number;
+  clusterNodeStrength: number | ((node: NodeType) => number);
   /** spring stiffness 弹簧劲度系数 */
   stiffness: number;
   /** 默认的弹簧长度 */
@@ -152,6 +154,7 @@ class ForceLayout {
         single: 2,
       },
       leafCluster: false,
+      clustering: false,
       nodeClusterBy: 'cluster',
       clusterNodeStrength: 20,
       damping: 0.9,
@@ -161,7 +164,7 @@ class ForceLayout {
       tickInterval: 0.02,
       groupFactor: 4,
       /** 浏览器16ms刷新一次，1min = 1 * 60s = 1 * 60 * 1000ms = 1 * 60 * (1000ms / 16ms)次 = 3750次 */
-      maxIterations: 7440, //3750,
+      maxIterations: 7440, // 3750,
       minDistanceThreshold: 0.4,
       animation: true,
       restartAnimation: true,
@@ -499,86 +502,121 @@ class ForceLayout {
 
       point.updateAcc(direction.scalarMultip(-radio));
     };
-    this.nodes.forEach(node => {
-      // 默认的向心力指向画布中心
-      /** 默认的向心力配置 */
-      const defaultRadio = {
-        leaf: 2,
-        single: 2,
+
+    /** 默认的向心力配置 */
+    const defaultRadio = {
+      leaf: 2,
+      single: 2,
+      others: 1,
+      // eslint-disable-next-line
+      center: (_node: any) => {
+        return {
+          x: this.props.width / 2,
+          y: this.props.height / 2,
+        };
+      },
+    };
+
+    let { centripetalOptions } = this.props;
+    const { leafCluster, clustering, nodeClusterBy, clusterNodeStrength: propsClusterNodeStrength } = this.props;
+    const getClusterNodeStrength = (node: NodeType) =>
+      typeof propsClusterNodeStrength === 'function' ? propsClusterNodeStrength(node) : propsClusterNodeStrength;
+
+    // 如果传入了需要叶子节点聚类
+    if (leafCluster) {
+      centripetalOptions = {
+        single: 100,
+        leaf: (node, nodes, edges) => {
+          const relativeNodesType = Utils.getRelativeNodesType(nodes, nodeClusterBy);
+          // 找出与它关联的边的起点或终点出发的所有一度节点中同类型的叶子节点
+          const { relativeLeafNodes, sameTypeLeafNodes } = Utils.getCoreNodeAndRelativeLeafNodes(
+            'leaf',
+            node,
+            edges,
+            nodeClusterBy,
+          );
+          // 如果都是同一类型或者每种类型只有1个，则施加默认向心力
+          if (sameTypeLeafNodes?.length === relativeLeafNodes?.length || relativeNodesType?.length === 1) {
+            return 1;
+          }
+          return getClusterNodeStrength(node);
+        },
         others: 1,
-        // eslint-disable-next-line
-        center: (_node: any) => {
+        center: (node, nodes, edges) => {
+          const { degree } = node.data?.layout || {};
+          // 孤点默认给1个远离的中心点
+          if (!degree) {
+            return {
+              x: 100,
+              y: 100,
+            };
+          }
+          let centerNode;
+          if (degree === 1) {
+            // 如果为叶子节点
+            // 找出与它关联的边的起点出发的所有一度节点中同类型的叶子节点
+            const { sameTypeLeafNodes } = Utils.getCoreNodeAndRelativeLeafNodes('leaf', node, edges, nodeClusterBy);
+            if (sameTypeLeafNodes.length === 1) {
+              // 如果同类型的叶子节点只有1个，中心节点置为undefined
+              centerNode = undefined;
+            } else if (sameTypeLeafNodes.length > 1) {
+              // 找出同类型节点平均位置节点的距离最近的节点作为中心节点
+              centerNode = Utils.getAvgNodePosition(sameTypeLeafNodes);
+            }
+          } else {
+            centerNode = undefined;
+          }
           return {
-            x: this.props.width / 2,
-            y: this.props.height / 2,
+            x: centerNode?.x as number,
+            y: centerNode?.y as number,
           };
         },
       };
+    }
+    // 如果传入了全局节点聚类s
+    if (clustering) {
+      const clusters: string[] = Array.from(new Set(this.nodes.map(node => node.data?.[nodeClusterBy]))).filter(
+        item => item !== undefined,
+      );
+      const centerNodeInfo: { [key: string]: { x: number; y: number } } = {};
+      clusters.forEach(cluster => {
+        const sameTypeNodes = this.nodes.filter(item => item.data?.[nodeClusterBy] === cluster);
+        // 找出同类型节点平均位置节点的距离最近的节点作为中心节点
+        centerNodeInfo[cluster] = Utils.getAvgNodePosition(sameTypeNodes);
+      });
 
+      centripetalOptions = {
+        single: node => getClusterNodeStrength(node),
+        leaf: node => getClusterNodeStrength(node),
+        others: node => getClusterNodeStrength(node),
+        center: (node, nodes, edges) => {
+          // 找出同类型节点平均位置节点的距离最近的节点作为中心节点
+          const centerNode = centerNodeInfo[node.data?.[nodeClusterBy]];
+          return {
+            x: centerNode?.x as number,
+            y: centerNode?.y as number,
+          };
+        },
+      };
+    }
+
+    this.nodes.forEach(node => {
       const { degree, sDegree, tDegree } = node.data?.layout as { [key: string]: number };
 
-      let { centripetalOptions } = this.props;
-      const { leafCluster, nodeClusterBy, clusterNodeStrength } = this.props;
-      // 如果传入了需要叶子节点聚类
-      if (leafCluster) {
-        centripetalOptions = {
-          single: 100,
-          leaf: (node, nodes, edges) => {
-            const relativeNodesType = Utils.getRelativeNodesType(nodes, nodeClusterBy);
-            // 找出与它关联的边的起点或终点出发的所有一度节点中同类型的叶子节点
-            const { relativeLeafNodes, sameTypeLeafNodes } = Utils.getCoreNodeAndRelativeLeafNodes(
-              'leaf',
-              node,
-              edges,
-              nodeClusterBy,
-            );
-            // 如果都是同一类型或者每种类型只有1个，则施加默认向心力
-            if (sameTypeLeafNodes?.length === relativeLeafNodes?.length || relativeNodesType?.length === 1) {
-              return 1;
-            }
-            return clusterNodeStrength;
-          },
-          others: 1,
-          center: (node, nodes, edges) => {
-            const { degree } = node.data?.layout || {};
-            // 孤点默认给1个远离的中心点
-            if (!degree) {
-              return {
-                x: 100,
-                y: 100,
-              };
-            }
-            let centerNode;
-            if (degree === 1) {
-              // 如果为叶子节点
-              // 找出与它关联的边的起点出发的所有一度节点中同类型的叶子节点
-              const { sameTypeLeafNodes } = Utils.getCoreNodeAndRelativeLeafNodes('leaf', node, edges, nodeClusterBy);
-              if (sameTypeLeafNodes.length === 1) {
-                // 如果同类型的叶子节点只有1个，中心节点置为undefined
-                centerNode = undefined;
-              } else if (sameTypeLeafNodes.length > 1) {
-                // 找出同类型节点平均位置节点的距离最近的节点作为中心节点
-                centerNode = Utils.getMinDistanceNode(sameTypeLeafNodes);
-              }
-            } else {
-              centerNode = undefined;
-            }
-            return {
-              x: centerNode?.x as number,
-              y: centerNode?.y as number,
-            };
-          },
-        };
-      }
-      const { leaf: propsLeaf, single: propsSingle, others: propsOthers, center } = {
+      const {
+        leaf: finalLeaf,
+        single: finalSingle,
+        others: finalOthers,
+        center,
+      } = {
         ...defaultRadio,
         ...centripetalOptions,
       };
       const { width, height } = this.props;
       const { x, y } = center(node, this.nodes, this.edges, width, height);
-      const leaf = typeof propsLeaf === 'function' ? propsLeaf(node, this.nodes, this.edges) : propsLeaf;
-      const single = typeof propsSingle === 'function' ? propsSingle(node) : propsSingle;
-      const others = typeof propsOthers === 'function' ? propsOthers(node) : propsOthers;
+      const leaf = typeof finalLeaf === 'function' ? finalLeaf(node, this.nodes, this.edges) : finalLeaf;
+      const single = typeof finalSingle === 'function' ? finalSingle(node) : finalSingle;
+      const others = typeof finalOthers === 'function' ? finalOthers(node) : finalOthers;
       const centerVector = new Vector(x, y);
       // 没有出度或没有入度，都认为是叶子节点
       const leafNode = tDegree === 0 || sDegree === 0;
