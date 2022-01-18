@@ -208,7 +208,7 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
     fontFamily,
     padding = 0,
     offset: inputOffset = [0, 0],
-    id
+    id,
   } = badge;
 
   const offset = convertSizeToWH(inputOffset);
@@ -399,9 +399,9 @@ export default () => {
         const group = item.getContainer();
         const shapes = group.get('children');
         setStatusStyle(shapes, style, parseAttr);
-
         const copyShapes = [...shapes];
-        if (badges && badges.length > 0) {
+
+        if (badges) {
           let index = 0;
           copyShapes.forEach(shape => {
             if (shape.cfg.name.startsWith('badges')) {
