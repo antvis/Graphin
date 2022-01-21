@@ -82,6 +82,8 @@ export interface ForceProps {
   maxIterations: number;
   /** 最小位移阈值，小于阈值则会停止迭代，默认0.5 */
   minDistanceThreshold: number;
+  /** 阈值的使用条件，mean 代表平均移动距离小于 minDistanceThreshold 时停止迭代，max 代表最大移动距离大时 minDistanceThreshold 时停时迭代。默认为 mean */
+  distanceThresholdMode: 'mean' | 'max' | 'min';
   /** 初始化时候是否需要动画 */
   animation: boolean;
   /** 是否启动webworker */
@@ -140,8 +142,8 @@ class ForceLayout {
   /** 向心力的中心点 */
   center: Vector;
 
-  /** 距离的总和 */
-  averageDistance: number;
+  /** 与 minDistanceThreshold 进行对比的判断停止迭代节点移动距离 */
+  judgingDistance: number;
 
   centripetalOptions: CentripetalOptions;
 
@@ -170,6 +172,7 @@ class ForceLayout {
       /** 浏览器16ms刷新一次，1min = 1 * 60s = 1 * 60 * 1000ms = 1 * 60 * (1000ms / 16ms)次 = 3750次 */
       maxIterations: 7440, // 3750,
       minDistanceThreshold: 0.4,
+      distanceThresholdMode: 'mean',
       animation: true,
       restartAnimation: true,
       width: 200,
@@ -191,7 +194,7 @@ class ForceLayout {
     this.edgeSprings = new Map();
     this.registers = new Map();
     this.done = false;
-    this.averageDistance = 0;
+    this.judgingDistance = 0;
 
     /** 计数器 */
     this.iterations = 0;
@@ -235,7 +238,7 @@ class ForceLayout {
     this.nodePoints = new Map();
     this.edgeSprings = new Map();
     this.sourceData = data;
-    this.averageDistance = 0;
+    this.judgingDistance = 0;
 
     // add nodes and edges
     if ('nodes' in data || 'edges' in data) {
@@ -409,7 +412,7 @@ class ForceLayout {
 
   slienceForce = () => {
     const { done, maxIterations, minDistanceThreshold } = this.props;
-    for (let i = 0; (this.averageDistance > minDistanceThreshold || i < 1) && i < maxIterations; i++) {
+    for (let i = 0; (this.judgingDistance > minDistanceThreshold || i < 1) && i < maxIterations; i++) {
       this.tick(this.props.tickInterval);
       this.iterations++;
     }
@@ -464,7 +467,7 @@ class ForceLayout {
           monitor(this.reportMointor(energy));
         }
 
-        if (this.averageDistance < minDistanceThreshold) {
+        if (this.judgingDistance < minDistanceThreshold) {
           this.render();
           if (done) {
             done(this.renderNodes);
@@ -488,8 +491,7 @@ class ForceLayout {
         monitor(this.reportMointor(energy));
       }
 
-      // console.log('average', this.averageDistance);
-      if (this.averageDistance < minDistanceThreshold || this.iterations > this.props.maxIterations) {
+      if (this.judgingDistance < minDistanceThreshold || this.iterations > this.props.maxIterations) {
         this.cancelAnimationFrame(this.timer);
         this.iterations = 0;
         this.done = true;
@@ -673,14 +675,32 @@ class ForceLayout {
   };
 
   updatePosition = (interval: number) => {
+    if (!this.nodes?.length) {
+      this.judgingDistance = 0;
+      return;
+    }
+    const { distanceThresholdMode } = this.props;
     let sum = 0;
+    if (distanceThresholdMode === 'max') this.judgingDistance = -Infinity;
+    else if (distanceThresholdMode === 'min') this.judgingDistance = Infinity;
     this.nodes.forEach(node => {
       const point = this.nodePoints.get(node.id);
-      const distance = point.v.scalarMultip(interval);
-      sum = sum + distance.magnitude();
       point.p = point.p.add(point.v.scalarMultip(interval)); // 路程公式 s = v * t
+      const distance = point.v.scalarMultip(interval);
+      const distanceMagnitude = distance.magnitude();
+      switch (distanceThresholdMode) {
+        case 'max':
+          if (this.judgingDistance < distanceMagnitude) this.judgingDistance = distanceMagnitude;
+          break;
+        case 'min':
+          if (this.judgingDistance > distanceMagnitude) this.judgingDistance = distanceMagnitude;
+          break;
+        default:
+          sum = sum + distanceMagnitude;
+          break;
+      }
     });
-    this.averageDistance = sum / this.nodes.length;
+    if (!distanceThresholdMode || distanceThresholdMode === 'mean') this.judgingDistance = sum / this.nodes.length;
   };
 
   /**
