@@ -507,6 +507,7 @@ class ForceLayout {
 
   render = () => {
     const render = this.registers.get('render');
+    this.renderNodes = [];
     this.nodePoints.forEach(node => {
       this.renderNodes.push({
         ...(this.nodeSet[node.id] && this.nodeSet[node.id].data),
