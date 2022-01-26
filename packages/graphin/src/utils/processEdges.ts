@@ -60,7 +60,7 @@ const processEdges = (
         let distance;
         if (isEvenCount) {
           // 奇数
-          const idx = Math.ceil(index / 2);
+          const idx = Math.ceil((index + 1) / 2);
           distance = poly * idx;
         } else {
           // 偶数
