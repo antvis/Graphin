@@ -1,5 +1,4 @@
 import ContextMenu from './ContextMenu';
+import Hull from './Hull';
 
-export type { ContextMenuValue } from './ContextMenu';
-
-export default { ContextMenu };
+export default { ContextMenu, Hull };

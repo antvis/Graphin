@@ -19,10 +19,12 @@ export type {
   TreeGraphData,
 } from '@antv/g6';
 export type { ContextMenuValue } from './components/ContextMenu/index';
+export type { HullCfg } from './components/Hull/index';
 export type { GraphinContextType } from './GraphinContext';
 export type { ThemeType } from './theme';
 export type { EdgeStyle, GraphinData, GraphinTreeData, IUserEdge, IUserNode, Layout, NodeStyle } from './typings/type';
 export { Utils, GraphinContext, Behaviors, Components, registerFontFamily };
+
 export interface GraphEvent extends MouseEvent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   item: any;
