@@ -1,5 +1,5 @@
-import { G6, GraphinContext } from '@antv/graphin';
 import React from 'react';
+import { G6, GraphinContext } from '../../index';
 
 const defaultOptions = {
   className: 'graphin-minimap',
