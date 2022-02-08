@@ -13,9 +13,10 @@ export default {
   // },
   resolve: {
     includes: [
-      'packages/graphin/docs/',
-      'packages/graphin-components/src/',
-      'packages/graphin-icons/src',
+      // 'packages/graphin/docs/',
+      'packages/graphin/src/components',
+      // 'packages/graphin-components/src/',
+      // 'packages/graphin-icons/src',
 
       // 'packages/graphin-graphscope/docs/',
 

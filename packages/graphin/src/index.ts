@@ -1,14 +1,34 @@
-import Graphin from './Graphin';
-import GraphinContext, { GraphinContextType } from './GraphinContext';
-import Utils from './utils';
 import Behaviors from './behaviors';
+import Components from './components';
+import Graphin from './Graphin';
+import GraphinContext from './GraphinContext';
 import registerGraphinForce from './layout/inner/registerGraphinForce';
 import registerPresetLayout from './layout/inner/registerPresetLayout';
 import { registerGraphinCircle, registerGraphinLine } from './shape';
+import Utils from './utils';
+
+export { default as G6 } from '@antv/g6';
 /** export type */
-export { NodeStyle, EdgeStyle, GraphinData, GraphinTreeData, IUserEdge, IUserNode, Layout } from './typings/type';
-export { ThemeType } from './theme';
-export { GraphinContextType };
+export type {
+  /** export G6 Type  */
+  EdgeConfig,
+  Graph,
+  GraphData,
+  IG6GraphEvent,
+  NodeConfig,
+  TreeGraphData,
+} from '@antv/g6';
+export type { ContextMenuValue } from './components/ContextMenu/index';
+export type { GraphinContextType } from './GraphinContext';
+export type { ThemeType } from './theme';
+export type { EdgeStyle, GraphinData, GraphinTreeData, IUserEdge, IUserNode, Layout, NodeStyle } from './typings/type';
+export { Utils, GraphinContext, Behaviors, Components, registerFontFamily };
+export interface GraphEvent extends MouseEvent {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  item: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  target: any;
+}
 
 /** 注册 Graphin force 布局 */
 registerGraphinForce();
@@ -26,23 +46,3 @@ const { registerFontFamily } = Graphin;
 
 /** export */
 export default Graphin;
-export { Utils, GraphinContext, Behaviors, registerFontFamily };
-
-export {
-  /** export G6 */
-  default as G6,
-  /** export G6 Type  */
-  Graph,
-  IG6GraphEvent,
-  GraphData,
-  TreeGraphData,
-  NodeConfig,
-  EdgeConfig,
-} from '@antv/g6';
-
-export interface GraphEvent extends MouseEvent {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  item: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  target: any;
-}
