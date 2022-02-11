@@ -13,9 +13,10 @@ export default {
   // },
   resolve: {
     includes: [
-      'packages/graphin/docs/',
-      'packages/graphin-components/src/',
-      'packages/graphin-icons/src',
+      // 'packages/graphin/docs/layout/leaf-cluster',
+      'packages/graphin/docs/layout/combo-combined-layout',
+      // 'packages/graphin-components/src/',
+      // 'packages/graphin-icons/src',
 
       // 'packages/graphin-graphscope/docs/',
 
@@ -91,8 +92,8 @@ export default {
     'https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js',
     'https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd-with-locales.js',
     /** G6 **/
-    'https://gw.alipayobjects.com/os/lib/antv/g6/4.5.0/dist/g6.min.js',
-    'https://gw.alipayobjects.com/os/lib/antv/g6/4.5.0/dist/g6.min.js.map',
+    'https://gw.alipayobjects.com/os/lib/antv/g6/4.6.0-beta.1/dist/g6.min.js',
+    'https://gw.alipayobjects.com/os/lib/antv/g6/4.6.0-beta.1/dist/g6.min.js.map',
     /** lodash */
     'https://gw.alipayobjects.com/os/lib/lodash/4.17.20/lodash.min.js',
   ],

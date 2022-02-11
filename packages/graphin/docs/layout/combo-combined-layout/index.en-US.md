@@ -1,5 +1,5 @@
 ---
-title: Combo Combined Layout
+title: Group Layout
 group:
   path: /layout
   title: Layout Plan
@@ -8,7 +8,7 @@ nav:
   order: 2
 ---
 
-## Combo Combined Layout
+## Group Layout
 
 When the data has obvious clustering characteristics, even if the grouping layout is very good, there are several common layout methods in the industry:
 
