@@ -92,6 +92,8 @@ export default () => {
           };
         }
         try {
+          if (!graph || graph.destroyed) return;
+          let shouldUpdateCombos = false;
           forceData.nodes.forEach(item => {
             const node = graph.findById(item.id);
             if (node) {
@@ -99,9 +101,12 @@ export default () => {
               const model = node.get('model');
               model.x = item.x;
               model.y = item.y;
+              if (node.getType() === 'combo') {
+                shouldUpdateCombos = true;
+              }
             }
           });
-          graph.refreshPositions();
+          graph.refreshPositions(shouldUpdateCombos);
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error(error);
@@ -142,6 +147,9 @@ export default () => {
       this.destroyed = true;
       this.simulation.stop();
       this.simulation = null;
+    },
+    getType() {
+      return 'graphin-force';
     },
   });
 };
