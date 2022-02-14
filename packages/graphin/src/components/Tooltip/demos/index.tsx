@@ -1,10 +1,9 @@
-import { CaretRightOutlined, ExpandAltOutlined, TagFilled } from '@ant-design/icons';
-import Graphin, { Utils } from '@antv/graphin';
-import { ContextMenu, Tooltip } from '@antv/graphin-components';
+import { CaretRightOutlined } from '@ant-design/icons';
+import Graphin, { Components, Utils } from '@antv/graphin';
 import { Collapse, Input, Radio, Switch } from 'antd';
 import * as React from 'react';
 
-const { Menu } = ContextMenu;
+const { Tooltip } = Components;
 
 const { Panel } = Collapse;
 const { TextArea } = Input;
@@ -68,45 +67,23 @@ const TooltipDemo: React.FunctionComponent = () => {
 
       <Graphin data={Utils.mock(10).circle().graphin()}>
         <Tooltip bindType="node" placement={placement} hasArrow={hasArrow} style={style}>
-          <Tooltip.Node>
-            {model => {
+          {value => {
+            if (value.model) {
+              const { model } = value;
               return (
                 <div>
-                  {model.id}
-                  <li>{model.id}</li>
-                  <li>{model.id}</li>
-                  <li>{model.id}</li>
-                  <li>{model.id}</li>
+                  <li> {model.id}</li>
+                  <li> {model.id}</li>
+                  <li> {model.id}</li>
+                  <li> {model.id}</li>
+                  <li> {model.id}</li>
+                  <li> {model.id}</li>
                 </div>
               );
-            }}
-          </Tooltip.Node>
+            }
+            return null;
+          }}
         </Tooltip>
-        <ContextMenu>
-          <Menu
-            bindType="node"
-            options={[
-              {
-                key: 'tag',
-                icon: <TagFilled />,
-                name: '打标',
-              },
-
-              {
-                key: 'expand',
-                icon: <ExpandAltOutlined />,
-                name: '扩散',
-              },
-            ]}
-          />
-        </ContextMenu>
-        {/* <Tooltip bindType="edge">
-          <Tooltip.Edge>
-            {model => {
-              return <span>{model.id}</span>;
-            }}
-          </Tooltip.Edge>
-        </Tooltip> */}
       </Graphin>
     </div>
   );

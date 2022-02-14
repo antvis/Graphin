@@ -16,20 +16,10 @@ Tooltip is an interactive component for quickly accessing nodes or edges informa
 
 ## Built-in Components
 
-`<Tooltip/>` is a tooltip container, providing information such as position, trigger element, callback function, etc., which can be obtained by the user through `context`. How to render is completely handed over to the user, and the official `<Tooltip.Node />` component is also provided for quick use. The user can customize the content of the display.
+`<Tooltip/>` is a tooltip container, providing information such as position, trigger element, callback function, etc., which can be obtained by the user through `context`. How to render is completely handed over to the user
 
 <code src='./demos/index.tsx'>
 <API src='./index.tsx'>
-
-## Custom Component: Popover component integrated with Antd
-
-<code src='./demos/Custom.tsx' />
-
-## ⚠️: Popover component integrated with Antd, unable to listen to ContextMenu event
-
-Integrating the Popover component of Antd requires a triggered DOM, and the triggered DOM happens to cover the node. Therefore, our components `<ContextMenu />`, `<DragNode />`, etc. cannot trigger node events, which will lead to failure. The official built-in is recommended `<Tooltip placement='top' hasArrow/>` to use
-
-<code src='./demos/Antd.tsx' />
 
 ## Features
 

@@ -1,12 +1,5 @@
 import React, { useEffect } from 'react';
-import GraphinContext from '../../GraphinContext';
-
-export interface IG6GraphEvent {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  item: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}
+import { GraphinContext, IG6GraphEvent } from '../../index';
 
 interface ContextMenuProps {
   bindType?: 'node' | 'edge' | 'canvas';
@@ -20,7 +13,7 @@ export interface State {
   y: number;
   /** 触发的元素 */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  item?: IG6GraphEvent['item'];
+  item: IG6GraphEvent['item'];
 }
 
 const useContextMenu = (props: ContextMenuProps) => {
@@ -116,12 +109,9 @@ const useContextMenu = (props: ContextMenuProps) => {
   }, []);
   const { x, y, visible, item } = state;
 
-  const id = (item && !item.destroyed && item.getModel && item.getModel().id) || '';
-
   return {
     oneShow: handleShow,
     onClose: handleClose,
-    id,
     item,
     visible,
     x,

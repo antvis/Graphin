@@ -1,6 +1,14 @@
+import { ModelConfig } from '@antv/g6';
 import React from 'react';
 import getContainerStyles from './getContainerStyles';
-import useTooltip from './useTooltip';
+import useTooltip, { State } from './useTooltip';
+
+export interface TooltipValue {
+  bindType: 'node' | 'edge';
+  item: State['item'];
+  id: string;
+  model: ModelConfig;
+}
 
 const defaultStyle: React.CSSProperties = {
   width: '120px',
@@ -10,14 +18,14 @@ const defaultStyle: React.CSSProperties = {
 export interface TooltipProps {
   /**
    * @description tooltip绑定的图元素
-   * @default node\
+   * @default node
    */
   bindType?: 'node' | 'edge';
   /**
    * @description children
    * @type  React.ReactChild | JSX.Element
    */
-  children: React.ReactChild | JSX.Element;
+  children: (props: TooltipValue) => React.ReactNode;
   /**
    * @description styles
    */
@@ -33,11 +41,11 @@ export interface TooltipProps {
   hasArrow?: boolean;
 }
 
-// let containerRef: HTMLDivElement | null;
+const container = React.createRef<HTMLDivElement>();
 
 const Tooltip: React.FunctionComponent<TooltipProps> = props => {
   const { children, bindType = 'node', style, placement = 'top', hasArrow } = props;
-  const { x, y, visible, item } = useTooltip({ bindType });
+  const { x, y, visible, item } = useTooltip({ bindType, container });
 
   let nodeSize = 40;
 
@@ -66,19 +74,23 @@ const Tooltip: React.FunctionComponent<TooltipProps> = props => {
     return null;
   }
 
+  const model = (item && !item.destroyed && item.getModel && item.getModel()) || {};
+  const id = model.id || '';
+  console.log('nodeSize', nodeSize, padding);
   return (
     <>
       <div
+        ref={container}
         className={`graphin-components-tooltip ${placement}`}
         // @ts-ignore
         style={{ ...defaultStyle, ...positionStyle, ...style }}
       >
-        {visible && (
-          <div>
-            {hasArrow && <div className={`tooltip-arrow ${placement}`} />}
-            {children}
-          </div>
-        )}
+        {/* {visible && ( */}
+        <div>
+          {hasArrow && <div className={`tooltip-arrow ${placement}`} />}
+          {children({ item, bindType, model, id })}
+        </div>
+        {/* )} */}
       </div>
     </>
   );

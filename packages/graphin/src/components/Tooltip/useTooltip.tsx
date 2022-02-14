@@ -12,10 +12,12 @@ export interface State {
 
 export interface Props {
   bindType: 'node' | 'edge';
+  container: React.RefObject<HTMLDivElement>;
 }
+let timer: number | undefined;
 
 const useTooltip = (props: Props) => {
-  const { bindType = 'node' } = props;
+  const { bindType = 'node', container } = props;
   const graphin = React.useContext(GraphinContext);
   const { graph } = graphin;
 
@@ -29,6 +31,9 @@ const useTooltip = (props: Props) => {
   const handleShow = (e: IG6GraphEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (timer) {
+      window.clearTimeout(timer);
+    }
 
     const point = graph.getPointByClient(e.clientX, e.clientY);
     let { x, y } = graph.getCanvasByPoint(point.x, point.y);
@@ -57,16 +62,23 @@ const useTooltip = (props: Props) => {
       };
     });
   };
-  const handleClose = () => {
-    setState(preState => {
-      return {
-        ...preState,
-        visible: false,
-        item: null,
-        x: 0,
-        y: 0,
-      };
-    });
+  const handleClose = (e: IG6GraphEvent) => {
+    console.log('close...');
+    if (timer) {
+      window.clearTimeout(timer);
+    }
+    timer = window.setTimeout(() => {
+      console.log('close...settimeout');
+      setState(preState => {
+        return {
+          ...preState,
+          visible: false,
+          item: null,
+          x: 0,
+          y: 0,
+        };
+      });
+    }, 200);
   };
   const handleDragStart = () => {
     setState({
@@ -77,7 +89,7 @@ const useTooltip = (props: Props) => {
       item: null,
     });
   };
-  const handleDragEnd = e => {
+  const handleDragEnd = (e: IG6GraphEvent) => {
     const point = graph.getPointByClient(e.clientX, e.clientY);
     let { x, y } = graph.getCanvasByPoint(point.x, point.y);
     if (bindType === 'node') {
@@ -109,7 +121,29 @@ const useTooltip = (props: Props) => {
     graph.on(`node:dragend`, handleDragEnd);
     // graph.on(`${bindType}:mousemove`, handleUpdatePosition);
 
+    container.current?.addEventListener('mouseenter', event => {
+      clearTimeout(timer);
+    });
+    container.current?.addEventListener('mouseleave', event => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = window.setTimeout(() => {
+        console.log('close...settimeout');
+        setState(preState => {
+          return {
+            ...preState,
+            visible: false,
+            item: null,
+            x: 0,
+            y: 0,
+          };
+        });
+      }, 200);
+    });
+
     return () => {
+      console.log('effect..remove....');
       graph.off(`${bindType}:mouseenter`, handleShow);
       graph.off(`${bindType}:mouseleave`, handleClose);
       graph.off(`afterremoveitem`, handleClose);
@@ -118,6 +152,10 @@ const useTooltip = (props: Props) => {
       // graph.off(`${bindType}:mousemove`, handleUpdatePosition);
     };
   }, []);
+
+  return {
+    ...state,
+  };
 };
 
 export default useTooltip;

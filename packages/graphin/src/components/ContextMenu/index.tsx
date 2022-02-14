@@ -1,6 +1,7 @@
 /* eslint-disable react/require-default-props */
+import type { IG6GraphEvent } from '@antv/g6';
 import React from 'react';
-import useContextMenu, { IG6GraphEvent, State } from './useContextMenu';
+import useContextMenu, { State } from './useContextMenu';
 
 const defaultStyle: React.CSSProperties = {
   width: '120px',
@@ -14,7 +15,7 @@ export interface ContextMenuValue extends State {
 }
 
 export interface ContextMenuProps {
-  children: (content: ContextMenuValue) => React.ReactChildren | JSX.Element;
+  children: (content: ContextMenuValue) => React.ReactNode;
   style?: React.CSSProperties;
   bindType?: 'node' | 'edge' | 'canvas';
 }
@@ -27,7 +28,7 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> = props => {
     bindType,
     container,
   });
-  const { id, visible, x, y } = contextmenu;
+  const { visible, x, y, item } = contextmenu;
 
   const positionStyle: React.CSSProperties = {
     position: 'absolute',
@@ -39,6 +40,7 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> = props => {
     console.error('<ContextMenu /> children should be a function');
     return null;
   }
+  const id = (item && !item.destroyed && item.getModel && item.getModel().id) || '';
 
   return (
     <div
@@ -47,7 +49,11 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> = props => {
       style={{ ...defaultStyle, ...style, ...positionStyle }}
       key={id}
     >
-      {visible && children(contextmenu)}
+      {visible &&
+        children({
+          ...contextmenu,
+          id,
+        })}
     </div>
   );
 };

@@ -37,6 +37,7 @@ const getContainerStyles = ({
       top: 0,
       opacity: 0.5,
       transform: 'translate(-50%,-100%)',
+      transition: 'opacity 0.5s,transform 0.5s',
     };
   }
   if (placement === 'bottom') {
@@ -54,6 +55,7 @@ const getContainerStyles = ({
       top: y + nodeSize / 2,
       opacity: 0.5,
       transform: 'translate(-50%,0px)',
+      transition: 'opacity 0.5s,transform 0.5s',
     };
   }
   if (placement === 'left') {
@@ -71,6 +73,7 @@ const getContainerStyles = ({
       left: x - nodeSize / 2,
       top: y,
       transform: 'translate(-100%,-50%)',
+      transition: 'opacity 0.5s,transform 0.5s',
     };
   }
   if (placement === 'right') {
@@ -88,6 +91,7 @@ const getContainerStyles = ({
       top: y,
       transform: 'translate(0,-50%)',
       opacity: 0,
+      transition: 'opacity 0.5s,transform 0.5s',
     };
   }
   if (placement === 'center') {
@@ -103,6 +107,7 @@ const getContainerStyles = ({
       left: x,
       top: y,
       opacity: 0,
+      transition: 'opacity 0.5s,transform 0.5s',
     };
   }
 
