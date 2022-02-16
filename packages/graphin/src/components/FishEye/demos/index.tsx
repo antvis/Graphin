@@ -11,7 +11,9 @@ const MyMenu = ({ value, onClick }: { value: ContextMenuValue; onClick: () => vo
   };
   return (
     <Menu>
-      <Menu.Item onClick={handleClick}>开启 FishEye</Menu.Item>
+      <Menu.Item onClick={handleClick} key="fisheye">
+        开启 FishEye
+      </Menu.Item>
     </Menu>
   );
 };
@@ -31,7 +33,7 @@ const App = () => {
     <div className="App">
       <Graphin data={data}>
         <ContextMenu bindType="canvas">
-          {value => {
+          {(value: ContextMenuValue) => {
             return <MyMenu value={value} onClick={handleClick} />;
           }}
         </ContextMenu>

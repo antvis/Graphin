@@ -62,13 +62,11 @@ const useTooltip = (props: Props) => {
       };
     });
   };
-  const handleClose = (e: IG6GraphEvent) => {
-    console.log('close...');
+  const handleClose = () => {
     if (timer) {
       window.clearTimeout(timer);
     }
     timer = window.setTimeout(() => {
-      console.log('close...settimeout');
       setState(preState => {
         return {
           ...preState,
@@ -113,6 +111,9 @@ const useTooltip = (props: Props) => {
       });
     }
   };
+  const removeTimer = () => {
+    clearTimeout(timer);
+  };
   useEffect(() => {
     graph.on(`${bindType}:mouseenter`, handleShow);
     graph.on(`${bindType}:mouseleave`, handleClose);
@@ -121,26 +122,8 @@ const useTooltip = (props: Props) => {
     graph.on(`node:dragend`, handleDragEnd);
     // graph.on(`${bindType}:mousemove`, handleUpdatePosition);
 
-    container.current?.addEventListener('mouseenter', event => {
-      clearTimeout(timer);
-    });
-    container.current?.addEventListener('mouseleave', event => {
-      if (timer) {
-        clearTimeout(timer);
-      }
-      timer = window.setTimeout(() => {
-        console.log('close...settimeout');
-        setState(preState => {
-          return {
-            ...preState,
-            visible: false,
-            item: null,
-            x: 0,
-            y: 0,
-          };
-        });
-      }, 200);
-    });
+    container.current?.addEventListener('mouseenter', removeTimer);
+    container.current?.addEventListener('mouseleave', handleClose);
 
     return () => {
       console.log('effect..remove....');
@@ -149,6 +132,8 @@ const useTooltip = (props: Props) => {
       graph.off(`afterremoveitem`, handleClose);
       graph.off(`node:dragstart`, handleDragStart);
       graph.off(`node:dragend`, handleDragEnd);
+      container.current?.removeEventListener('mouseenter', removeTimer);
+      container.current?.removeEventListener('mouseleave', handleClose);
       // graph.off(`${bindType}:mousemove`, handleUpdatePosition);
     };
   }, []);

@@ -1,4 +1,5 @@
 import { CaretRightOutlined } from '@ant-design/icons';
+import type { TooltipValue } from '@antv/graphin';
 import Graphin, { Components, Utils } from '@antv/graphin';
 import { Collapse, Input, Radio, Switch } from 'antd';
 import * as React from 'react';
@@ -67,9 +68,13 @@ const TooltipDemo: React.FunctionComponent = () => {
 
       <Graphin data={Utils.mock(10).circle().graphin()}>
         <Tooltip bindType="node" placement={placement} hasArrow={hasArrow} style={style}>
-          {value => {
+          {(value: TooltipValue) => {
             if (value.model) {
               const { model } = value;
+              if (model.id === 'node-6') {
+                // node-6 节点不可以Tooltip
+                return null;
+              }
               return (
                 <div>
                   <li> {model.id}</li>

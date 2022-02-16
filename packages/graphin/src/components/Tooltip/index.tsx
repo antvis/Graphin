@@ -1,6 +1,7 @@
 import { ModelConfig } from '@antv/g6';
 import React from 'react';
 import getContainerStyles from './getContainerStyles';
+import './index.less';
 import useTooltip, { State } from './useTooltip';
 
 export interface TooltipValue {
@@ -76,7 +77,6 @@ const Tooltip: React.FunctionComponent<TooltipProps> = props => {
 
   const model = (item && !item.destroyed && item.getModel && item.getModel()) || {};
   const id = model.id || '';
-  console.log('nodeSize', nodeSize, padding);
   return (
     <>
       <div
@@ -85,12 +85,12 @@ const Tooltip: React.FunctionComponent<TooltipProps> = props => {
         // @ts-ignore
         style={{ ...defaultStyle, ...positionStyle, ...style }}
       >
-        {/* {visible && ( */}
-        <div>
-          {hasArrow && <div className={`tooltip-arrow ${placement}`} />}
-          {children({ item, bindType, model, id })}
-        </div>
-        {/* )} */}
+        {visible && (
+          <div>
+            {hasArrow && <div className={`tooltip-arrow ${placement}`} />}
+            {children({ item, bindType, model, id })}
+          </div>
+        )}
       </div>
     </>
   );
