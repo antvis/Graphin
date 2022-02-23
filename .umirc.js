@@ -14,9 +14,10 @@ export default {
   resolve: {
     includes: [
       // 'packages/graphin/docs/layout/leaf-cluster',
-      'packages/graphin/docs/layout/combo-combined-layout',
-      // 'packages/graphin-components/src/',
-      // 'packages/graphin-icons/src',
+      // 'packages/graphin/docs/layout/combo-combined-layout',
+      'packages/graphin/docs/',
+      'packages/graphin-components/src/',
+      'packages/graphin-icons/src',
 
       // 'packages/graphin-graphscope/docs/',
 
