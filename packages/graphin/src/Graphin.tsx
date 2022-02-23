@@ -339,13 +339,17 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     /** 数据变化 */
     if (isDataChange) {
       this.initData(data);
+
       this.graph.data(this.data as GraphData | TreeGraphData);
+      this.graph.set('layoutController', null);
       this.graph.changeData(this.data as GraphData | TreeGraphData);
+
       // 由于 changeData 是将 this.data 融合到 item models 上面，因此 changeData 后 models 与 this.data 不是同一个引用了
       // 执行下面一行以保证 graph item model 中的数据与 this.data 是同一份
       // @ts-ignore
       this.data = this.layout.getDataFromGraph();
       this.layout.changeLayout();
+
       this.initStatus();
       this.apis = ApiController(this.graph);
       // console.log('%c isDataChange', 'color:grey');

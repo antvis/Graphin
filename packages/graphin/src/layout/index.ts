@@ -1,10 +1,9 @@
 // @ts-nocheck
 
 import G6, { Graph } from '@antv/g6';
-import defaultOptions from './utils/options';
-
-import Tweak from './inner/tweak';
 import Graphin from '../Graphin';
+import Tweak from './inner/tweak';
+import defaultOptions from './utils/options';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isEmpty = (data: any) => {
@@ -43,7 +42,14 @@ class LayoutController {
   hasPosition() {
     const { graphin } = this;
     const { data = {} } = graphin;
-    return data?.nodes?.every(node => !window.isNaN(Number(node.x)) && !window.isNaN(Number(node.y)));
+    // 若收到一个空数组，Array.prototype.every() 方法在一切情况下都会返回 true
+    if (!data.nodes) {
+      return false;
+    }
+    if (data.nodes.length === 0) {
+      return false;
+    }
+    return data.nodes.every(node => !window.isNaN(Number(node.x)) && !window.isNaN(Number(node.y)));
   }
 
   /**
@@ -232,8 +238,8 @@ class LayoutController {
   };
 
   refreshPosition = () => {
-    const { graph, graphin } = this;
-    const { animate, layoutAnimate } = graphin.props;
+    const { graphin } = this;
+    const { animate, layoutAnimate } = graphin.options;
     const { type } = this.options;
 
     if (animate || layoutAnimate) {
