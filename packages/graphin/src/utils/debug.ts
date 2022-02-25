@@ -29,7 +29,7 @@ const debug = (name: string) => {
 
   // eslint-disable-next-line
   return (...message: any[]) => {
-    // eslint-disable-line
+    // @ts-ignore
     if (isDebugMode && process.env.NODE_ENV === 'development') {
       // eslint-disable-next-line no-console
       console.log(`%c${name}`, `color:  ${color}; font-style:italic ;padding: 2px;font-weight:700`, ...message);
