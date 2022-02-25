@@ -13,13 +13,13 @@ import './index.less';
 import LayoutController from './layout';
 import { getDefaultStyleByTheme, ThemeData } from './theme/index';
 /** types  */
-import { GraphinData, GraphinProps, GraphinTreeData, IconLoader } from './typings/type';
+import { GraphinData, GraphinProps, GraphinTreeData, IconLoader, IUserNode, PlainObject } from './typings/type';
 import cloneDeep from './utils/cloneDeep';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
 
-const { DragCanvas, ZoomCanvas, DragNode, DragCombo, ClickSelect, BrushSelect, ResizeCanvas, Hoverable } = Behaviors;
+const { DragCanvas, ZoomCanvas, DragNode, DragCombo, ClickSelect, BrushSelect, ResizeCanvas } = Behaviors;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DiffValue = any;
@@ -31,6 +31,8 @@ export interface GraphinState {
     apis: ApisType;
     theme: ThemeData;
     layout: LayoutController;
+    dragNodes: IUserNode[];
+    updateContext: (config: PlainObject) => void;
   };
 }
 
@@ -115,6 +117,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
   theme: ThemeData;
 
+  dragNodes: IUserNode[];
+
   constructor(props: GraphinProps) {
     super(props);
 
@@ -131,6 +135,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     this.apis = {} as ApisType;
     this.layoutCache = layoutCache;
     this.layout = {} as LayoutController;
+    this.dragNodes = [] as IUserNode[];
 
     this.options = { ...otherOptions } as GraphOptions;
 
@@ -141,6 +146,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         apis: this.apis,
         theme: this.theme,
         layout: this.layout,
+        dragNodes: this.dragNodes,
+        updateContext: this.updateContext,
       },
     };
   }
@@ -262,6 +269,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         apis: this.apis,
         theme: this.theme,
         layout: this.layout,
+        dragNodes: this.dragNodes,
+        updateContext: this.updateContext,
       },
     });
   };
@@ -308,6 +317,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   };
 
   componentDidUpdate(prevProps: GraphinProps) {
+    console.log('-----Graphin componentDidUpdate!!!-----');
     // console.time('did-update');
     const isDataChange = this.shouldUpdate(prevProps, 'data');
     const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
@@ -337,6 +347,22 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     /** 数据变化 */
     if (isDataChange) {
       this.initData(data);
+      const {
+        context: { dragNodes },
+      } = this.state;
+      // 更新拖拽后的节点的mass到data
+      // @ts-ignore
+      this.data?.nodes?.forEach(node => {
+        const dragNode = dragNodes.find(item => item.id === node.id);
+        if (dragNode) {
+          node.layout = {
+            ...node.layout,
+            force: {
+              mass: dragNode.layout?.force?.mass,
+            },
+          };
+        }
+      });
       this.layout.changeLayout();
       this.graph.data(this.data as GraphData | TreeGraphData);
       this.graph.changeData(this.data as GraphData | TreeGraphData);
@@ -352,6 +378,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
               apis: this.apis,
               theme: this.theme,
               layout: this.layout,
+              dragNodes: preState.context.dragNodes,
+              updateContext: this.updateContext,
             },
           };
         },
@@ -406,6 +434,15 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error('Catch component error: ', error, info);
   }
+
+  updateContext = (config: PlainObject) => {
+    this.setState(prevState => ({
+      context: {
+        ...prevState.context,
+        ...config,
+      },
+    }));
+  };
 
   clear = () => {
     if (this.layout && this.layout.destroy) {
