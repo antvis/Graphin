@@ -319,7 +319,6 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   };
 
   componentDidUpdate(prevProps: GraphinProps) {
-    console.log('-----Graphin componentDidUpdate!!!-----');
     // console.time('did-update');
     const isDataChange = this.shouldUpdate(prevProps, 'data');
     const isLayoutChange = this.shouldUpdate(prevProps, 'layout');
@@ -497,23 +496,25 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           <div className="graphin-components">
             {isReady && (
               <>
-                {/** modes 不存在的时候，才启动默认的behaviors，否则会覆盖用户自己传入的 */
-                !modes && (
-                  <>
-                    {/* 拖拽画布 */}
-                    <DragCanvas />
-                    {/* 缩放画布 */}
-                    <ZoomCanvas />
-                    {/* 拖拽节点 */}
-                    <DragNode />
-                    {/* 点击节点 */}
-                    <DragCombo />
-                    {/* 点击节点 */}
-                    <ClickSelect />
-                    {/* 圈选节点 */}
-                    <BrushSelect />
-                  </>
-                )}
+                {
+                  /** modes 不存在的时候，才启动默认的behaviors，否则会覆盖用户自己传入的 */
+                  !modes && (
+                    <>
+                      {/* 拖拽画布 */}
+                      <DragCanvas />
+                      {/* 缩放画布 */}
+                      <ZoomCanvas />
+                      {/* 拖拽节点 */}
+                      <DragNode />
+                      {/* 点击节点 */}
+                      <DragCombo />
+                      {/* 点击节点 */}
+                      <ClickSelect />
+                      {/* 圈选节点 */}
+                      <BrushSelect />
+                    </>
+                  )
+                }
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
                 {/* <Hoverable bindType="edge" /> */}
