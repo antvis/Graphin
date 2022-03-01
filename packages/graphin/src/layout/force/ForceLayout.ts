@@ -147,6 +147,9 @@ class ForceLayout {
 
   centripetalOptions: CentripetalOptions;
 
+  /** 被拖动过的节点 */
+  dragNodes: ForceNodeType[];
+
   constructor(options: Partial<ForceProps>) {
     this.props = {
       stiffness: 200.0,
@@ -214,6 +217,7 @@ class ForceLayout {
         };
       },
     };
+    this.dragNodes = [];
   }
 
   /**
@@ -253,7 +257,6 @@ class ForceLayout {
       degree = Utils.getDegree(node, this.edges)?.degree, // 节点度数
       force,
     } = node.layout || {};
-
     /** 当你在layout.force.mass中制定了才使用 */
     if (force && force.mass) {
       // eslint-disable-next-line prefer-destructuring
@@ -355,7 +358,6 @@ class ForceLayout {
       ...this.centripetalOptions,
       ...centripetalOptions,
     };
-
     this.nodes.forEach(node => {
       const x = node.data.x || width / 2;
       const y = node.data.y || height / 2;
@@ -369,17 +371,13 @@ class ForceLayout {
         ...node.data.layout,
         ...degreeInfo,
       };
-
       const mass = this.getMass(node.data);
-
       this.nodePoints.set(node.id, new Point(vec, String(node.id), node.data, mass));
     });
-
     this.edges.forEach(edge => {
       const source = this.nodePoints.get(edge.source.id) as Point;
       const target = this.nodePoints.get(edge.target.id) as Point;
       const length = this.props.defSpringLen(edge, source, target);
-
       this.edgeSprings.set(edge.id, new Spring(source, target, length));
     });
 
@@ -598,7 +596,6 @@ class ForceLayout {
       const v = spring.target.p.subtract(spring.source.p);
       const displacement = spring.length - v.magnitude();
       const direction = v.normalise();
-
       spring.source.updateAcc(direction.scalarMultip(-this.props.stiffness * displacement));
       spring.target.updateAcc(direction.scalarMultip(this.props.stiffness * displacement));
     });
@@ -781,7 +778,7 @@ class ForceLayout {
     this.registers.set(type, options); // 将用户的自定义函数注册进来
   };
 
-  restart = (dragNode: ForceNodeType[], graph: Graph) => {
+  restart = (dragNodes: ForceNodeType[], graph: Graph) => {
     /** 将位置更新到nodePoint中 */
     const { ignore } = this.props;
     graph.getNodes().forEach((nodeItem: Item) => {
@@ -800,10 +797,8 @@ class ForceLayout {
 
     const changeNodePosition = (node: ForceNodeType) => {
       const vec = new Vector(node.x, node.y);
-      // const mass = (node.layout && node.layout.force && node.layout.force.mass) || 100000;
       const mass = this.getMass(node);
       this.nodePoints.set(node.id, new Point(vec, node.id, node.data, mass));
-
       this.edges.forEach(edge => {
         const source = this.nodePoints.get(edge.source.id);
         const target = this.nodePoints.get(edge.target.id);
@@ -815,7 +810,7 @@ class ForceLayout {
     };
 
     // TODO:支持多点拖拽
-    dragNode.forEach(changeNodePosition);
+    dragNodes.forEach(changeNodePosition);
 
     if (this.props.restartAnimation) this.animation();
     else this.slienceForce();

@@ -1,4 +1,4 @@
-import { IG6GraphEvent } from '@antv/g6';
+import { IG6GraphEvent, NodeConfig, EdgeConfig } from '@antv/g6';
 import React, { useEffect } from 'react';
 import GraphinContext from '../GraphinContext';
 
@@ -9,11 +9,12 @@ export interface DragNodeWithForceProps {
    * @default false
    */
   autoPin?: boolean;
+  dragNodeMass?: number;
 }
 const DragNodeWithForce = (props: DragNodeWithForceProps) => {
-  const { graph, layout } = React.useContext(GraphinContext);
+  const { graph, layout, dragNodes, updateContext } = React.useContext(GraphinContext);
 
-  const { autoPin } = props;
+  const { autoPin, dragNodeMass = 10000000000 } = props;
   const { instance } = layout;
 
   useEffect(() => {
@@ -37,12 +38,29 @@ const DragNodeWithForce = (props: DragNodeWithForceProps) => {
         nodeModel.layout = {
           ...nodeModel.layout,
           force: {
-            mass: autoPin ? 1000000 : null,
+            mass: autoPin ? dragNodeMass : null,
           },
         };
-        const drageNodes = [nodeModel];
-        simulation.restart(drageNodes, graph);
-        graph.refreshPositions();
+        // simulation.restart([nodeModel], graph);
+        // graph.refreshPositions();
+        const selectedNodes: NodeConfig[] = [];
+        graph.getNodes().forEach(node => {
+          if (node.hasState('selected')) {
+            const selectNodeModel = node.get('model');
+            selectNodeModel.layout.force = {
+              mass: autoPin ? dragNodeMass : null,
+            };
+            selectedNodes.push(selectNodeModel);
+          }
+        });
+        let newDragNodes = dragNodes.concat([nodeModel]) as NodeConfig[];
+        // 多选拖动的场景
+        if (selectedNodes.length > 1) {
+          newDragNodes = newDragNodes.concat(selectedNodes);
+        }
+        updateContext({
+          dragNodes: newDragNodes,
+        });
       }
     };
 
@@ -52,7 +70,7 @@ const DragNodeWithForce = (props: DragNodeWithForceProps) => {
       graph.off('node:dragstart', handleNodeDragStart);
       graph.off('node:dragend', handleNodeDragEnd);
     };
-  }, [graph, autoPin, instance]);
+  }, [graph, autoPin, instance, dragNodes, updateContext]);
   return null;
 };
 
