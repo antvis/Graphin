@@ -245,6 +245,10 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     /** 装载数据 */
     this.graph.data(this.data as GraphData | TreeGraphData);
+
+    /** 渲染 */
+    this.graph.render();
+
     /** 初始化布局：仅限网图 */
     if (!this.isTree) {
       this.layout = new LayoutController(this);
@@ -253,8 +257,6 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     // this.graph.get('canvas').set('localRefresh', true);
 
-    /** 渲染 */
-    this.graph.render();
     /** FitView 变为组件可选 */
 
     /** 初始化状态 */
@@ -326,19 +328,20 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     // console.timeEnd('did-update');
     const { data, layoutCache, layout } = this.props;
     this.layoutCache = layoutCache;
-    const isGraphTypeChange = (prevProps.data as GraphinTreeData).children !== (data as GraphinTreeData).children;
+    // const isGraphTypeChange = (prevProps.data as GraphinTreeData).children !== (data as GraphinTreeData).children;
 
     if (isThemeChange) {
       // TODO :Node/Edge/Combo 批量调用 updateItem 来改变
     }
 
     /** 图类型变化 */
-    if (isGraphTypeChange) {
-      console.error(
-        'The data types of pervProps.data and props.data are inconsistent,Graphin does not support the dynamic switching of TreeGraph and NetworkGraph',
-      );
-      return;
-    }
+    // if (isGraphTypeChange) {
+    //   console.error(
+    //     'The data types of pervProps.data and props.data are inconsistent,Graphin does not support the dynamic switching of TreeGraph and NetworkGraph',
+    //   );
+    //   return;
+    // }
+
     /** 配置变化 */
     if (isOptionsChange) {
       // this.updateOptions();
@@ -347,25 +350,39 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     /** 数据变化 */
     if (isDataChange) {
       this.initData(data);
-      const {
-        context: { dragNodes },
-      } = this.state;
-      // 更新拖拽后的节点的mass到data
-      // @ts-ignore
-      this.data?.nodes?.forEach(node => {
-        const dragNode = dragNodes.find(item => item.id === node.id);
-        if (dragNode) {
-          node.layout = {
-            ...node.layout,
-            force: {
-              mass: dragNode.layout?.force?.mass,
-            },
-          };
-        }
-      });
-      this.layout.changeLayout();
-      this.graph.data(this.data as GraphData | TreeGraphData);
-      this.graph.changeData(this.data as GraphData | TreeGraphData);
+
+      if (this.isTree) {
+        // this.graph.data(this.data as TreeGraphData);
+        this.graph.changeData(this.data as TreeGraphData);
+      } else {
+        const {
+          context: { dragNodes },
+        } = this.state;
+        // 更新拖拽后的节点的mass到data
+        // @ts-ignore
+        this.data?.nodes?.forEach(node => {
+          const dragNode = dragNodes.find(item => item.id === node.id);
+          if (dragNode) {
+            node.layout = {
+              ...node.layout,
+              force: {
+                mass: dragNode.layout?.force?.mass,
+              },
+            };
+          }
+        });
+
+        this.graph.data(this.data as GraphData | TreeGraphData);
+        this.graph.set('layoutController', null);
+        this.graph.changeData(this.data as GraphData | TreeGraphData);
+
+        // 由于 changeData 是将 this.data 融合到 item models 上面，因此 changeData 后 models 与 this.data 不是同一个引用了
+        // 执行下面一行以保证 graph item model 中的数据与 this.data 是同一份
+        // @ts-ignore
+        this.data = this.layout.getDataFromGraph();
+        this.layout.changeLayout();
+      }
+
       this.initStatus();
       this.apis = ApiController(this.graph);
       // console.log('%c isDataChange', 'color:grey');
@@ -480,25 +497,23 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           <div className="graphin-components">
             {isReady && (
               <>
-                {
-                  /** modes 不存在的时候，才启动默认的behaviors，否则会覆盖用户自己传入的 */
-                  !modes && (
-                    <>
-                      {/* 拖拽画布 */}
-                      <DragCanvas />
-                      {/* 缩放画布 */}
-                      <ZoomCanvas />
-                      {/* 拖拽节点 */}
-                      <DragNode />
-                      {/* 点击节点 */}
-                      <DragCombo />
-                      {/* 点击节点 */}
-                      <ClickSelect />
-                      {/* 圈选节点 */}
-                      <BrushSelect />
-                    </>
-                  )
-                }
+                {/** modes 不存在的时候，才启动默认的behaviors，否则会覆盖用户自己传入的 */
+                !modes && (
+                  <>
+                    {/* 拖拽画布 */}
+                    <DragCanvas />
+                    {/* 缩放画布 */}
+                    <ZoomCanvas />
+                    {/* 拖拽节点 */}
+                    <DragNode />
+                    {/* 点击节点 */}
+                    <DragCombo />
+                    {/* 点击节点 */}
+                    <ClickSelect />
+                    {/* 圈选节点 */}
+                    <BrushSelect />
+                  </>
+                )}
                 {/** resize 画布 */}
                 <ResizeCanvas graphDOM={this.graphDOM as HTMLDivElement} />
                 {/* <Hoverable bindType="edge" /> */}
