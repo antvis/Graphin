@@ -1,5 +1,14 @@
 {
-  "packages": ["packages/*"],
   "npmClient": "yarn",
-  "version": "2.0.0"
+  "useWorkspaces": true,
+  "version": "independent",
+  "command": {
+    "bootstrap": {
+      "ci": false,
+      "npmClientArgs": ["--no-package-lock"]
+    },
+    "publish": {
+      "commitHooks": false
+    }
+  }
 }

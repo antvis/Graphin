@@ -13,13 +13,13 @@ import './index.less';
 import LayoutController from './layout';
 import { getDefaultStyleByTheme, ThemeData } from './theme/index';
 /** types  */
-import { GraphinData, GraphinProps, GraphinTreeData, IconLoader } from './typings/type';
+import { GraphinData, GraphinProps, GraphinTreeData, IconLoader, IUserNode, PlainObject } from './typings/type';
 import cloneDeep from './utils/cloneDeep';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
 
-const { DragCanvas, ZoomCanvas, DragNode, DragCombo, ClickSelect, BrushSelect, ResizeCanvas, Hoverable } = Behaviors;
+const { DragCanvas, ZoomCanvas, DragNode, DragCombo, ClickSelect, BrushSelect, ResizeCanvas } = Behaviors;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DiffValue = any;
@@ -31,6 +31,8 @@ export interface GraphinState {
     apis: ApisType;
     theme: ThemeData;
     layout: LayoutController;
+    dragNodes: IUserNode[];
+    updateContext: (config: PlainObject) => void;
   };
 }
 
@@ -115,6 +117,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
   theme: ThemeData;
 
+  dragNodes: IUserNode[];
+
   constructor(props: GraphinProps) {
     super(props);
 
@@ -131,6 +135,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     this.apis = {} as ApisType;
     this.layoutCache = layoutCache;
     this.layout = {} as LayoutController;
+    this.dragNodes = [] as IUserNode[];
 
     this.options = { ...otherOptions } as GraphOptions;
 
@@ -141,6 +146,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         apis: this.apis,
         theme: this.theme,
         layout: this.layout,
+        dragNodes: this.dragNodes,
+        updateContext: this.updateContext,
       },
     };
   }
@@ -238,6 +245,10 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     /** 装载数据 */
     this.graph.data(this.data as GraphData | TreeGraphData);
+
+    /** 渲染 */
+    this.graph.render();
+
     /** 初始化布局：仅限网图 */
     if (!this.isTree) {
       this.layout = new LayoutController(this);
@@ -246,8 +257,6 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
     // this.graph.get('canvas').set('localRefresh', true);
 
-    /** 渲染 */
-    this.graph.render();
     /** FitView 变为组件可选 */
 
     /** 初始化状态 */
@@ -262,6 +271,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         apis: this.apis,
         theme: this.theme,
         layout: this.layout,
+        dragNodes: this.dragNodes,
+        updateContext: this.updateContext,
       },
     });
   };
@@ -316,19 +327,20 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     // console.timeEnd('did-update');
     const { data, layoutCache, layout } = this.props;
     this.layoutCache = layoutCache;
-    const isGraphTypeChange = (prevProps.data as GraphinTreeData).children !== (data as GraphinTreeData).children;
+    // const isGraphTypeChange = (prevProps.data as GraphinTreeData).children !== (data as GraphinTreeData).children;
 
     if (isThemeChange) {
       // TODO :Node/Edge/Combo 批量调用 updateItem 来改变
     }
 
     /** 图类型变化 */
-    if (isGraphTypeChange) {
-      console.error(
-        'The data types of pervProps.data and props.data are inconsistent,Graphin does not support the dynamic switching of TreeGraph and NetworkGraph',
-      );
-      return;
-    }
+    // if (isGraphTypeChange) {
+    //   console.error(
+    //     'The data types of pervProps.data and props.data are inconsistent,Graphin does not support the dynamic switching of TreeGraph and NetworkGraph',
+    //   );
+    //   return;
+    // }
+
     /** 配置变化 */
     if (isOptionsChange) {
       // this.updateOptions();
@@ -337,9 +349,39 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     /** 数据变化 */
     if (isDataChange) {
       this.initData(data);
-      this.layout.changeLayout();
-      this.graph.data(this.data as GraphData | TreeGraphData);
-      this.graph.changeData(this.data as GraphData | TreeGraphData);
+
+      if (this.isTree) {
+        // this.graph.data(this.data as TreeGraphData);
+        this.graph.changeData(this.data as TreeGraphData);
+      } else {
+        const {
+          context: { dragNodes },
+        } = this.state;
+        // 更新拖拽后的节点的mass到data
+        // @ts-ignore
+        this.data?.nodes?.forEach(node => {
+          const dragNode = dragNodes.find(item => item.id === node.id);
+          if (dragNode) {
+            node.layout = {
+              ...node.layout,
+              force: {
+                mass: dragNode.layout?.force?.mass,
+              },
+            };
+          }
+        });
+
+        this.graph.data(this.data as GraphData | TreeGraphData);
+        this.graph.set('layoutController', null);
+        this.graph.changeData(this.data as GraphData | TreeGraphData);
+
+        // 由于 changeData 是将 this.data 融合到 item models 上面，因此 changeData 后 models 与 this.data 不是同一个引用了
+        // 执行下面一行以保证 graph item model 中的数据与 this.data 是同一份
+        // @ts-ignore
+        this.data = this.layout.getDataFromGraph();
+        this.layout.changeLayout();
+      }
+
       this.initStatus();
       this.apis = ApiController(this.graph);
       // console.log('%c isDataChange', 'color:grey');
@@ -352,6 +394,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
               apis: this.apis,
               theme: this.theme,
               layout: this.layout,
+              dragNodes: preState.context.dragNodes,
+              updateContext: this.updateContext,
             },
           };
         },
@@ -406,6 +450,15 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error('Catch component error: ', error, info);
   }
+
+  updateContext = (config: PlainObject) => {
+    this.setState(prevState => ({
+      context: {
+        ...prevState.context,
+        ...config,
+      },
+    }));
+  };
 
   clear = () => {
     if (this.layout && this.layout.destroy) {
