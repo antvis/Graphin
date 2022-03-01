@@ -22,6 +22,9 @@ nav:
 
 <code src='./demos/combo-combined.tsx'>
 
-## 数据2
+## 增加交互
+
+- 双击 combo 解散
+- 节点右键菜单中可合并到父 combo
 
 <code src='./demos/combo-combined-data2.tsx'>
