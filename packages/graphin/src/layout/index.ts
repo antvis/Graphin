@@ -79,9 +79,13 @@ class LayoutController {
   start() {
     const { type } = this.options;
     this.instance.execute();
-    if (!(type === 'force' || type === 'g6force' || type === 'gForce' || type === 'comboCombined')) {
-      this.refreshPosition();
+
+    if ((type === 'force' || type === 'g6force' || type === 'gForce' || type === 'comboCombined')) {
+      // We emit afterlayout on options.layoutEnd()
+      return;
     }
+
+    this.refreshPosition();
     this.graph.emit('afterlayout');
   }
 
