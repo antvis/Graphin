@@ -32,6 +32,10 @@ interface TooltipProps {
    * @description.en-US display arrow
    */
   hasArrow?: boolean;
+  /**
+  * @description Tooltip hoverable
+  */
+  hoverable?: boolean;
 }
 
 interface State {
@@ -157,7 +161,7 @@ const getTranslate = ({
 // let containerRef: HTMLDivElement | null;
 
 const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & { Edge: typeof Edge } = props => {
-  const { children, bindType = 'node', style, placement = 'top', hasArrow } = props;
+  const { children, bindType = 'node', style, placement = 'top', hasArrow, hoverable } = props;
   const graphin = React.useContext(GraphinContext);
   const { graph } = graphin;
 
@@ -199,8 +203,17 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
       };
     });
   };
-  const handleClose = () => {
-    setState(preState => {
+  const handleClose = (e: any): void => {
+    const canvas = graph.get('canvas');
+    const { x, y } = canvas.getPointByEvent(e);
+    const shape = canvas.getShape(x, y, e);
+    const parentId = shape?.get('parent')?.get('id');
+    const itemId = item?.getID();
+
+    const inTooltip = document.querySelector('.graphin-components-tooltip:hover');
+    const inShape = parentId && (parentId === itemId);
+
+    !(hoverable && (inTooltip || inShape)) && setState(preState => {
       return {
         ...preState,
         visible: false,
@@ -303,7 +316,7 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
         style={{ ...defaultStyle, ...style, ...positionStyle }}
       >
         {visible && (
-          <div>
+          <div onMouseLeave={hoverable ? e => visible && handleClose(e) : undefined}>
             {hasArrow && <div className={`tooltip-arrow ${placement}`} />}
             {children}
           </div>
