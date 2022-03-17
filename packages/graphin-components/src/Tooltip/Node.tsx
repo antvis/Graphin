@@ -8,7 +8,7 @@ export interface NodeProps {
    * @description children 为一个函数
    * @type (model: any) => JSX.Element | JSX.Element[];
    */
-  children: (model: any) => JSX.Element | JSX.Element[];
+  children: (model: any) => JSX.Element | JSX.Element[] | null;
 }
 
 const Node: React.FunctionComponent<NodeProps> = props => {
@@ -16,11 +16,20 @@ const Node: React.FunctionComponent<NodeProps> = props => {
   const { tooltip } = React.useContext(GraphinContext);
   const context = tooltip.node;
   const { item } = context;
+  if (children === null) {
+    return null;
+  }
   if (typeof children !== 'function') {
     console.error('<Tooltip.Node /> children should be a function');
     return null;
   }
-  return <div className="graphin-components-tooltip-content">{children(item.getModel())}</div>;
+
+  const element = children(item.getModel());
+  if (element === null) {
+    return null;
+  }
+
+  return <div className="graphin-components-tooltip-content">{element}</div>;
 };
 
 export default Node;

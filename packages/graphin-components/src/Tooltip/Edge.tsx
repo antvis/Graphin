@@ -8,7 +8,7 @@ export interface EdgeProps {
    * @description children 为一个函数
    * @type (model: any) => JSX.Element | JSX.Element[];
    */
-  children: (model: any) => JSX.Element | JSX.Element[];
+  children: (model: any) => JSX.Element | JSX.Element[] | null;
 }
 
 const Edge: React.FunctionComponent<EdgeProps> = (props) => {
@@ -20,7 +20,13 @@ const Edge: React.FunctionComponent<EdgeProps> = (props) => {
     console.error('<Tooltip.Edge /> children should be a function');
     return null;
   }
-  return <div className="graphin-components-tooltip-content">{children(item.getModel())}</div>;
+
+  const element = children(item.getModel());
+  if (element === null) {
+    return null;
+  }
+
+  return <div className="graphin-components-tooltip-content">{element}</div>;
 };
 
 export default Edge;
