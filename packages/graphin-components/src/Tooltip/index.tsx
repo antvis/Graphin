@@ -160,6 +160,8 @@ const getTranslate = ({
 };
 // let containerRef: HTMLDivElement | null;
 
+const tooltipClassName = 'graphin-components-tooltip';
+
 const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & { Edge: typeof Edge } = props => {
   const { children, bindType = 'node', style, placement = 'top', hasArrow, hoverable } = props;
   const graphin = React.useContext(GraphinContext);
@@ -204,16 +206,20 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
     });
   };
   const handleClose = (e: any): void => {
-    const canvas = graph.get('canvas');
-    const { x, y } = canvas.getPointByEvent(e);
-    const shape = canvas.getShape(x, y, e);
-    const parentId = shape?.get('parent')?.get('id');
-    const itemId = item?.getID();
+    let keepOpen = false;
+    if (hoverable) {
+      const canvas = graph.get('canvas');
+      const { x, y } = canvas.getPointByEvent(e);
+      const shape = canvas.getShape(x, y, e);
+      const parentId = shape?.get('parent')?.get('id');
+      const itemId = item?.getID();
+      
+      const inShape = parentId && (parentId === itemId);
+      const inTooltip = document.querySelector(`.${tooltipClassName}:hover`);
+      keepOpen = !!(inShape || inTooltip);
+    }
 
-    const inTooltip = document.querySelector('.graphin-components-tooltip:hover');
-    const inShape = parentId && (parentId === itemId);
-
-    !(hoverable && (inTooltip || inShape)) && setState(preState => {
+    !keepOpen && setState(preState => {
       return {
         ...preState,
         visible: false,
@@ -311,7 +317,7 @@ const Tooltip: React.FunctionComponent<TooltipProps> & { Node: typeof Node } & {
         ref={() => {
           // containerRef = node;
         }}
-        className={`graphin-components-tooltip ${placement}`}
+        className={`${tooltipClassName} ${placement}`}
         // @ts-ignore
         style={{ ...defaultStyle, ...style, ...positionStyle }}
       >
