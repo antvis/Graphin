@@ -16,9 +16,6 @@ const Node: React.FunctionComponent<NodeProps> = props => {
   const { tooltip } = React.useContext(GraphinContext);
   const context = tooltip.node;
   const { item } = context;
-  if (children === null) {
-    return null;
-  }
   if (typeof children !== 'function') {
     console.error('<Tooltip.Node /> children should be a function');
     return null;
