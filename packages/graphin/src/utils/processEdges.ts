@@ -103,6 +103,13 @@ const processEdges = (
         newEdges.push(edge);
       });
     } else {
+      (0, Utils.deepMix)(edges[0], {
+        style: {
+          keyshape: {
+            type: 'line'
+          }
+        }
+      })
       newEdges.push(edges[0]);
     }
   });
