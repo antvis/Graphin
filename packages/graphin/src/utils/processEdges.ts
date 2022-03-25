@@ -103,6 +103,7 @@ const processEdges = (
         newEdges.push(edge);
       });
     } else {
+      // reset keyshape type
       (0, Utils.deepMix)(edges[0], {
         style: {
           keyshape: {
