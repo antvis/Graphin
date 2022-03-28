@@ -336,5 +336,90 @@ export default () => {
         console.error(error);
       }
     },
+    afterDraw(cfg: ModelConfig | undefined, group: IGroup | undefined) {
+      const style = deepMix({}, this.options.style, cfg.style) as EdgeStyle;
+      const { animate, keyshape } = style;
+      /** 如果没有 style.animate 就不绘制 */
+      if (!animate || !animate.type || animate.visible === false) {
+        return;
+      }
+      // get the keshape
+      const shape = group.get('children').find(s => {
+        return s.get('name') === 'keyshape';
+      });
+
+      const { color, type, repeat = true, duration = 3000 } = animate;
+      if (type === 'circle-running') {
+        // the start position of the edge's path
+        const startPoint = shape.getPoint(0);
+
+        // add red circle shape
+        const circle = group.addShape('circle', {
+          attrs: {
+            x: startPoint.x,
+            y: startPoint.y,
+            fill: color || keyshape.stroke,
+            r: keyshape.lineWidth * 1.5 + 2,
+          },
+          name: 'circle-shape',
+        });
+
+        // animation for the red circle
+        circle.animate(
+          ratio => {
+            const tmpPoint = shape.getPoint(ratio);
+            return {
+              x: tmpPoint.x,
+              y: tmpPoint.y,
+            };
+          },
+          {
+            repeat, // Whether executes the animation repeatly
+            duration, // the duration for executing once
+          },
+        );
+      }
+      if (type === 'line-dash') {
+        let index = 0;
+        const lineDash = animate.lineDash || keyshape.lineDash || [4, 2, 1, 2];
+        // Define the animation
+        shape.animate(
+          () => {
+            index++;
+
+            if (index > 9) {
+              index = 0;
+            }
+            // returns the modified configurations here, lineDash and lineDashOffset here
+            return {
+              lineDash,
+              lineDashOffset: -index,
+            };
+          },
+          {
+            repeat, // whether executes the animation repeatly
+            duration, // the duration for executing once
+          },
+        );
+      }
+      if (type === 'line-growth') {
+        const length = shape.getTotalLength();
+
+        shape.animate(
+          ratio => {
+            // the operations in each frame. Ratio ranges from 0 to 1 indicating the prograss of the animation. Returns the modified configurations
+            const startLen = ratio * length;
+            // Calculate the lineDash
+            return {
+              lineDash: [startLen, length - startLen],
+            };
+          },
+          {
+            repeat, // Whether executes the animation repeatly
+            duration, // the duration for executing once
+          },
+        );
+      }
+    },
   });
 };

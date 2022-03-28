@@ -2,6 +2,7 @@
 
 // TODO : remove any type
 import { Graph } from '@antv/g6';
+import React from 'react';
 import { ThemeType } from '../theme';
 
 export interface UserProperties {
@@ -284,6 +285,20 @@ export interface EdgeStyle {
       lineDash: number[];
       lineAppendWidth: number;
       cursor: string;
+      /**
+       * @description 是否展示
+       * @default false
+       */
+      visible: boolean;
+    } & CommondAttrsStyle
+  >;
+  /** 动画 */
+  animate: Partial<
+    {
+      type: 'line-dash' | 'line-growth' | 'circle-running';
+      color: string;
+      repeat: boolean;
+      duration: number;
       /**
        * @description 是否展示
        * @default false
