@@ -1,9 +1,9 @@
 import Force from '../force';
-import Graphin from '../../Graphin';
+import G6 from '@antv/g6';
 import { GraphinData } from '../../typings/type';
 
 export default () => {
-  Graphin.registerLayout('graphin-force', {
+  G6.registerLayout('graphin-force', {
     /**
      * 定义自定义行为的默认参数，会与用户传入的参数进行合并
      */
