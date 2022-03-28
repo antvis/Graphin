@@ -295,9 +295,23 @@ export interface EdgeStyle {
   /** 动画 */
   animate: Partial<
     {
+      /**
+       * @description 动画类型
+       */
       type: 'line-dash' | 'line-growth' | 'circle-running';
+      /**
+       * @description 当类型为'circle-running'时候小圆球的颜色
+       */
       color: string;
+      /**
+       * @description 动画是否重复
+       * @default true
+       */
       repeat: boolean;
+      /**
+       * @description 动画时长
+       * @default 3000
+       */
       duration: number;
       /**
        * @description 是否展示

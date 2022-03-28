@@ -181,7 +181,7 @@ data.edges = [
       },
       animate: {
         type: 'circle-running',
-        fill: 'green',
+        color: 'green',
         repeat: true,
         duration: 4000,
       },
