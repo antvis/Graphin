@@ -1,7 +1,7 @@
-import React from 'react';
 import Graphin, { Utils } from '@antv/graphin';
+import React from 'react';
 
-const data = Utils.mock(8).circle().graphin();
+const data = Utils.mock(11).circle().graphin();
 const layout = {
   type: 'concentric',
   nodeSize: 250,
@@ -155,6 +155,49 @@ data.edges = [
           distance: -40,
         },
         lineDash: [2, 2],
+      },
+    },
+  },
+  {
+    source: 'node-0',
+    target: 'node-8',
+    style: {
+      keyshape: {
+        lineDash: [8, 4],
+        lineWidth: 2,
+      },
+      animate: {
+        type: 'line-dash',
+        repeat: true,
+      },
+    },
+  },
+  {
+    source: 'node-0',
+    target: 'node-9',
+    style: {
+      keyshape: {
+        lineWidth: 1,
+      },
+      animate: {
+        type: 'circle-running',
+        color: 'green',
+        repeat: true,
+        duration: 4000,
+      },
+    },
+  },
+  {
+    source: 'node-0',
+    target: 'node-10',
+    style: {
+      keyshape: {
+        stroke: 'red',
+        lineWidth: 1,
+      },
+      animate: {
+        type: 'line-growth',
+        repeat: false,
       },
     },
   },
