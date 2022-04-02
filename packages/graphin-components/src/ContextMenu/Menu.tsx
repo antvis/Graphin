@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { GraphinContext } from '@antv/graphin';
 import React from 'react';
+import ContextMenuContext from './Context'
 import './index.less';
 
 export interface MenuProps {
@@ -34,20 +34,10 @@ export interface Item {
 }
 const Item = props => {
   const { children, onClick = () => {} } = props;
-  const graphin = React.useContext(GraphinContext);
-  const handleClose = () => {
-    onClick();
-    const { contextmenu } = graphin;
-    // 临时方案
-    if (contextmenu.node) {
-      contextmenu.node.handleClose();
-    }
-    if (contextmenu.edge) {
-      contextmenu.edge.handleClose();
-    }
-    if (contextmenu.canvas) {
-      contextmenu.canvas.handleClose();
-    }
+  const { item, handleClose: close } = React.useContext(ContextMenuContext);
+  const handleClose = (e) => {
+    onClick(e, item ? item.getModel() : undefined);
+    close && close(); // 关闭菜单
   };
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events
   // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -57,32 +47,12 @@ const Item = props => {
 const Menu: React.FunctionComponent<MenuProps> & {
   Item: typeof Item;
 } = props => {
-  const { bindType = 'node' } = props;
-  const graphin = React.useContext(GraphinContext);
-
-  const { options, onChange } = props;
+  const { bindType = 'node', options, onChange = () => {} } = props;
+  const { item, handleClose: close } = React.useContext(ContextMenuContext);
 
   const handleClick = e => {
-    try {
-      const { contextmenu } = graphin;
-
-      let item = null;
-      if (bindType === 'node') {
-        item = contextmenu.node.item.getModel();
-      }
-      if (bindType === 'edge') {
-        item = contextmenu.edge.item.getModel();
-      }
-      if (bindType === 'canvas') {
-        item = null;
-      }
-      if (onChange) {
-        onChange(e, item);
-        contextmenu[bindType].handleClose();
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    onChange(e, item ? item.getModel() : undefined);
+    close && close(); // 关闭菜单
   };
 
   const { children } = props;

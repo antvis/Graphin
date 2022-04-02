@@ -1,15 +1,10 @@
 import * as Graphin from '@antv/graphin';
 import React, { useEffect } from 'react';
 import Menu from './Menu';
+import ContextMenuContext, { ContextMenuContextType, IG6GraphEvent } from './Context'
 
 const { GraphinContext } = Graphin;
 
-interface IG6GraphEvent {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  item: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}
 const defaultStyle: React.CSSProperties = {
   width: 200,
   background: '#fff',
@@ -38,12 +33,6 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
   const graphin = React.useContext(GraphinContext);
   const { graph } = graphin;
 
-  const [state, setState] = React.useState<State>({
-    visible: false,
-    x: 0,
-    y: 0,
-    item: null,
-  });
   const handleShow = (e: IG6GraphEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -108,6 +97,16 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
     });
   };
 
+  const [state, setState] = React.useState<ContextMenuContextType>({
+    handleOpen: handleShow,
+    handleClose,
+    visible: false,
+    x: 0,
+    y: 0,
+    item: null,
+    bindType,
+  });
+
   useEffect(() => {
     // @ts-ignore
     graph.on(`${bindType}:contextmenu`, handleShow);
@@ -130,24 +129,10 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
     top: y,
   };
 
-  /** 将一些方法和数据传递给子组件 */
-  graphin.contextmenu = {
-    ...graphin.contextmenu,
-    [bindType]: {
-      handleOpen: handleShow,
-      handleClose,
-      item,
-      visible,
-      x,
-      y,
-      bindType,
-    },
-  };
-
   const id = (item && !item.destroyed && item.getModel && item.getModel().id) || '';
 
   return (
-    <>
+    <ContextMenuContext.Provider value={state}>
       <div
         ref={node => {
           containerRef = node;
@@ -159,7 +144,7 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
       >
         {visible && children}
       </div>
-    </>
+    </ContextMenuContext.Provider>
   );
 };
 
