@@ -6,11 +6,6 @@ import './index.less';
 
 export interface MenuProps {
   /**
-   * @description 绑定元素，必选
-   * @default node
-   */
-  bindType: string;
-  /**
    * @description Menu的配置选项
    */
   options?: Item[];
@@ -47,7 +42,7 @@ const Item = props => {
 const Menu: React.FunctionComponent<MenuProps> & {
   Item: typeof Item;
 } = props => {
-  const { bindType = 'node', options, onChange = () => {} } = props;
+  const { options, onChange = () => {} } = props;
   const { item, handleClose: close } = React.useContext(ContextMenuContext);
 
   const handleClick = e => {

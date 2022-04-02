@@ -45,7 +45,7 @@ const CanvasMenu = () => {
   };
 
   return (
-    <Menu bindType="canvas">
+    <Menu>
       <Menu.Item onClick={handleClear}>清除画布</Menu.Item>
       <Menu.Item onClick={handleStopLayout}>停止布局</Menu.Item>
       <Menu.Item onClick={handleDownload}>下载画布</Menu.Item>
@@ -61,8 +61,8 @@ const App = () => {
   return (
     <div className="App">
       <Graphin data={data}>
-        <ContextMenu style={{ width: '80px' }}>
-          <Menu options={options} onChange={handleChange} bindType="node" />
+        <ContextMenu style={{ width: '80px' }} bindType="node">
+          <Menu options={options} onChange={handleChange} />
         </ContextMenu>
         <ContextMenu style={{ width: '80px' }} bindType="canvas">
           <CanvasMenu />
@@ -73,7 +73,6 @@ const App = () => {
               return { ...item, name: `${item.name}-EDGE` };
             })}
             onChange={handleChange}
-            bindType="edge"
           />
         </ContextMenu>
       </Graphin>
