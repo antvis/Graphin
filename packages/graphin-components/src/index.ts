@@ -8,6 +8,7 @@ export { default as Hull, HullCfg } from './Hull';
 export { default as LayoutSelector } from './LayoutSelector';
 export { default as Legend } from './Legend';
 export { default as MiniMap } from './MiniMap';
+export { default as SnapLine } from './SnapLine';
 export { default as Toolbar } from './Toolbar';
 export { default as Tooltip } from './Tooltip';
 export * from './typing';
