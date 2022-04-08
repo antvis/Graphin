@@ -1,7 +1,7 @@
-import Graphin from '../../Graphin';
+import G6 from '@antv/g6';
 
 export default () => {
-  Graphin.registerLayout('preset', {
+  G6.registerLayout('preset', {
     init() {},
     execute() {},
     destroy() {

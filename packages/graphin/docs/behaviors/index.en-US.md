@@ -4,7 +4,7 @@ order: 0
 group:
   path: /behaviors
   title: Interactive behavior
-  order: 3
+  order: 0
 nav:
   path: /graphin
   order: 1

@@ -4,7 +4,7 @@ order: 0
 group:
   path: /behaviors
   title: 交互行为
-  order: 3
+  order: 0
 nav:
   path: /graphin
   order: 1

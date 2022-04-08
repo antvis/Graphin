@@ -1,7 +1,7 @@
 import React from 'react';
 import Graphin, { Utils, Behaviors } from '@antv/graphin';
 
-const { ZoomCanvas } = Behaviors;
+const { ZoomCanvas, Hoverable } = Behaviors;
 
 const data = Utils.mock(10).circle().graphin();
 const layout = {
@@ -48,6 +48,7 @@ export default () => {
     <div>
       <Graphin data={data} layout={layout} defaultNode={defaultNode} nodeStateStyles={defaultNodeStatusStyle}>
         <ZoomCanvas />
+        <Hoverable bindType="node" />
       </Graphin>
     </div>
   );
