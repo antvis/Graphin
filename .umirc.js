@@ -11,6 +11,7 @@ export default {
   // sitemap: {
   //   hostname: 'graphin.antv.vision',
   // },
+  extraBabelIncludes: ['@antv/dumi-theme-antv'],
   resolve: {
     includes: [
       // 'packages/graphin/docs/',
