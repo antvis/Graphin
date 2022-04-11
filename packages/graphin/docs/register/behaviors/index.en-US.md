@@ -5,8 +5,9 @@ group:
   path: /register
   title: Custom
 nav:
+  title: 使用文档
   path: /graphin
-  order: 5
+  order: 1
 ---
 
 ## [Recommended] Graphin custom interactive components

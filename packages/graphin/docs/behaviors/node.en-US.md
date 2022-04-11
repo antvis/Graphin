@@ -6,6 +6,7 @@ group:
   title: Interactive behavior
   order: 3
 nav:
+  title: 使用文档
   path: /graphin
   order: 1
 ---

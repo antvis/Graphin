@@ -3,6 +3,7 @@ title: Set Status
 group:
   path: /render
 nav:
+  title: 使用文档
   path: /graphin
   order: 1
 ---

@@ -5,19 +5,20 @@ group:
   title: 布局方案
   order: 9
 nav:
+  title: 使用文档
   path: /graphin
-  order: 2
+  order: 1
 ---
 
 ## 叶子节点聚类
 
-`叶子节点聚类`是指布局为graphin-force时，叶子节点可以根据`节点类型`进行聚类分堆展示。主要作用于在`连续分析探索`的场景，解决展开某个节点的一度关系导致的节点排布混乱（graphin-force布局的节点排布是根据数据施力打散的）、看不清难以发现有效信息等问题；将同一中心节点发散的一度节点进行按类型聚类分堆展示，可以帮助业务更清晰快速的看清。
+`叶子节点聚类`是指布局为 graphin-force 时，叶子节点可以根据`节点类型`进行聚类分堆展示。主要作用于在`连续分析探索`的场景，解决展开某个节点的一度关系导致的节点排布混乱（graphin-force 布局的节点排布是根据数据施力打散的）、看不清难以发现有效信息等问题；将同一中心节点发散的一度节点进行按类型聚类分堆展示，可以帮助业务更清晰快速的看清。
 
-底层算法是是通过配置力导布局`centripetalOptions`，将`不同类型的节点施以一定向心力及设置不同的center中心点`，实现将同类型的节点相对关联的节点聚在一起。相比于普通的全局聚类算法，在不破坏graphin-force整体布局的基础上做了叶子节点聚类分堆，视觉上更方便对类型进行区分，同时也不会打乱边的展示。
-
+底层算法是是通过配置力导布局`centripetalOptions`，将`不同类型的节点施以一定向心力及设置不同的center中心点`，实现将同类型的节点相对关联的节点聚在一起。相比于普通的全局聚类算法，在不破坏 graphin-force 整体布局的基础上做了叶子节点聚类分堆，视觉上更方便对类型进行区分，同时也不会打乱边的展示。
 
 ## 快速使用
-`叶子节点聚类`的使用非常简单，只需要在graphin-force配置`leafCluster`、`nodeclusterby`和`clusterNodeStrength`。
+
+`叶子节点聚类`的使用非常简单，只需要在 graphin-force 配置`leafCluster`、`nodeclusterby`和`clusterNodeStrength`。
 
 ```jsx | pure
 import React, { useEffect, useState } from 'react';
@@ -39,10 +40,11 @@ export default () => {
 ```
 
 ## 使用示例
-为方便区分聚类效果，现将同类型的节点映射成同一种颜色。
-- **简单数据场景效果对比**
-<code src='./demos/simple.tsx'>
-<br />
 
-- **复杂数据场景效果对比**
-<code src='./demos/complex.tsx'>
+为方便区分聚类效果，现将同类型的节点映射成同一种颜色。
+
+- **简单数据场景效果对比**
+  <code src='./demos/simple.tsx'>
+
+* **复杂数据场景效果对比**
+  <!-- <code src='./demos/complex.tsx'> -->

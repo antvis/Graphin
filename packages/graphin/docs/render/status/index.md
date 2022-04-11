@@ -3,6 +3,7 @@ title: 设置状态
 group:
   path: /render
 nav:
+  title: 使用文档
   path: /graphin
   order: 1
 ---

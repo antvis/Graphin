@@ -1,6 +1,6 @@
 ---
 title: Graphin - Graph Insight
-order: 10
+order: 0
 sidebar: false
 banner:
   title: Graphin - Graph Insight

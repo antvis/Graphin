@@ -5,7 +5,9 @@ group:
   path: /quick-start
   order: 0
 nav:
+  title: 使用文档
   path: /graphin
+  order: 1
 ---
 
 ### 01. Graphin 与 G6 的关系是什么？

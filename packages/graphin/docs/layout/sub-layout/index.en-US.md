@@ -5,6 +5,7 @@ group:
   title: Layout Plan
   order: 9
 nav:
+  title: 使用文档
   path: /graphin
   order: 1
 ---

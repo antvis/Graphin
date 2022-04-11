@@ -6,8 +6,9 @@ group:
   title: 元素渲染
   order: 0
 nav:
+  title: 使用文档
   path: /graphin
-  order: 0
+  order: 1
 ---
 
 ### 设置主题

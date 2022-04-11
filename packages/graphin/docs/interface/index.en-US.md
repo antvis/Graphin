@@ -6,8 +6,9 @@ group:
   title: Quick start
   order: 2
 nav:
+  title: 使用文档
   path: /graphin
-  order: 0
+  order: 1
 ---
 
 ## How to use Graphin
@@ -23,7 +24,7 @@ The most basic role of Graphin is the React component. The following table is th
 | width            | `number`            | `-`                   | Graphin canvas width, it is recommended to set the width through the parent element container, the default width is 100%                                         |
 | height           | `number`            | `-`                   | Graphin canvas height, it is recommended to set the width through the parent element container, the default minHeight is 500px                                   |
 | modes            | `G6.Modes`          | `-`                   | Recommended use [Behaviors](/en-US/graphin/behaviors/behaviors)                                                                                                  |
-| plugins          | `G6.Plugins`        | `-`                   | Recommended [Components](/en-US/components/interaction/context-menu)                                                                                             |
+| plugins          | `G6.Plugins`        | `-`                   | Recommended [Components](/en-US/components/built-in/context-menu)                                                                                                |
 | defaultNode      |                     |                       | Default style configuration of node                                                                                                                              |
 | defaultEdge      |                     |                       | Default edge style configuration                                                                                                                                 |
 | defaultCombo     |                     |                       | Combo's default style configuration                                                                                                                              |
