@@ -23,7 +23,7 @@ Graphin 最基础的角色是 React 组件，下表是`<Graphin />`的接口说�
 | width            | `number`            | `-`                   | Graphin 画布宽度,推荐通过父元素容器设置宽度，默认宽度为 100%                 |
 | height           | `number`            | `-`                   | Graphin 画布高度,推荐通过父元素容器设置宽度,默认最小高度 500px               |
 | modes            | `G6.Modes`          | `-`                   | 推荐使用 [Behaviors](/graphin/behaviors/behaviros)                           |
-| plugins          | `G6.Plugins`        | `-`                   | 推荐使用 [Components](/components/interaction/context-menu)                  |
+| plugins          | `G6.Plugins`        | `-`                   | 推荐使用 [Components](/components/built-in/context-menu)                     |
 | defaultNode      |                     |                       | 节点的默认样式配置                                                           |
 | defaultEdge      |                     |                       | 边的默认样式配置                                                             |
 | defaultCombo     |                     |                       | Combo 的默认样式配置                                                         |
