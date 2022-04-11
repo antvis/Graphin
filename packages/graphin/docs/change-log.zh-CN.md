@@ -5,8 +5,9 @@ group:
   path: /quick-start
   order: 0
 nav:
+  title: 使用文档
   path: /graphin
-  order: 0
+  order: 1
 ---
 
 Graphin 严格遵循 [Semantic Versioning 2.0.0 语义化版本规范](http://semver.org/lang/zh-CN/)。

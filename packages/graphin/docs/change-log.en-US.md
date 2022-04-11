@@ -5,8 +5,9 @@ group:
   path: /quick-start
   order: 0
 nav:
+  title: 使用文档
   path: /graphin
-  order: 0
+  order: 1
 ---
 
 Graphic strictly follows [semantic versioning 2.0.0 semantic version Specification](http://semver.org/lang/zh-cn/).

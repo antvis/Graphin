@@ -3,8 +3,9 @@ title: 设置状态
 group:
   path: /render
 nav:
+  title: 使用文档
   path: /graphin
-  order: 0
+  order: 1
 ---
 
 ## 节点的状态

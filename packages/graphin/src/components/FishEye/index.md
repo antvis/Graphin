@@ -7,7 +7,7 @@ group:
 nav:
   title: 分析组件
   path: /components
-  order: 1
+  order: 2
 ---
 
 # FishEye 鱼眼放大镜

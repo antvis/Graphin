@@ -5,8 +5,9 @@ group:
   path: /quick-start
   order: 0
 nav:
+  title: 使用文档
   path: /graphin
-  order: 0
+  order: 1
 ---
 
 > 本指南参考自 [Ant Design](https://ant.design/docs/react/contributing-cn)

@@ -6,7 +6,7 @@ group:
 nav:
   title: Components
   path: /components
-  order: 1
+  order: 2
 ---
 
 # Hull

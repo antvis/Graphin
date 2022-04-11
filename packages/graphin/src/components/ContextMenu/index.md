@@ -8,7 +8,7 @@ group:
 nav:
   title: 分析组件
   path: /components
-  order: 1
+  order: 2
 ---
 
 # ContextMenu 右键菜单

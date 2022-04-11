@@ -6,8 +6,9 @@ group:
   title: Element Rendering
   order: 0
 nav:
+  title: 使用文档
   path: /graphin
-  order: 0
+  order: 1
 ---
 
 ### Set The Theme

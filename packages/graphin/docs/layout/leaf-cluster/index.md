@@ -5,8 +5,9 @@ group:
   title: 布局方案
   order: 9
 nav:
+  title: 使用文档
   path: /graphin
-  order: 0
+  order: 1
 ---
 
 ## 叶子节点聚类

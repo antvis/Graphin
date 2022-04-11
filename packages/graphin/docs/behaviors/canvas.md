@@ -6,8 +6,9 @@ group:
   title: 交互行为
   order: 3
 nav:
+  title: 使用文档
   path: /graphin
-  order: 0
+  order: 1
 ---
 
 ## 用法
