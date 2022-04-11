@@ -6,6 +6,7 @@ group:
   order: 0
 nav:
   path: /graphin
+  order: 0
 ---
 
 ## 📖 背景介绍

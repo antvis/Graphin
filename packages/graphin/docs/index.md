@@ -1,6 +1,7 @@
 ---
 title: Graphin | 图可视分析解决方案
 sidebar: false
+order: 0
 banner:
   title: Graphin 图的分析洞察
   desc: Graphin 取名意为 Graph Insight（图的分析洞察），是一个基于 G6 封装的 React 组件库，专注在关系可视分析领域，简单高效，开箱即用。

@@ -4,7 +4,7 @@ group:
   path: /render
 nav:
   path: /graphin
-  order: 1
+  order: 0
 ---
 
 ## 节点的状态

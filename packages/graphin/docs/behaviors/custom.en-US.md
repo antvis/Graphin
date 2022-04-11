@@ -7,7 +7,7 @@ group:
   order: 4
 nav:
   path: /graphin
-  order: 1
+  order: 0
 ---
 
 ## Common Case

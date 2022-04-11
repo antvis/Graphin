@@ -6,7 +6,7 @@ group:
   title: 自定义机制
 nav:
   path: /graphin
-  order: 5
+  order: 0
 ---
 
 ## 【推荐】 Graphin 自定义 交互组件

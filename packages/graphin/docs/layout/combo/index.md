@@ -5,7 +5,7 @@ group:
   title: 布局方案
 nav:
   path: /graphin
-  order: 2
+  order: 0
 ---
 
 ## 分组布局

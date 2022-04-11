@@ -6,7 +6,7 @@ group:
   order: 9
 nav:
   path: /graphin
-  order: 1
+  order: 0
 ---
 
 ## Sub Graph Layout

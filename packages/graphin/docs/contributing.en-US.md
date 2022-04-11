@@ -6,6 +6,7 @@ group:
   order: 0
 nav:
   path: /graphin
+  order: 0  
 ---
 
 > This guide is referenced from [Ant Design](https://ant.design/docs/react/contributing-cn)

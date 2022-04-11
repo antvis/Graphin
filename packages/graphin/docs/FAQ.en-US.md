@@ -6,6 +6,7 @@ group:
   order: 0
 nav:
   path: /graphin
+  order: 0
 ---
 
 ### 01. What is the relationship between Graphin and G6?

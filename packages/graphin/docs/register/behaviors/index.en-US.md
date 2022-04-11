@@ -6,7 +6,7 @@ group:
   title: Custom
 nav:
   path: /graphin
-  order: 5
+  order: 0
 ---
 
 ## [Recommended] Graphin custom interactive components

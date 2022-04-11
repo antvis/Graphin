@@ -6,7 +6,7 @@ group:
   title: Layout Plan
 nav:
   path: /graphin
-  order: 1
+  order: 0
 ---
 
 > Note ⚠️: The visual layout switcher is still under development, please wait patiently... `import {LayoutSelector} from @antv/graphin-components` will be provided at that time

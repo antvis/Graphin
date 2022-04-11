@@ -5,7 +5,7 @@ group:
   title: 布局方案
 nav:
   path: /graphin
-  order: 2
+  order: 0
 ---
 
 ## 分组布局
@@ -18,7 +18,7 @@ nav:
 
 > 注意 ⚠️ ：Graphin 目前对这块的功能还处于研究中，如果你感兴趣，欢迎在 github 上与我们交流～
 
-## 数据1
+## 数据 1
 
 <code src='./demos/combo-combined.tsx'>
 

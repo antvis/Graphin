@@ -5,7 +5,7 @@ group:
   path: /render
 nav:
   path: /graphin
-  order: 1
+  order: 0
 ---
 
 ## 基本介绍

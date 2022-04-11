@@ -5,7 +5,7 @@ group:
   title: Layout Plan
 nav:
   path: /graphin
-  order: 2
+  order: 0
 ---
 
 ## Combo Combined Layout

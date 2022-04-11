@@ -6,6 +6,7 @@ group:
   order: 0
 nav:
   path: /graphin
+  order: 0
 ---
 
 Graphin 严格遵循 [Semantic Versioning 2.0.0 语义化版本规范](http://semver.org/lang/zh-CN/)。

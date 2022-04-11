@@ -6,7 +6,7 @@ group:
   order: 9
 nav:
   path: /graphin
-  order: 2
+  order: 0
 ---
 
 ## Dynamic Layout

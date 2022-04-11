@@ -7,7 +7,7 @@ group:
   order: 0
 nav:
   path: /graphin
-  order: 1
+  order: 0
 ---
 
 ## 基本用法

@@ -5,6 +5,7 @@ group:
   order: 0
 nav:
   path: /graphin
+  order: 0
 ---
 
 From V1 to V2
