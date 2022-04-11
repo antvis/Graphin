@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { GraphinContext, IG6GraphEvent } from '../../index';
 
-interface ContextMenuProps {
+export interface ContextMenuProps {
   bindType?: 'node' | 'edge' | 'canvas';
   container: React.RefObject<HTMLDivElement>;
 }

@@ -9,6 +9,7 @@ import debug from './debug';
 import hexToRgba, { hexToRgbaToHex } from './hexToRgba';
 import mock from './mock';
 import processEdges from './processEdges';
+import { getEnumDataMap, getEnumValue } from './processGraphData';
 import shallowEqual from './shallowEqual';
 import uuid from './uuid';
 import walk from './walk';
@@ -30,4 +31,6 @@ export default {
 
   layouts,
   uniqBy,
+  getEnumDataMap,
+  getEnumValue,
 };

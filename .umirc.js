@@ -14,19 +14,12 @@ export default {
   extraBabelIncludes: ['@antv/dumi-theme-antv'],
   resolve: {
     includes: [
-      // 'packages/graphin/docs/',
-      // 'packages/graphin/src/components',
-      // 'packages/graphin-components/src/',
-      // 'packages/graphin-icons/src',
-
-      // 'packages/graphin/docs/layout/leaf-cluster',
-      // 'packages/graphin/docs/layout/combo-combined-layout',
       'packages/graphin/docs/',
-      'packages/graphin-components/src/',
+      'packages/graphin/src/components',
       'packages/graphin-icons/src',
 
+      // 'packages/graphin-components/src/',
       // 'packages/graphin-graphscope/docs/',
-
       /** local develop */
       // 'packages/graphin-components/src/VisSettingPanel',
     ],
