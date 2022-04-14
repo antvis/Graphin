@@ -115,7 +115,7 @@ const Hull: React.FunctionComponent<IHullProps> = props => {
         // 直接调用updateData会报错
         if (item.group.destroyed) {
           // @ts-ignore
-          hullInstances.current[index] = graph.createHull(
+          hullInstances[index] = graph.createHull(
             // @ts-ignore
             deepMergeCfg(defaultHullCfg, {
               id: `{Math.random()}`, // Utils.uuid(),
