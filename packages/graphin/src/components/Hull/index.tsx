@@ -94,9 +94,13 @@ let hullInstances: any[];
 const Hull: React.FunctionComponent<IHullProps> = props => {
   const graphin = React.useContext<GraphinContextType>(GraphinContext);
   const { graph } = graphin;
+  const { options } = props;
 
   React.useEffect(() => {
-    const { options } = props;
+    // 如果options有更改，先删除再创建
+    if (hullInstances && hullInstances.length) {
+      hullInstances.forEach(item => graph.removeHull(item));
+    }
 
     hullInstances = options.map(item => {
       return graph.createHull(
@@ -132,7 +136,7 @@ const Hull: React.FunctionComponent<IHullProps> = props => {
     return () => {
       graph.on('afterupdateitem', handleAfterUpdateItem);
     };
-  }, [graph]);
+  }, [graph, options]);
 
   return null;
 };
