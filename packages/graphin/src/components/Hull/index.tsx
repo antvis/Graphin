@@ -122,7 +122,7 @@ const Hull: React.FunctionComponent<IHullProps> = props => {
           hullInstances[index] = graph.createHull(
             // @ts-ignore
             deepMergeCfg(defaultHullCfg, {
-              id: `{Math.random()}`, // Utils.uuid(),
+              id: `${Math.random()}`, // Utils.uuid(),
               ...options[index],
             }),
           );
