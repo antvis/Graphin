@@ -133,8 +133,10 @@ const Hull: React.FunctionComponent<IHullProps> = props => {
     });
 
     graph.on('afterupdateitem', handleAfterUpdateItem);
+    graph.on('aftergraphrefreshposition', handleAfterUpdateItem);
     return () => {
-      graph.on('afterupdateitem', handleAfterUpdateItem);
+      graph.off('afterupdateitem', handleAfterUpdateItem);
+      graph.off('aftergraphrefreshposition', handleAfterUpdateItem);
     };
   }, [graph, options]);
 
