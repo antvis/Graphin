@@ -1,6 +1,7 @@
 import React from 'react';
 import type { GraphinContextType } from '../../GraphinContext';
 import GraphinContext from '../../GraphinContext';
+import { debounce } from '@antv/util';
 
 const defaultHullCfg = {
   members: [],
@@ -107,11 +108,25 @@ const Hull: React.FunctionComponent<IHullProps> = props => {
       );
     });
 
-    const handleAfterUpdateItem = () => {
-      hullInstances.forEach(item => {
-        item.updateData(item.members);
+    // afterupdateitem会触发多次，所以使用debounce包裹一下
+    const handleAfterUpdateItem = debounce(() => {
+      hullInstances.forEach((item, index) => {
+        // Graphin的数据更新后，这里存储的instance.group已经被销毁了
+        // 直接调用updateData会报错
+        if (item.group.destroyed) {
+          // @ts-ignore
+          hullInstances.current[index] = graph.createHull(
+            // @ts-ignore
+            deepMergeCfg(defaultHullCfg, {
+              id: `{Math.random()}`, // Utils.uuid(),
+              ...options[index],
+            }),
+          );
+        } else {
+          item.updateData(item.members);
+        }
       });
-    };
+    });
 
     graph.on('afterupdateitem', handleAfterUpdateItem);
     return () => {
