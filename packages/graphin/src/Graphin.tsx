@@ -346,6 +346,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       // this.updateOptions();
     }
 
+    let newDragNodes: IUserNode[];
+
     /** 数据变化 */
     if (isDataChange) {
       this.initData(data);
@@ -357,10 +359,16 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         const {
           context: { dragNodes },
         } = this.state;
+        // 若 dragNodes 中的节点已经不存在，则从数组中删去
+        // @ts-ignore
+        newDragNodes = dragNodes.filter(
+          dNode => this.data?.nodes && this.data.nodes.find(node => node.id === dNode.id),
+        );
+
         // 更新拖拽后的节点的mass到data
         // @ts-ignore
         this.data?.nodes?.forEach(node => {
-          const dragNode = dragNodes.find(item => item.id === node.id);
+          const dragNode = newDragNodes.find(item => item.id === node.id);
           if (dragNode) {
             node.layout = {
               ...node.layout,
@@ -394,7 +402,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
               apis: this.apis,
               theme: this.theme,
               layout: this.layout,
-              dragNodes: preState.context.dragNodes,
+              dragNodes: newDragNodes || preState.context.dragNodes,
               updateContext: this.updateContext,
             },
           };
