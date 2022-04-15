@@ -275,19 +275,23 @@ class ForceLayout {
     const getClusterNodeStrength = (node: NodeType) =>
       typeof propsClusterNodeStrength === 'function' ? propsClusterNodeStrength(node) : propsClusterNodeStrength;
 
+    // eslint-disable-next-line
+    const sameTypeLeafMap: { [nodeId: string]: any } = {};
+    this.nodes.forEach(node => {
+      const { degree } = node.data?.layout || {};
+      if (degree === 1) {
+        sameTypeLeafMap[node.id] = Utils.getCoreNodeAndRelativeLeafNodes('leaf', node, this.edges, nodeClusterBy);
+      }
+    });
+    const relativeNodesType = Utils.getRelativeNodesType(this.nodes, nodeClusterBy);
+
     // 如果传入了需要叶子节点聚类
     if (leafCluster) {
       centripetalOptions = {
         single: 100,
         leaf: (node, nodes, edges) => {
-          const relativeNodesType = Utils.getRelativeNodesType(nodes, nodeClusterBy);
           // 找出与它关联的边的起点或终点出发的所有一度节点中同类型的叶子节点
-          const { relativeLeafNodes, sameTypeLeafNodes } = Utils.getCoreNodeAndRelativeLeafNodes(
-            'leaf',
-            node,
-            edges,
-            nodeClusterBy,
-          );
+          const { relativeLeafNodes, sameTypeLeafNodes } = sameTypeLeafMap[node.id] || {};
           // 如果都是同一类型或者每种类型只有1个，则施加默认向心力
           if (sameTypeLeafNodes?.length === relativeLeafNodes?.length || relativeNodesType?.length === 1) {
             return 1;
@@ -308,7 +312,7 @@ class ForceLayout {
           if (degree === 1) {
             // 如果为叶子节点
             // 找出与它关联的边的起点出发的所有一度节点中同类型的叶子节点
-            const { sameTypeLeafNodes } = Utils.getCoreNodeAndRelativeLeafNodes('leaf', node, edges, nodeClusterBy);
+            const { sameTypeLeafNodes = [] } = sameTypeLeafMap[node.id] || {};
             if (sameTypeLeafNodes.length === 1) {
               // 如果同类型的叶子节点只有1个，中心节点置为undefined
               centerNode = undefined;
