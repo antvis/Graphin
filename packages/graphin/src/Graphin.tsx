@@ -362,8 +362,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         // 若 dragNodes 中的节点已经不存在，则从数组中删去
         // @ts-ignore
         newDragNodes = dragNodes.filter(
-          // @ts-ignore
-          dNode => this.data?.nodes && this.data.nodes.find(node => node.id === dNode.id),
+          dNode => (this.data as GraphinData)?.nodes && (this.data as GraphinData).nodes.find(node => node.id === dNode.id),
         );
 
         // 更新拖拽后的节点的mass到data
