@@ -14,6 +14,8 @@ export interface State {
   /** 触发的元素 */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   item: IG6GraphEvent['item'];
+  /** 只有绑定canvas的时候才触发 */
+  selectedItems: IG6GraphEvent['item'][];
 }
 
 const useContextMenu = (props: ContextMenuProps) => {
@@ -25,6 +27,7 @@ const useContextMenu = (props: ContextMenuProps) => {
     x: 0,
     y: 0,
     item: null,
+    selectedItems: [],
   });
   const handleShow = (e: IG6GraphEvent) => {
     e.preventDefault();
@@ -94,25 +97,38 @@ const useContextMenu = (props: ContextMenuProps) => {
   };
 
   useEffect(() => {
+    const handleSaveAllItem = (e: IG6GraphEvent) => {
+      setState(preState => {
+        return {
+          ...preState,
+          selectedItems: e.selectedItems as IG6GraphEvent['item'][],
+        };
+      });
+    };
     // @ts-ignore
     graph.on(`${bindType}:contextmenu`, handleShow);
     graph.on('canvas:click', handleClose);
     graph.on('canvas:drag', handleClose);
     graph.on('wheelzoom', handleClose);
+    if (bindType === 'canvas') {
+      graph.on('nodeselectchange', handleSaveAllItem);
+    }
 
     return () => {
       graph.off(`${bindType}:contextmenu`, handleShow);
       graph.off('canvas:click', handleClose);
       graph.off('canvas:drag', handleClose);
       graph.off('wheelzoom', handleClose);
+      graph.off('nodeselectchange', handleSaveAllItem);
     };
-  }, []);
-  const { x, y, visible, item } = state;
+  }, [graph, bindType]);
+  const { x, y, visible, item, selectedItems } = state;
 
   return {
     oneShow: handleShow,
     onClose: handleClose,
     item,
+    selectedItems,
     visible,
     x,
     y,
