@@ -1,4 +1,4 @@
-import { IUserEdge } from '@antv/graphin';
+import { IUserEdge } from '../index';
 
 function isEven(number: number) {
   return number % 2 === 0;
