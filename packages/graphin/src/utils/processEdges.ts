@@ -1,5 +1,4 @@
-import { IUserEdge } from '../typings/type';
-import { deepMix } from '@antv/util';
+import { IUserEdge } from '@antv/graphin';
 
 function isEven(number: number) {
   return number % 2 === 0;
@@ -17,7 +16,7 @@ function isOdd(number: number) {
 const processEdges = (
   edges: IUserEdge[],
   {
-    poly = 50,
+    poly = 30,
     loop = 10,
   }: {
     /** poly distance */
@@ -25,14 +24,16 @@ const processEdges = (
     /** loop distance */
     loop: number;
   } = {
-    poly: 50,
+    poly: 30,
     loop: 10,
   },
 ) => {
   const edgesMap: { [edgeId: string]: IUserEdge[] } = {};
-  edges.forEach(edge => {
+  edges.forEach((item, index) => {
+    const edge = { ...item };
     const { source, target } = edge;
     const edgeId = `${source}-${target}`;
+    edge.id = edge.id || `${source}-${target}-${index}`;
     const revertEdgeId = `${target}-${source}`;
     /** 存储edge */
     if (edgesMap[edgeId]) {
@@ -51,7 +52,6 @@ const processEdges = (
     if (edges.length > 1) {
       // 说明是多边的情况
       const isEvenCount = isEven(edges.length);
-
       edges.forEach((edge, i: number) => {
         const { source, target } = edge;
         const isLoop = source === target;
@@ -94,12 +94,14 @@ const processEdges = (
           };
         }
 
-        deepMix(edge, {
-          style: {
-            keyshape: keyshapeStyle,
+        edge.style = {
+          ...edge.style,
+          keyshape: {
+            ...edge.style?.keyshape,
+            ...keyshapeStyle,
           },
-        });
-
+        };
+        edge.isMultiple = true;
         newEdges.push(edge);
       });
     } else {
