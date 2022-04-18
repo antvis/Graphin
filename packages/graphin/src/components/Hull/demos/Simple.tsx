@@ -22,6 +22,7 @@ const Demo = () => {
     },
   ]);
   const handleChangeHull = (itemProps: ContextMenuValue) => {
+    // @ts-ignore
     const nodes = (itemProps.selectedItems && itemProps.selectedItems.nodes) || [];
     const members = nodes.map((item: any) => {
       return item.get('id');
@@ -63,6 +64,7 @@ const Demo = () => {
             );
           }}
         </ContextMenu>
+        {/* @ts-ignore */}
         <Hull options={hullOptions} />
       </Graphin>
     </div>
