@@ -91,6 +91,10 @@ export interface GraphinTreeData {
 }
 
 export interface GraphinProps {
+  /** container id */
+  containerId?: string;
+  /** container className */
+  containerStyle?: React.CSSProperties;
   /** user custom styles */
   style?: React.CSSProperties;
   /** 主题 */

@@ -8,7 +8,7 @@ import Behaviors from './behaviors';
 import { DEFAULT_TREE_LATOUT_OPTIONS, TREE_LAYOUTS } from './consts';
 /** Context */
 import GraphinContext from './GraphinContext';
-import './index.less';
+// import './index.less';
 /** 内置布局 */
 import LayoutController from './layout';
 import { getDefaultStyleByTheme, ThemeData } from './theme/index';
@@ -362,7 +362,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         // 若 dragNodes 中的节点已经不存在，则从数组中删去
         // @ts-ignore
         newDragNodes = dragNodes.filter(
-          dNode => (this.data as GraphinData)?.nodes && (this.data as GraphinData).nodes.find(node => node.id === dNode.id),
+          dNode =>
+            (this.data as GraphinData)?.nodes && (this.data as GraphinData).nodes.find(node => node.id === dNode.id),
         );
 
         // 更新拖拽后的节点的mass到data
@@ -488,18 +489,32 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
   render() {
     const { isReady } = this.state;
-    const { modes, style } = this.props;
+    const { modes, style, containerId, containerStyle } = this.props;
 
     return (
       <GraphinContext.Provider value={this.state.context}>
-        <div id="graphin-container">
+        <div
+          id={containerId || 'graphin-container'}
+          style={{
+            height: '100%',
+            width: '100%',
+            position: 'relative',
+            ...containerStyle,
+          }}
+        >
           <div
             data-testid="custom-element"
             className="graphin-core"
             ref={node => {
               this.graphDOM = node;
             }}
-            style={{ background: this.theme?.background, ...style }}
+            style={{
+              height: '100%',
+              width: ' 100%',
+              minHeight: '500px',
+              background: this.theme?.background || '#fff',
+              ...style,
+            }}
           />
           <div className="graphin-components">
             {isReady && (
