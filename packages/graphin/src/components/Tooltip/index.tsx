@@ -26,7 +26,7 @@ export interface TooltipProps {
    * @description children
    * @type  React.ReactChild | JSX.Element
    */
-  children: (props: TooltipValue) => React.ReactNode | null;
+  children: (props: TooltipValue) => React.ReactNode;
   /**
    * @description styles
    */
