@@ -1,5 +1,5 @@
 import { ModelConfig } from '@antv/g6';
-import React from 'react';
+import React, { useRef } from 'react';
 import getContainerStyles from './getContainerStyles';
 import './index.less';
 import useTooltip, { State } from './useTooltip';
@@ -26,7 +26,7 @@ export interface TooltipProps {
    * @description children
    * @type  React.ReactChild | JSX.Element
    */
-  children: (props: TooltipValue) => React.ReactNode;
+  children: (props: TooltipValue) => React.ReactNode | null;
   /**
    * @description styles
    */
@@ -42,9 +42,10 @@ export interface TooltipProps {
   hasArrow?: boolean;
 }
 
-const container = React.createRef<HTMLDivElement>();
 
 const Tooltip: React.FunctionComponent<TooltipProps> = props => {
+  const container = useRef<HTMLDivElement>(null);
+
   const { children, bindType = 'node', style, placement = 'top', hasArrow } = props;
   const { x, y, visible, item } = useTooltip({ bindType, container });
 
@@ -53,7 +54,7 @@ const Tooltip: React.FunctionComponent<TooltipProps> = props => {
   try {
     if (item) {
       const { type } = item.getModel();
-      if (type === 'graphin-cirle') {
+      if (type === 'graphin-circle') {
         const { style } = item.getModel();
         if (style) {
           nodeSize = style.keyshape.size as number;

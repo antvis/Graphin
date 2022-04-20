@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { GraphinContext, IG6GraphEvent } from '../../index';
+import { GraphinContext, IG6GraphEvent } from '@antv/graphin';
 
 export interface State {
   /** 当前状态 */
@@ -136,7 +136,7 @@ const useTooltip = (props: Props) => {
       container.current?.removeEventListener('mouseleave', handleClose);
       // graph.off(`${bindType}:mousemove`, handleUpdatePosition);
     };
-  }, []);
+  }, [container.current]);
 
   return {
     ...state,
