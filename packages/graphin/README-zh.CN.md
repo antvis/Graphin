@@ -10,7 +10,7 @@
 
 ## @antv/graphin
 
-这是 Graphin 的核心 React 组件。Graphin 是基于 [G6 3.x](https://github.com/antvis/g6) 的图分析解决方案。
+这是 Graphin 的核心 React 组件。Graphin 是基于 [G6 4.x](https://github.com/antvis/g6) 的图分析解决方案。
 
 ## 安装
 

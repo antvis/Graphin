@@ -10,7 +10,7 @@
 
 ## @antv/graphin
 
-This package is the core React component of Graphin, the graph analysis toolkit based on [G6 3.x](https://github.com/antvis/g6).
+This package is the core React component of Graphin, the graph analysis toolkit based on [G6 4.x](https://github.com/antvis/g6).
 
 ## Install
 
