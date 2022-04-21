@@ -48,6 +48,17 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
     e.preventDefault();
     e.stopPropagation();
 
+    // Re-render before calling getBoundingClientRect
+    // on the containerRef for correct height (first click).
+    setState(preState => {
+      return {
+        ...preState,
+        visible: true,
+        x: e.canvasX,
+        y: e.canvasY
+      };
+    });
+
     const width: number = graph.get('width');
     const height: number = graph.get('height');
 
