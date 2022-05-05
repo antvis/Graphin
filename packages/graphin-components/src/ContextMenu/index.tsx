@@ -1,4 +1,5 @@
 import * as Graphin from '@antv/graphin';
+import { isArray } from '@antv/util';
 import React, { useEffect } from 'react';
 import Menu from './Menu';
 
@@ -15,10 +16,11 @@ const defaultStyle: React.CSSProperties = {
   background: '#fff',
 };
 
+type bindings = 'node' | 'edge' | 'canvas';
 interface ContextMenuProps {
   children: React.ReactChildren | JSX.Element;
   style?: React.CSSProperties;
-  bindType?: 'node' | 'edge' | 'canvas';
+  bindTypes?: bindings | bindings[];
 }
 
 interface State {
@@ -34,7 +36,7 @@ interface State {
 let containerRef: HTMLDivElement | null;
 
 const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Menu } = props => {
-  const { children, bindType = 'node', style } = props;
+  const { children, bindTypes = 'node', style } = props;
   const graphin = React.useContext(GraphinContext);
   const { graph } = graphin;
 
@@ -47,6 +49,11 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
   const handleShow = (e: IG6GraphEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
+    let type = "canvas";
+    if (e.item) {
+      type = e.item.getType();
+    }
 
     const width: number = graph.get('width');
     const height: number = graph.get('height');
@@ -71,7 +78,7 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
       y = e.canvasY - bbox.height - offsetY + graphTop;
     }
 
-    if (bindType === 'node') {
+    if (type === 'node') {
       // 如果是节点，则x，y指定到节点的中心点
       // eslint-disable-next-line no-underscore-dangle
       const { x: PointX, y: PointY } = (e.item && e.item.getModel()) as { x: number; y: number };
@@ -109,14 +116,22 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
   };
 
   useEffect(() => {
-    // @ts-ignore
-    graph.on(`${bindType}:contextmenu`, handleShow);
+    isArray(bindTypes)
+      ? bindTypes.map((bind) => {
+        return graph.on(`${bind}:contextmenu`, handleShow);
+      })
+      : graph.on(`${bindTypes}:contextmenu`, handleShow);
+
     graph.on('canvas:click', handleClose);
     graph.on('canvas:drag', handleClose);
     graph.on('wheelzoom', handleClose);
 
     return () => {
-      graph.off(`${bindType}:contextmenu`, handleShow);
+      isArray(bindTypes)
+        ? bindTypes.map((bind) => {
+          return graph.off(`${bind}:contextmenu`, handleShow);
+        })
+        : graph.off(`${bindTypes}:contextmenu`, handleShow);
       graph.off('canvas:click', handleClose);
       graph.off('canvas:drag', handleClose);
       graph.off('wheelzoom', handleClose);
@@ -131,17 +146,37 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
   };
 
   /** 将一些方法和数据传递给子组件 */
-  graphin.contextmenu = {
-    ...graphin.contextmenu,
-    [bindType]: {
+  const bindings = {};
+
+  isArray(bindTypes)
+    ?
+    bindTypes.map((bind) => {
+      return (
+        bindings[bind] = {
+          handleOpen: handleShow,
+          handleClose,
+          item,
+          visible,
+          x,
+          y,
+          bindType: bind,
+        }
+      )
+    })
+    :
+    bindings[bindTypes] = {
       handleOpen: handleShow,
       handleClose,
       item,
       visible,
       x,
       y,
-      bindType,
-    },
+      bindTypes,
+    }
+
+  graphin.contextmenu = {
+    ...graphin.contextmenu,
+    ...bindings
   };
 
   const id = (item && !item.destroyed && item.getModel && item.getModel().id) || '';
