@@ -20,7 +20,7 @@ type bindings = 'node' | 'edge' | 'canvas';
 interface ContextMenuProps {
   children: React.ReactChildren | JSX.Element;
   style?: React.CSSProperties;
-  bindTypes?: bindings | bindings[];
+  bindType?: bindings | bindings[];
 }
 
 interface State {
@@ -36,7 +36,7 @@ interface State {
 let containerRef: HTMLDivElement | null;
 
 const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Menu } = props => {
-  const { children, bindTypes = 'node', style } = props;
+  const { children, bindType = 'node', style } = props;
   const graphin = React.useContext(GraphinContext);
   const { graph } = graphin;
 
@@ -116,22 +116,22 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
   };
 
   useEffect(() => {
-    isArray(bindTypes)
-      ? bindTypes.map((bind) => {
+    isArray(bindType)
+      ? bindType.map((bind) => {
         return graph.on(`${bind}:contextmenu`, handleShow);
       })
-      : graph.on(`${bindTypes}:contextmenu`, handleShow);
+      : graph.on(`${bindType}:contextmenu`, handleShow);
 
     graph.on('canvas:click', handleClose);
     graph.on('canvas:drag', handleClose);
     graph.on('wheelzoom', handleClose);
 
     return () => {
-      isArray(bindTypes)
-        ? bindTypes.map((bind) => {
+      isArray(bindType)
+        ? bindType.map((bind) => {
           return graph.off(`${bind}:contextmenu`, handleShow);
         })
-        : graph.off(`${bindTypes}:contextmenu`, handleShow);
+        : graph.off(`${bindType}:contextmenu`, handleShow);
       graph.off('canvas:click', handleClose);
       graph.off('canvas:drag', handleClose);
       graph.off('wheelzoom', handleClose);
@@ -148,9 +148,9 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
   /** 将一些方法和数据传递给子组件 */
   const bindings = {};
 
-  isArray(bindTypes)
+  isArray(bindType)
     ?
-    bindTypes.map((bind) => {
+    bindType.map((bind) => {
       return (
         bindings[bind] = {
           handleOpen: handleShow,
@@ -164,14 +164,14 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
       )
     })
     :
-    bindings[bindTypes] = {
+    bindings[bindType] = {
       handleOpen: handleShow,
       handleClose,
       item,
       visible,
       x,
       y,
-      bindTypes,
+      bindType,
     }
 
   graphin.contextmenu = {
