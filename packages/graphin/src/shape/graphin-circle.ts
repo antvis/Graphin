@@ -4,9 +4,14 @@ import G6, { INode } from '@antv/g6';
 import { deepMix, isArray, isNumber } from '@antv/util';
 import { getDefaultStyleByTheme } from '../theme';
 import { IUserNode, NodeStyle } from '../typings/type';
-import { convertSizeToWH, getBadgePosition, getLabelXYByPosition, removeDumpAttrs, setStatusStyle } from './utils';
-
-const NODE_LABEL_BG_NAME = 'label-background';
+import {
+  convertSizeToWH,
+  getBadgePosition,
+  getLabelXYByPosition,
+  removeDumpAttrs,
+  setStatusStyle,
+  ShapeItemsNames,
+} from './utils';
 
 function getRadiusBySize(size: number | number[] | undefined) {
   let r;
@@ -63,7 +68,7 @@ const parseHalo = (style: NodeStyle) => {
     ...otherAttrs,
   };
   return {
-    name: 'halo',
+    name: ShapeItemsNames.halo,
     visible: visible !== false,
     attrs: removeDumpAttrs(attrs),
   };
@@ -87,7 +92,7 @@ const parseKeyshape = (style: NodeStyle) => {
     ...otherAttrs,
   };
   return {
-    name: 'keyshape',
+    name: ShapeItemsNames.keyshape,
     visible: visible !== false,
     attrs: removeDumpAttrs(attrs),
   };
@@ -113,7 +118,7 @@ const parseLabel = (style: NodeStyle) => {
     ...otherAttrs,
   };
   return {
-    name: 'label',
+    name: ShapeItemsNames.label,
     visible: visible !== false,
     attrs: removeDumpAttrs(attrs),
   };
@@ -141,7 +146,7 @@ const parseIcon = (style: NodeStyle) => {
   const [width, height] = convertSizeToWH(size);
 
   const params = {
-    name: 'icon',
+    name: ShapeItemsNames.icon,
     visible: visible !== false,
     capture: false,
   };
@@ -233,7 +238,7 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
         x: realX,
         y: realY,
       },
-      name: 'badges-circle',
+      name: ShapeItemsNames.badgesCircle,
     };
     if (id) {
       shape.id = id;
@@ -266,7 +271,7 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
         y: realY,
         radius: (height + padding * 2) / 3,
       },
-      name: 'badges-rect',
+      name: ShapeItemsNames.badgesRect,
     };
     if (id) {
       shape.id = id;
@@ -287,7 +292,7 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
         fill: color,
       },
       capture: false,
-      name: 'badges-text',
+      name: ShapeItemsNames.badgesText,
     });
   } else if (type === 'image') {
     group.addShape('image', {
@@ -299,7 +304,7 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
         img: badgeValue,
       },
       capture: false,
-      name: 'badges-image',
+      name: ShapeItemsNames.badgesImage,
     });
   }
 };
@@ -307,6 +312,7 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
 const getLabelBgStyleByPosition = (labelStyle: any) => {
   const WIDTH_APPROX = 0.5;
   const HEIGHT_APPROX = 1.2;
+  const Y_OFFSET = 2;
 
   const defaultLabelBgStyle = {
     fill: undefined,
@@ -325,7 +331,7 @@ const getLabelBgStyleByPosition = (labelStyle: any) => {
   const style = {
     ...compiledLabelBgStyle,
     x: 0 - backgroundWidth / 2,
-    y: labelStyle.y - padding.y / 2,
+    y: labelStyle.y - padding.y / 2 - Y_OFFSET,
     width: backgroundWidth,
     height: backgroundHeight,
   };
@@ -360,13 +366,12 @@ export default () => {
 
       const parsedLabel = parseLabel(style);
 
-      if (parsedLabel.attrs.background) {
-        // initial background for node label
-        group.addShape('rect', {
-          attrs: getLabelBgStyleByPosition(parsedLabel.attrs),
-          name: NODE_LABEL_BG_NAME,
-        });
-      }
+      // apply label background by default (if no initial background set on styles, use transparent one)
+      // it will allow to use label background on states without specifying it on intial styles
+      group.addShape('rect', {
+        attrs: getLabelBgStyleByPosition(parsedLabel.attrs),
+        name: ShapeItemsNames.labelBackground,
+      });
 
       // 文本
 
@@ -411,39 +416,13 @@ export default () => {
       const initStateStyle = deepMix({}, this.options.status, model.style.status);
       const initialStyle = item.getModel()._initialStyle as any;
       const status = item._cfg?.states || [];
-      const hasInitialBackground = !!initialStyle.label.background;
 
       try {
         Object.keys(initStateStyle).forEach(statusKey => {
           if (name === statusKey) {
             if (value) {
-              const hasStateLabelBackground = !!initStateStyle[name].label.background;
-              if (hasStateLabelBackground) {
-                const labelStateStyles = initStateStyle[name].label;
-                // update initial label background when selected
-                const labelBg = shapes.find((shape: any) => shape.cfg.name === NODE_LABEL_BG_NAME);
-                const compiledLabelStateStyle = deepMix({}, initialStyle.label, labelStateStyles);
-                const labelStyles = getLabelBgStyleByPosition(compiledLabelStateStyle);
-                Object.keys(labelStyles).forEach(key => {
-                  if (!['x', 'y', 'width', 'height'].includes(key)) {
-                    labelBg.attrs[key] = labelStyles[key];
-                  }
-                });
-              }
-
               setStatusStyle(shapes, initStateStyle[statusKey], parseAttr); // 匹配到status就改变
             } else {
-              if (hasInitialBackground) {
-                // reset background back to initial when state is the default one
-                const labelBg = shapes.find((shape: any) => shape.cfg.name === NODE_LABEL_BG_NAME);
-                const labelStyles = getLabelBgStyleByPosition(initialStyle.label);
-                Object.keys(labelStyles).forEach(key => {
-                  if (!['x', 'y', 'width', 'height'].includes(key)) {
-                    labelBg.attrs[key] = labelStyles[key];
-                  }
-                });
-              }
-
               setStatusStyle(shapes, initialStyle, parseAttr); // 没匹配到就重置
               status.forEach(key => {
                 // 如果cfg.status中还有其他状态，那就重新设置回来

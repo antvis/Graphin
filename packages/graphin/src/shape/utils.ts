@@ -1,5 +1,18 @@
 import { isArray, isNumber } from '@antv/util';
 import { NodeStyle } from '../typings/type';
+
+export enum ShapeItemsNames {
+  halo = 'halo',
+  keyshape = 'keyshape',
+  icon = 'icon',
+  badgesCircle = 'badges-circle',
+  badgesRect = 'badges-rect',
+  badgesText = 'badges-text',
+  badgesImage = 'badges-image',
+  label = 'label',
+  labelBackground = 'label-background',
+}
+
 /**
  *
  * @param shapes 元素组合的shape集合
@@ -19,6 +32,15 @@ export const setStatusStyle = (shapes: any, statusStyle: any, parseAttr: (style:
       const style = statusStyle[itemShapeName];
       if (style) {
         const { animate, visible, ...otherAttrs } = parseAttr(statusStyle, itemShapeName);
+
+        if (itemShapeName === ShapeItemsNames.label && style.background) {
+          // if shapeItem is label and there is label background specified on it
+          // dedicated shapeItem should be updated with specified styles
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const labelBgShapeItem = shapes.find((shape: any) => shape.cfg.name === ShapeItemsNames.labelBackground);
+          labelBgShapeItem.attr(style.background);
+        }
+
         // eslint-disable-next-line no-empty
         if (!shapeItem.attrs.img) {
           shapeItem.attr(otherAttrs);
