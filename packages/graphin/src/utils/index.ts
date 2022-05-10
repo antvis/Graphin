@@ -4,6 +4,7 @@ import getComboStyleByTheme from '../theme/combo-style';
 import getEdgeStyleByTheme from '../theme/edge-style';
 import getNodeStyleByTheme from '../theme/node-style';
 import { uniqBy } from './array';
+import calcByteLength from './calcByteLength';
 import cloneDeep from './cloneDeep';
 import debug from './debug';
 import hexToRgba, { hexToRgbaToHex } from './hexToRgba';
@@ -28,7 +29,7 @@ export default {
   uuid,
   walk,
   processEdges,
-
+  calcByteLength,
   layouts,
   uniqBy,
   getEnumDataMap,
