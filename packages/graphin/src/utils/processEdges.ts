@@ -1,4 +1,5 @@
-import { IUserEdge } from '../index';
+import { IUserEdge, EdgeStyle } from '../index';
+import { deepMix } from '@antv/util';
 
 function isEven(number: number) {
   return number % 2 === 0;
@@ -8,6 +9,10 @@ function isOdd(number: number) {
   return !isEven(number);
 }
 
+const POLY_DEFAULT = 30;
+const LOOP_DEFAULT = 10;
+const LOOP_LABEL_POSITION_DEFAULT = 1;
+
 /**
  *
  * @param edges 边的集合
@@ -16,16 +21,20 @@ function isOdd(number: number) {
 const processEdges = (
   edges: IUserEdge[],
   {
-    poly = 30,
-    loop = 10,
+    poly = POLY_DEFAULT,
+    loop = LOOP_DEFAULT,
+    loopLabelPosition = LOOP_LABEL_POSITION_DEFAULT,
   }: {
     /** poly distance */
-    poly: number;
+    poly?: number;
     /** loop distance */
-    loop: number;
+    loop?: number;
+    /** loop label position based on loop edge */
+    loopLabelPosition?: number;
   } = {
-    poly: 30,
-    loop: 10,
+    poly: POLY_DEFAULT,
+    loop: LOOP_DEFAULT,
+    loopLabelPosition: LOOP_LABEL_POSITION_DEFAULT,
   },
 ) => {
   const edgesMap: { [edgeId: string]: IUserEdge[] } = {};
@@ -77,30 +86,36 @@ const processEdges = (
           delete edge.revert;
         }
 
-        let keyshapeStyle = {
-          type: 'poly',
-          poly: {
-            distance: resultDistance,
-          },
-        };
-
+        let keyshapeStyle: EdgeStyle['keyshape'];
         if (isLoop) {
+          const distance = index * loop;
+
           keyshapeStyle = {
             type: 'loop',
-            // @ts-ignore
             loop: {
-              distance: index * loop,
+              distance,
+            },
+          };
+
+          if (edge.style?.label) {
+            const offsetX = 0;
+            const offsetY = -(POLY_DEFAULT * loopLabelPosition + distance * 2);
+            edge.style.label.offset = [offsetX, offsetY];
+          }
+        } else {
+          keyshapeStyle = {
+            type: 'poly',
+            poly: {
+              distance: resultDistance,
             },
           };
         }
 
-        edge.style = {
-          ...edge.style,
-          keyshape: {
-            ...edge.style?.keyshape,
-            ...keyshapeStyle,
+        deepMix(edge, {
+          style: {
+            keyshape: keyshapeStyle,
           },
-        };
+        });
         edge.isMultiple = true;
         newEdges.push(edge);
       });
