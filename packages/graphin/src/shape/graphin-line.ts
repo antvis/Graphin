@@ -4,6 +4,7 @@ import G6, { EdgeConfig, IEdge, IGroup, INode, ModelConfig } from '@antv/g6';
 import { deepMix } from '@antv/util';
 import { getDefaultStyleByTheme } from '../theme';
 import { EdgeStyle } from '../typings/type';
+import calcByteLength from '../utils/calcByteLength';
 import { setStatusStyle } from './utils';
 
 const getStyleByTheme = (theme = {}) => {
@@ -245,7 +246,8 @@ export default () => {
 
         /** 设置标签的背景 */
         if (hasBackground) {
-          const calcWidth = String(value).length * fontSize * 0.6;
+          const byteLength = calcByteLength(value);
+          const calcWidth = byteLength * fontSize * 0.6;
           const calcHeight = fontSize * 1.8;
           const defaultBackground = {
             fill: '#fff',
