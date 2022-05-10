@@ -402,6 +402,7 @@ export type NodeStyleLabel = Partial<
      * @default true
      */
     visible: boolean;
+    background: any;
   } & CommondAttrsStyle
 >;
 

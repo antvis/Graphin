@@ -6,6 +6,8 @@ import { getDefaultStyleByTheme } from '../theme';
 import { IUserNode, NodeStyle } from '../typings/type';
 import { convertSizeToWH, getBadgePosition, getLabelXYByPosition, removeDumpAttrs, setStatusStyle } from './utils';
 
+const NODE_LABEL_BG_NAME = 'label-background';
+
 function getRadiusBySize(size: number | number[] | undefined) {
   let r;
   if (isNumber(size)) {
@@ -301,6 +303,36 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
     });
   }
 };
+
+const getLabelBgStyleByPosition = (labelStyle: any) => {
+  const WIDTH_APPROX = 0.5;
+  const HEIGHT_APPROX = 1.2;
+
+  const defaultLabelBgStyle = {
+    fill: undefined,
+    fillOpacity: 0,
+    padding: [0, 0],
+    radius: 0,
+  };
+  const compiledLabelBgStyle = deepMix(defaultLabelBgStyle, labelStyle.background);
+
+  const padding = Array.isArray(compiledLabelBgStyle.padding)
+    ? { y: compiledLabelBgStyle.padding[0], x: compiledLabelBgStyle.padding[1] }
+    : { y: compiledLabelBgStyle.padding, x: compiledLabelBgStyle.padding };
+  const backgroundWidth = String(labelStyle.text).length * labelStyle.fontSize * WIDTH_APPROX + padding.x;
+  const backgroundHeight = labelStyle.fontSize * HEIGHT_APPROX + padding.y;
+
+  const style = {
+    ...compiledLabelBgStyle,
+    x: 0 - backgroundWidth / 2,
+    y: labelStyle.y - padding.y / 2,
+    width: backgroundWidth,
+    height: backgroundHeight,
+  };
+
+  return style;
+};
+
 export default () => {
   G6.registerNode('graphin-circle', {
     options: {
@@ -326,9 +358,19 @@ export default () => {
       // keyshape 主容器
       const keyShape = group.addShape('circle', parseKeyshape(style));
 
+      const parsedLabel = parseLabel(style);
+
+      if (parsedLabel.attrs.background) {
+        // initial background for node label
+        group.addShape('rect', {
+          attrs: getLabelBgStyleByPosition(parsedLabel.attrs),
+          name: NODE_LABEL_BG_NAME,
+        });
+      }
+
       // 文本
 
-      group.addShape('text', parseLabel(style));
+      group.addShape('text', parsedLabel);
 
       // keyShape 中间的 icon
 
@@ -369,13 +411,39 @@ export default () => {
       const initStateStyle = deepMix({}, this.options.status, model.style.status);
       const initialStyle = item.getModel()._initialStyle as any;
       const status = item._cfg?.states || [];
+      const hasInitialBackground = !!initialStyle.label.background;
 
       try {
         Object.keys(initStateStyle).forEach(statusKey => {
           if (name === statusKey) {
             if (value) {
+              const hasStateLabelBackground = !!initStateStyle[name].label.background;
+              if (hasStateLabelBackground) {
+                const labelStateStyles = initStateStyle[name].label;
+                // update initial label background when selected
+                const labelBg = shapes.find((shape: any) => shape.cfg.name === NODE_LABEL_BG_NAME);
+                const compiledLabelStateStyle = deepMix({}, initialStyle.label, labelStateStyles);
+                const labelStyles = getLabelBgStyleByPosition(compiledLabelStateStyle);
+                Object.keys(labelStyles).forEach(key => {
+                  if (!['x', 'y', 'width', 'height'].includes(key)) {
+                    labelBg.attrs[key] = labelStyles[key];
+                  }
+                });
+              }
+
               setStatusStyle(shapes, initStateStyle[statusKey], parseAttr); // 匹配到status就改变
             } else {
+              if (hasInitialBackground) {
+                // reset background back to initial when state is the default one
+                const labelBg = shapes.find((shape: any) => shape.cfg.name === NODE_LABEL_BG_NAME);
+                const labelStyles = getLabelBgStyleByPosition(initialStyle.label);
+                Object.keys(labelStyles).forEach(key => {
+                  if (!['x', 'y', 'width', 'height'].includes(key)) {
+                    labelBg.attrs[key] = labelStyles[key];
+                  }
+                });
+              }
+
               setStatusStyle(shapes, initialStyle, parseAttr); // 没匹配到就重置
               status.forEach(key => {
                 // 如果cfg.status中还有其他状态，那就重新设置回来
