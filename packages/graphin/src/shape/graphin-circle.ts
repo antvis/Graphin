@@ -310,10 +310,6 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
 };
 
 const getLabelBgStyleByPosition = (labelStyle: any) => {
-  const WIDTH_APPROX = 0.5;
-  const HEIGHT_APPROX = 1.2;
-  const Y_OFFSET = 2;
-
   const defaultLabelBgStyle = {
     fill: undefined,
     fillOpacity: 0,
@@ -325,13 +321,14 @@ const getLabelBgStyleByPosition = (labelStyle: any) => {
   const padding = Array.isArray(compiledLabelBgStyle.padding)
     ? { y: compiledLabelBgStyle.padding[0], x: compiledLabelBgStyle.padding[1] }
     : { y: compiledLabelBgStyle.padding, x: compiledLabelBgStyle.padding };
-  const backgroundWidth = String(labelStyle.text).length * labelStyle.fontSize * WIDTH_APPROX + padding.x;
-  const backgroundHeight = labelStyle.fontSize * HEIGHT_APPROX + padding.y;
+  const fontDimensions = G6.Util.getTextSize(labelStyle.text, labelStyle.fontSize);
+  const backgroundWidth = fontDimensions[0] + padding.x;
+  const backgroundHeight = fontDimensions[1] + padding.y;
 
   const style = {
     ...compiledLabelBgStyle,
     x: 0 - backgroundWidth / 2,
-    y: labelStyle.y - padding.y / 2 - Y_OFFSET,
+    y: labelStyle.y - padding.y / 2,
     width: backgroundWidth,
     height: backgroundHeight,
   };
