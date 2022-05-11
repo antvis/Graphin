@@ -1,4 +1,5 @@
-import { isArray, isNumber } from '@antv/util';
+import { LabelStyle } from '@antv/g6';
+import { deepMix, isArray, isNumber } from '@antv/util';
 import { NodeStyle } from '../typings/type';
 
 export enum ShapeItemsNames {
@@ -12,6 +13,21 @@ export enum ShapeItemsNames {
   label = 'label',
   labelBackground = 'label-background',
 }
+
+export const getDefaultLabelBgStyle = (labelBgStyle?: LabelStyle['background']) => {
+  const isFillSet = !!labelBgStyle?.fill;
+  const isStrokeSet = !!labelBgStyle?.stroke;
+
+  return {
+    fill: undefined,
+    fillOpacity: Number(isFillSet),
+    stroke: undefined,
+    strokeOpacity: Number(isStrokeSet),
+    lineWidth: Number(isStrokeSet),
+    padding: [0, 0],
+    radius: 0,
+  };
+};
 
 /**
  *
@@ -33,12 +49,14 @@ export const setStatusStyle = (shapes: any, statusStyle: any, parseAttr: (style:
       if (style) {
         const { animate, visible, ...otherAttrs } = parseAttr(statusStyle, itemShapeName);
 
-        if (itemShapeName === ShapeItemsNames.label && style.background) {
+        if (itemShapeName === ShapeItemsNames.label) {
           // if shapeItem is label and there is label background specified on it
           // dedicated shapeItem should be updated with specified styles
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const labelBgShapeItem = shapes.find((shape: any) => shape.cfg.name === ShapeItemsNames.labelBackground);
-          labelBgShapeItem.attr(style.background);
+          // if no label background set, use default definition
+          // e.g., to return to initial styles if there was only default definiton for label background
+          labelBgShapeItem.attr(deepMix(getDefaultLabelBgStyle(style.background), style.background));
         }
 
         // eslint-disable-next-line no-empty

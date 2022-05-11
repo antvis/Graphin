@@ -7,6 +7,7 @@ import { IUserNode, NodeStyle } from '../typings/type';
 import {
   convertSizeToWH,
   getBadgePosition,
+  getDefaultLabelBgStyle,
   getLabelXYByPosition,
   removeDumpAttrs,
   setStatusStyle,
@@ -309,26 +310,20 @@ const drawBadge = (badge: any, group: IGroup, r: number) => {
   }
 };
 
-const getLabelBgStyleByPosition = (labelStyle: any) => {
-  const defaultLabelBgStyle = {
-    fill: undefined,
-    fillOpacity: 0,
-    padding: [0, 0],
-    radius: 0,
-  };
-  const compiledLabelBgStyle = deepMix(defaultLabelBgStyle, labelStyle.background);
+const getLabelBgStyleByPosition = (cfgLabelStyle?: any) => {
+  const compiledLabelBgStyle = deepMix(getDefaultLabelBgStyle(cfgLabelStyle.background), cfgLabelStyle.background);
 
   const padding = Array.isArray(compiledLabelBgStyle.padding)
     ? { y: compiledLabelBgStyle.padding[0], x: compiledLabelBgStyle.padding[1] }
     : { y: compiledLabelBgStyle.padding, x: compiledLabelBgStyle.padding };
-  const fontDimensions = G6.Util.getTextSize(labelStyle.text, labelStyle.fontSize);
+  const fontDimensions = G6.Util.getTextSize(cfgLabelStyle.text, cfgLabelStyle.fontSize);
   const backgroundWidth = fontDimensions[0] + padding.x;
   const backgroundHeight = fontDimensions[1] + padding.y;
 
   const style = {
     ...compiledLabelBgStyle,
     x: 0 - backgroundWidth / 2,
-    y: labelStyle.y - padding.y / 2,
+    y: cfgLabelStyle.y - padding.y / 2,
     width: backgroundWidth,
     height: backgroundHeight,
   };
