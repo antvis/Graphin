@@ -111,7 +111,7 @@ const processKeyshape = (cfg: EdgeConfig, style: EdgeStyle) => {
       ...loop,
     };
     const R = nodeSize / 2;
-    const dy = Math.sqrt(R ** 2 - dx ** 2);
+    const dy = Math.sqrt(Math.max(R ** 2 - dx ** 2, 0));
 
     const RX = rx || R * 2 * 0.5;
     const RY = ry || R * 2 * 0.6;
