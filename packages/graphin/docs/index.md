@@ -11,6 +11,10 @@ banner:
       link: /graphin/quick-start/overview
       type: primary
   notifications:
+    - type: 新产品
+      title: 图应用低代码搭建：GraphInsight
+      date: 2022.06.06
+      link: https://github.com/antvis/GraphInsight
     - type: 重磅推出
       title: AntV图可视分析解决方案，来啦～
       date: 2020.11.22

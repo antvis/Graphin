@@ -17,6 +17,12 @@ A React toolkit for graph analysis based on G6
 
 <img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> English | [简体中文](./README.zh-CN.md)
 
+## 🌾 New Products!
+
+2022.06.06, this day coincides with the 4th anniversary of the open source of G6, which is also the traditional Chinese solar term: "Grain in Ear", GraphInsight, a new product in the direction of graph analysis. Users can complete the visualization, exploration and analysis tasks of relational data online without code development. You can also export the SDK with one click and integrate it into the business system to help developers improve R&D efficiency.
+
+The SDK exported by GraphInsight is encapsulated based on Graphin. If you want to understand the capabilities of Graphin, you can take a look at the product [GraphInsight](https://github.com/antvis/GraphInsight)
+
 ## ✨ Features
 
 ### 🎨 Good-looking elements, standardized style configuration
