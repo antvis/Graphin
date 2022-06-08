@@ -82,7 +82,7 @@ module.exports = (env, argv) => {
       publicPath: './',
       filename: 'graphin-components.min.js',
     },
-    plugins: [new MiniCssExtractPlugin(), new BundleAnalyzerPlugin()],
+    plugins: [new MiniCssExtractPlugin()],
     performance: {
       hints: false,
     },
