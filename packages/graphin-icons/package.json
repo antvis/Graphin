@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin-icons",
-  "version": "1.0.0-siren.0",
+  "version": "1.0.0-siren.1",
   "description": "graphin icon fonts",
   "main": "./dist/index",
   "scripts": {
