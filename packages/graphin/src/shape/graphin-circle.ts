@@ -3,7 +3,7 @@ import { IGroup, ShapeCfg } from '@antv/g-base';
 import G6, { INode } from '@antv/g6';
 import { deepMix, isArray, isNumber } from '@antv/util';
 import { getDefaultStyleByTheme } from '../theme';
-import { IUserNode, NodeStyle } from '../typings/type';
+import { IUserNode, NodeStyle, NodeStyleBadge } from '../typings/type';
 import { convertSizeToWH, getBadgePosition, getLabelXYByPosition, removeDumpAttrs, setStatusStyle } from './utils';
 
 function getRadiusBySize(size: number | number[] | undefined) {
@@ -195,7 +195,7 @@ const parseAttr = (style: NodeStyle, itemShapeName: string) => {
   return style[itemShapeName] || {};
 };
 
-const drawBadge = (badge: any, group: IGroup, r: number) => {
+const drawBadge = (badge: NodeStyleBadge, group: IGroup, r: number) => {
   const {
     type,
     position,

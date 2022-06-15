@@ -455,6 +455,8 @@ export type NodeStyleBadge = Partial<
      * @default true
      */
     visible: boolean;
+    /* 唯一身份 */
+    id: string;
   } & CommondAttrsStyle
 >;
 export type NodeStyleKeyShape = Partial<
