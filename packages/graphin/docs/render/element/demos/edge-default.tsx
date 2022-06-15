@@ -1,5 +1,7 @@
-import React from 'react';
 import Graphin, { Utils } from '@antv/graphin';
+import React from 'react';
+
+console.log('react', React);
 
 const nodes = [
   {
@@ -48,17 +50,19 @@ const edgesLoop2 = Array.from({ length: 3 }).map(() => {
 const edges = Utils.processEdges([...edges1, ...edges2, ...edgesLoop1, ...edgesLoop2], { poly: 50, loop: 10 });
 edges.forEach((edge, index) => {
   const { source, target } = edge;
+  // @ts-ignore
   edge.style.label = {
     value: `${index}th:${source}-${target}`,
+    fill: 'red',
+    background: {
+      fill: '#fff',
+      stroke: '#fff',
+    },
   };
 });
 
 const data = { nodes, edges };
 
 export default () => {
-  return (
-    <div>
-      <Graphin data={data} layout={layout} fitView />
-    </div>
-  );
+  return <Graphin data={data} layout={layout} fitView />;
 };
