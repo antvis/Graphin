@@ -1,7 +1,7 @@
 import G6, { IGroup, IShape, ModelConfig, ShapeOptions } from '@antv/g6';
-import registerNode from './graphin-circle';
-import { IUserNode } from '../typings/type';
-import { ShapeItemsNames } from './utils';
+import registerNode from '../graphin-circle';
+import { IUserNode } from '../../typings/type';
+import { ShapeItemsNames } from '../utils';
 
 jest.mock('@antv/g6', () => ({
   registerNode: jest.fn(),
