@@ -111,6 +111,7 @@ const useContextMenu = (props: ContextMenuProps) => {
     graph.on('canvas:drag', handleClose);
     graph.on('wheelzoom', handleClose);
     if (bindType === 'canvas') {
+      // @ts-ignore
       graph.on('nodeselectchange', handleSaveAllItem);
     }
 
@@ -119,6 +120,7 @@ const useContextMenu = (props: ContextMenuProps) => {
       graph.off('canvas:click', handleClose);
       graph.off('canvas:drag', handleClose);
       graph.off('wheelzoom', handleClose);
+      // @ts-ignore
       graph.off('nodeselectchange', handleSaveAllItem);
     };
   }, [graph, bindType]);
