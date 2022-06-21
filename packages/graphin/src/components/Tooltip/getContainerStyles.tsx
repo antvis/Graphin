@@ -16,7 +16,14 @@ const getContainerStyles = ({
   bindType: string;
 }) => {
   if (bindType === 'edge') {
+    if (visible) {
+      return {
+        left: x,
+        top: y,
+      };
+    }
     return {
+      visibility: 'hidden',
       left: x,
       top: y,
     };
@@ -33,6 +40,7 @@ const getContainerStyles = ({
       };
     }
     return {
+      visibility: 'hidden',
       left: 0,
       top: 0,
       opacity: 0.5,
@@ -51,6 +59,7 @@ const getContainerStyles = ({
       };
     }
     return {
+      visibility: 'hidden',
       left: x,
       top: y + nodeSize / 2,
       opacity: 0.5,
@@ -69,6 +78,7 @@ const getContainerStyles = ({
       };
     }
     return {
+      visibility: 'hidden',
       opacity: 0,
       left: x - nodeSize / 2,
       top: y,
@@ -87,6 +97,7 @@ const getContainerStyles = ({
       };
     }
     return {
+      visibility: 'hidden',
       left: x + nodeSize / 2,
       top: y,
       transform: 'translate(0,-50%)',
@@ -104,6 +115,7 @@ const getContainerStyles = ({
       };
     }
     return {
+      visibility: 'hidden',
       left: x,
       top: y,
       opacity: 0,
