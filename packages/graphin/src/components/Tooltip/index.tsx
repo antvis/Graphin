@@ -3,6 +3,7 @@ import React from 'react';
 import getContainerStyles from './getContainerStyles';
 import './index.less';
 import useTooltip, { State } from './useTooltip';
+import { GraphinContext } from '../../index';
 
 export interface TooltipValue {
   bindType: 'node' | 'edge';
@@ -34,7 +35,7 @@ export interface TooltipProps {
   /**
    * @description Tooltip 的位置
    */
-  placement?: 'top' | 'bottom' | 'right' | 'left' | 'center';
+  placement?: 'auto'| 'center' | 'top' | 'bottom' | 'right' | 'left' | 'top-left' | 'top-right' | 'bottom-left'| 'bottom-right';
   /**
    * @description 是否展示小箭头
    * @description.en-US display arrow
@@ -47,6 +48,7 @@ const container = React.createRef<HTMLDivElement>();
 const Tooltip: React.FunctionComponent<TooltipProps> = props => {
   const { children, bindType = 'node', style, placement = 'top', hasArrow } = props;
   const { x, y, visible, item } = useTooltip({ bindType, container });
+  const { graph } = React.useContext(GraphinContext);
 
   let nodeSize = 40;
 
@@ -64,8 +66,7 @@ const Tooltip: React.FunctionComponent<TooltipProps> = props => {
     console.log(error);
   }
   const padding = 12;
-  const containerPosition = getContainerStyles({ placement, nodeSize: nodeSize + padding, x, y, bindType, visible });
-  
+  const containerPosition = getContainerStyles({ graph, placement, nodeSize: nodeSize + padding, x, y, bindType, visible });
   const positionStyle = {
     position: 'absolute',
     ...containerPosition,
