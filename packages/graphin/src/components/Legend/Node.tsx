@@ -9,7 +9,7 @@ import type { LegendChildrenProps, OptionType } from './typing';
 const LegendNode: React.FunctionComponent<LegendChildrenProps> = props => {
   const { graph, theme } = React.useContext(GraphinContext);
 
-  const { options: defaultOptions, dataMap } = props;
+  const { options: defaultOptions, dataMap, onChange } = props;
 
   const { mode } = theme;
 
@@ -54,6 +54,8 @@ const LegendNode: React.FunctionComponent<LegendChildrenProps> = props => {
         graph.setItemState(edge, 'inactive', !checkedValue.checked);
       })
     });
+
+    onChange(checkedValue, result);
   };
 
   return (
