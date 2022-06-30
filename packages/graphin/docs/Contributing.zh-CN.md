@@ -57,6 +57,7 @@ Graphin 采用 lerna 管理仓库，packages 中包含以下 5 个 package：
 ```bash
 yarn
 ```
+> 如果安装错误，可以把版本降为 12.22.12
 
 - 安装各 packages 的依赖
 

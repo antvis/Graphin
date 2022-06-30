@@ -34,4 +34,5 @@ export interface LegendChildrenProps {
   sortKey: string;
   dataMap: Map<string | number, any>;
   options: OptionType[];
+  onChange: (checkedValue: OptionType, result: OptionType[]) => void;
 }
