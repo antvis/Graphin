@@ -65,7 +65,8 @@ const Tooltip: React.FunctionComponent<TooltipProps> = props => {
   }
   const padding = 12;
   const containerPosition = getContainerStyles({ placement, nodeSize: nodeSize + padding, x, y, bindType, visible });
-  const positionStyle: React.CSSProperties = {
+  
+  const positionStyle: any = {
     position: 'absolute',
     ...containerPosition,
   };
