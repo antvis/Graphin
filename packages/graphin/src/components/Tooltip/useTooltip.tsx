@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { GraphinContext, IG6GraphEvent } from '../../index';
 
 export interface State {
@@ -14,12 +14,14 @@ export interface Props {
   bindType: 'node' | 'edge';
   container: React.RefObject<HTMLDivElement>;
 }
-let timer: number | undefined;
+//let timer.current: number | undefined;
 
 const useTooltip = (props: Props) => {
   const { bindType = 'node', container } = props;
   const graphin = React.useContext(GraphinContext);
   const { graph } = graphin;
+
+  const timer = useRef<number>();
 
   const [state, setState] = React.useState<State>({
     visible: false,
@@ -31,8 +33,8 @@ const useTooltip = (props: Props) => {
   const handleShow = (e: IG6GraphEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (timer) {
-      window.clearTimeout(timer);
+    if (timer.current) {
+      window.clearTimeout(timer.current);
     }
 
     const point = graph.getPointByClient(e.clientX, e.clientY);
@@ -63,10 +65,10 @@ const useTooltip = (props: Props) => {
     });
   };
   const handleClose = () => {
-    if (timer) {
-      window.clearTimeout(timer);
+    if (timer.current) {
+      window.clearTimeout(timer.current);
     }
-    timer = window.setTimeout(() => {
+    timer.current = window.setTimeout(() => {
       setState(preState => {
         return {
           ...preState,
@@ -112,7 +114,7 @@ const useTooltip = (props: Props) => {
     }
   };
   const removeTimer = () => {
-    clearTimeout(timer);
+    clearTimeout(timer.current);
   };
   useEffect(() => {
     graph.on(`${bindType}:mouseenter`, handleShow);
