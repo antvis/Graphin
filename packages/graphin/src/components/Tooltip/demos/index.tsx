@@ -89,6 +89,24 @@ const TooltipDemo: React.FunctionComponent = () => {
             return null;
           }}
         </Tooltip>
+        <Tooltip bindType="edge" placement={placement} hasArrow={hasArrow} style={style}>
+          {(value: TooltipValue) => {
+            if (value.model) {
+              const { model } = value;
+              return (
+                <div>
+                  <li> {model.id}</li>
+                  <li> {model.id}</li>
+                  <li> {model.id}</li>
+                  <li> {model.id}</li>
+                  <li> {model.id}</li>
+                  <li> {model.id}</li>
+                </div>
+              );
+            }
+            return null;
+          }}
+        </Tooltip>
       </Graphin>
     </div>
   );
