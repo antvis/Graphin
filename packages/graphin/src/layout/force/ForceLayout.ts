@@ -65,6 +65,8 @@ export interface ForceProps {
   stiffness: number;
   /** 默认的弹簧长度 */
   defSpringLen: (edge: Edge, source: Point, target: Point) => number;
+  /** 计算画布上下两侧对节点吸引力大小  */
+  defSideCoe?: (node: Node) => number;
   /** repulsion 斥力，这里指代 库伦常量Ke */
   repulsion: number;
   /** https://www.khanacademy.org/science/ap-physics-1/ap-electric-charge-electric-force-and-voltage/coulombs-law-and-electric-force-ap/a/coulombs-law-and-electric-force-ap-physics-1 */
@@ -281,7 +283,7 @@ class ForceLayout {
     this.nodes.forEach(node => {
       const x = node.data.x || width / 2;
       const y = node.data.y || height / 2;
-      const vec = new Vector(x, y);
+      const position = new Vector(x, y);
 
       if (!node.data.layout) {
         node.data.layout = {};
@@ -292,7 +294,7 @@ class ForceLayout {
         ...degreeInfo,
       };
       const mass = this.getMass(node.data);
-      this.nodePoints.set(node.id, new Point(vec, String(node.id), node.data, mass));
+      this.nodePoints.set(node.id, new Point(position, String(node.id), node.data, mass));
     });
     this.edges.forEach(edge => {
       const source = this.nodePoints.get(edge.source.id) as Point;
@@ -543,6 +545,7 @@ class ForceLayout {
     this.updateCoulombsLawOptimized();
     this.updateHookesLaw();
     this.attractToCentre();
+    this.attractToSide();
     this.updateVelocity(interval);
     this.updatePosition(interval);
   };
@@ -602,14 +605,14 @@ class ForceLayout {
     });
   };
 
+  implementForce = (node: Node, other: Vector, radio = 2) => {
+    const point = this.nodePoints.get(node.id);
+    const direction = point.p.subtract(other);
+
+    point.updateAcc(direction.scalarMultip(-radio));
+  };
+
   attractToCentre = () => {
-    const implementForce = (node: Node, center: Vector, radio = 2) => {
-      const point = this.nodePoints.get(node.id);
-      const direction = point.p.subtract(center);
-
-      point.updateAcc(direction.scalarMultip(-radio));
-    };
-
     this.nodes.forEach(node => {
       const { degree, sDegree, tDegree } = node.data?.layout as { [key: string]: number };
 
@@ -630,7 +633,7 @@ class ForceLayout {
       const centerVector = new Vector(x, y);
 
       if (centerStrength) {
-        implementForce(node, centerVector, centerStrength);
+        this.implementForce(node, centerVector, centerStrength);
         return;
       }
 
@@ -646,16 +649,30 @@ class ForceLayout {
       }
 
       if (singleNode) {
-        implementForce(node, centerVector, single);
+        this.implementForce(node, centerVector, single);
         return;
       }
 
       if (leafNode) {
-        implementForce(node, centerVector, leaf);
+        this.implementForce(node, centerVector, leaf);
         return;
       }
       /** others */
-      implementForce(node, centerVector, others);
+      this.implementForce(node, centerVector, others);
+    });
+  };
+
+  attractToSide = () => {
+    if (!this.props.defSideCoe || typeof this.props.defSideCoe !== 'function') return;
+    const { height } = this.props;
+    this.nodes.forEach(node => {
+      const sideCoe = this.props.defSideCoe!(node);
+      if (sideCoe === 0) return;
+      const point = this.nodePoints.get(node.id);
+      const { x } = point.p;
+      const y = sideCoe > 0 ? 0 : height;
+      const sideVector = new Vector(x, y);
+      this.implementForce(node, sideVector, Math.abs(sideCoe));
     });
   };
 
@@ -833,7 +850,7 @@ class ForceLayout {
       }
     });
     return sameTypeLeafMap;
-  }
+  };
 }
 
 export default ForceLayout;
