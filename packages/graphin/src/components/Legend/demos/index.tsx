@@ -1,4 +1,4 @@
-import type { LegendChildrenProps, OptionType } from '@antv/graphin';
+import type { LegendChildrenProps, LegendOptionType } from '@antv/graphin';
 import Graphin, { Components, Utils } from '@antv/graphin';
 import iconsLoader from '@antv/graphin-icons';
 import * as React from 'react';
@@ -43,16 +43,16 @@ data.nodes.forEach((node, index) => {
 });
 
 const Demo = () => {
-  const onChange = (checkedValue: OptionType, options: OptionType[]) => {
+  const onChange = (checkedValue: LegendOptionType, options: LegendOptionType[]) => {
     console.log(checkedValue, options);
-  }
+  };
 
   return (
     <Graphin data={data}>
       <Legend bindType="node" sortKey="data.type">
         {(renderProps: LegendChildrenProps) => {
           console.log('renderProps', renderProps);
-          return <Legend.Node {...renderProps} onChange={onChange}/>;
+          return <Legend.Node {...renderProps} onChange={onChange} />;
         }}
       </Legend>
     </Graphin>

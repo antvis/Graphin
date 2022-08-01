@@ -21,7 +21,7 @@ export type {
 /** Components Typing */
 export type { ContextMenuValue } from './components/ContextMenu/index';
 export type { HullCfg } from './components/Hull/index';
-export type { LegendChildrenProps } from './components/Legend/typing';
+export type { LegendChildrenProps, OptionType as LegendOptionType } from './components/Legend/typing';
 export type { TooltipValue } from './components/Tooltip/index';
 export type { GraphinContextType } from './GraphinContext';
 export type { ThemeType } from './theme';
