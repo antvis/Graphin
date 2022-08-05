@@ -13,6 +13,12 @@ const defaultConfig = {
   trigger: DEFAULT_TRIGGER,
   /** 选中的样式，默认为 selected */
   selectedState: 'selected',
+  /** Whether nodes can be selected */
+  selectNode: true,
+  /** Whether edges can be selected */
+  selectEdge: false,
+  /** Whether combos can be selected */
+  selectCombo: true,
 };
 
 export type IDragCanvasProps = Partial<typeof defaultConfig>;
