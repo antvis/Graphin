@@ -217,6 +217,13 @@ export default () => {
                 path: `M 0,0 L ${d},${d / 2} L ${d},-${d / 2} Z`,
                 fill: keyShapeStyle.stroke,
               },
+          startArrow: isLoop
+            ? {
+                d: 0,
+                path: `M 0,0 L ${d},${d / 2} L ${d},-${d / 2} Z`,
+                fill: keyShapeStyle.stroke,
+              }
+            : undefined,
           ...keyShapeStyle,
         },
         draggable: true,
