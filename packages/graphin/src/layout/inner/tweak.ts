@@ -29,10 +29,10 @@ const tweak = (currentData: GraphinData, prevData: GraphinData) => {
   const incrementNodesMap = new Map();
   currNodes.forEach((node: IUserNode) => {
     const { id } = node;
-    const position = positionMap.get(id);
-    if (position) {
-      node.x = position.x;
-      node.y = position.y;
+    const { x, y } = positionMap.get(id);
+    if (!Number.isNaN(x) && !Number.isNaN(y)) {
+      node.x = x;
+      node.y = y;
     } else {
       incrementNodesMap.set(id, node);
     }
@@ -65,9 +65,12 @@ const tweak = (currentData: GraphinData, prevData: GraphinData) => {
 
   currNodes.forEach((node: IUserNode) => {
     const { id } = node;
-    const position = positionMap.get(id) || incrementPositonMap.get(id);
+    let position = positionMap.get(id);
+    if (Number.isNaN(position.x) || Number.isNaN(position.y)) {
+      position = incrementPositonMap.get(id);
+    }
 
-    if (position) {
+    if (!Number.isNaN(position.x) && !Number.isNaN(position.y)) {
       node.x = position.x;
       node.y = position.y;
     } else {

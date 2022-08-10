@@ -18,16 +18,19 @@ const DragNodeWithForce = (props: DragNodeWithForceProps) => {
   const { instance } = layout;
 
   useEffect(() => {
-    const { simulation, type } = instance;
+    const { simulation, type } = instance || { type: graph.get('layout')?.type };
 
     const handleNodeDragStart = () => {
-      console.log('drag-start', instance);
       if (simulation) {
         simulation.stop();
+      } else {
+        const layouts = graph.get('layoutController')?.layoutMethods || [];
+        // @ts-ignore
+        layouts.forEach(layout => layout.stop?.());
       }
     };
     const handleNodeDragEnd = (e: IG6GraphEvent) => {
-      if (type !== 'graphin-force') {
+      if (type !== 'graphin-force' && type !== 'force2') {
         return;
       }
 
@@ -72,6 +75,10 @@ const DragNodeWithForce = (props: DragNodeWithForceProps) => {
     };
   }, [graph, autoPin, instance, dragNodes, updateContext]);
   return null;
+};
+DragNodeWithForce.defaultProps = {
+  autoPin: false,
+  dragNodeMass: 10000000000,
 };
 
 export default DragNodeWithForce;

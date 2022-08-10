@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin",
-  "version": "2.7.2",
+  "version": "2.7.2-beta",
   "description": "the react toolkit for graph analysis based on g6",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -60,7 +60,7 @@
     "@types/lodash.clonedeep": "^4.5.6",
     "d3-quadtree": "^3.0.1",
     "lodash.clonedeep": "^4.5.0",
-    "@antv/g6": "^4.6.17"
+    "@antv/g6": "^4.7.1-beta.1"
   },
   "peerDependencies": {
     "react": ">=16.9.0",

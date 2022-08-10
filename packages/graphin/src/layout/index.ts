@@ -80,7 +80,7 @@ class LayoutController {
     const { type } = this.options;
     this.instance.execute();
 
-    if ((type === 'force' || type === 'g6force' || type === 'gForce' || type === 'comboCombined')) {
+    if (type === 'force' || type === 'g6force' || type === 'gForce' || type === 'comboCombined') {
       // We emit afterlayout on options.layoutEnd()
       return;
     }
@@ -172,7 +172,7 @@ class LayoutController {
     const self = this;
     const { options, graphin } = self;
     const { graph } = graphin;
-    const { type } = options;
+    const { type, animation, animate } = options;
 
     if (type === 'graphin-force') {
       self.options.graph = graph;
@@ -184,6 +184,7 @@ class LayoutController {
         if (onTick) {
           onTick();
         }
+        if (animation || animate) self.refreshPosition();
       };
 
       self.options.tick = tick;
