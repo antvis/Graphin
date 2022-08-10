@@ -240,7 +240,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     } else {
       if (!this.useGraphinLayoutController) {
         // processLayoutConfig 兼容布局参数
-        this.options.layout = processLayoutConfig(layout) || DEFAULT_GRAPH_LAYOUT_OPTIONS;
+        this.options.layout = processLayoutConfig(layout, this.graph) || DEFAULT_GRAPH_LAYOUT_OPTIONS;
       }
       this.graph = new G6.Graph(this.options);
     }
@@ -414,7 +414,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           this.layout.changeLayout();
         } else {
           if (layout) layout.disableTriggerLayout = true;
-          const layoutCfg = processLayoutConfig(layout); // 兼容布局参数
+          const layoutCfg = processLayoutConfig(layout, this.graph); // 兼容布局参数
           this.graph.updateLayout(layoutCfg);
           this.graph.data(this.data as GraphData | TreeGraphData);
           this.graph.changeData(this.data as GraphData | TreeGraphData);
@@ -470,7 +470,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         this.layout.changeLayout();
         // this.layout.refreshPosition();
       } else {
-        const layoutCfg = processLayoutConfig(layout); // 兼容布局参数
+        const layoutCfg = processLayoutConfig(layout, this.graph); // 兼容布局参数
+        if (layoutCfg) layoutCfg.disableTriggerLayout = false;
         this.graph.updateLayout(layoutCfg);
         this.data = this.graph.get('data');
       }
