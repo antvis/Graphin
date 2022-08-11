@@ -448,7 +448,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       // @ts-ignore
       this.data = this.layout.getDataFromGraph();
       this.layout.changeLayout();
-      this.layout.refreshPosition();
+      // this.layout.refreshPosition();
 
       /** 走G6的layoutController */
       // this.graph.updateLayout();
