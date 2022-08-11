@@ -40,7 +40,8 @@ The most basic role of Graphin is the React component. The following table is th
 | minZoom          | `number`              | 0.2                                                   | Minimum zoom ratio                                                                                                                                               |
 | maxZoom          | `number`              | 10                                                    | Maximum zoom ratio                                                                                                                                               |
 | enabledStack     | `boolean`             | false                                                 | Whether to enable stack, that is, whether to enable redo & undo function                                                                                         |
-| maxStep          | `number`              | 10                                                    | redo & undo maximum number of steps, only works when enabledStack is true                                                                                        |
+| maxStep          | `number`              | 10                                                    | Redo & undo maximum number of steps, only works when enabledStack is true                                                                                        |
+| rtl              | `boolean`             | false                                                 | Whether text will be rendered in the right-to-left direction, useful for languages like Arabic or Hebrew                                                         | 
 
 ## How to use the graph instance in Graphin
 

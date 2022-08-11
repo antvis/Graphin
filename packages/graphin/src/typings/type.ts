@@ -186,6 +186,11 @@ export interface GraphinProps {
   [key: string]: any;
 
   // children: React.ReactChildren;
+
+  /**
+   * Text direction, to support languages like Arabic and Hebrew.
+   */
+  dir?: 'ltr' | 'rtl';
 }
 
 export interface IUserNode extends BaseNode, Partial<RestNode>, UserProperties {}
