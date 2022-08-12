@@ -4,6 +4,7 @@ import { Layout, IUserNode } from '../typings/type';
 const LAYOUT_CFG_KEY_MAP: { [key: string]: string } = {
   animation: 'animate',
   minDistanceThreshold: 'minMovement',
+  maxIterations: 'maxIterations',
 };
 
 export const processLayoutConfig = (layoutCfg: Layout | undefined, graph: IGraph) => {
