@@ -41,6 +41,7 @@ Graphin 最基础的角色是 React 组件，下表是`<Graphin />`的接口说�
 | maxZoom          | `number`              | 10                                                    | 最大缩放比例                                                                 |
 | enabledStack     | `boolean`             | false                                                 | 是否启用 stack，即是否开启 redo & undo 功能                                  |
 | maxStep          | `number`              | 10                                                    | redo & undo 最大步数, 只有当 enabledStack 为 true 时才起作用                 |
+| rtl              | `boolean`             | false                                                 | 文本是否以从右到左的方向呈现，用于阿拉伯语或希伯来语等语言                   |
 
 ## 如何使用 Graphin 中的 graph 实例
 
