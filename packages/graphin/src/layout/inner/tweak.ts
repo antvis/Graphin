@@ -29,10 +29,10 @@ const tweak = (currentData: GraphinData, prevData: GraphinData) => {
   const incrementNodesMap = new Map();
   currNodes.forEach((node: IUserNode) => {
     const { id } = node;
-    const position = positionMap.get(id);
-    if (position) {
-      node.x = position.x;
-      node.y = position.y;
+    const { x, y } = positionMap.get(id);
+    if (!window.isNaN(x) && !window.isNaN(y)) {
+      node.x = x;
+      node.y = y;
     } else {
       incrementNodesMap.set(id, node);
     }
@@ -44,30 +44,34 @@ const tweak = (currentData: GraphinData, prevData: GraphinData) => {
 
     const nodeInSource = incrementNodesMap.get(source);
     const nodeInTarget = incrementNodesMap.get(target);
-    const positionInSource = positionMap.get(source);
-    const positionInTarget = positionMap.get(target);
+    const sourcePosition = positionMap.get(source);
+    const positionInSource = !window.isNaN(sourcePosition.x) && !window.isNaN(sourcePosition.y);
+    const targetPosition = positionMap.get(target);
+    const positionInTarget = !window.isNaN(targetPosition.x) && !window.isNaN(targetPosition.y);
 
     if (nodeInSource && positionInTarget) {
       incrementPositonMap.set(source, {
         // ...nodeInSource,
-        x: positionInTarget.x + getRandomPosition(),
-        y: positionInTarget.y + getRandomPosition(),
+        x: targetPosition.x + getRandomPosition(),
+        y: targetPosition.y + getRandomPosition(),
       });
     }
     if (nodeInTarget && positionInSource) {
       incrementPositonMap.set(target, {
         // ...nodeInTarget,
-        x: positionInSource.x + getRandomPosition(),
-        y: positionInSource.y + getRandomPosition(),
+        x: sourcePosition.x + getRandomPosition(),
+        y: sourcePosition.y + getRandomPosition(),
       });
     }
   });
 
   currNodes.forEach((node: IUserNode) => {
     const { id } = node;
-    const position = positionMap.get(id) || incrementPositonMap.get(id);
-
-    if (position) {
+    let position = positionMap.get(id);
+    if (window.isNaN(position.x) || window.isNaN(position.y)) {
+      position = incrementPositonMap.get(id);
+    }
+    if (!window.isNaN(position.x) && !window.isNaN(position.y)) {
       node.x = position.x;
       node.y = position.y;
     } else {

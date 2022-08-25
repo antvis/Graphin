@@ -5,7 +5,7 @@ import ApiController from './apis';
 import { ApisType } from './apis/types';
 /** 内置 Behaviors */
 import Behaviors from './behaviors';
-import { DEFAULT_TREE_LATOUT_OPTIONS, TREE_LAYOUTS } from './consts';
+import { DEFAULT_GRAPH_LAYOUT_OPTIONS, DEFAULT_TREE_LATOUT_OPTIONS, TREE_LAYOUTS } from './consts';
 /** Context */
 import GraphinContext from './GraphinContext';
 // import './index.less';
@@ -18,6 +18,7 @@ import cloneDeep from './utils/cloneDeep';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';
+import { processLayoutConfig } from './utils/layout';
 
 const { DragCanvas, ZoomCanvas, DragNode, DragCombo, ClickSelect, BrushSelect, ResizeCanvas } = Behaviors;
 
@@ -119,6 +120,9 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
   dragNodes: IUserNode[];
 
+  // 标记是否使用 graphin 的 layoutController，否则使用 g6 的 layoutController。待正式版本移除 graphin 的 layoutController
+  useGraphinLayoutController: boolean;
+
   constructor(props: GraphinProps) {
     super(props);
 
@@ -136,6 +140,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     this.layoutCache = layoutCache;
     this.layout = {} as LayoutController;
     this.dragNodes = [] as IUserNode[];
+    this.useGraphinLayoutController = layout?.type === 'graphin-force';
 
     this.options = { ...otherOptions } as GraphOptions;
 
@@ -233,6 +238,10 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
       this.options.layout = layout || DEFAULT_TREE_LATOUT_OPTIONS;
       this.graph = new G6.TreeGraph(this.options);
     } else {
+      if (!this.useGraphinLayoutController) {
+        // processLayoutConfig 兼容布局参数
+        this.options.layout = processLayoutConfig(layout, this.graph) || DEFAULT_GRAPH_LAYOUT_OPTIONS;
+      }
       this.graph = new G6.Graph(this.options);
     }
 
@@ -252,8 +261,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     /** 渲染 */
     this.graph.render();
 
-    /** 初始化布局：仅限网图 */
-    if (!this.isTree) {
+    /** 初始化布局：仅限网图且使用了 graphin-force */
+    if (!this.isTree && this.useGraphinLayoutController) {
       this.layout = new LayoutController(this);
       this.layout.start();
     }
@@ -286,7 +295,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
   }
 
   updateLayout = () => {
-    this.layout.changeLayout();
+    if (this.useGraphinLayoutController) this.layout.changeLayout();
   };
 
   componentDidMount() {
@@ -384,6 +393,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         this.data?.nodes?.forEach(node => {
           const dragNode = newDragNodes.find(item => item.id === node.id);
           if (dragNode) {
+            node.mass = dragNode.layout?.force?.mass;
             node.layout = {
               ...node.layout,
               force: {
@@ -392,16 +402,24 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
             };
           }
         });
+        if (this.useGraphinLayoutController) {
+          this.graph.data(this.data as GraphData | TreeGraphData);
+          this.graph.set('layoutController', null);
+          this.graph.changeData(this.data as GraphData | TreeGraphData);
 
-        this.graph.data(this.data as GraphData | TreeGraphData);
-        this.graph.set('layoutController', null);
-        this.graph.changeData(this.data as GraphData | TreeGraphData);
-
-        // 由于 changeData 是将 this.data 融合到 item models 上面，因此 changeData 后 models 与 this.data 不是同一个引用了
-        // 执行下面一行以保证 graph item model 中的数据与 this.data 是同一份
-        // @ts-ignore
-        this.data = this.layout.getDataFromGraph();
-        this.layout.changeLayout();
+          // 由于 changeData 是将 this.data 融合到 item models 上面，因此 changeData 后 models 与 this.data 不是同一个引用了
+          // 执行下面一行以保证 graph item model 中的数据与 this.data 是同一份
+          // @ts-ignore
+          this.data = this.layout.getDataFromGraph();
+          this.layout.changeLayout();
+        } else {
+          if (layout) layout.disableTriggerLayout = true;
+          const layoutCfg = processLayoutConfig(layout, this.graph); // 兼容布局参数
+          this.graph.updateLayout(layoutCfg);
+          this.graph.data(this.data as GraphData | TreeGraphData);
+          this.graph.changeData(this.data as GraphData | TreeGraphData);
+          this.data = this.graph.get('data');
+        }
       }
 
       this.initStatus();
@@ -432,26 +450,31 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     }
     /** 布局变化 */
     if (isLayoutChange) {
+      const { layout } = this.props;
+      this.useGraphinLayoutController = layout?.type === 'graphin-force';
       if (this.isTree) {
-        // @ts-ignore
-        // eslint-disable-next-line react/destructuring-assignment
-        this.graph.updateLayout(this.props.layout);
+        this.graph.updateLayout(layout);
         return;
       }
-      /**
-       * TODO
-       * 1. preset 前置布局判断问题
-       * 2. enablework 问题
-       * 3. G6 LayoutController 里的逻辑
-       */
-      /** 数据需要从画布中来 */
-      // @ts-ignore
-      this.data = this.layout.getDataFromGraph();
-      this.layout.changeLayout();
-      // this.layout.refreshPosition();
-
-      /** 走G6的layoutController */
-      // this.graph.updateLayout();
+      if (this.useGraphinLayoutController) {
+        // graphin-force 时使用 graphin 的 layoutController，否则使用 G6 全套逻辑
+        /**
+         * TODO
+         * 1. preset 前置布局判断问题
+         * 2. enablework 问题
+         * 3. G6 LayoutController 里的逻辑
+         */
+        /** 数据需要从画布中来 */
+        // @ts-ignore
+        this.data = this.layout.getDataFromGraph();
+        this.layout.changeLayout();
+        // this.layout.refreshPosition();
+      } else {
+        const layoutCfg = processLayoutConfig(layout, this.graph); // 兼容布局参数
+        if (layoutCfg) layoutCfg.disableTriggerLayout = false;
+        this.graph.updateLayout(layoutCfg);
+        this.data = this.graph.get('data');
+      }
       // console.log('%c isLayoutChange', 'color:grey');
       this.graph.emit('graphin:layoutchange', { prevLayout: prevProps.layout, layout });
     }

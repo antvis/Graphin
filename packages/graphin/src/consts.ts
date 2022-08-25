@@ -19,3 +19,6 @@ export const DEFAULT_TREE_LATOUT_OPTIONS = {
   },
 };
 export const TREE_LAYOUTS = ['dendrogram', 'compactBox', 'mindmap', 'indented'];
+export const DEFAULT_GRAPH_LAYOUT_OPTIONS = {
+  type: 'force2',
+};
