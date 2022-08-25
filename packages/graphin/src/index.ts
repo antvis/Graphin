@@ -25,7 +25,7 @@ export type { LegendChildrenProps, OptionType as LegendOptionType } from './comp
 export type { TooltipValue } from './components/Tooltip/index';
 export type { GraphinContextType } from './GraphinContext';
 export type { ThemeType } from './theme';
-export type { EdgeStyle, GraphinData, GraphinTreeData, IUserEdge, IUserNode, Layout, NodeStyle } from './typings/type';
+export type { EdgeStyle, GraphinData, GraphinTreeData, GraphinProps,IUserEdge, IUserNode, Layout, NodeStyle } from './typings/type';
 export { Utils, GraphinContext, Behaviors, Components, registerFontFamily };
 
 export interface GraphEvent extends MouseEvent {

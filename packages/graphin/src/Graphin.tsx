@@ -37,6 +37,8 @@ export interface GraphinState {
   };
 }
 
+
+
 export interface RegisterFunction {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (name: string, options: { [key: string]: any }, extendName?: string): void;
