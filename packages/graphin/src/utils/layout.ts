@@ -1,5 +1,6 @@
 import { IGraph } from '@antv/g6';
 import { Layout, IUserNode } from '../typings/type';
+import cloneDeep from './cloneDeep';
 
 const LAYOUT_CFG_KEY_MAP: { [key: string]: string } = {
   animation: 'animate',
@@ -8,6 +9,7 @@ const LAYOUT_CFG_KEY_MAP: { [key: string]: string } = {
 };
 
 export const processLayoutConfig = (layoutCfg: Layout | undefined, graph: IGraph) => {
+ 
   if (!layoutCfg) return layoutCfg;
   const newLayoutCfg: Layout = {};
   Object.keys(layoutCfg).forEach(key => {

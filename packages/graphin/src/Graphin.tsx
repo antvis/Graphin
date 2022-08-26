@@ -344,7 +344,8 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     const isOptionsChange = this.shouldUpdate(prevProps, 'options');
     const isThemeChange = this.shouldUpdate(prevProps, 'theme');
     // console.timeEnd('did-update');
-    const { data, layoutCache, layout, rtl } = this.props;
+    const { data, layoutCache,  rtl } = this.props;
+    const layout = cloneDeep(this.props.layout);//
     this.layoutCache = layoutCache;
     // const isGraphTypeChange = (prevProps.data as GraphinTreeData).children !== (data as GraphinTreeData).children;
 
@@ -415,7 +416,10 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           this.data = this.layout.getDataFromGraph();
           this.layout.changeLayout();
         } else {
-          if (layout) layout.disableTriggerLayout = true;
+ 
+          if (layout) {
+            layout['disableTriggerLayout'] = true
+          };
           const layoutCfg = processLayoutConfig(layout, this.graph); // 兼容布局参数
           this.graph.updateLayout(layoutCfg);
           this.graph.data(this.data as GraphData | TreeGraphData);
@@ -452,7 +456,6 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     }
     /** 布局变化 */
     if (isLayoutChange) {
-      const { layout } = this.props;
       this.useGraphinLayoutController = layout?.type === 'graphin-force';
       if (this.isTree) {
         this.graph.updateLayout(layout);
@@ -473,7 +476,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
         // this.layout.refreshPosition();
       } else {
         const layoutCfg = processLayoutConfig(layout, this.graph); // 兼容布局参数
-        if (layoutCfg) layoutCfg.disableTriggerLayout = false;
+        if (layoutCfg) {layoutCfg.disableTriggerLayout = false}
         this.graph.updateLayout(layoutCfg);
         this.data = this.graph.get('data');
       }
