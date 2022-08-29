@@ -80,7 +80,7 @@ class LayoutController {
     const { type } = this.options;
     this.instance.execute();
 
-    if (type === 'force' || type === 'g6force' || type === 'gForce' || type === 'comboCombined') {
+    if (type === 'force' || type === 'g6force' || type === 'gForce' || type === 'comboCombined' || type === 'force2') {
       // We emit afterlayout on options.layoutEnd()
       return;
     }
