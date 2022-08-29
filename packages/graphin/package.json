@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin",
-  "version": "2.7.8",
+  "version": "2.7.9",
   "description": "the react toolkit for graph analysis based on g6",
   "main": "lib/index.js",
   "module": "es/index.js",
