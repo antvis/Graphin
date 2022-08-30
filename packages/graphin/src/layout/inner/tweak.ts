@@ -1,4 +1,4 @@
-import { GraphinData, IUserNode, IUserEdge } from '../../typings/type';
+import { GraphinData, IUserEdge, IUserNode } from '../../typings/type';
 
 /* eslint-disable no-param-reassign */
 const getRandomPosition = () => {
@@ -67,10 +67,12 @@ const tweak = (currentData: GraphinData, prevData: GraphinData) => {
 
   currNodes.forEach((node: IUserNode) => {
     const { id } = node;
+
     let position = positionMap.get(id);
     if (window.isNaN(position.x) || window.isNaN(position.y)) {
-      position = incrementPositonMap.get(id);
+      position = incrementPositonMap.get(id) || {};
     }
+
     if (!window.isNaN(position.x) && !window.isNaN(position.y)) {
       node.x = position.x;
       node.y = position.y;

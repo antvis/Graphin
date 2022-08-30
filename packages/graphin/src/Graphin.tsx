@@ -37,8 +37,6 @@ export interface GraphinState {
   };
 }
 
-
-
 export interface RegisterFunction {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (name: string, options: { [key: string]: any }, extendName?: string): void;
@@ -344,8 +342,9 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     const isOptionsChange = this.shouldUpdate(prevProps, 'options');
     const isThemeChange = this.shouldUpdate(prevProps, 'theme');
     // console.timeEnd('did-update');
-    const { data, layoutCache,  rtl } = this.props;
-    const layout = cloneDeep(this.props.layout);//
+    const { data, layoutCache, rtl, layout: LAYOUT } = this.props;
+    // @ts-ignore
+    const layout = cloneDeep(LAYOUT);
     this.layoutCache = layoutCache;
     // const isGraphTypeChange = (prevProps.data as GraphinTreeData).children !== (data as GraphinTreeData).children;
 
@@ -416,10 +415,9 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           this.data = this.layout.getDataFromGraph();
           this.layout.changeLayout();
         } else {
- 
           if (layout) {
-            layout['disableTriggerLayout'] = true
-          };
+            layout.disableTriggerLayout = true;
+          }
           const layoutCfg = processLayoutConfig(layout, this.graph); // 兼容布局参数
           this.graph.updateLayout(layoutCfg);
           this.graph.data(this.data as GraphData | TreeGraphData);
@@ -430,7 +428,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
 
       this.initStatus();
       this.apis = ApiController(this.graph);
-      // console.log('%c isDataChange', 'color:grey');
+
       this.setState(
         preState => {
           return {
@@ -471,16 +469,28 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
          */
         /** 数据需要从画布中来 */
         // @ts-ignore
+        if (Object.keys(this.layout).length === 0) {
+          this.layout = new LayoutController(this);
+        }
+        // @ts-ignore
         this.data = this.layout.getDataFromGraph();
         this.layout.changeLayout();
         // this.layout.refreshPosition();
       } else {
+        const layoutController = this.graph.get('layoutController');
+        if (!layoutController) {
+          // @ts-ignore
+          this.graph.initLayoutController();
+        }
         const layoutCfg = processLayoutConfig(layout, this.graph); // 兼容布局参数
-        if (layoutCfg) {layoutCfg.disableTriggerLayout = false}
+        if (layoutCfg) {
+          layoutCfg.disableTriggerLayout = false;
+        }
+
         this.graph.updateLayout(layoutCfg);
         this.data = this.graph.get('data');
       }
-      // console.log('%c isLayoutChange', 'color:grey');
+
       this.graph.emit('graphin:layoutchange', { prevLayout: prevProps.layout, layout });
     }
   }
