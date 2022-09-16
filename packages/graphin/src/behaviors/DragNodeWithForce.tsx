@@ -50,6 +50,7 @@ const DragNodeWithForce = (props: DragNodeWithForceProps) => {
         graph.getNodes().forEach(node => {
           if (node.hasState('selected')) {
             const selectNodeModel = node.get('model');
+            if (!selectNodeModel.layout) selectNodeModel.layout = {};
             selectNodeModel.layout.force = {
               mass: autoPin ? dragNodeMass : null,
             };
