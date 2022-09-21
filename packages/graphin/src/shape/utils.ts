@@ -27,6 +27,9 @@ export const setStatusStyle = (shapes: any, statusStyle: any, parseAttr: (style:
             const { attrs, ...animateOptions } = animate;
             shapeItem.animate(attrs, animateOptions);
           }
+        } else if (otherAttrs.opacity !== undefined) {
+          // Support at least transparency on images
+          shapeItem.attr({ opacity: otherAttrs.opacity });
         }
       }
     });
