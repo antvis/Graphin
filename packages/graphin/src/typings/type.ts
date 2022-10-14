@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // TODO : remove any type
-import { Graph } from '@antv/g6';
+import { Graph, ShapeStyle } from '@antv/g6';
 import React from 'react';
 import { ThemeType } from '../theme';
 
@@ -125,6 +125,12 @@ export interface GraphinProps {
   defaultCombo?: Partial<{
     type?: string;
     style: ComboStyle;
+    labelCfg?: {
+      position?: 'center' | 'top' | 'left' | 'right' | 'bottom';
+      refX?: number;
+      refY?: number;
+      style?: ShapeStyle;
+    };
     [key: string]: any;
   }>;
 
