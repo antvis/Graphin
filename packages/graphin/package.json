@@ -1,10 +1,16 @@
 {
   "name": "@antv/graphin",
-  "version": "2.7.10",
+  "version": "2.7.12",
   "description": "the react toolkit for graph analysis based on g6",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "packages.json"
+  ],
   "scripts": {
     "start": "npm run clean && father build --watch",
     "build": "npm run clean && father build && npm run build:umd",
