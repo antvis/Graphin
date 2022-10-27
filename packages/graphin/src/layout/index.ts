@@ -247,7 +247,7 @@ class LayoutController {
     const { animate, layoutAnimate } = graphin.options;
     const { type } = this.options;
 
-    if (animate || layoutAnimate) {
+    if (animate && !layoutAnimate && !this.options.animation) {
       this.graph.positionsAnimate(type === 'comboCombined');
     } else {
       this.graph.refreshPositions(type === 'comboCombined');
