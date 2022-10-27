@@ -10,11 +10,13 @@ export interface DragNodeWithForceProps {
    */
   autoPin?: boolean;
   dragNodeMass?: number;
+  // 发生 pin 的动作，由 props 控制而非拖拽产中的 pin 动作
+  pinAction?: { id: string; pinned: boolean } | undefined;
 }
 const DragNodeWithForce = (props: DragNodeWithForceProps) => {
   const { graph, layout, dragNodes, updateContext } = React.useContext(GraphinContext);
 
-  const { autoPin, dragNodeMass = 10000000000 } = props;
+  const { autoPin, pinAction, dragNodeMass = 10000000000 } = props;
   const { instance } = layout;
 
   useEffect(() => {
@@ -36,8 +38,6 @@ const DragNodeWithForce = (props: DragNodeWithForceProps) => {
 
       if (e.item) {
         const nodeModel = e.item.get('model');
-        nodeModel.x = e.x;
-        nodeModel.y = e.y;
         nodeModel.layout = {
           ...nodeModel.layout,
           force: {
@@ -75,11 +75,35 @@ const DragNodeWithForce = (props: DragNodeWithForceProps) => {
       graph.off('node:dragend', handleNodeDragEnd);
     };
   }, [graph, autoPin, instance, dragNodes, updateContext]);
+
+  /** props 控制一个 pin 的动作，可能是 pin 或 unpin */
+  useEffect(() => {
+    const { id, pinned } = pinAction || {};
+    if (!id) return;
+    let newDragNodes = dragNodes;
+    if (!pinned) {
+      newDragNodes = dragNodes.filter((node: NodeConfig) => node.id !== id);
+    } else {
+      const node = graph.findById(id);
+      if (!node) return;
+      const nodeModel = node.get('model');
+      if (!nodeModel.layout) nodeModel.layout = {};
+      nodeModel.layout.force = {
+        mass: autoPin ? dragNodeMass : null,
+      };
+      newDragNodes.push(nodeModel);
+    }
+    updateContext({
+      dragNodes: newDragNodes,
+    });
+  }, [pinAction]);
+
   return null;
 };
 DragNodeWithForce.defaultProps = {
   autoPin: false,
   dragNodeMass: 10000000000,
+  pinAction: undefined,
 };
 
 export default DragNodeWithForce;
