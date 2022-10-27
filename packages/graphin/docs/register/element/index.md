@@ -16,7 +16,7 @@ nav:
 
 ## 【兼容】通过 G6.registerNode 注册节点
 
-熟悉 G6 的朋友应该指导，整个图元素都是 G6 的[注册机制](https://g6.antv.vision/zh/docs/manual/middle/elements/nodes/custom-node)完成的。Graphin 当然也支持自定义节点。用户可以直接通过`Graphin.reigsterNode()`完成注册。内部实现源码如下：
+熟悉 G6 的朋友应该知道，整个图元素都是 G6 的[注册机制](https://g6.antv.vision/zh/docs/manual/middle/elements/nodes/custom-node)完成的。Graphin 当然也支持自定义节点。用户可以直接通过`Graphin.reigsterNode()`完成注册。内部实现源码如下：
 
 ```jsx | pure
   static registerNode: RegisterFunction = (nodeName, options, extendedNodeName) => {
