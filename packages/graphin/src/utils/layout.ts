@@ -1,6 +1,5 @@
 import { IGraph } from '@antv/g6';
-import { Layout, IUserNode } from '../typings/type';
-import cloneDeep from './cloneDeep';
+import { IUserNode, Layout } from '../typings/type';
 
 const LAYOUT_CFG_KEY_MAP: { [key: string]: string } = {
   animation: 'animate',
@@ -9,7 +8,6 @@ const LAYOUT_CFG_KEY_MAP: { [key: string]: string } = {
 };
 
 export const processLayoutConfig = (layoutCfg: Layout | undefined, graph: IGraph) => {
- 
   if (!layoutCfg) return layoutCfg;
   const newLayoutCfg: Layout = {};
   Object.keys(layoutCfg).forEach(key => {
@@ -37,5 +35,12 @@ export const processLayoutConfig = (layoutCfg: Layout | undefined, graph: IGraph
       };
     }
   }
+  if (newLayoutCfg.type === 'concentric') {
+    const { minNodeSpacing = 60, preventOverlap = true, nodeSize = 60 } = newLayoutCfg;
+    newLayoutCfg.minNodeSpacing = minNodeSpacing;
+    newLayoutCfg.preventOverlap = preventOverlap;
+    newLayoutCfg.nodeSize = nodeSize;
+  }
+
   return newLayoutCfg;
 };
