@@ -23,11 +23,13 @@ const defaultConfig = {
   trigger: DEFAULT_TRIGGER,
   /** 框选过程中是否选中边，默认为 true，用户配置为 false 时，则不选中边； */
   includeEdges: true,
+  /** Whether to include combos in the selection */
+  includeCombos: false,
 };
 
 export type IDragCanvasProps = Partial<typeof defaultConfig>;
 
-const BurshSelect: React.FunctionComponent<IDragCanvasProps> = props => {
+const BrushSelect: React.FunctionComponent<IDragCanvasProps> = props => {
   useBehaviorHook({
     type: 'brush-select',
     userProps: props,
@@ -36,4 +38,4 @@ const BurshSelect: React.FunctionComponent<IDragCanvasProps> = props => {
   return null;
 };
 
-export default BurshSelect;
+export default BrushSelect;
