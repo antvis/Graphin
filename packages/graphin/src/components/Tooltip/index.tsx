@@ -41,13 +41,20 @@ export interface TooltipProps {
    * @description.en-US display arrow
    */
   hasArrow?: boolean;
+  /**
+   * @description set tooltip delay (ms)
+   */
+  delay?: {
+    show: number;
+    hide: number;
+  }
 }
 
 const container = React.createRef<HTMLDivElement>();
 
 const Tooltip: React.FunctionComponent<TooltipProps> = props => {
-  const { children, bindType = 'node', style, placement = 'top', hasArrow } = props;
-  const { x, y, visible, item } = useTooltip({ bindType, container });
+  const { children, bindType = 'node', style, placement = 'top', hasArrow, delay = { show: 0, hide: 200} } = props;
+  const { x, y, visible, item } = useTooltip({ bindType, container, delay });
   const { graph } = React.useContext(GraphinContext);
 
   let nodeSize = 40;
