@@ -59,6 +59,12 @@ export function parseHalo(json: EdgeStyle['halo']) {
   return removeDumpAttrs(attrs);
 }
 
+function parseLabelBackground(json: EdgeStyle['label']['background']) {
+  return {
+    id: 'label-background',
+    ...json
+  }
+}
 const parseAttr = (style: EdgeStyle, itemShapeName: string) => {
   if (itemShapeName === 'keyshape') {
     return parseKeyShape(style.keyshape || {});
@@ -68,6 +74,9 @@ const parseAttr = (style: EdgeStyle, itemShapeName: string) => {
   }
   if (itemShapeName === 'label') {
     return parseLabel(style.label || {});
+  }
+  if(itemShapeName === 'label-background'){
+    return parseLabelBackground(style[itemShapeName] || {});
   }
   return {};
 };
@@ -345,7 +354,10 @@ export default () => {
             if (value) {
               setStatusStyle(shapes, initStateStyle[statusKey], parseAttr); // 匹配到status就改变
             } else {
-              setStatusStyle(shapes, initialStyle, parseAttr); // 没匹配到就重置
+              setStatusStyle(shapes, {
+                ...initialStyle,
+                ['label-background']: initialStyle.label?.background
+              }, parseAttr); // 没匹配到就重置
               status.forEach(key => {
                 // 如果cfg.status中还有其他状态，那就重新设置回来
                 setStatusStyle(shapes, initStateStyle[key], parseAttr);
