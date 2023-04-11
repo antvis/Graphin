@@ -50,8 +50,8 @@ export default {
   navs: [
     null,
     {
-      title: 'GraphInsight',
-      path: 'https://graphinsight.antgroup.com/home.html#/',
+      title: 'G6VP',
+      path: 'https://insight.antv.antgroup.com',
     },
     // {
     //   title: 'GitHub',

@@ -19,9 +19,9 @@ A React toolkit for graph analysis based on G6
 
 ## 🌾 新产品！
 
-2022.06.06 ，这天恰逢 G6 开源 4 周年，也是中国传统节气芒种日，我们对外发布一款图分析方向的新品 GraphInsight，用户无需代码开发，即可在线完成关系数据的可视化与探索分析任务。还可一键导出 SDK，集成到业务系统中，帮助开发者研发提效。
+2022.06.06 ，这天恰逢 G6 开源 4 周年，也是中国传统节气芒种日，我们对外发布一款图分析方向的新品 G6VP，用户无需代码开发，即可在线完成关系数据的可视化与探索分析任务。还可一键导出 SDK，集成到业务系统中，帮助开发者研发提效。
 
-GraphInsight 所导出的 SDK 正是基于 Graphin 封装的，如果你想了解 Graphin 的能力，不妨可以在 [GraphInsight](https://github.com/antvis/GraphInsight) 这款产品中一窥究竟
+G6VP 所导出的 SDK 正是基于 Graphin 封装的，如果你想了解 Graphin 的能力，不妨可以在 [G6VP](https://github.com/antvis/G6VP) 这款产品中一窥究竟
 
 ## ✨ 功能特性
 
