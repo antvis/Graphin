@@ -50,7 +50,7 @@ export default {
   navs: [
     null,
     {
-      title: 'G6VP',
+      title: '在线分析工具 G6VP',
       path: 'https://insight.antv.antgroup.com',
     },
     // {
@@ -92,8 +92,9 @@ export default {
     'https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js',
     'https://gw.alipayobjects.com/os/lib/antd/4.6.6/dist/antd-with-locales.js',
     /** G6 **/
-    'https://gw.alipayobjects.com/os/lib/antv/g6/4.7.0/dist/g6.min.js',
-    'https://gw.alipayobjects.com/os/lib/antv/g6/4.7.0/dist/g6.min.js.map',
+    'https://gw.alipayobjects.com/os/lib/antv/g6/4.8.9/dist/g6.min.js',
+    'https://gw.alipayobjects.com/os/lib/antv/g6/4.8.9/dist/g6.min.js.map',
+
     /** lodash */
     'https://gw.alipayobjects.com/os/lib/lodash/4.17.20/lodash.min.js',
   ],
