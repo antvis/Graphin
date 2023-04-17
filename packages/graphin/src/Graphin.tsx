@@ -506,6 +506,11 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     const { willUnmount } = this.props;
     if (willUnmount) {
       willUnmount();
+      if (this.layout && this.layout.destroy) {
+        this.layout.destroy(); // tree graph
+      }
+      this.layout = {} as LayoutController;
+      this.graph.destroyLayout();
     } else {
       this.clear();
     }
