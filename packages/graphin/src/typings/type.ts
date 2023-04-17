@@ -197,6 +197,7 @@ export interface GraphinProps {
    * Text direction, to support languages like Arabic and Hebrew.
    */
   dir?: 'ltr' | 'rtl';
+  willUnmount?: () => void;
 }
 
 export interface IUserNode extends BaseNode, Partial<RestNode>, UserProperties {}
