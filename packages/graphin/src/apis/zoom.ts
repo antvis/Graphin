@@ -11,7 +11,10 @@ export const handleZoomOut = (graph: Graph) => () => {
   if (ratio * current > 5) {
     return;
   }
-  graph.zoom(ratio, { x: point.x / pixelRatio, y: point.y / pixelRatio });
+  graph.zoom(ratio, { x: point.x / pixelRatio, y: point.y / pixelRatio }, true, {
+    easing: 'easeCubic',
+    duration: 150,
+  });
   return {
     text: `${Math.round(ratio * current * 100)}%`,
     ratio: ratio * current,
@@ -30,7 +33,10 @@ export const handleZoomIn = (graph: Graph) => () => {
   if (ratio * current < 0.3) {
     return;
   }
-  graph.zoom(ratio, { x: point.x / pixelRatio, y: point.y / pixelRatio });
+  graph.zoom(ratio, { x: point.x / pixelRatio, y: point.y / pixelRatio }, true, {
+    easing: 'easeCubic',
+    duration: 150,
+  });
 
   return {
     text: `${Math.round(ratio * current * 100)}%`,
@@ -38,18 +44,23 @@ export const handleZoomIn = (graph: Graph) => () => {
   };
 };
 // 自定义缩放
-export const handleChangeZoom = (graph: Graph) => ({ text, ratio }: { text: string; ratio: number }) => {
-  if (!graph || graph.destroyed) return;
+export const handleChangeZoom =
+  (graph: Graph) =>
+  ({ text, ratio }: { text: string; ratio: number }) => {
+    if (!graph || graph.destroyed) return;
 
-  const canvas = graph.get('canvas');
-  const point = canvas.getPointByClient(canvas.get('width') / 2, canvas.get('height') / 2);
-  const pixelRatio = canvas.get('pixelRatio') || 1;
-  graph.zoomTo(ratio, { x: point.x / pixelRatio, y: point.y / pixelRatio });
-  return {
-    text,
-    ratio,
+    const canvas = graph.get('canvas');
+    const point = canvas.getPointByClient(canvas.get('width') / 2, canvas.get('height') / 2);
+    const pixelRatio = canvas.get('pixelRatio') || 1;
+    graph.zoomTo(ratio, { x: point.x / pixelRatio, y: point.y / pixelRatio }, true, {
+      easing: 'easeCubic',
+      duration: 150,
+    });
+    return {
+      text,
+      ratio,
+    };
   };
-};
 
 // 实际大小
 export const handleRealZoom = (graph: Graph) => () => {
@@ -68,7 +79,7 @@ export const handleAutoZoom = (graph: Graph) => () => {
   if (!graph || graph.destroyed) return;
   const nodes = graph.getNodes();
   if (nodes.length > 0) {
-    graph.fitView([20, 20]);
+    graph.fitView([20, 20], {}, true);
   }
   const current = graph.getZoom();
   return {
