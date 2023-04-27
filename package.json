@@ -80,8 +80,7 @@
   },
   "dependencies": {
     "@ant-design/create-react-context": "^0.2.5",
-    "@ant-design/icons": "^4.6.2",
-    "@ant-design/icons-react": "^2.0.1",
+    "@ant-design/icons": "4.6.2",
     "@antv/gatsby-theme-antv": "latest",
     "antd": "^4.12.3",
     "rc-footer": "^0.6.6",

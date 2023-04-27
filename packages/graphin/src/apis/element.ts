@@ -32,7 +32,7 @@ export const focusNodeById = (graph: Graph) => (nodeId: string) => {
   }
 
   graph.focusItem(nodeId, true, {
-    duration: 300,
+    duration: 200,
     easing: 'easeCubic',
   });
 
