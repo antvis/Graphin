@@ -23,6 +23,8 @@ A React toolkit for graph analysis based on G6
 
 The SDK exported by G6VP is encapsulated based on Graphin. If you want to understand the capabilities of Graphin, you can take a look at the product [G6VP](https://github.com/antvis/G6VP)
 
+![demo2](https://github.com/antvis/G6VP/assets/10703060/40560cd2-3fea-41f8-888b-5abc1eb09b66)
+
 ## ✨ Features
 
 ### 🎨 Good-looking elements, standardized style configuration
@@ -93,8 +95,8 @@ export default () => {
 
 ```tsx | pure
 import React from 'react';
-import Graphin from '@antv/graphin';
-import { MiniMap } from '@antv/graphin-components';
+import Graphin, { Components, Utils } from '@antv/graphin';
+const { MiniMap } = Components;
 // mock data
 const data = Utils.mock(10).circle().graphin();
 export default () => {
@@ -111,7 +113,6 @@ export default () => {
 ```tsx | pure
 import React from 'react';
 import Graphin from '@antv/graphin';
-import { MiniMap } from '@antv/graphin-components';
 // Import icon resource files
 import iconLoader from '@antv/graphin-icons';
 import '@antv/graphin-icons/dist/index.css';
@@ -131,11 +132,7 @@ data.nodes.forEach(node => {
   };
 });
 export default () => {
-  return (
-    <Graphin data={data}>
-      <MiniMap />
-    </Graphin>
-  );
+  return <Graphin data={data} />;
 };
 ```
 
@@ -152,10 +149,3 @@ If you want to run Graphin locally, you may wish to read this [Contribution Guid
 - [Graphin Introduction](https://graphin.antv.vision/en-US/graphin/quick-start/introduction)
 - [Quick Start](https://graphin.antv.vision/en-US/graphin/quick-start/quick-start)
 - [Graphin visual analysis solution](https://graphin.antv.vision/en-US/solution/database/graph-database)
-
-## DingTalk
-
-You can scan the QR code to join graphin's group chat
-
-<img src='https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*-qzoTpLg-1cAAAAAAAAAAAAAARQnAQ' alt='DingTalk' width= '300px'/>
-```
