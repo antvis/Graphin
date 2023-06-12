@@ -23,6 +23,8 @@ A React toolkit for graph analysis based on G6
 
 G6VP 所导出的 SDK 正是基于 Graphin 封装的，如果你想了解 Graphin 的能力，不妨可以在 [G6VP](https://github.com/antvis/G6VP) 这款产品中一窥究竟
 
+![demo2](https://github.com/antvis/G6VP/assets/10703060/40560cd2-3fea-41f8-888b-5abc1eb09b66)
+
 ## ✨ 功能特性
 
 ### 🎨 高颜值元素，规范的样式配置。
@@ -94,9 +96,8 @@ export default () => {
 
 ```tsx | pure
 import React from 'react';
-import Graphin from '@antv/graphin';
-import { MiniMap } from '@antv/graphin-components';
-// mock数据
+import Graphin, { Components, Utils } from '@antv/graphin';
+const { MiniMap } = Components;
 const data = Utils.mock(10).circle().graphin();
 export default () => {
   return (
@@ -112,7 +113,6 @@ export default () => {
 ```tsx | pure
 import React from 'react';
 import Graphin from '@antv/graphin';
-import { MiniMap } from '@antv/graphin-components';
 // 引入图标资源文件
 import iconLoader from '@antv/graphin-icons';
 import '@antv/graphin-icons/dist/index.css';
@@ -132,11 +132,7 @@ data.nodes.forEach(node => {
   };
 });
 export default () => {
-  return (
-    <Graphin data={data}>
-      <MiniMap />
-    </Graphin>
-  );
+  return <Graphin data={data} />;
 };
 ```
 
@@ -153,7 +149,3 @@ export default () => {
 - [Graphin 简介](https://graphin.antv.vision/graphin/quick-start/introduction)
 - [快速上手](https://graphin.antv.vision/graphin/quick-start/quick-start)
 - [图可视分析解决方案](https://graphin.antv.vision/solution/database/graph-database)
-
-## 钉钉群
-
-<img src='https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*-qzoTpLg-1cAAAAAAAAAAAAAARQnAQ' alt='钉钉群' width= '300px'/>
