@@ -5,9 +5,9 @@ const defaultConfig = {
   /** 缩放灵敏度，支持 1-10 的数值，默认灵敏度为 5； */
   sensitivity: 2,
   /** 最小缩放比例 */
-  minZoom: undefined,
+  minZoom: undefined as number | undefined,
   /** 最大缩放比例 */
-  maxZoom: undefined,
+  maxZoom: undefined as number | undefined,
   /** 是否开启性能优化，默认为 false，设置为 true 开启，开启后缩放比例小于 optimizeZoom 时自动隐藏非 keyShape */
   enableOptimize: false,
   /** 当 enableOptimize 为 true 时起作用，默认值为 0.7，表示当缩放到哪个比例时开始隐藏非 keyShape； */
