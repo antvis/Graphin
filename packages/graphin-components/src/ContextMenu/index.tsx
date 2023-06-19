@@ -19,7 +19,7 @@ interface ContextMenuProps {
   children: React.ReactChildren | JSX.Element;
   style?: React.CSSProperties;
   bindType?: 'node' | 'edge' | 'canvas';
-  autoAdjust?: boolean;
+  disableAutoAdjust?: boolean;
 }
 
 interface State {
@@ -35,7 +35,7 @@ interface State {
 let containerRef: HTMLDivElement | null;
 
 const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Menu } = props => {
-  const { children, bindType = 'node', autoAdjust = true, style } = props;
+  const { children, bindType = 'node', disableAutoAdjust, style } = props;
   const graphin = React.useContext(GraphinContext);
   const { graph } = graphin;
 
@@ -75,7 +75,7 @@ const ContextMenu: React.FunctionComponent<ContextMenuProps> & { Menu: typeof Me
     let y = e.canvasY + graphTop + offsetY;
 
     // when the menu is (part of) out of the canvas
-    if (autoAdjust) {
+    if (!disableAutoAdjust) {
       if (x + bbox.width > width) {
         x = e.canvasX - bbox.width - offsetX + graphLeft;
       }
