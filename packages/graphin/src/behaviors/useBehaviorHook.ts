@@ -14,6 +14,9 @@ const useBehaviorHook = (params: Props) => {
   const { disabled, ...otherConfig } = userProps;
 
   React.useEffect(() => {
+    if (!graph || graph.destroyed) {
+      return;
+    }
     /** 保持单例 */
     graph.removeBehaviors(type, mode);
 

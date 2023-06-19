@@ -35,11 +35,11 @@ const styles: {
       '0px 8px 10px -5px rgba(0,0,0,0.2), 0px 16px 24px 2px rgba(0,0,0,0.14), 0px 6px 30px 5px rgba(0,0,0,0.12)',
   },
 };
-let containerRef: null | HTMLDivElement = null;
 const containerHeight = 120;
 const MiniMap: React.FunctionComponent<MiniMapProps> = props => {
   const { graph } = React.useContext(GraphinContext);
   const { options, style = {} } = props;
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const width = graph.getWidth();
@@ -72,9 +72,7 @@ const MiniMap: React.FunctionComponent<MiniMapProps> = props => {
   };
   return (
     <div
-      ref={node => {
-        containerRef = node;
-      }}
+      ref={containerRef}
       // @ts-ignore
       style={mergedStyle}
     />

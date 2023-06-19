@@ -18,15 +18,17 @@ export interface ContextMenuProps {
   children: (content: ContextMenuValue) => React.ReactNode;
   style?: React.CSSProperties;
   bindType?: 'node' | 'edge' | 'canvas';
+  disableAutoAdjust?: boolean;
 }
 
 const container = React.createRef() as React.RefObject<HTMLDivElement>;
 
 const ContextMenu: React.FunctionComponent<ContextMenuProps> = props => {
-  const { bindType, children, style } = props;
+  const { bindType, children, style, disableAutoAdjust } = props;
   const contextmenu = useContextMenu({
     bindType,
     container,
+    disableAutoAdjust,
   });
   const { visible, x, y, item } = contextmenu;
 
