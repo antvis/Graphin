@@ -49,7 +49,7 @@ const MiniMap: React.FunctionComponent<MiniMapProps> = props => {
     const containerSize = [((width - padding * 2) / (height - padding * 2)) * containerHeight, containerHeight];
 
     const miniMapOptions = {
-      container: containerRef,
+      container: containerRef.current,
       ...defaultOptions,
       size: containerSize,
       ...options,

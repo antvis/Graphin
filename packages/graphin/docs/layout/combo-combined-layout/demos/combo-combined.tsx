@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-import React from 'react';
-import Graphin, { Utils, Behaviors } from '@antv/graphin';
-import * as d3 from 'd3';
 import G6 from '@antv/g6';
+import Graphin, { Behaviors } from '@antv/graphin';
+import * as d3 from 'd3';
+import React from 'react';
 // 引入Graphin CSS
 
 const { DragCombo } = Behaviors;
@@ -115,7 +115,10 @@ const transTree2Graphin = sourceData => {
 };
 
 const pack = data =>
-  d3.pack().size([1000, 500]).padding(3)(
+  d3
+    .pack()
+    .size([1000, 500])
+    .padding(3)(
     d3
       .hierarchy(data)
 
@@ -143,7 +146,8 @@ const layout = {
   type: 'comboCombined',
   animation: 'false',
   comboPadding: 120,
-  outerLayout: new G6.Layout['gForce']({ // gForce forceAtlas2 graphin-force
+  outerLayout: new G6.Layout.gForce({
+    // gForce forceAtlas2 graphin-force
     preventOverlap: true,
     animation: false, // for graphin-force
     animate: false, // for gForce and fruchterman
@@ -152,9 +156,9 @@ const layout = {
     linkDistance: (edge, source, target) => {
       const nodeSize = ((source.size?.[0] || 40) + (target.size?.[0] || 40)) / 2;
       return Math.min(nodeSize * 1.5, 700);
-    }
-  })
-}
+    },
+  }),
+};
 
 const Demo = () => {
   return (
@@ -166,8 +170,8 @@ const Demo = () => {
         groupByTypes={false}
         defaultCombo={{
           style: {
-            opacity: 0.6
-          }
+            opacity: 0.6,
+          },
         }}
       >
         <DragCombo />
