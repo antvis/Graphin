@@ -25,7 +25,6 @@
     "directory": "packages/graphin"
   },
   "devDependencies": {
-    "@types/node": "latest",
     "@antv/g-base": "^0.5.9",
     "@antv/hierarchy": "^0.6.6",
     "@babel/core": "^7.16.0",
@@ -34,6 +33,7 @@
     "@types/d3-quadtree": "^3.0.2",
     "@types/jest": "^27.0.3",
     "@types/lodash-es": "^4.17.7",
+    "@types/node": "latest",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "eventemitter3": "^4.0.0",
@@ -62,9 +62,9 @@
   "author": "AntV",
   "license": "MIT",
   "dependencies": {
-    "lodash-es": "^4.17.21",
+    "@antv/g6": "^4.8.10",
     "d3-quadtree": "^3.0.1",
-    "@antv/g6": "^4.8.10"
+    "lodash-es": "^4.17.21"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
