@@ -2,9 +2,8 @@
 import G6 from '@antv/g6';
 import Graphin, { Behaviors } from '@antv/graphin';
 import { ContextMenu } from '@antv/graphin-components';
-import React, { useEffect, useState } from 'react';
-// import cloneDeep from '../../../../lib/utils/cloneDeep';
 import { cloneDeep } from 'lodash-es';
+import React, { useEffect, useState } from 'react';
 
 const { DragCombo } = Behaviors;
 const { Menu } = ContextMenu;

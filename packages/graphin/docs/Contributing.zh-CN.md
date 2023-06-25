@@ -67,7 +67,6 @@ yarn
 
 ```json
  "dependencies": {
-    "@antv/util": "^2.0.10",
     "@antv/graphin": "^2.0.0"
   },
   "peerDependencies": {

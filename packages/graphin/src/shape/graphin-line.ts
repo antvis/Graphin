@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // @ts-nocheck
 import G6, { EdgeConfig, IEdge, IGroup, INode, ModelConfig } from '@antv/g6';
-import { deepMix } from '@antv/util';
+import { merge } from 'lodash-es';
 import { getDefaultStyleByTheme } from '../theme';
 import { EdgeStyle } from '../typings/type';
 import calcByteLength from '../utils/calcByteLength';
@@ -62,8 +62,8 @@ export function parseHalo(json: EdgeStyle['halo']) {
 function parseLabelBackground(json: EdgeStyle['label']['background']) {
   return {
     id: 'label-background',
-    ...json
-  }
+    ...json,
+  };
 }
 const parseAttr = (style: EdgeStyle, itemShapeName: string) => {
   if (itemShapeName === 'keyshape') {
@@ -75,7 +75,7 @@ const parseAttr = (style: EdgeStyle, itemShapeName: string) => {
   if (itemShapeName === 'label') {
     return parseLabel(style.label || {});
   }
-  if(itemShapeName === 'label-background'){
+  if (itemShapeName === 'label-background') {
     return parseLabelBackground(style[itemShapeName] || {});
   }
   return {};
@@ -166,7 +166,7 @@ export default () => {
 
       this.options = getStyleByTheme(_theme);
 
-      const style = deepMix({}, this.options.style, cfg.style) as EdgeStyle;
+      const style = merge({}, this.options.style, cfg.style) as EdgeStyle;
 
       /** 将初始化样式存储在model中 */
       if (cfg) {
@@ -342,7 +342,7 @@ export default () => {
       const model = (item as IEdge).getModel() as EdgeConfig;
       const shapes = (item as IEdge).getContainer().get('children'); // 顺序根据 draw 时确定
 
-      const initStateStyle = deepMix({}, this.options.status, model.style.status);
+      const initStateStyle = merge({}, this.options.status, model.style.status);
 
       const initialStyle = (item as IEdge).getModel()._initialStyle as EdgeStyle;
 
@@ -354,10 +354,14 @@ export default () => {
             if (value) {
               setStatusStyle(shapes, initStateStyle[statusKey], parseAttr); // 匹配到status就改变
             } else {
-              setStatusStyle(shapes, {
-                ...initialStyle,
-                ['label-background']: initialStyle.label?.background
-              }, parseAttr); // 没匹配到就重置
+              setStatusStyle(
+                shapes,
+                {
+                  ...initialStyle,
+                  ['label-background']: initialStyle.label?.background,
+                },
+                parseAttr,
+              ); // 没匹配到就重置
               status.forEach(key => {
                 // 如果cfg.status中还有其他状态，那就重新设置回来
                 setStatusStyle(shapes, initStateStyle[key], parseAttr);
@@ -370,7 +374,7 @@ export default () => {
       }
     },
     afterDraw(cfg: ModelConfig | undefined, group: IGroup | undefined) {
-      const style = deepMix({}, this.options.style, cfg.style) as EdgeStyle;
+      const style = merge({}, this.options.style, cfg.style) as EdgeStyle;
       const { animate, keyshape } = style;
       /** 如果没有 style.animate 就不绘制 */
       if (!animate || !animate.type || animate.visible === false) {

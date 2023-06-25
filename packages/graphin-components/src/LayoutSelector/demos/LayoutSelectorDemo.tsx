@@ -8,7 +8,7 @@ import graphLayoutConfig from './defaultLayoutConfig';
 
 import styles from './index.less';
 
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 
 const defaultValue = {};
 

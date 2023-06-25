@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IGroup, ShapeCfg } from '@antv/g-base';
 import G6, { INode } from '@antv/g6';
-import { deepMix, isArray, isNumber } from '@antv/util';
+import { merge } from 'lodash-es';
 import { getDefaultStyleByTheme } from '../theme';
 import { IUserNode, NodeStyle, NodeStyleBadge } from '../typings/type';
 import { convertSizeToWH, getBadgePosition, getLabelXYByPosition, removeDumpAttrs, setStatusStyle } from './utils';
 
 function getRadiusBySize(size: number | number[] | undefined) {
   let r;
-  if (isNumber(size)) {
+  if (typeof size === 'number') {
     r = size / 2;
-  } else if (isArray(size)) {
+  } else if (Array.isArray(size)) {
     r = size[0] / 2;
   }
   return r;
@@ -313,7 +313,7 @@ export default () => {
 
       this.options = getStyleByTheme(_theme);
 
-      const style = deepMix({}, this.options.style, cfg.style) as NodeStyle; // getStyles({}, this.options.style, cfg.style) as NodeStyle;
+      const style = merge({}, this.options.style, cfg.style) as NodeStyle; // getStyles({}, this.options.style, cfg.style) as NodeStyle;
       /** 将初始化样式存储在model中 */
       cfg._initialStyle = { ...style };
       const { icon, badges = [], keyshape: keyShapeStyle } = style;
@@ -366,7 +366,7 @@ export default () => {
       const model = item.getModel() as any;
       const shapes = item.getContainer().get('children'); // 顺序根据 draw 时确定
 
-      const initStateStyle = deepMix({}, this.options.status, model.style.status);
+      const initStateStyle = merge({}, this.options.status, model.style.status);
       const initialStyle = item.getModel()._initialStyle as any;
       const status = item._cfg?.states || [];
 
@@ -392,7 +392,7 @@ export default () => {
     update(cfg: IUserNode, item: INode) {
       if (!cfg.style) return;
       try {
-        const style = deepMix({}, cfg._initialStyle, cfg.style) as NodeStyle; // getStyles(cfg._initialStyle, cfg.style) as NodeStyle;
+        const style = merge({}, cfg._initialStyle, cfg.style) as NodeStyle; // getStyles(cfg._initialStyle, cfg.style) as NodeStyle;
         cfg._initialStyle = { ...style };
         const { badges, keyshape } = style;
         const r = getRadiusBySize(keyshape.size) as number;

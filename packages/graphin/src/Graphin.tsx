@@ -1,4 +1,4 @@
-import G6, { Graph as IGraph, GraphData, GraphOptions, TreeGraphData } from '@antv/g6';
+import G6, { GraphData, GraphOptions, Graph as IGraph, TreeGraphData } from '@antv/g6';
 import React, { ErrorInfo } from 'react';
 /** 内置API */
 import ApiController from './apis';
@@ -13,8 +13,8 @@ import GraphinContext from './GraphinContext';
 import LayoutController from './layout';
 import { getDefaultStyleByTheme, ThemeData } from './theme/index';
 /** types  */
+import { cloneDeep } from 'lodash-es';
 import { GraphinData, GraphinProps, GraphinTreeData, IconLoader, IUserNode, PlainObject } from './typings/type';
-import cloneDeep from './utils/cloneDeep';
 /** utils */
 // import shallowEqual from './utils/shallowEqual';
 import deepEqual from './utils/deepEqual';

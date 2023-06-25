@@ -14,6 +14,7 @@
     "start": "npm run clean && father build --watch",
     "build": "npm run clean && father build && npm run build:umd",
     "build:umd": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --mode production  -c ./webpack.config.js",
+    "analyze": "cross-env ANALYZE=true npm run build:umd",
     "test": "jest",
     "prettier": "prettier --write ./src/**/**/**/*.js",
     "clean": "rimraf es esm lib dist"
@@ -32,7 +33,7 @@
     "@testing-library/react": "^12.1.2",
     "@types/d3-quadtree": "^3.0.2",
     "@types/jest": "^27.0.3",
-    "@types/lodash-es": "^4.17.5",
+    "@types/lodash-es": "^4.17.7",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "eventemitter3": "^4.0.0",
@@ -61,10 +62,8 @@
   "author": "AntV",
   "license": "MIT",
   "dependencies": {
-    "@antv/util": "^2.0.10",
-    "@types/lodash.clonedeep": "^4.5.6",
+    "lodash-es": "^4.17.21",
     "d3-quadtree": "^3.0.1",
-    "lodash.clonedeep": "^4.5.0",
     "@antv/g6": "^4.8.10"
   },
   "peerDependencies": {

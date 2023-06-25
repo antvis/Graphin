@@ -65,7 +65,6 @@ Before installing the dependencies of each package, you need to do a special tre
 
 ```json
  "dependencies": {
-    "@antv/util": "^2.0.10",
     "@antv/graphin": "^2.0.0"
   },
   "peerDependencies": {

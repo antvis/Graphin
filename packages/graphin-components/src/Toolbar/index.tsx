@@ -1,5 +1,4 @@
 import * as Graphin from '@antv/graphin';
-import { isArray } from '@antv/util';
 import React from 'react';
 import './index.less';
 
@@ -116,7 +115,7 @@ const Toolbar: React.FunctionComponent<ToolBarProps> & { Item: typeof ToolbarIte
       style={{ ...defaultStyle, ...positionStyle, ...style }}
       className="graphin-components-toolbar"
     >
-      {isArray(children) || (children && (children as JSX.Element).type === ToolbarItem) ? (
+      {Array.isArray(children) || (children && (children as JSX.Element).type === ToolbarItem) ? (
         <ul className="graphin-components-toolbar-content" style={{ display: isHorizontal ? 'flex' : '' }}>
           {children}
         </ul>
