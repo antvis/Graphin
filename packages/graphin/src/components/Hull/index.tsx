@@ -1,7 +1,7 @@
+import { debounce } from 'lodash-es';
 import React from 'react';
 import type { GraphinContextType } from '../../GraphinContext';
 import GraphinContext from '../../GraphinContext';
-import { debounce } from '@antv/util';
 
 const defaultHullCfg = {
   members: [],

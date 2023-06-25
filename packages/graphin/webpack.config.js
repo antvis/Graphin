@@ -82,7 +82,7 @@ module.exports = (env, argv) => {
       publicPath: './',
       filename: 'graphin.min.js',
     },
-    plugins: [new MiniCssExtractPlugin(), new BundleAnalyzerPlugin()],
+    plugins: [new MiniCssExtractPlugin(), ...(process.env.ANALYZE ? [new BundleAnalyzerPlugin()] : [])],
     externals: {
       lodash: '_',
       'lodash-es': '_',

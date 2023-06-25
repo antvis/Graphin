@@ -1,6 +1,6 @@
+import { debounce } from 'lodash-es';
 import * as React from 'react';
 import GraphinContext from '../GraphinContext';
-import { debounce } from '@antv/util';
 
 export interface ResizeCanvasProps {
   graphDOM: HTMLDivElement;

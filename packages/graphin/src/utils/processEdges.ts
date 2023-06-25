@@ -1,5 +1,5 @@
-import { IUserEdge, EdgeStyle } from '../index';
-import { deepMix } from '@antv/util';
+import { merge } from 'lodash-es';
+import { EdgeStyle, IUserEdge } from '../index';
 
 function isEven(number: number) {
   return number % 2 === 0;
@@ -111,7 +111,7 @@ const processEdges = (
           };
         }
 
-        deepMix(edge, {
+        merge(edge, {
           style: {
             keyshape: keyshapeStyle,
           },

@@ -1,14 +1,5 @@
 import { GraphinTreeData } from '../typings/type';
 
-// export interface Node {
-//   id: string;
-//   parent?: Node;
-//   data?: any; // eslint-disable-line
-//   children: Node[];
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   [key: string]: any;
-// }
-
 export interface Node extends GraphinTreeData {
   parent?: Node;
 }
