@@ -12,12 +12,11 @@ import GraphinContext from './GraphinContext';
 /** 内置布局 */
 import LayoutController from './layout';
 import { getDefaultStyleByTheme, ThemeData } from './theme/index';
+
+import { cloneDeep, isEqual } from 'lodash-es';
 /** types  */
-import { cloneDeep } from 'lodash-es';
-import { GraphinData, GraphinProps, GraphinTreeData, IconLoader, IUserNode, PlainObject } from './typings/type';
+import type { GraphinData, GraphinProps, GraphinTreeData, IconLoader, IUserNode, PlainObject } from './typings/type';
 /** utils */
-// import shallowEqual from './utils/shallowEqual';
-import deepEqual from './utils/deepEqual';
 import { processLayoutConfig } from './utils/layout';
 
 const { DragCanvas, ZoomCanvas, DragNode, DragCombo, ClickSelect, BrushSelect, ResizeCanvas } = Behaviors;
@@ -548,8 +547,7 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
     /* eslint-disable react/destructuring-assignment */
     const prevVal = prevProps[key];
     const currentVal = this.props[key] as DiffValue;
-    const isEqual = deepEqual(prevVal, currentVal);
-    return !isEqual;
+    return !isEqual(prevVal, currentVal);
   }
 
   render() {

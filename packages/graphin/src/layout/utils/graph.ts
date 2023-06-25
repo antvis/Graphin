@@ -1,8 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { Edge } from '../../layout/force/Elements';
 import { IUserNode as Node } from '../../typings/type';
-import Utils from '../../utils/index';
-import Vector from '../force/Vector';
+import { uniqBy } from 'lodash-es';
 
 const getDegree = (node: Node, edges: Edge[]) => {
   const nodeId = node.data.id;
@@ -71,7 +70,7 @@ const getRelativeNodes = (type: 'source' | 'target' | 'both', coreNode: Node, ed
       break;
   }
   // 去重
-  relativeNodes = Utils.uniqBy(relativeNodes, (a: Node, b: Node) => {
+  relativeNodes = uniqBy(relativeNodes, (a: Node, b: Node) => {
     return a.id === b.id;
   });
   return relativeNodes;

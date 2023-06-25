@@ -1,8 +1,8 @@
+import { uniqBy } from 'lodash-es';
 import { layouts } from '../layout/utils/options';
 import getComboStyleByTheme from '../theme/combo-style';
 import getEdgeStyleByTheme from '../theme/edge-style';
 import getNodeStyleByTheme from '../theme/node-style';
-import { uniqBy } from './array';
 import calcByteLength from './calcByteLength';
 import debug from './debug';
 import hexToRgba, { hexToRgbaToHex } from './hexToRgba';
