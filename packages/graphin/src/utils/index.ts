@@ -1,4 +1,4 @@
-import { uniqBy } from 'lodash-es';
+import { cloneDeep, merge, uniqBy } from 'lodash-es';
 import { layouts } from '../layout/utils/options';
 import getComboStyleByTheme from '../theme/combo-style';
 import getEdgeStyleByTheme from '../theme/edge-style';
@@ -22,6 +22,8 @@ export default {
   getNodeStyleByTheme,
   getEdgeStyleByTheme,
   getComboStyleByTheme,
+  deepMix: merge,
+  cloneDeep,
   uuid,
   walk,
   processEdges,
