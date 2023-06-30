@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin",
-  "version": "2.7.19",
+  "version": "2.7.20",
   "description": "the react toolkit for graph analysis based on g6",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -68,7 +68,8 @@
   },
   "peerDependencies": {
     "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+    "react-dom": ">=16.9.0",
+    "lodash-es": ">=4.17.21"
   },
   "publishConfig": {
     "access": "public"

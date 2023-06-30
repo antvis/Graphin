@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { Edge } from '../../layout/force/Elements';
 import { IUserNode as Node } from '../../typings/type';
 import { uniqBy } from 'lodash-es';
@@ -113,7 +112,7 @@ export const getMinDistanceNode = (sameTypeNodes: Node[]) => {
 
 // 获取节点集合的平均位置信息
 export const getAvgNodePosition = (nodes: Node[]) => {
-  let totalNodes = { x: 0, y: 0 };
+  const totalNodes = { x: 0, y: 0 };
   nodes.forEach(node => {
     totalNodes.x += node.x || 0;
     totalNodes.y += node.y || 0;
