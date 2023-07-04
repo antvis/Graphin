@@ -32,3 +32,5 @@ export default {
   DragNodeWithForce,
   Hoverable,
 };
+
+export { default as useBehaviorHook } from './useBehaviorHook';
