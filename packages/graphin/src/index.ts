@@ -1,4 +1,4 @@
-import Behaviors from './behaviors';
+import Behaviors, { useBehaviorHook } from './behaviors';
 import Components from './components';
 import Graphin from './Graphin';
 import GraphinContext from './GraphinContext';
@@ -25,8 +25,17 @@ export type { LegendChildrenProps, OptionType as LegendOptionType } from './comp
 export type { TooltipValue } from './components/Tooltip/index';
 export type { GraphinContextType } from './GraphinContext';
 export type { ThemeType } from './theme';
-export type { EdgeStyle, GraphinData, GraphinTreeData, GraphinProps,IUserEdge, IUserNode, Layout, NodeStyle } from './typings/type';
-export { Utils, GraphinContext, Behaviors, Components, registerFontFamily };
+export type {
+  EdgeStyle,
+  GraphinData,
+  GraphinTreeData,
+  GraphinProps,
+  IUserEdge,
+  IUserNode,
+  Layout,
+  NodeStyle,
+} from './typings/type';
+export { Utils, GraphinContext, Behaviors, Components, useBehaviorHook, registerFontFamily };
 
 export interface GraphEvent extends MouseEvent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
