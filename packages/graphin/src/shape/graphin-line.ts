@@ -78,7 +78,7 @@ const parseAttr = (style: EdgeStyle, itemShapeName: string) => {
   if (itemShapeName === 'label-background') {
     return parseLabelBackground(style[itemShapeName] || {});
   }
-  return {};
+  return style[itemShapeName] || {};
 };
 
 // @ts-ignore
