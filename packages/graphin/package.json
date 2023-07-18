@@ -17,7 +17,8 @@
     "analyze": "cross-env ANALYZE=true npm run build:umd",
     "test": "jest",
     "prettier": "prettier --write ./src/**/**/**/*.js",
-    "clean": "rimraf es esm lib dist"
+    "clean": "rimraf es esm lib dist",
+    "postpublish": "tnpm sync @antv/graphin"
   },
   "repository": {
     "type": "git",
