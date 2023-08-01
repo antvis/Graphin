@@ -69,9 +69,7 @@ const getRelativeNodes = (type: 'source' | 'target' | 'both', coreNode: Node, ed
       break;
   }
   // 去重
-  relativeNodes = uniqBy(relativeNodes, (a: Node, b: Node) => {
-    return a.id === b.id;
-  });
+  relativeNodes = uniqBy(relativeNodes, 'id');
   return relativeNodes;
 };
 
