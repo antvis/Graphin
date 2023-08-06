@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash-es';
 import React from 'react';
 import GraphinContext from '../GraphinContext';
 
@@ -14,7 +15,7 @@ const useBehaviorHook = (params: Props) => {
   const { disabled, ...otherConfig } = userProps;
 
   React.useEffect(() => {
-    if (!graph || graph.destroyed) {
+    if (!graph || graph.destroyed || isEmpty(graph)) {
       return;
     }
     /** 保持单例 */
