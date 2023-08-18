@@ -291,7 +291,7 @@ const drawBadge = (badge: NodeStyleBadge, group: IGroup, r: number) => {
     group.addShape('image', {
       attrs: {
         x: realX - width / 2,
-        y: realX - height / 2,
+        y: realY - height / 2,
         width,
         height,
         img: badgeValue,
