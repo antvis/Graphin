@@ -209,6 +209,7 @@ const drawBadge = (badge: NodeStyleBadge, group: IGroup, r: number) => {
     padding = 0,
     offset: inputOffset = [0, 0],
     id,
+    ...otherAttrs
   } = badge;
 
   const offset = convertSizeToWH(inputOffset);
@@ -230,6 +231,7 @@ const drawBadge = (badge: NodeStyleBadge, group: IGroup, r: number) => {
         stroke,
         x: realX,
         y: realY,
+        ...otherAttrs,
       },
       name: 'badges-circle',
     };
@@ -263,6 +265,7 @@ const drawBadge = (badge: NodeStyleBadge, group: IGroup, r: number) => {
         x: realX,
         y: realY,
         radius: (height + padding * 2) / 3,
+        ...otherAttrs,
       },
       name: 'badges-rect',
     };
@@ -283,6 +286,7 @@ const drawBadge = (badge: NodeStyleBadge, group: IGroup, r: number) => {
         textBaseline: 'middle',
         fontFamily,
         fill: color,
+        ...otherAttrs,
       },
       capture: false,
       name: 'badges-text',
@@ -295,6 +299,7 @@ const drawBadge = (badge: NodeStyleBadge, group: IGroup, r: number) => {
         width,
         height,
         img: badgeValue,
+        ...otherAttrs,
       },
       capture: false,
       name: 'badges-image',
