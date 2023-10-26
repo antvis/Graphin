@@ -421,8 +421,14 @@ class Graphin extends React.PureComponent<GraphinProps, GraphinState> {
           if (layout) {
             layout.disableTriggerLayout = true;
           }
-          const layoutCfg = processLayoutConfig(layout, this.graph); // 兼容布局参数
-          this.graph.updateLayout(layoutCfg);
+
+          if (this.layoutCache) {
+            this.graph.destroyLayout();
+          } else {
+            const layoutCfg = processLayoutConfig(layout, this.graph); // 兼容布局参数
+            this.graph.updateLayout(layoutCfg);
+          }
+
           this.graph.data(this.data as GraphData | TreeGraphData);
           this.graph.changeData(this.data as GraphData | TreeGraphData);
           this.data = this.graph.get('data');
