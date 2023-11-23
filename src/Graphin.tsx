@@ -10,7 +10,6 @@ import { GraphinContext } from './useGraphin';
 interface GraphinProps extends Specification<{}, {}> {
   container?: string;
   style?: React.CSSProperties;
-  /** 兼容的props  */
   fitView?: boolean;
   onInit?: (graph: any) => void;
   unMount?: (graph: any) => void;
