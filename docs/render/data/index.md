@@ -27,7 +27,7 @@ Graphin2.0 版本支持树图渲染。和树图搭配的有 `TreeCollapse`和 `F
 
 ### 树图渲染
 
-<code src='./CompactBox.tsx'>
+<!-- <code src='./CompactBox.tsx'> -->
 
 ### 🔧 工具函数
 
@@ -36,18 +36,10 @@ Graphin 提供了一个工具函数，可以帮助我们快速生成网图和树
 ```jsx | pure
 import { Utils } from '@antv/graphin';
 
-const tree = Utils.mock(10)
-  .tree()
-  .graphinTree();
-const network = Utils.mock(10)
-  .circle()
-  .graphin();
-const network = Utils.mock(10)
-  .random()
-  .graphin();
-const network = Utils.mock(10)
-  .tree()
-  .graphin();
+const tree = Utils.mock(10).tree().graphinTree();
+const network = Utils.mock(10).circle().graphin();
+const network = Utils.mock(10).random().graphin();
+const network = Utils.mock(10).tree().graphin();
 ```
 
 ### ⚠️ 动态切换

@@ -1,10 +1,10 @@
-import { Graph } from '@antv/g6';
+import { IGraph } from '@antv/g6';
 
 /**
  * 高亮节点
  * @param graph
  */
-export const highlightNodeById = (graph: Graph) => (nodeIds: string[]) => {
+export const highlightNodeById = (graph: IGraph) => (nodeIds: string[]) => {
   graph.getNodes().forEach(node => {
     graph.clearItemStates(node, ['active', 'inactive']);
     if (nodeIds.indexOf(node.get('id')) !== -1) {
@@ -19,7 +19,7 @@ export const highlightNodeById = (graph: Graph) => (nodeIds: string[]) => {
  * Focus 节点
  * @param graph
  */
-export const focusNodeById = (graph: Graph) => (nodeId: string) => {
+export const focusNodeById = (graph: IGraph) => (nodeId: string) => {
   if (!graph || typeof nodeId !== 'string') {
     return;
   }
@@ -31,10 +31,7 @@ export const focusNodeById = (graph: Graph) => (nodeId: string) => {
     return;
   }
 
-  graph.focusItem(nodeId, true, {
-    duration: 200,
-    easing: 'easeCubic',
-  });
+  graph.focusItem(nodeId);
 
   graph.setItemState(node, 'selected', true);
   node.toFront();

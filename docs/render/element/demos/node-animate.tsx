@@ -1,5 +1,5 @@
+import Graphin, { Behaviors, Utils } from '@antv/graphin';
 import React from 'react';
-import Graphin, { Utils, Behaviors } from '@antv/graphin';
 
 const { ZoomCanvas, Hoverable } = Behaviors;
 

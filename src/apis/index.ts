@@ -1,8 +1,8 @@
-import { Graph } from '@antv/g6';
+import { IGraph } from '@antv/g6';
 // import { handleAutoZoom, handleRealZoom, handleChangeZoom, handleZoomIn, handleZoomOut } from './zoom';
 // import { focusNodeById, highlightNodeById } from './element';
-import * as zoomApis from './zoom';
 import * as elementApis from './element';
+import * as zoomApis from './zoom';
 
 import { ApisType } from './types';
 
@@ -11,7 +11,7 @@ const apis = {
   ...elementApis,
 };
 
-const ApiController = (graph: Graph) => {
+const ApiController = (graph: IGraph) => {
   const apiKeys = Object.keys(apis);
   return apiKeys.reduce((acc, curr) => {
     return {

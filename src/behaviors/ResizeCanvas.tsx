@@ -1,6 +1,6 @@
 import { debounce } from 'lodash-es';
 import * as React from 'react';
-import GraphinContext from '../GraphinContext';
+import { GraphinContext } from '../useGraphin';
 
 export interface ResizeCanvasProps {
   graphDOM: HTMLDivElement;
@@ -20,7 +20,6 @@ const ResizeCanvas: React.FunctionComponent<ResizeCanvasProps> = props => {
       const canvas = graph.get('canvas');
       if (canvas) {
         canvas.changeSize(clientWidth, clientHeight);
-        graph.autoPaint();
       }
     }, 200);
 

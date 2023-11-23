@@ -1,78 +1,55 @@
 {
   "name": "@antv/graphin",
-  "version": "2.7.26",
+  "version": "3.0.0",
   "description": "the react toolkit for graph analysis based on g6",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
-  "files": [
-    "dist",
-    "lib",
-    "es"
-  ],
-  "scripts": {
-    "start": "npm run clean && father build --watch",
-    "build": "npm run clean && father build && npm run build:umd",
-    "build:umd": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js  --mode production  -c ./webpack.config.js",
-    "analyze": "cross-env ANALYZE=true npm run build:umd",
-    "test": "jest",
-    "prettier": "prettier --write ./src/**/**/**/*.js",
-    "clean": "rimraf es esm lib dist",
-    "postpublish": "tnpm sync @antv/graphin"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/antvis/Graphin.git",
-    "directory": "packages/graphin"
+    "url": "https://github.com/antvis/Graphin.git"
+  },
+  "files": [
+    "es",
+    "lib",
+    "dist"
+  ],
+  "sideEffects": [
+    "*.css",
+    "*.less"
+  ],
+  "scripts": {
+    "docs": "dumi dev",
+    "build": "npm run clean && npm run build:es & npm run build:umd",
+    "build:es": "father build",
+    "build:umd": "webpack --mode production  -c ./webpack.config.js --env path=/packages/gi-sdk",
+    "build:umd:analysis": "webpack  --mode production  -c ./webpack.config.js --env path=/packages/gi analysis=true",
+    "clean": "rimraf es esm lib dist",
+    "prettier": "prettier --write ./src/**/**/**/*.js",
+    "start": "npm run clean && father build --watch",
+    "test": "jest",
+    "prepublishOnly": "npm run build",
+    "postpublish": "tnpm sync @antv/graphin"
+  },
+  "dependencies": {
+    "@antv/g6": "5.0.0-beta.27",
+    "lodash-es": "^4.17.21",
+    "react": "17.x",
+    "react-dom": "17.x"
   },
   "devDependencies": {
-    "@antv/g-base": "^0.5.9",
-    "@antv/hierarchy": "^0.6.6",
-    "@babel/core": "^7.16.0",
-    "@testing-library/jest-dom": "^5.16.0",
-    "@testing-library/react": "^12.1.2",
-    "@types/d3-quadtree": "^3.0.2",
-    "@types/jest": "^27.0.3",
-    "@types/lodash-es": "^4.17.7",
-    "@types/node": "latest",
-    "cross-env": "^5.2.0",
-    "css-loader": "^1.0.1",
-    "eventemitter3": "^4.0.0",
-    "father": "^2.30.13",
-    "jest": "^27.4.3",
-    "jest-canvas-mock": "^2.3.1",
-    "jsdom-worker": "^0.1.0",
-    "less": "^3.8.1",
-    "less-loader": "^5.0.0",
-    "mini-css-extract-plugin": "^2.4.5",
-    "prettier": "^1.18.2",
+    "@types/react": "17.x",
+    "@types/react-dom": "17.x",
+    "dumi": "^1.1.50",
+    "antd": "4.x",
     "rimraf": "^3.0.2",
-    "style-loader": "^3.3.1",
-    "svg-inline-loader": "^0.8.0",
-    "svg-path-parser": "^1.1.0",
-    "ts-jest": "^27.0.7",
-    "ts-loader": "^9.2.6",
-    "typescript": "^4.5.2",
-    "webpack": "^5.65.0",
-    "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-cli": "^4.9.1"
-  },
-  "sideEffects": [
-    "*.css"
-  ],
-  "author": "AntV",
-  "license": "MIT",
-  "dependencies": {
-    "@antv/g6": "^4.8.19",
-    "d3-quadtree": "^3.0.1",
-    "lodash-es": "^4.17.21"
-  },
-  "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0",
-    "lodash-es": ">=4.17.21"
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.0.0",
+    "@antv/dumi-theme-antv": "0.2.0",
+    "father": "^2.30.23"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "license": "MIT"
 }

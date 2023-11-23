@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
-import Graphin, { Utils, Behaviors, GraphinContext } from '@antv/graphin';
-import IconLoader from '@antv/graphin-icons';
+import Graphin, { Utils } from '@antv/graphin';
+import React from 'react';
 
-const iconLoader = Graphin.registerFontFamily(IconLoader);
+const data = Utils.mock(10).circle().graphin();
 
-const data = Utils.mock(10)
-  .circle()
-  .graphin();
 const layout = {
   type: 'concentric',
 };

@@ -56,6 +56,15 @@ const getEdgeStyleByTheme = (inputTheme: EdgeTheme) => {
         fill: Color.label,
         fontSize: 12,
         textAlign: 'center',
+        background: {
+          // 设置背景的填充色
+          fill: 'transparent',
+          // 设置圆角
+          radius: 2,
+          // 设置border，即 stroke
+          stroke: 'transparent',
+          opacity: 1,
+        },
       },
       animate: {},
     },

@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash-es';
 import React from 'react';
-import GraphinContext from '../GraphinContext';
+import { GraphinContext } from '../useGraphin';
 
 interface Props {
   type: string;
@@ -9,6 +9,7 @@ interface Props {
   userProps: any;
   mode?: string;
 }
+
 const useBehaviorHook = (params: Props) => {
   const { type, defaultConfig, userProps, mode = 'default' } = params;
   const { graph } = React.useContext(GraphinContext);
@@ -18,12 +19,17 @@ const useBehaviorHook = (params: Props) => {
     if (!graph || graph.destroyed || isEmpty(graph)) {
       return;
     }
-    /** 保持单例 */
-    graph.removeBehaviors(type, mode);
+    try {
+      /** 保持单例 */
+      graph.removeBehaviors([type], mode);
+    } catch (error) {}
 
     if (disabled) {
       return;
     }
+    // if (type === 'drag-canvas') {
+    //   debugger;
+    // }
     graph.addBehaviors(
       {
         type,
@@ -34,7 +40,7 @@ const useBehaviorHook = (params: Props) => {
     );
     return () => {
       if (!graph.destroyed) {
-        graph.removeBehaviors(type, mode);
+        graph.removeBehaviors([type], mode);
       }
     };
   }, []);

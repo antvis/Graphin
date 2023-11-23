@@ -1,10 +1,8 @@
 import Graphin, { GraphinData, registerIconFonts } from '@antv/graphin';
-
 import React, { useEffect, useState } from 'react';
 
 const fetchData = async () => {
-  // registerIconFonts 是异步方法，参数为 fontIconIds []
-  const icons = await registerIconFonts();
+  const icons = await registerIconFonts(['font_4331738_e3gzt4yq6wf']);
 
   const nodes = [
     {
@@ -14,7 +12,7 @@ const fetchData = async () => {
         icon: {
           type: 'font', // // 指定图标为Font类型
           fontFamily: 'iconfont', // // 指定FontFamily
-          value: icons.user, // 指定图标的值
+          value: icons['graphin-logo'], // 指定图标的值
         },
         label: {
           value: 'graphin-circle icon',
@@ -27,7 +25,7 @@ const fetchData = async () => {
         type: 'circle-node',
         iconShape: {
           fontFamily: 'iconfont',
-          text: icons.user,
+          text: icons['alipay'],
           fill: '#fff',
         },
         labelShape: {

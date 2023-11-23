@@ -1,4 +1,3 @@
-import { join } from 'path';
 const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
@@ -13,33 +12,9 @@ export default {
   // },
   extraBabelIncludes: ['@antv/dumi-theme-antv'],
   resolve: {
-    includes: [
-      'packages/graphin/docs/',
-      'packages/graphin/src/components',
-      'packages/graphin-icons/src',
+    includes: ['docs/*.md', 'docs/render/data/', 'docs/render/element/'],
+  },
 
-      // 'packages/graphin-components/src/',
-      // 'packages/graphin-graphscope/docs/',
-      /** local develop */
-      // 'packages/graphin-components/src/VisSettingPanel',
-    ],
-  },
-  alias: {
-    '@antv/graphin': join(__dirname, 'packages', 'graphin'),
-    '@antv/graphin-components': join(__dirname, 'packages', 'graphin-components'),
-    '@antv/graphin-icons': join(__dirname, 'packages', 'graphin-icons'),
-    '@antv/graphin-graphscope': join(__dirname, 'packages', 'graphin-graphscope'),
-  },
-  extraBabelPlugins: [
-    [
-      'import',
-      {
-        libraryName: 'antd',
-        libraryDirectory: 'es',
-        style: true,
-      },
-    ],
-  ],
   metas: [
     {
       name: 'keywords',
@@ -64,12 +39,14 @@ export default {
   ssr: {
     devServerRender: false,
   },
+  workerLoader: {},
+  webpack5: {},
   exportStatic: {},
   externals: {
     react: 'window.React',
     'react-dom': 'window.ReactDOM',
     antd: 'window.antd',
-    '@antv/g6': 'window.G6',
+    '@antv/g6': 'window.G6V5',
   },
   targets: {
     chrome: 80,

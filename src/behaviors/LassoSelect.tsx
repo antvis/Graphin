@@ -1,9 +1,12 @@
+import { Extensions } from '@antv/g6';
 import * as React from 'react';
+import registerBehavior from './registerBehavior';
 import useBehaviorHook from './useBehaviorHook';
 
 const DEFAULT_TRIGGER = 'shift';
 
 const defaultConfig = {
+  mode: 'lasso',
   /** 是否禁用该功能 */
   disabled: false,
   /** 拖动框选框的样式，包括 fill、fillOpacity、stroke 和 lineWidth 四个属性; */
@@ -27,11 +30,14 @@ const defaultConfig = {
 
 export type LassoSelectProps = Partial<typeof defaultConfig>;
 
+registerBehavior('lasso-select', Extensions.LassoSelect);
+
 const LassoSelect: React.FunctionComponent<LassoSelectProps> = props => {
   useBehaviorHook({
     type: 'lasso-select',
     userProps: props,
     defaultConfig,
+    mode: (props && props.mode) || 'lasso',
   });
   return null;
 };

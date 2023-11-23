@@ -1,54 +1,59 @@
 import { IG6GraphEvent } from '@antv/g6';
 import * as React from 'react';
-import GraphinContext from '../GraphinContext';
+import { GraphinContext } from '../useGraphin';
 
 export interface HoverableProps {
   bindType?: 'node' | 'edge';
   disabled?: boolean;
+  activateState?: string;
 }
 
 const Hoverable: React.FunctionComponent<HoverableProps> = props => {
   const graphin = React.useContext(GraphinContext);
-  const { bindType = 'node', disabled } = props;
+  const { bindType = 'node', disabled, activateState = 'active' } = props;
   const { graph } = graphin;
   React.useEffect(() => {
     if (disabled) {
       return;
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const handleNodeMouseEnter = (evt: IG6GraphEvent & any) => {
-      graph.setItemState(evt.item, 'hover', true);
+      graph.setItemState(evt.itemId, activateState, true);
+      graph.setCursor('pointer');
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const handleNodeMouseLeave = (evt: IG6GraphEvent & any) => {
-      graph.setItemState(evt.item, 'hover', false);
+      graph.setItemState(evt.itemId, activateState, false);
+      graph.setCursor('default');
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const handleEdgeMouseEnter = (evt: IG6GraphEvent & any) => {
-      graph.setItemState(evt.item, 'hover', true);
+      graph.setItemState(evt.itemId, activateState, true);
+      graph.setCursor('pointer');
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const handleEdgeMouseLeave = (evt: IG6GraphEvent & any) => {
-      graph.setItemState(evt.item, 'hover', false);
+      graph.setItemState(evt.itemId, activateState, false);
+      graph.setCursor('default');
     };
 
     if (bindType === 'node') {
-      graph.on('node:mouseenter', handleNodeMouseEnter);
-      graph.on('node:mouseleave', handleNodeMouseLeave);
+      graph.on('node:pointerenter', handleNodeMouseEnter);
+      graph.on('node:pointerleave', handleNodeMouseLeave);
     }
     if (bindType === 'edge') {
-      graph.on('edge:mouseenter', handleEdgeMouseEnter);
-      graph.on('edge:mouseleave', handleEdgeMouseLeave);
+      graph.on('edge:pointerenter', handleEdgeMouseEnter);
+      graph.on('edge:pointerleave', handleEdgeMouseLeave);
     }
 
     return () => {
       if (bindType === 'node') {
-        graph.off('node:mouseenter', handleNodeMouseEnter);
-        graph.off('node:mouseleave', handleNodeMouseLeave);
+        graph.off('node:pointerenter', handleNodeMouseEnter);
+        graph.off('node:pointerleave', handleNodeMouseLeave);
       }
       if (bindType === 'edge') {
-        graph.off('edge:mouseenter', handleEdgeMouseEnter);
-        graph.off('edge:mouseleave', handleEdgeMouseLeave);
+        graph.off('edge:pointerenter', handleEdgeMouseEnter);
+        graph.off('edge:pointerleave', handleEdgeMouseLeave);
       }
     };
   }, [graph, disabled]);

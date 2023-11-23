@@ -1,63 +1,56 @@
-/* eslint-disable react/require-default-props */
-import type { IG6GraphEvent } from '@antv/g6';
-import React from 'react';
-import useContextMenu, { State } from './useContextMenu';
-
-const defaultStyle: React.CSSProperties = {
-  width: '120px',
-  boxShadow: '0 4px 12px rgb(0 0 0 / 15%)',
-};
-
-export interface ContextMenuValue extends State {
-  oneShow: (e: IG6GraphEvent) => void;
-  onClose: () => void;
-  id: string;
-}
-
+import React, { useEffect, useRef } from 'react';
+import { useGraphin } from '../../useGraphin';
 export interface ContextMenuProps {
-  children: (content: ContextMenuValue) => React.ReactNode;
-  style?: React.CSSProperties;
-  bindType?: 'node' | 'edge' | 'canvas';
-  disableAutoAdjust?: boolean;
+  children: React.ReactNode[];
+  options: {
+    key: string;
+    icon: React.ReactNode;
+    name: string;
+  }[];
+  onChange: (menuItem, menuData) => void;
+  bindType: 'node' | 'edge' | 'canvas';
 }
-
-const container = React.createRef() as React.RefObject<HTMLDivElement>;
 
 const ContextMenu: React.FunctionComponent<ContextMenuProps> = props => {
-  const { bindType, children, style, disableAutoAdjust } = props;
-  const contextmenu = useContextMenu({
-    bindType,
-    container,
-    disableAutoAdjust,
-  });
-  const { visible, x, y, item } = contextmenu;
+  const { children, bindType, options, onChange } = props;
+  const { graph } = useGraphin();
 
-  const positionStyle: React.CSSProperties = {
-    position: 'absolute',
-    left: x,
-    top: y,
-  };
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const itemContent = options
+      .map(item => {
+        const { key, icon, name } = item;
+        return `<li class='g6-contextmenu-li' code=${key}> ${icon} ${name} </li>`;
+      })
+      .join('');
 
-  if (typeof children !== 'function') {
-    console.error('<ContextMenu /> children should be a function');
-    return null;
-  }
-  const id = (item && !item.destroyed && item.getModel && item.getModel().id) || '';
-
-  return (
-    <div
-      ref={container}
-      className="graphin-components-contextmenu"
-      style={{ ...defaultStyle, ...style, ...positionStyle }}
-      key={id}
-    >
-      {visible &&
-        children({
-          ...contextmenu,
-          id,
-        })}
-    </div>
-  );
+    const content = `
+      <ul class='g6-contextmenu-ul'>
+      ${itemContent}
+      </ul>
+  `;
+    graph.addPlugins([
+      {
+        type: 'menu',
+        key: 'graphin-context-menu',
+        trigger: 'contextmenu',
+        /** async string menu */
+        getContent: e => {
+          return content;
+        },
+        handleMenuClick: (target: HTMLLIElement, itemId) => {
+          //@ts-ignore
+          const { value } = Object.values(target.attributes).find(item => item.name === 'code');
+          const item = graph.getNodeData(itemId);
+          onChange && onChange({ key: value }, item);
+        },
+      },
+    ]);
+    return () => {
+      graph && graph.removePlugins(['graphin-context-menu']);
+    };
+  }, [graph]);
+  return <div ref={containerRef}></div>;
 };
 
 export default ContextMenu;

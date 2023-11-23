@@ -1,4 +1,6 @@
+import { Extensions } from '@antv/g6';
 import * as React from 'react';
+import registerBehavior from './registerBehavior';
 import useBehaviorHook from './useBehaviorHook';
 
 const defaultConfig = {
@@ -30,6 +32,8 @@ const defaultConfig = {
 };
 
 export type ActivateRelationsProps = Partial<typeof defaultConfig>;
+
+registerBehavior('activate-relations', Extensions.ActivateRelations);
 
 const ActivateRelations: React.FunctionComponent<ActivateRelationsProps> = props => {
   useBehaviorHook({

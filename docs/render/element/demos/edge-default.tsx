@@ -1,7 +1,5 @@
-import Graphin, { Utils } from '@antv/graphin';
+import Graphin from '@antv/graphin';
 import React from 'react';
-
-console.log('react', React);
 
 const nodes = [
   {
@@ -47,22 +45,25 @@ const edgesLoop2 = Array.from({ length: 3 }).map(() => {
   };
 });
 
-const edges = Utils.processEdges([...edges1, ...edges2, ...edgesLoop1, ...edgesLoop2], { poly: 50, loop: 10 });
-edges.forEach((edge, index) => {
-  const { source, target } = edge;
-  // @ts-ignore
-  edge.style.label = {
-    value: `${index}th:${source}-${target}`,
-    fill: 'red',
-    background: {
-      fill: '#fff',
-      stroke: '#fff',
-    },
-  };
-});
+const edges = [...edges1, ...edges2, ...edgesLoop1, ...edgesLoop2];
 
 const data = { nodes, edges };
 
+const edgeMapper = edge => {
+  const { id, data } = edge;
+  console.log('EDGE>>>>>', edge);
+  return {
+    id,
+    data: {
+      ...data,
+      labelShape: {
+        text: id,
+        fill: 'red',
+      },
+    },
+  };
+};
+
 export default () => {
-  return <Graphin data={data} layout={layout} fitView />;
+  return <Graphin data={data} layout={layout} fitView edge={edgeMapper} />;
 };

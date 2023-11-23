@@ -1,7 +1,102 @@
-import Tree from './Tree';
-import walk from './walk';
+import { GraphinData, IUserEdge, IUserNode } from '../typings/type';
+export type GraphinTreeData = any;
 
-import { IUserNode, IUserEdge, GraphinData, GraphinTreeData } from '../typings/type';
+const walk = (node: GraphinTreeData, callback: (node: GraphinTreeData) => void) => {
+  callback(node);
+  if (node.children && node.children.length > 0) {
+    node.children.forEach(child => {
+      walk(child, callback);
+    });
+  }
+};
+
+export interface Node extends GraphinTreeData {
+  parent?: Node;
+}
+
+class Tree {
+  private root: Node | undefined;
+
+  private nodeIds: string[] = [];
+
+  constructor(root?: Node) {
+    // Pass in the root of an existing tree
+    if (root) this.root = root;
+  }
+
+  bfs = (cb: (node: Node) => boolean): Node | undefined => {
+    if (!this.root) {
+      return;
+    }
+
+    const queue: Node[] = [];
+
+    queue.push(this.root);
+    while (queue.length) {
+      const node = queue.shift() as Node;
+      if (cb(node)) {
+        return node;
+      }
+      if (node?.children?.length) {
+        queue.push(...node.children);
+      }
+    }
+  };
+
+  getRoot = (): Node | undefined => {
+    return this.root;
+  };
+
+  getNode = (id: string): Node | undefined => {
+    const result = this.bfs(node => {
+      return node.id === id;
+    });
+
+    return result;
+  };
+
+  // eslint-disable-next-line
+  private addRoot = (id: string, data?: any) => {
+    this.root = {
+      id,
+      children: [],
+    };
+    this.nodeIds.push(id);
+  };
+
+  // eslint-disable-next-line
+  addNode = (conf: { parentId?: string; id: string; data?: any }) => {
+    const { parentId, id, data } = conf;
+    if (!this.root) {
+      this.addRoot(id, data);
+      return;
+    }
+
+    let parent: Node | undefined;
+
+    if (!parentId) {
+      // If parentId was not given, pick a random node as parent
+      const index = Math.floor(Math.random() * this.nodeIds.length);
+      parent = this.getNode(this.nodeIds[index]);
+    } else {
+      parent = this.getNode(parentId);
+    }
+
+    if (!parent) {
+      console.error(`Parent node doesn't exist!`);
+      return;
+    }
+
+    this.nodeIds.push(id);
+    // @ts-ignore
+    (parent as Node).children.push({
+      id,
+      // @ts-ignore
+      parent,
+      children: [],
+    });
+  };
+}
 
 const defaultOptions = {
   /** 节点 */
@@ -205,6 +300,29 @@ export class Mock {
       combos: this.combosData,
     };
   };
+  g6 = (): GraphinData => {
+    return {
+      // @ts-ignore
+      nodes: this.nodes.map(node => {
+        return {
+          ...node,
+          id: node.id,
+          type: 'circle-node',
+          comboId: node.comboId,
+          data: {},
+        };
+      }),
+      edges: this.edges.map((edge, index) => {
+        return {
+          id: `edge-${index}`,
+          source: edge.source,
+          target: edge.target,
+          data: {},
+        };
+      }),
+      combos: this.combosData,
+    };
+  };
 
   graphinTree = (): GraphinTreeData => {
     const tree = this.treeData.getRoot();
@@ -218,7 +336,6 @@ export class Mock {
   };
 }
 
-const mock = (count: number) => {
+export const mock = (count: number) => {
   return new Mock(count);
 };
-export default mock;

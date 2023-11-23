@@ -27,7 +27,7 @@ Graphin2.0 version supports tree graph rendering. There are two interactive comp
 
 ### Tree Graphs Rendering
 
-<code src='./CompactBox.tsx'>
+<!-- <code src='./CompactBox.tsx'> -->
 
 ### 🔧 Tool Functions
 
@@ -36,18 +36,10 @@ Graphin provides a tool function that can help us quickly generate data for netw
 ```jsx | pure
 import { Utils } from '@antv/graphin';
 
-const tree = Utils.mock(10)
-  .tree()
-  .graphinTree();
-const network = Utils.mock(10)
-  .circle()
-  .graphin();
-const network = Utils.mock(10)
-  .random()
-  .graphin();
-const network = Utils.mock(10)
-  .tree()
-  .graphin();
+const tree = Utils.mock(10).tree().graphinTree();
+const network = Utils.mock(10).circle().graphin();
+const network = Utils.mock(10).random().graphin();
+const network = Utils.mock(10).tree().graphin();
 ```
 
 ### ⚠️ Dynamic Switching

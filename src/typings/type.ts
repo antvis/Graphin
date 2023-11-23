@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 // TODO : remove any type
-import { Graph, ShapeStyle } from '@antv/g6';
 import React from 'react';
+
 import { ThemeType } from '../theme';
+type ShapeStyle = any;
 
 export interface UserProperties {
   [key: string]: any;
@@ -107,7 +106,7 @@ export interface GraphinProps {
   modes?: any;
 
   /** 布局后的回调函数 */
-  handleAfterLayout?: (graph: Graph) => void;
+  handleAfterLayout?: (graph: any) => void;
 
   /** 节点的默认样式配置 */
   defaultNode?: Partial<{

@@ -68,12 +68,9 @@ const getNodeStyleByTheme = (inputNodeTheme: NodeTheme) => {
         fillOpacity: 1,
       },
       icon: {
-        type: 'text',
+        type: '',
         value: '',
-        size: nodeSize / 2,
-        fill: Color.icon,
-        fillOpacity: 1,
-        offset: [0, 0],
+        visible: false,
       },
       badges: [],
       halo: {

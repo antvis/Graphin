@@ -13,7 +13,8 @@
     "esModuleInterop": true,
     "typeRoots": ["./node_modules/@types/", "./typings/index.d.ts"],
     "skipLibCheck": true,
-    "isolatedModules": false
+    "isolatedModules": false,
+    "noImplicitAny": false
   },
   "include": ["src"]
 }

@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react';
-import Graphin, { Utils, Behaviors, GraphinContext, NodeStyle } from '@antv/graphin';
-import IconLoader from '@antv/graphin-icons';
-import { Row, Col, Card } from 'antd';
+import Graphin, { Behaviors, registerIconFonts } from '@antv/graphin';
+import React from 'react';
 
-const icons = Graphin.registerFontFamily(IconLoader);
+const icons = registerIconFonts();
 
 const { ZoomCanvas, Hoverable } = Behaviors;
 
-const normalStyle: Partial<NodeStyle> = {
+const normalStyle = {
   keyshape: {
     size: 60,
 

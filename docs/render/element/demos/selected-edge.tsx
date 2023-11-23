@@ -1,6 +1,6 @@
+import Graphin, { Behaviors, GraphinContext, Utils } from '@antv/graphin';
+import { Col, Row } from 'antd';
 import React, { useEffect } from 'react';
-import Graphin, { Utils, Behaviors, GraphinContext } from '@antv/graphin';
-import { Row, Col } from 'antd';
 
 const { ZoomCanvas } = Behaviors;
 
@@ -23,9 +23,7 @@ const EventCenter = () => {
   return null;
 };
 
-const data = Utils.mock(10)
-  .circle()
-  .graphin();
+const data = Utils.mock(10).circle().graphin();
 const layout = {
   type: 'concentric',
 };
