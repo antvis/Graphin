@@ -48,6 +48,9 @@ const LegendNode: React.FunctionComponent<LegendChildrenProps> = props => {
       graph.setItemState(node.id, 'inactive', !checkedValue.checked);
       const { id } = node;
       const item = graph.findById(id) as INode;
+      if (item.getType() !== 'node') {
+        return;
+      }
       const edges = item.getEdges();
       edges.forEach(edge => {
         graph.setItemState(edge, 'normal', checkedValue.checked);
