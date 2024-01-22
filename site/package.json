@@ -1,0 +1,28 @@
+{
+  "version": "3.0.0",
+  "scripts": {
+    "build": "cross-env NODE_OPTIONS=--max_old_space_size=12288 dumi build",
+    "develop": "cross-env DUMI=true dumi dev",
+    "deploy": "pnpm run build && gh-pages -d public",
+    "start": "cross-env NODE_OPTIONS=--max_old_space_size=8192 pnpm run develop"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.8.1",
+    "@antv/dumi-theme-antv": "^0.5.0",
+    "@antv/graphin": "^3.0.0-alpha.0",
+    "antd": "^4.24.14",
+    "dumi": "^2.2.14",
+    "fecha": "^4.2.3",
+    "lodash-es": "^4.17.21",
+    "react": ">=16.8.4",
+    "react-dom": ">=16.8.4"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "gh-pages": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/graphin"
+  }
+}

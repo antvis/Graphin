@@ -1,55 +1,50 @@
 {
-  "name": "@antv/graphin",
-  "version": "3.0.0",
-  "description": "the react toolkit for graph analysis based on g6",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "types": "lib/index.d.ts",
+  "name": "graphin",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/antvis/Graphin.git"
   },
-  "files": [
-    "es",
-    "lib",
-    "dist"
-  ],
-  "sideEffects": [
-    "*.css",
-    "*.less"
-  ],
   "scripts": {
-    "docs": "dumi dev",
-    "build": "npm run clean && npm run build:es & npm run build:umd",
-    "build:es": "father build",
-    "build:umd": "webpack --mode production  -c ./webpack.config.js --env path=/packages/gi-sdk",
-    "build:umd:analysis": "webpack  --mode production  -c ./webpack.config.js --env path=/packages/gi analysis=true",
-    "clean": "rimraf es esm lib dist",
-    "prettier": "prettier --write ./src/**/**/**/*.js",
-    "start": "npm run clean && father build --watch",
-    "test": "jest",
-    "prepublishOnly": "npm run build",
-    "postpublish": "tnpm sync @antv/graphin"
-  },
-  "dependencies": {
-    "@antv/g6": "5.0.0-beta.27",
-    "lodash-es": "^4.17.21",
-    "react": "17.x",
-    "react-dom": "17.x"
+    "start": "pnpm -r --stream --filter=./site run start",
+    "test": "pnpm -r --stream --filter=./packages/* run test",
+    "lint": "pnpm -r --stream --filter=./packages/* run lint",
+    "build": "pnpm -r --stream --filter=!./site run build",
+    "build:site": "pnpm -r --stream --filter=./site run build",
+    "build:lib": "pnpm -r --stream --filter=!./site run build:lib",
+    "profile": "webpack --config webpack.config.js --mode production --profile --json > stats.json",
+    "prettier": "prettier --write \"**/**.{js,jsx,tsx,ts,less,md,json}\"",
+    "ci:version": "pnpm changeset version",
+    "add:changelog": "pnpm changeset",
+    "before:release": "pnpm run build",
+    "release": "pnpm run before:release && pnpm publish --no-git-checks -r --registry=https://registry.npmjs.org --filter @ant-design/*",
+    "release:alpha": "pnpm publish --tag alpha --no-git-checks -r --filter @ant-design/*",
+    "release:beta": "pnpm publish --tag beta --no-git-checks -r --filter @ant-design/*"
   },
   "devDependencies": {
-    "@types/react": "17.x",
-    "@types/react-dom": "17.x",
-    "dumi": "^1.1.50",
-    "antd": "4.x",
-    "rimraf": "^3.0.2",
-    "webpack": "^5.88.0",
-    "webpack-cli": "^5.0.0",
     "@antv/dumi-theme-antv": "0.2.0",
-    "father": "^2.30.23"
+    "@babel/core": "^7.11.6",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.13.9",
+    "@babel/preset-typescript": "^7.10.4",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-named-asset-import": "^0.3.7",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-react-app": "^10.0.0",
+    "babel-types": "^6.26.0",
+    "dumi": "^1.1.50",
+    "mini-css-extract-plugin": "^2.7.7",
+    "react-dev-utils": "^12.0.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^5.3.3",
+    "webpack": "^5.88.0",
+    "webpack-bundle-analyzer": "^4.10.1",
+    "webpack-cli": "^5.0.0"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "license": "MIT"
+  "license": "MIT",
+  "pnpm": {
+    "overrides": {
+      "types-ramda": "0.29.4"
+    }
+  }
 }

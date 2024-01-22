@@ -14,7 +14,11 @@
     "typeRoots": ["./node_modules/@types/", "./typings/index.d.ts"],
     "skipLibCheck": true,
     "isolatedModules": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "downlevelIteration": true
   },
-  "include": ["src"]
+  "include": ["packages/graphin/src"],
+  "paths": {
+    "@@/*": ["src/.umi/*"]
+  }
 }
