@@ -1,0 +1,56 @@
+{
+  "name": "@antv/gi-sdk",
+  "version": "3.0.0",
+  "description": "the react toolkit for graph analysis based on g6",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/Graphin.git"
+  },
+  "files": [
+    "es",
+    "lib",
+    "dist"
+  ],
+  "sideEffects": [
+    "*.css",
+    "*.less"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "watch": "pnpm lib:es --w",
+    "build": "run-s clean lib dist",
+    "build:lib": "run-s clean lib",
+    "clean": "rimraf lib es dist",
+    "dist": "webpack --config webpack.config.js --mode production",
+    "profile": "webpack --config webpack.config.js --mode production --profile --json > stats.json",
+    "lib": "run-p lib:*",
+    "lib:cjs": "tsc -p tsconfig.json --target ES5 --module commonjs --outDir lib",
+    "lib:es": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir es",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx  --fix --format=pretty ./src && pnpm run lint:prettier",
+    "lint:prettier": "pnpm run prettier &&  git diff && prettier --version && prettier --check \"src/**/**.{js,jsx,tsx,ts,less,md,json}\" --end-of-line auto",
+    "prettier": "prettier --write \"**/**.{js,jsx,tsx,ts,less,md,json}\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ant-design/icons": "^4.8.1",
+    "@antv/graphin": "workspace:*",
+    "antd": "^5.13.2",
+    "lodash-es": "^4.17.21",
+    "react-transition-group": "^4.4.5",
+    "size-sensor": "^1.0.1",
+    "valtio": "^1.13.0"
+  },
+  "peerDependencies": {
+    "@antv/graphin": "^2.7.27",
+    "lodash-es": "^4.17.21",
+    "react": ">=16.8.4",
+    "react-dom": ">=16.8.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
