@@ -17,4 +17,4 @@ widgets.register('Minimap', Minimap);
 widgets.register('ContextMenu', ContextMenu);
 
 /** Export for external use */
-export { widgets, Panel, Sider, Header, Copyright };
+export { widgets, Panel, Sider, Header, Copyright, Toolbar, Minimap, ContextMenu, Interaction };

@@ -2,7 +2,6 @@ import React, { useRef, useImperativeHandle, forwardRef } from 'react';
 import { ContextMenu as GraphinContextMenu } from '@antv/graphin';
 import { PREFIX } from '../../constants';
 import { useGraph } from '../../hooks';
-import './style.less';
 
 const Menu = forwardRef((props, ref) => {
   const { graph } = useGraph();

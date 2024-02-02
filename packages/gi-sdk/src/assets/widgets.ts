@@ -9,6 +9,9 @@ export class Widgets {
    * @param {Widget} widget 组件
    */
   register(name: string, widget: React.FC<any>) {
+    if (this.widgets.has(name)) {
+      throw new Error(`Widget ${name} already exists.`);
+    }
     this.widgets.set(name, widget);
   }
   /**

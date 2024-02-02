@@ -25,3 +25,5 @@ export const PATH_PREFIX = {
 };
 
 export const PREFIX = 'gi';
+export const HEADER_HEIGHT = 48;
+export const SIDER_WIDTH = 354;

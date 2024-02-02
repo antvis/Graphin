@@ -1,7 +1,6 @@
 import React from 'react';
 import { useModel } from '../../hooks';
 import { PREFIX } from '../../constants';
-import './style.less';
 
 export const Copyright: React.FC<{ children: React.ReactNode }> = props => {
   const { children } = props;

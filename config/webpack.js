@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
@@ -110,31 +109,9 @@ const getWebpackConfig = (name, library) => {
             inputSourceMap: true,
           },
         },
-        {
-          test: /\.css$/,
-          // exclude: /node_modules/,
-          use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-        },
-        {
-          test: /\.less$/,
-          // exclude: /node_modules/,
-          use: [
-            { loader: 'style-loader' },
-            { loader: 'css-loader' },
-            {
-              loader: 'less-loader',
-              options: {
-                lessOptions: {
-                  javascriptEnabled: true,
-                },
-              },
-            },
-          ],
-        },
       ],
     },
     plugins: [
-      new MiniCssExtractPlugin(),
       new webpack.NoEmitOnErrorsPlugin(),
       new ForkTsCheckerWebpackPlugin({
         eslint: undefined,

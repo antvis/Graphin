@@ -1,4 +1,4 @@
-import { Graph, GraphinProps } from '@antv/graphin';
+import type { Graph, GraphinProps } from '@antv/graphin';
 
 export type WidgetItem = {
   /**
@@ -54,7 +54,7 @@ export interface IModel {
   /**
    * @description 画布实例
    */
-  graph: Graph[];
+  graph: (typeof Graph)[];
   /**
    * @description 是否初始化完成
    */
@@ -76,8 +76,8 @@ export interface IModel {
    */
   interaction?: {
     nodes?: readonly NodeState[];
-    // egdes?: EdgeState[];
-    // combo?: ComboState[];
+    egdes?: readonly EdgeState[];
+    combo?: readonly ComboState[];
   };
   application?: Application;
   /**

@@ -14,10 +14,6 @@
     "lib",
     "dist"
   ],
-  "sideEffects": [
-    "*.css",
-    "*.less"
-  ],
   "scripts": {
     "dev": "vite",
     "watch": "pnpm lib:es --w",
@@ -38,6 +34,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.8.1",
     "@antv/graphin": "workspace:*",
+    "@emotion/react": "^11.11.3",
     "antd": "^5.13.2",
     "lodash-es": "^4.17.21",
     "react-transition-group": "^4.4.5",

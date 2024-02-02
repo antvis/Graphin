@@ -1,7 +1,9 @@
-@contentWidth: 354px;
+import { css } from '@emotion/react';
+import { SIDER_WIDTH } from '../../constants';
 
-.gi-sider {
+export const SIDER_STYLE = css`
   display: flex;
+  height: 100%;
   background-color: var(--background-color);
 
   .gi-tool {
@@ -9,13 +11,6 @@
     width: 24px;
     height: 100%;
     border-right: 1px solid var(--border-color);
-  }
-
-  .gi-content {
-    flex: 1;
-    border-right: 1px solid var(--border-color);
-    overflow: hidden;
-    width: @contentWidth;
   }
 
   .gi-sider-icon {
@@ -27,18 +22,24 @@
     cursor: pointer;
   }
 
+  .gi-sider-content {
+    overflow: hidden;
+    width: ${SIDER_WIDTH}px;
+    overflow-y: auto;
+    box-shadow: var(--box-shadow);
+  }
   .fade-enter {
     width: 0;
   }
   .fade-enter-active {
-    width: @contentWidth;
+    width: ${SIDER_WIDTH}px;
     transition: all 0.3s ease-in;
   }
   .fade-enter-done {
-    width: @contentWidth;
+    width: ${SIDER_WIDTH}px;
   }
   .fade-exit {
-    width: @contentWidth;
+    width: ${SIDER_WIDTH}px;
   }
   .fade-exit-active {
     width: 0;
@@ -49,5 +50,4 @@
     width: 0;
     border-right: none;
   }
-}
-
+`;
