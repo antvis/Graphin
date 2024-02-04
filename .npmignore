@@ -47,7 +47,6 @@ yarn.lock
 .vscode/
 src
 jest.config.js
-.fatherrc.js
 __mock__
 public
 tsconfig.json
