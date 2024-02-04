@@ -1,0 +1,11 @@
+{
+  "panel": {
+    "title": "属性面板"
+  },
+  "copy": "复制",
+  "delete": "删除",
+  "tag": "打标",
+  "zoomIn": "放大",
+  "zoomOut": "缩小",
+  "zoomFit": "视图自适应居中"
+}

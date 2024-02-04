@@ -2,19 +2,15 @@ import { WidgetItem } from '../types';
 
 export const BASIC_WIDGETS: WidgetItem[] = [
   {
-    name: 'Interaction',
+    name: 'ClickSelect',
     solt: 'canvas',
   },
   {
-    name: 'Toolbar',
+    name: 'BrushSelect',
     solt: 'canvas',
   },
   {
-    name: 'Minimap',
-    solt: 'canvas',
-  },
-  {
-    name: 'ContextMenu',
+    name: 'ClickNode',
     solt: 'canvas',
   },
 ];
@@ -27,3 +23,13 @@ export const PATH_PREFIX = {
 export const PREFIX = 'gi';
 export const HEADER_HEIGHT = 48;
 export const SIDER_WIDTH = 354;
+export const LANGUAGE_LIST = [
+  {
+    value: 'zh-CN',
+    label: '中文',
+  },
+  {
+    value: 'en-US',
+    label: 'English',
+  },
+];

@@ -1,0 +1,11 @@
+{
+  "panel": {
+    "title": "Property panel"
+  },
+  "copy": "Copy",
+  "delete": "Delete",
+  "tag": "Tag",
+  "zoomIn": "Zoom in",
+  "zoomOut": "Zoom out",
+  "zoomFit": "Zoom fit"
+}

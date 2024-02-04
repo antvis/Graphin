@@ -1,11 +1,12 @@
 import React, { useRef, useImperativeHandle, forwardRef } from 'react';
 import { ContextMenu as GraphinContextMenu } from '@antv/graphin';
+import { useTranslation } from 'react-i18next';
 import { PREFIX } from '../../constants';
 import { useGraph } from '../../hooks';
 
 const Menu = forwardRef((props, ref) => {
   const { graph } = useGraph();
-
+  const { t } = useTranslation();
   const handleClick = e => {
     console.log(`${e.key}`);
   };
@@ -14,10 +15,10 @@ const Menu = forwardRef((props, ref) => {
 
   return (
     <React.Fragment>
-      <p data-key="copy">复制</p>
-      <p data-key="delete">删除</p>
+      <p data-key="copy">{t('copy')}</p>
+      <p data-key="delete">{t('delete')}</p>
       <p data-key="tag" style={{ marginBottom: 0 }}>
-        打标
+        {t('tag')}
       </p>
     </React.Fragment>
   );

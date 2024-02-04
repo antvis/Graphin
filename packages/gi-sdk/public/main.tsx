@@ -44,15 +44,19 @@ const data = {
   ],
 };
 
+const style = {
+  fontSize: 32,
+  color: 'green',
+};
+
 const CustomSidebar = props => {
   // const { graph } = useGraph();
   const [model, setModel] = useModel();
   const { panel } = model;
-
   return (
     <div style={{ height: '100%' }}>
       <p>sider</p>
-      <p style={{ color: 'green' }}>{panel?.open ? 'panel open' : 'panel close'}</p>
+      <p>Panel {panel?.open ? <b style={style}>opened</b> : <b style={style}>closed</b>}</p>
       <Button
         onClick={() => {
           setModel('widgets:[2]properties.count', Math.floor(Math.random() * 1000));
@@ -68,13 +72,15 @@ const CustomPanel = props => {
   const { properties } = props;
   const [model, setModel] = useModel();
   const { sider } = model;
-  const nodes = get(model, 'interaction.nodes', []);
+  const activeNode = get(model, 'interaction.clickNode', {});
 
   return (
     <div>
-      <p>{properties?.count}...</p>
-      <p>{sider?.open ? 'sider open' : 'sider close'}</p>
-      <p>current node: {nodes.length}</p>
+      <p style={style}>{properties?.count}...</p>
+      <p>{sider?.open ? 'sider opened' : 'sider closed'}</p>
+      <p>
+        current node: <b style={style}>{activeNode.id}</b>
+      </p>
     </div>
   );
 };
@@ -129,8 +135,23 @@ const SPEC = {
           count: 100,
         },
       },
+      /** 内部组件，无需注册 */
+      {
+        name: 'Toolbar',
+        solt: 'canvas',
+      },
+      {
+        name: 'Minimap',
+        solt: 'canvas',
+      },
+      {
+        name: 'ContextMenu',
+        solt: 'canvas',
+      },
     ],
   },
 };
+
+localStorage.setItem('language', 'zh-CN');
 
 ReactDOM.render(<GISDK {...SPEC}></GISDK>, document.getElementById('root'));

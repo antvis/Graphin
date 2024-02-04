@@ -3,11 +3,13 @@ import { css } from '@emotion/react';
 import React from 'react';
 import { PlusCircleOutlined, MinusCircleOutlined, ColumnWidthOutlined } from '@ant-design/icons';
 import { Popover } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useGraph } from '../../hooks';
 import { PREFIX } from '../../constants';
 
 export const Toolbar: React.FC<any> = props => {
   const { zoomSensitivity = 20 } = props;
+  const { t } = useTranslation();
   const { graph } = useGraph();
 
   const zoomIn = () => {
@@ -51,13 +53,13 @@ export const Toolbar: React.FC<any> = props => {
         }
       `}
     >
-      <Popover placement="right" content="放大">
+      <Popover placement="right" content={t('zoomIn')}>
         <PlusCircleOutlined onClick={() => zoomIn()} />
       </Popover>
-      <Popover placement="right" content="缩小">
+      <Popover placement="right" content={t('zoomOut')}>
         <MinusCircleOutlined onClick={() => zoomOut()} />
       </Popover>
-      <Popover placement="right" content="视图自适应居中">
+      <Popover placement="right" content={t('zoomFit')}>
         <ColumnWidthOutlined onClick={() => fitWiew()} />
       </Popover>
     </div>

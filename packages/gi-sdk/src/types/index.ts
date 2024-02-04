@@ -75,9 +75,26 @@ export interface IModel {
    * @description 交互状态
    */
   interaction?: {
-    nodes?: readonly NodeState[];
-    egdes?: readonly EdgeState[];
-    combo?: readonly ComboState[];
+    /**
+     * @description 当前点击的节点
+     */
+    clickNode?: NodeState;
+    /**
+     * @description 当前点击的边
+     */
+    clickEdge?: EdgeState;
+    /**
+     * @description 当前选中的节点
+     */
+    selectedNodes?: readonly NodeState[];
+    /**
+     * @description 当前选中的边
+     */
+    selectedEgdes?: readonly EdgeState[];
+    /**
+     * @description 当前选中的 combo
+     */
+    selectedCombos?: readonly ComboState[];
   };
   application?: Application;
   /**
@@ -85,3 +102,5 @@ export interface IModel {
    */
   get: (name: string) => any;
 }
+
+export type IProperties = Record<string, any>;

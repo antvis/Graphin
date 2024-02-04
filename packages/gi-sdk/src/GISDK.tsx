@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
+import './i18n/config';
 import { css } from '@emotion/react';
 import React from 'react';
-import Graphin, { ClickSelect } from '@antv/graphin';
+import Graphin from '@antv/graphin';
 import type { Graph } from '@antv/graphin';
 import { useSnapshot } from 'valtio';
 import { PREFIX, HEADER_HEIGHT } from './constants';
@@ -10,6 +11,7 @@ import { Panel, Sider, Header } from './assets';
 import { useComponent } from './hooks';
 import { makeCssTheme } from './utils';
 import { GLOBAL_LIGHT_STYLES } from './theme';
+import { Watcher } from './plugin';
 
 export const GISDK = props => {
   const { spec } = props;
@@ -56,11 +58,11 @@ export const GISDK = props => {
               }}
             >
               {renderComponent('canvas')}
-              <ClickSelect />
             </Graphin>
           </div>
           <Panel>{snap.isReady && renderComponent('panel')}</Panel>
         </div>
+        <Watcher />
       </div>
     </React.Fragment>
   );

@@ -11,9 +11,11 @@ class Model implements IModel {
     open: true,
   };
   interaction = {
-    nodes: [],
-    egdes: [],
-    combo: [],
+    clickNode: undefined,
+    clickEdge: undefined,
+    selectedNodes: [],
+    selectedEdges: [],
+    selectedCombo: [],
   };
   isReady = false;
   application: undefined;
