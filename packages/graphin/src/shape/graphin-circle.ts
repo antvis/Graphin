@@ -129,6 +129,7 @@ const parseIcon = (style: NodeStyle) => {
     // @ts-ignore
     textBaseline = 'middle',
     fill,
+    fillOpacity,
     size,
     visible,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -171,6 +172,7 @@ const parseIcon = (style: NodeStyle) => {
       width,
       height,
       visible: visible !== false,
+      opacity: fillOpacity,
       ...otherAttrs,
     },
   };
