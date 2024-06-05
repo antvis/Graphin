@@ -25,6 +25,7 @@ packages/graphin/src/.umi
 
 # Optional npm cache directory
 .npm
+.npmrc
 
 # Optional eslint cache
 .eslintcache
@@ -50,9 +51,13 @@ package-lock.json
 
 # yarn-lock
 yarn.lock
+pnpm-lock.yaml
 
 .umi
-
+tmp
 
 # ignore dist files
 .vscode/
+es/
+lib/
+dist/
