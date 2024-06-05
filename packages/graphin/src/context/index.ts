@@ -9,7 +9,7 @@ export const GraphinContext = React.createContext<GraphinContextProps>({
 export const useGraphin = () => {
   const context = React.useContext(GraphinContext);
   if (context === undefined || Object.keys(context).length === 0) {
-    throw new Error('useGraphin must be used within a GraphinProvider');
+    throw new Error('useGraphin must be used within a GraphinProvider.');
   }
   return context;
 };
