@@ -1,34 +1,34 @@
-import React, { forwardRef, memo, useImperativeHandle } from 'react';
+import React, { CSSProperties, PropsWithChildren, forwardRef, memo, useImperativeHandle } from 'react';
 import { Graph } from '@antv/g6';
 import { GraphinContext } from './context';
 import useGraph from './hooks/useGraph';
 import type { GraphinProps } from './types';
 
-const Graphin: React.FC<GraphinProps> = forwardRef((props, ref) => {
-  const { style, children, ...rest } = props;
+type GraphRef = Graph | null;
 
-  // @ts-expect-error
-  const { graph, container, isReady } = useGraph<Graph, GraphinProps>(Graph, rest);
+const Graphin = forwardRef<GraphRef, PropsWithChildren<GraphinProps>>((props, ref) => {
+  const { style, children, ...restProps } = props;
+  const { graph, containerRef, isReady } = useGraph<GraphinProps>(restProps);
 
-  const containerStyle: React.CSSProperties = {
+  useImperativeHandle(ref, () => graph!, [isReady]);
+
+  const containerStyle: CSSProperties = {
     height: 'inherit',
     position: 'relative',
-    minHeight: 300,
     ...style,
   };
-
-  useImperativeHandle(ref, () => graph);
 
   if (children) {
     return (
       <GraphinContext.Provider value={{ graph, isReady }}>
-        <div ref={container} style={containerStyle}>
+        <div ref={containerRef} style={containerStyle}>
           {isReady && children}
         </div>
       </GraphinContext.Provider>
     );
   }
-  return <div ref={container} style={containerStyle}></div>;
+
+  return <div ref={containerRef} style={containerStyle}></div>;
 });
 
 export default memo(Graphin);

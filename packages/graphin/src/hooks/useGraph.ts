@@ -1,60 +1,45 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { isEqual, cloneDeep } from '../utils';
-import { DEFAULT_SPEC } from '../constants';
-import { GraphinProps, Graph } from '../types';
+import { useRef, useEffect, useState } from 'react';
+import { Graph } from '@antv/g6';
+import type { GraphinProps } from '../types';
 
-export default function useGraph<T extends Graph, U extends GraphinProps>(GraphClass: T, options: U) {
+export default function useGraph<P extends GraphinProps>(props: P) {
+  const { onInit, onRender, onDestroy, options } = props;
   const [isReady, setIsReady] = useState(false);
-  const graphRef = useRef<T>();
-  const graphOptions = useRef<U>();
-  const container = useRef<HTMLDivElement>(null);
-  const { onInit, unMount, ...rest } = options;
+  const graphRef: React.MutableRefObject<Graph | null> = useRef(null);
+  const containerRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   useEffect(() => {
-    const graph = graphRef.current;
-    if (graph && !isEqual(graphOptions.current, rest)) {
-      /** 可能会存在性能问题 */
-      graph.updateSpecification(rest);
-      graphOptions.current = cloneDeep(rest);
-    }
-  }, [rest]);
+    if (graphRef.current || !containerRef.current) return;
 
-  useEffect(() => {
-    if (!container.current) {
-      return () => null;
-    }
-    if (!graphOptions.current) {
-      graphOptions.current = cloneDeep(rest);
-    }
+    const graph = new Graph({ container: containerRef.current! });
+    graphRef.current = graph;
 
-    const { clientWidth, clientHeight } = container.current;
-
-    const graphInstance: T = new (GraphClass as any)({
-      container: container.current,
-      width: clientWidth,
-      height: clientHeight,
-      ...DEFAULT_SPEC,
-      ...rest,
-    });
-
-    graphRef.current = graphInstance;
-    if (onInit) {
-      onInit(graphInstance);
-    }
     setIsReady(true);
+    onInit?.(graph);
 
     return () => {
-      if (graphInstance) {
-        graphInstance.destroy();
-        unMount && unMount(graphInstance);
-        graphRef.current = undefined;
+      const graph = graphRef.current;
+      if (graph) {
+        graph.destroy();
+        onDestroy?.(graph);
+        graphRef.current = null;
       }
     };
   }, []);
 
+  useEffect(() => {
+    const container = containerRef.current;
+    const graph = graphRef.current;
+
+    if (!options || !container || !graph || graph.destroyed) return;
+
+    graph.setOptions(options);
+    graph.render().then(() => onRender?.(graph));
+  }, [options]);
+
   return {
     graph: graphRef.current,
-    container,
+    containerRef,
     isReady,
   };
 }

@@ -6,6 +6,8 @@
     "url": "https://github.com/antvis/Graphin.git"
   },
   "scripts": {
+    "postinstall": "husky install",
+    "prepare": "husky install",
     "start": "pnpm -r --stream --filter=./packages/graphin run dev",
     "start:sdk": "pnpm -r --stream --filter=./packages/gi-sdk run dev",
     "test": "pnpm -r --stream --filter=./packages/* run test",
@@ -26,11 +28,18 @@
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.13.9",
     "@babel/preset-typescript": "^7.10.4",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@typescript-eslint/eslint-plugin": "^7.12.0",
     "babel-loader": "^8.2.3",
     "babel-plugin-named-asset-import": "^0.3.7",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react-app": "^10.0.0",
     "babel-types": "^6.26.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-jsdoc": "^48.2.7",
+    "husky": "^9.0.11",
+    "path": "^0.12.7",
+    "prettier": "^3.3.0",
     "react-dev-utils": "^12.0.1",
     "rimraf": "^3.0.2",
     "typescript": "^5.3.3",
@@ -47,5 +56,16 @@
   "dependencies": {
     "@vitejs/plugin-react": "^4.2.1",
     "vite": "^5.0.12"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

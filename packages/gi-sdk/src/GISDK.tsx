@@ -17,7 +17,7 @@ export const GISDK = props => {
   const { spec } = props;
   const styleTheme = React.useMemo(() => makeCssTheme(GLOBAL_LIGHT_STYLES), []);
   const { graph: graphConfig } = spec;
-  const { onInit, ...rest } = graphConfig;
+  const { onRender, ...rest } = graphConfig;
   SDKModel.application = props;
   const snap = useSnapshot(SDKModel);
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -51,10 +51,10 @@ export const GISDK = props => {
           >
             <Graphin
               {...rest}
-              onInit={(graph: typeof Graph) => {
+              onRender={(graph: typeof Graph) => {
                 SDKModel.isReady = true;
                 SDKModel.graph.push(graph);
-                onInit?.(graph);
+                onRender?.(graph);
               }}
             >
               {renderComponent('canvas')}

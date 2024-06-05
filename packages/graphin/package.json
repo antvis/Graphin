@@ -1,7 +1,7 @@
 {
   "name": "@antv/graphin",
   "version": "3.0.0-alpha.0",
-  "description": "the react toolkit for graph analysis based on g6",
+  "description": "A React toolkit for graph analysis based on g6",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
@@ -25,24 +25,26 @@
     "lib": "run-p lib:*",
     "lib:cjs": "tsc -p tsconfig.json --target ES5 --module commonjs --outDir lib",
     "lib:es": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir es",
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx  --fix --format=pretty ./src && pnpm run lint:prettier",
-    "lint:prettier": "pnpm run prettier &&  git diff && prettier --version && prettier --check \"src/**/**.{js,jsx,tsx,ts,less,md,json}\" --end-of-line auto",
-    "prettier": "prettier --write \"**/**.{js,jsx,tsx,ts,less,md,json}\""
+    "lint": "eslint ./src --quiet && prettier ./src --check",
+    "fix": "eslint ./src --fix && prettier ./src --write ",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@ant-design/charts-util": "0.0.1-alpha.5",
-    "@antv/g6": "5.0.0-beta.27"
+    "@antv/g6": "^5.0.0-beta.39"
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.8.1",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.6",
+    "antd": "^5.13.2",
+    "less": "^4.2.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"
   },
   "peerDependencies": {
     "lodash-es": "^4.17.21",
-    "react": ">=16.8.4",
-    "react-dom": ">=16.8.4"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "publishConfig": {
     "access": "public"
