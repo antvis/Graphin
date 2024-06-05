@@ -17,11 +17,9 @@
   "scripts": {
     "dev": "vite",
     "watch": "pnpm lib:es --w",
-    "build": "run-s clean lib dist",
+    "build": "run-s clean lib",
     "build:lib": "run-s clean lib",
     "clean": "rimraf lib es dist",
-    "dist": "webpack --config webpack.config.js --mode production",
-    "profile": "webpack --config webpack.config.js --mode production --profile --json > stats.json",
     "lib": "run-p lib:*",
     "lib:cjs": "tsc -p tsconfig.json --target ES5 --module commonjs --outDir lib",
     "lib:es": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir es",
@@ -43,11 +41,17 @@
     "size-sensor": "^1.0.1",
     "valtio": "^1.13.0"
   },
+  "devDependencies": {
+    "@antv/graphin": "^3.0.0",
+    "lodash-es": "^4.17.21",
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
   "peerDependencies": {
     "@antv/graphin": "^2.7.27",
     "lodash-es": "^4.17.21",
-    "react": ">=16.8.4",
-    "react-dom": ">=16.8.4"
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   },
   "publishConfig": {
     "access": "public"
