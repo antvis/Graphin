@@ -103,6 +103,7 @@ const UpdateNode = () => {
               size: [20, 20],
               color: '#fff',
               fill: 'red',
+              fillOpacity: 0.6,
             },
           ],
         },
