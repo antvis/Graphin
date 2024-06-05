@@ -1,5 +1,7 @@
+<img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> [English](./README.en-US.md) | 简体中文
+
 <p align="center">
-  <a href="https://graphin.antv.vision/">
+  <a href="https://github.com/antvis/graphin">
     <img width="150" src="https://gw.alipayobjects.com/zos/antfincdn/0b4HzOcEJY/Graphin.svg">
   </a>
 </p>
@@ -7,145 +9,111 @@
 
 <div align="center">
 
-A React toolkit for graph analysis based on G6
+A lighteight React toolkit for graph analysis based on [G6](https://github.com/antvis/G6).
 
-[![Version](https://badgen.net/npm/v/@antv/graphin)](https://www.npmjs.com/@antv/graphin)
+[![Version](https://img.shields.io/npm/v/@antv/graphin)](https://www.npmjs.com/@antv/graphin)
 [![NPM downloads](http://img.shields.io/npm/dm/@antv/graphin.svg)](http://npmjs.com/@antv/graphin)
 ![Latest commit](https://badgen.net/github/last-commit/antvis/graphin)
 
 </div>
 
-<img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> English | [简体中文](./README.zh-CN.md)
 
-## 🌾 New Products!
+## ✨ 功能特性
 
-2022.06.06, this day coincides with the 4th anniversary of the open source of G6, which is also the traditional Chinese solar term: "Grain in Ear", G6VP, a new product in the direction of graph analysis. Users can complete the visualization, exploration and analysis tasks of relational data online without code development. You can also export the SDK with one click and integrate it into the business system to help developers improve R&D efficiency.
+- 🎨 **轻量级**：不做过度封装，尽量保持 [G6](https://github.com/antvis/G6) 能力同步，尽量不新增概念，整体核心代码 <200 行。
+- 🎗️ **React 风格**：舒心的开发体验，符合 React 用户心智，基于 React 扩展组件更容易。
+- 🚀 **丰富组件**：丰富的组件，源于业务沉淀，让用户定制自己的图应用更快更容易。
 
-The SDK exported by G6VP is encapsulated based on Graphin. If you want to understand the capabilities of Graphin, you can take a look at the product [G6VP](https://github.com/antvis/G6VP)
+![component](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*cGzHQK4MGToAAAAAAAAAAAAAARQnAQ)
 
-![demo2](https://github.com/antvis/G6VP/assets/10703060/40560cd2-3fea-41f8-888b-5abc1eb09b66)
 
-## ✨ Features
+## 🔨 快速使用
 
-### 🎨 Good-looking elements, standardized style configuration
-
-Graphin standardizes the visual mapping of graph elements. A Graphin's built-in node contains 5 parts: `keyshape, label, halo, icon, and badges`, each part can be driven by data. The built-in edges include three parts:` keyshape, label, and halo`. There are also corresponding style configurations for commonly used features, such as `label backgrounds`, `self-loops`, `polygons`, and `dashed lines`, etc. [Try it online](https://graphin.antv.vision/en-US/graphin/render/node)
-
-![node-style](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*eGi_S5NXE3cAAAAAAAAAAAAAARQnAQ)
-![edge-style](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*voNsS4vtKlsAAAAAAAAAAAAAARQnAQ)
-
-### 📦 Automatic layout, easy to handle complex scenarios
-
-Graphin has 10 built-in network graph layouts and 4 tree graph layouts to meet your needs of layout for different data types and different analysis scenarios. For features in complex business scenarios, such as `layout switching`, `dynamic layouts`, `sub-graph layouts`, etc., can be easily realized through data-driven layout. [Try it online](https://graphin.antv.vision/en-US/graphin/layout/dynamic-layout)
-
-![node-expand](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*tdcwQYD_FLoAAAAAAAAAAAAAARQnAQ)
-![layout-switch](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*ZhBqT4ZONrcAAAAAAAAAAAAAARQnAQ)
-
-### 📝 Thoughtful interactions, easy to customize
-
-Graphin provides 13 interactive components, including canvas zooming, panning, brush selection, lasso select , automatic resize, and also element dragging, selection, hovering, highlighting, expanding and collapsing, etc., to meet your interactive needs for different analysis scenarios [Try it online](https://graphin.antv.vision/en-US/graphin/behaviors/behaviors)
-
-![behaviors](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*cGzHQK4MGToAAAAAAAAAAAAAARQnAQ)
-
-### 🚀 Rich components, derived from precipitation of business development
-
-Currently Graphin provides 7 analysis components: `ContextMenu`, `Tooltip`, `MiniMap`, `Toolbar`, `FishEye`, `Hull`, and `Legend`. 17+ analysis components will be provided in the future. [Try it online](https://graphin.antv.vision/en-US/components/interaction/context-menu)
-![components](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*XebMSIakucgAAAAAAAAAAAAAARQnAQ)
-
-### ⚙️ Comfortable development experience, in line with React users' cognition
-
-![typescript](https://gw.alipayobjects.com/mdn/rms_402c1a/afts/img/A*xpoaRpOGme4AAAAAAAAAAAAAARQnAQ)
-
-## 🖥 Browser support
-
-- Graphin icons use [Proxy](https://caniuse.com/?search=Proxy), the font icon may not be displayed correctly on some browsers that do not support Proxy syntax
-- The Graphin rendering engine of Graphin is G6, which relies on the browser API and does not support SSR
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Safari |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| IE11, Edge                                                                                                                                                                                                     | last 2 versions                                                                                                                                                                                                  | last 2 versions                                                                                                                                                                                              | last 2 versions                                                                                                                                                                                              |
-
-## 📦 Installation
-
-If you are using React, then you can use Graphin as a normal React component.
-
-It uses yarn to install dependencies in this article, while npm is also fine. The following commands install Graphin's core components `@antv/graphin` and analysis components `@antv/graphin-components`, and Graphin's official icon library `@antv/graphin-icons`
+把 `graphin` 当作一个普通的 React 组件来使用即可，通过 NPM 或 Yarn 等包管理器来安装。
 
 ```bash
-yarn add @antv/graphin@latest --save
-yarn add @antv/graphin-components@latest --save
-yarn add @antv/graphin-icons --save
+$ npm install @antv/graphin
 ```
 
-## 🔨 Usage
-
-### Use Graphin Core Component
-
-```tsx | pure
-import React from 'react';
-import Graphin from '@antv/graphin';
-// mock data
-const data = Utils.mock(10).circle().graphin();
-export default () => {
-  return <Graphin data={data} />;
-};
+```bash
+$ yarn add @antv/graphin
 ```
 
-### Use Graphin Analysis Components
+成功安装之后，可以通过 import 导入 `Graphin` 组件。
 
-```tsx | pure
+```jsx
 import React from 'react';
-import Graphin, { Components, Utils } from '@antv/graphin';
-const { MiniMap } = Components;
-// mock data
-const data = Utils.mock(10).circle().graphin();
-export default () => {
+import { Graphin } from '@antv/graphin';
+
+export function Demo() {
   return (
-    <Graphin data={data}>
-      <MiniMap />
+    <Graphin
+      id="my-graphin-demo"
+      className="my-graphin-container"
+      style={{ width: '100%', height: '100%' }}
+      options={{
+        data,
+        node: {
+          style: {
+            labelText: (d) => d.id,
+          },
+          palette: {
+            type: 'group',
+            field: 'cluster',
+          },
+        },
+        layout: {
+          type: 'd3force',
+          collide: {
+            strength: 0.5,
+          },
+        },
+        behaviors: ['zoom-canvas', 'drag-canvas'],
+        animation: true,
+      }}
+    >
     </Graphin>
+    />
   );
-};
+}
 ```
 
-### Use Graphin font icon
 
-```tsx | pure
-import React from 'react';
-import Graphin from '@antv/graphin';
-// Import icon resource files
-import iconLoader from '@antv/graphin-icons';
-import '@antv/graphin-icons/dist/index.css';
-// mock data
-const data = Utils.mock(10).circle().graphin();
-// Register in Graphin
-const { fontFamily, glyphs } = iconLoader();
-const icons = Graphin.registerFontFamily(iconLoader);
-// Use icons
-data.nodes.forEach(node => {
-  node.style = {
-    icon: {
-      type: 'font', // Specify the icon to be Font type
-      fontFamily: fontFamily, // Specify FontFamily
-      value: icons.home, // Specify the value of the icon
-    },
-  };
-});
-export default () => {
-  return <Graphin data={data} />;
-};
-```
+## 📖 API Reference
 
-## 👨‍💻 Upgrade Guide
+| Property | Description                                                                                                     | Type                     | Default |
+| -------- | --------------------------------------------------------------------------------------------------------------- | ------------------------ | ------- |
+| id       | 设置图画布容器的 id 属性。                                                                                          | `string`                 | -       |
+| className| 设置图画布容器的 class 属性。                                                                                       | `string`                 | -       |
+| style    | 设置图画布容器的 style  样式属性。                                                                                   | `CSSProperties`          | -       |
+| options  | 设置图画布的配置项，参考 [G6 配置](https://g6.antv.antgroup.com/) 文档，在 `graph.setOptions(options)` 中调用          | `GraphOptions` \| `null` | -       |
+| onInit   | 当图实例初始化之后调用，在 `new Graph()` 之后。                                                                       | `(graph: Graph) => void` | -       |
+| onReady  | 当图实例渲染完成之后调用，在 `graph.render()` 之后。                                                                  | `(graph: Graph) => void` | -       |
+| onDestroy| 当图实例被销毁的时候调用，在 `graph.destroy()` 之后。                                                                 | `() => {}` | -           |
 
-If you are a user from Graphin1.x, this [Upgrade Guide](https://graphin.antv.vision/en-US/graphin/quick-start/migration) may help you. If you encounter upgrade problems, you can go to github issue section, and feel free to create issues if it's not already there.
 
-## ⌨️ Development Guide
+## 🗂 Examples
 
-If you want to run Graphin locally, you may wish to read this [Contribution Guide](https://graphin.antv.vision/en-US/graphin/quick-start/contributing). We hope more contributors can join our team to make Graphin better together.
+- [Creating Graph](#creating-graph)
+- [Fetching Data](#updating-data)
+- [Handling Events](#handling-events)
+- [Customizing Component](#customizing-component)
+- [Styling Container](#styling-container)
+- [Using hooks](#using-hooks)
 
-## More Info
 
-- [Graphin Introduction](https://graphin.antv.vision/en-US/graphin/quick-start/introduction)
-- [Quick Start](https://graphin.antv.vision/en-US/graphin/quick-start/quick-start)
-- [Graphin visual analysis solution](https://graphin.antv.vision/en-US/solution/database/graph-database)
+## 📮 贡献
+
+- **问题反馈**：使用过程遇到的 `graphin` 的问题，欢迎提交 Issue，并附上可以复现问题的最小案例代码。
+- **贡献指南**：如何参与到 `graphin` 的[开发和贡献](./CONTRIBUTING.md)。
+- **想法讨论**：在 GitHub Discussion 上或者钉钉群里面讨论。
+
+<div>
+  <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*CQoGSoFBzaUAAAAAAAAAAAAADmJ7AQ/fmt.webp" height="256" />
+  <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*yXJGSY8RC68AAAAAAAAAAAAADmJ7AQ/fmt.webp" height="256" />
+</div>
+
+
+## 📄 License
+
+[MIT](./LICENSE).

@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import React, { useState } from 'react';
-import Graphin from '../src';
+import { Graphin } from '../src';
 import { LayoutSelector } from '../src/components';
 import type { SingleLayoutOptions } from '@antv/g6';
 import {

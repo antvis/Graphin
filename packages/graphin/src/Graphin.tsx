@@ -1,12 +1,15 @@
 import React, { CSSProperties, PropsWithChildren, forwardRef, memo, useImperativeHandle } from 'react';
-import { Graph } from '@antv/g6';
+import { Graph as G6Graph } from '@antv/g6';
 import { GraphinContext } from './context';
 import useGraph from './hooks/useGraph';
 import type { GraphinProps } from './types';
 
-type GraphRef = Graph | null;
+type GraphRef = G6Graph | null;
 
-const Graphin = forwardRef<GraphRef, PropsWithChildren<GraphinProps>>((props, ref) => {
+/**
+ * Graphin, the react component for G6.
+ */
+const Graph = forwardRef<GraphRef, PropsWithChildren<GraphinProps>>((props, ref) => {
   const { style, children, ...restProps } = props;
   const { graph, containerRef, isReady } = useGraph<GraphinProps>(restProps);
 
@@ -31,4 +34,4 @@ const Graphin = forwardRef<GraphRef, PropsWithChildren<GraphinProps>>((props, re
   return <div ref={containerRef} style={containerStyle}></div>;
 });
 
-export default memo(Graphin);
+export const Graphin = memo(Graph);
