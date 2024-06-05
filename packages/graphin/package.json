@@ -1,6 +1,6 @@
 {
   "name": "@antv/graphin",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-alpha.1",
   "description": "A React toolkit for graph analysis based on g6",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -14,16 +14,18 @@
     "lib"
   ],
   "scripts": {
-    "dev": "vite",
-    "watch": "pnpm lib:es --w",
     "build": "run-s clean lib",
+    "ci": "run-s type-check lint build",
     "clean": "rimraf lib es",
-    "lib": "run-p lib:*",
+    "dev": "vite",
+    "fix": "eslint ./src --fix && prettier ./src --write ",
     "lib:cjs": "tsc -p tsconfig.json --target ES5 --module commonjs --outDir lib",
     "lib:es": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir es",
+    "lib": "run-p lib:*",
     "lint": "eslint ./src --quiet && prettier ./src --check",
-    "fix": "eslint ./src --fix && prettier ./src --write ",
-    "type-check": "tsc --noEmit"
+    "prepublishOnly": "npm run ci",
+    "type-check": "tsc --noEmit",
+    "watch": "pnpm lib:es --w"
   },
   "dependencies": {
     "@antv/g6": "^5.0.0-beta.39"
@@ -42,6 +44,8 @@
     "react-dom": "^18.0.0"
   },
   "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "alpha",
     "access": "public"
   },
   "license": "MIT"
