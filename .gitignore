@@ -25,6 +25,7 @@ packages/graphin/src/.umi
 
 # Optional npm cache directory
 .npm
+.npmrc
 
 # Optional eslint cache
 .eslintcache

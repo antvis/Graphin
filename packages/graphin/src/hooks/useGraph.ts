@@ -2,6 +2,10 @@ import { useRef, useEffect, useState } from 'react';
 import { Graph } from '@antv/g6';
 import type { GraphinProps } from '../types';
 
+/**
+ *
+ * @param props
+ */
 export default function useGraph<P extends GraphinProps>(props: P) {
   const { onInit, onRender, onDestroy, options } = props;
   const [isReady, setIsReady] = useState(false);

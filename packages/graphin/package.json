@@ -11,17 +11,13 @@
   },
   "files": [
     "es",
-    "lib",
-    "dist"
+    "lib"
   ],
   "scripts": {
     "dev": "vite",
     "watch": "pnpm lib:es --w",
-    "build": "run-s clean lib dist",
-    "build:lib": "run-s clean lib",
-    "clean": "rimraf lib es dist",
-    "dist": "webpack --config webpack.config.js --mode production",
-    "profile": "webpack --config webpack.config.js --mode production --profile --json > stats.json",
+    "build": "run-s clean lib",
+    "clean": "rimraf lib es",
     "lib": "run-p lib:*",
     "lib:cjs": "tsc -p tsconfig.json --target ES5 --module commonjs --outDir lib",
     "lib:es": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir es",
@@ -42,7 +38,6 @@
     "rimraf": "^3.0.2"
   },
   "peerDependencies": {
-    "lodash-es": "^4.17.21",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
