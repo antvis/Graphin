@@ -16,7 +16,7 @@ export default function useGraph<P extends GraphinProps>(props: P) {
   useEffect(() => {
     if (graphRef.current || !containerRef.current) return;
 
-    const graph = new Graph({ container: containerRef.current! });
+    const graph = new Graph({ container: containerRef.current!, ...options });
     graphRef.current = graph;
 
     setIsReady(true);

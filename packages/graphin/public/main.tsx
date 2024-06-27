@@ -97,6 +97,7 @@ const Demo: React.FC = () => {
       className="graphin-container"
       style={{ width: '100%', height: '100%' }}
       options={{
+        autoResize: true,
         data,
         layout,
         behaviors: ['zoom-canvas', 'drag-canvas'],
