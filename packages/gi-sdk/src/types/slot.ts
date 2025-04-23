@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import type { ID } from './id';
 
 export type Slot = ID[] | Record<string, ID[]>;

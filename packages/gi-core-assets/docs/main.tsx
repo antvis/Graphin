@@ -1,7 +1,7 @@
 import GICoreAssets from '@antv/gi-core-assets';
 import { GISDK } from '@antv/gi-sdk';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import { myAssetPackage } from './asset';
 import { config } from './config';
 import './index.less';
@@ -18,5 +18,7 @@ export const Demo: React.FC = () => {
     />
   );
 };
-
-ReactDOM.render(<Demo />, document.getElementById('root'));
+const app = document.createElement('div');
+app.id = 'app';
+document.getElementsByTagName('body')[0].appendChild(app);
+createRoot(app).render(<Demo />);

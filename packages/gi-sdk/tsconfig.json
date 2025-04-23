@@ -1,11 +1,10 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "downlevelIteration": true,
-    "strict": true,
     "paths": {
-      "@antv/gi-sdk": ["./src"]
+      "@antv/gi-sdk": [
+        "./src"
+      ]
     }
   },
-  "extends": "../../tsconfig.json",
-  "include": ["src", "docs"]
 }

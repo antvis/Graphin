@@ -1,4 +1,4 @@
-import { ImplementService } from '@antv/gi-sdk';
+import type { ImplementService } from '@antv/gi-sdk';
 import $i18n from '../../i18n';
 import { getFetchData } from './service';
 

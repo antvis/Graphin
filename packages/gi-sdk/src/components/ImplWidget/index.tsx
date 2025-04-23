@@ -31,7 +31,10 @@ export const ImplWidget: React.FC<ImplWidgetProps> = ({ widget }) => {
 
         if (!slotWidgets.length) return acc;
 
-        acc[slotName] = slotWidgets.map((slotWidget) => <ImplWidget key={slotWidget.id} widget={slotWidget} />);
+        // @ts-ignore
+        acc[slotName] = slotWidgets.map((slotWidget) => (
+          <ImplWidget key={slotWidget.id} widget={slotWidget} />
+        ));
         return acc;
       }, {});
     }

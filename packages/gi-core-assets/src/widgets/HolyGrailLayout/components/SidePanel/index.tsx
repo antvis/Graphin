@@ -13,7 +13,7 @@ export interface SidePanelProps {
 
 export const SidePanel: React.FC<PropsWithChildren<SidePanelProps>> = React.memo((props) => {
   const { children, width = 350 } = props;
-  const [sider, updateSider] = useGlobalModel('sider');
+  const [sider, updateSider] = useGlobalModel<{sider:boolean}>('sider');
   const siderWidth = useMemo(() => (sider ? width : 0), [sider, width]);
 
   const toggleSidePanelCollapsed = () => {

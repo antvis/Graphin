@@ -15,7 +15,10 @@ export const useWidgetProps = <Properties extends Record<string, unknown> = Reco
   const [properties, setProperties] = useState<Properties>(widgetStore.getWidgetProperties<Properties>(widgetId));
 
   useEffect(() => {
-    const updateInternalProperties = ({ widgetId: id, properties: newProperties }) => {
+    const updateInternalProperties = ({
+      widgetId: id,
+      properties: newProperties,
+    }: { widgetId: string; properties: Properties }) => {
       if (id === widgetId) {
         setProperties(newProperties);
       }

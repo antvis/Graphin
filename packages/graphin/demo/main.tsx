@@ -7,7 +7,7 @@ import {
   ShareAltOutlined,
 } from '@ant-design/icons';
 import type { Graph, SingleLayoutOptions } from '@antv/g6';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Graphin } from '../src';
 import { LayoutSelector } from '../src/components';
@@ -102,8 +102,8 @@ const Demo: React.FC = () => {
       ref={(r) => {
         setGraph(r);
       }}
-      id="graphin-demo"
-      className="graphin-container"
+      id='graphin-demo'
+      className='graphin-container'
       style={{ width: '100%', height: '100%' }}
       options={{
         autoResize: true,

@@ -1,6 +1,7 @@
 {
   "name": "@antv/gi-core-assets",
   "version": "1.0.0",
+  "type": "module",
   "description": "Core assets for @antv/gi-sdk",
   "repository": {
     "type": "git",
@@ -8,43 +9,38 @@
   },
   "license": "ISC",
   "author": "https://github.com/orgs/antvis/people",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "src",
-    "es",
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "run-s clean lib",
+    "build": "rslib build",
     "ci": "run-s type-check lint build",
-    "clean": "rimraf lib es",
     "dev": "vite",
-    "lib": "run-p lib:*",
-    "lib:cjs": "tsc -p tsconfig.build.json --target ES5 --module commonjs --outDir lib",
-    "lib:es": "tsc -p tsconfig.build.json --target ES5 --module ESNext --outDir es",
     "lint": "eslint ./src --quiet && prettier ./src --check",
     "prepublishOnly": "npm run ci",
     "type-check": "tsc --noEmit",
-    "watch": "pnpm lib:es --w"
+    "watch": "rslib build -w"
   },
   "dependencies": {
     "@aligov/global-locale": "^1.0.5",
     "@aligov/global-string-format": "^1.0.7",
-    "@ant-design/icons": "^4.8.3",
-    "@antv/g6": "^5.0.28",
+    "@ant-design/icons": "^6.0.0",
+    "@antv/g6": "^5.0.45",
     "@antv/gi-sdk": "workspace:*",
-    "ahooks": "^3.8.1",
-    "antd": "^5.21.6"
+    "antd": "^5.24.8"
   },
   "devDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+    "react": "^18.0.0 || ^19.1.0",
+    "react-dom": "^18.0.0 || ^19.1.0"
   },
   "publishConfig": {
     "access": "public",

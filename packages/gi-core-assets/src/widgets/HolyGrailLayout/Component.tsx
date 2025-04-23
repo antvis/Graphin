@@ -3,11 +3,11 @@
  */
 import type { ImplementWidgetProps } from '@antv/gi-sdk';
 import { GraphContainer } from '@antv/gi-sdk';
-import React from 'react';
 import './Component.less';
 import type { FloatPanelProps, SidePanelProps } from './components';
 import { FloatPanel, Footer, Header, SidePanel } from './components';
 import { WIDGET_PREFIX } from './constant';
+import { memo } from 'react';
 
 type Slot = 'header' | 'sidePanel' | 'floatPanel' | 'canvas' | 'footer';
 
@@ -38,7 +38,7 @@ export interface HolyGrailLayoutProps extends ImplementWidgetProps<Slot> {
   floatPanel?: FloatPanelProps;
 }
 
-export const HolyGrailLayout: React.FC<HolyGrailLayoutProps> = React.memo((props) => {
+export const HolyGrailLayout: React.FC<HolyGrailLayoutProps> = memo((props) => {
   const { slotElements, showHeader, showFooter, showFloatPanel, showSidePanel, sidePanel, floatPanel } = props;
 
   return (

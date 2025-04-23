@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite';
+import { join } from 'node:path';
 import react from '@vitejs/plugin-react';
-import { join } from 'path';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: './docs',
@@ -8,7 +8,6 @@ export default defineConfig({
     port: 8001,
     open: '/',
   },
-  build: { outDir: '../' },
   plugins: [react()],
   resolve: {
     alias: {

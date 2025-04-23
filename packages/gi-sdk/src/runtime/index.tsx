@@ -26,7 +26,7 @@ export class GIRuntimeApp {
 
   public App: React.FC<GIRenderProps>;
 
-  constructor({ assets, initialGlobalState }) {
+  constructor({ assets=[], initialGlobalState=[] }:{ assets?: AssetPackage[]; initialGlobalState?: GlobalModel }) {
     this.initRuntime(assets, initialGlobalState);
 
     this.App = this.getApp();

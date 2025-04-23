@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react';
-import { join } from 'path';
+import { join } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -8,11 +8,9 @@ export default defineConfig({
     port: 8002,
     open: '/',
   },
-  build: { outDir: '../' },
   plugins: [react()],
   resolve: {
     alias: {
-      '@antv/gi-sdk': join(__dirname, '../gi-sdk/src'),
       '@antv/gi-core-assets': join(__dirname, './src'),
     },
   },
