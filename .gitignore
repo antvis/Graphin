@@ -61,3 +61,7 @@ tmp
 es/
 lib/
 dist/
+
+# ide
+.history/
+.lh
