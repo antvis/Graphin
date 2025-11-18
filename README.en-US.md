@@ -34,11 +34,6 @@ The diagram below illustrates the relationship between Graphin and GISDK:
 - **Contribution Guide**: Information on how to get involved in the [development and contribution](./CONTRIBUTING.en-US.md) to `graphin`.
 - **Ideas Discussion**: Discuss your ideas on GitHub Discussions or in the DingTalk group.
 
-<div align="center">
-  <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*CQoGSoFBzaUAAAAAAAAAAAAADmJ7AQ/fmt.webp" height="256" />
-  <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*yXJGSY8RC68AAAAAAAAAAAAADmJ7AQ/fmt.webp" height="256" />
-</div>
-
 ## 📄 License
 
 [MIT](./LICENSE).

@@ -34,11 +34,6 @@ Graphin 的技术基础是 G6 + React，根据集成到项目中的深度不同�
 - **贡献指南**：如何参与到 `graphin` 的[开发和贡献](./CONTRIBUTING.md)。
 - **想法讨论**：在 GitHub Discussion 上或者钉钉群里面讨论。
 
-<div>
-  <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*CQoGSoFBzaUAAAAAAAAAAAAADmJ7AQ/fmt.webp" height="256" />
-  <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*yXJGSY8RC68AAAAAAAAAAAAADmJ7AQ/fmt.webp" height="256" />
-</div>
-
 ## 📄 License
 
 [MIT](./LICENSE).
