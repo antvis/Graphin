@@ -14,7 +14,6 @@ A lightweight React toolkit for graph analysis based on [G6](https://github.com/
 
 [![Version](https://img.shields.io/npm/v/@antv/graphin)](https://www.npmjs.com/@antv/graphin)
 [![NPM downloads](http://img.shields.io/npm/dm/@antv/graphin.svg)](http://npmjs.com/@antv/graphin)
-![Latest commit](https://badgen.net/github/last-commit/antvis/graphin)
 
 </div>
 
